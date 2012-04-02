@@ -1,0 +1,3 @@
+IndexIgnore *
+Options -Indexes
+DirectoryIndex index.php index.html index.html /prohibido.php
