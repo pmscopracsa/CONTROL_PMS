@@ -1,0 +1,19 @@
+.areaScroll
+{
+    height: 90px;
+    overflow: auto;
+    /*margin-left: auto;
+    margin-top:  auto;*/
+    width: 900px;
+    border: 1px solid #c2e1ef;
+    padding-right: 10px;
+}
+
+.areaScrollModal
+{
+    height: 90px;
+    overflow: auto;
+    width: 500px;
+    border: 1px solid #c2e1ef;
+    padding-right: 10px;
+}

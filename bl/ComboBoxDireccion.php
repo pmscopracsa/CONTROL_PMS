@@ -5,11 +5,31 @@ class ComboBoxDireccion extends ComboBoxSql
     
     protected $codigo_seleccion;
     
+    function cargarPais()
+    {
+        $consulta = parent::__construct();
+        $consulta = parent::consulta("SELECT * FROM tb_pais ORDER BY nombre");
+        $num_total_registros = parent::num_rows($consulta);
+        
+        if ($num_total_registros > 0) {
+            $paises = array();
+            
+            while ($pais = parent::fetch_assoc($consulta)) {
+                $id_pais = $pais['id'];
+                $nombre_pais = $pais['nombre'];
+                $paises[$id_pais] = $nombre_pais;
+            }
+            return $paises;
+        } else {
+            return FALSE;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+        }
+    }
+    
     function cargarDepartamento()
     {
         $consulta = parent::__construct();
-        $consulta = parent::consulta("SELECT * FROM Departamento ORDER BY descripcion ASC");
-        $num_total_registros = parent::num_rows($consulta);
+        $consulta = parent::consulta("SELECT * FROM tb_departamento WHERE tb_pais_id = $this->codigo_seleccion ORDER BY nombre ASC");              
+        $num_total_registros = parent::num_rows($consulta);                                                                                 
         
         if ($num_total_registros > 0) 
         {
@@ -17,8 +37,8 @@ class ComboBoxDireccion extends ComboBoxSql
             
             while ($departamento = parent::fetch_assoc($consulta)) {
                 $id_departamento = $departamento['id'];
-                $descripcion_departamento = $departamento['descripcion'];
-                $departamentos[$id_departamento] = $descripcion_departamento;
+                $descripcion_departamento = $departamento['nombre'];
+                $departamentos[$id_departamento] = $descripcion_departamento;                                                                                                                           
             }
             return $departamentos;
         }  else {
@@ -29,7 +49,7 @@ class ComboBoxDireccion extends ComboBoxSql
     function cargarProvincia()
     {
         $consulta = parent::__construct();
-        $consulta = parent::consulta("SELECT * FROM Provincia WHERE departamento_id = $this->codigo_seleccion ORDER BY descripcion ASC");
+        $consulta = parent::consulta("SELECT * FROM tb_provincia WHERE tb_departamento_id = $this->codigo_seleccion ORDER BY nombre ASC");
         $num_total_registros = parent::num_rows($consulta);
         
         if ($num_total_registros > 0) 
@@ -38,7 +58,7 @@ class ComboBoxDireccion extends ComboBoxSql
             
             while ($provincia = parent::fetch_assoc($consulta)) {
                 $id_provincia = $provincia['id'];
-                $descripcion_provincia = $provincia['descripcion'];
+                $descripcion_provincia = $provincia['nombre'];
                 $provincias[$id_provincia] = $descripcion_provincia;
             }
             return $provincias;
@@ -50,7 +70,7 @@ class ComboBoxDireccion extends ComboBoxSql
     function cargarDistrito()
     {
         $consulta = parent::__construct();
-        $consulta = parent::consulta("SELECT * FROM Distrito WHERE provincia_id = $this->codigo_seleccion ORDER BY descripcion ASC");
+        $consulta = parent::consulta("SELECT * FROM tb_distrito WHERE tb_provincia_id = $this->codigo_seleccion ORDER BY nombre ASC");
         $num_total_registros = parent::num_rows($consulta);
         
         if ($num_total_registros > 0) 
@@ -60,7 +80,7 @@ class ComboBoxDireccion extends ComboBoxSql
             while($distrito = parent::fetch_assoc($consulta))
             {
                 $id_distrito = $distrito['id'];
-                $descripcion_distrito = $distrito['descripcion'];
+                $descripcion_distrito = $distrito['nombre'];
                 $distritos[$id_distrito] = $descripcion_distrito;
             }
             return $distritos;
@@ -76,7 +96,6 @@ class ComboBoxDireccion extends ComboBoxSql
     public function setCodigo_seleccion($codigo_seleccion) {
         $this->codigo_seleccion = $codigo_seleccion;
     }
-
 
 }
 

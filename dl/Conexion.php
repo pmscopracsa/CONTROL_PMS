@@ -14,7 +14,7 @@ class Conexion
     {
         $this->usuario = "pms_admin";
         $this->clave = "pmsadmin123";
-        $this->db = "pms";
+        $this->db = "control_pms";
         $this->servidor = "localhost";
     }
     

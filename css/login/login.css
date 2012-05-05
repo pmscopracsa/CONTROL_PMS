@@ -1,0 +1,47 @@
+html {
+    background-color: #72C1B0;
+    border: 0 none;
+    
+}
+
+form label {
+    color: #FFFFFF;
+    margin: 15px 0 2px;
+    text-transform: capitalize;
+}
+
+#login label a {
+    float: right;
+    font-size: 11px;
+    position: relative;
+    right: 10px;
+    top: 2px;
+}
+
+fieldset {
+    border: 0 none;
+    padding: 0;
+}
+
+.av-text {
+    width: 68%;
+}
+
+#av-content {
+    background-color: #FFFFFF;
+    padding: 0;
+}
+
+#content {
+    box-shadow: none;
+    margin-top: 132px;
+    min-height: 430;
+    padding: 0;
+    width: 100%;
+}
+
+#login-form-wrap {
+    background: none repeat scroll 0 0 transparent;
+    border: none;
+}
+

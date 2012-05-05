@@ -1,5 +1,5 @@
 <?php
-include_once ("Conexion.php");
+include_once '../../dl/Conexion.php';
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -14,7 +14,7 @@ class EspecialidadCompaniaDL {
   
   public function mostrarEspecialidades()
   {   
-      $query = "SELECT * FROM TipoCompania";
+      $query = "SELECT * FROM EspecialidadCompania";
       try
       {
           $conexion = new Conexion();

@@ -1,3 +1,13 @@
-IndexIgnore *
-Options -Indexes
-DirectoryIndex index.php index.html index.html /prohibido.php
+RewriteEngine On
+
+<Files .*>
+    Order Deny,Allow
+    Deny From All
+</Files>
+
+RewriteRule ^(?:application|modules|system)\b.* index.php/$0 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+Rewrite .* index.php/$0 [PT]

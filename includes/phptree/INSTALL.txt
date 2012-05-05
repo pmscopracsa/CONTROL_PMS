@@ -1,0 +1,33 @@
+///////////////////////////////////////////////////////////////////////////////////
+// 
+// Advanced Power of PHP
+// ---------------------
+// http://www.apphp.com
+// 
+// ApPHP TreeMenu
+//
+// Version: 1.0.1
+//
+///////////////////////////////////////////////////////////////////////////////////
+
+Software requirements: PHP 5.0 or later version.
+
+To install ApPHP TreeMenu, you should have to extract the ApPHP TreeMenu ZIP file. 
+It depends on the operating system you use. Once extracted, you will have a directory
+containing the ApPHP TreeMenu script.
+
+Upload all content of this directory to your webserver, either by copying the 
+directory or by using an FTP program.
+
+Type in your browser code_example.php
+
+If you are running on your own computer, this will be
+
+   http://localhost/{treemenu directory}/code_example.php
+
+or if on a live server:
+
+   http://{www.mydomain.com}/code_example.php
+   
+Congratulations, you now have ApPHP TreeMenu v.1.x.x. Installed!   
+

@@ -1,0 +1,6 @@
+======================================================================================
+- Version 1.0.1 [13.03.2010]
+======================================================================================
+
+1. Feature: [added] possibility to define form submission type (GET or POST)
+2. Feature: [added] nodes are now highlighted when you point on them

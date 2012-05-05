@@ -1,0 +1,11 @@
+.tree ul.tree
+{
+      background: url(images/line.jpg) repeat-y;
+}
+.tree li.single
+{  
+  background: url(images/node.jpg) no-repeat;
+}
+ul.tree li.last {
+  background: #fff url(images/lastnode.jpg) no-repeat;
+}

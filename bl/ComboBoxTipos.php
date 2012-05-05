@@ -7,7 +7,7 @@ class ComboBoxTipos extends ComboBoxSql
     public function cargaTipoCompania()
     {
         $consulta = parent::__construct();
-        $consulta = parent::consulta("SELECT * FROM TipoCompania ORDER BY nombre ASC");
+        $consulta = parent::consulta("SELECT * FROM tb_tipocompania ORDER BY nombre ASC");
         $num_total_registros = parent::num_rows($consulta);
         
         if ($num_total_registros > 0) {
@@ -47,7 +47,7 @@ class ComboBoxTipos extends ComboBoxSql
     public function cargarTipoDireccion()
     {
         $consulta = parent::__construct();
-        $consulta = parent::consulta("SELECT * FROM  TipoDireccion ORDER BY descripcion ASC");
+        $consulta = parent::consulta("SELECT * FROM TipoDireccion ORDER BY descripcion ASC");
         $total_registros = parent::num_rows($consulta);
         
         if ($total_registros > 0) {

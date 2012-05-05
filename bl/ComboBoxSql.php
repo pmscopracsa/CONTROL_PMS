@@ -12,7 +12,7 @@ class ComboBoxSql
     public function consulta($query)
     {
         $resultado = mysql_query($query);
-        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
         if (!$resultado) {
             echo "Error en consulta: ".mysql_error();
             exit;

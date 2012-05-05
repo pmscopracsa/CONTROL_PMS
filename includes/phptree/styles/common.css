@@ -1,0 +1,72 @@
+body
+{
+    margin: 50px;
+    font-family: Arial;
+    font-size: smaller;
+}
+#caption
+{
+   font-family: Georgia, sans-serif;
+   font-size: 2em;
+   letter-spacing: -1px;
+}
+.maintable
+{
+    width: 80%
+}
+.treecolumn
+{
+    width: 40%;
+    vertical-align: top;
+    font-size: small;
+}
+.contentscolumn
+{
+    width: 60%;
+    vertical-align: top;
+}
+.single span,.expanded span,.collapsed span,.last span
+{
+     cursor:pointer;    
+}
+.single span,.last span
+{
+    margin-left: 15px;
+}
+.collapsed ul
+{
+    display:none;
+}
+.tree,.tree ul
+{
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+.tree ul
+{
+  padding-left: 15px;
+}
+
+.image
+{
+    vertical-align: middle;
+}
+.selected
+{
+  background-color:#316AC5;
+  color:White;
+}
+.highlighted
+{
+  text-decoration:underline;
+}
+.tree li
+{
+  margin: 0;
+  padding: 0 ;
+  line-height: 20px;
+  color: #369;
+  font-weight: bold;
+  vertical-align:bottom;
+}
