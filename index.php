@@ -10,6 +10,14 @@
     <link href="css/menu_principal/menu_principal.css" rel="stylesheet" type="text/css" />
     <link href="css/menu_principal/easyui.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
+        $(document).ready(function(){
+            $("#logo_pms").hover(function() {
+		$(this).attr("src","img/pmslogo_orange.png");
+			}, function() {
+		$(this).attr("src","img/pmslogo.png");
+            });
+        });        
+        
 	$(function(){
 		$('#mm').accordion('select','Application');
 		open1('index_embeded.php');
@@ -52,7 +60,7 @@
     }
     a {
         
-        color: #ff99aa;
+        color: #FF6600;
         text-decoration: none; 
     }
     a:hover {
@@ -66,23 +74,26 @@
                 <tr>
                     <td rowspan="2" style="width:20px;">
                     </td>
-                    <td style="height:52px;">
-                        <div style="color:#fff;font-size:22px;font-weight:bold;">
-                                <a href="/index.php" style="color:#fff;font-size:22px;font-weight:bold;text-decoration:none">Control PMS</a>
+                <div class="contenedor">
+                    <div class="texto">
+                        <h4>Control PMS</h4><br />                            
+                        <p>Project Management Software</p>
+                    </div>        
+                    <div class="imagen">
+                        <img id="logo_pms" class="logo_pms" src="img/pmslogo.png" title="CONTROL PMS"/>
+                    </div>
+                </div>
+                <div >
+                        <div id="imagen">
+                            <img class="logo_cliente" src="img/cliente/oechsle.png" />
                         </div>
-                        <div style="color:#fff">
-                                <a href="/index.php" style="color:#fff;text-decoration:none">Sistemas de Gestión de Proyectos</a>
-                        </div>
-                    </td>
-                    <td style="padding-right:5px;text-align:right;vertical-align:bottom;">
-                        <div id="topmenu">
-                            <label>LOGO</label>
-                        </div>
-                    </td>
+                </div>
                 </tr>
             </table>
         </div>
     </div>
+        
+       
         
     <div id="mainwrap">
         <div id="content">
@@ -91,15 +102,21 @@
                 <div class="easyui-accordion" border="false">
                     <div title="Busca Personas">
                         <ul class="pitem">
-                            <li><a href="javascript:void(0)" onclick="abrir('modulos/contacto/registracompania.php')">Registro de Compa&ntilde;ias</a></li>
-                            <li><a href="javascript:void(0)" onclick="abrir('modulos/contacto/registrapersona.php')">Registro de Persona</a></li>
-                            <li><a href="javascript:void(0)" onclick="abrir('modulos/contacto/registrolistadistribucion.php')">Listas de Distribuci&oacute;n</a></li>
-                            <li><a href="javascript:void(0)" onclick="abrir('modulos/contacto/reporteporespecialidad.php')">Reporte por Especialidad</a></li>
+                            <li><a href="modulos/contacto/registracompania.php" target="_blank">Registro de Compa&ntilde;ias</a></li>
+                            <li><a href="modulos/contacto/registrapersona.php" target="_blank">Registro de Persona</a></li>
+                            <li><a href="modulos/contacto/registrolistadistribucion.php" target="_blank">Listas de Distribuci&oacute;n</a></li>
+                            <li><a href="modulos/contacto/reporteporespecialidad.php" target="_blank">Reporte por Especialidad</a></li>
                         </ul>
                     </div>
                     <div title="Datos de Obra">
+                        <ul>
+                            <li><a href="modulos/datosdeobra/registradatosdeobra.php" target="_blank">Datos de Obra</a></li>
+                        </ul>
                     </div>
                     <div title="Gesti&oacute; de Obra - Procura">
+                        <ul>
+                            <li><a href="modulos/procura/test_phpexcel.php" target="_blank">Gesti&oacute; de Obra - Procura</a></li>
+                        </ul>
                     </div>
                     <div title="Pagos y Rendiciones">
                     </div>

@@ -12,6 +12,9 @@ function __autoload($name) {
 
 $especialidadcompania = new EspecialidadCompaniaDL();
 $especialidades = $especialidadcompania->mostrarEspecialidades();
+
+$representantescompania = new RepresentanteCompaniaDL();
+$representantes = $representantescompania->mostrarRepresentantes();
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -31,6 +34,45 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
     
     <script type="text/javascript">
     $(document).ready(function(){
+        /*
+         * MODAL PARA SELECCIONAR ESPECIALIDAD
+         */
+        $("#divSeleccionaEspecialidad").dialog({
+            autoOpen:false,
+            height:300,
+            width:350,
+            modal:true,
+            buttons:{
+                "Crear nueva especialidad":function(){
+                    $("#divNuevaEspecialidad").dialog("open");
+                },
+                "Salir":function(){
+                    $(this).dialog("close");
+                }
+            },
+            close:function(){
+                //allFields.val("").removeClass("ui-state-error");
+            }
+        });
+        
+        /**
+         * MODAL PARA SELECCIONAR REPRESENTANTE
+         */
+        $("#divSeleccionaRepresentante").dialog({
+            autoOpen:false,
+            height:300,
+            width:350,
+            modal:true,
+            buttons:{
+                "Agregar representate (Contactos)":function(){
+                    $("#").dialog("open");
+                },
+                "Salir":function(){
+                    $(this).dialog("close");
+                }
+            }
+        })
+        
         var contador = 1;
         var counter_strike = 0;
         
@@ -40,7 +82,7 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
         $("#dialog:ui-dialog").dialog("destroy");
         $("#seleccionaDireccion").dialog({
             autoOpen:false,
-            height:300,
+            height:250,
             width:350,
             modal:true,
             buttons:{
@@ -49,63 +91,160 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
                 }
             },
             close:function(){
+                //allFields.val("").removeClass("ui-state-error");
+            }
+        });
+        
+        /**
+         * MODAL PARA CREAR UNA NUEVA ESPECIALIDAD
+         */
+        $.fx.speeds._default = 1000;
+        $("#divNuevaEspecialidad").dialog({
+            show:"blind",
+            autoOpen:false,
+            height:300,
+            width:350,
+            modal:true,
+            buttons:{
+                "Salir":function(){
+                    $(this).dialog("close");
+                }
+            },
+            close:function(){
                 allFields.val("").removeClass("ui-state-error");
             }
         });
         
+        /**
+         * BOTON PARA ABRIR MODAL Y AGREGAR ESPECIALIDADES AL FORMULARIO PRINCIPAL
+         */
+        $("#btnAgregarEspecialidad").click(function(){
+            $("#divSeleccionaEspecialidad").dialog("open");
+        })
+        
+        /**
+         * BOTON PARA ABRIR MODAL Y CREAR UNA NUEVA ESPECIALIDAD
+         */
+        $("#btnNuevaEspecialidad").click(function(){
+            $("#divNuevaEspecialidad").dialog("open");
+        });
+        
+        /**
+         * abre modal para ingresar direccion
+         */
         $("#agregarDireccion").button().click(function(){
             $("#seleccionaDireccion").dialog("open");
         })
         
-        // direcciones
+        /**
+         * BOTON PARA ABRIR MODAL Y AGREGAR REPRESENTANTES AL FOMRULARIO PRINCIPAL
+         */
+        $("#btnAgregarRepresentante").click(function(){
+            $("#divSeleccionaRepresentante").dialog("open");
+        })
+        
+        
+        // eliminar direccione de scrollbar del fomrulario principal
         $("#del-direccion").live("click",function(e) {
             e.preventDefault();
             counter_strike--;
             $(this).parent().parent().remove();
+        })       
+        
+        
+        
+        $("#btn-nuevaespecialidad").click(function(){
+            var descripcion = $(".input-descripcion").attr('value');
+            
+            $.ajax({
+                type:"POST",
+                url:'../../bl/Contacto/mantenimiento/especialidadcompania_crear.php',
+                data:"descripcion="+descripcion,
+                success:function(){
+                    $('.input-descripcion').val("")
+                }
+            });
+        });
+        
+        /**
+         * detectar seleccion en especialidad en base al click del checkbox
+         * y agregar la descripcion a la lista que el usuario visualizará.
+         */
+        $('input:checkbox[name=especialidades[]]').click(function() {
+            $.ajax({
+                data:{id:$(this).val()},
+                type:"GET",
+                dataType:"json",
+                url:"../../includes/query_repository/getEspecialidadCompania.php",
+                success:function(data) {
+                    mostrarEspecialidadesScroll(data);
+                }
+            });
+        });
+        
+        $("#del-especialidad").live("click",function(e) {
+            e.preventDefault();
+            $(this).parent().parent().remove();
         })
         
-        //ocultar al inicio 
+        function mostrarEspecialidadesScroll(data)
+        {
+            $.each(data,function(index,value){
+                $("#tbl-listaespecialidades tbody").append(
+                "<tr>"+
+                "<td>"+data[index].id+"</td>"+
+                "<td>"+data[index].descripcion+"</td>"+
+                "<td>"+"<a href='#' id='del-especialidad' class='button delete'>Eliminar</a>"+"</td>"+
+                "</tr>"
+                );
+            });
+        }
+        
+        /**
+         * DETECTAR SELECCION EN REPRESENTANTE EN BASE A SU SELECCION
+         * Y AGREGAR EL REPRESENTANTE A LA LISTA QUE EL USUARIO VISUALIZARA
+         */
+         $('input:checkbox[name=representantes[]]').click(function() {
+            $.ajax({
+                data:{id:$(this).val()},
+                type:"GET",
+                dataType:"json",
+                url:"../../includes/query_repository/getRepresentante.php",
+                success:function(data) {
+                    mostrarRepresentantesScroll(data);
+                }
+            });
+         });
+         
+         $("#del-representante").live("click",function(e) {
+            e.preventDefault();
+            $(this).parent().parent().remove();
+         });
+         
+         function mostrarRepresentantesScroll(data)
+         {
+             $.each(data,function(index,value){
+                $("#tbl-listarepresentantes tbody").append(
+                "<tr>"+
+                "<td>"+data[index].dni+"</td>"+
+                "<td>"+data[index].nombre+"</td>"+
+                "<td>"+data[index].cargo+"</td>"+
+                "<td>"+data[index].fax+"</td>"+
+                "<td>"+data[index].email+"</td>"+
+                "<td>"+"<a href='#' id='del-representante' class='button delete'>Eliminar</a>"+"</td>"+
+                "</tr>"
+                );
+             });
+         }
+        
+        /**
+         * DESPERDICIO DE CODIGO;:SETEARLA ONLINE CON CSS COMO ATRIBUTO DE ELEMENTO
+         */
         $("#seleccionaDireccion").css("display", "none");
         $("#seleccionaEspecialidad").css("display", "none");
         $("#quitardireccion").css("display","none");
         $("#seleccionaRepresentante").css("display","none");
-        
-        // Efecto para direccion
-//        $("#agregarDireccion").click(function(){
-//            if($(this).attr("value") == "Agregar Direccion"){
-//                $(this).attr("value", "Ocultar");
-//                $("#seleccionaDireccion").fadeIn('slow');
-//                $("#quitardireccion").fadeIn('slow');
-//            }else{
-//                $(this).attr("value","Agregar Direccion");
-//                $("#seleccionaDireccion").fadeOut('slow');
-//                $("#quitardireccion").fadeOut('slow')
-//            }
-//        });
-        
-        // Efecto para Especialidad
-        $("#agregarEspecialidad").click(function(){
-            if($(this).attr("value") == "Agregar Especialidad"){
-                $(this).attr("value", "Ocultar");
-                $("#seleccionaEspecialidad").fadeIn('slow');
-            }else{
-                $(this).attr('value', "Agregar Especialidad");
-                $("#seleccionaEspecialidad").fadeOut('slow');
-            }
-        });
-        
-        /*
-         * Efecto para representante
-         */ 
-        $("#agregarRepresentante").click(function(){
-            if($(this).attr("value") == "Agregar Representante"){
-                $(this).attr("value","Ocultar");
-                $("#seleccionaRepresentante").fadeIn('slow');
-            }else{
-                $(this).attr("value","Agregar Representante");
-                $("#seleccionaRepresentante").fadeOut('slow');
-            }
-        });
+
         
         $("#agregarRegistroDireccion").click(function() {
             //contador para saber cuantas direcciones existen
@@ -113,7 +252,6 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
             //OBTENEMOS LOS ID DE LOS VALORES SELECCIONADOS EN EL COMBOBOX
             var tipodireccion_id = $('#tipodireccionid option:selected').val();
             var departamento_id = $('#departamentoid option:selected').val();
-            var provincia_id = $('#provinciaid option:selected').val();
             var distrito_id = $('#distritoid option:selected').val();
             
             //OBTENEMOS LOS VALORES A MOSTRAR DE LOS DATOS ELEGIDOS EN EL COMBOBX
@@ -121,7 +259,6 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
             var direccion_value = $('#direccion_text').val();
             var pais_value = $('#paisid option:selected').html();
             var departamento_value = $('#departamentoid option:selected').html();
-            var provincia_value = $('#provinciaid option:selected').html();
             var distrito_value = $('#distritoid option:selected').html();
             
             /*
@@ -134,7 +271,6 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
                 "<td>"+direccion_value+"</td>"+
                 "<td>"+pais_value+"</td>"+
                 "<td>"+departamento_value+"</td>"+
-                "<td>"+provincia_value+"</td>"+
                 "<td>"+distrito_value+"</td>"+
                 "<td>"+"<a href='#' id='del-direccion' class='button delete'>Eliminar</a>"+"</td>"+
                 "</tr>"
@@ -163,21 +299,18 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
        cargar_tipocompania();
        cargar_tipodireccion();
        cargar_paises();
+       //selDefault();
        //cargar_departamentos(); ya no se cargara a menos que se cargue un pais
        $("#paisid").change(function(){cargar_departamentos();})
-       $("#departamentoid").change(function(){cargar_provincias();})
+       $("#departamentoid").change(function(){cargar_distritos();})
        $("#departamentoid").attr("disabled",true);
-       $("#provinciaid").change(function(){cargar_distritos();})
-       $("#provinciaid").attr("disabled",true);
+       //$("#provinciaid").change(function(){cargar_distritos();})
+       //$("#provinciaid").attr("disabled",true);
        $("#distritoid").attr("disabled",true);
        
        $("#submit").click(function(){
            
        });
-    });
-    
-    $('input:checkbox[name=especialidad]').click(function(){
-        alert("checked");
     });
     </script>
 <title>REGISTRO DE COMPANIAS</title>
@@ -219,7 +352,18 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
                </tr>
                <tr>
                    <td><label for="giro">Giro:</label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="giro" /></td>
+                   <td>
+                       <table border='0' class="atable">
+                           <tr>
+                               <th>
+                               <th colspan="2">
+                           <tr>
+                                <td class="atable"><input type="text" size="30" name="grio" />
+                                <td><input type="button" class="addRow" value="+" />
+                                <td><input type="button" class="delRow" value="-" />
+                                    <input type="hidden" class="rowCount" name="filas_giro" />    
+                       </table>
+                   </td>
                </tr>
                <tr>
                    <td><label for="actividad_principal">Activida Principal:</label></td>
@@ -292,44 +436,39 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
                        <!-- ventana modal para seleccionar la direccion -->
                        <div id="seleccionaDireccion">
                            <table border="0" class="atable">
-                                <tr>
-                                    <td>
+                                <tr >
+                                    <td class="tr-padding">
                                         <label>Tipo de Direcci&oacute;n:</label>
-                                        <select name="tipodireccionseleccionada" id="tipodireccionid" name="tipodir">
+                                        <select class="derecha" name="tipodireccionseleccionada" id="tipodireccionid" name="tipodir">
                                             <option value="0" name="td">Seleccionar tipo de Direccion</option>
                                         </select>
                                     </td>
-                                 <tr>   
-                                    <td>
+                                 <tr >   
+                                    <td class="tr-padding">
                                         <label>Direccion:</label>
-                                        <input id="direccion_text" type="text" size="15" name="direccion" />
+                                        <input class="derecha" id="direccion_text" type="text" size="15" name="direccion" />
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td>
+                                    <td class="tr-padding">
                                         <label>Pa&iacute;s:</label>
-                                        <select name="paisseleccionada" id="paisid">
-                                            <option value="0">Seleccionar Pa&iacute;s</option>
+                                        <select class="derecha" name="paisseleccionada" id="paisid">
+                                            <option value="0">Selecciona pa&iacute;s</option>
+                                            <option value="-1">Selecciona pa&iacute;s -1</option>
                                         </selected>
                                     </td>
                                   <tr>  
-                                    <td>
-                                        <label>Departamento:</label>
-                                        <select name="departamentoseleccionada" id="departamentoid">
-                                            <option value="0">Seleccionar departamento</option>
+                                    <td class="tr-padding">
+                                        <label>Departamento/Estado:</label>
+                                        <select class="derecha" name="departamentoseleccionada" id="departamentoid">
+                                            <option value="2911">Lima</option>
                                         </selected>
                                     </td>
                                    <tr> 
-                                    <td>
-                                        <label>Provincia:</label>
-                                        <select name="provinciaseleccionada" id="provinciaid">
-                                            <option value="0">Seleccione una provincia</option>
-                                        </select> 
-                                    </td>
                                     <tr>
-                                    <td>
-                                        <label>Distrito:</label>
-                                        <select name="distritoseleccionada" id="distritoid">
+                                    <td class="tr-padding">
+                                        <label>Distrito/Ciudad:</label>
+                                        <select class="derecha" name="distritoseleccionada" id="distritoid">
                                             <option value="0">Seleccione un distrito</option>
                                         </select>
                                     </td>
@@ -355,7 +494,6 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
                                        <th>Direcci&oacute;n</th>
                                        <th>Pa&iacute;s
                                        <th>Departamento</th>
-                                       <th>Provincia</th>
                                        <th>Distrito</th>
                                    </tr>
                                </thead>
@@ -369,9 +507,9 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
                <tr>
                    <td><label for="especialidad">Especialidad:</label></td>
                    <td>
-                       <input type="button" id="agregarEspecialidad" value="Agregar Especialidad" />
+                       <input type="button" id="btnAgregarEspecialidad" value="Agregar Especialidad" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                       
-                       <div id="seleccionaEspecialidad" class="areaScroll">
+                       <div id="divSeleccionaEspecialidad" title="Agregar Especialidad" style="display:none">
                             <table border="0" class="atable">
                             <tr>
                                 <th></th>
@@ -380,7 +518,7 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
                                 <td>
                                     <?php
                                     foreach ($especialidades as &$valor) {
-                                        echo '<input type="checkbox" name="contacto[]" value="'.
+                                        echo '<input type="checkbox" name="especialidades[]" value="'.
                                                 $valor[0].
                                                 '"/>'.
                                                 $valor[1].
@@ -392,12 +530,35 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
                             </table>
                        </div>
                    </td>
+                        <div id="divNuevaEspecialidad" title="Crear nueva especialidad" style="display: none">
+                            <label>Especialidad:</label>
+                            <input id="inputext" class="input-descripcion" type="text" />
+                            <input id="btn-nuevaespecialidad" type="button" value="Crear" />
+                        </div>
                </tr>
+               <tr>
+                    <td><label>Lista de especialidades:</label></td>
+                    <td>
+                        <div class="areaScrollModal" id="lista-especialidades">
+                            <table id="tbl-listaespecialidades" class="ui-widget">
+                                <thead>
+                                    <tr class="ui-widget-header">
+                                        <th>Id</th>
+                                        <th>Descripcion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr></tr>
+                                </tbody>    
+                            </table>
+                        </div>
+                    </td>
+                </tr>
                <tr>
                    <td><label for="representante">Representante:</label></td>
                    <td>
-                       <input type="button" id="agregarRepresentante" value="Agregar Representante" />
-                       <div id="seleccionaRepresentante" class="areaScroll">
+                       <input type="button" id="btnAgregarRepresentante" value="Agregar Representante" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                       <div id="divSeleccionaRepresentante" title="Agregar Representante" style="display: none">
                            <table border="0" class="atable">
                            <tr>
                                 <th></th>
@@ -405,19 +566,39 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
                             <tr>
                                 <td>
                                     <?php
-                                    /*
-                                     * CAMBIAR EL ARREGLO contacto Y LA CONSULTA SQL
-                                     */
-                                    foreach ($especialidades as &$valor) {
-                                        echo '<input type="checkbox" name="contacto[]" value="'.
+                                    foreach ($representantes as &$valor) {
+                                        echo '<input type="checkbox" name="representantes[]" value="'.
                                                 $valor[0].
                                                 '"/>'.
-                                                $valor[1].
+                                                strtoupper($valor[3]).
                                                 '<br />';
                                     }
                                     ?>
                                 </td>
                             </tr>    
+                           </table>
+                       </div>
+                   </td>
+               </tr>
+               <tr>
+                   <td><label>Lista de representantes</label></td>
+                   <td>
+                       <div class="areaScrollModal" id="lista-representantes">
+                           <table id="tbl-listarepresentantes" class="ui-widget">
+                               <thead>
+                                   <tr class="ui-widget-header">
+                                       <th> DNI </th>
+                                       <th>Nombres</th>
+                                       <th>Cargo</th>
+                                       <th>Tel&eacute;fono</th>
+                                       <th>Fax</th>
+                                       <th>T. M&oacute;vil</th>
+                                       <th>Email</th>
+                                   </tr>
+                               </thead>
+                               <tbody>
+                                    <tr></tr>
+                                </tbody>    
                            </table>
                        </div>
                    </td>

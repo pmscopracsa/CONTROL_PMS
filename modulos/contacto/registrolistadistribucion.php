@@ -11,8 +11,9 @@ function  __autoload($name) {
     if (file_exists($fullpath))        require_once ($fullpath);
 }
 
-$especialidadcompania = new EspecialidadCompaniaDL();
-$especialidades = $especialidadcompania->mostrarEspecialidades();
+$contacto = new ContactoPersona();
+$contactos = $contacto->mostrarContactos();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,10 +40,10 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
             /*
              * Eliminar elementos seleccionados de cotactos
              */
-            $("#del-contacto").live("click",function(e) {
-                e.preventDefault();
-                $(this).parent().parent().remove();
-            });
+//            $("#del-contacto").live("click",function(e) {
+//                e.preventDefault();
+//                $(this).parent().parent().remove();
+//            });
             
             $("#modal-contactos").dialog({
                 autoOpen:false,
@@ -94,12 +95,21 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
                     $("#contactos-agregados tbody").append(
                     "<tr>"+
                     "<td>"+datos[index].id+"</td>" +
-                    "<td>"+datos[index].descripcion+"</td>"+
+                    "<td>"+datos[index].nombre+"</td>"+
                     "<td>"+"<a href='#' id='del-contacto' class='button delete'>Eliminar</a>"+"</td>"
                     +"</tr>"    
                     );
                 })
-            }          
+            }
+            
+            /**
+             * ELIMINAR DEL SCROLLBAR AL ELEMENTO SELECCIONADO
+             */
+            $("#del-contacto").live("click",function(e){
+                e.preventDefault();
+                $(this).parent().parent().remove();
+            })
+            
             /*
              * auto completar obras
              */
@@ -127,11 +137,11 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
                     <tr>
                         <td>
                             <?php
-                            foreach ($especialidades as $valor) {
+                            foreach ($contactos as $valor) {
                                 echo '<input type="checkbox" name="contacto[]" value="'.
                                         $valor[0].
                                         '"/>'.
-                                        $valor[1].
+                                        strtoupper($valor[nombre]).
                                         '<br />';
                             }
                             ?>

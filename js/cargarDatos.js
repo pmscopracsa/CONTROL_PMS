@@ -16,10 +16,24 @@ function agregar_direccion()
     contador++;
 }
 
+function cargar_especialidadpersona()
+{
+    $.get("../../bl/Contacto/cargarEspecialidadPersona.php",function(resultado) {
+        $("#checkbox-especialidadpersona").append(resultado);
+    });
+}
+
 function cargar_viasenvio()
 {
     $.get("../../bl/Contacto/cargarViaEnvio.php",function(resultado){
         $("#viaenvioid").append(resultado);
+    });
+}
+
+function cargar_companias()
+{
+    $.get("../../bl/Contacto/cargarCompanias.php",function(resultado){
+        $("#companiaseleccionada").append(resultado);
     });
 }
 
@@ -54,19 +68,19 @@ function cargar_departamentos()
     });
 }
 
-function cargar_provincias()
-{
-    var code = $("#departamentoid").val();
-    $.get("../../bl/Contacto/cargarProvincias.php",{code:code},function(resultado) {
-            $("#provinciaid").attr("disabled",false);
-            document.getElementById("provinciaid").options.length = 1;
-            $('#provinciaid').append(resultado);
-    });
-}
+//function cargar_provincias()
+//{
+//    var code = $("#departamentoid").val();
+//    $.get("../../bl/Contacto/cargarProvincias.php",{code:code},function(resultado) {
+//            $("#provinciaid").attr("disabled",false);
+//            document.getElementById("provinciaid").options.length = 1;
+//            $('#provinciaid').append(resultado);
+//    });
+//}
 
 function cargar_distritos()
 {
-    var code=$("#provinciaid").val();
+    var code=$("#departamentoid").val();
     $.get("../../bl/Contacto/cargarDistritos.php",{code:code},
         function(resultado)
         {

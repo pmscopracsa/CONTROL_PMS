@@ -10,7 +10,7 @@ $sord = $_GET['sord'];
 
 if(!$sidx) $sidx = 1;
 
-$result = mysql_query("SELECT COUNT(*) AS count FROM Departamento");
+$result = mysql_query("SELECT COUNT(*) AS count FROM tb_especialidadcompania");
 $row = mysql_fetch_array($result,MYSQL_ASSOC);
 $count = $row['count'];
 
@@ -21,8 +21,7 @@ if($page > $total_pages) $page = $total_pages;
 
 $start = $limit * $page - $limit;
 
-$SQL = "SELECT id,descripcion FROM Departamento ORDER BY $sidx $sord LIMIT $start, $limit";
-//$SQL = "SELECT id,descripcion FROM Departamento ORDER BY descripcion LIMIT $start, $limit";
+$SQL = "SELECT id,descripcion FROM tb_especialidadcompania ORDER BY $sidx $sord LIMIT $start, $limit";
 $result = mysql_query($SQL);
 
 $responce->page = $page;

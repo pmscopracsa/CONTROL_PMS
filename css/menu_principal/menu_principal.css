@@ -108,3 +108,74 @@ a.download-link{
 .icon-gears{
 	background:url('images/gears.png') no-repeat;
 }
+
+.logo_pms {
+    position: absolute;
+    left: 50%;
+    right: 0;
+    top: 0cm;
+    width: 155px;
+    height: 180px;
+    float: right;
+    z-index: 1;
+}
+
+.contenedor {
+    position: relative;
+    width: 380px;
+    height: 180px;
+    border: #FF6600 5px solid;
+    left: -5%;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px; 
+}
+
+
+
+.contenedor .texto {
+    position: absolute;
+    left: 0;
+    z-index: 2;
+    padding:50px 0 10px;
+    top: 0;
+}
+
+.contenedor .texto h4{
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px; 
+    background:#FF6600;
+    color:#FFFFFF;
+    display:inline;
+    padding:5px;
+}
+
+.contenedor .texto p{
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px; 
+    background:#FF6600;
+    color:#FFFFFF;
+    margin:20px 0;
+    padding:5px;
+    width:90%;
+}
+
+.contenedor_cliente {
+    position: static;
+    width: 380px;
+    height: 180px;
+    border: #FF6600 5px solid;
+    
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px; 
+}
+
+.logo_cliente {
+    position: absolute;
+    left: 80%;
+    right: 0;
+    top: 0cm;
+    width: 155px;
+    height: 180px;
+    float: right;
+    z-index: 1;
+}

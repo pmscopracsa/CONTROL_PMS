@@ -24,14 +24,13 @@ $css = scandir($CSS_PATH);
         
         <script>
         $(function(){
-            $("#error").hide();
             
             $("#lista-especialidades").jqGrid({
                 url:'../../dl/contacto_bl/testlistaespecialidades/parent.php?q=2',
                 datatype:"json",
                 colNames:['Id','Especialidad'],
                 colModel:[
-                    {name:'id',index:'id',width:250,hidden:true},
+                    {name:'id',index:'id',width:350,hidden:true},
                     {name:'descripcion',index:'descripcion',width:250}
                 ],
                 rowNum:10,
@@ -48,7 +47,7 @@ $css = scandir($CSS_PATH);
                         if($("#lista-especialidades-detalle").jqGrid('getGridParam','records') > 0) {
                             $("#lista-especialidades-detalle").jqGrid('setGridParam',{url:"../../dl/contacto_bl/testlistaespecialidades/hijo.php?q=1&id="+ids,page:1});
                             $("#lista-especialidades-detalle").jqGrid('setCaption',"Empresa-Especialidad:"+ids).trigger('reloadGrid');
-                            //RELOAD LAST GRID
+                            //REGARCAR ULTIMO GRID
                             var detalle = $("#detalle");
                             detalle.clearGridData();
                         }
@@ -63,7 +62,7 @@ $css = scandir($CSS_PATH);
                 }
             });
             
-            $("#lista-especialidades").jqGrid('navGrid','#pager-especialidades',{add:true,edit:true,del:false});
+            //$("#lista-especialidades").jqGrid('navGrid','#pager-especialidades',{add:true,edit:true,del:false});
             
             $("#lista-especialidades-detalle").jqGrid({
                 url:'../../dl/contacto_bl/testlistaespecialidades/hijo.php?q=1&id=0',
@@ -108,18 +107,19 @@ $css = scandir($CSS_PATH);
                 rowNum:10,
                 rowList:[10,20,30],
                 pager:"#pager-detalle",
-                sortname:'descripcion',
+                sortname:'nombre',
                 viewrecords:true,
                 sortorder:"asc",
                 multiselect:false,
                 caption:"Persona",
                 onSelectRow:function(id) {
-                    verDetalle(id);
+                    //alert(id);
+                    //verDetalle(id);
                     $.ajax({
                         data:{id:id},
                         type:"GET",
                         dataType:"json",
-                        url:"foo.php",
+                        url:"../../dl/contacto_bl/testlistaespecialidades/last-detail.php",
                         success:function(data){
                             verDetalle(data)
                         },
@@ -152,7 +152,6 @@ $css = scandir($CSS_PATH);
                 <h1 id="titulo_barra">REPORTE POR ESPECIALIDAD</h1>
             </div>
         </div>
-        
         <div id="main">
             <div class="container">
                 <div id="izquierdo">
@@ -172,13 +171,11 @@ $css = scandir($CSS_PATH);
                 <div id="derecho">
                     <div id="derecho-content">
                         <h1>DETALLES</h1>
-                        <div id="error">
+                        <div id="error" style="display: none">
                         <h3>No se puede consultar los datos de detalle</h3>
                         </div>
                     </div>
-                    
                 </div>
-
             </div>
             <div class="clear"></div>
         </div>

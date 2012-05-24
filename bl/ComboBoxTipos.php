@@ -1,5 +1,4 @@
 <?php
-
 class ComboBoxTipos extends ComboBoxSql
 {
     protected $codigo_seleccion;
@@ -7,7 +6,7 @@ class ComboBoxTipos extends ComboBoxSql
     public function cargaTipoCompania()
     {
         $consulta = parent::__construct();
-        $consulta = parent::consulta("SELECT * FROM tb_tipocompania ORDER BY nombre ASC");
+        $consulta = parent::consulta("SELECT * FROM tb_tipocompania ORDER BY descripcion ASC");
         $num_total_registros = parent::num_rows($consulta);
         
         if ($num_total_registros > 0) {
@@ -15,7 +14,7 @@ class ComboBoxTipos extends ComboBoxSql
             
             while ($tipocompania = parent::fetch_assoc($consulta)) {
                 $id = $tipocompania['id'];
-                $descripcion = $tipocompania['nombre'];
+                $descripcion = $tipocompania['descripcion'];
                 $tipocompanias[$id] = $descripcion;
             }
             return $tipocompanias;
@@ -27,7 +26,7 @@ class ComboBoxTipos extends ComboBoxSql
     public function cargarTipoEnvio()
     {
         $consulta = parent::__construct();
-        $consulta = parent::consulta("SELECT * FROM ViaEnvio ORDER BY nombre ASC");
+        $consulta = parent::consulta("SELECT * FROM tb_viaenvio ORDER BY descripcion ASC");
         $num_total_registros = parent::num_rows($consulta);
         
         if ($num_total_registros > 0) {
@@ -35,7 +34,7 @@ class ComboBoxTipos extends ComboBoxSql
             
             while ($viaenvio = parent::fetch_assoc($consulta)) {
                 $id = $viaenvio['id'];
-                $descripcion = $viaenvio['nombre'];
+                $descripcion = $viaenvio['descripcion'];
                 $viasenvio[$id] = $descripcion;
             }
             return $viasenvio;
@@ -47,7 +46,7 @@ class ComboBoxTipos extends ComboBoxSql
     public function cargarTipoDireccion()
     {
         $consulta = parent::__construct();
-        $consulta = parent::consulta("SELECT * FROM TipoDireccion ORDER BY descripcion ASC");
+        $consulta = parent::consulta("SELECT * FROM tb_tipodireccion ORDER BY descripcion ASC");
         $total_registros = parent::num_rows($consulta);
         
         if ($total_registros > 0) {

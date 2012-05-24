@@ -20,10 +20,10 @@
 	border-width:0px;
 }
 .accordion-collapse{
-	background:url('../img/accordion_collapse.png') no-repeat;
+	background:url('../../img/accordion_collapse.png') no-repeat;
 }
 .accordion-expand{
-	background:url('../img/accordion_expand.png') no-repeat;
+	background:url('../../img/accordion_expand.png') no-repeat;
 }
 .calendar{
 	background:#fff;

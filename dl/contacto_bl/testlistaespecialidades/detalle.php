@@ -11,13 +11,11 @@ $sidx = $_GET['sidx']; // get index row - i.e. user click to sort
 $sord = $_GET['sord']; // get the direction 
 $id = $_GET['id']; 
 
-//echo $_GET["q"];
-
 if(!$sidx) $sidx =1;
 
 switch ($examp) { 
     case 1: 
-        $result = mysql_query("SELECT COUNT(*) AS count FROM Distrito WHERE provincia_id=".$id); 
+        $result = mysql_query("SELECT COUNT(*) FROM tb_personacontacto WHERE tb_companiacontacto_id =".$id); 
         $row = mysql_fetch_array($result,MYSQL_ASSOC); 
         $count = $row['count']; 
         
@@ -30,7 +28,7 @@ switch ($examp) {
         if ($page > $total_pages) $page=$total_pages; 
         $start = $limit*$page - $limit; 
         if ($start<0) $start = 0; 
-        $SQL = "SELECT id, descripcion FROM Distrito WHERE provincia_id=".$id." ORDER BY $sidx $sord LIMIT $start , $limit"; 
+        $SQL = "SELECT id,nombre FROM tb_personacontacto WHERE tb_companiacontacto_id =".$id." ORDER BY $sidx $sord LIMIT $start , $limit";
         $result = mysql_query( $SQL ) or die("Couldnt execute query.".mysql_error()); 
         $responce->page = $page; 
         $responce->total = $total_pages; 
@@ -39,7 +37,7 @@ switch ($examp) {
         
         while($row = mysql_fetch_array($result,MYSQL_ASSOC)) { 
             $responce->rows[$i]['id']=$row[id]; 
-            $responce->rows[$i]['cell']=array($row[id],$row[descripcion]); 
+            $responce->rows[$i]['cell']=array($row[id],$row[nombre]); 
             $i++; 
         } 
         

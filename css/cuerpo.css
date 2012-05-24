@@ -72,3 +72,18 @@ input[type="text"]:focus:hover {
     background: #FFFFFF;
     color: #000000;
 }
+
+.derecha {
+    position: absolute;
+    left: 150px;
+}
+
+.derecha-inline {
+    position: absolute;
+    left: 300px;
+}
+
+.tr-padding {
+    padding: 5px 5px 5px 5px;
+}
+

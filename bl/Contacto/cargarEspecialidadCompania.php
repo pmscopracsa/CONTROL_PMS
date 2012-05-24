@@ -1,6 +1,6 @@
 <?php
 include_once '../CheckBoxSql.php';
-include_once '../CheckBoxEspecialidad.php';
+include_once '../CheckBoxEspecialidadCompania.php';
 
 $checks = new CheckBoxEspecialidad();
 $especialidades = $checks->cargarEspecialidad();

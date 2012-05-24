@@ -14,7 +14,10 @@ if(!$sidx) $sidx =1;
 
 switch ($examp) { 
     case 1: 
-        $result = mysql_query("SELECT COUNT(*) AS count FROM Provincia WHERE departamento_id=".$id); 
+        $result = mysql_query("SELECT COUNT(compania.descripcion) AS count FROM tb_rubro rubro 
+        INNER JOIN tb_companiacontacto compania
+        ON compania.id = rubro.tb_companiacontacto_id
+        WHERE tb_especialidadcompania_id = ".$id); 
         $row = mysql_fetch_array($result,MYSQL_ASSOC); 
         $count = $row['count']; 
         
@@ -27,7 +30,10 @@ switch ($examp) {
         if ($page > $total_pages) $page=$total_pages; 
         $start = $limit*$page - $limit; // do not put $limit*($page - 1) 
         if ($start<0) $start = 0; 
-        $SQL = "SELECT id, descripcion FROM Provincia WHERE departamento_id=".$id." ORDER BY $sidx $sord LIMIT $start , $limit"; 
+        $SQL = "SELECT compania.id, compania.descripcion FROM tb_rubro rubro 
+        INNER JOIN tb_companiacontacto compania
+        ON compania.id = rubro.tb_companiacontacto_id
+        WHERE tb_especialidadcompania_id = ".$id." ORDER BY $sidx $sord LIMIT $start , $limit"; 
         $result = mysql_query( $SQL ) or die("Couldnt execute query.".mysql_error()); 
         $responce->page = $page; 
         $responce->total = $total_pages; 

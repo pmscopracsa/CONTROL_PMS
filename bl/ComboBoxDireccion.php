@@ -46,31 +46,31 @@ class ComboBoxDireccion extends ComboBoxSql
         }
     }
     
-    function cargarProvincia()
-    {
-        $consulta = parent::__construct();
-        $consulta = parent::consulta("SELECT * FROM tb_provincia WHERE tb_departamento_id = $this->codigo_seleccion ORDER BY nombre ASC");
-        $num_total_registros = parent::num_rows($consulta);
-        
-        if ($num_total_registros > 0) 
-        {
-            $provincias = array();
-            
-            while ($provincia = parent::fetch_assoc($consulta)) {
-                $id_provincia = $provincia['id'];
-                $descripcion_provincia = $provincia['nombre'];
-                $provincias[$id_provincia] = $descripcion_provincia;
-            }
-            return $provincias;
-        }  else {
-            return FALSE;
-        }
-    }
+//    function cargarProvincia()
+//    {
+//        $consulta = parent::__construct();
+//        $consulta = parent::consulta("SELECT * FROM tb_provincia WHERE tb_departamento_id = $this->codigo_seleccion ORDER BY nombre ASC");
+//        $num_total_registros = parent::num_rows($consulta);
+//        
+//        if ($num_total_registros > 0) 
+//        {
+//            $provincias = array();
+//            
+//            while ($provincia = parent::fetch_assoc($consulta)) {
+//                $id_provincia = $provincia['id'];
+//                $descripcion_provincia = $provincia['nombre'];
+//                $provincias[$id_provincia] = $descripcion_provincia;
+//            }
+//            return $provincias;
+//        }  else {
+//            return FALSE;
+//        }
+//    }
     
     function cargarDistrito()
     {
         $consulta = parent::__construct();
-        $consulta = parent::consulta("SELECT * FROM tb_distrito WHERE tb_provincia_id = $this->codigo_seleccion ORDER BY nombre ASC");
+        $consulta = parent::consulta("SELECT * FROM tb_distrito WHERE tb_departamento_id = $this->codigo_seleccion ORDER BY nombre ASC");
         $num_total_registros = parent::num_rows($consulta);
         
         if ($num_total_registros > 0) 

@@ -2,7 +2,7 @@
 require_once '../Conexion.php';
 $conexion = new Conexion();
 $cn = $conexion->conectar();
-
+/*
 $examp = $_GET["q"]; //query number 
 $page = $_GET['page']; // get the requested page 
 $limit = $_GET['rows']; // get how many rows we want to have into the grid 
@@ -43,4 +43,8 @@ switch ($examp) {
         echo json_encode($responce); 
         break; 
 }
+*/
+$id = $_GET['id'];
+$sql = "SELECT nombre, dni, cargo, fax, email, web FROM tb_personacontacto WHERE id = ".$id;
+$result = mysql_query( $SQL ) or die("Couldnt execute query.".mysql_error()); 
 ?>

@@ -5,7 +5,7 @@ class CheckBoxEspecialidad  extends CheckBoxSql
     function cargarEspecialidad()
     {
         $consulta = parent::__construct();
-        $consulta = parent::consulta("SELECT * FROM EspecialidadCompania ORDER BY descripcion ASC");
+        $consulta = parent::consulta("SELECT * FROM tb_especialidadcompania ORDER BY descripcion ASC");
         $num_total_registros = parent::num_rows($consulta);
         
         if($num_total_registros > 0)
@@ -22,8 +22,5 @@ class CheckBoxEspecialidad  extends CheckBoxSql
             return FALSE;
         }
     }
-    
-    
 }
-
 ?>
