@@ -113,9 +113,9 @@
                             <li><a href="modulos/datosdeobra/registradatosdeobra.php" target="_blank">Datos de Obra</a></li>
                         </ul>
                     </div>
-                    <div title="Gesti&oacute; de Obra - Procura">
+                    <div title="Gesti&oacute;n de Obra - Procura">
                         <ul>
-                            <li><a href="modulos/procura/test_phpexcel.php" target="_blank">Gesti&oacute; de Obra - Procura</a></li>
+                            <li><a href="modulos/procura/test_phpexcel.php" target="_blank">Gesti&oacute;n de Obra - Procura</a></li>
                         </ul>
                     </div>
                     <div title="Pagos y Rendiciones">

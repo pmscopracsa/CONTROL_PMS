@@ -60,9 +60,7 @@ $css = scandir($CSS_PATH);
                             detalle.clearGridData();
                     }
                 }
-            });
-            
-            //$("#lista-especialidades").jqGrid('navGrid','#pager-especialidades',{add:true,edit:true,del:false});
+            });//$("#lista-especialidades").jqGrid('navGrid','#pager-especialidades',{add:true,edit:true,del:false});
             
             $("#lista-especialidades-detalle").jqGrid({
                 url:'../../dl/contacto_bl/testlistaespecialidades/hijo.php?q=1&id=0',
@@ -113,8 +111,6 @@ $css = scandir($CSS_PATH);
                 multiselect:false,
                 caption:"Persona",
                 onSelectRow:function(id) {
-                    //alert(id);
-                    //verDetalle(id);
                     $.ajax({
                         data:{id:id},
                         type:"GET",
@@ -132,9 +128,31 @@ $css = scandir($CSS_PATH);
             
             function verDetalle(data) 
             {
+                /**
+                 * TODO: LAYOUT estilizado
+                 */
+                clear_detail();
                 $.each(data,function(index,value){
-                    
-                })
+                    $("#derecho-content-table-data tbody").append(
+                    "<tr>"+
+                    "<td>"+data[index].nombre+"</td>"+
+                    "<td>"+data[index].dni+"</td>"+
+                    "<td>"+data[index].cargo+"</td>"+
+                    "<td>"+data[index].fax+"</td>"+
+                    "<td>"+data[index].email+"</td>"+
+                    "<td>"+data[index].web+"</td>"+
+                    "</tr>"
+                    );
+                });
+            }
+            
+            function clear_detail()
+            {
+                /**
+                 * limpiar tabla de detalles
+                 * TODO: LAYOUT Estilizado
+                 */
+                $("#derecho-content-table-data td").remove();
             }
             
             function errorDetalle()
@@ -174,6 +192,25 @@ $css = scandir($CSS_PATH);
                         <div id="error" style="display: none">
                         <h3>No se puede consultar los datos de detalle</h3>
                         </div>
+                    </div>
+                </div>
+                <div id="derecho">
+                    <div id="derecho-content-table">
+                        <table id="derecho-content-table-data" border="1">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>DNI</th>
+                                    <th>Cargo</th>
+                                    <th>Fax</th>
+                                    <th>Email</th>
+                                    <th>Web</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

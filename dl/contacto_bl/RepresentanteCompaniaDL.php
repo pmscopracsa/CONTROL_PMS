@@ -1,5 +1,5 @@
 <?php
-include_once '../../dl/Conexion.php';
+include_once 'Conexion.php';
 
 class RepresentanteCompaniaDL {
     protected $tb_companiacontacto_id;
@@ -7,9 +7,7 @@ class RepresentanteCompaniaDL {
     
     public function mostrarRepresentantes()
     {
-        $query = "
-            SELECT * FROM tb_personacontacto ORDER BY nombre ASC
-            ";
+        $query = "SELECT * FROM tb_personacontacto ORDER BY nombre ASC";
         
         $conexion = new Conexion();
         $cn = $conexion->conectar();

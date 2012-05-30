@@ -17,11 +17,12 @@ $representante = array();
 $i = 0;
 
 while($res = mysql_fetch_assoc($result)) {
-    $representante[$i]['dni'] = $res['dni'];
-    $representante[$i]['nombre'] = $res['nombre'];
-    $representante[$i]['cargo'] = $res['cargo'];
-    $representante[$i]['fax'] = $res['fax'];
-    $representante[$i]['email'] = $res['email'];
+    $representante[$i]['id'] = $res['id'];
+    $representante[$i]['dni'] = $res['dni'] == NULL ? "------" : $res['dni'];
+    $representante[$i]['nombre'] = $res['nombre'] === NULL ? "------" : $res['nombre'];
+    $representante[$i]['cargo'] = $res['cargo'] === NULL ? "------" : $res['cargo'];
+    $representante[$i]['fax'] = $res['fax'] === NULL ? "------" : $res['fax'];
+    $representante[$i]['email'] = $res['email'] === NULL ? "------" : $res['email'];
     $i++;
 }
 echo json_encode($representante);

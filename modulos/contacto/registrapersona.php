@@ -38,7 +38,7 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
         <script src="../../js/cargarDatos.js" type="text/javascript"></script>
         <script>
         $(document).ready(function(){
-            
+            var contador_especialidades = 0;
             /*
              * MODAL PÁRA SELECCIONAR ESPECIALIDAD(ES)
              */
@@ -221,12 +221,13 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
              */
             function mostrarEspecialidadesScroll(data)
             {
+                contador_especialidades++;
                 $.each(data,function(index,value){
                     $("#tbl-listaespecialidades tbody").append(
                     "<tr>"+
-                    "<td>"+data[index].id+"</td>"+
                     "<td>"+data[index].descripcion+"</td>"+
                     "<td>"+"<a href='#' id='del-especialidad' class='button delete'>Eliminar</a>"+"</td>"+
+                    '<input type="hidden" name="especialidad'+contador_especialidades+'" value="'+data[index].id+'"/>'+
                     "</tr>"
                     );
                 });
@@ -243,10 +244,13 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
         </div>
         
         <div id="main">
-            <form action="" method="POST" id="frm-regpersona">
+            <form action="registratest.php" method="POST" id="frm-regpersona">
+                <div class="info">
+                Los campos obligatorios est&aacute;n marcados con <img src="../../img/required_star.gif" alt="dato requerido" />
+                </div>
                 <table>
                     <tr>
-                        <td><label>Tipo documento:</label></td>
+                        <td><label>Tipo documento:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td>
                             <!-- VALIDAR -->
                             <select id="tipo-documento" name="tipo-documento">
@@ -254,21 +258,21 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                                 <option value="carne-extranjeria">Carn&eacute; de extranjer&iacute;a</option>
                             </select>
                          <td>
-                             <input  class="input-tipo-documento" size="8" type="text" id="inputext" required/>
+                             <input  class="input-tipo-documento" size="8" type="text" name="numero-documento" id="inputext" required/>
                     </tr>
                     <tr>
-                        <td><label>¿Tiene RUC?</label>
+                        <td><label>¿Tiene RUC?<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label>
                         <td>
                             <input type="radio" name="tieneruc" value="si">Si<br>
                             <input type="radio" name="tieneruc" value="no">No<br>
                             <td class="td-ruc-checkbox" style="display: none"><input placeholder="RUC" type="text" id="inputext" name="ruc"/>
                     <tr>
-                        <td><label>Nombres y Apellidos</label></td>
+                        <td><label>Nombres y Apellidos:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td><input id="inputext" type="text" size="25" name="nombre"</td>
                     </tr>
                     <tr>
                         <td>
-                            <label>Compania</label></td>
+                            <label>Compania:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td>
                             <select name="companiaseleccionada" id="companiaseleccionada">
                                 <option value="0">Seleccione una compania</option>
@@ -278,11 +282,11 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                     
                     
                    
-                        <td><label>Cargo</label></td>
+                        <td><label>Cargo:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td><input id="inputext" type="text" size="25" name="cargo"</td>
                     </tr>
                     <tr>
-                    <td><label for="telefono_fijo">Tel&eacute;fono Fijo:</label></td>
+                    <td><label for="telefono_fijo">Tel&eacute;fono Fijo:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td>
                         <table border="0" class="atable">
                             <tr>
@@ -307,7 +311,7 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="telefono_movil">Tel&eacute;fono M&oacute;vill:</label></td>
+                    <td><label for="telefono_movil">Tel&eacute;fono M&oacute;vil:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td>
                     <table>
                         <tr>
@@ -325,7 +329,7 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                 </td>
                 </tr>
                 <tr>
-                    <td><label for="telefono_nextel">Tel&eacute;fono Nextel:</label></td>
+                    <td><label for="telefono_nextel">Tel&eacute;fono Nextel:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td>
                         <table>
                         <tr>
@@ -342,7 +346,7 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="direccion">Direcci&oacute;n Personal:</label></td>
+                    <td><label for="direccion">Direcci&oacute;n Personal:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td>
                         <input type="button" id="agregarDireccion" value="Agregar Direccion" class="ui-button ui-widget ui-state-default ui-corner-all" />
                         <div id="seleccionaDireccion" style="display:none">
@@ -361,7 +365,7 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                                      </td>
                                  <tr>   
                                     <td class="tr-padding">
-                                        <label>Departamento:</label>
+                                        <label>Departamento/Estado:</label>
                                         <select class="derecha-inline" name="departamentoseleccionada" id="departamentoid">
                                                 <option value="0">Seleccionar departamento</option>
                                             </selected>
@@ -382,7 +386,7 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                     <td><label>Direcci&oacute;n del centro de trabajo:</label>
                 </tr>
                 <tr>
-                    <td><label for="especialidad">Especialidad:</label></td>
+                    <td><label for="especialidad">Especialidad:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td>
                         <input type="button" id="agregarEspecialidad" value="Agregar Especialidad" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                         <div id="seleccionaEspecialidad" title="Agregar Especialidad" style="display: none" >
@@ -423,7 +427,6 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                             <table id="tbl-listaespecialidades" class="ui-widget">
                                 <thead>
                                     <tr class="ui-widget-header">
-                                        <th>Id</th>
                                         <th>Descripcion</th>
                                     </tr>
                                 </thead>
@@ -436,10 +439,10 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                 </tr>
                 <tr>
                     <td><label>Observaci&oacute;n</label></td>
-                    <td><textarea></textarea></td>
+                    <td><textarea name="observacion"></textarea></td>
                 </tr>
                 <tr>
-                    <td><label for="email">Email principal:</label></td>
+                    <td><label for="email">Email principal:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input id="inputext" type="email" size="30" placeholder="" name="email"</td>
                 </tr>
                 <tr>
@@ -464,7 +467,7 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                     <td><input id="inputext" type="text" size="30" placeholder="" name="fax" /></td>
                 </tr>
                 <tr>
-                    <td><label for="via_envio">V&iacute;a de Env&iacute;o:</label></td>
+                    <td><label for="via_envio">V&iacute;a de Env&iacute;o:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td>
                         <select name="viaenvioseleccionada" id="viaenvioid">
                             <option value="0">Seleccione una V&iacute;a de Env&iacute;o</option> 
@@ -472,16 +475,19 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                     </td>
                 </tr>
                 </table>
+                <div id="footer">
+            <hr />
+        </div>
+        <input type="submit" id="submit" value="test" />
             </form>
         </div>
+        
     </body>
 </html>
 
 <?php
 /**
  * TODO:
- * 1. poner el cursor en el primer elemento HTML
- * 2. avanzar al siguiente elemento con ENTER
  * 3. Validar data en el submit
  */
 

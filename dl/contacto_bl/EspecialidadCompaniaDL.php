@@ -1,5 +1,5 @@
 <?php
-include_once '../../dl/Conexion.php';
+include_once 'Conexion.php';
 
 class EspecialidadCompaniaDL {
   protected $id;

@@ -14,9 +14,9 @@
                 <tr>
                     <td>
                         <?php
-                        foreach ($especialidades as &$valor) {
+                        foreach ($clientes as &$valor) {
                             echo '<table>';
-                            echo '<tr style="cursor:pointer;"><td class="supervisorproyecto">'.$valor[1].'</td></tr>';
+                            echo '<tr style="cursor:pointer;"><td class="supervisorproyecto">'.'<p style="display:none">'.$valor[0].'</p>'."-".$valor[1].'</td></tr>';
                             echo '</table>';
                         }
                         ?>

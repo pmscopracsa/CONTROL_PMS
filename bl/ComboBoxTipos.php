@@ -62,6 +62,66 @@ class ComboBoxTipos extends ComboBoxSql
             return FALSE;
         }
     }
+    
+    public function cargarMoneda()
+    {
+        $consulta = parent::__construct();
+        $consulta = parent::consulta("SELECT * FROM tb_moneda ORDER BY descripcion ASC");
+        $total_registros = parent::num_rows($consulta);
+        
+        if ($total_registros > 0) {
+            $monedas = array();
+            
+            while ($moneda = parent::fetch_assoc($consulta)) {
+                $id = $moneda['id'];
+                $descripcion = $moneda['descripcion'];
+                $monedas[$id] = $descripcion;
+            }
+            return $monedas;
+        }  else {
+            return FALSE;
+        }
+    }
+    
+    public function cargarTipoValorizacion()
+    {
+        $consulta = parent::__construct();
+        $consulta = parent::consulta("SELECT * FROM tb_tipovalorizacion ORDER BY descripcion ASC");
+        $total_registros = parent::num_rows($consulta);
+        
+        if ($total_registros > 0) {
+            $tipovalorizaciones = array();
+            
+            while ($tipovalorizacion = parent::fetch_assoc($consulta)) {
+                $id = $tipovalorizacion['id'];
+                $descripcion = $tipovalorizacion['descripcion'];
+                $tipovalorizaciones[$id] = $descripcion;
+            }
+            return $tipovalorizaciones;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    public function cargarFormatoPresupuesto()
+    {
+        $consulta = parent::__construct();
+        $consulta = parent::consulta("SELECT * FROM tb_formatopresupuesto ORDER BY descripcion ASC");
+        $total_registros = parent::num_rows($consulta);
+        
+        if ($total_registros > 0) {
+            $formatospresupuesto = array();
+            
+            while ($formatopresupuesto = parent::fetch_assoc($consulta)) {
+                $id = $formatopresupuesto['id'];
+                $descripcion = $formatopresupuesto['descripcion'];
+                $formatospresupuesto[$id] = $descripcion;
+            }
+            return $formatospresupuesto;
+        } else {
+            return FALSE;
+        }
+    }
 }
 
 ?>

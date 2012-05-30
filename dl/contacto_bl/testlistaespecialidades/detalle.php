@@ -15,7 +15,7 @@ if(!$sidx) $sidx =1;
 
 switch ($examp) { 
     case 1: 
-        $result = mysql_query("SELECT COUNT(*) FROM tb_personacontacto WHERE tb_companiacontacto_id =".$id); 
+        $result = mysql_query("SELECT COUNT(*) as count FROM tb_personacontacto WHERE tb_companiacontacto_id =".$id); 
         $row = mysql_fetch_array($result,MYSQL_ASSOC); 
         $count = $row['count']; 
         

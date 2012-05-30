@@ -1,7 +1,7 @@
-<div id="modal-gerenteproyecto" title="Seleccionar cliente">
+<div id="modal-gerenteproyecto" title="Seleccionar gerente de proyecto">
     <form autocomplete="off">
         <div class="" >
-            <table id="contactos" style="width:550px;height250px" 
+            <table id="contactos" style="width:550px;height:250px" 
                     url=""
                     toolbar="toolbar"
                     rownumber="true"
@@ -14,9 +14,9 @@
                 <tr>
                     <td>
                         <?php
-                        foreach ($especialidades as &$valor) {
+                        foreach ($clientes as &$valor) {
                             echo '<table>';
-                            echo '<tr style="cursor:pointer;"><td class="gerenteproyecto">'.$valor[1].'</td></tr>';
+                            echo '<tr style="cursor:pointer;"><td class="gerenteproyecto">'.'<p style="display:none">'.$valor[0].'</p>'."-".$valor[1].'</td></tr>';
                             echo '</table>';
                         }
                         ?>

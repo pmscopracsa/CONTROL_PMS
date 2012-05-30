@@ -12,7 +12,7 @@ class ContactoPersona {
     
     public function mostrarContactos()
     {
-        $query = "SELECT * FROM tb_personacontacto";
+        $query = "SELECT * FROM tb_personacontacto ORDER BY nombre ASC";
         
         try
         {

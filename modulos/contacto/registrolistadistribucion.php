@@ -34,6 +34,7 @@ $contactos = $contacto->mostrarContactos();
         <script src="../../dl/contacto_bl/Obras/Obras.js"></script>
         <script>
         $(function(){
+           var contador_contactos = 0;
            
             $("#dialog:ui-dialog").dialog("destroy");
             
@@ -67,7 +68,6 @@ $contactos = $contacto->mostrarContactos();
                 return false;
             });
             
-            
             /*
              *Evento para mostrar registro desde la base de datos
              *en una ventana modal.
@@ -91,13 +91,14 @@ $contactos = $contacto->mostrarContactos();
              */
             function resultados(datos)
             {
+                contador_contactos++;
                 $.each(datos,function(index,value){
                     $("#contactos-agregados tbody").append(
                     "<tr>"+
-                    "<td>"+datos[index].id+"</td>" +
                     "<td>"+datos[index].nombre+"</td>"+
-                    "<td>"+"<a href='#' id='del-contacto' class='button delete'>Eliminar</a>"+"</td>"
-                    +"</tr>"    
+                    "<td>"+"<a href='#' id='del-contacto' class='button delete'>Eliminar</a>"+"</td>"+
+                    '<input type="hidden" name="contacto'+contador_contactos+'" value="'+datos[index].id+'" />'+
+                    "</tr>"    
                     );
                 })
             }
@@ -106,6 +107,7 @@ $contactos = $contacto->mostrarContactos();
              * ELIMINAR DEL SCROLLBAR AL ELEMENTO SELECCIONADO
              */
             $("#del-contacto").live("click",function(e){
+                contador_contactos--;
                 e.preventDefault();
                 $(this).parent().parent().remove();
             })
@@ -118,6 +120,14 @@ $contactos = $contacto->mostrarContactos();
                 matchContains:true,
                 selectFirst:false
             });
+            
+            /**
+             * CREAR INPUT QUE TENDRA LA CANTIDAD DE CONTACTOS
+             */
+            $("#submit").click(function(){
+                var canti_contactos = $('<input type="hidden" name="contador_contactos" value="'+contador_contactos+'"/>');
+                canti_contactos.appendTo("#canti_contactos");                
+            });
         });    
         </script>
     </head>
@@ -128,10 +138,8 @@ $contactos = $contacto->mostrarContactos();
                
             </div>
         </div>
-        
         <!--ventana modal para seleccionar los contactos-->
         <div id="modal-contactos" title="Seleccionar contactos">
-            <form autocomplete="off">
                 <div class="">
                     <table border="0">
                     <tr>
@@ -149,21 +157,23 @@ $contactos = $contacto->mostrarContactos();
                     </tr>
                     </table>
                 </div>
-            </form>
         </div>
         <div id="main">
-            <form action="" method="post">
+            <form action="registratest.php" method="POST">
+                <div class="info">
+                Los campos obligatorios est&aacute;n marcados con <img src="../../img/required_star.gif" alt="dato requerido" />
+                </div>
                 <table>
                     <tr>
-                        <td>Nombre de la lista:</td>
+                        <td><label>Nombre de la lista:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td><input id="inputext" type="text" name="nombre" /></td>
                     </tr>
                     <tr>
-                        <td>C&oacute;digo de obra:</td>
+                        <td><label>C&oacute;digo de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td><input id="inputext" class="obra" type="text" name="codigo" /></td>
                     </tr>
                     <tr>
-                        <td>A&ncaron;adir Contacto:</td>
+                        <td><label>A&ncaron;adir Contacto:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td>
                             <button id="anadir-contacto">Agregar Contacto...</button>
                         </td>
@@ -176,7 +186,6 @@ $contactos = $contacto->mostrarContactos();
                                 <table id="contactos-agregados" class="ui-widget ui-widget-content">
                                     <thead>
                                         <tr class="ui-widget-header">
-                                            <th>Id</th>
                                             <th>Nombre</th>
                                         </tr>
                                     </thead>
@@ -187,10 +196,12 @@ $contactos = $contacto->mostrarContactos();
                             </div>
                         </td>
                     </tr>
+                    <!-- input con cantidad de contactos -->
+                    <div id="canti_contactos"></div>
                     <tr>
                         <td>Observaci&oacute;n:</td>
                         <td>
-                            <textarea></textarea>
+                            <textarea name="observacion"></textarea>
                         </td>
                     </tr>
                 </table>

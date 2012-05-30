@@ -34,6 +34,25 @@ $representantes = $representantescompania->mostrarRepresentantes();
     
     <script type="text/javascript">
     $(document).ready(function(){
+        /**
+         * contador para especialidades
+         */ 
+        var contador_especialidades = 0;
+        
+        /**
+         * contador para representantes
+         */
+        var contador_representante = 0;
+        
+        /**
+         * contador para direcciones = tipo de direccion, direccion, pais, departamento, distrito
+         */
+        var contador_tipodireccion = 0;
+        var contador_direccion = 0;
+        var contador_pais = 0;
+        var contador_departamento = 0;
+        var contador_distrito = 0;
+        
         /*
          * MODAL PARA SELECCIONAR ESPECIALIDAD
          */
@@ -74,7 +93,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
         })
         
         var contador = 1;
-        var counter_strike = 0;
+        var contador_direcciones = 0;
         
         /*
          * modal para direcciones
@@ -144,15 +163,17 @@ $representantes = $representantescompania->mostrarRepresentantes();
         })
         
         
-        // eliminar direccione de scrollbar del fomrulario principal
+        // eliminar direcciones de scrollbar del fomrulario principal
         $("#del-direccion").live("click",function(e) {
             e.preventDefault();
-            counter_strike--;
+            contador_direcciones--;
             $(this).parent().parent().remove();
         })       
         
         
-        
+        /**
+         * BOTON PARA CREAR UNA NUEVA ESPECIALIDAD
+         */ 
         $("#btn-nuevaespecialidad").click(function(){
             var descripcion = $(".input-descripcion").attr('value');
             
@@ -161,10 +182,26 @@ $representantes = $representantescompania->mostrarRepresentantes();
                 url:'../../bl/Contacto/mantenimiento/especialidadcompania_crear.php',
                 data:"descripcion="+descripcion,
                 success:function(){
-                    $('.input-descripcion').val("")
+                    alert("¡Nueva especialidad ingresada con éxito!");
+                    recargarEspecialidad();
                 }
             });
         });
+        
+        function recargarEspecialidad() {
+            $.ajax({
+                type:"GET",
+                dataType:"json",
+                url:"../../dl/contacto_bl/obtenerEspecialidadCompania.php",
+                success:function(data){
+                    
+                    $.each(data,function(index,value){
+                        alert(data[index].descripcion);
+                        alert("*-*-*-*-*-*-");
+                    });
+                }
+            });
+        }
         
         /**
          * detectar seleccion en especialidad en base al click del checkbox
@@ -189,12 +226,16 @@ $representantes = $representantescompania->mostrarRepresentantes();
         
         function mostrarEspecialidadesScroll(data)
         {
+            /**
+             * VARIABLES QUE AYUDARAN A DIFERENCIAR EL ATRIBUTO NAME DEL INPUT TYPE HIDDEN
+             */
+            contador_especialidades++;
             $.each(data,function(index,value){
                 $("#tbl-listaespecialidades tbody").append(
                 "<tr>"+
-                "<td>"+data[index].id+"</td>"+
                 "<td>"+data[index].descripcion+"</td>"+
                 "<td>"+"<a href='#' id='del-especialidad' class='button delete'>Eliminar</a>"+"</td>"+
+                '<input type="hidden" name="especialidad'+contador_especialidades+'" value="'+data[index].id+'"/>'+
                 "</tr>"
                 );
             });
@@ -223,36 +264,40 @@ $representantes = $representantescompania->mostrarRepresentantes();
          
          function mostrarRepresentantesScroll(data)
          {
+             /**
+             * VARIABLES QUE AYUDARAN A DIFERENCIAR EL ATRIBUTO NAME DEL INPUT TYPE HIDDEN
+             */
+             contador_representante++;
              $.each(data,function(index,value){
-                $("#tbl-listarepresentantes tbody").append(
-                "<tr>"+
+                 datos = "<tr>"+
                 "<td>"+data[index].dni+"</td>"+
                 "<td>"+data[index].nombre+"</td>"+
                 "<td>"+data[index].cargo+"</td>"+
                 "<td>"+data[index].fax+"</td>"+
                 "<td>"+data[index].email+"</td>"+
                 "<td>"+"<a href='#' id='del-representante' class='button delete'>Eliminar</a>"+"</td>"+
-                "</tr>"
-                );
+                '<input type="hidden" name="representante'+contador_representante+'" value="'+data[index].id+'" />'+
+                "</tr>";
+                $("#tbl-listarepresentantes tbody").append(datos);
              });
          }
         
-        /**
-         * DESPERDICIO DE CODIGO;:SETEARLA ONLINE CON CSS COMO ATRIBUTO DE ELEMENTO
-         */
-        $("#seleccionaDireccion").css("display", "none");
-        $("#seleccionaEspecialidad").css("display", "none");
-        $("#quitardireccion").css("display","none");
-        $("#seleccionaRepresentante").css("display","none");
-
-        
         $("#agregarRegistroDireccion").click(function() {
             //contador para saber cuantas direcciones existen
-            counter_strike++;
+            contador_direcciones++;
+            /**
+             * VARIABLES QUE AYUDARAN A DIFERENCIAR EL ATRIBUTO NAME DEL INPUT TYPE HIDDEN
+             */
+            contador_tipodireccion++;
+            contador_direccion++;
+            contador_pais++;
+            contador_departamento++;
+            contador_distrito++;
             //OBTENEMOS LOS ID DE LOS VALORES SELECCIONADOS EN EL COMBOBOX
             var tipodireccion_id = $('#tipodireccionid option:selected').val();
             var departamento_id = $('#departamentoid option:selected').val();
             var distrito_id = $('#distritoid option:selected').val();
+            var pais_id = $('#paisid option:selected').val();
             
             //OBTENEMOS LOS VALORES A MOSTRAR DE LOS DATOS ELEGIDOS EN EL COMBOBX
             var tipodireccion_value = $('#tipodireccionid option:selected').html();
@@ -266,18 +311,21 @@ $representantes = $representantescompania->mostrarRepresentantes();
              * con la opcionde eliminar
              **/
             $("#direcciones tbody").append(
-                "<tr>"+
-                "<td>"+tipodireccion_value+"</td>"+    
+                "<tr name=\"direccion\">"+
+                "<td name=\"tipodireccion\">"+tipodireccion_value+"</td>"+    
+                '<input type="hidden" name="tipodireccion'+contador_tipodireccion+'" value="'+tipodireccion_id+'" />'+
                 "<td>"+direccion_value+"</td>"+
+                '<input type="hidden" name="direccion'+contador_direccion+'" value="'+direccion_value+'" />'+
                 "<td>"+pais_value+"</td>"+
+                '<input type="hidden" name="pais'+contador_pais+'" value="'+pais_id+'" />'+
                 "<td>"+departamento_value+"</td>"+
+                '<input type="hidden" name="departamento'+contador_departamento+'" value="'+departamento_id+'" />'+
                 "<td>"+distrito_value+"</td>"+
+                '<input type="hidden" name="distrito'+contador_distrito+'" value="'+distrito_id+'" />'+
                 "<td>"+"<a href='#' id='del-direccion' class='button delete'>Eliminar</a>"+"</td>"+
                 "</tr>"
             );
-           
             contador++;
-            
             return false;
         });
         
@@ -286,12 +334,15 @@ $representantes = $representantescompania->mostrarRepresentantes();
          * variable que se crear antes de enviar el formulario
          */
         $("#submit").click(function(){
-            //alert(counter_strike);
-            var valor_oculto = $('<input type="hidden" name="contador" value="'+counter_strike+'" />');
+            var valor_oculto = $('<input type="hidden" name="contador_direcciones" value="'+contador_direcciones+'" />');
             valor_oculto.appendTo("#cant_direcciones");
         })
         
+        /**
+         * funcion que no se utiliza en ningun sitio, posible a ser borrada
+         */
         $("#delAddress").click(function(){
+            alert("aaa");
            $("direccione"+contador).remove();
         });
         
@@ -299,17 +350,12 @@ $representantes = $representantescompania->mostrarRepresentantes();
        cargar_tipocompania();
        cargar_tipodireccion();
        cargar_paises();
-       //selDefault();
-       //cargar_departamentos(); ya no se cargara a menos que se cargue un pais
+       
        $("#paisid").change(function(){cargar_departamentos();})
        $("#departamentoid").change(function(){cargar_distritos();})
        $("#departamentoid").attr("disabled",true);
-       //$("#provinciaid").change(function(){cargar_distritos();})
-       //$("#provinciaid").attr("disabled",true);
        $("#distritoid").attr("disabled",true);
-       
        $("#submit").click(function(){
-           
        });
     });
     </script>
@@ -323,11 +369,14 @@ $representantes = $representantescompania->mostrarRepresentantes();
     </div>
     
 <div id="main">
-    <form action="registracompaniatest.php" method="POST">
+    <form action="registratest.php" method="POST">
+       <div class="info">
+       Los campos obligatorios est&aacute;n marcados con <img src="../../img/required_star.gif" alt="dato requerido" />
+       </div>
        <div> 
            <table id="titulo">
                <tr>
-                   <td><label for="tipocompania">Tipo de Compania:</label></td>
+                   <td><label for="tipocompania">Tipo de Compania:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
                        <select name="tipocompaniaseleccionada" id="tipocompaniaid">
                            <option value="0">Seleccione un tipo de Compania</option>
@@ -335,42 +384,44 @@ $representantes = $representantescompania->mostrarRepresentantes();
                    </td>
                </tr>
                <tr class="alt">
-                   <td><label for="ruc">RUC:</label></td>
+                   <td><label for="ruc">RUC:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td><input id="inputext" type="text" size="30" placeholder="" name="ruc" /></td>
                </tr>
                <tr>
-                   <td><label for="nombre">Nombre:</label></td>
+                   <td><label for="nombre">Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td><input id="inputext" type="text" size="30" placeholder="" name="nombre" /></td>
                </tr>
                <tr>
-                   <td><label for="nombre_comercial">Nombre Comercial:</label></td>
+                   <td><label for="nombre_comercial">Nombre Comercial:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td><input id="inputext" type="text" size="30" placeholder="" name="nombrecomercial" /></td>
                </tr>
                <tr>
-                   <td><label for="partida_registral">Partida Registral:</label></td>
+                   <td><label for="partida_registral">Partida Registral:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td><input id="inputext" type="text" size="30" placeholder="" name="partidaregistral" /></td>
                </tr>
                <tr>
-                   <td><label for="giro">Giro:</label></td>
+                   <td><label for="giro">Giro:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
                        <table border='0' class="atable">
                            <tr>
                                <th>
                                <th colspan="2">
+                           </tr>
                            <tr>
-                                <td class="atable"><input type="text" size="30" name="grio" />
+                                <td class="atable"><input type="text" size="30" name="giro" />
                                 <td><input type="button" class="addRow" value="+" />
                                 <td><input type="button" class="delRow" value="-" />
+                           </tr>
                                     <input type="hidden" class="rowCount" name="filas_giro" />    
                        </table>
                    </td>
                </tr>
                <tr>
-                   <td><label for="actividad_principal">Activida Principal:</label></td>
+                   <td><label for="actividad_principal">Activida Principal:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td><input id="inputext" type="text" size="30" placeholder="" name="actividadprincipal" /></td>
                </tr>
                <tr>
-                   <td><label for="telefono_fijo">Tel&eacute;fono Fijo:</label></td>
+                   <td><label for="telefono_fijo">Tel&eacute;fono Fijo:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
                        <table border="0" class="atable">
                            <tr>
@@ -395,7 +446,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
                    </td>
                </tr>
                <tr>
-                   <td><label for="telefono_movil">Tel&eacute;fono M&oacute;vil:</label></td>
+                   <td><label for="telefono_movil">Tel&eacute;fono M&oacute;vil:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
                         <table>
                             <tr>
@@ -412,7 +463,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
                    </td>
                </tr>
                <tr>
-                   <td><label for="telefono_nextel">Tel&eacute;fono Nextel:</label></td>
+                   <td><label for="telefono_nextel">Tel&eacute;fono Nextel:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
                        <table>
                             <tr>
@@ -429,12 +480,12 @@ $representantes = $representantescompania->mostrarRepresentantes();
                    </td>
                </tr>
                <tr>
-                   <td><label for="direccion">Direcci&oacute;n:</label></td>
+                   <td><label for="direccion">Direcci&oacute;n:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
                        <input type="button" id="agregarDireccion" value="Agregar Direcci&oacute;n" />
                        
                        <!-- ventana modal para seleccionar la direccion -->
-                       <div id="seleccionaDireccion">
+                       <div id="seleccionaDireccion" title="Direcci&oacute;n" style="display: none" >
                            <table border="0" class="atable">
                                 <tr >
                                     <td class="tr-padding">
@@ -446,7 +497,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
                                  <tr >   
                                     <td class="tr-padding">
                                         <label>Direccion:</label>
-                                        <input class="derecha" id="direccion_text" type="text" size="15" name="direccion" />
+                                        <input class="derecha" id="direccion_text" type="text" size="25" name="direccion" />
                                     </td>
                                  </tr>
                                  <tr>
@@ -454,14 +505,13 @@ $representantes = $representantescompania->mostrarRepresentantes();
                                         <label>Pa&iacute;s:</label>
                                         <select class="derecha" name="paisseleccionada" id="paisid">
                                             <option value="0">Selecciona pa&iacute;s</option>
-                                            <option value="-1">Selecciona pa&iacute;s -1</option>
                                         </selected>
                                     </td>
                                   <tr>  
                                     <td class="tr-padding">
                                         <label>Departamento/Estado:</label>
                                         <select class="derecha" name="departamentoseleccionada" id="departamentoid">
-                                            <option value="2911">Lima</option>
+                                            <option value="0">Selecciona departamento</option>
                                         </selected>
                                     </td>
                                    <tr> 
@@ -505,12 +555,12 @@ $representantes = $representantescompania->mostrarRepresentantes();
                    </td> 
                </tr>
                <tr>
-                   <td><label for="especialidad">Especialidad:</label></td>
+                   <td><label for="especialidad">Especialidad:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
                        <input type="button" id="btnAgregarEspecialidad" value="Agregar Especialidad" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                       
                        <div id="divSeleccionaEspecialidad" title="Agregar Especialidad" style="display:none">
-                            <table border="0" class="atable">
+                           <table border="0" id="tbl-especialidades" class="atable">
                             <tr>
                                 <th></th>
                             </tr>
@@ -543,7 +593,6 @@ $representantes = $representantescompania->mostrarRepresentantes();
                             <table id="tbl-listaespecialidades" class="ui-widget">
                                 <thead>
                                     <tr class="ui-widget-header">
-                                        <th>Id</th>
                                         <th>Descripcion</th>
                                     </tr>
                                 </thead>
@@ -555,7 +604,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
                     </td>
                 </tr>
                <tr>
-                   <td><label for="representante">Representante:</label></td>
+                   <td><label for="representante">Representante:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
                        <input type="button" id="btnAgregarRepresentante" value="Agregar Representante" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                        <div id="divSeleccionaRepresentante" title="Agregar Representante" style="display: none">
@@ -604,19 +653,19 @@ $representantes = $representantescompania->mostrarRepresentantes();
                    </td>
                </tr>
                <tr>
-                   <td><label for="observacion">Observaci&oacute;n</label></td>
+                   <td><label for="observacion">Observaci&oacute;n:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td><textarea name="observacion"></textarea></td>
                </tr>
                <tr>
-                   <td><label for="email">Email:</label></td>
+                   <td><label for="email">Email:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td><input id="inputext" type="text" size="30" placeholder="" name="email" /></td>
                </tr>
                <tr>
-                   <td><label for="web">Web:</label></td>
+                   <td><label for="web">Web:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td><input id="inputext" type="text" size="30" placeholder="" name="web" /></td>
                </tr>
                <tr>
-                   <td><label for="via_envio">V&iacute;a de Env&iacute;o:</label></td>
+                   <td><label for="via_envio">V&iacute;a de Env&iacute;o:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
                        <select name="viaenvioseleccionada" id="viaenvioid">
                            <option value="0">Seleccione una V&iacute;a de Env&iacute;o</option> 

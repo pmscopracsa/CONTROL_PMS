@@ -1,5 +1,13 @@
+<?php
+/**
+ * modulo:datos de obra
+ * formulario: datos de obra
+ * descripcion: muestra datos de los clientes en ventana modal
+ * tabla: tb_companiacontacto
+ */
+?>
 <div id="modal-cliente" title="Seleccionar cliente">
-    <form autocomplete="off">
+   
         <div class="" >
             <table id="contactos" style="width:550px;height250px" 
                     url=""
@@ -14,9 +22,12 @@
                 <tr>
                     <td>
                         <?php
-                        foreach ($especialidades as &$valor) {
+                        foreach ($clientes as &$valor) {
                             echo '<table>';
-                            echo '<tr style="cursor:pointer;"><td class="cliente">'.$valor[1].'</td></tr>';
+                            echo '<tr style="cursor:pointer;">';
+                            echo '<td class="cliente">'.'<p style="display:none">'.$valor[0].'</p>'."-".$valor[1].'</td>';
+                           
+                            echo '</tr>';
                             echo '</table>';
                         }
                         ?>
@@ -24,5 +35,5 @@
                 </tr>
             </table>
         </div>
-    </form>
+    
 </div>

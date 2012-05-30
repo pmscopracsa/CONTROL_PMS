@@ -51,6 +51,20 @@ function cargar_tipodireccion()
     })
 }
 
+function cargar_tipovalorizacion()
+{
+    $.get("../../bl/DatosObra/cargarTipoValorizacion.php",function(resultado){
+        $("#cmb_tipovalorizacion").append(resultado);
+    });
+}
+
+function cargar_formatopresupuesto()
+{
+    $.get("../../bl/DatosObra/cargarFormatoPresupuesto.php",function(resultado){
+        $("#cmb_formatopresupuesto").append(resultado);
+    });
+}
+
 function cargar_paises()
 {
     $.get("../../bl/Contacto/cargarPaises.php",function(resultado) {
@@ -65,6 +79,13 @@ function cargar_departamentos()
             $("#departamentoid").attr("disabled",false);
             document.getElementById("departamentoid").options.length = 1;
             $('#departamentoid').append(resultado);
+    });
+}
+
+function cargar_departamentos_peru()
+{
+    $.get("../../bl/DatosObra/cargarDepartamentosPeru.php",function(resultado){
+        $("#departamento-peru").append(resultado);
     });
 }
 
@@ -97,3 +118,11 @@ function cargar_distritos()
         }
     );
 }
+
+function cargar_monedas()
+{
+    $.get("../../bl/DatosObra/cargarTipoMoneda.php",function(resultado){
+        $("#moneda-id").append(resultado);
+    });
+}
+
