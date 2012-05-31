@@ -262,6 +262,22 @@ $representantes = $representantescompania->mostrarRepresentantes();
             $(this).parent().parent().remove();
          });
          
+         /**
+          * TOOL TIPO TEXT PARA LOS TELEFONOS
+          */
+         $("#fijo").live("mouseover",function(e){
+             alert($(this).val());
+             $.ajax({
+                 data:{id:e},
+                 type:"GET",
+                 dataType:"json",
+                 url:"",
+                 success:function(data) {
+                     mostrarTelefonos(data);
+                 }
+             });
+         });
+         
          function mostrarRepresentantesScroll(data)
          {
              /**
@@ -273,8 +289,11 @@ $representantes = $representantescompania->mostrarRepresentantes();
                 "<td>"+data[index].dni+"</td>"+
                 "<td>"+data[index].nombre+"</td>"+
                 "<td>"+data[index].cargo+"</td>"+
-                "<td>"+data[index].fax+"</td>"+
                 "<td>"+data[index].email+"</td>"+
+                "<td>"+data[index].fax+"</td>"+
+                "<td>"+data[index].qnt_tf+"</td>"+
+                "<td>"+data[index].qnt_tm+"</td>"+
+                "<td>"+data[index].qnt_tn+"</td>"+
                 "<td>"+"<a href='#' id='del-representante' class='button delete'>Eliminar</a>"+"</td>"+
                 '<input type="hidden" name="representante'+contador_representante+'" value="'+data[index].id+'" />'+
                 "</tr>";
@@ -637,12 +656,13 @@ $representantes = $representantescompania->mostrarRepresentantes();
                                <thead>
                                    <tr class="ui-widget-header">
                                        <th> DNI </th>
-                                       <th>Nombres</th>
-                                       <th>Cargo</th>
-                                       <th>Tel&eacute;fono</th>
-                                       <th>Fax</th>
-                                       <th>T. M&oacute;vil</th>
-                                       <th>Email</th>
+                                       <th> Nombres </th>
+                                       <th> Cargo </th>
+                                       <th> Email </th>
+                                       <th> Fax </th>
+                                       <th> T. Fijo </th>
+                                       <th> T. M&oacute;vil </th>
+                                       <th> T. Nextel </th>
                                    </tr>
                                </thead>
                                <tbody>

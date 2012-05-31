@@ -126,11 +126,11 @@ $css = scandir($CSS_PATH);
                 }
             });
             
+            /**
+             * DETALLE QUE SE MUESTRA AL LADO DERECHO
+             */
             function verDetalle(data) 
             {
-                /**
-                 * TODO: LAYOUT estilizado
-                 */
                 clear_detail();
                 $.each(data,function(index,value){
                     $("#derecho-content-table-data tbody").append(
@@ -196,17 +196,23 @@ $css = scandir($CSS_PATH);
                 </div>
                 <div id="derecho">
                     <div id="derecho-content-table">
-                        <table id="derecho-content-table-data" border="1">
+                        <table id="derecho-content-table-data" class="rounded-corner" border="0">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
+                                    <th class="rounded-company">Nombre</th>
                                     <th>DNI</th>
                                     <th>Cargo</th>
                                     <th>Fax</th>
                                     <th>Email</th>
-                                    <th>Web</th>
+                                    <th class="rounded-q4">Web</th>
                                 </tr>
                             </thead>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5" class="rounded-foot-left"></td>
+                                    <td class="rounded-foot-right">&nbsp;</td>
+                                </tr>
+                            </tfoot>
                             <tbody>
                                 <tr></tr>
                             </tbody>
