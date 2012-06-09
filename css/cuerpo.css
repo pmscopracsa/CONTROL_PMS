@@ -87,3 +87,19 @@ input[type="text"]:focus:hover {
     padding: 5px 5px 5px 5px;
 }
 
+.addRow {
+    background-image: url('../img/add-button.gif');
+    background-repeat: no-repeat;
+    border: none;
+    width: 12px;
+    height: 12px;
+}
+
+.delRow {
+    background-image: url('../img/delete.gif');
+    background-repeat: no-repeat;
+    border: none;
+    width: 12px;
+    height: 12px;
+}
+

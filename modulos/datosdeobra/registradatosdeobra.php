@@ -34,8 +34,18 @@ $contactos = $contactoPersona->mostrarContactos();
         <script src="../../js/calendar/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
         <script src="../../js/calendar/jquery.ui.datepicker-es.js" type="text/javascript"></script>
         <script src="../../js/cargarDatos.js" type="text/javascript"></script>
+        <script src="../../js/jquery-tooltip/js/jtip.js" type="text/javascript"></script>
+        <link href="../../js/jquery-tooltip/css/global.css" rel="stylesheet" type="text/css" />
+        
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/claro/claro.css">
+     <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async:true"></script>
         <script>
         $(function(){
+            /**
+             * dojo floating
+             */
+           
+            
             /**
              * CONTADOR PARA LOS CONTACTOS
              */
@@ -158,7 +168,7 @@ $contactos = $contactoPersona->mostrarContactos();
             $("#btn-parametrospptoventa").click(function(){
                 $("#div-modal-pptoventa").dialog("open");
                 return false;
-            }) 
+            }); 
             $("#div-modal-pptoventa").dialog({
                 autoOpen:false,
                 heigh:900,
@@ -170,6 +180,25 @@ $contactos = $contactoPersona->mostrarContactos();
                     }
                 }
             }); 
+            
+            /**
+             * MODAL ASIGNAR USUARIOS PARA APROBACION
+             */
+             $("#usuarios-aprobacion").click(function(){
+                $("#div-modal-asigna_aprobacion").dialog("open");
+                return false;
+             });
+             $("#div-modal-asigna_aprobacion").dialog({
+                 autoOpen:false,
+                 heigh:900,
+                 width:450,
+                 modal:true,
+                 buttons:{
+                     "Cerrar":function(){
+                         $(this).dialog("close");
+                     }
+                 }
+             })
             
             /**
              * MODAL ASIGNAR FIRMAS (1)
@@ -531,6 +560,40 @@ $contactos = $contactoPersona->mostrarContactos();
             </table>
         </div>
         
+        <!-- VENTANA MODAL PARA ASIGNAR USUARIOS PARA APROBACION -->
+        <div style="display: none" id="div-modal-asigna_aprobacion" title="Usuarios acr&eacute;ditados">
+            <table>
+                <thead>
+                    <th>
+                    <th>
+                    <th>    
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="button" id="btn-asign-selecciona" value="Seleccionar usuarios" class="ui-button ui-widget ui-state-default ui-corner-all" /></td>
+                        <td><input type="button" id="btn-asign-elimina" value="Eliminar usuarios" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                        <td><input type="button" id="btn-asign-elimina" value="Asignar opciones" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <table>
+                <thead>
+                    <tr class="ui-widget-header">
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Email</th>
+                        <th>Id</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
         <!-- AGREGAR CONTACTOS DE MANERA DISTINTA A LA VERSION DESKTOP-->
         <!-- ESTO PORQUE EXISTEN ERRORES EN LA DESKTOP-->
         <div style="display: none" id="div-addcontactos" title="Contactos">
@@ -553,6 +616,7 @@ $contactos = $contactoPersona->mostrarContactos();
                    <td class="tr-padding">
                        <input type="button" id="btn-agregarContacto" class="ui-button ui-widget ui-state-default ui-corner-all" value="Agregar" />
             </table>
+            
         </div>
         
         <div style="display: none" id="div-firmas-reportes" title="Reportes">
@@ -567,15 +631,15 @@ $contactos = $contactoPersona->mostrarContactos();
             </div>
             <table>
                 <tr>
-                    <td><label>C&oacute;digo:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                    <td><input id="inputext" type="text" size="15" name="codigo"/></td>
+                    <td><label>C&oacute;digo:</label></td>
+                    <td><input id="inputext" type="text" size="15" name="codigo" /><span class="formInfo"><a href="../../js/jquery-tooltip/ajax.htm" class="jTip" id="one" name="El codigo debe tener el siguiente formato">?</a></span></td>
                     <td><label>Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input id="inputext" type="text" size="35" name="nombre"/></td>
-                    <td><label>Fecha inicio obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="datepicker_i" type="text" name="f_inicio" /></td>
+                    <td><label>Fecha inicio obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="datepicker_f" type="text" name="f_inicio" /></td>
                     <td><label>Fecha fin de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="datepicker_f" type="text" name="f_fin" /></td>
                 </tr>
                 <tr>
-                    <td><label>Direcci&oacute;n:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                    <td><label>Direcci&oacute;n de la obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input type="text" id="inputext" size="30" name="direccion" /></td>
                 </tr>
                 <tr>
@@ -622,10 +686,10 @@ $contactos = $contactoPersona->mostrarContactos();
             </table>
             <div id="hr"><hr /></div>
             <table>
-                <tr>
+<!--                <tr>
                     <td><label>Asignar firmas a reportes:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input id="btn-asignarfirmasreportes" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
-                </tr>
+                </tr>-->
                 
                 <tr>
                     <td><label>Par&aacute;metros Ppto. de ventas:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
@@ -639,7 +703,7 @@ $contactos = $contactoPersona->mostrarContactos();
             <div id="hr"><hr /></div>
             <table>
                 <tr>
-                    <td><label>Proveedor a facturar:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                    <td><label>Proveedor facturar a:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input type="text" class="proveedorfacturar-text" id="inputext" size="30" name="proveedor-a-facturar" READONLY/><input id="agregar-proveedorfacturar" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                     <input type="hidden" class="proveedor_id" name="proveedor--id" />
                 </tr>
@@ -647,7 +711,7 @@ $contactos = $contactoPersona->mostrarContactos();
                 <tr>
                     <td>Lista de cont&aacute;ctos:</td>
                     <td>
-                        <input type="button" id="mostrarcontactos" value="Mostrar contactos" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                        <input type="button" id="mostrarcontactos" value="Buscar contactos" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                         <div class="areaScrollModal" id="lista-contactos">
                             <table id="contactos-agregados">
                                 <thead>
@@ -663,6 +727,16 @@ $contactos = $contactoPersona->mostrarContactos();
                     </td>
                 </tr>
             </table>
+            <br />
+            <hr />
+            <table>
+                <tr>
+                    <td><label>Asignar firmas a reportes:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                    <td><input id="btn-asignarfirmasreportes" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                </tr>
+            </table>
+            <br />
+            <hr/>
             <fieldset>
                 <legend>Par&aacute;metros obras(para proveedores)</legend>
                 <div id="inner-textfield">
@@ -672,8 +746,7 @@ $contactos = $contactoPersona->mostrarContactos();
                                 <input type="text" id="inputext" name="carta-fianza" size="5"/>
                             </td>
                             <td>
-                                <label>Porcentaje de la carta fianza fiel cumplimiento para Contratistas/Proveedores</label>
-                                <input type="checkbox" />
+                                <p>Porcentaje de la carta fianza fiel cumplimiento para Contratistas/Proveedores<input name="porcentage_fielcumplimiento" type="checkbox" /></p>
                             </td> 
                         </tr>
                         <tr>
@@ -681,7 +754,7 @@ $contactos = $contactoPersona->mostrarContactos();
                                 <input type="text" id="inputext" name="dias-desembolso" size="5"/>
                             </td>
                             <td>
-                                <label>Dias habiles para el desembolso, despues de presentada la factura</label>
+                                <p>Dias habiles para el desembolso, despues de presentada la factura</p>
                             </td>
                         </tr>
                         <tr>
@@ -689,7 +762,7 @@ $contactos = $contactoPersona->mostrarContactos();
                                 <input type="text" id="inputext" name="fondo-retencion" size="5"/>
                             </td>
                             <td>
-                                <label>Porcentaje de fondo de retencion</label>
+                                <p>Porcentaje de fondo de retencion</p>
                             </td>
                         </tr>
                         <tr>
@@ -697,24 +770,55 @@ $contactos = $contactoPersona->mostrarContactos();
                                 <input type="text" id="inputext" name="dias-devolucion-fondoretencion" size="5"/>
                             </td>
                             <td>
-                                <label>Dias habiles para la devolucion del fondo de retencion, contados a partir de la retencion de obra sin observaciones(Acta definitiva)</label>
+                                <p>Dias habiles para la devolucion del fondo de retencion, contados a partir de la retencion de obra sin observaciones(Acta definitiva)</p>
                             </td>
                         </tr>
                     </table>
                     <table>
                         <tr>
-                            <td><label>Monto contratado mayor a:</label></td>
+                            <td><p>Monto contratado mayor a:</p></td>
                             <td><input type="text" id="inputext" name="mayor-a" size="5"/></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <p><input type="checkbox" name="oc_oc_mayora"/>OC/OT</p>
+                            </td>
+                            <td>
+                                <p><input type="checkbox" name="ca_cg_mayora"/>CA y CG</p>
+                            </td>
+                            <td>
+                                <p><input type="checkbox" name="contrato_mayora"/>Contrato</p>
+                            </td>
                         </tr>
                         <tr>
-                            <td><label>Monto contratado entre:</label></td>
+                            <td><p>Monto contratado entre:</p></td>
                             <td><input type="text" id="inputext" name="entre-a" size="5" READONLY/></td>
                             <td> y </td>
                             <td><input type="text" id="inputext" name="entre-b" size="5" READONLY/></td>
+                            <td>
+                                <p><input type="checkbox" name="oc_oc_entre"/>OC/OT</p>
+                            </td>
+                            <td>
+                                <p><input type="checkbox" name="ca_cg_entre"/>CA y CG</p>
+                            </td>
+                            <td>
+                                <p><input type="checkbox" name="contrato_entre"/>Contrato</p>
+                            </td>
                         </tr>
                         <tr>
-                            <td><label>Monto contratado menor a:</label></td>
+                            <td><p>Monto contratado menor a:</p></td>
                             <td><input type="text" id="inputext" name="menor-a" size="5"/></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <p><input type="checkbox" name="oc_oc_menora"/>OC/OT</p>
+                            </td>
+                            <td>
+                                <p><input type="checkbox" name="ca_cg_menora"/>CA y CG</p>
+                            </td>
+                            <td>
+                                <p><input type="checkbox" name="contrato_menora"/>Contrato</p>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -724,11 +828,11 @@ $contactos = $contactoPersona->mostrarContactos();
                 <div id="inner-textfield">
                     <table>
                         <tr>
-                            <td><label>Selecione modelo de carta de adjudicacion y condiciones generales</label></td>
+                            <td><p>Selecione modelo de carta de adjudicacion y condiciones generales</p></td>
                             <td><input type="text" size="45" id="inputext"/><input type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                         </tr>
                         <tr>
-                            <td><label>Selecione modelo de contrato</label></td>
+                            <td><p>Selecione modelo de contrato</p></td>
                             <td><input type="text" size="45" id="inputext"/><input type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                         </tr>
                     </table>

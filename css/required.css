@@ -11,6 +11,10 @@ label em {
     top: 0;
 }
 
+label #parametros_obras {
+    position: absolute !important;
+}
+
 .info, success, .warning, .error, .validation {
     border: 1px solid;
     margin: 10px 0px;

@@ -11,9 +11,17 @@
 
 .areaScrollModal
 {
-    height: 90px;
+    height: 150px;
     overflow: auto;
-    width: 500px;
+    width: 800px;
     border: 1px solid #c2e1ef;
     padding-right: 10px;
+}
+
+#tbl-listarepresentantes .direcciones th {
+    width: 25%;
+    text-align: center;
+    vertical-align: top;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }

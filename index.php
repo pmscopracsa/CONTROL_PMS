@@ -22,6 +22,12 @@
 		$('#mm').accordion('select','Application');
 		open1('index_embeded.php');
 	});
+        
+        function seleccion(url){
+            
+            $('#cc').attr('src',url);
+        }
+        
 	function open1(url){
 		$('#cc').attr('src',url);
 	}
@@ -48,8 +54,8 @@
             font-size:12px;
             line-height:18px;
     }
-    .demo-c{
-            width:845px;
+    .demo-c{ 
+           width:845px;
             height:550px;
             float:right;
             background:#fff;
@@ -105,7 +111,8 @@
                             <li><a href="modulos/contacto/registracompania.php" target="_blank">Registro de Compa&ntilde;ias</a></li>
                             <li><a href="modulos/contacto/registrapersona.php" target="_blank">Registro de Persona</a></li>
                             <li><a href="modulos/contacto/registrolistadistribucion.php" target="_blank">Listas de Distribuci&oacute;n</a></li>
-                            <li><a href="modulos/contacto/reporteporespecialidad.php" target="_blank">Reporte por Especialidad</a></li>
+<!--                            <li><a href="modulos/contacto/reporteporespecialidad.php" onClik="open1('index_embeded.php');" target="_blank">Reporte por Especialidad</a></li>-->
+                            <li><a href="#" onClick="seleccion('seleccionReporteEspecialidad.php');">Reporte por Especialidad</a></li>
                         </ul>
                     </div>
                     <div title="Datos de Obra">

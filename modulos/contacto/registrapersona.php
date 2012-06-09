@@ -295,8 +295,8 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                             </tr>
                             <tr>
                                 <td><input type="text" size="15" name="telefonofijo" /></td>
-                                <td><input type="button" class="addRow" value="+" /></td>
-                                <td><input type="button" class="delRow" value="-" /></td>
+                                <td><input type="button" class="addRow" /></td>
+                                <td><input type="button" class="delRow" /></td>
                             </tr>
                             <input type="hidden" class="rowCount" name="filas_tfijo" />
                         </table>
@@ -320,8 +320,8 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                         </tr>
                         <tr>
                             <td><input type="text" size="15" name="telefonomovil" /></td>
-                            <td><input type="button" class="addRow" value="+" /></td>
-                            <td><input type="button" class="delRow" value="-" /></td>
+                            <td><input type="button" class="addRow" /></td>
+                            <td><input type="button" class="delRow" /></td>
                         </tr>
                         <input type="hidden" class="rowCount" name="filas_tmovil" />
                     </table>
@@ -338,8 +338,8 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                         </tr>
                         <tr>
                             <td><input type="text" size="15" name="telefononextel" /></td>
-                            <td><input type="button" class="addRow" value="+" /></td>
-                            <td><input type="button" class="delRow" value="-" /></td>
+                            <td><input type="button" class="addRow" /></td>
+                            <td><input type="button" class="delRow" /></td>
                         </tr>
                         <input type="hidden" class="rowCount" name="filas_tnextel" />
                     </table>
@@ -454,8 +454,8 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                                 <th colspan="2">
                             <tr>
                                 <td class="atable"><input type="text" size="15" name="emailsecundario" />
-                                <td><input type="button" class="addRow" value="+" />
-                                <td><input type="button" class="delRow" value="-" />
+                                <td><input type="button" class="addRow" />
+                                <td><input type="button" class="delRow" />
                                     <input type="hidden" class="rowCount" name="filas_emailsecundario" />   
                         </table>
                 <tr>

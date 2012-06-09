@@ -1,6 +1,6 @@
 <?php
 
-include_once '../../dl/Conexion.php';
+//include_once '../../dl/Conexion.php';
 
 class CompaniaContactoDL 
 {
@@ -8,7 +8,7 @@ class CompaniaContactoDL
     
     public function mostrarCompaniaContacto()
     {
-        $query = "SELECT * FROM tb_companiacontacto";
+        $query = "SELECT * FROM tb_companiacontacto ORDER BY descripcion ASC";
         
         try {
             $conexion = new Conexion();
@@ -63,10 +63,6 @@ class CompaniaContactoDL
             } catch(Exception $e1){}
         }
         return $registros;
-    }
-    
-    public function mostrarEmpresa(){
-        $query = "";
     }
 }
 ?>

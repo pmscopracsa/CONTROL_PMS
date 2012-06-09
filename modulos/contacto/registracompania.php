@@ -17,7 +17,7 @@ $representantescompania = new RepresentanteCompaniaDL();
 $representantes = $representantescompania->mostrarRepresentantes();
 ?>
 <!DOCTYPE HTML>
-<html>
+<html class="no-js">
     <head>
     <!-- zona css -->
     <?php
@@ -31,9 +31,19 @@ $representantes = $representantescompania->mostrarRepresentantes();
     <script src="../../js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
     <script src="../../js/tfijo.js" type="text/javascript"></script>
     <script src="../../js/cargarDatos.js" type="text/javascript"></script>
-    
+    <script src="../../js/modernizr.custom.27460.js" type="text/javascript"></script>
+    <script src="../../js/jquery.form.js" type="text/javascript"></script>
+ 
     <script type="text/javascript">
     $(document).ready(function(){
+        /**
+         * JQFORM
+         */
+        var opciones_formulario = {
+            beforeSubmit:showRequest
+        };
+        $("#frm-registracompania").ajaxForm(opciones_formulario);
+        
         /**
          * contador para especialidades
          */ 
@@ -164,6 +174,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
         
         
         // eliminar direcciones de scrollbar del fomrulario principal
+        // TODO: desmarcar el checkbox
         $("#del-direccion").live("click",function(e) {
             e.preventDefault();
             contador_direcciones--;
@@ -257,26 +268,20 @@ $representantes = $representantescompania->mostrarRepresentantes();
             });
          });
          
+         /**
+          * ELIMINAR REPRESENTANTE 
+          */
          $("#del-representante").live("click",function(e) {
             e.preventDefault();
             $(this).parent().parent().remove();
          });
          
          /**
-          * TOOL TIPO TEXT PARA LOS TELEFONOS
+          * AGERGAR FONDO AL INPUT TEXT
           */
-         $("#fijo").live("mouseover",function(e){
-             alert($(this).val());
-             $.ajax({
-                 data:{id:e},
-                 type:"GET",
-                 dataType:"json",
-                 url:"",
-                 success:function(data) {
-                     mostrarTelefonos(data);
-                 }
-             });
-         });
+         $('#inp-giro').live("click",function(e){
+             
+         })
          
          function mostrarRepresentantesScroll(data)
          {
@@ -298,6 +303,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
                 '<input type="hidden" name="representante'+contador_representante+'" value="'+data[index].id+'" />'+
                 "</tr>";
                 $("#tbl-listarepresentantes tbody").append(datos);
+                
              });
          }
         
@@ -376,19 +382,33 @@ $representantes = $representantescompania->mostrarRepresentantes();
        $("#distritoid").attr("disabled",true);
        $("#submit").click(function(){
        });
+       
+       
     });
+    
+//    function validaciones()
+//    {
+//        alert("mmm");
+//    }
+    function showRequest(formData, jqForm, options) { 
+        if($("#viaenvioid").val()) {
+            alert("Debe seleccionar una via de envio antes de proceder con el guardado de los datos.");
+            return;
+        }
+    }
     </script>
 <title>REGISTRO DE COMPANIAS</title>
 </head>
 <body class="fondo">
     <div id="barra-superior">
         <div id="barra-superior-dentro">
+            
             <h1 id="titulo_barra">REGISTRO DE COMPA&Ncaron;IAS</h1>
         </div>
     </div>
     
 <div id="main">
-    <form action="registratest.php" method="POST">
+    <form id="frm-registracompania" action="registratest.php" method="POST">
        <div class="info">
        Los campos obligatorios est&aacute;n marcados con <img src="../../img/required_star.gif" alt="dato requerido" />
        </div>
@@ -427,9 +447,9 @@ $representantes = $representantescompania->mostrarRepresentantes();
                                <th colspan="2">
                            </tr>
                            <tr>
-                                <td class="atable"><input type="text" size="30" name="giro" />
-                                <td><input type="button" class="addRow" value="+" />
-                                <td><input type="button" class="delRow" value="-" />
+                                <td class="atable"><input type="text" size="30" id="inputext" name="giro" />
+                                <td><input type="button" class="addRow" />
+                                <td><input type="button" class="delRow" />
                            </tr>
                                     <input type="hidden" class="rowCount" name="filas_giro" />    
                        </table>
@@ -449,8 +469,8 @@ $representantes = $representantescompania->mostrarRepresentantes();
                            </tr>
                            <tr>
                                <td class="atable"><input type="text" size="15" name="telefonofijo" /></td>
-                               <td><input type="button" class="addRow" value="+" /></td>
-                               <td><input type="button" class="delRow" value="-" /></td>
+                               <td><input type="button" class="addRow" /></td>
+                               <td><input type="button" class="delRow" /></td>
                            </tr>
                            <input type="hidden" class="rowCount" name="filas_tfijo" />
                        </table>
@@ -474,8 +494,8 @@ $representantes = $representantescompania->mostrarRepresentantes();
                             </tr>
                             <tr>
                                 <td><input id="inputext" type="text" size="15" name="telefonomovil" /></td>
-                                <td><input type="button" class="addRow" value="+" /></td>
-                                <td><input type="button" class="delRow" value="-" /></td>
+                                <td><input type="button" class="addRow" /></td>
+                                <td><input type="button" class="delRow" /></td>
                             </tr>
                             <input type="hidden" class="rowCount" name="filas_tmovil" />
                         </table>
@@ -491,8 +511,8 @@ $representantes = $representantescompania->mostrarRepresentantes();
                             </tr>
                             <tr>
                                 <td><input type="text" size="15" name="telefononextel" /></td>
-                                <td><input type="button" class="addRow" value="+" /></td>
-                                <td><input type="button" class="delRow" value="-" /></td>
+                                <td><input type="button" class="addRow" /></td>
+                                <td><input type="button" class="delRow" /></td>
                             </tr>
                             <input type="hidden" class="rowCount" name="filas_tnextel" />
                        </table>
@@ -551,12 +571,17 @@ $representantes = $representantescompania->mostrarRepresentantes();
                    </td>
                </tr>
                <!-- INPUT CON LA CANTIDAD DE DIRECCIONES -->
+               <!-- 
+               TODO:
+               VALIDAR QUE SI ALGUNO DE LOS DATOS REQUERIDOS NO EXISTE NO SE PERMITE AGREGAR A 
+               FORMULARIO PRINCIPAL
+               -->
                <div id="cant_direcciones"></div>
                <tr>
                    <td>Lista de Direcciones</td>
                    <td>
                        <div class="areaScroll">
-                           <table id="direcciones">
+                           <table id="direcciones" border="1">
                                <thead>
                                    <tr class="ui-widget-header">
                                        <th>Tipo de direcci&oacute;n</th>
@@ -652,7 +677,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
                    <td><label>Lista de representantes</label></td>
                    <td>
                        <div class="areaScrollModal" id="lista-representantes">
-                           <table id="tbl-listarepresentantes" class="ui-widget">
+                           <table id="tbl-listarepresentantes" class="ui-widget" border="1">
                                <thead>
                                    <tr class="ui-widget-header">
                                        <th> DNI </th>
@@ -660,9 +685,9 @@ $representantes = $representantescompania->mostrarRepresentantes();
                                        <th> Cargo </th>
                                        <th> Email </th>
                                        <th> Fax </th>
-                                       <th> T. Fijo </th>
-                                       <th> T. M&oacute;vil </th>
-                                       <th> T. Nextel </th>
+                                       <th> Tel&eacute;fono Fijo </th>
+                                       <th> Tel&eacute;fono M&oacute;vil </th>
+                                       <th> Tel&eacute;fono Nextel </th>
                                    </tr>
                                </thead>
                                <tbody>
@@ -682,13 +707,13 @@ $representantes = $representantescompania->mostrarRepresentantes();
                </tr>
                <tr>
                    <td><label for="web">Web:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="web" /></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="web" REQUIRED/></td>
                </tr>
                <tr>
                    <td><label for="via_envio">V&iacute;a de Env&iacute;o:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
-                       <select name="viaenvioseleccionada" id="viaenvioid">
-                           <option value="0">Seleccione una V&iacute;a de Env&iacute;o</option> 
+                       <select name="viaenvioseleccionada" id="viaenvioid" >
+                           <option value="0" REQUIRED>Seleccione una V&iacute;a de Env&iacute;o</option> 
                        </select>
                    </td>
                </tr>

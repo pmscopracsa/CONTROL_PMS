@@ -1,4 +1,9 @@
 <?php
+/**
+ *no esw clase porque solo muestra los detalles
+ * se convertira en clase si el requrimeinto va por el lado
+ * de tener una edicion in-line 
+ */
 require_once '../Conexion.php';
 $conexion = new Conexion();
 $cn = $conexion->conectar();

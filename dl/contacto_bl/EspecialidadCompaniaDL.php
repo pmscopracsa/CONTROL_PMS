@@ -7,7 +7,7 @@ class EspecialidadCompaniaDL {
   
   public function mostrarEspecialidades()
   {   
-      $query = "SELECT * FROM tb_especialidadcompania";
+      $query = "SELECT * FROM tb_especialidadcompania ORDER BY descripcion ASC";
       try
       {
           $conexion = new Conexion();

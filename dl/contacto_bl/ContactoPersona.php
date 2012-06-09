@@ -6,7 +6,7 @@
  * tabla: tb_personacontacto 
  */
 
-include_once '../../dl/Conexion.php';
+//include_once '../../dl/Conexion.php';
 class ContactoPersona {
     protected $id;
     
