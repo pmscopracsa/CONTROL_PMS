@@ -135,7 +135,13 @@
                     </div>
                     <div title="Comunicaciones">
                     </div>
-                    
+                    <div title="Mantenimiento">
+                        <ul class="pitem">
+                            <li><a href="#">Compa&ntilde;ias</a></li>
+                            <li><a href="#">Persona</a></li>
+                            <li><a href="#">Listas de Distribuci&oacute;n</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="demo-c" style="">

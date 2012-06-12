@@ -25,6 +25,27 @@ $css = scandir($CSS_PATH);
         <script>
             $(function(){
                 /**
+                 * AGREGAR CONTACTOS COMUNES A LA LISTA DE MIS CONTACTOS
+                 */
+                $("#agrega").click(function(){
+//                    alert($("#empresa_id").html());
+//                    alert($("#persona_id").html());
+                    
+                    /**
+                     * TODO: validar si se tiene el dato ID de la empresa
+                     * sino no se podra hacer la consulta
+                     */
+                    $.ajax({
+                        type:"POST",
+                        url:'../../bl/Contacto/mantenimiento/contactoComunAgregamelo.php',
+                        data:{"id_empresa":$("#empresa_id").html(),"id_persona":$("#persona_id").html()},
+                        success:function(){
+                            alert("Este contacto ahora esta en su lista.");
+                        }
+                    });
+                });
+                
+                /**
                 * CONTACTO COMÚN - especialidad
                 */   
                 $("#tbl-paginaamarilla_especialidad").jqGrid({
@@ -45,6 +66,7 @@ $css = scandir($CSS_PATH);
                     sortname:'descripcion',
                     caption:"ESPECIALIDADES",
                     onSelectRow:function(ids){
+                        ocultarBotonImportar();
                         if(ids == null) {
                             ids = 0;
                             if($("#tbl-paginaamarilla_empresa").jqGrid('getGridParam','records') > 0) {
@@ -64,7 +86,6 @@ $css = scandir($CSS_PATH);
                         }
                     }
                 });
-                
                 
                 /**
                  * CONTACTO COMUN - EMPRESA
@@ -95,10 +116,7 @@ $css = scandir($CSS_PATH);
                             url:"../../dl/contacto_bl/contactoComun_empresaDetail.php",
                             success:function(data){
                                 verDetalle(data);
-                            }/*,
-                            error:function(){
-                                errorDetalle();
-                            }*/
+                            }
                         });
                     },
                     subGridRowExpanded:function(subgrid_id,row_id){
@@ -124,13 +142,13 @@ $css = scandir($CSS_PATH);
                             height: '100%',
                             width:'100%',
                             onSelectRow:function(idx){
-                                //alert(idx);
                                 $.ajax({
                                     data:{id:idx},
                                     type:"GET",
                                     dataType:"json",
                                     url:"../../dl/contacto_bl/contactoComun_personaDetail.php",
                                     success:function(data){
+                                        mostrarBotonImportar();
                                         verDetallePersona(data);
                                     },
                                     error:function(){
@@ -155,8 +173,8 @@ $css = scandir($CSS_PATH);
                     $.each(data,function(index,value){
                        $("#derecho-content-table-data tbody").append(
                         "<tr>"+
+                        "<td id=\"empresa_id\" style=\"display: none\">"+data[index].id+"</td>"+    
                         "<td>"+data[index].descripcion+"</td>"+
-                        "<td>"+data[index].desc+"</td>"+
                         "<td>"+data[index].ruc+"</td>"+
                         "<td>"+data[index].observacion+"</td>"+
                         "<td>"+data[index].email+"</td>"+
@@ -175,6 +193,7 @@ $css = scandir($CSS_PATH);
                     $.each(data,function(index,value){
                         $("#derecho-content-table-data-persona tbody").append(
                             "<tr>"+
+                            "<td id=\"persona_id\" style=\"display: none\">"+data[index].id+"</td>"+    
                             "<td>"+data[index].nombres+"</td>"+
                             "<td>"+data[index].correo+"</td>"+
                             "</tr>"    
@@ -193,6 +212,26 @@ $css = scandir($CSS_PATH);
                         case 2:$("#derecho-content-table-data-persona td").remove();
                             break;
                     }
+                }
+                
+                /**
+                 * 
+                 */
+                function mostrarBotonImportar() {
+                    $("#derecho-content-addToMyContacts").css("display","block");
+                }
+                
+                function ocultarBotonImportar() {
+                    $("#derecho-content-addToMyContacts").css("display","none");
+                }
+                
+                /**
+                 * ESTA FUNCION ALMACENA EL ID DE LA EMPRESA Y EL ID
+                 * DEL CONTACTO PARA SER UTILIZADOS AL IMPORTARLOS A LOS
+                 * CONTACTOS PROPIOS DE LA EMPRESA QUE LO REQUIERA
+                 */
+                function almacenaElegido(i,ii) {
+                    
                 }
             });
         </script>
@@ -228,8 +267,7 @@ $css = scandir($CSS_PATH);
                         <table id="derecho-content-table-data" class="rounded-corner" border="0">
                             <thead>
                                 <tr>
-                                    <th class="rounded-company">Nombre</th>
-                                    <th>Tipo</th>
+                                    <th class="rounded-company">Descripcion</th>
                                     <th>RUC</th>
                                     <th>Observacion</th>
                                     <th>email</th>
@@ -238,7 +276,7 @@ $css = scandir($CSS_PATH);
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <td colspan="5" class="rounded-foot-left"></td>
+                                    <td colspan="4" class="rounded-foot-left"></td>
                                     <td class="rounded-foot-right">&nbsp;</td>
                                 </tr>
                             </tfoot>
@@ -281,6 +319,12 @@ $css = scandir($CSS_PATH);
                 <div id="derecho">
                     <div id="derecho-content-table-mike">
                         <div id="div-empresa_detail"></div>
+                    </div>
+                </div>
+                <div id="derecho">
+                    <div id="derecho-content-addToMyContacts" style="display: none">
+                        <a href="#" id="agrega" class="cta cta-blue"><span class="icon-download">Agregar a mis cont&aacute;ctos</span></a>
+<!--                        <input type="button" value="Agregar a mis cont&aacute;ctos" id="agregarMisContactos"/>-->
                     </div>
                 </div>
             </div>

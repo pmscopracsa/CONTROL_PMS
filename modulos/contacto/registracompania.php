@@ -44,6 +44,11 @@ $representantes = $representantescompania->mostrarRepresentantes();
  
     <script type="text/javascript">
     $(document).ready(function(){
+        $("form").validity(function(){
+            $(".ruc")
+                .require()
+                .match("number");
+        })
         /**
          * JQFORM
          */
@@ -435,7 +440,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
                </tr>
                <tr class="alt">
                    <td><label for="ruc">RUC:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="ruc" REQUIRED/></td>
+                   <td><input id="inputext" class="ruc" type="text" size="30" placeholder="" name="ruc" REQUIRED/></td>
                </tr>
                <tr>
                    <td><label for="nombre">Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
