@@ -5,6 +5,12 @@ $CSS_PATH = '../../css/';
 $css = array();
 $css = scandir($CSS_PATH);
 
+/**
+ * $id_empresa = $_SESSION['id_empresa'];
+ * @param type $name 
+ */
+$id_empresa = 1;
+
 function __autoload($name) {
     $fullpath = '../../dl/contacto_bl/'.$name.'.php';
     if (file_exists($fullpath))        require_once ($fullpath);
@@ -33,17 +39,20 @@ $representantes = $representantescompania->mostrarRepresentantes();
     <script src="../../js/cargarDatos.js" type="text/javascript"></script>
     <script src="../../js/modernizr.custom.27460.js" type="text/javascript"></script>
     <script src="../../js/jquery.form.js" type="text/javascript"></script>
+    <script src="../../js/jquery.validity/jQuery.validity.js" type="text/javascript"></script>
+    <link href="../../js/jquery.validity/jquery.validity.css" rel="stylesheet" type="text/css" />
  
     <script type="text/javascript">
     $(document).ready(function(){
         /**
          * JQFORM
          */
+        /*
         var opciones_formulario = {
             beforeSubmit:showRequest
         };
         $("#frm-registracompania").ajaxForm(opciones_formulario);
-        
+        */
         /**
          * contador para especialidades
          */ 
@@ -359,8 +368,14 @@ $representantes = $representantescompania->mostrarRepresentantes();
          * variable que se crear antes de enviar el formulario
          */
         $("#submit").click(function(){
-            var valor_oculto = $('<input type="hidden" name="contador_direcciones" value="'+contador_direcciones+'" />');
-            valor_oculto.appendTo("#cant_direcciones");
+            var valor_oculto_direcciones = $('<input type="hidden" name="contador_direcciones" value="'+contador_direcciones+'" />');
+            valor_oculto_direcciones.appendTo("#cant_direcciones");
+            
+            var valor_oculto_especialidades = $('<input type="hidden" name="contador_especialidades" value="'+contador_especialidades+'"/>');
+            valor_oculto_especialidades.appendTo("#cant_especialidades");
+            
+            var valor_oculto_representantes = $('<input type="hidden" name="contador_representantes" value="'+contador_representante+'"/>');
+            valor_oculto_representantes.appendTo("#cant_representantes");
         })
         
         /**
@@ -386,10 +401,6 @@ $representantes = $representantescompania->mostrarRepresentantes();
        
     });
     
-//    function validaciones()
-//    {
-//        alert("mmm");
-//    }
     function showRequest(formData, jqForm, options) { 
         if($("#viaenvioid").val()) {
             alert("Debe seleccionar una via de envio antes de proceder con el guardado de los datos.");
@@ -424,19 +435,19 @@ $representantes = $representantescompania->mostrarRepresentantes();
                </tr>
                <tr class="alt">
                    <td><label for="ruc">RUC:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="ruc" /></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="ruc" REQUIRED/></td>
                </tr>
                <tr>
                    <td><label for="nombre">Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="nombre" /></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="nombre" REQUIRED/></td>
                </tr>
                <tr>
                    <td><label for="nombre_comercial">Nombre Comercial:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="nombrecomercial" /></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="nombrecomercial" REQUIRED/></td>
                </tr>
                <tr>
                    <td><label for="partida_registral">Partida Registral:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="partidaregistral" /></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="partidaregistral" REQUIRED/></td>
                </tr>
                <tr>
                    <td><label for="giro">Giro:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
@@ -447,7 +458,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
                                <th colspan="2">
                            </tr>
                            <tr>
-                                <td class="atable"><input type="text" size="30" id="inputext" name="giro" />
+                                <td class="atable"><input type="text" size="30" id="inputext" name="giro" REQUIRED/>
                                 <td><input type="button" class="addRow" />
                                 <td><input type="button" class="delRow" />
                            </tr>
@@ -519,6 +530,10 @@ $representantes = $representantescompania->mostrarRepresentantes();
                    </td>
                </tr>
                <tr>
+                   <td><label for="fax">Fax:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="fax" /></td>
+               </tr>
+               <tr>
                    <td><label for="direccion">Direcci&oacute;n:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
                        <input type="button" id="agregarDireccion" value="Agregar Direcci&oacute;n" />
@@ -577,6 +592,8 @@ $representantes = $representantescompania->mostrarRepresentantes();
                FORMULARIO PRINCIPAL
                -->
                <div id="cant_direcciones"></div>
+               <div id="cant_especialidades"></div>
+               <div id="cant_representantes"></div>
                <tr>
                    <td>Lista de Direcciones</td>
                    <td>
@@ -722,6 +739,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
         <div id="footer">
             <hr />
         </div>
+        <input type="hidden" value="<?=$id_empresa;?>" name="id_empresa" />
         <input type="submit" id="submit" value="test" />
     </form>
 </div>
