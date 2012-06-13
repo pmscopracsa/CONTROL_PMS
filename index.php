@@ -140,6 +140,7 @@
                             <li><a href="#">Compa&ntilde;ias</a></li>
                             <li><a href="#">Persona</a></li>
                             <li><a href="#">Listas de Distribuci&oacute;n</a></li>
+                            <li><a href="#">P&aacute;ginas amarillas</a></li>
                         </ul>
                     </div>
                 </div>

@@ -27,20 +27,21 @@ $css = scandir($CSS_PATH);
                 /**
                  * AGREGAR CONTACTOS COMUNES A LA LISTA DE MIS CONTACTOS
                  */
-                $("#agrega").click(function(){
-//                    alert($("#empresa_id").html());
-//                    alert($("#persona_id").html());
-                    
+                $("#agrega").click(function(e){
+                    e.preventDefault();
                     /**
                      * TODO: validar si se tiene el dato ID de la empresa
-                     * sino no se podra hacer la consulta
+                     * sino no se podra hacer la consulta. (Haciendo click para ver el detalle a la mano derecha)
                      */
                     $.ajax({
                         type:"POST",
                         url:'../../bl/Contacto/mantenimiento/contactoComunAgregamelo.php',
-                        data:{"id_empresa":$("#empresa_id").html(),"id_persona":$("#persona_id").html()},
+                        data:{"id_empresa":$("#empresa_id").html(),"id_persona":$("#persona_id").html(),"id_especialidad":$("#especialidad_id").html()},
                         success:function(){
                             alert("Este contacto ahora esta en su lista.");
+                        },
+                        error:function(){
+                            alert("La importacion de este registro no se ha podido concretar. Reintentelo luego por favor.")
                         }
                     });
                 });
@@ -66,6 +67,8 @@ $css = scandir($CSS_PATH);
                     sortname:'descripcion',
                     caption:"ESPECIALIDADES",
                     onSelectRow:function(ids){
+                        limpiarIdAnterior();
+                        obtenerIdEspecialidad(ids);
                         ocultarBotonImportar();
                         if(ids == null) {
                             ids = 0;
@@ -201,6 +204,19 @@ $css = scandir($CSS_PATH);
                     });
                 }
                 /**
+                 * OBTENER EL ID DE LA ESPECIALIDAD
+                 */
+                function obtenerIdEspecialidad(ids)
+                {
+                    //alert(ids);
+                    $("#tbl-idEspecialidad tbody").append(
+                    "<tr>"+
+                    "<td id=\"especialidad_id\" style=\"display: none\">"+ids+"</td>"+
+                    "</tr>"
+                    );
+                }
+                
+                /**
                  * LIMPIAR SEGUN SEA EL CASO LAS TABLAS DE DETALLE
                  * DE LA MANO DERECHA 
                  */
@@ -215,6 +231,13 @@ $css = scandir($CSS_PATH);
                 }
                 
                 /**
+                 * LIMPIAR EL TD QUE ALMACENA EL ID DE LA ESPECIALIDAD 
+                 */
+                function limpiarIdAnterior() {
+                    $("#tbl-idEspecialidad td").remove();
+                }
+                
+                /**
                  * 
                  */
                 function mostrarBotonImportar() {
@@ -223,15 +246,6 @@ $css = scandir($CSS_PATH);
                 
                 function ocultarBotonImportar() {
                     $("#derecho-content-addToMyContacts").css("display","none");
-                }
-                
-                /**
-                 * ESTA FUNCION ALMACENA EL ID DE LA EMPRESA Y EL ID
-                 * DEL CONTACTO PARA SER UTILIZADOS AL IMPORTARLOS A LOS
-                 * CONTACTOS PROPIOS DE LA EMPRESA QUE LO REQUIERA
-                 */
-                function almacenaElegido(i,ii) {
-                    
                 }
             });
         </script>
@@ -323,12 +337,19 @@ $css = scandir($CSS_PATH);
                 </div>
                 <div id="derecho">
                     <div id="derecho-content-addToMyContacts" style="display: none">
-                        <a href="#" id="agrega" class="cta cta-blue"><span class="icon-download">Agregar a mis cont&aacute;ctos</span></a>
+                        <a href="" id="agrega" class="cta cta-blue"><span class="icon-download">Agregar a mis cont&aacute;ctos</span></a>
 <!--                        <input type="button" value="Agregar a mis cont&aacute;ctos" id="agregarMisContactos"/>-->
                     </div>
                 </div>
             </div>
             <div class="clear"></div>
+        </div>
+        <div id="div-idEspecialidad" style="display: none">
+            <table id="tbl-idEspecialidad" border="0">
+                <thead></thead>
+                <tfoot></tfoot>
+                <tbody><tr></tr></tbody>
+            </table>
         </div>
     </body>
 </html>

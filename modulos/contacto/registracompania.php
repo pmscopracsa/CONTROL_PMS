@@ -424,7 +424,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
     </div>
     
 <div id="main">
-    <form id="frm-registracompania" action="registratest.php" method="POST">
+    <form id="frm-registracompania" action="ttest/registraCompaniaTest.php" method="POST">
        <div class="info">
        Los campos obligatorios est&aacute;n marcados con <img src="../../img/required_star.gif" alt="dato requerido" />
        </div>
@@ -440,19 +440,19 @@ $representantes = $representantescompania->mostrarRepresentantes();
                </tr>
                <tr class="alt">
                    <td><label for="ruc">RUC:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" class="ruc" type="text" size="30" placeholder="" name="ruc" REQUIRED/></td>
+                   <td><input id="inputext" class="ruc" type="text" size="30" placeholder="" name="ruc" /></td>
                </tr>
                <tr>
                    <td><label for="nombre">Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="nombre" REQUIRED/></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="nombre" /></td>
                </tr>
                <tr>
                    <td><label for="nombre_comercial">Nombre Comercial:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="nombrecomercial" REQUIRED/></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="nombrecomercial" /></td>
                </tr>
                <tr>
                    <td><label for="partida_registral">Partida Registral:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="partidaregistral" REQUIRED/></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="partidaregistral" /></td>
                </tr>
                <tr>
                    <td><label for="giro">Giro:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
@@ -463,7 +463,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
                                <th colspan="2">
                            </tr>
                            <tr>
-                                <td class="atable"><input type="text" size="30" id="inputext" name="giro" REQUIRED/>
+                                <td class="atable"><input type="text" size="30" id="inputext" name="giro" />
                                 <td><input type="button" class="addRow" />
                                 <td><input type="button" class="delRow" />
                            </tr>
@@ -729,7 +729,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
                </tr>
                <tr>
                    <td><label for="web">Web:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="web" REQUIRED/></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="web" /></td>
                </tr>
                <tr>
                    <td><label for="via_envio">V&iacute;a de Env&iacute;o:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
