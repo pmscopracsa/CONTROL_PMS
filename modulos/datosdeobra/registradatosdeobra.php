@@ -6,6 +6,9 @@ $css = scandir($CSS_PATH);
 function __autoload($name) {
     $fullpath = '../../dl/contacto_bl/'.$name.'.php';
     if (file_exists($fullpath))        require_once ($fullpath);
+    
+    $fullpath_procura = '../../dl/procura_dl/'.$name.'.php';
+    if (file_exists($fullpath_procura)) require ($fullpath_procura); 
 }
 
 $especialidadCompania = new EspecialidadCompaniaDL();
@@ -17,6 +20,14 @@ $empresa_contacto = $clienteCompania->mostrarEmpresaContacto();
 
 $contactoPersona = new ContactoPersona();
 $contactos = $contactoPersona->mostrarContactos();
+
+/**
+ *AUTOLOAD DE MODELOD DE CARTA Y CONTRATO 
+ */
+$modelocarta = new ProcuraDL();
+$cartas = $modelocarta->mostrarCartas();
+$modelocontrato = new ProcuraDL();
+$contratos = $modelocontrato->mostrarContratos();
 ?>
 <!DOCTYPE html>
 <html>
@@ -171,8 +182,8 @@ $contactos = $contactoPersona->mostrarContactos();
             }); 
             $("#div-modal-pptoventa").dialog({
                 autoOpen:false,
-                heigh:900,
-                width:450,
+                heigh:950,
+                width:550,
                 modal:true,
                 buttons:{
                     "Cerrar":function(){
@@ -198,7 +209,45 @@ $contactos = $contactoPersona->mostrarContactos();
                          $(this).dialog("close");
                      }
                  }
-             })
+             });
+             
+             /**
+              * MODAL MODELO DE CARTA DE ADJUDICACION Y CONDICIONES GENERALES
+              */
+             $("#btn-modelocartaadjudicacion").click(function(){
+                $("#div-modal-modelocartaadjudicacion").dialog("open");
+                return false;
+             }); 
+             $("#div-modal-modelocartaadjudicacion").dialog({
+                 autoOpen:false,
+                 height:500,
+                 width:450,
+                 modal:true,
+                 buttons:{
+                     "Cerrar":function(){
+                         $(this).dialog("close");
+                     }
+                 }
+             });
+              
+             /**
+              * MODAL MODELO DE CONTRATO 
+              */
+             $("#btn-modelocartacontrato").click(function(){
+                $("#div-modal-modelocartacontrato").dialog("open");
+                return false;
+             }); 
+             $("#div-modal-modelocartacontrato").dialog({
+                 autoOpen:false,
+                 height:500,
+                 width:450,
+                 modal:true,
+                 buttons:{
+                     "Cerrar":function(){
+                         $(this).dialog("close");
+                     }
+                 }
+             });
             
             /**
              * MODAL ASIGNAR FIRMAS (1)
@@ -438,6 +487,8 @@ $contactos = $contactoPersona->mostrarContactos();
         <?php include_once 'modales/modal-supervisorproyecto.php';?>
         <?php include_once 'modales/modal-proveedorfacturar.php';?>
         <?php include_once 'modales/modal-addContacto.php';?>
+        <?php include 'modales/modal-modelocarta.php';?>
+        <?php include 'modales/modal-modelocontrato.php';?>
         
         <div id="modal-contactos" title="Seleccionar contactos">
                 <div class="" >
@@ -829,11 +880,11 @@ $contactos = $contactoPersona->mostrarContactos();
                     <table>
                         <tr>
                             <td><p>Selecione modelo de carta de adjudicacion y condiciones generales</p></td>
-                            <td><input type="text" size="45" id="inputext"/><input type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                            <td><input type="text" size="45" id="inputext"/><input id="btn-modelocartaadjudicacion" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                         </tr>
                         <tr>
                             <td><p>Selecione modelo de contrato</p></td>
-                            <td><input type="text" size="45" id="inputext"/><input type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                            <td><input type="text" size="45" id="inputext"/><input id="btn-modelocartacontrato" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                         </tr>
                     </table>
                 </div>

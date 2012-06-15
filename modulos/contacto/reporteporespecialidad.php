@@ -28,7 +28,7 @@ $css = scandir($CSS_PATH);
              * GRILLA ESPECIALIDAD
              */
             $("#lista-especialidades").jqGrid({
-                height:150,
+                height:200,
                 width:500,
                 url:'../../dl/contacto_bl/testlistaespecialidades/parent.php?q=2',
                 datatype:"json",
@@ -70,7 +70,7 @@ $css = scandir($CSS_PATH);
              * GRILLA EMPRESA
              */
             $("#lista-especialidades-detalle").jqGrid({
-                height:150,
+                height:200,
                 width:500,
                 url:'../../dl/contacto_bl/testlistaespecialidades/hijo.php?q=1&id=0',
                 datatype:"json",
@@ -86,7 +86,7 @@ $css = scandir($CSS_PATH);
                 viewrecords:true,
                 sortorder:"asc",
                 multiselect:false,
-                caption:"EMPRESA...",
+                caption:"EMPRESA",
                 subGrid:true,
                 onSelectRow:function(idx){
                     $.ajax({
@@ -149,27 +149,42 @@ $css = scandir($CSS_PATH);
             {
                 var i = 1;
                 clear_detail(i);
+//                $.each(data,function(index,value){
+//                    $("#derecho-content-table-data tbody").append(
+//                    "<tr>"+
+//                    "<td>"+data[index].descripcion+"</td>"+
+//                    "<td>"+data[index].ruc+"</td>"+
+//                    "</tr>"
+//                    );
+//                });
+                
                 $.each(data,function(index,value){
                     $("#derecho-content-table-data tbody").append(
-                    "<tr>"+
-                    "<td>"+data[index].descripcion+"</td>"+
-                    "<td>"+data[index].ruc+"</td>"+
-                    "</tr>"
-                    );
+                        "<tr><th>Descripcion<td>"+data[index].descripcion+
+                        "<tr><th>RUC<td>"+data[index].ruc    
+                    )
                 });
             }
             
             function verDetallePersona(data){
                 var i = 2;
                 clear_detail(i);
+//                $.each(data,function(index,value){
+//                    $("#derecho-content-table-data-persona tbody").append(
+//                    "<tr>"+
+//                    "<td>"+data[index].nombre+"</td>"+
+//                    "<td>"+data[index].dni+"</td>"+
+//                    "<td>"+data[index].cargo+"</td>"+
+//                    "</tr>"
+//                    );
+//                });
+                
                 $.each(data,function(index,value){
                     $("#derecho-content-table-data-persona tbody").append(
-                    "<tr>"+
-                    "<td>"+data[index].nombre+"</td>"+
-                    "<td>"+data[index].dni+"</td>"+
-                    "<td>"+data[index].cargo+"</td>"+
-                    "</tr>"
-                    );
+                    "<tr><th>Nombre<td>"+data[index].nombre+
+                    "<tr><th>DNI<td>"+data[index].dni+
+                    "<tr><th>Cargo<td>"+data[index].cargo
+                    )
                 });
             }
             
@@ -180,9 +195,13 @@ $css = scandir($CSS_PATH);
                  */
                 switch(i)
                 {
-                    case 1:$("#derecho-content-table-data td").remove();
+                    case 1:
+                        $("#derecho-content-table-data td").remove();
+                        $("#derecho-content-table-data th").remove();
                         break;
-                    case 2:$("#derecho-content-table-data-persona td").remove();    
+                    case 2:
+                        $("#derecho-content-table-data-persona td").remove();    
+                        $("#derecho-content-table-data-persona th").remove();    
                         break;
                 }
                 
@@ -221,7 +240,7 @@ $css = scandir($CSS_PATH);
                 </div>
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1>DETALLES DE LA EMPRESA</h1>
+                        <h1 class="titulo">DETALLES DE LA EMPRESA</h1>
                         <div id="error" style="display: none">
                         <h3>No se puede consultar los datos de detalle</h3>
                         </div>
@@ -230,7 +249,7 @@ $css = scandir($CSS_PATH);
                 <div id="derecho">
                     <div id="derecho-content-table">
                         <table id="derecho-content-table-data" class="rounded-corner" border="0">
-                            <thead>
+<!--                            <thead>
                                 <tr>
                                     <th class="rounded-company">Nombre</th>
                                     <th class="rounded-q4">RUC</th>
@@ -241,7 +260,7 @@ $css = scandir($CSS_PATH);
                                     <td colspan="1" class="rounded-foot-left"></td>
                                     <td class="rounded-foot-right">&nbsp;</td>
                                 </tr>
-                            </tfoot>
+                            </tfoot>-->
                             <tbody>
                                 <tr></tr>
                             </tbody>
@@ -250,7 +269,7 @@ $css = scandir($CSS_PATH);
                 </div>
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1>DETALLES DEL CONTACTO</h1>
+                        <h1 class="titulo">DETALLES DEL CONTACTO</h1>
                         <div id="error" style="display: none">
                         <h3>No se puede consultar los datos de detalle</h3>
                         </div>
@@ -260,7 +279,7 @@ $css = scandir($CSS_PATH);
                 <div id="derecho">
                     <div id="derecho-content-table">
                         <table id="derecho-content-table-data-persona" class="rounded-corner" border="0">
-                            <thead>
+<!--                            <thead>
                                 <tr>
                                     <th class="rounded-company">Nombre</th>
                                     <th>Cargo</th>
@@ -272,7 +291,7 @@ $css = scandir($CSS_PATH);
                                     <td colspan="2" class="rounded-foot-left"></td>
                                     <td class="rounded-foot-right">&nbsp;</td>
                                 </tr>
-                            </tfoot>
+                            </tfoot>-->
                             <tbody>
                                 <tr></tr>
                             </tbody>

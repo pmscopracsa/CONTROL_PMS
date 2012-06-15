@@ -1,6 +1,6 @@
 <?php
-include_once '../Conexion.php';
-include_once '../../dl/consultas_comunes/Comun.php';
+require_once 'Conexion.php';
+require_once 'Comun.php';
 
 /**
  * @Descripcion:
@@ -34,9 +34,7 @@ class ProveedorRecomendado {
      * FUNCION QUE VERIFICA SI YA TENEMOS DENTRO DE NUESTROS CONTACTOS 
      * EL CONTACTO QUE DESEAMOS IMPORTAR 
      */
-    public function verificaExistencia() {
-        
-    }
+    public function verificaExistencia() {}
     
     public function importarContactoComun()
     {
@@ -75,7 +73,7 @@ class ProveedorRecomendado {
             $array_cc = $a_cc->retornaTabla();
             $arraytmp_cc = array();
             
-            while ($reg = mysql_fetch_array($array_cc. MYSQL_ASSOC)) {
+            while ($reg = mysql_fetch_array($array_cc,MYSQL_ASSOC)) {
                 array_push($arraytmp_cc, $reg['descripcion']);
                 array_push($arraytmp_cc, $reg['ruc']);
                 array_push($arraytmp_cc, $reg['email']);
@@ -89,7 +87,8 @@ class ProveedorRecomendado {
             }
             
             $sql_empresa = "INSERT INTO tb_companiacontacto (
-                descripcion
+                id
+                ,descripcion
                 ,ruc
                 ,nombrecomercial
                 ,partidaregistral
@@ -102,28 +101,39 @@ class ProveedorRecomendado {
                 ,web
                 ,tb_viaenvio_id
                 ,tb_empresa_id) 
-                VALUES ("
-                .$arraytmp_cc[0].
-                ",".$arraytmp_cc[1].
-                ",".$arraytmp_cc[5].
-                ",".$arraytmp_cc[7].
-                ",".$arraytmp_cc[8].
-                ",".$arraytmp_cc[9].
-                ",1".
-                ",".$arraytmp_cc[6].
-                ",".$arraytmp_cc[4].
-                ",".$arraytmp_cc[2].    
-                ",".$arraytmp_cc[3].    
-                ",3".
-                "1,".    
-                ")";
+                VALUES (
+                NULL
+                ,'$arraytmp_cc[0]'
+                ,'$arraytmp_cc[1]'
+                ,'$arraytmp_cc[5]'
+                ,'$arraytmp_cc[7]'
+                ,'$arraytmp_cc[8]'
+                ,'$arraytmp_cc[9]'
+                ,1
+                ,'$arraytmp_cc[6]'
+                ,'$arraytmp_cc[4]'
+                ,'$arraytmp_cc[2]'    
+                ,'$arraytmp_cc[3]'   
+                ,3
+                ,1    
+                )";
             
             $tb_empresa = mysql_query($sql_empresa);
             if (!$tb_empresa)
                 throw new Exception("Error en insercion a tabla: tb_companiacontacto. Error: ".  mysql_error());
             
+            
+            
+            
+            mysql_query("COMMIT");
+            
             /**
-            * PARA OBTENER EL ULTIMO ID 
+             * LUEGO DEL COMMIT POQUE LOS VALORES AUN NO EXISTEN EN LA DDBB
+             * ------------------------------------------------------------ 
+             */
+            
+            /**
+            * PARA OBTENER EL ULTIMO ID PARA TB_RUBRO
             */
             $tabla_empresa = "tb_companiacontacto";
             $tabla_especialidad = "tb_especialidadcompania";
@@ -135,11 +145,9 @@ class ProveedorRecomendado {
             
             $ultimoid->set_nombreTabla($tabla_empresa);
             $id_empresa = $ultimoid->obtenerUltimoId();
-            $id_empresa+=1;
             
             $ultimoid->set_nombreTabla($tabla_especialidad);
             $id_especialidad = $ultimoid->obtenerUltimoId();
-            $id_especialidad+=1;
             
             /**
              * INSERTAMOS A LA TABLA TB_RUBRO QUE UNE A LAS
@@ -157,6 +165,14 @@ class ProveedorRecomendado {
             
             if (!$tb_rubro)
                 throw new Exception("Error en la insercion a tabla: tb_rubro. Error: ". mysql_error());
+            
+            /**
+             * PARA OBTENER EL UTLIMO ID PARA TB_PERSONACONTACTO
+             * ------------------------------------------------- 
+             */
+            $tabla_personacontacto = "tb_companiacontacto";
+            $ultimoid->set_nombreTabla($tabla_personacontacto);
+            $id_personacontacto = $ultimoid->obtenerUltimoId();
             
             /**
              * INSERTAMOS A LA TABLA  TB_PERSONACONTACTO QUE SE REFERENCIA A LA
@@ -181,7 +197,8 @@ class ProveedorRecomendado {
             }
             
             $sql_persona = "INSERT INTO tb_personacontacto (
-                tb_empresa_id
+                id
+                ,tb_empresa_id
                 ,dni
                 ,nombre
                 ,cargo
@@ -192,22 +209,22 @@ class ProveedorRecomendado {
                 ,tb_viaenvio_id
                 ,tb_companiacontacto_id) 
                 VALUES(
-                1".
-                ",".$arraytmp_pc[3].
-                ",".$arraytmp_pc[0].
-                ",".$arraytmp_pc[4].
-                ",".$arraytmp_pc[5].
-                ",".$arraytmp_pc[6].
-                ",".$arraytmp_pc[1].
-                ",".$arraytmp_pc[7].
-                ",3".
-                ",".$arraytmp_pc[2].
-                ")";
+                NULL
+                ,1
+                ,'$arraytmp_pc[3]'
+                ,'$arraytmp_pc[0]'
+                ,'$arraytmp_pc[4]'
+                ,'$arraytmp_pc[5]'
+                ,'$arraytmp_pc[6]'
+                ,'$arraytmp_pc[1]'
+                ,'$arraytmp_pc[7]'
+                ,3
+                ,$id_personacontacto
+                )";
             $tb_persona = mysql_query($sql_persona);
             if (!$tb_persona)
                 throw new Exception("Error en insercion a tabla: tb_personacontacto. Error: ". mysql_errno());
             
-            mysql_query("COMMIT");
         } catch (Exception $exc) {
             mysql_query("ROLLBACK");
             $respuesta = FALSE;

@@ -1,4 +1,5 @@
 <?php
+/*
 include_once 'Conexion.php';
 $conexion = new Conexion();
 $cn = $conexion->conectar();
@@ -14,6 +15,8 @@ while ($res = mysql_fetch_assoc($rs)) {
 }
 mysql_free_result($rs);
 mysql_close($cn);
-
+*/
 return json_encode($registros);   
-?>
+
+$especialidades = "<h1>HOLA</h>";
+return $especialidades;

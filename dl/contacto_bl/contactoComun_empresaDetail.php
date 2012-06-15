@@ -18,6 +18,8 @@ $sql = "SELECT
     ,a.observacion
     ,a.email
     ,a.web
+    ,a.nombreComercial
+    ,a.fax
     FROM control_pms.tb_contactocomun a
     WHERE a.id = ".$id;
 
@@ -31,12 +33,12 @@ while($row = mysql_fetch_assoc($result))
     $detalle[$i]['ruc'] = $row[ruc] == NULL ? "<i>No tiene</i>" : $row[ruc];*/
     
     $detalle[$i]['id'] = $row[id];
-    $detalle[$i]['descripcion'] = $row[descripcion] == NULL ? "<i>No tiene</i>" : $row[descripcion];
-    //$detalle[$i]['descr'] = $row[descr] == NULL ? "<i>No tiene</i>" : $row[ruc];
-    $detalle[$i]['ruc'] = $row[ruc] == NULL ? "<i>No tiene</i>" : $row[ruc];
-    $detalle[$i]['observacion'] = $row[observacion] == NULL ? "<i>No tiene</i>" : $row[observacion];
-    $detalle[$i]['email'] = $row[email] == NULL ? "<i>No tiene</i>" : $row[email];
-    $detalle[$i]['web'] = $row[web] == NULL ? "<i>No tiene</i>" : $row[web];
+    $detalle[$i]['descripcion'] = $row[descripcion] == NULL ? "<i><b>No est&aacute; especificado</b></i>" : $row[descripcion];
+    $detalle[$i]['ruc'] = $row[ruc] == NULL ? "<i><b>No est&aacute; especificado</b></i>" : $row[ruc];
+    $detalle[$i]['observacion'] = $row[observacion] == NULL ? "<i><b>No est&aacute; especificado</b></i>" : $row[observacion];
+    $detalle[$i]['email'] = $row[email] == NULL ? "<i><b>No est&aacute; especificado</b></i>" : $row[email];
+    $detalle[$i]['web'] = $row[web] == NULL ? "<i><b>No est&aacute; especificado</b></i>" : $row[web];
+    $detalle[$i]['nombreComercial'] = $row[nombreComercial] == NULL ? "<i><b>No est&aacute; especificado</b></i>" : $row[nombreComercial];
     $i++;
 }
 echo json_encode($detalle);

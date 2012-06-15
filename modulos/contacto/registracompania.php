@@ -122,11 +122,11 @@ $representantes = $representantescompania->mostrarRepresentantes();
         /*
          * modal para direcciones
          */
-        $("#dialog:ui-dialog").dialog("destroy");
+//        $("#dialog:ui-dialog").dialog("destroy");
         $("#seleccionaDireccion").dialog({
             autoOpen:false,
-            height:250,
-            width:350,
+            height:280,
+            width:450,
             modal:true,
             buttons:{
                 "Cerrar":function(){
@@ -207,26 +207,17 @@ $representantes = $representantescompania->mostrarRepresentantes();
                 url:'../../bl/Contacto/mantenimiento/especialidadcompania_crear.php',
                 data:"descripcion="+descripcion,
                 success:function(){
-                    alert("¡Nueva especialidad ingresada con éxito!");
-                    recargarEspecialidad();
+                    alert("SE HA INGRESADO CORRECTAMENTE LA NUEVA ESPECIAIDAD");
+                    /**
+                     * RECARGAR LA PAGINA AUTOMATICAMENTE
+                     */ 
+                    //location.reload();
+                    $("#divNuevaEspecialidad").dialog('destroy');
+//                    $("#divSeleccionaEspecialidad").dialog('destroy');
+//                    $("#divSeleccionaEspecialidad").dialog('open');
                 }
             });
         });
-        
-        function recargarEspecialidad() {
-            $.ajax({
-                type:"GET",
-                dataType:"json",
-                url:"../../dl/contacto_bl/obtenerEspecialidadCompania.php",
-                success:function(data){
-                    
-                    $.each(data,function(index,value){
-                        alert(data[index].descripcion);
-                        alert("*-*-*-*-*-*-");
-                    });
-                }
-            });
-        }
         
         /**
          * detectar seleccion en especialidad en base al click del checkbox
@@ -395,11 +386,13 @@ $representantes = $representantescompania->mostrarRepresentantes();
        cargar_tipocompania();
        cargar_tipodireccion();
        cargar_paises();
+       cargar_departamentos();
+       cargar_distritos();
        
-       $("#paisid").change(function(){cargar_departamentos();})
-       $("#departamentoid").change(function(){cargar_distritos();})
-       $("#departamentoid").attr("disabled",true);
-       $("#distritoid").attr("disabled",true);
+//       $("#paisid").change(function(){cargar_departamentos();})
+//       $("#departamentoid").change(function(){cargar_distritos();})
+//       $("#departamentoid").attr("disabled",true);
+//       $("#distritoid").attr("disabled",true);
        $("#submit").click(function(){
        });
        
@@ -563,14 +556,14 @@ $representantes = $representantescompania->mostrarRepresentantes();
                                     <td class="tr-padding">
                                         <label>Pa&iacute;s:</label>
                                         <select class="derecha" name="paisseleccionada" id="paisid">
-                                            <option value="0">Selecciona pa&iacute;s</option>
+<!--                                            <option value="0">Selecciona pa&iacute;s</option>-->
                                         </selected>
                                     </td>
                                   <tr>  
                                     <td class="tr-padding">
                                         <label>Departamento/Estado:</label>
                                         <select class="derecha" name="departamentoseleccionada" id="departamentoid">
-                                            <option value="0">Selecciona departamento</option>
+<!--                                            <option value="0">Selecciona departamento</option>-->
                                         </selected>
                                     </td>
                                    <tr> 
@@ -578,7 +571,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
                                     <td class="tr-padding">
                                         <label>Distrito/Ciudad:</label>
                                         <select class="derecha" name="distritoseleccionada" id="distritoid">
-                                            <option value="0">Seleccione un distrito</option>
+<!--                                            <option value="0">Seleccione un distrito</option>-->
                                         </select>
                                     </td>
                                     <tr>

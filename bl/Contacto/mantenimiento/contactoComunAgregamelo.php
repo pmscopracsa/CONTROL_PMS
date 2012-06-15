@@ -1,4 +1,5 @@
 <?php
+
 /**
  * BL: TOMA LOS SIGUIENTES DATOS:
  * especialidad, empresa y contacto (todos estos relacionados)
@@ -12,3 +13,4 @@ $proveedor_recomendado->set_id_persona($_REQUEST['id_persona']);
 $proveedor_recomendado->set_id_especialidad($_REQUEST['id_especialidad']);
 
 $proveedor_recomendado->importarContactoComun();
+//$proveedor_recomendado->importaPrueba();

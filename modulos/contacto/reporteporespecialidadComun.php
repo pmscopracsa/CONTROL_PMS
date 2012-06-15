@@ -120,7 +120,17 @@ $css = scandir($CSS_PATH);
                             success:function(data){
                                 verDetalle(data);
                             }
-                        });
+                        }),//;probandosi se puede 2 ajax no anidados pero casi revueltos
+                        $.ajax({
+                            data:{id:row_id},
+                            type:"GET",
+                            dataType:"json",
+                            //url:"../../dl/contacto_bl/contactoComun_empresaDetail.php",
+                            url:"../../dl/contacto_bl/contactoComun_empresatf.php",
+                            success:function(data2){
+                                verTFEmpresa(data2);
+                            }
+                        })
                     },
                     subGridRowExpanded:function(subgrid_id,row_id){
                         var subgrid_table_id,pager_id;
@@ -173,17 +183,24 @@ $css = scandir($CSS_PATH);
                 {   
                     var i = 1;
                     clearDetail(i);
+                    
                     $.each(data,function(index,value){
-                       $("#derecho-content-table-data tbody").append(
-                        "<tr>"+
-                        "<td id=\"empresa_id\" style=\"display: none\">"+data[index].id+"</td>"+    
-                        "<td>"+data[index].descripcion+"</td>"+
-                        "<td>"+data[index].ruc+"</td>"+
-                        "<td>"+data[index].observacion+"</td>"+
-                        "<td>"+data[index].email+"</td>"+
-                        "<td>"+data[index].web+"</td>"+
-                        "</tr>"
-                        ); 
+                        $("#derecho-content-table-data tbody").append(
+                            "<tr><th>Descripcion<td>"+data[index].descripcion+
+                            "<tr><th>Ruc<td>"+data[index].ruc+
+                            "<tr><th>Observacion<td>"+data[index].observacion+
+                            "<tr><th>Email<td>"+data[index].email+
+                            "<tr><th>Web<td>"+data[index].web
+                        );
+                    });
+                }
+                
+                function verTFEmpresa(data2)
+                {
+                    $.each(data2,function(index,value){
+                        $("#telefonosfijo-empresa tbody").append(
+                            "<tr><th>Numero<td>"+data2[index].descripcion
+                        )
                     });
                 }
                 /**
@@ -193,14 +210,13 @@ $css = scandir($CSS_PATH);
                 {
                     var i = 2;
                     clearDetail(i);
+                    
                     $.each(data,function(index,value){
                         $("#derecho-content-table-data-persona tbody").append(
-                            "<tr>"+
-                            "<td id=\"persona_id\" style=\"display: none\">"+data[index].id+"</td>"+    
-                            "<td>"+data[index].nombres+"</td>"+
-                            "<td>"+data[index].correo+"</td>"+
-                            "</tr>"    
-                        )
+                            "<tr><th>Nombre<td>"+data[index].nombres+
+                            "<tr><th>Email<td>"+data[index].correo+    
+                            "<tr><th>Cargo<td>"+data[index].cargo
+                        );
                     });
                 }
                 /**
@@ -223,9 +239,13 @@ $css = scandir($CSS_PATH);
                 function clearDetail(i){
                     switch(i)
                     {
-                        case 1:$("#derecho-content-table-data td").remove();
+                        case 1:
+                            $("#derecho-content-table-data td").remove();
+                            $("#derecho-content-table-data th").remove();
                             break;
-                        case 2:$("#derecho-content-table-data-persona td").remove();
+                        case 2:
+                            $("#derecho-content-table-data-persona td").remove();
+                            $("#derecho-content-table-data-persona th").remove();
                             break;
                     }
                 }
@@ -269,7 +289,7 @@ $css = scandir($CSS_PATH);
                 <br />
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1>DETALLES DE LA EMPRESA</h1>
+                        <h1 class="titulo">DETALLES DE LA EMPRESA</h1>
                         <div id="error" style="display: none">
                         <h3>No se puede consultar los datos de detalle</h3>
                         </div>
@@ -279,21 +299,6 @@ $css = scandir($CSS_PATH);
                 <div id="derecho">
                     <div id="derecho-content-table">
                         <table id="derecho-content-table-data" class="rounded-corner" border="0">
-                            <thead>
-                                <tr>
-                                    <th class="rounded-company">Descripcion</th>
-                                    <th>RUC</th>
-                                    <th>Observacion</th>
-                                    <th>email</th>
-                                    <th class="rounded-q4">web</th>
-                                </tr> 
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="4" class="rounded-foot-left"></td>
-                                    <td class="rounded-foot-right">&nbsp;</td>
-                                </tr>
-                            </tfoot>
                             <tbody>
                                 <tr></tr>
                             </tbody>
@@ -303,7 +308,7 @@ $css = scandir($CSS_PATH);
                 
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1>DETALLES DEL CONTACTO</h1>
+                        <h1 class="titulo">DETALLES DEL CONTACTO</h1>
                         <div id="error" style="display: none">
                         <h3>No se puede consultar los datos de detalle</h3>
                         </div>
@@ -312,24 +317,28 @@ $css = scandir($CSS_PATH);
                 <div id="derecho">
                     <div id="derecho-content-table">
                         <table id="derecho-content-table-data-persona" class="rounded-corner" border="0">
-                            <thead>
-                                <tr>
-                                    <th class="rounded-company">Nombre</th>
-                                    <th class="rounded-q4">Correo</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="1" class="rounded-foot-left"></td>
-                                    <td class="rounded-foot-right">&nbsp;</td>
-                                </tr>
-                            </tfoot>
                             <tbody>
                                 <tr></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                <!---->
+                <div id="derecho">
+                    <div id="derecho-content">
+                        <h1>Telefonos</h1>
+                    </div>
+                </div>
+                <div id="derecho">
+                    <div id="derecho-content-table">
+                        <table id="telefonosfijo-empresa" border="0">
+                            <tbody>
+                                <tr></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!---->
                 <div id="derecho">
                     <div id="derecho-content-table-mike">
                         <div id="div-empresa_detail"></div>
@@ -338,7 +347,6 @@ $css = scandir($CSS_PATH);
                 <div id="derecho">
                     <div id="derecho-content-addToMyContacts" style="display: none">
                         <a href="" id="agrega" class="cta cta-blue"><span class="icon-download">Agregar a mis cont&aacute;ctos</span></a>
-<!--                        <input type="button" value="Agregar a mis cont&aacute;ctos" id="agregarMisContactos"/>-->
                     </div>
                 </div>
             </div>

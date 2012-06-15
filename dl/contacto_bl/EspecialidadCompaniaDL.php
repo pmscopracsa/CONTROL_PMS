@@ -83,4 +83,3 @@ class EspecialidadCompaniaDL {
       $this->descripcion = $descripcion;
   }
 }
-?>

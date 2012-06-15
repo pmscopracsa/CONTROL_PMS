@@ -20,7 +20,7 @@ class Conexion
     
     public function conectar()
     {
-        $this->conexion_id = mysql_connect($this->servidor, $this->usuario, $this->clave);
+        $this->conexion_id = mysql_connect($this->servidor, $this->usuario, $this->clave) or die ("No se puede conectar: ".  mysql_error());
         
         if(!$this->conexion_id){
             $this->error = "No se puede conectar al servidor";

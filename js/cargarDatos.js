@@ -76,8 +76,8 @@ function cargar_departamentos()
 {
     var code = $("#paisid").val();
     $.get("../../bl/Contacto/cargarDepartamentos.php",{code:code},function(resultado) {
-            $("#departamentoid").attr("disabled",false);
-            document.getElementById("departamentoid").options.length = 1;
+//            $("#departamentoid").attr("disabled",false);
+//            document.getElementById("departamentoid").options.length = 1;
             $('#departamentoid').append(resultado);
     });
 }
@@ -111,8 +111,8 @@ function cargar_distritos()
             }
             else
             {
-                $("#distritoid").attr("disabled",false);
-                document.getElementById("distritoid").options.length = 1;
+//                $("#distritoid").attr("disabled",false);
+//                document.getElementById("distritoid").options.length = 1;
                 $("#distritoid").append(resultado);
             }
         }

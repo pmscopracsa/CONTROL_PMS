@@ -9,4 +9,3 @@ $departamentos = $selects->cargarDepartamento();
 foreach ($departamentos as $key => $value) {
     echo "<option value=\"$key\">$value</option>";
 }
-?>
