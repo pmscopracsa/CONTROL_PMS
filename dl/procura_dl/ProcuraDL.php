@@ -21,7 +21,7 @@ class ProcuraDL
         {
             $conexion = new Conexion();
             $cn = $conexion->conectar();
-            $result = myql_query($query);
+            $result = mysql_query($query);
             $registros = array();
             while ($reg = mysql_fetch_array($result))
             {
