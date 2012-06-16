@@ -1,10 +1,9 @@
 <?php
 /**
- * Description of ProcuraDL
- *
- * @author root
+ * TODO: Arreglar la cadena de conexion. Porque del problema de llamar a la clase conexion
+ * TODO: EL $_idempresa no esta siendo seteado por el formulario.
  */
-require_once '../Conexion.php';
+//include_once ($_SERVER['DOCUMENT_ROOT'].'/control_pms/dl/procura_dl/Conexion.php');
 
 class ProcuraDL 
 {
@@ -14,25 +13,20 @@ class ProcuraDL
      * Obtener los modelos de cartas de adjudicacion 
      */
     public function mostrarCartas(){
-        $query = "(SELECT id,descripcion,path FROM tb_modelocartacomun) 
-            UNION (SELECT id,descripcion,path FROM tb_modelocartapropia WHERE tb_empresa_id = $this->_idempresa)";
+        $conex = mysql_connect('localhost','pms_admin','pmsadmin123');
+        mysql_select_db('control_pms',$conex);
         
-        try
+        $query = "(SELECT id,descripcion,path FROM tb_modelocartacomun) 
+            UNION (SELECT id,descripcion,path FROM tb_modelocartapropia WHERE tb_empresa_id =1)";
+        
+        $result = mysql_query($query);
+        
+        $registros = array();
+        while ($reg = mysql_fetch_array($result))
         {
-            $conexion = new Conexion();
-            $cn = $conexion->conectar();
-            $result = mysql_query($query);
-            $registros = array();
-            while ($reg = mysql_fetch_array($result))
-            {
-                array_push($registros,$reg);
-            }
-            mysql_free_result($result);
-            mysql_close($cn);
-        } catch (Exception $ex) {
-            mysql_free_result($result);
-            mysql_close($cn);
+            array_push($registros,$reg);
         }
+     
         return $registros;
     }
     
@@ -40,26 +34,20 @@ class ProcuraDL
      * Obtener los modelos de cartas contrato 
      */
     public function mostrarContratos(){
-        $query = "(SELECT id,descripcion,path FROM tb_modelocontratocomun)
-            UNION (SELECT id,descripcion,path FROM tb_modelocontratopropio WHERE tb_empresa_id = $this->_idempresa)";
+        $conex = mysql_connect('localhost','pms_admin','pmsadmin123');
+        mysql_select_db('control_pms',$conex);
         
-        try
+        $query = "(SELECT id,descripcion,path FROM tb_modelocontratocomun)
+            UNION (SELECT id,descripcion,path FROM tb_modelocontratopropio WHERE tb_empresa_id = 1)";
+        
+        $result = mysql_query($query);
+        
+        $registros = array();
+        while ($reg = mysql_fetch_array($result))
         {
-            $conexion = new Conexion();
-            $cn = $conexion->conectar();
-            $result = mysql_query($query);
-            $registros = array();
-            
-            while ($reg = mysql_fetch_array($result))
-            {
-                array_push($registros, $reg);
-            }
-            mysql_free_result($result);
-            mysql_close($cn);
-        } catch(Exception $ex) {
-            mysql_free_result($result);
-            mysql_close($cn);
+            array_push($registros, $reg);
         }
+      
         return $registros;
     }
     

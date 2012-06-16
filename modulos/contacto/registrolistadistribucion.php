@@ -1,7 +1,4 @@
 <?php
-/*
- * Este dato debe ser cambiado por los contactos
- */
 $CSS_PATH = '../../css/';
 $css = array();
 $css = scandir($CSS_PATH);
@@ -13,7 +10,6 @@ function  __autoload($name) {
 
 $contacto = new ContactoPersona();
 $contactos = $contacto->mostrarContactos();
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -96,6 +92,7 @@ $contactos = $contacto->mostrarContactos();
                     $("#contactos-agregados tbody").append(
                     "<tr>"+
                     "<td>"+datos[index].nombre+"</td>"+
+                    "<td>"+datos[index].empresa+"</td>"+
                     "<td>"+"<a href='#' id='del-contacto' class='button delete'>Eliminar</a>"+"</td>"+
                     '<input type="hidden" name="contacto'+contador_contactos+'" value="'+datos[index].id+'" />'+
                     "</tr>"    
@@ -186,7 +183,8 @@ $contactos = $contacto->mostrarContactos();
                                 <table id="contactos-agregados" class="ui-widget ui-widget-content">
                                     <thead>
                                         <tr class="ui-widget-header">
-                                            <th>Nombre</th>
+                                            <th>Contacto</th>
+                                            <th>Empresa</th>
                                         </tr>
                                     </thead>
                                     <tbody>

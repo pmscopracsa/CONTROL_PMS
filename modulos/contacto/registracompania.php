@@ -313,6 +313,19 @@ $representantes = $representantescompania->mostrarRepresentantes();
          }
         
         $("#agregarRegistroDireccion").click(function() {
+            
+            /**
+             * VALIDACIONES PARA LAS DIRECCIONES
+             */
+            if ($('#direccion_text').val() == "") {
+                alert("Ingrese la direcci\xf3n por favor.");
+                return;
+            }
+            if (($('#tipodireccionid option:selected').val()) == 0) {
+                alert("Escoja un tipo de direcci\xf3n por favor");
+                return;
+            }
+            
             //contador para saber cuantas direcciones existen
             contador_direcciones++;
             /**
@@ -406,13 +419,13 @@ $representantes = $representantescompania->mostrarRepresentantes();
         }
     }
     </script>
-<title>REGISTRO DE COMPANIAS</title>
+    <title>REGISTRO DE COMPA&Ntilde;IAS</title>
 </head>
 <body class="fondo">
     <div id="barra-superior">
         <div id="barra-superior-dentro">
             
-            <h1 id="titulo_barra">REGISTRO DE COMPA&Ncaron;IAS</h1>
+            <h1 id="titulo_barra">REGISTRO DE COMPA&Ntilde;IAS</h1>
         </div>
     </div>
     
@@ -546,10 +559,11 @@ $representantes = $representantescompania->mostrarRepresentantes();
                                             <option value="0" name="td">Seleccionar tipo de Direccion</option>
                                         </select>
                                     </td>
+                                    
                                  <tr >   
                                     <td class="tr-padding">
                                         <label>Direccion:</label>
-                                        <input class="derecha" id="direccion_text" type="text" size="25" name="direccion" />
+                                        <input style="background-color: wheat" class="derecha" id="direccion_text" type="text" size="25" name="direccion" />
                                     </td>
                                  </tr>
                                  <tr>
@@ -596,7 +610,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
                    <td>Lista de Direcciones</td>
                    <td>
                        <div class="areaScroll">
-                           <table id="direcciones" border="1">
+                           <table id="direcciones" border="0">
                                <thead>
                                    <tr class="ui-widget-header">
                                        <th>Tipo de direcci&oacute;n</th>
@@ -692,7 +706,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
                    <td><label>Lista de representantes</label></td>
                    <td>
                        <div class="areaScrollModal" id="lista-representantes">
-                           <table id="tbl-listarepresentantes" class="ui-widget" border="1">
+                           <table id="tbl-listarepresentantes" class="ui-widget" border="0">
                                <thead>
                                    <tr class="ui-widget-header">
                                        <th> DNI </th>

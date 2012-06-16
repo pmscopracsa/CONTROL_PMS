@@ -17,7 +17,7 @@
                         foreach ($clientes as &$valor) {
                             echo '<table>';
                             echo '<tr style="cursor:pointer;">';
-                            echo '<td class="contratante">'.'<p style="display:none">'.$valor[0].'</p>'."-".$valor[1].'</td>';
+                            echo '<td class="contratante">'.'<p style="display:none">'.$valor[0].'</p>'.'<p style="display:none">-</p>'.$valor[1].'</td>';
                             echo '</tr>';
                             echo '</table>';
                         }

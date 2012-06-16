@@ -24,10 +24,9 @@ $contactos = $contactoPersona->mostrarContactos();
 /**
  *AUTOLOAD DE MODELOD DE CARTA Y CONTRATO 
  */
-$modelocarta = new ProcuraDL();
-$cartas = $modelocarta->mostrarCartas();
-$modelocontrato = new ProcuraDL();
-$contratos = $modelocontrato->mostrarContratos();
+$modelos = new ProcuraDL();
+$cartas = $modelos->mostrarCartas();
+$contratos = $modelos->mostrarContratos();
 ?>
 <!DOCTYPE html>
 <html>
@@ -221,7 +220,7 @@ $contratos = $modelocontrato->mostrarContratos();
              $("#div-modal-modelocartaadjudicacion").dialog({
                  autoOpen:false,
                  height:500,
-                 width:450,
+                 width:350,
                  modal:true,
                  buttons:{
                      "Cerrar":function(){
@@ -240,7 +239,7 @@ $contratos = $modelocontrato->mostrarContratos();
              $("#div-modal-modelocartacontrato").dialog({
                  autoOpen:false,
                  height:500,
-                 width:450,
+                 width:350,
                  modal:true,
                  buttons:{
                      "Cerrar":function(){
@@ -410,6 +409,7 @@ $contratos = $modelocontrato->mostrarContratos();
                     $("#contactos-agregados tbody").append(
                     "<tr>"+
                     "<td>"+datos[index].nombre+"</td>"+
+                    "<td>"+datos[index].empresa+"</td>"+
                     "<td>"+"<a href='#' id='del-contacto' class='button delete'>Eliminar</a>"+"</td>"+
                     '<input type="hidden" name="contacto'+contador_contactos+'" value="'+datos[index].id+'" />'+
                     "</tr>"    
@@ -426,7 +426,7 @@ $contratos = $modelocontrato->mostrarContratos();
             });
             
             /*
-             * Agregar datos a los input
+             * Agregar datos a los input - INPUT BY DEFAULT READONLY
              */
             $('.cliente').click(function(){
                 var cliente_array = $(this).text().split("-");
@@ -465,10 +465,24 @@ $contratos = $modelocontrato->mostrarContratos();
                 var cli = proveedor_array[1];
                 var proveedor_id = proveedor_array[0];
                 $(".proveedorfacturar-text").val(cli);
-                $(".proveedor_id").val(proveedor_id);
+                $(".contrato_id").val(proveedor_id);
             });
             
+            $('.carta').click(function(){
+                var carta_array = $(this).text().split("-");
+                var carta = carta_array[1];
+                var carta_id = carta_array[0];
+                $(".cls-modelocarta").val(carta);
+                $(".carta_id").val(carta_id);
+            });
             
+            $('.contrato').click(function(){
+                var contrato_array = $(this).text().split("-");
+                var contrato = contrato_array[1];
+                var contrato_id = contrato_array[0];
+                $(".cls-modelocontrato").val(contrato);
+                $(".contrato_id").val(contrato_id);
+            })
         })    
         </script>
         <style>
@@ -487,8 +501,8 @@ $contratos = $modelocontrato->mostrarContratos();
         <?php include_once 'modales/modal-supervisorproyecto.php';?>
         <?php include_once 'modales/modal-proveedorfacturar.php';?>
         <?php include_once 'modales/modal-addContacto.php';?>
-        <?php include 'modales/modal-modelocarta.php';?>
-        <?php include 'modales/modal-modelocontrato.php';?>
+        <?php include_once 'modales/modal-modelocarta.php';?>
+        <?php include_once 'modales/modal-modelocontrato.php';?>
         
         <div id="modal-contactos" title="Seleccionar contactos">
                 <div class="" >
@@ -496,7 +510,7 @@ $contratos = $modelocontrato->mostrarContratos();
                            url=""
                            toolbar="toolbar"
                            rownumber="true"
-                           borde="0">
+                           border="0">
                         <thead>
                             <tr>
                                 <th field="nombre">Nombre</th>
@@ -767,7 +781,8 @@ $contratos = $modelocontrato->mostrarContratos();
                             <table id="contactos-agregados">
                                 <thead>
                                     <tr class="ui-widget-header">
-                                        <th>Nombre</th>
+                                        <th>Nombre de Contacto</th>
+                                        <th>Empresa
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -832,7 +847,7 @@ $contratos = $modelocontrato->mostrarContratos();
                             <td></td>
                             <td></td>
                             <td>
-                                <p><input type="checkbox" name="oc_oc_mayora"/>OC/OT</p>
+                                <p><input type="checkbox" name="oc_oc_mayora" CHECKED DISABLED/>OC/OT</p>
                             </td>
                             <td>
                                 <p><input type="checkbox" name="ca_cg_mayora"/>CA y CG</p>
@@ -847,7 +862,7 @@ $contratos = $modelocontrato->mostrarContratos();
                             <td> y </td>
                             <td><input type="text" id="inputext" name="entre-b" size="5" READONLY/></td>
                             <td>
-                                <p><input type="checkbox" name="oc_oc_entre"/>OC/OT</p>
+                                <p><input type="checkbox" name="oc_oc_entre"CHECKED DISABLED/>OC/OT</p>
                             </td>
                             <td>
                                 <p><input type="checkbox" name="ca_cg_entre"/>CA y CG</p>
@@ -862,7 +877,7 @@ $contratos = $modelocontrato->mostrarContratos();
                             <td></td>
                             <td></td>
                             <td>
-                                <p><input type="checkbox" name="oc_oc_menora"/>OC/OT</p>
+                                <p><input type="checkbox" name="oc_oc_menora" CHECKED DISABLED/>OC/OT</p>
                             </td>
                             <td>
                                 <p><input type="checkbox" name="ca_cg_menora"/>CA y CG</p>
@@ -880,11 +895,13 @@ $contratos = $modelocontrato->mostrarContratos();
                     <table>
                         <tr>
                             <td><p>Selecione modelo de carta de adjudicacion y condiciones generales</p></td>
-                            <td><input type="text" size="45" id="inputext"/><input id="btn-modelocartaadjudicacion" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                            <td><input class="cls-modelocarta" type="text" size="45" id="inputext" READONLY/><input id="btn-modelocartaadjudicacion" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                            <input type="hidden" class="carta_id" name="carta--id" />
                         </tr>
                         <tr>
                             <td><p>Selecione modelo de contrato</p></td>
-                            <td><input type="text" size="45" id="inputext"/><input id="btn-modelocartacontrato" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                            <td><input class="cls-modelocontrato" type="text" size="45" id="inputext" READONLY/><input id="btn-modelocartacontrato" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                            <input type="hidden" class="contrato_id" name="contrato--id" />
                         </tr>
                     </table>
                 </div>
