@@ -1,6 +1,6 @@
 <?php
-include_once '../Conexion.php';
-include_once '../consultas_comunes/Comun.php';
+include_once 'Conexion.php';
+include_once 'Comun.php';
 
 /**
  * @Descripcion:
@@ -30,6 +30,7 @@ class RegistraCompania
     protected $_viaenvio;
     /**
      * Empresa a la que pertenece esta empresa, por defecto por ahora Copracsa
+     * dato en duro
      */
     protected $_idempresa;
     
@@ -64,226 +65,156 @@ class RegistraCompania
     
     
     public function __construct() {
-        /**
-         * ACTIVAMOS LA CLASE CONEXION 
-         */
-        $conex = new Conexion();
-        $conex->conectar();
+        $this->_idempresa = 1;
+    }
+    
+    public function prueba() {
+         for ($i = 0; $i < sizeof($this->_representate); $i++) {
+                        $representante = $this->_representate[$i];
+                        $query = "INSERT INTO tb_representante VALUES($ultimo_id,$representante)";
+                        $res = mysql_query($query,$cn);
+                        if (!$res)
+                            throw new Exception("tb_representante. Error: ".mysql_error());
+                    }
     }
     
     public function i_RegistraCompania()
     {
-        /**
-         * OBTENIENDO EL ULTIMO ID INSERTADO 
-         */
-        $comun = new Comun();
-        $comun->set_nombreTabla($nombreTablaCompaniaContacto);
-        $ultimo_id = $comun->obtenerUltimoId();
-        
+        $conexion = new Conexion();
+        $cn = $conexion->conectar();
         /**
          * INSERCION A TABLA: tb_companiacontacto 
          */
-        $nombreTablaCompaniaContacto = "tb_companiacontacto";
-        $tablaTFijo = "tb_telefonofijocompania";
-        
-        mysql_query("BEGIN");
+        mysql_query("BEGIN",$cn);
         try {
-            $sql_tb_companiacontacto = "INSERT INTO tb_companiacontacto (
-                id
-                ,descripcion
-                ,ruc
-                ,nombrecomercial
-                ,partidaregistral
-                ,giro
-                ,actividadprincipal
-                ,tb_tipocompania_id
-                ,fax
-                ,observacion
-                ,email
-                ,web
-                ,tb_viaenvio_id
-                ,tb_empresa_id) VALUES (
+            $sql_tb_companiacontacto = "INSERT INTO tb_companiacontacto VALUES (
                 NULL
-                ,$this->_descripcion
-                ,$this->_ruc
-                ,$this->_nombrecomercial
-                ,$this->_partidaregistral
-                ,$this->_actividadprincipal
+                ,'$this->_descripcion'
+                ,'$this->_ruc'
+                ,'$this->_nombrecomercial'
+                ,'$this->_partidaregistral'
+                ,'$this->_actividadprincipal'
                 ,$this->_tipocompania
-                ,$this->_fax
-                ,$this->_observacion
-                ,$this->_email
-                ,$this->_web
+                ,'$this->_fax'
+                ,'$this->_observacion'
+                ,'$this->_email'
+                ,'$this->_web'
                 ,$this->_viaenvio
                 ,$this->_idempresa    
                 )";
-            $tb_companiacontacto = mysql_query($sql_tb_companiacontacto);
+            $tb_companiacontacto = mysql_query($sql_tb_companiacontacto,$cn);
             
-            if (!$tb_companiacontacto) {
-                throw new Exception("Error en insercion a tabla: ".$nombreTablaCompaniaContacto.". Error:".  mysql_error());
-            }
+            if (!$tb_companiacontacto)
+                throw new Exception('Error en insercion a tabla tb_companiacontacto. Error: '.  mysql_error());
+           
+            mysql_query("COMMIT",$cn);
             
             /**
-             * INSERCION A TABLA: tb_giro 
+             * OBTENIENDO EL ULTIMO ID INSERTADO 
              */
-            if ($this->_cantgiros >= 1) 
-            {
-                for ($i = 0; $i < $this->_cantgiros; $i++) {
-                    $sql_tbgiro = "INSERT INTO tb_giro (
-                        id
-                        ,descripcion
-                        ,tb_compania_id) VALUES (
-                        NULL
-                        ,'$this->_giro[$i]'
-                        ,$this->_idempresa)" ;
+             $nombreTablaCompaniaContacto = "tb_companiacontacto";
+             $comun = new Comun();
+             $comun->set_nombreTabla($nombreTablaCompaniaContacto);
+             $ultimo_id = $comun->obtenerUltimoId();
+             
+             try {
+                     /**
+                    * INSERCION A TABLA: tb_giro 
+                    */
+                    for ($i = 0; $i < sizeof($this->_giro); $i++) {
+                        $giro = $this->_giro[$i];
+                        $query = "INSERT INTO tb_giro VALUES(NULL,'$giro',$ultimo_id)";
+                        $res = mysql_query($query,$cn);
+                        if (!$res)
+                            throw new Exception("tb_giro. Error: ".mysql_error());
+                    }
 
-                    $tb_giro = mysql_query($sql_tbgiro);
-                    if (!$tb_giro) {
-                        throw new Exception("Error en insercion a tabla tb_giro. Error: ".  mysql_error());
+                    /**
+                    * INSERCION A TABLA: tb_telefonofijocompania
+                    */
+                    for ($i = 0; $i <sizeof($this->_telefonoFijo); $i++) {
+                        $telefono = $this->_telefonoFijo[$i];
+                        $query = "INSERT INTO tb_telefonofijocompania VALUES(NULL,'$telefono',$ultimo_id)";
+                        $res = mysql_query($query,$cn);
+                        if (!$res)
+                            throw new Exception("tb_telefonofijocompania. Error: ".mysql_error());
                     }
-                }
-            }
-            
-            /**
-             * INSERCION A TABLA: tb_telefonofijocompania
-             */
-            if ($this->_cantfijos >= 1)
-            {
-                for ($i = 0; $i < $this->_cantfijos; $i++) {
-                    $sql_tbtelefonofijocompania = "INSERT INTO tb_telefonofijocompania (
-                        id
-                        ,numero
-                        ,tb_companiacontacto_id) VALUES (
-                        NULL
-                        ,'$this->_telefonoFijo[$i]'
-                        ,$ultimo_id    
-                        )";
-                    $tb_telefonofijo = mysql_query($sql_tbtelefonofijocompania);
+                    
+                    /**
+                    * INSERCION A TABLA: tb_telefonomovilcompania
+                    */
+                    for ($i = 0; $i <sizeof($this->_telefonoMobile); $i++) {
+                        $telefono = $this->_telefonoMobile[$i];
+                        $query = "INSERT INTO tb_telefonomovilcompania VALUES(NULL,'$telefono',$ultimo_id)";
+                        $res = mysql_query($query,$cn);
+                        if (!$res)
+                            throw new Exception("tb_telefonomovilcompania. Error: ".mysql_error());
+                    }
 
-                    if (!$tb_telefonofijo) {
-                        throw new Exception("Error en insercion a tabla:".$tablaTFijo.". Error: ".mysql_error());
+                    /**
+                    * INSERCION A TABLA: tb_telefononextelcompania 
+                    */
+                    for ($i = 0; $i < sizeof($this->_telefonoNextel); $i++) {
+                        $telefono = $this->_telefonoNextel[$i];
+                        $query = "INSERT INTO tb_telefononextelcompania VALUES(NULL,'$telefono',$ultimo_id)";
+                        $res = mysql_query($query,$cn);
+                        if (!$res)
+                            throw new Exception("tb_telefononextelcompania. Error: ".mysql_error());
                     }
-                }
-            }
-            
-            /**
-             * INSERCION A TABLA: tb_telefonomovilcompania
-             */
-            if ($this->_cantmoviles >= 1)
-            {
-                for ($i = 0; $i < $this->_cantmoviles; $i++) {
-                    $sql_tbtelefonomovilcompania = "INSERT INTO tb_telefonomovilcompania(
-                        id
-                        ,numero
-                        ,tb_companiacontacto_id) VALUES (
-                        NULL
-                        ,'$this->_telefonoMobile[$i]'
-                        ,$ultimo_id)";
-                    $tb_telefonomovil = mysql_query($sql_tbtelefonomovilcompania);
+
+                    /**
+                    * INSERCION A TABLA: tb_rubro
+                    */
+                    for ($i = 0; $i < sizeof($this->_especialidad); $i++) {
+                        $especialidad = $this->_especialidad[$i];
+                        $query = "INSERT INTO tb_rubro VALUES($ultimo_id,$especialidad)";
+                        $res = mysql_query($query,$cn);
+                        if (!$res)
+                            throw new Exception("tb_rubro. Error:".mysql_error());
+                    }
                     
-                    if (!$tb_telefonomovil) {
-                        throw new Exception("Error en la insercion a tabla: tb_telefonomovil. Error: ".mysql_error());
+                     /**
+                    *  INSERCION A TABLA: tb_representante
+                    */
+                    for ($i = 0; $i < sizeof($this->_representate); $i++) {
+                        $representante = $this->_representate[$i];
+                        $query = "INSERT INTO tb_representante VALUES($ultimo_id,$representante)";
+                        $res = mysql_query($query,$cn);
+                        if (!$res)
+                            throw new Exception("tb_representante. Error:".mysql_error());
                     }
-                }
-            }
-            
-            /**
-             * INSERCION A TABLA: tb_telefononextelcompania 
-             */
-            if ($this->_cantnextel >= 1)
-            {
-                for ($i = 0; $i <$this->_cantnextel; $i++) {
-                    $sql_tbtelefononextelcompania = "INSERT INTO tb_telefononextelcompania (
-                        id
-                        ,numero
-                        ,tb_personacontacto_id) VALUES (
-                        NULL
-                        ,'$this->_telefonoNextel[$i]'
-                        ,$ultimo_id)";
-                    $tb_telefononextel = mysql_query($sql_tbtelefononextelcompania);
-                    
-                    if (!$tb_telefononextel) {
-                        throw new Exception("Error en la insercion a tabla: tb_telefononextel. Error: ".mysql_error());
+
+                    /**
+                    * INSERCION A TABLA: tb_direccioncompaniacontacto
+                    */
+                    for ($i = 0; $i < $this->_cantdireccion; $i++) {
+                        $direccion = $this->_direccion[$i];
+                        $pais_id = $this->_pais[$i];
+                        $departamento_id = $this->_departamento[$i];
+                        $tipodireccion_id = $this->_tipodireccion[$i];
+                        $distrito_id = $this->_distrito[$i];
+                        $query = "INSERT INTO tb_direccioncompaniacontacto VALUES (
+                            NULL
+                            ,'$direccion'
+                            ,$pais_id
+                            ,$departamento_id
+                            ,$ultimo_id
+                            ,$tipodireccion_id
+                            ,$distrito_id
+                            )";
+                        $res = mysql_query($query,$cn);
+                        if (!$res)
+                            throw new Exception("tb_direccioncompaniacontacto. Error: ".mysql_error());
                     }
-                }
-            }
-            
-            /**
-             * INSERCION A TABLA: tb_especialidadcompania 
-             */
-            if ($this->_cantespecialidad >= 1)
-            {
-                for ($i = 0; $i < $this->_cantespecialidad; $i++)
-                {
-                    $sql_tbespecialidadcompania = "INSERT INTO tb_especialidadcompania (
-                        id
-                        ,descripcion) VALUES (
-                        NULL
-                        ,'$this->_especialidad[$i]')";
-                    $tb_especialidadcompania = mysql_query($sql_tbespecialidadcompania);
-                    
-                    if (!$tb_especialidadcompania) {
-                        throw new Exception("Error en la insercion a tabla: tb_especialidadcompania. Error: ".mysql_error());
-                    }
-                }
-            }
-            
-            /**
-             *  INSERCION A TABLA: tb_representante
-             */
-            if ($this->_cantrepresentante >= 1)
-            {
-                for ($i = 0; $i < $this->_cantrepresentante; $i++)
-                {
-                    $sql_tbrepresentante = "INSERT INTO tb_representante (
-                        tb_companiacontacto_id
-                        ,tb_personacontacto_id) VALUES (
-                        $ultimo_id
-                        ,$this->_representate[$i])";
-                    $tb_representante = mysql_query($sql_tbrepresentante);
-                    
-                    if (!$tb_representante) {
-                        throw new Exception("Error en la insercion a tabla: tb_representante. Error: ".mysql_error());
-                    }
-                }
-            }
-            
-            /**
-             * INSERCION A TABLA: tb_direccioncompaniacontacto
-             */
-            if ($this->_cantdireccion >= 1)
-            {
-                for ($i = 0; $i < $this->_cantdireccion; $i++)
-                {
-                    $sql_tbdireccion = "INSERT INTO tb_direccioncompaniacontacto (
-                        id
-                        ,direccion
-                        ,tb_pais_id
-                        ,tb_departamento_id
-                        ,tb_companiacontacto_id
-                        ,tb_tipodireccion_id
-                        ,tb_distrito_id
-                        ) VALUES (
-                        NULL
-                        ,'$this->_direccion[$i]'
-                        ,$this->_pais[$i]
-                        ,$this->_departamento[$i]
-                        ,$ultimo_id
-                        ,$this->_distrito[$i]
-                        ,$this->_tipodireccion[$i])";
-                    $tb_direccion = mysql_query($sql_tbdireccion);
-                    
-                    if (!$tb_direccion) {
-                        throw new Exception("Error en la insercion a tabla: tb_direccion. Error: ".mysql_error());
-                    }
-                }
-            }
-            
-            mysql_query("COMMIT");
+             } catch (Exception $ex1) {
+                 mysql_query("ROLLBACK",$cn);
+                 echo "Error en tabla ".$ex1->getMessage()."<br>";
+                 $query = "DELETE FROM tb_companiacontacto WHERE id = $ultimo_id";
+             }
         } catch (Exception $exc) {
-            mysql_query("ROLLBACK");
+            mysql_query("ROLLBACK",$cn);
+            echo $exc->getMessage()."<br>";
         }
-        
     }
     
     public function u_RegistraCompania()

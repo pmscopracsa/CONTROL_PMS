@@ -37,7 +37,6 @@ $representantes = $representantescompania->mostrarRepresentantes();
     <script src="../../js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
     <script src="../../js/tfijo.js" type="text/javascript"></script>
     <script src="../../js/cargarDatos.js" type="text/javascript"></script>
-    <script src="../../js/modernizr.custom.27460.js" type="text/javascript"></script>
     <script src="../../js/jquery.form.js" type="text/javascript"></script>
     <script src="../../js/jquery.validity/jQuery.validity.js" type="text/javascript"></script>
     <link href="../../js/jquery.validity/jquery.validity.css" rel="stylesheet" type="text/css" />
@@ -107,9 +106,6 @@ $representantes = $representantescompania->mostrarRepresentantes();
             width:350,
             modal:true,
             buttons:{
-                "Agregar representate (Contactos)":function(){
-                    $("#").dialog("open");
-                },
                 "Salir":function(){
                     $(this).dialog("close");
                 }
@@ -122,7 +118,6 @@ $representantes = $representantescompania->mostrarRepresentantes();
         /*
          * modal para direcciones
          */
-//        $("#dialog:ui-dialog").dialog("destroy");
         $("#seleccionaDireccion").dialog({
             autoOpen:false,
             height:280,
@@ -207,7 +202,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
                 url:'../../bl/Contacto/mantenimiento/especialidadcompania_crear.php',
                 data:"descripcion="+descripcion,
                 success:function(){
-                    alert("SE HA INGRESADO CORRECTAMENTE LA NUEVA ESPECIAIDAD");
+                    alert("SE HA INGRESADO CORRECTAMENTE LA NUEVA ESPECIALIDAD");
                     /**
                      * RECARGAR LA PAGINA AUTOMATICAMENTE
                      */ 
@@ -377,6 +372,23 @@ $representantes = $representantescompania->mostrarRepresentantes();
          * variable que se crear antes de enviar el formulario
          */
         $("#submit").click(function(){
+            /**
+             * VALIDACIONES PRE FORM
+             */
+            
+            
+            
+            if (($("#tipocompaniaid").val()) == 0) {
+                alert("Escoja un tipo de Compa\xf1 \xeda por favor");
+                //$.scrollTo($('div#tipo_compania'),100);
+                return false;
+            }
+            
+            if ($("#viaenvioid").val() == 0) {
+                alert("Escoja una V\xeda de env\xedo");
+                return false;
+            }
+            
             var valor_oculto_direcciones = $('<input type="hidden" name="contador_direcciones" value="'+contador_direcciones+'" />');
             valor_oculto_direcciones.appendTo("#cant_direcciones");
             
@@ -406,18 +418,8 @@ $representantes = $representantescompania->mostrarRepresentantes();
 //       $("#departamentoid").change(function(){cargar_distritos();})
 //       $("#departamentoid").attr("disabled",true);
 //       $("#distritoid").attr("disabled",true);
-       $("#submit").click(function(){
-       });
-       
        
     });
-    
-    function showRequest(formData, jqForm, options) { 
-        if($("#viaenvioid").val()) {
-            alert("Debe seleccionar una via de envio antes de proceder con el guardado de los datos.");
-            return;
-        }
-    }
     </script>
     <title>REGISTRO DE COMPA&Ntilde;IAS</title>
 </head>
@@ -430,14 +432,15 @@ $representantes = $representantescompania->mostrarRepresentantes();
     </div>
     
 <div id="main">
-    <form id="frm-registracompania" action="ttest/registraCompaniaTest.php" method="POST">
+    <form id="frm-registracompania" action="../../bl/busca_persona/registraCompania_BL.php" method="POST">
+<!--<form id="frm-registracompania" action="ttest/registraCompaniaTest.php" method="POST">-->
        <div class="info">
        Los campos obligatorios est&aacute;n marcados con <img src="../../img/required_star.gif" alt="dato requerido" />
        </div>
        <div> 
            <table id="titulo">
                <tr>
-                   <td><label for="tipocompania">Tipo de Compania:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                   <div id="tipo_compania"><td><label for="tipocompania">Tipo de Compania:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td></div>
                    <td>
                        <select name="tipocompaniaseleccionada" id="tipocompaniaid">
                            <option value="0">Seleccione un tipo de Compania</option>
