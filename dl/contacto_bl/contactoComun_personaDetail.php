@@ -10,7 +10,7 @@ $sql = "SELECT
     ,correo 
     ,cargo
     FROM tb_personacontactocomun WHERE id=".$id." ORDER BY nombres ASC";
-$result = mysql_query($sql) or die ("Error en la consulta: ".  mysql_error());
+$result = mysql_query($sql,$cn) or die ("Error en la consulta: ".  mysql_error());
 
 $i = 0;
 $detalle = array();
@@ -22,6 +22,5 @@ while ($row = mysql_fetch_assoc($result)) {
     $detalle[$i]['cargo'] = $row[cargo] == NULL ? "<i><b>No est&aacute; especificado</b></i>" : $row[cargo];
     $i++;
 }
-
 
 echo json_encode($detalle);

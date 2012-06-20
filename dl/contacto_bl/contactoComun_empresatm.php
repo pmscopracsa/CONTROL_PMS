@@ -5,9 +5,9 @@ $cn = $conexion->conectar();
 
 $id = $_GET['id'];
 $sql = "SELECT 
-    tf.numero numero
+    tm.numero numero
     FROM tb_personacontactocomun pcc
-    INNER JOIN tb_comuntfijo tf ON  pcc.id = tf.tb_personacontactocomun_id
+    INNER JOIN tb_comuntmobile tm ON  pcc.id = tm.tb_personacontactocomun_id
     WHERE pcc.id=".$id;
 $result = mysql_query($sql,$cn) or die ("Error en la consulta: ".  mysql_error());
 

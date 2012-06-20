@@ -120,16 +120,6 @@ $css = scandir($CSS_PATH);
                             success:function(data){
                                 verDetalle(data);
                             }
-                        }),//;probandosi se puede 2 ajax no anidados pero casi revueltos
-                        $.ajax({
-                            data:{id:row_id},
-                            type:"GET",
-                            dataType:"json",
-                            //url:"../../dl/contacto_bl/contactoComun_empresaDetail.php",
-                            url:"../../dl/contacto_bl/contactoComun_empresatf.php",
-                            success:function(data2){
-                                verTFEmpresa(data2);
-                            }
                         })
                     },
                     subGridRowExpanded:function(subgrid_id,row_id){
@@ -171,10 +161,11 @@ $css = scandir($CSS_PATH);
                             }
                         }); 
                         jQuery("#"+subgrid_table_id).jqGrid('navGrid',"#"+pager_id,{edit:false,add:false,del:false})
-                    },
-                    subGridRowColapsed:function(subgrid_id,row_id){
-                        
-                    }
+                        }
+//                    },
+//                    subGridRowColapsed:function(subgrid_id,row_id){
+//                        
+//                    }
                 });
                 /**
                  * VER DETALLE DE LA EMPRESA 
@@ -193,16 +184,95 @@ $css = scandir($CSS_PATH);
                             "<tr><th>Web<td>"+data[index].web
                         );
                     });
+                   
                 }
-                
-                function verTFEmpresa(data2)
+                /*
+                function verTFEmpresa(codigo)
                 {
-                    $.each(data2,function(index,value){
-                        $("#telefonosfijo-empresa tbody").append(
-                            "<tr><th>Numero<td>"+data2[index].descripcion
-                        )
+                    $.ajax({
+                        data:{id:codigo},
+                        type:"GET",
+                        dataType:"json",
+                        url:"../../dl/contacto_bl/contactoComun_empresatf.php",
+                        success:function(data){
+                            telefonosfijos(data);
+                        }
+                    });
+                }*/
+                
+                function verTFEmpresa(codigo)
+                {
+                    // LIMPIAR TELEFONOS
+                    $("#telefonosfijo-empresa tbody td").remove();
+                    $("#telefonosfijo-empresa tbody th").remove();
+                    
+                    // MUESTRA NUMEROS TELEFONICOS
+                    
+                    $.ajax({
+                        data:{id:codigo},
+                        type:"GET",
+                        dataType:"json",
+                        url:"../../dl/contacto_bl/contactoComun_empresatf.php",
+                        success:function(data){
+                            $.each(data,function(index,value){
+                                $("#telefonosfijo-empresa tbody").append(
+                                    "<tr><th>#<td>"+data[index].numero
+                                );
+                            });
+                        }
                     });
                 }
+                
+                function verTMEmpresa(codigo)
+                {
+                    //LIMPIAR 
+                    $("#telefonosmoviles-empresa td").remove();
+                    $("#telefonosmoviles-empresa th").remove();
+                    //
+                    $.ajax({
+                        data:{id:codigo},
+                        type:"GET",
+                        dataType:"json",
+                        url:"../../dl/contacto_bl/contactoComun_empresatm.php",
+                        success:function(data){
+                            $.each(data,function(index,value){
+                                $("#telefonosmoviles-empresa tbody").append(
+                                    "<tr><th>#<td>"+data[index].numero
+                                );
+                            });
+                        }
+                    });
+                }
+                
+                function verTNEmpresa(codigo)
+                {
+                    // LIMPIAR
+                    $("#telefonosnextel-empresa td").remove();
+                    $("#telefonosnextel-empresa th").remove();
+                    //MUESTRA
+                    $.ajax({
+                        data:{id:codigo},
+                        type:"GET",
+                        dataType:"json",
+                        url:"../../dl/contacto_bl/contactoComun_empresatn.php",
+                        success:function(data){
+                            $.each(data,function(index,value){
+                                $("#telefonosnextel-empresa tbody").append(
+                                    "<tr><th>#<td>"+data[index].numero
+                                );
+                            });
+                        }
+                    });
+                }
+                
+                function telefonosfijos(data) {
+                    $.each(data,function(index,value){
+                        $("#telefonosfijo-empresa tbody").append(
+                            "<tr><th>Descripcion<td>"+data[index].numero
+                        );
+                    });
+                }
+                
                 /**
                  * VER DETALLE DE LA PERSONA QUE TRABAJA EN LA EMPRESA 
                  */
@@ -210,21 +280,26 @@ $css = scandir($CSS_PATH);
                 {
                     var i = 2;
                     clearDetail(i);
+                    var codigo;
                     
                     $.each(data,function(index,value){
+                        codigo = data[index].id;
                         $("#derecho-content-table-data-persona tbody").append(
                             "<tr><th>Nombre<td>"+data[index].nombres+
                             "<tr><th>Email<td>"+data[index].correo+    
                             "<tr><th>Cargo<td>"+data[index].cargo
-                        );
+                        );    
+                        verTFEmpresa(codigo);
+                        verTMEmpresa(codigo);
+                        verTNEmpresa(codigo);
                     });
                 }
+                
                 /**
                  * OBTENER EL ID DE LA ESPECIALIDAD
                  */
                 function obtenerIdEspecialidad(ids)
                 {
-                    //alert(ids);
                     $("#tbl-idEspecialidad tbody").append(
                     "<tr>"+
                     "<td id=\"especialidad_id\" style=\"display: none\">"+ids+"</td>"+
@@ -256,9 +331,25 @@ $css = scandir($CSS_PATH);
                 function limpiarIdAnterior() {
                     $("#tbl-idEspecialidad td").remove();
                 }
-                
+
+                function cleanAll() {
+                    $("#derecho-content-table-data td").remove();
+                    $("#derecho-content-table-data th").remove();
+                            
+                    $("#derecho-content-table-data-persona td").remove();
+                    $("#derecho-content-table-data-persona th").remove();  
+                    
+                    $("#telefonosfijo-empresa tbody td").remove();
+                    $("#telefonosfijo-empresa tbody th").remove();
+
+                    $("#telefonosmoviles-empresa td").remove();
+                    $("#telefonosmoviles-empresa th").remove();
+
+                    $("#telefonosnextel-empresa td").remove();
+                    $("#telefonosnextel-empresa th").remove();
+                }
                 /**
-                 * 
+                 * BOTON QUE SE MUESTRA POR DEMANDA
                  */
                 function mostrarBotonImportar() {
                     $("#derecho-content-addToMyContacts").css("display","block");
@@ -326,12 +417,50 @@ $css = scandir($CSS_PATH);
                 <!---->
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1>Telefonos</h1>
+                        <h1 class="titulo   ">TELEFONO(S) FIJO(S)</h1>
+                    </div>
+                    <div id="div-tfijo" title="Telefonos Fijos" style="display: none">
                     </div>
                 </div>
                 <div id="derecho">
                     <div id="derecho-content-table">
-                        <table id="telefonosfijo-empresa" border="0">
+                        <table id="telefonosfijo-empresa" class="rounded-corner" border="0">
+                            <tbody>
+                                <tr></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!---->
+                <!---->
+                <div id="derecho">
+                    <div id="derecho-content">
+                        <h1 class="titulo   ">TELEFONO(S) MOVIL(ES)</h1>
+                    </div>
+                    <div id="div-tfijo" title="Telefonos Moviles" style="display: none">
+                    </div>
+                </div>
+                <div id="derecho">
+                    <div id="derecho-content-table">
+                        <table id="telefonosmoviles-empresa" class="rounded-corner" border="0">
+                            <tbody>
+                                <tr></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!---->
+                <!---->
+                <div id="derecho">
+                    <div id="derecho-content">
+                        <h1 class="titulo   ">TELEFONO(S) NEXTEL</h1>
+                    </div>
+                    <div id="div-tfijo" title="Telefonos Nextel" style="display: none">
+                    </div>
+                </div>
+                <div id="derecho">
+                    <div id="derecho-content-table">
+                        <table id="telefonosnextel-empresa" class="rounded-corner" border="0">
                             <tbody>
                                 <tr></tr>
                             </tbody>

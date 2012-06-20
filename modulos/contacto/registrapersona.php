@@ -86,7 +86,8 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
             /*
              * boton para abrir ventana modal PARA AGREGAR ESPECIALIDAD AL FORMULARIO PRINCIPAL
              */
-            $("#agregarEspecialidad").click(function(){
+            $("#agregarEspecialidad").click(function(e){
+                e.preventDefault();
                 $("#seleccionaEspecialidad").dialog("open");
             });
              
