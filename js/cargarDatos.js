@@ -126,3 +126,9 @@ function cargar_monedas()
     });
 }
 
+function cargar_tipodocumento()
+{
+    $.get("../../bl/Contacto/cargarTipoDocumento.php",function(resultado) {
+        $("#cmb_tipodocumento").append(resultado);
+    })
+}

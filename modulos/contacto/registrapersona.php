@@ -36,9 +36,11 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
         <script src="../../js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
         <script src="../../js/tfijo.js" type="text/javascript"></script>
         <script src="../../js/cargarDatos.js" type="text/javascript"></script>
+        <script src="../../js/jquery.form.js" type="text/javascript"></script>
         <script>
         $(document).ready(function(){
             var contador_especialidades = 0;
+            var con_especia = 0;
             /*
              * MODAL PÁRA SELECCIONAR ESPECIALIDAD(ES)
              */
@@ -98,14 +100,16 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
             cargar_companias(); 
             cargar_viasenvio();
             cargar_tipodireccion();
+            cargar_tipodocumento();
             
             cargar_paises();
-            
-            $("#paisid").change(function(){cargar_departamentos();})
+            cargar_departamentos();
+            cargar_distritos();
+            /*$("#paisid").change(function(){cargar_departamentos();})
             $("#departamentoid").change(function(){cargar_distritos();})
             $("#departamentoid").attr("disabled",true);
             $("#distritoid").attr("disabled",true);
-            
+            */
             /*
              * DIRECCION
              */
@@ -211,6 +215,8 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
              * eliminar especialidad de la lista del scrollbar
              */
             $("#del-especialidad").live("click",function(e) {
+                con_especia--;
+                contador_especialidades--;
                 e.preventDefault();
                 $(this).parent().parent().remove();
             })
@@ -221,6 +227,7 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
              */
             function mostrarEspecialidadesScroll(data)
             {
+                con_especia++;
                 contador_especialidades++;
                 $.each(data,function(index,value){
                     $("#tbl-listaespecialidades tbody").append(
@@ -233,7 +240,52 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                 });
             }
             
+            $("#submit").click(function() {
+                var valor_oculto_especialidadess = $('<input type="hidden" name="cont_especialidades" value="'+con_especia+'" />');
+                valor_oculto_especialidadess.appendTo("#cant_especialidades");
+                /**
+                 *  VALIDACIONES PRE FORM
+                 */
+                if ($("#cmb_tipodocumento").val() == 0) {
+                    alert("Escoja un Tipo de documento");
+                    return false;
+                }
+                
+                if ($("#companiaseleccionada").val() == 0) {
+                    alert("Escoja una Compa\xf1 \xeda");
+                    return false;
+                }
+                
+                if ($("#viaenvioid").val() == 0) {
+                    alert("Escoja una V\xeda de env\xedo");
+                    return false;
+                }
+                
+                if (!$("input").is(':checked')) {
+                    alert("Tiene RUC no ha sido precisado. Marque una opcion por favor.");
+                    return false;
+                }
+                
+                if ((".direccion_lbl").val() =="") {
+                    alert("NO ha especificado la direccion");
+                    return false;
+                }
+            })
         });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var options = {
+                    success:muestraRespuesta
+                    //clearForm:true
+                };
+                $("#frm-regpersona").ajaxForm(options);
+            });
+            
+            function muestraRespuesta(responseText, statusText, xhr, $form) {
+                alert("Los datos han sido ingresados correctamente");
+                window.setTimeout('location.reload()',1000);
+            }
         </script>
     </head>
     <body class="fondo">
@@ -244,7 +296,8 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
         </div>
         
         <div id="main">
-            <form action="registratest.php" method="POST" id="frm-regpersona">
+            <form action="../../bl/busca_persona/registraPersona_BL.php" method="POST" id="frm-regpersona">
+                
                 <div class="info">
                 Los campos obligatorios est&aacute;n marcados con <img src="../../img/required_star.gif" alt="dato requerido" />
                 </div>
@@ -253,9 +306,8 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                         <td><label>Tipo documento:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td>
                             <!-- VALIDAR -->
-                            <select id="tipo-documento" name="tipo-documento">
-                                <option value="dni">DNI</option>
-                                <option value="carne-extranjeria">Carn&eacute; de extranjer&iacute;a</option>
+                            <select id="cmb_tipodocumento" name="tipo-documento">
+                                <option value="0">Seleccionar tipo de documento</option>
                             </select>
                          <td>
                              <input  class="input-tipo-documento" size="8" type="text" name="numero-documento" id="inputext" required/>
@@ -279,9 +331,6 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                             </select>
                         </td>
                     </tr>
-                    
-                    
-                   
                         <td><label>Cargo:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td><input id="inputext" type="text" size="25" name="cargo"</td>
                     </tr>
@@ -354,20 +403,20 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                                  <tr>   
                                      <td class="tr-padding">
                                         <label>Direcci&oacute;n:</label>
-                                        <input class="derecha-inline" id="inputext" type="text" size="25" name="direccion" />
+                                        <input class="direccion_lbl" id="inputext" type="text" size="25" name="direccion" />
                                     </td>
                                  <tr>
                                      <td class="tr-padding">
                                          <label>Pa&iacute;s</label>
                                          <select class="derecha-inline" name="paisseleccionada" id="paisid">
-                                             <option value="0">Seleccionar Pa&iacute;s</option>
+<!--                                             <option value="0">Seleccionar Pa&iacute;s</option>-->
                                          </select>
                                      </td>
                                  <tr>   
                                     <td class="tr-padding">
                                         <label>Departamento/Estado:</label>
                                         <select class="derecha-inline" name="departamentoseleccionada" id="departamentoid">
-                                                <option value="0">Seleccionar departamento</option>
+<!--                                                <option value="0">Seleccionar departamento</option>-->
                                             </selected>
                                     </td>
                                  <tr>   
@@ -375,7 +424,7 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                                     <td class="tr-padding">
                                         <label>Distrito:</label>
                                         <select class="derecha-inline" name="distritoseleccionada" id="distritoid">
-                                                <option value="0">Seleccione un distrito</option>
+<!--                                                <option value="0">Seleccione un distrito</option>-->
                                             </select>
                                     </td>
                             </table>
@@ -452,12 +501,15 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                             <tr>
                                 <th>
                                 <th colspan="2">
+                            </tr>
                             <tr>
-                                <td class="atable"><input type="text" size="15" name="emailsecundario" />
+                                <td class="atable"><input type="text" size="15" size="50" name="emailsecundario" />
                                 <td><input type="button" class="addRow" />
                                 <td><input type="button" class="delRow" />
-                                    <input type="hidden" class="rowCount" name="filas_emailsecundario" />   
+                            </tr>
+                            <input type="hidden" class="rowCount" name="filas_emailsecundario" />   
                         </table>
+                       
                 <tr>
                     <td><label for="web">Web:</label></td>
                     <td><input id="inputext" type="text" size="30" placeholder="" name="web" /></td>
@@ -475,6 +527,8 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                     </td>
                 </tr>
                 </table>
+                <!-- VALORES OCULTOS -->
+                <div id="cant_especialidades"></div>
                 <div id="footer">
             <hr />
         </div>
@@ -484,17 +538,3 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
         
     </body>
 </html>
-
-<?php
-/**
- * TODO:
- * 3. Validar data en el submit
- */
-
-/**
- * BUGS:
- * 1. Al eliminar una especialidad del formulario principal
- *      no se quita el check de la ventana modal. Debería quitarse el check de
- *      la ventana modal. 
- */
-?>

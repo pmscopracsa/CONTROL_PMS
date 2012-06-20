@@ -40,7 +40,8 @@ $representantes = $representantescompania->mostrarRepresentantes();
     <script src="../../js/jquery.form.js" type="text/javascript"></script>
     <script src="../../js/jquery.validity/jQuery.validity.js" type="text/javascript"></script>
     <link href="../../js/jquery.validity/jquery.validity.css" rel="stylesheet" type="text/css" />
- 
+    <script src="../../js/jquery.form.js" type="text/javascript"></script>
+    
     <script type="text/javascript">
     $(document).ready(function(){
         $("form").validity(function(){
@@ -376,8 +377,6 @@ $representantes = $representantescompania->mostrarRepresentantes();
              * VALIDACIONES PRE FORM
              */
             
-            
-            
             if (($("#tipocompaniaid").val()) == 0) {
                 alert("Escoja un tipo de Compa\xf1 \xeda por favor");
                 //$.scrollTo($('div#tipo_compania'),100);
@@ -420,6 +419,20 @@ $representantes = $representantescompania->mostrarRepresentantes();
 //       $("#distritoid").attr("disabled",true);
        
     });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var options = {
+                success:muestraRespuesta
+                //clearForm:true
+            };
+            $("#frm-registracompania").ajaxForm(options);
+        });
+
+        function muestraRespuesta(responseText, statusText, xhr, $form) {
+            alert("Los datos han sido ingresados correctamente");
+            window.setTimeout('location.reload()',1000);
+        }
     </script>
     <title>REGISTRO DE COMPA&Ntilde;IAS</title>
 </head>

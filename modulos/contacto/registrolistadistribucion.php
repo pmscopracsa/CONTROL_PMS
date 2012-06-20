@@ -28,6 +28,7 @@ $contactos = $contacto->mostrarContactos();
         <script src="../../js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
         <script src="../../js/jquery.autocomplete.js" type="text/javascript"></script> 
         <script src="../../dl/contacto_bl/Obras/Obras.js"></script>
+        <script src="../../js/jquery.form.js" type="text/javascript"></script>
         <script>
         $(function(){
            var contador_contactos = 0;
@@ -127,6 +128,20 @@ $contactos = $contacto->mostrarContactos();
             });
         });    
         </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var options = {
+                    success:muestraRespuesta
+                    //clearForm:true
+                };
+                $("#frm-registralistadist").ajaxForm(options);
+            });
+
+            function muestraRespuesta(responseText, statusText, xhr, $form) {
+                alert("Los datos han sido ingresados correctamente");
+                window.setTimeout('location.reload()',1000);
+            }
+        </script>
     </head>
     <body class="fondo">
         <div id="barra-superior">
@@ -156,7 +171,7 @@ $contactos = $contacto->mostrarContactos();
                 </div>
         </div>
         <div id="main">
-            <form action="registratest.php" method="POST">
+            <form id="frm-registralistadist" action="../../bl/busca_persona/registraListaDistribucion_BL.php" method="POST">
                 <div class="info">
                 Los campos obligatorios est&aacute;n marcados con <img src="../../img/required_star.gif" alt="dato requerido" />
                 </div>

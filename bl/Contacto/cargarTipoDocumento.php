@@ -3,9 +3,8 @@ include_once '../ComboBoxSql.php';
 include_once '../ComboBoxTipos.php';
 
 $selects = new ComboBoxTipos();
-$viasenvio = $selects->cargarTipoEnvio();
+$tiposdocumento = $selects->cargarTipoDocumento();
 
-foreach ($viasenvio as $key => $value) {
+foreach ($tiposdocumento as $key => $value) {
     echo "<option value=\"$key\">$value</option>";
 }
-?>

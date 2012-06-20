@@ -43,6 +43,26 @@ class ComboBoxTipos extends ComboBoxSql
         }
     }
     
+    public function cargarTipoDocumento()
+    {
+        $consulta = parent::__construct();
+        $consulta = parent::consulta("SELECT * FROM tb_tipodocumento ORDER BY descripcion ASC");
+        $num_total_registros = parent::num_rows($consulta);
+        
+        if ($num_total_registros > 0) {
+            $tiposdocumento = array();
+            
+            while ($tipodocumento = parent::fetch_assoc($consulta)) {
+                $id = $tipodocumento['id'];
+                $descripcion = $tipodocumento['descripcion'];
+                $tiposdocumento[$id] = $descripcion;
+            }
+            return $tiposdocumento;
+        } else {
+            return FALSE;
+        }
+    }
+    
     public function cargarTipoDireccion()
     {
         $consulta = parent::__construct();
@@ -123,5 +143,4 @@ class ComboBoxTipos extends ComboBoxSql
         }
     }
 }
-
 ?>

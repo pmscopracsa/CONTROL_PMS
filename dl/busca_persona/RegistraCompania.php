@@ -206,10 +206,14 @@ class RegistraCompania
                         if (!$res)
                             throw new Exception("tb_direccioncompaniacontacto. Error: ".mysql_error());
                     }
+                    mysql_query("COMMIT",$cn);
              } catch (Exception $ex1) {
                  mysql_query("ROLLBACK",$cn);
                  echo "Error en tabla ".$ex1->getMessage()."<br>";
                  $query = "DELETE FROM tb_companiacontacto WHERE id = $ultimo_id";
+                 /*
+                  * missing DEL implementation
+                  */
              }
         } catch (Exception $exc) {
             mysql_query("ROLLBACK",$cn);
@@ -485,6 +489,4 @@ class RegistraCompania
     public function set_distrito($_distrito) {
         $this->_distrito = $_distrito;
     }
-
-
 }

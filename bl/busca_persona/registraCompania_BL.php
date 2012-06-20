@@ -108,5 +108,7 @@ if ($_REQUEST['contador_representantes'] > 0) {
     }
     $registracompania->set_representate($representante_);//array
 }
-$registracompania->i_RegistraCompania();
+$res_mysql = $registracompania->i_RegistraCompania();
 //$registracompania->prueba();
+if (!$res_mysql)
+    echo "No se ingresó";
