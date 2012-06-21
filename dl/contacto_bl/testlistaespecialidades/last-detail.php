@@ -9,14 +9,15 @@ $conexion = new Conexion();
 $cn = $conexion->conectar();
 
 $id = $_GET['id'];
-$sql = "SELECT nombre, dni, cargo, fax, email, web FROM tb_personacontacto WHERE id = ".$id;
-$result = mysql_query( $sql ) or die("Error en la consulta.".mysql_error()); 
+$sql = "SELECT id, nombre, dni, cargo, fax, email, web FROM tb_personacontacto WHERE id = ".$id;
+$result = mysql_query( $sql,$cn ) or die("Error en la consulta.".mysql_error()); 
 //
 $i = 0;
 //mysql_fetch_assoc($result)
 $detalle = array();
 while($row = mysql_fetch_assoc($result))
 {
+    $detalle[$i]['id'] = $row[id];
     $detalle[$i]['nombre'] = $row[nombre] == NULL ? "<i>No tiene</i>" : $row[nombre];
     $detalle[$i]['dni'] = $row[dni] == NULL ? "<i>No tiene</i>" : $row[dni];
     $detalle[$i]['cargo'] = $row[cargo] == NULL ? "<i>No tiene</i>" : $row[cargo];
@@ -26,4 +27,3 @@ while($row = mysql_fetch_assoc($result))
     $i++;
 }
 echo json_encode($detalle);
-?>

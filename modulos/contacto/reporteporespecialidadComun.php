@@ -186,19 +186,6 @@ $css = scandir($CSS_PATH);
                     });
                    
                 }
-                /*
-                function verTFEmpresa(codigo)
-                {
-                    $.ajax({
-                        data:{id:codigo},
-                        type:"GET",
-                        dataType:"json",
-                        url:"../../dl/contacto_bl/contactoComun_empresatf.php",
-                        success:function(data){
-                            telefonosfijos(data);
-                        }
-                    });
-                }*/
                 
                 function verTFEmpresa(codigo)
                 {
@@ -265,13 +252,13 @@ $css = scandir($CSS_PATH);
                     });
                 }
                 
-                function telefonosfijos(data) {
-                    $.each(data,function(index,value){
-                        $("#telefonosfijo-empresa tbody").append(
-                            "<tr><th>Descripcion<td>"+data[index].numero
-                        );
-                    });
-                }
+//                function telefonosfijos(data) {
+//                    $.each(data,function(index,value){
+//                        $("#telefonosfijo-empresa tbody").append(
+//                            "<tr><th>Descripcion<td>"+data[index].numero
+//                        );
+//                    });
+//                }
                 
                 /**
                  * VER DETALLE DE LA PERSONA QUE TRABAJA EN LA EMPRESA 

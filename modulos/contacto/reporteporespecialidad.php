@@ -149,14 +149,6 @@ $css = scandir($CSS_PATH);
             {
                 var i = 1;
                 clear_detail(i);
-//                $.each(data,function(index,value){
-//                    $("#derecho-content-table-data tbody").append(
-//                    "<tr>"+
-//                    "<td>"+data[index].descripcion+"</td>"+
-//                    "<td>"+data[index].ruc+"</td>"+
-//                    "</tr>"
-//                    );
-//                });
                 
                 $.each(data,function(index,value){
                     $("#derecho-content-table-data tbody").append(
@@ -166,25 +158,89 @@ $css = scandir($CSS_PATH);
                 });
             }
             
+            /**
+             * DETALLE DE LOS TELEFONOS
+             */
+             function verTFEmpresa(codigo)
+                {
+                    // LIMPIAR TELEFONOS
+                    $("#telefonosfijo-empresa tbody td").remove();
+                    $("#telefonosfijo-empresa tbody th").remove();
+                    
+                    // MUESTRA NUMEROS TELEFONICOS
+                    
+                    $.ajax({
+                        data:{id:codigo},
+                        type:"GET",
+                        dataType:"json",
+                        url:"../../dl/contacto_bl/reporteEspecialidades/contacto_empresatf.php",
+                        success:function(data){
+                            $.each(data,function(index,value){
+                                $("#telefonosfijo-empresa tbody").append(
+                                    "<tr><th>#<td>"+data[index].numero
+                                );
+                            });
+                        }
+                    });
+                }
+                
+                function verTMEmpresa(codigo)
+                {
+                    //LIMPIAR 
+                    $("#telefonosmoviles-empresa td").remove();
+                    $("#telefonosmoviles-empresa th").remove();
+                    //
+                    $.ajax({
+                        data:{id:codigo},
+                        type:"GET",
+                        dataType:"json",
+                        url:"../../dl/contacto_bl/reporteEspecialidades/contacto_empresatm.php",
+                        success:function(data){
+                            $.each(data,function(index,value){
+                                $("#telefonosmoviles-empresa tbody").append(
+                                    "<tr><th>#<td>"+data[index].numero
+                                );
+                            });
+                        }
+                    });
+                }
+                
+                function verTNEmpresa(codigo)
+                {
+                    // LIMPIAR
+                    $("#telefonosnextel-empresa td").remove();
+                    $("#telefonosnextel-empresa th").remove();
+                    //MUESTRA
+                    $.ajax({
+                        data:{id:codigo},
+                        type:"GET",
+                        dataType:"json",
+                        url:"../../dl/contacto_bl/reporteEspecialidades/contacto_empresatn.php",
+                        success:function(data){
+                            $.each(data,function(index,value){
+                                $("#telefonosnextel-empresa tbody").append(
+                                    "<tr><th>#<td>"+data[index].numero
+                                );
+                            });
+                        }
+                    });
+                }
+            
             function verDetallePersona(data){
                 var i = 2;
                 clear_detail(i);
-//                $.each(data,function(index,value){
-//                    $("#derecho-content-table-data-persona tbody").append(
-//                    "<tr>"+
-//                    "<td>"+data[index].nombre+"</td>"+
-//                    "<td>"+data[index].dni+"</td>"+
-//                    "<td>"+data[index].cargo+"</td>"+
-//                    "</tr>"
-//                    );
-//                });
+                var codigo;
                 
                 $.each(data,function(index,value){
+                    codigo = data[index].id;
                     $("#derecho-content-table-data-persona tbody").append(
                     "<tr><th>Nombre<td>"+data[index].nombre+
                     "<tr><th>DNI<td>"+data[index].dni+
                     "<tr><th>Cargo<td>"+data[index].cargo
-                    )
+                    );
+                    verTFEmpresa(codigo);
+                    verTMEmpresa(codigo);
+                    verTNEmpresa(codigo);    
                 });
             }
             
@@ -209,9 +265,10 @@ $css = scandir($CSS_PATH);
             
             function errorDetalle()
             {
-                $("#error").fadeIn(1000, function(){
+                alert("Error");
+                /*$("#error").fadeIn(1000, function(){
                     $("#error").fadeOut(1000);
-                })
+                })*/
             }
         });
         </script>
@@ -242,25 +299,13 @@ $css = scandir($CSS_PATH);
                     <div id="derecho-content">
                         <h1 class="titulo">DETALLES DE LA EMPRESA</h1>
                         <div id="error" style="display: none">
-                        <h3>No se puede consultar los datos de detalle</h3>
+                        <h3>No se puede consultar los detalles de la empresa</h3>
                         </div>
                     </div>
                 </div>
                 <div id="derecho">
                     <div id="derecho-content-table">
                         <table id="derecho-content-table-data" class="rounded-corner" border="0">
-<!--                            <thead>
-                                <tr>
-                                    <th class="rounded-company">Nombre</th>
-                                    <th class="rounded-q4">RUC</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="1" class="rounded-foot-left"></td>
-                                    <td class="rounded-foot-right">&nbsp;</td>
-                                </tr>
-                            </tfoot>-->
                             <tbody>
                                 <tr></tr>
                             </tbody>
@@ -271,7 +316,7 @@ $css = scandir($CSS_PATH);
                     <div id="derecho-content">
                         <h1 class="titulo">DETALLES DEL CONTACTO</h1>
                         <div id="error" style="display: none">
-                        <h3>No se puede consultar los datos de detalle</h3>
+                        <h3>No se puede consultar los detalles del contacto</h3>
                         </div>
                     </div>
                 </div>
@@ -279,25 +324,66 @@ $css = scandir($CSS_PATH);
                 <div id="derecho">
                     <div id="derecho-content-table">
                         <table id="derecho-content-table-data-persona" class="rounded-corner" border="0">
-<!--                            <thead>
-                                <tr>
-                                    <th class="rounded-company">Nombre</th>
-                                    <th>Cargo</th>
-                                    <th class="rounded-q4">DNI</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="2" class="rounded-foot-left"></td>
-                                    <td class="rounded-foot-right">&nbsp;</td>
-                                </tr>
-                            </tfoot>-->
                             <tbody>
                                 <tr></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                <!---->
+                <div id="derecho">
+                    <div id="derecho-content">
+                        <h1 class="titulo   ">TELEFONO(S) FIJO(S)</h1>
+                    </div>
+                    <div id="div-tfijo" title="Telefonos Fijos" style="display: none">
+                    </div>
+                </div>
+                <div id="derecho">
+                    <div id="derecho-content-table">
+                        <table id="telefonosfijo-empresa" class="rounded-corner" border="0">
+                            <tbody>
+                                <tr></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!---->
+                <!---->
+                <div id="derecho">
+                    <div id="derecho-content">
+                        <h1 class="titulo   ">TELEFONO(S) MOVIL(ES)</h1>
+                    </div>
+                    <div id="div-tfijo" title="Telefonos Moviles" style="display: none">
+                    </div>
+                </div>
+                <div id="derecho">
+                    <div id="derecho-content-table">
+                        <table id="telefonosmoviles-empresa" class="rounded-corner" border="0">
+                            <tbody>
+                                <tr></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!---->
+                <!---->
+                <div id="derecho">
+                    <div id="derecho-content">
+                        <h1 class="titulo   ">TELEFONO(S) NEXTEL</h1>
+                    </div>
+                    <div id="div-tfijo" title="Telefonos Nextel" style="display: none">
+                    </div>
+                </div>
+                <div id="derecho">
+                    <div id="derecho-content-table">
+                        <table id="telefonosnextel-empresa" class="rounded-corner" border="0">
+                            <tbody>
+                                <tr></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!---->
             </div>
             <div class="clear"></div>
         </div>

@@ -5,7 +5,7 @@ $cn = $conexion->conectar();
 
 $id = $_GET['id'];
 $sql = "SELECT descripcion,ruc FROM tb_companiacontacto WHERE id =".$id." ORDER BY descripcion ASC";
-$result = mysql_query($sql) or die ("Error en la consulta:".  mysql_error());
+$result = mysql_query($sql,$cn) or die ("Error en la consulta:".  mysql_error());
 
 $i = 0;
 $detalle = array();
