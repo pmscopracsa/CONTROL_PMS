@@ -48,7 +48,7 @@ $contratos = $modelos->mostrarContratos();
         <link href="../../js/jquery-tooltip/css/global.css" rel="stylesheet" type="text/css" />
         
         <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/claro/claro.css">
-     <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async:true"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async:true"></script>
         <script>
         $(function(){
             /**
@@ -327,7 +327,6 @@ $contratos = $modelos->mostrarContratos();
                      $(".txt-puesto").focus();
                      return false;
                  }
-                 
                  if ($(".txt-contacto").val() == "" || $(".txt-compania").val() == ""){
                      alert("¡No has seleccionado contacto alguno!");
                      $(".txt-contacto").focus();
@@ -404,16 +403,27 @@ $contratos = $modelos->mostrarContratos();
              */
             function resultados(datos)
             {
+                /**
+                 * FUNCION AJAX CON POST PARA INGRESAR LOS DATOS
+                 */
                 contador_contactos++;
+                var codigo;
                 $.each(datos,function(index,value){
+                    codigo = datos[index].id;
                     $("#contactos-agregados tbody").append(
                     "<tr>"+
                     "<td>"+datos[index].nombre+"</td>"+
                     "<td>"+datos[index].empresa+"</td>"+
                     "<td>"+"<a href='#' id='del-contacto' class='button delete'>Eliminar</a>"+"</td>"+
-                    '<input type="hidden" name="contacto'+contador_contactos+'" value="'+datos[index].id+'" />'+
+                    '<input id="codigo" type="hidden" name="contacto'+contador_contactos+'" value="'+datos[index].id+'" />'+
                     "</tr>"    
-                    );
+                    ),
+                    //
+                    $.ajax({
+                        type:"POST",
+                        url:"../../dl/datos_obra/i_ingresacontacto.php",
+                        data:{id:codigo}
+                    });
                 });
             }
             
@@ -421,8 +431,25 @@ $contratos = $modelos->mostrarContratos();
              * ELIMINAR CONTACTO DE TABLA
              **/
             $("#del-contacto").live("click", function(e) {
-                e.preventDefault();
+                var value = $(this).parent().parent().html();
                 $(this).parent().parent().remove();
+                
+                /**
+                 * FUNCION AJAX CON POST PARA ELIMINAR VALOR
+                 */
+                e.preventDefault();
+                
+                var matches = value.match(
+                                        new RegExp("(\\w+)","gi"));
+                                            
+                //alert(matches[matches.length-3]);                            
+                //alert(matches[matches.length-1]);
+                
+                $.ajax({
+                    data:{id:matches[matches.length-3]},
+                    type:"POST",
+                    url:"../../dl/datos_obra/d_eliminacontacto.php"
+                })
             });
             
             /*
