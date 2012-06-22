@@ -1,13 +1,11 @@
 <?php
 include_once 'Conexion.php';
-echo "eliminar temporal";
 try {
     $conexion = new Conexion();
     $cn = $conexion->conectar();
     if (!$cn)
         throw new Exception("Problemas en la conexion a la DDBB: ".  mysql_error());
     
-    //$sql = "TRUNCATE TABLE temporal";
     $sql = "DELETE FROM temporal";
     $res = mysql_query($sql,$cn);
     if (!$res)

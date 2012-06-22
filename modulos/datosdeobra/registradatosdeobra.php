@@ -318,9 +318,11 @@ $contratos = $modelos->mostrarContratos();
                   */
                  $.each(data,function(index,value) { 
                      var datos = 
+                         '<table>'+
                          '<tr style="cursor:pointer;">'+
                          '<td class="contactofirma">'+data[index].nombre+'</td>'+
-                         '</tr>';
+                         '</tr>'+
+                         '</table>';
                      $("#tblAddContacto tbody").append(datos);
                  });
                  
@@ -330,7 +332,6 @@ $contratos = $modelos->mostrarContratos();
                  $("#modal-addContacto").dialog("open");
                  return false;
              }
-              
               
             /**
             * AGREGAR CONTACTO PARA LAS FIRMAS
