@@ -16,10 +16,12 @@ $especialidades = $especialidadCompania->mostrarEspecialidades();
 
 $clienteCompania = new CompaniaContactoDL();
 $clientes = $clienteCompania->mostrarCompaniaContacto();
-$empresa_contacto = $clienteCompania->mostrarEmpresaContacto();
+//$empresa_contacto = $clienteCompania->mostrarEmpresaContacto();
+$empresa_contacto = $clienteCompania->mostrarContactosTemporal();
 
 $contactoPersona = new ContactoPersona();
 $contactos = $contactoPersona->mostrarContactos();
+
 
 /**
  *AUTOLOAD DE MODELOD DE CARTA Y CONTRATO 
@@ -52,9 +54,16 @@ $contratos = $modelos->mostrarContratos();
         <script>
         $(function(){
             /**
-             * dojo floating
+             * ELIMINAR DATOS DE LA TABLA TEMPORAL SI SE DETECTA
+             * RECARGA DE LA PAGINA
              */
-           
+            $(window).bind('beforeunload', function() {
+                
+                $.ajax({
+                    type:"POST",
+                    url:"../../dl/datos_obra/truncate_temporal.php"
+                })
+            });
             
             /**
              * CONTADOR PARA LOS CONTACTOS
@@ -285,15 +294,52 @@ $contratos = $modelos->mostrarContratos();
                     }
                 }
              });   
-
+             
+             /**
+              * MODAL PARE RECUPERAR LOS DATOS DE LA TABLA TEMPORAL
+              */
+             $("#btn-addContacto").click(function() {
+                $("#tblAddContacto tbody td").remove();
+                $("#tblAddContacto tbody th").remove();
+                $.ajax({
+                    type:"GET",
+                    dataType:"json",
+                    url:"../../dl/datos_obra/r_contactostemporal.php",
+                    success:function(data) {
+                        mostrarContactosTemporal(data);
+                    }
+                });
+             });
+             
+             function mostrarContactosTemporal(data)
+             {
+                 /**
+                  *  ARMAMOS LA TABLA CON LOS DATOS DE DATA
+                  */
+                 $.each(data,function(index,value) { 
+                     var datos = 
+                         '<tr style="cursor:pointer;">'+
+                         '<td class="contactofirma">'+data[index].nombre+'</td>'+
+                         '</tr>';
+                     $("#tblAddContacto tbody").append(datos);
+                 });
+                 
+                 /**
+                  * ABRIMOS EL MODAL
+                  */
+                 $("#modal-addContacto").dialog("open");
+                 return false;
+             }
+              
+              
             /**
             * AGREGAR CONTACTO PARA LAS FIRMAS
-            * POR NOMBRE DE CONTACTO
+            * POR NOMBRE DE CONTACTO---deshabilita temporal
             */
-             $("#btn-addContacto").click(function(){
+            /*$("#btn-addContacto").click(function(){
                 $("#modal-addContacto").dialog("open");
                 return false;
-            });
+            });*/
             
             $("#modal-addContacto").dialog({
                 autoOpen:false,
@@ -421,9 +467,12 @@ $contratos = $modelos->mostrarContratos();
                     //
                     $.ajax({
                         type:"POST",
+                        data:{id:codigo},
                         url:"../../dl/datos_obra/i_ingresacontacto.php",
-                        data:{id:codigo}
-                    });
+                        success:function() {
+                            
+                        }
+                    })
                 });
             }
             
@@ -686,8 +735,8 @@ $contratos = $modelos->mostrarContratos();
             </table>
         </div>
         
-        <!-- AGREGAR CONTACTOS DE MANERA DISTINTA A LA VERSION DESKTOP-->
-        <!-- ESTO PORQUE EXISTEN ERRORES EN LA DESKTOP-->
+        <!-- BUSCAR CONTACTOS QUE SOLO EXISTEN EN LA GRILLA -->
+        <!-- *** -->
         <div style="display: none" id="div-addcontactos" title="Contactos">
             <table border="0" class="atable">
                 <tr>

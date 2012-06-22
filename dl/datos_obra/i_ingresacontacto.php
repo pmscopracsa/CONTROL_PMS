@@ -1,5 +1,4 @@
 <?php
-
 include_once 'Conexion.php';
 $id = $_REQUEST['id'];
 
@@ -17,5 +16,3 @@ try {
 } catch ( Exception $ex ) {
     echo "-> ".$ex->getMessage(); 
 }
-
-

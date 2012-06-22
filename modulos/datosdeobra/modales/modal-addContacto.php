@@ -5,7 +5,7 @@
  * Tabla: tb_personacontacto
  */
 ?>
-<div id="modal-addContacto" title="Agregar contactos">
+<!--<div id="modal-addContacto" title="Agregar contactos">
     <div class="">
         <table id="tblAddContacto" style="width: 550px; height: 250px"
                url=""
@@ -28,6 +28,23 @@
                     ?>
                 </td>
             </tr>
+        </table>
+    </div>
+</div>-->
+
+<div id="modal-addContacto" title="Agregar contactoss">
+    <div class="">
+        <table id="tblAddContacto" style="width: 550px; height: 250px"
+               url=""
+               toolbar="toolbar"
+               rownumber="true"
+               border="0">
+            <thead>
+                <tr>Nombre</tr>
+            </thead>
+            <tbody>
+                <tr></tr>
+            </tbody>
         </table>
     </div>
 </div>
