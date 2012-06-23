@@ -1,6 +1,8 @@
 <?php
 include_once 'Conexion.php';
 
+$aleatorio = $_REQUEST['aleatorio'];
+
 try {
     $conexion = new Conexion();
     $cn = $conexion->conectar();
@@ -11,7 +13,8 @@ try {
         INNER JOIN temporal  b
         ON a.id = b.id_contacto
         INNER JOIN tb_companiacontacto c
-        ON a.tb_companiacontacto_id = c.id";
+        ON a.tb_companiacontacto_id = c.id
+        WHERE b.random_code = $aleatorio";
     
     $res = mysql_query($sql,$cn);
     $contacto = array();

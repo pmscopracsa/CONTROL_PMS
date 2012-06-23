@@ -1,4 +1,16 @@
 <?php
+session_start();
+
+/**
+ * VARIABLE ALEATORIA QUE NOS SERVIRA PARA
+ * LA ELIMINACION DE LA TABLA TEMPORAL EN LAS SIGUIENTES SITUACIONES:
+ * abandonar la pagina y|o recargar la paginay no dejar datos huerfanos
+ * darle al boton eliminar en el formulario 
+ */
+mt_srand(time());
+$aleatorio = mt_rand(1, 250);
+$_SESSION['aleatorio'] = $aleatorio;
+
 $CSS_PATH = '../../css/';
 $css = array();
 $css = scandir($CSS_PATH);
@@ -55,12 +67,14 @@ $contratos = $modelos->mostrarContratos();
         $(function(){
             /**
              * ELIMINAR DATOS DE LA TABLA TEMPORAL SI SE DETECTA
-             * RECARGA DE LA PAGINA
+             * RECARGA DE LA PAGINA, EL VALOR ALEATORIO IDENTIFICARA 
+             * LA SESSION DE CADA USUARIO
              */
             $(window).bind('beforeunload', function() {
-                
+                var aleatorio = <?=$aleatorio?>;
                 $.ajax({
                     type:"POST",
+                    data:{aleatorio:aleatorio},
                     url:"../../dl/datos_obra/truncate_temporal.php"
                 })
             });
@@ -299,11 +313,12 @@ $contratos = $modelos->mostrarContratos();
               * MODAL PARE RECUPERAR LOS DATOS DE LA TABLA TEMPORAL
               */
              $("#btn-addContacto").click(function() {
-                $("#tblAddContacto tbody td").remove();
-                $("#tblAddContacto tbody th").remove();
+                var aleatorio = <?=$aleatorio?>;
+
                 $.ajax({
                     type:"GET",
                     dataType:"json",
+                    data:{aleatorio:aleatorio},
                     url:"../../dl/datos_obra/r_contactostemporal.php",
                     success:function(data) {
                         mostrarContactosTemporal(data);
@@ -313,17 +328,15 @@ $contratos = $modelos->mostrarContratos();
              
              function mostrarContactosTemporal(data)
              {
+                 $("#tblAddContacto td").remove();
+
                  /**
                   *  ARMAMOS LA TABLA CON LOS DATOS DE DATA
                   */
                  $.each(data,function(index,value) { 
-                     var datos = 
-                         '<table>'+
-                         '<tr style="cursor:pointer;">'+
-                         '<td class="contactofirma">'+data[index].nombre+'</td>'+
-                         '</tr>'+
-                         '</table>';
-                     $("#tblAddContacto tbody").append(datos);
+                        $("#tblAddContacto tbody").append(
+                        "<tr><th><td>"+data[index].nombre
+                        );
                  });
                  
                  /**
@@ -332,15 +345,6 @@ $contratos = $modelos->mostrarContratos();
                  $("#modal-addContacto").dialog("open");
                  return false;
              }
-              
-            /**
-            * AGREGAR CONTACTO PARA LAS FIRMAS
-            * POR NOMBRE DE CONTACTO---deshabilita temporal
-            */
-            /*$("#btn-addContacto").click(function(){
-                $("#modal-addContacto").dialog("open");
-                return false;
-            });*/
             
             $("#modal-addContacto").dialog({
                 autoOpen:false,
@@ -452,9 +456,11 @@ $contratos = $modelos->mostrarContratos();
             {
                 /**
                  * FUNCION AJAX CON POST PARA INGRESAR LOS DATOS
+                 * EN LA TABLA TEMPORAL
                  */
                 contador_contactos++;
                 var codigo;
+                var aleatorio = <?=$aleatorio?>;
                 $.each(datos,function(index,value){
                     codigo = datos[index].id;
                     $("#contactos-agregados tbody").append(
@@ -468,7 +474,7 @@ $contratos = $modelos->mostrarContratos();
                     //
                     $.ajax({
                         type:"POST",
-                        data:{id:codigo},
+                        data:{id:codigo, aleatorio:aleatorio},
                         url:"../../dl/datos_obra/i_ingresacontacto.php",
                         success:function() {
                             
@@ -486,17 +492,17 @@ $contratos = $modelos->mostrarContratos();
                 
                 /**
                  * FUNCION AJAX CON POST PARA ELIMINAR VALOR
+                 * DE LA TABLA TEMPORAL
                  */
                 e.preventDefault();
+                var aleatorio = <?=$aleatorio?>;
                 
                 var matches = value.match(
                                         new RegExp("(\\w+)","gi"));
-                                            
+                var id =     matches[matches.length-3];                        
                 //alert(matches[matches.length-3]);                            
-                //alert(matches[matches.length-1]);
-                
                 $.ajax({
-                    data:{id:matches[matches.length-3]},
+                    data:{id:id,aleatorio:aleatorio},
                     type:"POST",
                     url:"../../dl/datos_obra/d_eliminacontacto.php"
                 })

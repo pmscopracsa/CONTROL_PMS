@@ -1,6 +1,7 @@
 <?php
 include_once 'Conexion.php';
 $id = $_REQUEST['id'];
+$aleatorio = $_REQUEST['aleatorio'];
 
 try {
     $conexion = new Conexion();
@@ -8,7 +9,7 @@ try {
     if (!$cn)
         throw new Exception("Problemas en la conexion a la DDBB: ".  mysql_error());
     
-    $sql = "DELETE FROM temporal WHERE id_contacto=$id";
+    $sql = "DELETE FROM temporal WHERE id_contacto=$id AND random_code = $aleatorio";
     $res = mysql_query($sql,$cn);
     
     if (!$res)
