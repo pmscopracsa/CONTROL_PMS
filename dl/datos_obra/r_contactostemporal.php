@@ -9,7 +9,8 @@ try {
     if (!$cn) 
         throw new Exception ("Problemas en la conexion a la DDBB: ".  mysql_error());
     
-    $sql = "SELECT a.nombre nombre, c.descripcion descripcion FROM tb_personacontacto a
+    $sql = "SELECT a.id id, a.nombre nombre, c.descripcion descripcion 
+        FROM tb_personacontacto a
         INNER JOIN temporal  b
         ON a.id = b.id_contacto
         INNER JOIN tb_companiacontacto c
@@ -21,6 +22,7 @@ try {
     $i = 0;
     
     while ($rs = mysql_fetch_assoc($res)) {
+        $contacto[$i]['id'] = $rs['id'];
         $contacto[$i]['nombre'] = $rs['nombre'];
         $contacto[$i]['descripcion'] = $rs['descripcion'];
         $i++;

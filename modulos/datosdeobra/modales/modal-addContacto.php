@@ -1,5 +1,6 @@
-<div id="modal-addContacto" style="display: none" title="Agregar contactoss">
-    <table id="tblAddContacto" style="width: 550px; height: 250px" border="0">
+<!-- CARGADA ON CLICK -->
+<div id="modal-addContacto" style="display: none" title="Agregar contactos">
+    <table id="tblAddContacto" border="0">
         <tbody>
             <tr></tr>
         </tbody>

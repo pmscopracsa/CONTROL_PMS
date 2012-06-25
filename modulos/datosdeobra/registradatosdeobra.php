@@ -285,7 +285,17 @@ $contratos = $modelos->mostrarContratos();
                  modal:true,
                  buttons:{
                      "Asignar firmas a reportes ":function(){
-                         $("#div-firmas-reportes").dialog("open");
+                         var aleatorio = <?=$aleatorio?>;
+                         $.ajax({
+                             type:"GET",
+                             dataType:"json",
+                             data:{aleatorio:aleatorio},
+                             url:"../../dl/datos_obra/r_listareportes",
+                             success:function(data) {
+                                 mostrarEmpatarFirmasPersonas(data);
+                             }
+                         })
+                         $("#modal-listareportes").dialog("open");
                      },
                      "Agregar contactos":function(){
                          $("#div-addcontactos").dialog("open");
@@ -295,6 +305,23 @@ $contratos = $modelos->mostrarContratos();
                      }
                  }
              });
+             
+             function mostrarEmpatarFirmasPersonas(data)
+             {
+                 $("#tblListaReportes td").remove();
+                 $("#tblListaReportes tr").remove();
+                 $.each(data,function(index,value) { 
+                     $("#tblListaReportes tbody").append(
+                        '<tr>'+
+                        '<td class="contactofirma">'+
+                        '<input type="radio" name="reportes" value="'+data[index].id+'">'+
+                        data[index].descripcion+
+                        '<p class="descx" style="display:none">'+data[index].descripcion+'</p>'+
+                        '</td>'+
+                        '</tr>'
+                     );
+                 });
+             }
              
              $("#div-addcontactos").dialog({
                 show:"blind",
@@ -307,7 +334,38 @@ $contratos = $modelos->mostrarContratos();
                         $(this).dialog("close");
                     }
                 }
-             });   
+             });
+             
+             /**
+              * DETECTAR CLICK EN UN RADIO BUTTON Y HACER LA CONSULTA
+              **/
+              $("input").click(function() {
+                alert($(":checked").val());
+              })
+             
+             /**
+              * EMPATAR REPORTES Y FIRMANTES
+              */
+             $("#modal-listareportes").dialog({
+                show:"blind",
+                autoOpen:false,
+                height:500,
+                width:650,
+                modal:true,
+                buttons:{
+                    "Agregar firmantes":function() {
+                        if($("input[name:'reportes']:radio").is(':checked')) {
+                            alert($("input[name='reportes']:checked").val());
+                        } else {
+                            alert("Debe seleccionar un reporte de la lista");
+                            
+                        }
+                    },
+                    "Salir":function(){
+                        $(this).dialog("close");
+                    }
+                }
+             });
              
              /**
               * MODAL PARE RECUPERAR LOS DATOS DE LA TABLA TEMPORAL
@@ -329,14 +387,24 @@ $contratos = $modelos->mostrarContratos();
              function mostrarContactosTemporal(data)
              {
                  $("#tblAddContacto td").remove();
+                 $("#tblAddContacto tr").remove();
 
                  /**
                   *  ARMAMOS LA TABLA CON LOS DATOS DE DATA
                   */
                  $.each(data,function(index,value) { 
-                        $("#tblAddContacto tbody").append(
-                        "<tr><th><td>"+data[index].nombre
-                        );
+                     //$("#tblAddContacto > tbody:last").append(
+                     $("#tblAddContacto tbody").append(
+                        '<tr style="cursor:pointer;">'+
+                        '<td class="contactofirma">'+
+                        '<p style="display:none">'+data[index].id+"</p>"+
+                        '<p style="display:none">-</p>'+
+                        '<p>'+data[index].nombre+'</p>'+
+                        '<p style="display:none">-</p>'+
+                        '<p style="display:none">'+data[index].descripcion+'</p>'+
+                        '</td>'+
+                        '</tr>'
+                     );
                  });
                  
                  /**
@@ -358,16 +426,16 @@ $contratos = $modelos->mostrarContratos();
                 }
             });
             
-            /**
-             * OBTENER DATO DEL MODAL HIJO Y PASARLO AL INPUT PADRE
-             */
-             $(".contactofirma").click(function(){
+            $(".contactofirma").live("click",function(e) {
                 var data_array = $(this).text().split("-");
+                var id_persona = data_array[0];
                 var persona = data_array[1];
-                var empresa = data_array[0];
+                var empresa = data_array[2];
+                $(".txt-idcontacto").val(id_persona);
                 $(".txt-contacto").val(persona);
                 $(".txt-compania").val(empresa);
-             });
+                
+            });
              
              /**
               * OBTENER LOS 3 DATOS DELPADRE(AHORA HIJO) Y PASARLO A SU PADRE
@@ -397,6 +465,22 @@ $contratos = $modelos->mostrarContratos();
                 var puesto = $(".txt-puesto").val();
                 var contacto = $(".txt-contacto").val();
                 var empresa = $(".txt-compania").val();
+                
+                /**
+                 * INGRESAR VALORES: id_contacto, puesto, empresa a tabla temporal para luego
+                 * empatarlas con los reportes
+                 */
+                var aleatorio = <?=$aleatorio?>;
+                var id_contacto = $(".txt-idcontacto").val();
+                var puesto = $(".txt-puesto").val();
+
+                $.ajax({
+                    type:"POST",
+                    data:{id_contacto:id_contacto,puesto: puesto,aleatorio:aleatorio},
+                    url:"../../dl/datos_obra/i_ingresafirmascontactotemporal.php",
+                    success:function(data) {/* DATOS ALMACENADOS EN TABLA: tb_firmascontactotemporal */
+                    }
+                });  
                 
                 /*
                  * AGREGAR A SCROLL
@@ -586,6 +670,8 @@ $contratos = $modelos->mostrarContratos();
         <?php include_once 'modales/modal-addContacto.php';?>
         <?php include_once 'modales/modal-modelocarta.php';?>
         <?php include_once 'modales/modal-modelocontrato.php';?>
+        <?php include_once 'modales/modal-mostrarlistareportes.php';?>
+        
         
         <div id="modal-contactos" title="Seleccionar contactos">
                 <div class="" >
@@ -755,6 +841,7 @@ $contratos = $modelos->mostrarContratos();
                         <label>Contacto</label>
                         <input type="text" size="30" class="txt-contacto" id="inputext" name="contacto" READONLY />
                         <input type="button" id="btn-addContacto" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                        <input type="hidden" class="txt-idcontacto" name="txt_idcontacto" />
                <tr>
                     <td class="tr-padding">
                         <label>Compa&nacute;&iacute;a</label>
@@ -857,7 +944,7 @@ $contratos = $modelos->mostrarContratos();
                 </tr>
                 
                 <tr>
-                    <td>Lista de cont&aacute;ctos:</td>
+                    <td>Lista de contactos:</td>
                     <td>
                         <input type="button" id="mostrarcontactos" value="Buscar contactos" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                         <div class="areaScrollModal" id="lista-contactos">
