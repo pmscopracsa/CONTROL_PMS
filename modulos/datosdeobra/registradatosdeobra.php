@@ -531,7 +531,7 @@ $contratos = $modelos->mostrarContratos();
                 $("#tbl-firmas1 tbody").append(
                     "<tr name=\"firmas\">"+
                     '<input id="id_contacto" type="hidden" value="'+id_contacto+'" />'+    
-                    '<td name="puesto'+contador_firmas+'" id="id-puesto"><input id="puesto_editar" class="'+id_contacto+'" type="text" value="' +puesto+'" READONLY /></td>'+
+                    '<td id="id_puesto" name="puesto'+contador_firmas+'"><input id="puesto_editar" type="text" value="' +puesto+'" /></td>'+
                     '<td name="contacto'+contador_firmas+'">'+contacto+"</td>"+
                     '<td name="empresa'+contador_firmas+'">'+empresa+"</td>"+
                     '<td>'+'<a href="#" id="del-firma" class="button delete">Eliminar</a>'+'</td>'+
@@ -555,21 +555,35 @@ $contratos = $modelos->mostrarContratos();
               * EDITAR POSICION DEL CONTACTO, AFECTA AL FORMULARIO
               * Y A LA BASE DE DATOS
               */
-             $("#id-puesto").live("click",function(e){
-                 //alert($(this).siblings(":select").val());
-                 //alert($(this).html());
-                 var tmp = $(this).html();
+             $("#id_puesto").live("click",function(e){
+                 var tmp = $(this).parent().html();
+                 
                  var matches = tmp.match(new RegExp("(\\w+)","gi"));
-                 alert(matches);
-                 /*
+                 /*alert(matches);
+                 alert(matches[4]);
+                 alert(matches[16]);*/
+                 var codigo = matches[4];
+                 var posicion = matches[16];
+                 
+                 
+                 
                  var aleatorio = <?=$aleatorio?>;
-                 $(this).attr("readonly",false);
-                 $(this).focusout(function(){
+                 
+                     $(this).focusout(function(){
+                        //alert("ciao");
+                         $.ajax({
+                         data:{aleatorio:aleatorio,codigo:codigo,posicion:posicion},
+                         type:"POST",
+                         url:"../../dl/datos_obra/u_posicion.php"
+                        });
+                     });
+                 /*
+                 $("#id-puesto").focusout(function(){
                      alert($(this).val());
                      $.ajax({
-                         data:{aleatorio:aleatorio},
+                         data:{aleatorio:aleatorio,codigo:codigo,posicion:posicion},
                          type:"POST",
-                         url:""
+                         url:"../../dl/datos_obra/u_posicion.php"
                      });
                  });*/
              });
