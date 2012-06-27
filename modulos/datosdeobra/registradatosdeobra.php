@@ -281,7 +281,7 @@ $contratos = $modelos->mostrarContratos();
              $("#div-firmas-1").dialog({
                  autoOpen:false,
                  height:300,
-                 width:450,
+                 width:750,
                  modal:true,
                  buttons:{
                      "Asignar firmas a reportes ":function(){
@@ -339,9 +339,25 @@ $contratos = $modelos->mostrarContratos();
              /**
               * DETECTAR CLICK EN UN RADIO BUTTON Y HACER LA CONSULTA
               **/
-              $("input").click(function() {
-                alert($(":checked").val());
-              })
+              $("input[name='reportes']").live("click",function(e) {
+                  //alert($("input[name='reportes']:checked").val());
+                  var checked = $("input[name='reportes']:checked").val();
+                  $.ajax({
+                      type:"GET",
+                      dataType:"json",
+                      data:{checked:checked},
+                      url:"../../dl/datos_obra/r_listafirmasreportes.php",
+                      success:function(data){
+                          mostrarFirmasAsignadas(data);
+                      }
+                  });
+              });
+              
+              function mostrarFirmasAsignadas(data)
+              {
+                  /*--------------------------------*/
+                  
+              }
              
              /**
               * EMPATAR REPORTES Y FIRMANTES
@@ -350,7 +366,7 @@ $contratos = $modelos->mostrarContratos();
                 show:"blind",
                 autoOpen:false,
                 height:500,
-                width:650,
+                width:850,
                 modal:true,
                 buttons:{
                     "Agregar firmantes":function() {
@@ -399,7 +415,7 @@ $contratos = $modelos->mostrarContratos();
                         '<td class="contactofirma">'+
                         '<p style="display:none">'+data[index].id+"</p>"+
                         '<p style="display:none">-</p>'+
-                        '<p>'+data[index].nombre+'</p>'+
+                        '<p id="contacto_nombre"><a id="agregar-contacto_modal" href="#">'+data[index].nombre+'</a></p>'+
                         '<p style="display:none">-</p>'+
                         '<p style="display:none">'+data[index].descripcion+'</p>'+
                         '</td>'+
@@ -413,6 +429,14 @@ $contratos = $modelos->mostrarContratos();
                  $("#modal-addContacto").dialog("open");
                  return false;
              }
+             
+             /**
+              * Cerramos el modal modal-addContacto - "modal-addContacto"
+              */
+             $("#agregar-contacto_modal").live("click",function(e) {
+                e.preventDefault();
+                $("#modal-addContacto").dialog('close');
+             });
             
             $("#modal-addContacto").dialog({
                 autoOpen:false,
@@ -438,7 +462,12 @@ $contratos = $modelos->mostrarContratos();
             });
              
              /**
-              * OBTENER LOS 3 DATOS DELPADRE(AHORA HIJO) Y PASARLO A SU PADRE
+              * MODAL: Contactos
+              * FIELDS: Contacto, Posicion, Compania
+              * DESC. : Pasa los datos del modal "Contactos" al modal "Firmas".
+              * TODO: 
+              * 1. Mostrar aviso de que se ha agregado los datos al modal "Firmas"
+              * 2. Limpiar el modal "COntactos" 
               */
              $("#btn-agregarContacto").click(function(){
                  if ($(".txt-puesto").val() == ""){
@@ -481,23 +510,40 @@ $contratos = $modelos->mostrarContratos();
                     success:function(data) {/* DATOS ALMACENADOS EN TABLA: tb_firmascontactotemporal */
                     }
                 });  
+                /**
+                 * LIMIPIAR CAJAS DE TEXTO DEL MODAL "Contactos"
+                 */
+                $(".txt-puesto").val("");
+                $(".txt-contacto").val("");
+                $(".txt-compania").val("");
                 
                 /*
-                 * AGREGAR A SCROLL
+                 * Modal: Firmas
+                 * Fields: 
+                 * Desc. Muestra la grilla con los siguientes datos:
+                 * - Puesto
+                 * - Contacto
+                 * - Compañia
+                 * Todo:
+                 * 1. Validar si ya existe el registro para no poder volver a
+                 *    ingresaro a la tabla temporal.
                  */
                 $("#tbl-firmas1 tbody").append(
                     "<tr name=\"firmas\">"+
-                    '<td name="puesto'+contador_firmas+'" id="id-puesto">'+puesto+'</td>'+
+                    '<input id="id_contacto" type="hidden" value="'+id_contacto+'" />'+    
+                    '<td name="puesto'+contador_firmas+'" id="id-puesto"><input id="puesto_editar" class="'+id_contacto+'" type="text" value="' +puesto+'" READONLY /></td>'+
                     '<td name="contacto'+contador_firmas+'">'+contacto+"</td>"+
                     '<td name="empresa'+contador_firmas+'">'+empresa+"</td>"+
                     '<td>'+'<a href="#" id="del-firma" class="button delete">Eliminar</a>'+'</td>'+
                     "</tr>"    
                 );
+                    
+                $("#div-addcontactos").dialog("close");    
                 return false;    
              });
              
              /**
-              * botón de eliminar firma
+              * botón de eliminarcontacto del modal "Firmas"
               */
              $("#del-firma").live("click",function(e){
                  e.preventDefault();
@@ -505,9 +551,28 @@ $contratos = $modelos->mostrarContratos();
                  $(this).parent().parent().remove();
              })
              
+             /**
+              * EDITAR POSICION DEL CONTACTO, AFECTA AL FORMULARIO
+              * Y A LA BASE DE DATOS
+              */
              $("#id-puesto").live("click",function(e){
-                 alert($(this).html());
-             })
+                 //alert($(this).siblings(":select").val());
+                 //alert($(this).html());
+                 var tmp = $(this).html();
+                 var matches = tmp.match(new RegExp("(\\w+)","gi"));
+                 alert(matches);
+                 /*
+                 var aleatorio = <?=$aleatorio?>;
+                 $(this).attr("readonly",false);
+                 $(this).focusout(function(){
+                     alert($(this).val());
+                     $.ajax({
+                         data:{aleatorio:aleatorio},
+                         type:"POST",
+                         url:""
+                     });
+                 });*/
+             });
              
             /**
              * CARGA DE DATA PARA COMBOS DEL FOMRULARIO
@@ -827,21 +892,26 @@ $contratos = $modelos->mostrarContratos();
                 </tbody>
             </table>
         </div>
-        
+        <!-- ********************************************** -->
         <!-- BUSCAR CONTACTOS QUE SOLO EXISTEN EN LA GRILLA -->
-        <!-- *** -->
+        <!-- Contacto [...] -->
+        <!-- Posición -->
+        <!-- Compañia [...] - REDONLY-->
         <div style="display: none" id="div-addcontactos" title="Contactos">
             <table border="0" class="atable">
-                <tr>
-                    <td class="tr-padding">
-                        <label>Puesto</label>
-                        <input type="text" class="txt-puesto" id="inputext" name="posicion" />
+                
                <tr>
                     <td class="tr-padding">
                         <label>Contacto</label>
                         <input type="text" size="30" class="txt-contacto" id="inputext" name="contacto" READONLY />
                         <input type="button" id="btn-addContacto" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/>
                         <input type="hidden" class="txt-idcontacto" name="txt_idcontacto" />
+                        
+               <tr>
+                    <td class="tr-padding">
+                        <label>Posici&oacute;n</label>
+                        <input type="text" size="30" class="txt-puesto" id="inputext" name="posicion" />         
+                        
                <tr>
                     <td class="tr-padding">
                         <label>Compa&nacute;&iacute;a</label>
@@ -851,7 +921,6 @@ $contratos = $modelos->mostrarContratos();
                    <td class="tr-padding">
                        <input type="button" id="btn-agregarContacto" class="ui-button ui-widget ui-state-default ui-corner-all" value="Agregar" />
             </table>
-            
         </div>
         
         <div style="display: none" id="div-firmas-reportes" title="Reportes">

@@ -1,0 +1,9 @@
+.izquierda-firma {
+    float: left;
+    width: 100%;
+}
+
+.derecha-firmante {
+    float: left;
+    width: 50%;
+}

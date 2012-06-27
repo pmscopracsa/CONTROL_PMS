@@ -4,5 +4,5 @@
             <tr></tr>
         </tbody>
     </table>
-    <hr>
+    
 </div>
