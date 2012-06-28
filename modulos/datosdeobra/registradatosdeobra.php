@@ -340,7 +340,7 @@ $contratos = $modelos->mostrarContratos();
               * DETECTAR CLICK EN UN RADIO BUTTON Y HACER LA CONSULTA
               **/
               $("input[name='reportes']").live("click",function(e) {
-                  //alert($("input[name='reportes']:checked").val());
+                  alert($("input[name='reportes']:checked").val());
                   var checked = $("input[name='reportes']:checked").val();
                   $.ajax({
                       type:"GET",
@@ -365,7 +365,7 @@ $contratos = $modelos->mostrarContratos();
              $("#modal-listareportes").dialog({
                 show:"blind",
                 autoOpen:false,
-                height:500,
+                height:700,
                 width:850,
                 modal:true,
                 buttons:{
@@ -374,7 +374,6 @@ $contratos = $modelos->mostrarContratos();
                             alert($("input[name='reportes']:checked").val());
                         } else {
                             alert("Debe seleccionar un reporte de la lista");
-                            
                         }
                     },
                     "Salir":function(){
@@ -406,7 +405,7 @@ $contratos = $modelos->mostrarContratos();
                  $("#tblAddContacto tr").remove();
 
                  /**
-                  *  ARMAMOS LA TABLA CON LOS DATOS DE DATA
+                  *  MODAL: Agregar contactos
                   */
                  $.each(data,function(index,value) { 
                      //$("#tblAddContacto > tbody:last").append(
@@ -415,7 +414,8 @@ $contratos = $modelos->mostrarContratos();
                         '<td class="contactofirma">'+
                         '<p style="display:none">'+data[index].id+"</p>"+
                         '<p style="display:none">-</p>'+
-                        '<p id="contacto_nombre"><a id="agregar-contacto_modal" href="#">'+data[index].nombre+'</a></p>'+
+//                        '<p id="contacto_nombre"><a id="agregar-contacto_modal" href="#">'+data[index].nombre+'</a></p>'+
+                        '<a id="agregar-contacto_modal" href="#" style="text-decoration:none;">'+data[index].nombre+'</a>'+
                         '<p style="display:none">-</p>'+
                         '<p style="display:none">'+data[index].descripcion+'</p>'+
                         '</td>'+
@@ -555,38 +555,22 @@ $contratos = $modelos->mostrarContratos();
               * EDITAR POSICION DEL CONTACTO, AFECTA AL FORMULARIO
               * Y A LA BASE DE DATOS
               */
-             $("#id_puesto").live("click",function(e){
-                 var tmp = $(this).parent().html();
-                 
-                 var matches = tmp.match(new RegExp("(\\w+)","gi"));
-                 /*alert(matches);
-                 alert(matches[4]);
-                 alert(matches[16]);*/
-                 var codigo = matches[4];
-                 var posicion = matches[16];
-                 
-                 
-                 
-                 var aleatorio = <?=$aleatorio?>;
-                 
-                     $(this).focusout(function(){
-                        //alert("ciao");
-                         $.ajax({
-                         data:{aleatorio:aleatorio,codigo:codigo,posicion:posicion},
-                         type:"POST",
-                         url:"../../dl/datos_obra/u_posicion.php"
-                        });
-                     });
-                 /*
-                 $("#id-puesto").focusout(function(){
-                     alert($(this).val());
-                     $.ajax({
-                         data:{aleatorio:aleatorio,codigo:codigo,posicion:posicion},
-                         type:"POST",
-                         url:"../../dl/datos_obra/u_posicion.php"
-                     });
-                 });*/
-             });
+             $("#puesto_editar").live("click",function() {
+                //alert($(this).val());
+                var td_padre = $(this).parent().parent().html();
+                var matches = td_padre.match(new RegExp("(\\d+)","gi"));
+                /*alert(matches);
+                alert(matches[4]);*/
+                var aleatorio = <?=$aleatorio?>;
+                
+                $(this).focusout(function(){
+                    $.ajax({
+                        data:{aleatorio:aleatorio,codigo:matches[0],posicion:$(this).val()},
+                        type:"POST",
+                        url:"../../dl/datos_obra/u_posicion.php"
+                    });
+                });
+             })
              
             /**
              * CARGA DE DATA PARA COMBOS DEL FOMRULARIO
@@ -750,7 +734,6 @@ $contratos = $modelos->mostrarContratos();
         <?php include_once 'modales/modal-modelocarta.php';?>
         <?php include_once 'modales/modal-modelocontrato.php';?>
         <?php include_once 'modales/modal-mostrarlistareportes.php';?>
-        
         
         <div id="modal-contactos" title="Seleccionar contactos">
                 <div class="" >
@@ -950,7 +933,7 @@ $contratos = $modelos->mostrarContratos();
             <table>
                 <tr>
                     <td><label>C&oacute;digo:</label></td>
-                    <td><input id="inputext" type="text" size="15" name="codigo" /><span class="formInfo"><a href="../../js/jquery-tooltip/ajax.htm" class="jTip" id="one" name="El codigo debe tener el siguiente formato">?</a></span></td>
+                    <td><input id="inputext" type="text" size="15" name="codigo" /><span class="formInfo"><a href="../../js/jquery-tooltip/ajax.htm" class="jTip" id="one" name="El codigo debe tener el siguiente formato">!</a></span></td>
                     <td><label>Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input id="inputext" type="text" size="35" name="nombre"/></td>
                     <td><label>Fecha inicio obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="datepicker_f" type="text" name="f_inicio" /></td>
