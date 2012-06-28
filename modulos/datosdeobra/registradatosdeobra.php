@@ -369,9 +369,10 @@ $contratos = $modelos->mostrarContratos();
                 width:850,
                 modal:true,
                 buttons:{
-                    "Agregar firmantes":function() {
+                    "Agregar firmantes":function() {//SELECCIONAR DATOS DE LA TABLA -> tb_firmascontactotemporal
                         if($("input[name:'reportes']:radio").is(':checked')) {
-                            alert($("input[name='reportes']:checked").val());
+                            //alert($("input[name='reportes']:checked").val());
+                            listaContactoPosicion();
                         } else {
                             alert("Debe seleccionar un reporte de la lista");
                         }
@@ -381,6 +382,47 @@ $contratos = $modelos->mostrarContratos();
                     }
                 }
              });
+             
+             function listaContactoPosicion()
+             {
+                 var aleatorio = <?=$aleatorio?>;
+                 // Se consulta a tabla tb_firmascontactotemporal
+                 // en caso de exito llama al modal: modal_r_listaContactosPosicion
+                 $.ajax({
+                     type:"GET",
+                     dataType:"json",
+                     data:{aleatorio:aleatorio},
+                     url:"../../dl/datos_obra/r_listaContactoPosicion.php",
+                     success:function(data) {
+                         $.each(data,function(index,value) {
+                             $("#tblr_listaContactoPosicion tbody").append(
+                                '<tr>'+
+                                '<td>'+
+                                data[index].txt_puesto+
+                                '</td>'+
+                                '<td>'+
+                                '<input type="checkbox" name="foo" value="'+data[index].txt_puesto+'"/>'+
+                                '</td>'+
+                                '</tr>'    
+                             )
+                         });
+                     }
+                 });
+                 $("#modal_r_listaContactoPosicion").dialog("open");
+             }
+             
+             $("#modal_r_listaContactoPosicion").dialog({
+                show:"blind",
+                autoOpen:false,
+                height:350,
+                width:550,
+                modal:true,
+                buttons:{
+                    "Salir":function() {
+                        $(this).dialog("close");
+                    }
+                }
+             })
              
              /**
               * MODAL PARE RECUPERAR LOS DATOS DE LA TABLA TEMPORAL
@@ -734,6 +776,7 @@ $contratos = $modelos->mostrarContratos();
         <?php include_once 'modales/modal-modelocarta.php';?>
         <?php include_once 'modales/modal-modelocontrato.php';?>
         <?php include_once 'modales/modal-mostrarlistareportes.php';?>
+        <?php include_once 'modales/modal_r_listaContactoPosicion.php';?>
         
         <div id="modal-contactos" title="Seleccionar contactos">
                 <div class="" >

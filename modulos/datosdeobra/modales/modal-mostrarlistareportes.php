@@ -26,7 +26,5 @@
 /**
  * @TODO 
  * darle mas ancho a cada campo
- * Quitar el radiobutton y reemplazarlo un el tag <a> y que detecte el click en cada elemento (reporte)
- * del listado.
  */
 ?>
