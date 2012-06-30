@@ -341,6 +341,7 @@ $contratos = $modelos->mostrarContratos();
               **/
               $("input[name='reportes']").live("click",function(e) {
                   alert($("input[name='reportes']:checked").val());
+                  setReporte($("input[name='reportes']:checked").val());
                   var checked = $("input[name='reportes']:checked").val();
                   $.ajax({
                       type:"GET",
@@ -352,10 +353,28 @@ $contratos = $modelos->mostrarContratos();
                       }
                   });
               });
+              /**
+               * GETTER Y SETTER DEL REPORTE A USAR EN EL MODAL: FIRMAS
+               **/
+              var reporte = "";
+              function setReporte(reporte_x) {
+                reporte = reporte_x;
+              }
+              function getReporte() {
+                  return reporte;
+              }
               
               function mostrarFirmasAsignadas(data)
               {
-                  /*--------------------------------*/
+                  $.each(data,function(index,value) {
+                      $("#tbl-empate-firmante_reporte tbody").append(
+                        "<tr>"+
+                        "<td>"+
+                        data[index].nombre_contacto+
+                        "</tr>"+
+                        "</td>"    
+                      )
+                  });
                   
               }
              
@@ -372,6 +391,7 @@ $contratos = $modelos->mostrarContratos();
                     "Agregar firmantes":function() {//SELECCIONAR DATOS DE LA TABLA -> tb_firmascontactotemporal
                         if($("input[name:'reportes']:radio").is(':checked')) {
                             //alert($("input[name='reportes']:checked").val());
+                            limpiaPreviaTabla();
                             listaContactoPosicion();
                         } else {
                             alert("Debe seleccionar un reporte de la lista");
@@ -382,6 +402,16 @@ $contratos = $modelos->mostrarContratos();
                     }
                 }
              });
+             
+             /**
+              * FUNCION PARA EVITAR "N" PLICAR LOS DATOS
+              * AL MOSTRALOS
+              **/
+             function limpiaPreviaTabla()
+             {
+                 $("#tblr_listaContactoPosicion td").remove();
+                 $("input[name=id_contactoReporte]").attr('checked',false);
+             }
              
              function listaContactoPosicion()
              {
@@ -401,7 +431,10 @@ $contratos = $modelos->mostrarContratos();
                                 data[index].txt_puesto+
                                 '</td>'+
                                 '<td>'+
-                                '<input type="checkbox" name="foo" value="'+data[index].txt_puesto+'"/>'+
+                                data[index].nombre_contacto+
+                                '</td>'+
+                                '<td>'+
+                                '<input type="checkbox" name="id_contactoReporte" value="'+data[index].id_contacto+'"/>'+
                                 '</td>'+
                                 '</tr>'    
                              )
@@ -410,6 +443,20 @@ $contratos = $modelos->mostrarContratos();
                  });
                  $("#modal_r_listaContactoPosicion").dialog("open");
              }
+             /**
+              * DETECTA CLICK EN MODAL FIRMAS: QUE ES DONDE SE EMPATAN LOS REPORTES Y LOS CONTACTOS
+              * LOS DATOS SE INGRESAN A LA TABLA: tb_contactoreportetemporal
+              */
+             $("input[name=id_contactoReporte]").live("click",function() {
+                var aleatorio = <?=$aleatorio?>;
+//                alert($(this).val());
+//                alert(getReporte());
+                $.ajax({
+                    type:"POST",
+                    data:{aleatorio:aleatorio,id_contacto:$(this).val(),id_reporte:getReporte()},
+                    url:"../../dl/datos_obra/i_contactoreportetemporal.php"
+                });
+             });
              
              $("#modal_r_listaContactoPosicion").dialog({
                 show:"blind",
