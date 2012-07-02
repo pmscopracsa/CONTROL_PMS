@@ -340,13 +340,14 @@ $contratos = $modelos->mostrarContratos();
               * DETECTAR CLICK EN UN RADIO BUTTON Y HACER LA CONSULTA
               **/
               $("input[name='reportes']").live("click",function(e) {
-                  alert($("input[name='reportes']:checked").val());
+                  //alert($("input[name='reportes']:checked").val());
                   setReporte($("input[name='reportes']:checked").val());
                   var checked = $("input[name='reportes']:checked").val();
+                  var aleatorio = <?=$aleatorio?>;
                   $.ajax({
                       type:"GET",
                       dataType:"json",
-                      data:{checked:checked},
+                      data:{checked:checked,aleatorio:aleatorio},
                       url:"../../dl/datos_obra/r_listafirmasreportes.php",
                       success:function(data){
                           mostrarFirmasAsignadas(data);
@@ -365,18 +366,40 @@ $contratos = $modelos->mostrarContratos();
               }
               
               function mostrarFirmasAsignadas(data)
-              {
+              {/****************************************************/
+                 $("#tbl-empate-firmante_reporte td").remove();
+                 
                   $.each(data,function(index,value) {
                       $("#tbl-empate-firmante_reporte tbody").append(
                         "<tr>"+
                         "<td>"+
+                        data[index].posicion+
+                        "</td>"+
+                        "<td>"+
                         data[index].nombre_contacto+
-                        "</tr>"+
-                        "</td>"    
+                        "</td>"+
+                        "<td>"+
+                        data[index].nombre_compania+
+                        "</td>"+
+                        "<td>"+
+                        '<input type="text" name="pos_firma_reporte" id="pos_firma_reporte"/>'+
+                        "</td>"+
+                        "</tr>"    
                       )
                   });
-                  
               }
+              
+              $("#pos_firma_reporte").live("click",function() {
+                    $(this).attr("id","inputext");
+                    $(this).focusout(function(){
+                       alert($(this).val());
+                       $.ajax({
+                           data:{aleatorio:<?=$aleatorio?>,posi_reporte:$(this).val(),reporte:getReporte()},
+                           type:"POST",
+                           url:""
+                       })
+                    });
+              });
              
              /**
               * EMPATAR REPORTES Y FIRMANTES

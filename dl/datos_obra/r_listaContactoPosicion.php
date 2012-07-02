@@ -18,6 +18,7 @@ try {
         throw new Exception("Error en la consulta");
     
     $a_firmar = array();
+    $i = 0;
     while ($res = mysql_fetch_assoc($rs)) {
         $a_firmar[$i]['txt_puesto'] = $res['txt_puesto'];
         $a_firmar[$i]['nombre_contacto'] = $res['nombre_contacto'];
