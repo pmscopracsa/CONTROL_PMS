@@ -382,22 +382,31 @@ $contratos = $modelos->mostrarContratos();
                         data[index].nombre_compania+
                         "</td>"+
                         "<td>"+
-                        '<input type="text" name="pos_firma_reporte" id="pos_firma_reporte"/>'+
+                        '<input type="text" name="pos_firma_reporte" id="pos_firma_reporte"/ value="'+data[index].numero_posi+'">'+
+                        "</td>"+
+                        "<td>"+
+                        '<p style="display:none">'+data[index].id_contacto+"</p>"+
                         "</td>"+
                         "</tr>"    
                       )
                   });
               }
               
+              /**
+               *  
+               **/
               $("#pos_firma_reporte").live("click",function() {
                     $(this).attr("id","inputext");
                     $(this).focusout(function(){
-                       alert($(this).val());
+                       var td_padre = $(this).parent().parent().text();
+                       var matches = td_padre.match(new RegExp("\\d+","gi"));
+                       //alert(matches[0]);
+                       //alert($(this).val());
                        $.ajax({
-                           data:{aleatorio:<?=$aleatorio?>,posi_reporte:$(this).val(),reporte:getReporte()},
+                           data:{aleatorio:<?=$aleatorio?>,posi_reporte:$(this).val(),reporte:getReporte(),id_contacto:matches[0]},
                            type:"POST",
-                           url:""
-                       })
+                           url:"../../dl/datos_obra/i_posicion_en_reportefirma.php"
+                       });
                     });
               });
              

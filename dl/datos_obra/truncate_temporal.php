@@ -12,6 +12,7 @@ try {
     $sql = "DELETE FROM temporal WHERE random_code = $aleatorio";
     $sql1 = "DELETE FROM tb_firmascontactotemporal WHERE aleatorio = $aleatorio";
     $sql2 = "DELETE FROM tb_contactoreportetemporal WHERE id_aleatorio = $aleatorio"; 
+    $sql3 = "DELETE FROM tb_reportecontactoposicionfirmatemporal WHERE id_aleatorio = $aleatorio";
     $res = mysql_query($sql,$cn);
     $res1 = mysql_query($sql1,$cn);
     $res2 = mysql_query($sql2,$cn);

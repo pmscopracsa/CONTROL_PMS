@@ -21,6 +21,9 @@ $especialidades = $especialidadcompania->mostrarEspecialidades();
 
 $representantescompania = new RepresentanteCompaniaDL();
 $representantes = $representantescompania->mostrarRepresentantes();
+
+$empresas = new CompaniaContactoDL();
+$lista_empresas = $empresas->mostrarCompaniaContacto();
 ?>
 <!DOCTYPE HTML>
 <html class="no-js">
@@ -413,6 +416,24 @@ $representantes = $representantescompania->mostrarRepresentantes();
        cargar_departamentos();
        cargar_distritos();
        
+       $("#edita").click(function(e) {
+           e.preventDefault();
+           $("#modal-escogeEmpresa").dialog("open");
+           return false;
+       })
+       
+       $("#modal-escogeEmpresa").dialog({
+           autoOpen:false,
+           height:300,
+           width:350,
+           modal:true,
+           buttons:{
+               "Cerrar":function(){
+                   $(this).dialog("close");
+               }
+           }
+       });
+       
 //       $("#paisid").change(function(){cargar_departamentos();})
 //       $("#departamentoid").change(function(){cargar_distritos();})
 //       $("#departamentoid").attr("disabled",true);
@@ -438,6 +459,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
 </head>
 <body class="fondo">
     <div id="barra-superior">
+        <?php            include_once 'modal_registracompania/modal-escogeEmpresa.php';?>
         <div id="barra-superior-dentro">
             
             <h1 id="titulo_barra">REGISTRO DE COMPA&Ntilde;IAS</h1>
@@ -467,6 +489,7 @@ $representantes = $representantescompania->mostrarRepresentantes();
                <tr>
                    <td><label for="nombre">Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td><input id="inputext" type="text" size="30" placeholder="" name="nombre" /></td>
+                   <td><a id="edita" href="#"><img src="../../img/search.png" /></a></td>
                </tr>
                <tr>
                    <td><label for="nombre_comercial">Nombre Comercial:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
