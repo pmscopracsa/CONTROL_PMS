@@ -20,9 +20,16 @@ try {
     AND id_contacto = $id_contacto
     AND id_aleatorio = $id_aleatorio";
     
-    $res = mysql_query($sql,$cn);
+    $sql_tb_firmascontactotemporal = "UPDATE tb_firmascontactotemporal 
+    SET estado_asignado = 's'
+    ,reporte_id = $id_reporte
+    WHERE id_contacto = $id_contacto 
+    AND aleatorio = $id_aleatorio";
     
-    if (!$res)
+    $res = mysql_query($sql,$cn);
+    $res2 = mysql_query($sql_tb_firmascontactotemporal,$cn);
+    
+    if (!$res || $res2)
         throw new Exception("Problemas en la insercion de la data: ".  mysql_error());
 } catch ( Exception $ex ) {
     echo "-> ".$ex->getMessage(); 

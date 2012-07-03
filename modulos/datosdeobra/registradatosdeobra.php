@@ -452,7 +452,7 @@ $contratos = $modelos->mostrarContratos();
                  $.ajax({
                      type:"GET",
                      dataType:"json",
-                     data:{aleatorio:aleatorio},
+                     data:{aleatorio:aleatorio,reporte:getReporte()},
                      url:"../../dl/datos_obra/r_listaContactoPosicion.php",
                      success:function(data) {
                          $.each(data,function(index,value) {
@@ -468,7 +468,10 @@ $contratos = $modelos->mostrarContratos();
                                 '<input type="checkbox" name="id_contactoReporte" value="'+data[index].id_contacto+'"/>'+
                                 '</td>'+
                                 '<td>'+
-                                '<input type="text" id="posi_firma_reporte"/>'+ 
+                                '<input type="text" style="background:orange;color:white" id="posi_firma_reporte"/>'+ 
+                                '</td>'+
+                                '<td>'+
+                                '<input type="text" value="'+data[index].estado_asignado+'" READONLY/>'+
                                 '</td>'+
                                 '</tr>'    
                              )
@@ -482,6 +485,8 @@ $contratos = $modelos->mostrarContratos();
               * LOS DATOS SE INGRESAN A LA TABLA: tb_contactoreportetemporal
               */
              $("input[name=id_contactoReporte]").live("click",function() {
+                
+            
                 $.ajax({
                     type:"POST",
                     data:{aleatorio:<?=$aleatorio?>,id_contacto:$(this).val(),id_reporte:getReporte()},
@@ -499,7 +504,6 @@ $contratos = $modelos->mostrarContratos();
                 var matches = td_padre.match(new RegExp("(\\d+)","gi"));
                 
                 $(this).focusout(function() {
-                    //alert($(this).val());
                     $.ajax({
                        data:{reporte:getReporte(), id_contacto:matches[0], id_aleatorio:<?=$aleatorio?>, posi_reporte:$(this).val()},
                        type:"POST",

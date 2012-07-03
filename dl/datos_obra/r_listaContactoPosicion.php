@@ -1,17 +1,22 @@
 <?php
 include_once 'Conexion.php';
 $aleatorio = $_REQUEST['aleatorio'];
+$reporte = $_REQUEST['reporte'];
 try {
     $conexion = new Conexion();
     $cn = $conexion->conectar();
     if ( !$cn )
         throw new Exception("Error al conectar: ".  mysql_error());
-    //$sql = "SELECT * FROM tb_firmascontactotemporal WHERE aleatorio = ".$aleatorio;
-    $sql = "SELECT fct.id_contacto id_contacto, fct.txt_puesto txt_puesto,pc.nombre nombre_contacto, fct.aleatorio aleatorio 
+    
+    /**
+     * ARREGLAR EL QUE AL CONSULTAR NO DEBE MOSTRAR LOS QUE YA ESTAN ASIGNADOS 
+     */
+    
+    $sql = "SELECT fct.id_contacto id_contacto, fct.txt_puesto txt_puesto,pc.nombre nombre_contacto, fct.aleatorio aleatorio, fct.estado_asignado AS estado_asignado
     FROM tb_firmascontactotemporal fct 
     INNER JOIN tb_personacontacto pc
     ON fct.id_contacto = pc.id
-    WHERE aleatorio =".$aleatorio;
+    WHERE fct.aleatorio = $aleatorio  AND fct.estado_asignado like 'n'";
     
     $rs = mysql_query($sql);
     if (!$rs)
@@ -23,6 +28,8 @@ try {
         $a_firmar[$i]['txt_puesto'] = $res['txt_puesto'];
         $a_firmar[$i]['nombre_contacto'] = $res['nombre_contacto'];
         $a_firmar[$i]['id_contacto'] = $res['id_contacto'];
+        $a_firmar[$i]['estado_asignado'] = $res['estado_asignado'] == "n" ? "Aun no asignado" : "Ya esta asignado";
+        
         $i++;
     }
     echo json_encode($a_firmar);

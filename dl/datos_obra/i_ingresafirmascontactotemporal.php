@@ -10,11 +10,11 @@ try  {
     if ( !$cn )
     throw new Exception("Problemas en la conexion a la DB: ".mysql_error());
     
-    $sql = "INSERT INTO tb_firmascontactotemporal VALUES($id_contacto, '$txt_puesto','$aleatorio')";
+    $sql = "INSERT INTO tb_firmascontactotemporal(id_contacto,txt_puesto,aleatorio) VALUES($id_contacto, '$txt_puesto','$aleatorio')";
     $res = mysql_query( $sql,$cn );
     
     if ( !$res )
-        throw new Exception("Problemas en la insercion de la data: ".  mysql_error());
+        throw new Exception("Problemas en la insercion de la data a la tabla tb_firmascontactotemporal: ".  mysql_error());
 } catch ( Exception $ex ) {
     echo $ex->getMessage();
 }

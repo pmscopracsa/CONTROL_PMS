@@ -185,7 +185,6 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
             $("#divSeleccionaRepresentante").dialog("open");
         })
         
-        
         // eliminar direcciones de scrollbar del fomrulario principal
         // TODO: desmarcar el checkbox
         $("#del-direccion").live("click",function(e) {
@@ -194,9 +193,8 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
             $(this).parent().parent().remove();
         })       
         
-        
         /**
-         * BOTON PARA CREAR UNA NUEVA ESPECIALIDAD
+         * MODAL PARA CREAR UNA NUEVA ESPECIALIDAD
          */ 
         $("#btn-nuevaespecialidad").click(function(){
             var descripcion = $(".input-descripcion").attr('value');
@@ -207,16 +205,36 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                 data:"descripcion="+descripcion,
                 success:function(){
                     alert("SE HA INGRESADO CORRECTAMENTE LA NUEVA ESPECIALIDAD");
-                    /**
-                     * RECARGAR LA PAGINA AUTOMATICAMENTE
-                     */ 
-                    //location.reload();
-                    $("#divNuevaEspecialidad").dialog('destroy');
-//                    $("#divSeleccionaEspecialidad").dialog('destroy');
-//                    $("#divSeleccionaEspecialidad").dialog('open');
+                    $.ajax({
+                        type:"GET",
+                        url:"../../bl/Contacto/consulta/listarUltimoIngreso.php",
+                        success:function(data){
+                            alert(data);
+                            $.each(data,function(index,value) {
+                                var tmp = '<input type="checkbox" id="check_especialidades" name="especialidades[]" value="'+data[index].id+'" />'+data[index].descripcion+'</br>'; 
+                                $("#tbl-especialidades").append(tmp);
+                                
+                                $("#check_especialidades").live("click",function() {
+                                    $("#tbl-listaespecialidades tbody").append(
+                                        "<tr>"+
+                                        "<td>"+data[index].id+"</td>"+
+                                        "<td>"+"<a href='#' id='del-especialidad' class='button delete'>Eliminar</a>"+"</td>"+
+                                        '<input type="hidden" name="especialidad'+contador_especialidades+'" value="'+data[index].descripcion+'"/>'+
+                                        "</tr>"
+                                    );
+                                });
+                            });
+                        }
+                    });
                 }
             });
         });
+        
+        /**
+         * DANDOLE LA POPSIBILIDAD A LA NUEVA ESPECIALIDAD DE PODER SER USADA EN EL FORMULARIO
+         * -------------------------------------------- 
+         */
+        
         
         /**
          * detectar seleccion en especialidad en base al click del checkbox
@@ -467,8 +485,8 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
     </div>
     
 <div id="main">
-    <form id="frm-registracompania" action="../../bl/busca_persona/registraCompania_BL.php" method="POST">
-<!--<form id="frm-registracompania" action="ttest/registraCompaniaTest.php" method="POST">-->
+<!--    <form id="frm-registracompania" action="../../bl/busca_persona/registraCompania_BL.php" method="POST">-->
+<form id="frm-registracompania" action="ttest/registraCompaniaTest.php" method="POST">
        <div class="info">
        Los campos obligatorios est&aacute;n marcados con <img src="../../img/required_star.gif" alt="dato requerido" />
        </div>
@@ -680,7 +698,7 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                                 <td>
                                     <?php
                                     foreach ($especialidades as &$valor) {
-                                        echo '<input type="checkbox" name="especialidades[]" value="'.
+                                        echo '<input id="check_especialidades" type="checkbox" name="especialidades[]" value="'.
                                                 $valor[0].
                                                 '"/>'.
                                                 $valor[1].

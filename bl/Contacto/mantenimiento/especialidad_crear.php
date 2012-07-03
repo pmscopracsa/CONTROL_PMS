@@ -10,4 +10,3 @@ if ($res) {
     $especialidades = $especialidad->mostrarEspecialidades();
     echo $especialidades;
 }
-?>

@@ -1,9 +1,3 @@
-.izquierda-firma {
-    float: left;
-    width: 100%;
-}
-
-.derecha-firmante {
-    float: left;
-    width: 50%;
+.fondo_naranja {
+    background-color: #FF6600;
 }
