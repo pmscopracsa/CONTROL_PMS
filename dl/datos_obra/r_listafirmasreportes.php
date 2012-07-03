@@ -10,7 +10,7 @@ try {
     if ( !$cn )
         throw new Exception("Error al conectar: ".  mysql_error());
     
-    $sql = "SELECT pc.id AS id_contacto,fct.txt_puesto AS posicion, pc.nombre AS nombre_contacto, cc.descripcion AS nombre_compania, rcpft.posicion AS numero_posi
+    $sql = "SELECT pc.id AS id_contacto,fct.txt_puesto AS posicion, pc.nombre AS nombre_contacto, cc.descripcion AS nombre_compania, crt.posicion_firma_en_reporte AS numero_posi
     FROM tb_firmascontactotemporal fct
     INNER JOIN tb_personacontacto AS pc
     ON fct.id_contacto = pc.id
@@ -18,10 +18,6 @@ try {
     ON pc.tb_companiacontacto_id = cc.id
     INNER JOIN tb_contactoreportetemporal AS crt
     ON fct.id_contacto = crt.id_contacto
-    
-    INNER JOIN tb_reportecontactoposicionfirmatemporal AS rcpft
-    ON fct.id_contacto = rcpft.id_contacto
-    
     WHERE crt.id_reporte = $id_reporte AND crt.id_aleatorio = $id_aleatorio";
     
     $rs = mysql_query($sql);

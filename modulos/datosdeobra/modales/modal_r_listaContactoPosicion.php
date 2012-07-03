@@ -4,6 +4,8 @@
             <tr class="ui-widget-header">
                 <th>Posici&oacute;n</th>
                 <th>Contacto</th>
+                <th>Posici&oacute;n de firma en Reporte</th>
+                <th>Seleccionar</th>
             </tr>
         </thead>
         <tbody>

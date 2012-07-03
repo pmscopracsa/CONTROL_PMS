@@ -284,6 +284,9 @@ $contratos = $modelos->mostrarContratos();
                  width:750,
                  modal:true,
                  buttons:{
+                     "Agregar contactos":function(){
+                         $("#div-addcontactos").dialog("open");
+                     },
                      "Asignar firmas a reportes ":function(){
                          var aleatorio = <?=$aleatorio?>;
                          $.ajax({
@@ -296,9 +299,6 @@ $contratos = $modelos->mostrarContratos();
                              }
                          })
                          $("#modal-listareportes").dialog("open");
-                     },
-                     "Agregar contactos":function(){
-                         $("#div-addcontactos").dialog("open");
                      },
                      "Cerrar":function(){
                          $(this).dialog("close");
@@ -368,7 +368,6 @@ $contratos = $modelos->mostrarContratos();
               function mostrarFirmasAsignadas(data)
               {/****************************************************/
                  $("#tbl-empate-firmante_reporte td").remove();
-                 
                   $.each(data,function(index,value) {
                       $("#tbl-empate-firmante_reporte tbody").append(
                         "<tr>"+
@@ -468,6 +467,9 @@ $contratos = $modelos->mostrarContratos();
                                 '<td>'+
                                 '<input type="checkbox" name="id_contactoReporte" value="'+data[index].id_contacto+'"/>'+
                                 '</td>'+
+                                '<td>'+
+                                '<input type="text" id="posi_firma_reporte"/>'+ 
+                                '</td>'+
                                 '</tr>'    
                              )
                          });
@@ -480,13 +482,29 @@ $contratos = $modelos->mostrarContratos();
               * LOS DATOS SE INGRESAN A LA TABLA: tb_contactoreportetemporal
               */
              $("input[name=id_contactoReporte]").live("click",function() {
-                var aleatorio = <?=$aleatorio?>;
-//                alert($(this).val());
-//                alert(getReporte());
                 $.ajax({
                     type:"POST",
-                    data:{aleatorio:aleatorio,id_contacto:$(this).val(),id_reporte:getReporte()},
+                    data:{aleatorio:<?=$aleatorio?>,id_contacto:$(this).val(),id_reporte:getReporte()},
                     url:"../../dl/datos_obra/i_contactoreportetemporal.php"
+                });
+             });
+             
+             /**
+              * MODAL: FIRMAS
+              * ACCION: OBTENER EL VALOR DE LA CAJA DE TEXTO: POSICION DE FIRMA EN REPORTE
+              * ARCHIVO_PHP: i_posicionfirmareporte.php
+              **/
+             $("#posi_firma_reporte").live("click",function() {
+                var td_padre = $(this).parent().parent().html();
+                var matches = td_padre.match(new RegExp("(\\d+)","gi"));
+                
+                $(this).focusout(function() {
+                    //alert($(this).val());
+                    $.ajax({
+                       data:{reporte:getReporte(), id_contacto:matches[0], id_aleatorio:<?=$aleatorio?>, posi_reporte:$(this).val()},
+                       type:"POST",
+                       url:"../../dl/datos_obra/i_posicionfirmareporte.php"
+                    });
                 });
              });
              
@@ -535,7 +553,6 @@ $contratos = $modelos->mostrarContratos();
                         '<td class="contactofirma">'+
                         '<p style="display:none">'+data[index].id+"</p>"+
                         '<p style="display:none">-</p>'+
-//                        '<p id="contacto_nombre"><a id="agregar-contacto_modal" href="#">'+data[index].nombre+'</a></p>'+
                         '<a id="agregar-contacto_modal" href="#" style="text-decoration:none;">'+data[index].nombre+'</a>'+
                         '<p style="display:none">-</p>'+
                         '<p style="display:none">'+data[index].descripcion+'</p>'+
