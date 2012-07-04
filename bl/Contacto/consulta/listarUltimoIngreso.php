@@ -8,7 +8,7 @@ $sql = "SELECT * FROM control_pms.tb_especialidadcompania ORDER BY id DESC LIMIT
 $rs = mysql_query($sql,$cn);
 
 $especialidad = array();
-
+$i = 0;
 while ($res = mysql_fetch_assoc($rs)) {
     $especialidad[$i]['id'] = $res['id'];
     $especialidad[$i]['descripcion'] = $res['descripcion'];

@@ -41,12 +41,27 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
     <script src="../../js/tfijo.js" type="text/javascript"></script>
     <script src="../../js/cargarDatos.js" type="text/javascript"></script>
     <script src="../../js/jquery.form.js" type="text/javascript"></script>
+    <script src="../../js/autocomplete/jquery.autocomplete.js" type="text/javascript"></script>
     <script src="../../js/jquery.validity/jQuery.validity.js" type="text/javascript"></script>
     <link href="../../js/jquery.validity/jquery.validity.css" rel="stylesheet" type="text/css" />
     <script src="../../js/jquery.form.js" type="text/javascript"></script>
-    
+    <style>
+        .ui-autocomplete-loading { background:white url('../../img/ui-anim_basic_16x16.gif') right center no-repeat; }
+    </style>    
     <script type="text/javascript">
+    /**
+     * FUNCION QUE VUELVE A RECARGAR EL DIV QUE CONTIENE LA LISTA DE ESPECIALIDADES
+     */    
+    function recargarEspecialidades()
+    {
+        $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php");
+    }    
+        
     $(document).ready(function(){
+        /**
+         * PRIMERA CARGA DE LA LISTA DE ESPECIALIDADES
+         */
+        $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php");
         $("form").validity(function(){
             $(".ruc")
                 .require()
@@ -95,9 +110,6 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                 "Salir":function(){
                     $(this).dialog("close");
                 }
-            },
-            close:function(){
-                //allFields.val("").removeClass("ui-state-error");
             }
         });
         
@@ -131,9 +143,6 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                 "Cerrar":function(){
                     $(this).dialog("close");
                 }
-            },
-            close:function(){
-                //allFields.val("").removeClass("ui-state-error");
             }
         });
         
@@ -151,9 +160,6 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                 "Salir":function(){
                     $(this).dialog("close");
                 }
-            },
-            close:function(){
-                allFields.val("").removeClass("ui-state-error");
             }
         });
         
@@ -204,26 +210,12 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                 url:'../../bl/Contacto/mantenimiento/especialidadcompania_crear.php',
                 data:"descripcion="+descripcion,
                 success:function(){
-                    alert("SE HA INGRESADO CORRECTAMENTE LA NUEVA ESPECIALIDAD");
                     $.ajax({
                         type:"GET",
                         url:"../../bl/Contacto/consulta/listarUltimoIngreso.php",
                         success:function(data){
-                            alert(data);
-                            $.each(data,function(index,value) {
-                                var tmp = '<input type="checkbox" id="check_especialidades" name="especialidades[]" value="'+data[index].id+'" />'+data[index].descripcion+'</br>'; 
-                                $("#tbl-especialidades").append(tmp);
-                                
-                                $("#check_especialidades").live("click",function() {
-                                    $("#tbl-listaespecialidades tbody").append(
-                                        "<tr>"+
-                                        "<td>"+data[index].id+"</td>"+
-                                        "<td>"+"<a href='#' id='del-especialidad' class='button delete'>Eliminar</a>"+"</td>"+
-                                        '<input type="hidden" name="especialidad'+contador_especialidades+'" value="'+data[index].descripcion+'"/>'+
-                                        "</tr>"
-                                    );
-                                });
-                            });
+                            $("#divNuevaEspecialidad").dialog('close');
+                            recargarEspecialidades();
                         }
                     });
                 }
@@ -231,16 +223,22 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
         });
         
         /**
-         * DANDOLE LA POPSIBILIDAD A LA NUEVA ESPECIALIDAD DE PODER SER USADA EN EL FORMULARIO
-         * -------------------------------------------- 
-         */
-        
-        
-        /**
          * detectar seleccion en especialidad en base al click del checkbox
          * y agregar la descripcion a la lista que el usuario visualizará.
          */
         $('input:checkbox[name=especialidades[]]').click(function() {
+            $.ajax({
+                data:{id:$(this).val()},
+                type:"GET",
+                dataType:"json",
+                url:"../../includes/query_repository/getEspecialidadCompania.php",
+                success:function(data) {
+                    mostrarEspecialidadesScroll(data);
+                }
+            });
+        });
+        
+        $("#especialidades_boxes").live("click",function() {
             $.ajax({
                 data:{id:$(this).val()},
                 type:"GET",
@@ -433,6 +431,14 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
        cargar_paises();
        cargar_departamentos();
        cargar_distritos();
+       /**
+        * AUTOCOMPLETAR SEGUN NOMBRE DE LA EMPRESA
+        */
+       $(".nombre_empresa").autocomplete("../../bl/Contacto/mantenimiento/autocompletadoEmpresas.php",{
+           width:260,
+           matchContains:true,
+           selectFirst:false
+       });
        
        $("#edita").click(function(e) {
            e.preventDefault();
@@ -506,7 +512,7 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                </tr>
                <tr>
                    <td><label for="nombre">Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="nombre" /></td>
+                   <td><input class="nombre_empresa" id="inputext" type="text" size="30" placeholder="" name="nombre" /></td>
                    <td><a id="edita" href="#"><img src="../../img/search.png" /></a></td>
                </tr>
                <tr>
@@ -688,27 +694,9 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                    <td><label for="especialidad">Especialidad:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
                        <input type="button" id="btnAgregarEspecialidad" value="Agregar Especialidad" class="ui-button ui-widget ui-state-default ui-corner-all"/>
-                      
-                       <div id="divSeleccionaEspecialidad" title="Agregar Especialidad" style="display:none">
-                           <table border="0" id="tbl-especialidades" class="atable">
-                            <tr>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <?php
-                                    foreach ($especialidades as &$valor) {
-                                        echo '<input id="check_especialidades" type="checkbox" name="especialidades[]" value="'.
-                                                $valor[0].
-                                                '"/>'.
-                                                $valor[1].
-                                                '<br />';
-                                    }
-                                    ?>
-                                </td>
-                            </tr>
-                            </table>
-                       </div>
+                       
+                       <!-- div que se alimenta con load()-->
+                       <div id="divSeleccionaEspecialidad" title="Agregar Especialidad" style="display:none"></div>
                    </td>
                         <div id="divNuevaEspecialidad" title="Crear nueva especialidad" style="display: none">
                             <label>Especialidad:</label>
