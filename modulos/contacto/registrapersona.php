@@ -37,6 +37,7 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
         <script src="../../js/tfijo.js" type="text/javascript"></script>
         <script src="../../js/cargarDatos.js" type="text/javascript"></script>
         <script src="../../js/jquery.form.js" type="text/javascript"></script>
+        <script src="../../js/autocomplete/jquery.autocomplete.js" type="text/javascript"></script>
         <script>
         $(document).ready(function(){
             var contador_especialidades = 0;
@@ -106,6 +107,8 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
             cargar_paises();
             cargar_departamentos();
             cargar_distritos();
+            
+                    
             /*$("#paisid").change(function(){cargar_departamentos();})
             $("#departamentoid").change(function(){cargar_distritos();})
             $("#departamentoid").attr("disabled",true);
@@ -272,6 +275,24 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                     return false;
                 }
             })
+            
+              /**
+             * AUTOCOMPLETAR SEGUN NOMBRE DE LA PERSONA
+             */
+            $(".nombre_persona").autocomplete("../../bl/Contacto/mantenimiento/autocompletadoEmpresasPorContacto.php",{
+                width:260,
+                matchContains:true,
+                selectFirst:false
+            });
+            
+            /**
+             * AUTOCOMPLETAR SEGUN NOMBRE DE LA EMPRESA
+             */
+            $(".nombre_empresa").autocomplete("../../bl/Contacto/mantenimiento/autocompletadoEmpresas.php",{
+                width:260,
+                matchContains:true,
+                selectFirst:false
+            });  
         });
         </script>
         <script type="text/javascript">
@@ -321,7 +342,7 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                             <td class="td-ruc-checkbox" style="display: none"><input placeholder="RUC" type="text" id="inputext" name="ruc"/>
                     <tr>
                         <td><label>Nombres y Apellidos:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                        <td><input id="inputext" type="text" size="25" name="nombre"</td>
+                        <td><input class="nombre_persona" id="inputext" type="text" size="25" name="nombre"</td>
                     </tr>
                     <tr>
                         <td>

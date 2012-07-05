@@ -68,7 +68,8 @@ class RegistraListaDistribucion
                 for ($i = 0; $i < sizeof($this->_tbcontactoid); $i++) {
                     //echo $ultimo_id."<br>";
                     $contacto = $this->_tbcontactoid[$i];
-                    $query = "INSERT INTO tb_contactodelista VALUES($ultimo_id,$contacto)";
+                    //$query = "INSERT INTO tb_contactodelista VALUES($ultimo_id,$contacto)";
+                    $query = "INSERT INTO tb_listadistribucionpersonacontacto VALUES($ultimo_id,$contacto)";
                     $res = mysql_query($query,$cn);
                     if (!$res) 
                         throw new Exception("tb_contactodelista. Error: ". mysql_error());

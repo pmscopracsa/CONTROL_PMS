@@ -439,6 +439,14 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
            matchContains:true,
            selectFirst:false
        });
+       /**
+        * AUTOCOMPLETAR SEGUN RUC DE LA EMPRESA
+        */
+      $(".ruc_empresa").autocomplete("../../bl/Contacto/mantenimiento/autocompletadoEmpresasPorRuc.php",{
+           width:260,
+           matchContains:true,
+           selectFirst:false
+       });
        
        $("#edita").click(function(e) {
            e.preventDefault();
@@ -508,7 +516,7 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                </tr>
                <tr class="alt">
                    <td><label for="ruc">RUC:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" class="ruc" type="text" size="30" placeholder="" name="ruc" /></td>
+                   <td><input  class="ruc_empresa" id="inputext" type="text" size="30" placeholder="" name="ruc" /></td>
                </tr>
                <tr>
                    <td><label for="nombre">Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>

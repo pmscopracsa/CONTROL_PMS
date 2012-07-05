@@ -29,6 +29,7 @@ $contactos = $contacto->mostrarContactos();
         <script src="../../js/jquery.autocomplete.js" type="text/javascript"></script> 
         <script src="../../dl/contacto_bl/Obras/Obras.js"></script>
         <script src="../../js/jquery.form.js" type="text/javascript"></script>
+        <script src="../../js/autocomplete/jquery.autocomplete.js" type="text/javascript"></script>
         <script>
         $(function(){
            var contador_contactos = 0;
@@ -126,6 +127,32 @@ $contactos = $contacto->mostrarContactos();
                 var canti_contactos = $('<input type="hidden" name="contador_contactos" value="'+contador_contactos+'"/>');
                 canti_contactos.appendTo("#canti_contactos");                
             });
+            
+            /**
+             * AUTOCOMPLETAR POR NOMBRE DE LISTA
+             */
+            $(".nombre_lista").autocomplete("../../bl/Contacto/mantenimiento/autocompletadoListaDistribucionPorNombre.php",{
+                width:260,
+                matchContains:true,
+                selectFirst:false
+            });
+            
+            /**
+             * BUSCAR DATOS PARA EDITAR 
+             * BTNPORNOMBRE
+             */
+            $("#btnBuscaPorNombre").click(function() {
+                var id_listadistribucion = <?=$_SESSION['id_listadistribucion']?>;
+                $.ajax({
+                    data:{id:id_listadistribucion},
+                    type:"GET",
+                    dataType:"json",
+                    url:"",
+                    success:function(data) {
+                        llevarFormulario(data);
+                    } 
+                })
+            })
         });    
         </script>
         <script type="text/javascript">
@@ -178,7 +205,8 @@ $contactos = $contacto->mostrarContactos();
                 <table>
                     <tr>
                         <td><label>Nombre de la lista:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                        <td><input id="inputext" type="text" name="nombre" /></td>
+                        <td><input class="nombre_lista" id="inputext" type="text" name="nombre" /></td>
+                        <td><input id="btnBuscaPorNombre" type="button" value="Buscar..."/></td>
                     </tr>
                     <tr>
                         <td><label>C&oacute;digo de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
