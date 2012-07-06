@@ -21,14 +21,13 @@ $css = scandir($CSS_PATH);
         <script src="../../js/jquery1.4.2.js.js" type="text/javascript"></script>
         <script src="../../js/jqgrid/gridtree/js/i18n/grid.locale-es.js" type="text/javascript"></script>
         <script src="../../js/jqgrid/gridtree/js/jquery.jqGrid.src.js" type="text/javascript"></script>
-        
         <script>
         $(function(){
             /**
              * GRILLA ESPECIALIDAD
              */
             $("#lista-especialidades").jqGrid({
-                height:200,
+                height:550,
                 width:500,
                 url:'../../dl/contacto_bl/testlistaespecialidades/parent.php?q=2',
                 datatype:"json",
@@ -37,7 +36,7 @@ $css = scandir($CSS_PATH);
                     {name:'id',index:'id',width:550,hidden:true},
                     {name:'descripcion',index:'descripcion',width:250}
                 ],
-                rowNum:10,
+                rowNum:25,
                 rowList:[10,20,30],
                 pager:'#pager-especialidades',
                 sortname:'descripcion',
@@ -45,102 +44,163 @@ $css = scandir($CSS_PATH);
                 sortorder:"asc",
                 multiselect:false,
                 caption:"ESPECIALIDAD",
+                subGrid:true,
                 onSelectRow:function(ids) {
-                    if(ids == null) {
-                        ids = 0;
-                        if($("#lista-especialidades-detalle").jqGrid('getGridParam','records') > 0) {
-                            $("#lista-especialidades-detalle").jqGrid('setGridParam',{url:"../../dl/contacto_bl/testlistaespecialidades/hijo.php?q=1&id="+ids,page:1});
-                            $("#lista-especialidades-detalle").jqGrid('setCaption',"EMPRESA").trigger('reloadGrid');
-                            //REGARCAR ULTIMO GRID
-                            var detalle = $("#detalle");
-                            detalle.clearGridData();
+                    alert(ids);
+//                    if(ids == null) {
+//                        ids = 0;
+//                        if($("#lista-especialidades-detalle").jqGrid('getGridParam','records') > 0) {
+//                            $("#lista-especialidades-detalle").jqGrid('setGridParam',{url:"../../dl/contacto_bl/testlistaespecialidades/hijo.php?q=1&id="+ids,page:1});
+//                            $("#lista-especialidades-detalle").jqGrid('setCaption',"EMPRESA").trigger('reloadGrid');
+//                            //REGARCAR ULTIMO GRID
+//                            var detalle = $("#detalle");
+//                            detalle.clearGridData();
+//                        }
+//                    }
+//                    else {
+//                            $("#lista-especialidades-detalle").jqGrid('setGridParam',{url:"../../dl/contacto_bl/testlistaespecialidades/hijo.php?q=1&id="+ids,page:1});
+//                            $("#lista-especialidades-detalle").jqGrid('setCaption',"EMPRESA").trigger('reloadGrid');
+//                            //recargar la ultima grilla
+//                            var detalle = $("#detalle");
+//                            detalle.clearGridData();
+//                    }
+                },
+                subGridRowExpanded:function(subgrid_id,row_id){
+                    var subgrid_table_id, pager_id;
+                    pager_id = "p_"+subgrid_table_id+"_t";
+                    $("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
+                    jQuery("#"+subgrid_table_id).jqGrid({
+                        url:"../../dl/contacto_bl/testlistaespecialidades/hijo.php?q=1&id="+row_id,
+                        datatype:"json",
+                        colNames:['Id','Empresa'],
+                        colModel:[
+                            {name:'id',index:'id',width:250,hidden:true},
+                            {name:'descripcion',index:'descripcion',width:250}
+                        ],
+                        rowNum:15,
+                       
+                        subGrid:true,
+                        onSelectedRow:function(ids){
+                            
+                        },
+                        subGridRowExpanded:function(subgrid_id,row_id){
+                            var subgrid_table_id, pager_id;
+                            var idx;
+                            subgrid_table_id = subgrid_id+"_t";
+                            pager_id = "p_"+subgrid_table_id;
+                            $("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
+                            jQuery("#"+subgrid_table_id).jqGrid({
+                                url:"../../dl/contacto_bl/testlistaespecialidades/detalle.php?q=2&id="+row_id,
+                                datatype:"xml",
+                                colNames:['Id','Nombre'],
+                                colModel:[
+                                    {name:"id",index:"id",key:true,hidden:true},
+                                    {name:"nombre",index:"nombre"},
+                                ],
+                                rowNum:10,
+                                pager:pager_id,
+                                sortname:'nombre',
+                                sortorder:"asc",
+                                height:'100%',
+                                onSelectRow:function(idx){
+                                    $.ajax({
+                                        data:{id:idx},
+                                        type:"GET",
+                                        dataType:"json",
+                                        url:"../../dl/contacto_bl/testlistaespecialidades/last-detail.php",
+                                        success:function(data){
+                                            verDetallePersona(data);
+                                        },
+                                        error:function(){
+                                            errorDetalle();
+                                        }
+                                    });
+                                }
+                            });
+                            jQuery("#"+subgrid_table_id).jqGrid('navGrid',"#"+pager_id,{edit:false,add:false,del:false})
                         }
-                    }
-                    else {
-                            $("#lista-especialidades-detalle").jqGrid('setGridParam',{url:"../../dl/contacto_bl/testlistaespecialidades/hijo.php?q=1&id="+ids,page:1});
-                            $("#lista-especialidades-detalle").jqGrid('setCaption',"EMPRESA").trigger('reloadGrid');
-                            //recargar la ultima grilla
-                            var detalle = $("#detalle");
-                            detalle.clearGridData();
-                    }
+                    })
                 }
             });//$("#lista-especialidades").jqGrid('navGrid','#pager-especialidades',{add:true,edit:true,del:false});
             
             /**
-             * GRILLA EMPRESA
+             * GRILLA EMPRESA + SUBGRILLA CONTACTO
+             * 
+             * 
+             * GRILLA A OCULTAR
              */
-            $("#lista-especialidades-detalle").jqGrid({
-                height:200,
-                width:500,
-                url:'../../dl/contacto_bl/testlistaespecialidades/hijo.php?q=1&id=0',
-                datatype:"json",
-                colNames:['Id','Empresa'],
-                colModel:[
-                    {name:'id',index:'id',width:250,hidden:true},
-                    {name:'descripcion',index:'descripcion',width:250}
-                ],
-                rowNum:5,
-                rowList:[5,10,20],
-                pager:'#pager-especialidades-detalle',
-                sortname:'descripcion',
-                viewrecords:true,
-                sortorder:"asc",
-                multiselect:false,
-                caption:"EMPRESA",
-                subGrid:true,
-                onSelectRow:function(idx){
-                    $.ajax({
-                        data:{id:idx},
-                        type:"GET",
-                        dataType:"json",
-                        url:"../../dl/contacto_bl/testlistaespecialidades/contacto_empresaDetail",
-                        success:function(data){
-                            verDetalle(data);
-                        },
-                        error:function(){
-                            errorDetalle();
-                        }
-                    });
-                },
-                subGridRowExpanded:function(subgrid_id,row_id){
-                    var subgrid_table_id, pager_id;
-                    var idx;
-                    subgrid_table_id = subgrid_id+"_t";
-                    pager_id = "p_"+subgrid_table_id;
-                    $("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
-                    jQuery("#"+subgrid_table_id).jqGrid({
-                        url:"../../dl/contacto_bl/testlistaespecialidades/detalle.php?q=2&id="+row_id,
-                        datatype:"xml",
-                        colNames:['Id','Nombre'],
-                        colModel:[
-                            {name:"id",index:"id",key:true,hidden:true},
-                            {name:"nombre",index:"nombre"},
-                        ],
-                        rowNum:10,
-                        pager:pager_id,
-                        sortname:'nombre',
-                        sortorder:"asc",
-                        height:'100%',
-                        onSelectRow:function(idx){
-                            $.ajax({
-                                data:{id:idx},
-                                type:"GET",
-                                dataType:"json",
-                                url:"../../dl/contacto_bl/testlistaespecialidades/last-detail.php",
-                                success:function(data){
-                                    verDetallePersona(data);
-                                },
-                                error:function(){
-                                    errorDetalle();
-                                }
-                            });
-                        }
-                    });
-                    jQuery("#"+subgrid_table_id).jqGrid('navGrid',"#"+pager_id,{edit:false,add:false,del:false})
-                },
-                subGridRowColapsed:function(subgrid_id,row_id){
-                }
-            });//.navGrid('#pager-especialidades-detalle',{add:false,edit:false,del:false});
+//            $("#lista-especialidades-detalle").jqGrid({
+//                height:200,
+//                width:500,
+//                url:'../../dl/contacto_bl/testlistaespecialidades/hijo.php?q=1&id=0',
+//                datatype:"json",
+//                colNames:['Id','Empresa'],
+//                colModel:[
+//                    {name:'id',index:'id',width:250,hidden:true},
+//                    {name:'descripcion',index:'descripcion',width:250}
+//                ],
+//                rowNum:5,
+//                rowList:[5,10,20],
+//                pager:'#pager-especialidades-detalle',
+//                sortname:'descripcion',
+//                viewrecords:true,
+//                sortorder:"asc",
+//                multiselect:false,
+//                caption:"EMPRESA",
+//                subGrid:true,
+//                onSelectRow:function(idx){
+//                    $.ajax({
+//                        data:{id:idx},
+//                        type:"GET",
+//                        dataType:"json",
+//                        url:"../../dl/contacto_bl/testlistaespecialidades/contacto_empresaDetail",
+//                        success:function(data){
+//                            verDetalle(data);
+//                        },
+//                        error:function(){
+//                            errorDetalle();
+//                        }
+//                    });
+//                },
+//                subGridRowExpanded:function(subgrid_id,row_id){
+//                    var subgrid_table_id, pager_id;
+//                    var idx;
+//                    subgrid_table_id = subgrid_id+"_t";
+//                    pager_id = "p_"+subgrid_table_id;
+//                    $("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
+//                    jQuery("#"+subgrid_table_id).jqGrid({
+//                        url:"../../dl/contacto_bl/testlistaespecialidades/detalle.php?q=2&id="+row_id,
+//                        datatype:"xml",
+//                        colNames:['Id','Nombre'],
+//                        colModel:[
+//                            {name:"id",index:"id",key:true,hidden:true},
+//                            {name:"nombre",index:"nombre"},
+//                        ],
+//                        rowNum:10,
+//                        pager:pager_id,
+//                        sortname:'nombre',
+//                        sortorder:"asc",
+//                        height:'100%',
+//                        onSelectRow:function(idx){
+//                            $.ajax({
+//                                data:{id:idx},
+//                                type:"GET",
+//                                dataType:"json",
+//                                url:"../../dl/contacto_bl/testlistaespecialidades/last-detail.php",
+//                                success:function(data){
+//                                    verDetallePersona(data);
+//                                },
+//                                error:function(){
+//                                    errorDetalle();
+//                                }
+//                            });
+//                        }
+//                    });
+//                    jQuery("#"+subgrid_table_id).jqGrid('navGrid',"#"+pager_id,{edit:false,add:false,del:false})
+//                },
+//                subGridRowColapsed:function(subgrid_id,row_id){
+//                }
+//            });//.navGrid('#pager-especialidades-detalle',{add:false,edit:false,del:false});
             
             /**
              * DETALLE QUE SE MUESTRA AL LADO DERECHO

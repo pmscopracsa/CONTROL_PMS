@@ -14,7 +14,6 @@ class RegistraListaDistribucion
     protected $_id;
     protected $_empresaid;
     protected $_nombrelista;
-    protected $_codigoobra;
     protected $_tbcontactoid = array();
     protected $_observacion;
     
@@ -44,11 +43,10 @@ class RegistraListaDistribucion
                 NULL
                 ,$this->_empresaid
                 ,'$this->_nombrelista'
-                ,'$this->_codigoobra'
                 ,'$this->_observacion')";
             $tb_query = mysql_query($query,$cn);
             
-            if (!$query)
+            if (!$tb_query)
                 throw new Exception('Error en insercion a tabla: tb_listadistribucioncontacto. Error '.mysql_error ());
             
             mysql_query("COMMIT",$cn);
@@ -109,14 +107,6 @@ class RegistraListaDistribucion
 
     public function set_nombrelista($_nombrelista) {
         $this->_nombrelista = $_nombrelista;
-    }
-
-    public function get_codigoobra() {
-        return $this->_codigoobra;
-    }
-
-    public function set_codigoobra($_codigoobra) {
-        $this->_codigoobra = $_codigoobra;
     }
 
     public function get_tbcontactoid() {

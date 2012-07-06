@@ -1,4 +1,5 @@
 <?php
+session_start(); 
 $CSS_PATH = '../../css/';
 $css = array();
 $css = scandir($CSS_PATH);
@@ -99,7 +100,7 @@ $contactos = $contacto->mostrarContactos();
                     '<input type="hidden" name="contacto'+contador_contactos+'" value="'+datos[index].id+'" />'+
                     "</tr>"    
                     );
-                })
+                });
             }
             
             /**
@@ -142,17 +143,17 @@ $contactos = $contacto->mostrarContactos();
              * BTNPORNOMBRE
              */
             $("#btnBuscaPorNombre").click(function() {
-                var id_listadistribucion = <?=$_SESSION['id_listadistribucion']?>;
+                var id = <?=$_SESSION['id']?>;
                 $.ajax({
-                    data:{id:id_listadistribucion},
+                    data:{id:id},
                     type:"GET",
                     dataType:"json",
-                    url:"",
+                    url:"../../bl/Contacto/mantenimiento/registrolistadistribucion_llenarformulario.php",
                     success:function(data) {
-                        llevarFormulario(data);
+                        $("#contactos-agregados tbody").load(data);
                     } 
-                })
-            })
+                });
+            });
         });    
         </script>
         <script type="text/javascript">
@@ -170,12 +171,8 @@ $contactos = $contacto->mostrarContactos();
             }
         </script>
     </head>
-    <body class="fondo">
-        <div id="barra-superior">
-            <div id="barra-superior-dentro">
-                <h1 id="titulo_barra">REGISTRO LISTA DE DISTRIBUCION</h1>
-               
-            </div>
+    <body >
+        <div >
         </div>
         <!--ventana modal para seleccionar los contactos-->
         <div id="modal-contactos" title="Seleccionar contactos">
@@ -209,7 +206,7 @@ $contactos = $contacto->mostrarContactos();
                         <td><input id="btnBuscaPorNombre" type="button" value="Buscar..."/></td>
                     </tr>
                     <tr>
-                        <td><label>C&oacute;digo de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                        <td><label>Nombre de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td><input id="inputext" class="obra" type="text" name="codigo" /></td>
                     </tr>
                     <tr>
@@ -251,5 +248,6 @@ $contactos = $contacto->mostrarContactos();
                 <input type="submit" id="submit" value="test" />
             </form>
         </div>
+        <div id="id_session"></div>
     </body>
 </html>

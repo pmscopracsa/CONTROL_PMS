@@ -1,4 +1,8 @@
 <?php
+/**
+ * LLENAR FORMULARIO POR ID DE LISTA 
+ */
+/*
 require_once '../../../dl/Conexion.php';
 
 try {
@@ -14,7 +18,7 @@ try {
     if (!$cn)
         throw new Exception("Error en la conexion. Archivo: ".$path_info['basename']." Error DB: ".  mysql_error(). "\n");
     
-    $sql = "SELECT * FROM tb_listadistribucioncontacto WHERE id = ".$id_listadistribucion;
+    $sql = "SELECT * FROM tb_listadistribucioncontacto WHERE id = $id_listadistribucion AND tb_empresa_id = 1";
     $rs = mysql_query($sql);
     
     if (!$rs)
@@ -33,4 +37,9 @@ try {
     echo json_encode($especialidad);
 } catch ( Exception $ex ) {
     echo "Mensaje de error :\n".$ex->getMessage()."\n";
-}
+}*/
+                    echo"<tr>";
+                    echo"<td>HOLA</td>";
+                    echo"<td>ADIOS</td>";
+                    echo"<td><a href='#' id='del-contacto' class='button delete'>Eliminar</a></td>";
+                    echo'<input type="hidden" name="contacto" value="" /></tr>';    
