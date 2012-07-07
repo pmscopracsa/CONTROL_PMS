@@ -50,7 +50,7 @@ $css = scandir($CSS_PATH);
                 * CONTACTO COMÚN - especialidad
                 */   
                 $("#tbl-paginaamarilla_especialidad").jqGrid({
-                    height:200,
+                    height:550,
                     width:500,
                     url:'../../dl/contacto_bl/ContactoComun_Especialidad.php?q=1&id=0',
                     datatype:"json",
@@ -66,107 +66,152 @@ $css = scandir($CSS_PATH);
                     multiselect:false,
                     sortname:'descripcion',
                     caption:"ESPECIALIDADES",
+                    subGrid:true,
                     onSelectRow:function(ids){
-                        limpiarIdAnterior();
-                        obtenerIdEspecialidad(ids);
-                        ocultarBotonImportar();
-                        if(ids == null) {
-                            ids = 0;
-                            if($("#tbl-paginaamarilla_empresa").jqGrid('getGridParam','records') > 0) {
-                                $("#tbl-paginaamarilla_empresa").jqGrid('setGridParam',{url:"../../dl/contacto_bl/ContactoComun_Empresa.php?q=1&id="+ids,page:1});
-                                $("#tbl-paginaamarilla_empresa").jqGrid('setCaption',"EMPRESA").trigger('reloadGrid');
-                                //REGARCAR ULTIMO GRID
-                                var detalle = $("#detalle");
-                                detalle.clearGridData();
+//                        limpiarIdAnterior();
+//                        obtenerIdEspecialidad(ids);
+//                        ocultarBotonImportar();
+//                        if(ids == null) {
+//                            ids = 0;
+//                            if($("#tbl-paginaamarilla_empresa").jqGrid('getGridParam','records') > 0) {
+//                                $("#tbl-paginaamarilla_empresa").jqGrid('setGridParam',{url:"../../dl/contacto_bl/ContactoComun_Empresa.php?q=1&id="+ids,page:1});
+//                                $("#tbl-paginaamarilla_empresa").jqGrid('setCaption',"EMPRESA").trigger('reloadGrid');
+//                                //REGARCAR ULTIMO GRID
+//                                var detalle = $("#detalle");
+//                                detalle.clearGridData();
+//                            }
+//                        }
+//                        else {
+//                            $("#tbl-paginaamarilla_empresa").jqGrid('setGridParam',{url:"../../dl/contacto_bl/ContactoComun_Empresa.php?q=1&id="+ids,page:1});
+//                            $("#tbl-paginaamarilla_empresa").jqGrid('setCaption',"EMPRESA").trigger('reloadGrid');
+//                            //recargar la ultima grilla
+//                            var detalle = $("#detalle");
+//                            detalle.clearGridData();
+//                        }
+                    },
+                    subGridRowExpanded:function(subgrid_id,row_id) {
+                        var subgrid_table_id, pager_id;
+                        pager_id = "p_"+subgrid_table_id+"_t";
+                        $("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
+                        jQuery("#"+subgrid_table_id).jqGrid({
+                            url:"../../dl/contacto_bl/ContactoComun_Empresa.php?q=1&id=0"+row_id,
+                            datatype:"json",
+                            colNames:['Id','Empresa'],
+                            colModel:[
+                                {name:'id',index:'id',width:250,hidden:true},
+                                {name:'descripcion',index:'descripcion',width:250}
+                            ],
+                            rowNum:15,
+                            subGrid:true,
+                            onSelectedRow:function(ids){
+                                
+                            },
+                            subGridRowExpanded:function(subgrid_id,row_id) {
+                                var subgrid_table_id, pager_id;
+                                var idx;
+                                subgrid_table_id = subgrid_id+"_t";
+                                pager_id = "p_"+subgrid_table_id;
+                                $("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
+                                jQuery("#"+subgrid_table_id).jqGrid({
+                                    url:"../../dl/contacto_bl/ContactoComun_Contacto.php?q=2&id="+row_id, 
+                                    datatype:"xml",
+                                    colNames:['Id','Contacto','Email'],
+                                    colModel:[
+                                        {name:"id",index:"id",width:80,key:true,hidden:true}, 
+                                        {name:"nombres",index:"nombres",width:130},
+                                        {name:"correo",index:"correo"},
+                                    ],
+                                    rowNum:10,
+                                    pager:pager_id,
+                                    sortname:"",
+                                    sortorder:"",
+                                    height:'100%',
+                                    onSelectedRow:function(idx){
+                                        
+                                    }
+                                });
+                                jQuery("#"+subgrid_table_id).jqGrid('navGrid',"#"+pager_id,{edit:false,add:false,del:false})
                             }
-                        }
-                        else {
-                            $("#tbl-paginaamarilla_empresa").jqGrid('setGridParam',{url:"../../dl/contacto_bl/ContactoComun_Empresa.php?q=1&id="+ids,page:1});
-                            $("#tbl-paginaamarilla_empresa").jqGrid('setCaption',"EMPRESA").trigger('reloadGrid');
-                            //recargar la ultima grilla
-                            var detalle = $("#detalle");
-                            detalle.clearGridData();
-                        }
+                        })
                     }
                 });
                 
                 /**
                  * CONTACTO COMUN - EMPRESA
-                 */
-                $("#tbl-paginaamarilla_empresa").jqGrid({
-                    url:'../../dl/contacto_bl/ContactoComun_Empresa.php?q=1&id=0',
-                    datatype:"json",
-                    height:190,
-                    width:500,
-                    colNames:['Id','Empresa'],
-                    colModel:[
-                        {name:'id',index:'id',width:250,sortable:false,hidden:true},
-                        {name:'descripcion',index:'descripcion',width:250}
-                    ],
-                    rowNum:10,
-                    rowList:[10,20,30],
-                    pager:"#paginaamarilla_empresa-pager",
-                    sortname:'descripcion',
-                    viewrecords:true,
-                    multiselect:false,
-                    caption:"EMPRESA",
-                    subGrid:true,
-                    onSelectRow:function(row_id){
-                        $.ajax({
-                            data:{id:row_id},
-                            type:"GET",
-                            dataType:"json",
-                            url:"../../dl/contacto_bl/contactoComun_empresaDetail.php",
-                            success:function(data){
-                                verDetalle(data);
-                            }
-                        })
-                    },
-                    subGridRowExpanded:function(subgrid_id,row_id){
-                        var subgrid_table_id,pager_id;
-                        var idx;
-                        subgrid_table_id = subgrid_id+"_t";
-                        pager_id = "p_"+subgrid_table_id;
-                        $("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
-                        jQuery("#"+subgrid_table_id).jqGrid({ 
-                            url:"../../dl/contacto_bl/ContactoComun_Contacto.php?q=2&id="+row_id, 
-                            datatype: "xml", 
-                            colNames: ['Id','Contacto','Email'], 
-                            colModel: [ 
-                                {name:"id",index:"id",width:80,key:true,hidden:true}, 
-                                {name:"nombres",index:"nombres",width:130},
-                                {name:"correo",index:"correo"},
-                               
-                            ], 
-                            rowNum:20, 
-                            pager: pager_id, 
-                            sortname: 'num', 
-                            sortorder: "asc", 
-                            height: '100%',
-                            width:'100%',
-                            onSelectRow:function(idx){
-                                $.ajax({
-                                    data:{id:idx},
-                                    type:"GET",
-                                    dataType:"json",
-                                    url:"../../dl/contacto_bl/contactoComun_personaDetail.php",
-                                    success:function(data){
-                                        mostrarBotonImportar();
-                                        verDetallePersona(data);
-                                    },
-                                    error:function(){
-                                        errorDetalle();
-                                    }
-                                });
-                            }
-                        }); 
-                        jQuery("#"+subgrid_table_id).jqGrid('navGrid',"#"+pager_id,{edit:false,add:false,del:false})
+                 *//*
+            $("#tbl-paginaamarilla_empresa").jqGrid({
+                url:'../../dl/contacto_bl/ContactoComun_Empresa.php?q=1&id=0',
+                datatype:"json",
+                height:190,
+                width:500,
+                colNames:['Id','Empresa'],
+                colModel:[
+                    {name:'id',index:'id',width:250,sortable:false,hidden:true},
+                    {name:'descripcion',index:'descripcion',width:250}
+                ],
+                rowNum:10,
+                rowList:[10,20,30],
+                pager:"#paginaamarilla_empresa-pager",
+                sortname:'descripcion',
+                viewrecords:true,
+                multiselect:false,
+                caption:"EMPRESA",
+                subGrid:true,
+                onSelectRow:function(row_id){
+                    $.ajax({
+                        data:{id:row_id},
+                        type:"GET",
+                        dataType:"json",
+                        url:"../../dl/contacto_bl/contactoComun_empresaDetail.php",
+                        success:function(data){
+                            verDetalle(data);
                         }
+                    })
+                },
+                subGridRowExpanded:function(subgrid_id,row_id){
+                    var subgrid_table_id,pager_id;
+                    var idx;
+                    subgrid_table_id = subgrid_id+"_t";
+                    pager_id = "p_"+subgrid_table_id;
+                    $("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
+                    jQuery("#"+subgrid_table_id).jqGrid({ 
+                        url:"../../dl/contacto_bl/ContactoComun_Contacto.php?q=2&id="+row_id, 
+                        datatype: "xml", 
+                        colNames: ['Id','Contacto','Email'], 
+                        colModel: [ 
+                            {name:"id",index:"id",width:80,key:true,hidden:true}, 
+                            {name:"nombres",index:"nombres",width:130},
+                            {name:"correo",index:"correo"},
+                        ], 
+                        rowNum:20, 
+                        pager: pager_id, 
+                        sortname: 'num', 
+                        sortorder: "asc", 
+                        height: '100%',
+                        width:'100%',
+                        onSelectRow:function(idx){
+                            $.ajax({
+                                data:{id:idx},
+                                type:"GET",
+                                dataType:"json",
+                                url:"../../dl/contacto_bl/contactoComun_personaDetail.php",
+                                success:function(data){
+                                    mostrarBotonImportar();
+                                    verDetallePersona(data);
+                                },
+                                error:function(){
+                                    errorDetalle();
+                                }
+                            });
+                        }
+                    }); 
+                    jQuery("#"+subgrid_table_id).jqGrid('navGrid',"#"+pager_id,{edit:false,add:false,del:false})
+                    }
 //                    },
 //                    subGridRowColapsed:function(subgrid_id,row_id){
 //                        
 //                    }
-                });
+                });*/
                 /**
                  * VER DETALLE DE LA EMPRESA 
                  */

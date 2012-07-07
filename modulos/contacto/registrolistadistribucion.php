@@ -143,14 +143,14 @@ $contactos = $contacto->mostrarContactos();
              * BTNPORNOMBRE
              */
             $("#btnBuscaPorNombre").click(function() {
-                var id = <?=$_SESSION['id']?>;
+                //var id = <?=$_SESSION['datos_empresa'][0]?>;
                 $.ajax({
                     data:{id:id},
                     type:"GET",
                     dataType:"json",
                     url:"../../bl/Contacto/mantenimiento/registrolistadistribucion_llenarformulario.php",
                     success:function(data) {
-                        $("#contactos-agregados tbody").load(data);
+                        //$("#contactos-agregados tbody").load(data);
                     } 
                 });
             });
