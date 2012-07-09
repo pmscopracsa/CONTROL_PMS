@@ -45,30 +45,10 @@ $css = scandir($CSS_PATH);
                 multiselect:false,
                 caption:"ESPECIALIDAD",
                 subGrid:true,
-                onSelectRow:function(ids) {
-//                    alert(ids);
-//                    if(ids == null) {
-//                        ids = 0;
-//                        if($("#lista-especialidades-detalle").jqGrid('getGridParam','records') > 0) {
-//                            $("#lista-especialidades-detalle").jqGrid('setGridParam',{url:"../../dl/contacto_bl/testlistaespecialidades/hijo.php?q=1&id="+ids,page:1});
-//                            $("#lista-especialidades-detalle").jqGrid('setCaption',"EMPRESA").trigger('reloadGrid');
-//                            //REGARCAR ULTIMO GRID
-//                            var detalle = $("#detalle");
-//                            detalle.clearGridData();
-//                        }
-//                    }
-//                    else {
-//                            $("#lista-especialidades-detalle").jqGrid('setGridParam',{url:"../../dl/contacto_bl/testlistaespecialidades/hijo.php?q=1&id="+ids,page:1});
-//                            $("#lista-especialidades-detalle").jqGrid('setCaption',"EMPRESA").trigger('reloadGrid');
-//                            //recargar la ultima grilla
-//                            var detalle = $("#detalle");
-//                            detalle.clearGridData();
-//                    }
-                },
                 subGridRowExpanded:function(subgrid_id,row_id){
                     var subgrid_table_id, pager_id;
                     subgrid_table_id = subgrid_id+"_t";
-                    pager_id = "p_"+subgrid_table_id+"_t";
+                    pager_id = "p_"+subgrid_table_id;
                     $("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
                     jQuery("#"+subgrid_table_id).jqGrid({
                         url:"../../dl/contacto_bl/testlistaespecialidades/hijo.php?q=1&id="+row_id,
@@ -81,6 +61,7 @@ $css = scandir($CSS_PATH);
                         rowNum:15,
                         pager:pager_id,
                         subGrid:true,
+                        height:'100%',
                         onSelectRow:function(idx){
                             $.ajax({
                                 data:{id:idx},

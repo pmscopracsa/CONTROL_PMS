@@ -511,11 +511,11 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                </tr>
                <tr class="alt">
                    <td><label for="ruc">RUC:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input  class="ruc_empresa" id="inputext" type="text" size="30" placeholder="INGRESE EL RUC COMO DATO NUEVO O EMPIECE A TIPEAR UN RUC EXISTENTE" name="ruc" /></td>
+                   <td><input  class="ruc_empresa" id="inputext" type="text" size="70" placeholder="INGRESE EL RUC COMO DATO NUEVO O EMPIECE A TIPEAR UN RUC EXISTENTE" name="ruc" /></td>
                </tr>
                <tr>
                    <td><label for="nombre">Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input class="nombre_empresa" id="inputext" type="text" size="30" placeholder="" name="nombre" /></td>
+                   <td><input class="nombre_empresa" id="inputext" type="text" size="70" placeholder="INGRESE EL NOMBRE COMO DATO NUEVO O EMPIECE A TIPEAR UNO YA EXISTENTE" name="nombre" /></td>
                    <td><a id="edita" href="#"><img src="../../img/search.png" /></a></td>
                </tr>
                <tr>

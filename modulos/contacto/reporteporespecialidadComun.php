@@ -68,28 +68,6 @@ $css = scandir($CSS_PATH);
                     sortname:'descripcion',
                     caption:"ESPECIALIDADES",
                     subGrid:true,
-                    onSelectRow:function(ids){
-//                        limpiarIdAnterior();
-//                        obtenerIdEspecialidad(ids);
-//                        ocultarBotonImportar();
-//                        if(ids == null) {
-//                            ids = 0;
-//                            if($("#tbl-paginaamarilla_empresa").jqGrid('getGridParam','records') > 0) {
-//                                $("#tbl-paginaamarilla_empresa").jqGrid('setGridParam',{url:"../../dl/contacto_bl/ContactoComun_Empresa.php?q=1&id="+ids,page:1});
-//                                $("#tbl-paginaamarilla_empresa").jqGrid('setCaption',"EMPRESA").trigger('reloadGrid');
-//                                //REGARCAR ULTIMO GRID
-//                                var detalle = $("#detalle");
-//                                detalle.clearGridData();
-//                            }
-//                        }
-//                        else {
-//                            $("#tbl-paginaamarilla_empresa").jqGrid('setGridParam',{url:"../../dl/contacto_bl/ContactoComun_Empresa.php?q=1&id="+ids,page:1});
-//                            $("#tbl-paginaamarilla_empresa").jqGrid('setCaption',"EMPRESA").trigger('reloadGrid');
-//                            //recargar la ultima grilla
-//                            var detalle = $("#detalle");
-//                            detalle.clearGridData();
-//                        }
-                    },
                     subGridRowExpanded:function(subgrid_id,row_id) {
                         var subgrid_table_id, pager_id;
                         subgrid_table_id = subgrid_id+"_t";
@@ -108,6 +86,7 @@ $css = scandir($CSS_PATH);
                             subGrid:true,
                             sortname:'descripcion',    
                             sortorder:'asc',
+                            height:'100%',
                             onSelectRow:function(row_id){
                                 $.ajax({
                                     data:{id:row_id},
