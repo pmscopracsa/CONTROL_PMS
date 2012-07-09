@@ -38,14 +38,25 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
         <script src="../../js/cargarDatos.js" type="text/javascript"></script>
         <script src="../../js/jquery.form.js" type="text/javascript"></script>
         <script src="../../js/autocomplete/jquery.autocomplete.js" type="text/javascript"></script>
-        <script>
+        <script type="text/javascript">
+        
+        function recargarEspecialidades()
+        {
+            $("#seleccionaEspecialidad").load("modal_registracompania/especialidades_div.php");
+        }
+            
         $(document).ready(function(){
+            
+            /**
+             * PRIMERA CARGA DE LA LISTA DE ESPECIALIDADES
+             */
+            $("#seleccionaEspecialidad").load("modal_registracompania/especialidades_div.php");
+            
             var contador_especialidades = 0;
             var con_especia = 0;
             /*
              * MODAL PÁRA SELECCIONAR ESPECIALIDAD(ES)
              */
-            $("#dialog:ui-dialog").dialog("destroy");
             $("#seleccionaEspecialidad").dialog({
                 autoOpen:false,
                 height:300,
@@ -58,9 +69,6 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                     "Salir":function(){
                         $(this).dialog("close");
                     }
-                },
-                close:function(){
-                    allFields.val("").removeClass("ui-state-error");
                 }
             });
             
@@ -78,9 +86,6 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                     "Salir":function() {
                         $(this).dialog("close");
                     }
-                },
-                close:function(){
-                    allFields.val("").removeClass("ui-state-error");
                 }
             });
             
@@ -135,11 +140,11 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                 //alert(descripcion);
                 $.ajax({
                     type:"POST",
-                    url:'../../bl/Contacto/mantenimiento/especialidad_crear.php',
+                    url:'../../bl/Contacto/mantenimiento/especialidadcompania_crear.php',
                     data:"descripcion="+descripcion,
-                    target:'#seleccionaEspecialidad',
                     success:function() {
-                        $('.input-descripcion').val("")
+                        $("#divNuevaEspecialidad").dialog('close');
+                        recargarEspecialidades();
                     }
                 });
             });
@@ -460,31 +465,9 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                     <td><label for="especialidad">Especialidad:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td>
                         <input type="button" id="agregarEspecialidad" value="Agregar Especialidad" class="ui-button ui-widget ui-state-default ui-corner-all"/>
-                        <div id="seleccionaEspecialidad" title="Agregar Especialidad" style="display: none" >
-                            <table border="0" class="atable">
-                                <tr>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <?php
-                                        /**
-                                         *corregir el nombre contaxcto[] ya que no correspponde 
-                                         */
-                                        foreach ($especialidades as &$valor) {
-                                            echo '<input type="checkbox" name="contacto[]" value="'.
-                                                    $valor[0].
-                                                    '"/>'.
-                                                    $valor[1].
-                                                    '<br />';
-                                        }    
-                                        ?>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+                        <div id="seleccionaEspecialidad" title="Agregar Especialidad" style="display: none" ></div>
                     </td>
-                    <!-- probando con nuevo modal sobre modal -->
+                    
                     <div id="divNuevaEspecialidad" title="Crear nueva especialidad" style="display: none">
                         <label>Especialidad:</label>
                         <input id="inputext" class="input-descripcion" type="text" />

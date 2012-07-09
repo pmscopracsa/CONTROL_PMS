@@ -166,7 +166,8 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
         /**
          * BOTON PARA ABRIR MODAL Y AGREGAR ESPECIALIDADES AL FORMULARIO PRINCIPAL
          */
-        $("#btnAgregarEspecialidad").click(function(){
+        $("#btnAgregarEspecialidad").click(function(e){
+            e.preventDefault();
             $("#divSeleccionaEspecialidad").dialog("open");
         })
         
@@ -210,14 +211,8 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                 url:'../../bl/Contacto/mantenimiento/especialidadcompania_crear.php',
                 data:"descripcion="+descripcion,
                 success:function(){
-                    $.ajax({
-                        type:"GET",
-                        url:"../../bl/Contacto/consulta/listarUltimoIngreso.php",
-                        success:function(data){
-                            $("#divNuevaEspecialidad").dialog('close');
-                            recargarEspecialidades();
-                        }
-                    });
+                    $("#divNuevaEspecialidad").dialog('close');
+                    recargarEspecialidades();
                 }
             });
         });
@@ -516,7 +511,7 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                </tr>
                <tr class="alt">
                    <td><label for="ruc">RUC:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input  class="ruc_empresa" id="inputext" type="text" size="30" placeholder="" name="ruc" /></td>
+                   <td><input  class="ruc_empresa" id="inputext" type="text" size="30" placeholder="INGRESE EL RUC COMO DATO NUEVO O EMPIECE A TIPEAR UN RUC EXISTENTE" name="ruc" /></td>
                </tr>
                <tr>
                    <td><label for="nombre">Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>

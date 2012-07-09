@@ -46,7 +46,7 @@ $css = scandir($CSS_PATH);
                 caption:"ESPECIALIDAD",
                 subGrid:true,
                 onSelectRow:function(ids) {
-                    alert(ids);
+//                    alert(ids);
 //                    if(ids == null) {
 //                        ids = 0;
 //                        if($("#lista-especialidades-detalle").jqGrid('getGridParam','records') > 0) {
@@ -67,6 +67,7 @@ $css = scandir($CSS_PATH);
                 },
                 subGridRowExpanded:function(subgrid_id,row_id){
                     var subgrid_table_id, pager_id;
+                    subgrid_table_id = subgrid_id+"_t";
                     pager_id = "p_"+subgrid_table_id+"_t";
                     $("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
                     jQuery("#"+subgrid_table_id).jqGrid({
@@ -78,10 +79,22 @@ $css = scandir($CSS_PATH);
                             {name:'descripcion',index:'descripcion',width:250}
                         ],
                         rowNum:15,
-                       
+                        pager:pager_id,
                         subGrid:true,
-                        onSelectedRow:function(ids){
-                            
+                        onSelectRow:function(idx){
+                            $.ajax({
+                                data:{id:idx},
+                                type:"GET",
+                                dataType:"json",
+                                url:"../../dl/contacto_bl/testlistaespecialidades/contacto_empresaDetail",
+                            success:function(data){
+                                verDetalle(data);
+                            },
+                            error:function(){
+                                errorDetalle();
+                            }
+                    });
+
                         },
                         subGridRowExpanded:function(subgrid_id,row_id){
                             var subgrid_table_id, pager_id;
