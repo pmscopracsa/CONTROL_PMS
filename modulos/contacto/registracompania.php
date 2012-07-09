@@ -54,14 +54,19 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
      */    
     function recargarEspecialidades()
     {
-        $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php");
-    }    
+        $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro=1");
+    } 
+    
+    function recargarEspecialidadesPorFiltro(filtro)
+    {
+        $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro="+filtro);
+    }
         
     $(document).ready(function(){
         /**
          * PRIMERA CARGA DE LA LISTA DE ESPECIALIDADES
          */
-        $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php");
+        $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro=1");
         $("form").validity(function(){
             $(".ruc")
                 .require()
@@ -104,8 +109,40 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
             width:350,
             modal:true,
             buttons:{
+                "Buscar":function() {
+                    $("#txt_nombreEspecialidad").val("");
+                    buscarEspecialidad();
+                },
+                "Limpiar":function() {
+                    recargarEspecialidades();
+                },
                 "Crear nueva especialidad":function(){
                     $("#divNuevaEspecialidad").dialog("open");
+                },
+                "Salir":function(){
+                    $(this).dialog("close");
+                }
+            }
+        });
+        
+        /**
+         * MODAL PARA BUSCAR DENTEL DEL MODAL DE ESPECIALIDADES
+         */
+        function buscarEspecialidad()
+        {
+            $("#modal_buscarEspecialidadPorNombre").dialog("open");
+        }
+        
+        $("#modal_buscarEspecialidadPorNombre").dialog({
+            autoOpen:false,
+            height:100,
+            width:450,
+            modal:true,
+            buttons:{
+                "Ok":function(){
+                    if ($("#txt_nombreEspecialidad").val() == "")
+                        alert("Ingrese dato para buscar");
+                    recargarEspecialidadesPorFiltro($("#txt_nombreEspecialidad").val());
                 },
                 "Salir":function(){
                     $(this).dialog("close");
@@ -460,12 +497,6 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                }
            }
        });
-       
-//       $("#paisid").change(function(){cargar_departamentos();})
-//       $("#departamentoid").change(function(){cargar_distritos();})
-//       $("#departamentoid").attr("disabled",true);
-//       $("#distritoid").attr("disabled",true);
-       
     });
     </script>
     <script type="text/javascript">
@@ -636,14 +667,12 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                                     <td class="tr-padding">
                                         <label>Pa&iacute;s:</label>
                                         <select class="derecha" name="paisseleccionada" id="paisid">
-<!--                                            <option value="0">Selecciona pa&iacute;s</option>-->
                                         </selected>
                                     </td>
                                   <tr>  
                                     <td class="tr-padding">
                                         <label>Departamento/Estado:</label>
                                         <select class="derecha" name="departamentoseleccionada" id="departamentoid">
-<!--                                            <option value="0">Selecciona departamento</option>-->
                                         </selected>
                                     </td>
                                    <tr> 
@@ -651,7 +680,6 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                                     <td class="tr-padding">
                                         <label>Distrito/Ciudad:</label>
                                         <select class="derecha" name="distritoseleccionada" id="distritoid">
-<!--                                            <option value="0">Seleccione un distrito</option>-->
                                         </select>
                                     </td>
                                     <tr>
@@ -705,6 +733,11 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                             <label>Especialidad:</label>
                             <input id="inputext" class="input-descripcion" type="text" />
                             <input id="btn-nuevaespecialidad" type="button" value="Crear" />
+                        </div>
+                        <!-- MODAL PARA BUSCAR ESPECIALIDAD POR NOMBRE -->    
+                        <div id="modal_buscarEspecialidadPorNombre" title="Buscar Especialidad" style="display: none">
+                            <label>Nombre de especialidad:</label>
+                            <input type="text" id="txt_nombreEspecialidad" class="input-descripcion" />
                         </div>
                </tr>
                <tr>
