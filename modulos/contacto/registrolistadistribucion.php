@@ -34,16 +34,6 @@ $contactos = $contacto->mostrarContactos();
         <script>
         $(function(){
            var contador_contactos = 0;
-           
-            $("#dialog:ui-dialog").dialog("destroy");
-            
-            /*
-             * Eliminar elementos seleccionados de cotactos
-             */
-//            $("#del-contacto").live("click",function(e) {
-//                e.preventDefault();
-//                $(this).parent().parent().remove();
-//            });
             
             $("#modal-contactos").dialog({
                 autoOpen:false,

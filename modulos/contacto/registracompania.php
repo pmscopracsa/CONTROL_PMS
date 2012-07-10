@@ -16,14 +16,11 @@ function __autoload($name) {
     if (file_exists($fullpath))        require_once ($fullpath);
 }
 
-$especialidadcompania = new EspecialidadCompaniaDL();
-$especialidades = $especialidadcompania->mostrarEspecialidades();
+//$representantescompania = new RepresentanteCompaniaDL();
+//$representantes = $representantescompania->mostrarRepresentantes();
 
-$representantescompania = new RepresentanteCompaniaDL();
-$representantes = $representantescompania->mostrarRepresentantes();
-
-$empresas = new CompaniaContactoDL();
-$lista_empresas = $empresas->mostrarCompaniaContacto();
+//$empresas = new CompaniaContactoDL();
+//$lista_empresas = $empresas->mostrarCompaniaContacto();
 ?>
 <!DOCTYPE HTML>
 <html class="no-js">
@@ -45,9 +42,7 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
     <script src="../../js/jquery.validity/jQuery.validity.js" type="text/javascript"></script>
     <link href="../../js/jquery.validity/jquery.validity.css" rel="stylesheet" type="text/css" />
     <script src="../../js/jquery.form.js" type="text/javascript"></script>
-    <style>
-        .ui-autocomplete-loading { background:white url('../../img/ui-anim_basic_16x16.gif') right center no-repeat; }
-    </style>    
+  
     <script type="text/javascript">
     /**
      * FUNCION QUE VUELVE A RECARGAR EL DIV QUE CONTIENE LA LISTA DE ESPECIALIDADES
@@ -57,16 +52,39 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
         $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro=1");
     } 
     
+    /**
+     * FUNCTION QUE VEULVE A CARGAR EL DIS DE ESPECIALIDADES PERO PASANDOLE UN FILTRO PARA LA BUSQUEDA
+     */
     function recargarEspecialidadesPorFiltro(filtro)
     {
         $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro="+filtro);
+    }
+    
+    /**
+     * FUNCTION QUE VUELVE A RECARGAR EL DIV QUE CONTIEN LA LISTA DE ESPECIALIDADES
+     */
+    function recargarRepresentantes()
+    {
+        $("#divSeleccionaRepresentante").load("modal_registracompania/representantes_div.php?filtro=1");
+    }
+    
+    /**
+     * FUNCTION QUEVUELVE A CARGAR EL DIV DE REPRESENTANTES PERO PASANDOLE UN FILTRO DE BUSQUEDA
+     */
+    function recargarRepresentantesPorFiltro(filtro)
+    {
+        $("#divSeleccionaRepresentante").load("modal_registracompania/representantes_div.php?filtro="+filtro);
     }
         
     $(document).ready(function(){
         /**
          * PRIMERA CARGA DE LA LISTA DE ESPECIALIDADES
+         * PRIMERA CARGA DE LA LISTA DE REPRESENTANTES
          */
         $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro=1");
+        $("#divSeleccionaRepresentante").load("modal_registracompania/representantes_div.php?filtro=1");
+        
+        
         $("form").validity(function(){
             $(".ruc")
                 .require()
@@ -105,12 +123,12 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
          */
         $("#divSeleccionaEspecialidad").dialog({
             autoOpen:false,
-            height:300,
-            width:350,
+            height:350,
+            width:450,
             modal:true,
             buttons:{
                 "Buscar":function() {
-                    $("#txt_nombreEspecialidad").val("");
+                    $("#txt_nombreEspecialidad").val("");//clean it up
                     buscarEspecialidad();
                 },
                 "Limpiar":function() {
@@ -121,6 +139,7 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                 },
                 "Salir":function(){
                     $(this).dialog("close");
+                    recargarEspecialidades();
                 }
             }
         });
@@ -155,10 +174,41 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
          */
         $("#divSeleccionaRepresentante").dialog({
             autoOpen:false,
-            height:300,
-            width:350,
+            height:350,
+            width:450,
             modal:true,
             buttons:{
+                "Buscar":function(){
+                    $("#txt_nombreRepresentante").val("");//clean it up
+                    buscarRepresentante();
+                },
+                "Limpiar":function(){
+                    recargarRepresentantes();
+                },
+                "Salir":function(){
+                    $(this).dialog("close");
+                }
+            }
+        });
+        
+        /**
+         * MODAL PARA BUSCAR REPRESENATE
+         */
+        function buscarRepresentante() {
+            $("#modal_buscarRepresentantePorNombre").dialog("open");
+        }
+        
+        $("#modal_buscarRepresentantePorNombre").dialog({
+            autoOpen:false,
+            height:100,
+            width:450,
+            modal:true,
+            buttons:{
+                "Ok":function(){
+                    if ($("#txt_nombreRepresentante").val() == "")
+                        alert("Ingrese dato para buscar");
+                    recargarRepresentantesPorFiltro($("#txt_nombreRepresentante").val());
+                },
                 "Salir":function(){
                     $(this).dialog("close");
                 }
@@ -241,12 +291,10 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
          * MODAL PARA CREAR UNA NUEVA ESPECIALIDAD
          */ 
         $("#btn-nuevaespecialidad").click(function(){
-            var descripcion = $(".input-descripcion").attr('value');
-            
             $.ajax({
                 type:"POST",
                 url:'../../bl/Contacto/mantenimiento/especialidadcompania_crear.php',
-                data:"descripcion="+descripcion,
+                data:"descripcion="+$('.input-descripcion').attr('value'),
                 success:function(){
                     $("#divNuevaEspecialidad").dialog('close');
                     recargarEspecialidades();
@@ -319,6 +367,18 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                 }
             });
          });
+         
+         $("#representantes_boxes").live("click",function() {
+            $.ajax({
+                data:{id:$(this).val()},
+                type:"GET",
+                dataType:"json",
+                url:"../../includes/query_repository/getRepresentante.php",
+                success:function(data) {
+                    mostrarRepresentantesScroll(data);
+                }
+            })
+         })
          
          /**
           * ELIMINAR REPRESENTANTE 
@@ -502,7 +562,9 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
     <script type="text/javascript">
         $(document).ready(function(){
             var options = {
-                success:muestraRespuesta
+                success:function(){
+                    muestraRespuesta();
+                }
                 //clearForm:true
             };
             $("#frm-registracompania").ajaxForm(options);
@@ -737,7 +799,7 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                         <!-- MODAL PARA BUSCAR ESPECIALIDAD POR NOMBRE -->    
                         <div id="modal_buscarEspecialidadPorNombre" title="Buscar Especialidad" style="display: none">
                             <label>Nombre de especialidad:</label>
-                            <input type="text" id="txt_nombreEspecialidad" class="input-descripcion" />
+                            <input type="text" id="txt_nombreEspecialidad" />
                         </div>
                </tr>
                <tr>
@@ -761,27 +823,13 @@ $lista_empresas = $empresas->mostrarCompaniaContacto();
                    <td><label for="representante">Representante:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
                        <input type="button" id="btnAgregarRepresentante" value="Agregar Representante" class="ui-button ui-widget ui-state-default ui-corner-all"/>
-                       <div id="divSeleccionaRepresentante" title="Agregar Representante" style="display: none">
-                           <table border="0" class="atable">
-                           <tr>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <?php
-                                    foreach ($representantes as &$valor) {
-                                        echo '<input type="checkbox" name="representantes[]" value="'.
-                                                $valor[0].
-                                                '"/>'.
-                                                strtoupper($valor[3]).
-                                                '<br />';
-                                    }
-                                    ?>
-                                </td>
-                            </tr>    
-                           </table>
-                       </div>
+                       <div id="divSeleccionaRepresentante" title="Agregar Representante" style="display: none"></div>
+                       
                    </td>
+                        <div id="modal_buscarRepresentantePorNombre" title="Buscar representante" style="display: none">
+                           <label>Nombre del representante:</label>
+                           <input type="text" id="txt_nombreRepresentante" />
+                       </div>
                </tr>
                <tr>
                    <td><label>Lista de representantes</label></td>

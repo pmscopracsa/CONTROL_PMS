@@ -14,9 +14,8 @@ function __autoload($name) {
     $fullpath = '../../dl/contacto_bl/'.$name.'.php';
     if (file_exists($fullpath))        require_once ($fullpath);
 }
-
-$especialidadContacto = new EspecialidadPersonaDL();
-$especialidades = $especialidadContacto->mostrarEspecialidades();
+//$especialidadContacto = new EspecialidadPersonaDL();
+//$especialidades = $especialidadContacto->mostrarEspecialidades();
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,7 +41,12 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
         
         function recargarEspecialidades()
         {
-            $("#seleccionaEspecialidad").load("modal_registracompania/especialidades_div.php");
+            $("#seleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro=1");
+        }
+    
+        function recargarEspecialidadesPorFiltro(filtro)
+        {
+            $("#seleccionaEspecialidad").load("modal_registracompania/especialidades_div?filtro="+filtro);
         }
             
         $(document).ready(function(){
@@ -50,7 +54,7 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
             /**
              * PRIMERA CARGA DE LA LISTA DE ESPECIALIDADES
              */
-            $("#seleccionaEspecialidad").load("modal_registracompania/especialidades_div.php");
+            $("#seleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro=1");
             
             var contador_especialidades = 0;
             var con_especia = 0;
@@ -60,9 +64,16 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
             $("#seleccionaEspecialidad").dialog({
                 autoOpen:false,
                 height:300,
-                width:350,
+                width:450,
                 modal:true,
                 buttons:{
+                    "Buscar":function() {
+                        $("txt_nombreEspecialidad").val("");
+                        buscarEspecialidad();
+                    },
+                    "Limpiar":function() {
+                      recargarEspecialidades();  
+                    },
                     "Crear nueva especialidad":function(){
                         $("#divNuevaEspecialidad").dialog("open");
                     },
@@ -71,6 +82,34 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                     }
                 }
             });
+            
+            /**
+             * FUNCION PARA BUSCAR UNA ESPECIALIDAD
+             */
+             function buscarEspecialidad()
+             {
+                 $("#modal_buscarEspecialidadPorNombre").dialog("open");
+             }
+             
+             /**
+              * MODAL PARA ESCRIBIR LA ESPECIALIDAD A BUSCAR
+              */
+             $("#modal_buscarEspecialidadPorNombre").dialog({
+                 autoOpen:false,
+                 height:100,
+                 width:450,
+                 modal:true,
+                 buttons:{
+                     "Ok":function(){
+                         if($("#txt_nombreEspecialidad").val() == "")
+                             alert("Ingrese dato a buscar");
+                         recargarEspecialidadesPorFiltro($("#txt_nombreEspecialidad").val());
+                     },
+                     "Salir":function(){
+                         $(this).dialog("close");
+                     }
+                 }
+             })
             
             /*
              * Modal para crear una nueva especialidad
@@ -112,7 +151,6 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
             cargar_paises();
             cargar_departamentos();
             cargar_distritos();
-            
                     
             /*$("#paisid").change(function(){cargar_departamentos();})
             $("#departamentoid").change(function(){cargar_distritos();})
@@ -219,6 +257,21 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                    removerEspecialidad();
                 }
             });
+                        
+            /**
+             * ESCOGER ESPECIALIDAD O ESPECIALIDADES
+             */            
+             $("#especialidades_boxes").live("click",function() {
+                $.ajax({
+                    data:{id:$(this).val()},
+                    type:"GET",
+                    dataType:"json",
+                    url:"../../includes/query_repository/getEspecialidadCompania.php",
+                    success:function(data) {
+                        mostrarEspecialidadesScroll(data);
+                    }
+                })
+             })
                         
             /**
              * eliminar especialidad de la lista del scrollbar
@@ -347,15 +400,16 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                             <td class="td-ruc-checkbox" style="display: none"><input placeholder="RUC" type="text" id="inputext" name="ruc"/>
                     <tr>
                         <td><label>Nombres y Apellidos:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                        <td><input class="nombre_persona" id="inputext" type="text" size="25" name="nombre"</td>
+                        <td><input class="nombre_persona" id="inputext" type="text" size="70" placeholder="INGRESE EL NOMBRE COMO DATO NUEVO O EMPIECE A TIPEAR UNO YA EXISTENTE" name="nombre"</td>
                     </tr>
                     <tr>
                         <td>
                             <label>Compania:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td>
-                            <select name="companiaseleccionada" id="companiaseleccionada">
+                            <input class="nombre_empresa" id="inputext" type="text" size="70" placeholder="INGRESE EL NOMBRE COMO DATO NUEVO O EMPIECE A TIPEAR UNO YA EXISTENTE" name="companiaseleccionada" />
+<!--                            <select name="companiaseleccionada" id="companiaseleccionada">
                                 <option value="0">Seleccione una compania</option>
-                            </select>
+                            </select>-->
                         </td>
                     </tr>
                         <td><label>Cargo:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
@@ -473,6 +527,11 @@ $especialidades = $especialidadContacto->mostrarEspecialidades();
                         <input id="inputext" class="input-descripcion" type="text" />
                         <input id="btn-nuevaespecialidad" type="button" value="Crear" />
                     </div> 
+                <!-- MODAL PARA BUSCAR ESPECIALIDAD POR NOMBRE -->
+                <div id="modal_buscarEspecialidadPorNombre" title="Buscar Especialidad" style="display: none">
+                    <label>Nombre de especialidad:</label>
+                    <input type="text" id="txt_nombreEspecialidad" />
+                </div> 
                 </tr>
                 <tr>
                     <td><label>Lista de especialidades:</label></td>
