@@ -5,10 +5,40 @@
 class CompaniaContactoDL 
 {
     protected $id;
+    protected $descripcion;
     
     public function mostrarCompaniaContacto()
     {
         $query = "SELECT * FROM tb_companiacontacto ORDER BY descripcion ASC";
+        
+        try {
+            $conexion = new Conexion();
+            $cn = $conexion->conectar();
+            $rs = mysql_query($query,$cn);
+            $registros = array();
+            while($reg = mysql_fetch_array($rs))
+            {
+                array_push($registros,$reg);
+            }
+            mysql_free_result($rs);
+            mysql_close($cn);
+        } catch (Exception $exc) {
+            try {
+                mysql_free_result($rs);
+            } catch(Exception $e1){}
+            try {
+                mysql_close($cn);
+            }catch(Exception $e1){}
+        }
+    return $registros;    
+    }
+    
+    /**
+     * FUNCIONA PARA LA BUSQUEDA CON FILTRO EN EL DIALOG 
+     */
+    public function mostrarCompaniaContactoPorNombre()
+    {
+            $query = "SELECT * FROM tb_companiacontacto WHERE descripcion LIKE '$this->descripcion'";
         
         try {
             $conexion = new Conexion();
@@ -92,5 +122,26 @@ class CompaniaContactoDL
         }
         return $registros;
     }
+    
+    /*
+     * GETTES AND SETTRES
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    public function getDescripcion() {
+        return $this->descripcion;
+    }
+
+    public function setDescripcion($descripcion) {
+        $this->descripcion = $descripcion;
+    }
+
+
 }
 ?>

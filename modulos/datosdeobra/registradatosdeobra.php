@@ -61,10 +61,15 @@ $contratos = $modelos->mostrarContratos();
         <script src="../../js/jquery-tooltip/js/jtip.js" type="text/javascript"></script>
         <link href="../../js/jquery-tooltip/css/global.css" rel="stylesheet" type="text/css" />
         
-        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/claro/claro.css">
-        <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async:true"></script>
+<!--        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/claro/claro.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async:true"></script>-->
         <script>
         $(function(){
+            /**
+             * CARGAR DIV CON DATOS Y PREPARAOS PARA BUSCARLOS
+             */
+            $("#divSeleccionaCliente").load("modales/clientes_div.php");
+            
             /**
              * ELIMINAR DATOS DE LA TABLA TEMPORAL SI SE DETECTA
              * RECARGA DE LA PAGINA, EL VALOR ALEATORIO IDENTIFICARA 
@@ -602,7 +607,33 @@ $contratos = $modelos->mostrarContratos();
                 $(".txt-compania").val(empresa);
                 
             });
+            
+            /**
+             * NUEVO MODAL PARA SELECCIONAR CLIENTES - PRUEBA
+             * PPPPPPPPPP RRRRRRRR  UUUUUUUU EEEEE BBBBBBB AAAAAAA
+             */
+            $("#divSeleccionaCliente").dialog({
+                autoOpen:false,
+                height:350,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Buscar":function() {
+                        
+                    },
+                    "Limpiar":function() {
+                        
+                    },
+                    "Salir":function() {
+                        
+                    }
+                }
+            })
              
+            $('.cliente').click(function(){
+                alert("click");------------------------------------------------------------------------------------
+                $("#divSeleccionaCliente").dialog("open");
+            } 
              /**
               * MODAL: Contactos
               * FIELDS: Contacto, Posicion, Compania
@@ -799,14 +830,15 @@ $contratos = $modelos->mostrarContratos();
             
             /*
              * Agregar datos a los input - INPUT BY DEFAULT READONLY
+             * COMENTADO MOMENTANEO ------- OJO QUE ESTE SI FUNCIONA
              */
-            $('.cliente').click(function(){
-                var cliente_array = $(this).text().split("-");
-                var cli = cliente_array[1];
-                var id_cliente =  cliente_array[0];
-                $(".cliente-text").val(cli);
-                $(".cliente-id").val(id_cliente);
-            });
+//            $('.cliente').click(function(){
+//                var cliente_array = $(this).text().split("-");
+//                var cli = cliente_array[1];
+//                var id_cliente =  cliente_array[0];
+//                $(".cliente-text").val(cli);
+//                $(".cliente-id").val(id_cliente);
+//            });
             
             $('.contratante').click(function(){
                 var contratante_array = $(this).text().split("-");
@@ -877,6 +909,8 @@ $contratos = $modelos->mostrarContratos();
         <?php include_once 'modales/modal-modelocontrato.php';?>
         <?php include_once 'modales/modal-mostrarlistareportes.php';?>
         <?php include_once 'modales/modal_r_listaContactoPosicion.php';?>
+        
+        <div id="divSeleccionaCliente" title="Seleccionar Cliente - NEW FORM" style="display: none"></div>
         
         <div id="modal-contactos" title="Seleccionar contactos">
                 <div class="" >

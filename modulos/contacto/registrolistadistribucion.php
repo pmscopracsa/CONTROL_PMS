@@ -9,8 +9,8 @@ function  __autoload($name) {
     if (file_exists($fullpath))        require_once ($fullpath);
 }
 
-$contacto = new ContactoPersona();
-$contactos = $contacto->mostrarContactos();
+//$contacto = new ContactoPersona();
+//$contactos = $contacto->mostrarContactos();
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,7 +32,30 @@ $contactos = $contacto->mostrarContactos();
         <script src="../../js/jquery.form.js" type="text/javascript"></script>
         <script src="../../js/autocomplete/jquery.autocomplete.js" type="text/javascript"></script>
         <script>
+         
+            
+            
+        function recargarRepresentantes()
+        {
+            $("#modal-contactos").load("modal_registracompania/representantes_div.php?filtro=1");
+        }
+        
+        function recargarRepresentantesPorFiltro(filtro)
+        {
+            $("#modal-contactos").load("modal_registracompania/representantes_div.php?filtro="+filtro);
+        }
+            
         $(function(){
+            /**
+             * FUNCION QUE DETECTA ABANDONO O REFRESCO DE LA PAGINA
+             */
+            /*$(window).bind('beforeunload', function() {
+            });*/   
+           /**
+            * PRIMERA CARGA DE REPRESENTANTES 
+            */ 
+           $("#modal-contactos").load("modal_registracompania/representantes_div.php?filtro=1");
+            
            var contador_contactos = 0;
             
             $("#modal-contactos").dialog({
@@ -41,14 +64,42 @@ $contactos = $contacto->mostrarContactos();
                 width:350,
                 modal:true,
                 buttons:{
-                    "Cerrar":function(){
+                    "Buscar":function() {
+                        $("#txt_nombreRepresentante").val("");
+                        buscarRepresentante();
+                    },
+                    "Limpiar":function() {
+                        recargarRepresentantes();
+                    },
+                    "Salir":function(){
                         $(this).dialog("close");
                     }
-                },
-                close:function(){
-                    allFields.val("").removeClass("ui-state-error");
                 }
             });
+            
+            /**
+             * MODAL PARA BUSCAR CONTACTOS
+             */
+            function buscarRepresentante() {
+                $("#modal_buscarRepresentantePorNombre").dialog("open");
+            }
+            
+            $("#modal_buscarRepresentantePorNombre").dialog({
+                autoOpen:false,
+                height:100,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Ok":function() {
+                        if ($("#txt_nombreRepresentante").val() == "")
+                            alert("Ingrese dato a buscar");
+                        recargarRepresentantesPorFiltro($("#txt_nombreRepresentante").val());
+                    },
+                    "Salir":function() {
+                        $(this).dialog("close");
+                    }
+                }
+            })
             
             $("#anadir-contacto").button().click(function(){
                 //limpiar las selecciones previas
@@ -69,6 +120,21 @@ $contactos = $contacto->mostrarContactos();
                     type:"GET",
                     dataType:"json",
                     url:"../../includes/query_repository/getAllContacto.php",
+                    success:function(data) {
+                        resultados(data);
+                    }
+                });
+            });
+            
+            /**
+             * 
+             */
+            $("#representantes_boxes").live("click",function() {
+                $.ajax({
+                    data:{id:$(this).val()},
+                    type:"GET",
+                    dataType:"json",
+                    url:"../../includes/query_repository/getRepresentante.php",
                     success:function(data) {
                         resultados(data);
                     }
@@ -133,17 +199,18 @@ $contactos = $contacto->mostrarContactos();
              * BTNPORNOMBRE
              */
             $("#btnBuscaPorNombre").click(function() {
-                //var id = <?=$_SESSION['datos_empresa'][0]?>;
-                $.ajax({
-                    data:{id:id},
-                    type:"GET",
-                    dataType:"json",
-                    url:"../../bl/Contacto/mantenimiento/registrolistadistribucion_llenarformulario.php",
-                    success:function(data) {
-                        //$("#contactos-agregados tbody").load(data);
-                    } 
-                });
+                var id = '<?= isset($_SESSION['datos_empresa'][0]) ? $_SESSION['datos_empresa'][0] : "No definido aun" ?>';
+                var observacion = '<?= isset($_SESSION['datos_empresa'][2]) ? $_SESSION['datos_empresa'][2] : "No definido aun" ?>';
+                alert(id);
+                $("textarea#observacion").val(observacion);
             });
+            
+            /**
+             * BUSCAR DATOS PARA EDITAR POR NOMBRE DE OBRA
+             */
+            $("#btnBuscarPorObra").click(function() {
+                
+            })
         });    
         </script>
         <script type="text/javascript">
@@ -164,26 +231,19 @@ $contactos = $contacto->mostrarContactos();
     <body >
         <div >
         </div>
-        <!--ventana modal para seleccionar los contactos-->
-        <div id="modal-contactos" title="Seleccionar contactos">
-                <div class="">
-                    <table border="0">
-                    <tr>
-                        <td>
-                            <?php
-                            foreach ($contactos as $valor) {
-                                echo '<input type="checkbox" name="contacto[]" value="'.
-                                        $valor[0].
-                                        '"/>'.
-                                        strtoupper($valor[nombre]).
-                                        '<br />';
-                            }
-                            ?>
-                        </td>
-                    </tr>
-                    </table>
-                </div>
+        <!-- ventana modal para seleccionar los contactos -->
+        <!--                                              -->
+        <div id="modal-contactos" title="Seleccionar contactos"></div>
+        <div id="modal_buscarRepresentantePorNombre" title="Buscar contacto" style="display: none">
+            <label>Nombre del contacto</label>
+            <input type="text" id="txt_nombreRepresentante" />
         </div>
+        <!-- modal de cargando... -->
+        <div id="modal_cargando" class="clearfix" style="display: none">
+            <img src="../../img/indicator.gif" />
+        </div>    
+        
+        
         <div id="main">
             <form id="frm-registralistadist" action="../../bl/busca_persona/registraListaDistribucion_BL.php" method="POST">
                 <div class="info">
@@ -197,12 +257,13 @@ $contactos = $contacto->mostrarContactos();
                     </tr>
                     <tr>
                         <td><label>Nombre de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                        <td><input id="inputext" class="obra" type="text" name="codigo" /></td>
+                        <td><input id="inputext" class="obra" type="text" name="codigo" READONLY/></td>
+                        <td><input id="btnBuscarPorObra" type="button" value="Buscar..." DISABLED /></td>
                     </tr>
                     <tr>
                         <td><label>A&ncaron;adir Contacto:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td>
-                            <button id="anadir-contacto">Agregar Contacto...</button>
+                            <button id="anadir-contacto">Buscar Contacto</button>
                         </td>
                     </tr>
                     <tr>
@@ -229,7 +290,7 @@ $contactos = $contacto->mostrarContactos();
                     <tr>
                         <td>Observaci&oacute;n:</td>
                         <td>
-                            <textarea name="observacion"></textarea>
+                            <textarea id="observacion" name="observacion"></textarea>
                         </td>
                     </tr>
                 </table>
