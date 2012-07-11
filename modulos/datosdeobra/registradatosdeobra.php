@@ -65,11 +65,36 @@ $contratos = $modelos->mostrarContratos();
 <!--        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/claro/claro.css">
         <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async:true"></script>-->
         <script>
+            
+        /**
+         * FUNCIONES DE RECAR SIN PARAMETROS (PARA LIMPIAR) Y CON PARAMETRO PARA FILTRAR LISTA
+         **/    
         function recargarClientes() {
             $("#divSeleccionaCliente").load("modales/clientes_div.php?filtro=1");
         }   
         function recargarClientesPorFiltro(filtro) {
             $("#divSeleccionaCliente").load("modales/clientes_div.php?filtro="+filtro);
+        }
+        
+        function recargarEmpresaContratante() {
+            $("#divSeleccionaEmpContratante").load("modales/empcontratante_div.php?filtro=1");
+        }
+        function recargarEmpresaContratantePorFiltro(filtro) {
+            $("#divSeleccionaEmpContratante").load("modales/empcontratante_div.php?filtro="+filtro)
+        }
+        
+        function recargarEmpGerenteProyecto() {
+            $("#divSeleccionaEmpGerenteProyecto").load("modales/empgerproyecto_div?filtro=1");
+        }
+        function recargarEmpGerenteProyectoPorFiltro(filtro) {
+            $("#divSeleccionaEmpGerenteProyecto").load("modales/empgerproyecto_div?filtro="+filtro);
+        }
+        
+        function recargarEmpSupervisoraProyecto() {
+            $("#divSeleccionaEmpSupProyecto").load("modales/empsupproyecto_div?filtro=1");
+        }
+        function recargarEmpSupervisoraProyectoPorFiltro(filtro) {
+            $("#divSeleccionaEmpSupProyecto").load("modales/empsupproyecto_div?filtro="+filtro);
         }
         
         $(function(){
@@ -78,6 +103,9 @@ $contratos = $modelos->mostrarContratos();
              * CARGA POR DEFECTO SIN FILTRO - PRIMERA CARGA
              */
             $("#divSeleccionaCliente").load("modales/clientes_div.php?filtro=1");
+            $("#divSeleccionaEmpContratante").load("modales/empcontratante_div.php?filtro=1");
+            $("#divSeleccionaEmpGerenteProyecto").load("modales/empgerproyecto_div?filtro=1");
+            $("#divSeleccionaEmpSupProyecto").load("modales/empsupproyecto_div?filtro=1");
             
             /**
              * ELIMINAR DATOS DE LA TABLA TEMPORAL SI SE DETECTA
@@ -125,11 +153,12 @@ $contratos = $modelos->mostrarContratos();
             });
             
             /**
+             * BOTONES PARA ABRIR MODALES PADRES
+             * =================================
              * BOTON PARA ABRIR EL MODAL DE SELECCION DE LOS CLIENTES
+             * 
              */
-            $("#agregar-cliente").click(function() {
-//                $("#modal-cliente").dialog("open");
-//                return false;
+            $("#agregar-cliente").click(function() { // MODAL PARA SELECCIONAR A LOS CLIENTES
                 $("#divSeleccionaCliente").dialog("open");
             })
             
@@ -143,12 +172,12 @@ $contratos = $modelos->mostrarContratos();
                         $(this).dialog("close");
                     }
                 }
-            })
+            });
             
             $("#agregar-contratante").click(function() {
                 $("#modal-contratante").dialog("open");
                 return false;
-            })
+            });
             
             $("#modal-contratante").dialog({
                 autoOpen:false,
@@ -616,14 +645,13 @@ $contratos = $modelos->mostrarContratos();
                 $(".txt-idcontacto").val(id_persona);
                 $(".txt-contacto").val(persona);
                 $(".txt-compania").val(empresa);
-                
             });
             
             /**
-             * NUEVO MODAL PARA SELECCIONAR CLIENTES - PRUEBA
-             * PPPPPPPPPP RRRRRRRR  UUUUUUUU EEEEE BBBBBBB AAAAAAA
+             * MODALES PADRES
+             * ==============
              */
-            $("#divSeleccionaCliente").dialog({
+            $("#divSeleccionaCliente").dialog({ //MODAL PARA SELECCIONAR A LOS CLIENTES
                 autoOpen:false,
                 height:350,
                 width:450,
@@ -640,7 +668,64 @@ $contratos = $modelos->mostrarContratos();
                         $(this).dialog("close");
                     }
                 }
-            })
+            });
+            
+            $("#divSeleccionaEmpContratante").dialog({
+               autoOpen:false,
+                height:350,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Buscar":function() {
+                        $("#txt_empresacontratante").val("");
+                        //buscarCliente();
+                    },
+                    "Limpiar":function() {
+                        //recargarClientes();
+                    },
+                    "Salir":function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            
+            $("#divSeleccionaEmpGerenteProyecto").dialog({
+                autoOpen:false,
+                height:350,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Buscar":function() {
+                        $("#txt_empresagerenteproyecto").val("");
+                        //buscarCliente();
+                    },
+                    "Limpiar":function() {
+                        //recargarClientes();
+                    },
+                    "Salir":function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            
+            $("#divSeleccionaEmpSupProyecto").dialog({
+                autoOpen:false,
+                height:350,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Buscar":function() {
+                        $("#txt_empsupervisoraproyecto").val("");
+                        //buscarCliente();
+                    },
+                    "Limpiar":function() {
+                        //recargarClientes();
+                    },
+                    "Salir":function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
             
             /**
              * FUNCION PARA BUSCAR CLIENTE POR EL MODAL
@@ -1183,7 +1268,7 @@ $contratos = $modelos->mostrarContratos();
                     <td><label>Cliente:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input id="inputext" class="cliente-text" type="text" size="30" name="cliente" READONLY /><input id="agregar-cliente" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                     <td><input type="hidden" class="cliente-id" name="cliente--id"</td>
-                    <!-- MODAL PARA BUSCAR POR NOMBRE -->
+                    <!-- MODAL PARA BUSCAR POR NOMBRE { CLIENTES } -->
                     <div id="modal_buscarClientePorNombre" title="Buscar cliente" style="display:none">
                         <label>Nombre del cliente:</label>
                         <input type="text" id="txt_nombreCliente" />
@@ -1193,6 +1278,11 @@ $contratos = $modelos->mostrarContratos();
                     <td><label>Empresa Contratante:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input type="text" id="inputext" class="empresacontratante-text" size="30" name="empresa-contratante" READONLY/><input id="agregar-contratante" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                     <td><input type="hidden" class="contratante_id" name="contratante--id" /></td>
+                    <!-- MODAL PARA BUSCAR POR NOMBRE { EMPRESA CONTRATANTE } -->
+                    <div id="modal_buscarEmpContratantePorNombre" title="Buscar Empresa Contratante" style="display:none">
+                        <label>Nombre de la empresa:</label>
+                        <input type="text" id="txt_empresacontratante" />
+                    </div>   
                 </tr>
             </table>
             <div id="hr"><hr /></div>
@@ -1201,11 +1291,21 @@ $contratos = $modelos->mostrarContratos();
                     <td><label>Empresa Gerente de proyecto:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input id="inputext" class="empresagerente-text" type="text" size="30" name="gerente-proyecto" READONLY/><input id="agregar-gerenteproyecto" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                     <td><input type="hidden" class="gerente_id" name="gerente--id" /></td>
+                    <!-- MODAL PARA BUSCAR POR NOMBRE [ EMPRESA GERENTE DE PROYECTO ] -->
+                    <div id="modal_buscarEmpGerenteProyecto" title="Buscar empresa gerente de Proyecto" style="display:none">
+                        <label>Nombre de la empresa:</label> 
+                        <input type="text" id="txt_empresagerenteproyecto" />
+                    </div>   
                 </tr>
                 <tr>
                     <td><label>Empresa Supervisora de proyecto:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input type="text" class="empresasupervisora-text" id="inputext" size="30" name="supervisora-proyecto" READONLY/><input id="agregar-supervisorproyecto" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                     <input type="hidden" class="supervisor_id" name="supervisor--id" />
+                    <!-- MODAL PARA BUSCAR POR NOMBRE [ EMPRESA SUPERVISORA DE PROEYCTO ] -->
+                    <div id="modal_buscarEmpSupervisoraProyecto" title="Buscar Empresa Supervisora de Proyecto" style="display:none">
+                        <label>Nombre de la empresa:</label>
+                        <input type="text" id="txt_empsupervisoraproyecto" />
+                    </div>     
                 </tr>
             </table>
             <div id="hr"><hr /></div>
