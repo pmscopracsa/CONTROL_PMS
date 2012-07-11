@@ -23,8 +23,8 @@ function __autoload($name) {
     if (file_exists($fullpath_procura)) require ($fullpath_procura); 
 }
 
-$especialidadCompania = new EspecialidadCompaniaDL();
-$especialidades = $especialidadCompania->mostrarEspecialidades();
+//$especialidadCompania = new EspecialidadCompaniaDL();
+//$especialidades = $especialidadCompania->mostrarEspecialidades();
 
 //$clienteCompania = new CompaniaContactoDL();
 //$clientes = $clienteCompania->mostrarCompaniaContacto();
@@ -32,8 +32,8 @@ $especialidades = $especialidadCompania->mostrarEspecialidades();
 //$empresa_contacto = $clienteCompania->mostrarEmpresaContacto();
 //$empresa_contacto = $clienteCompania->mostrarContactosTemporal();
 
-$contactoPersona = new ContactoPersona();
-$contactos = $contactoPersona->mostrarContactos();
+//$contactoPersona = new ContactoPersona();
+//$contactos = $contactoPersona->mostrarContactos();
 
 
 /**
@@ -175,8 +175,9 @@ $contratos = $modelos->mostrarContratos();
             });
             
             $("#agregar-contratante").click(function() {
-                $("#modal-contratante").dialog("open");
-                return false;
+//                $("#modal-contratante").dialog("open");
+//                return false;
+                $("#divSeleccionaEmpContratante").dialog("open");
             });
             
             $("#modal-contratante").dialog({
@@ -192,8 +193,9 @@ $contratos = $modelos->mostrarContratos();
             })
             
             $("#agregar-gerenteproyecto").click(function() {
-                $("#modal-gerenteproyecto").dialog("open");
-                return false;
+//                $("#modal-gerenteproyecto").dialog("open");
+//                return false;
+                $("#divSeleccionaEmpGerenteProyecto").dialog("open");
             })
             
             $("#modal-gerenteproyecto").dialog({
@@ -209,8 +211,9 @@ $contratos = $modelos->mostrarContratos();
             })
             
             $("#agregar-supervisorproyecto").click(function() {
-                $("#modal-supervisorproyecto").dialog("open");
-                return false;
+//                $("#modal-supervisorproyecto").dialog("open");
+//                return false;
+                $("#divSeleccionaEmpSupProyecto").dialog("open");
             })
             
             $("#modal-supervisorproyecto").dialog({
@@ -728,15 +731,30 @@ $contratos = $modelos->mostrarContratos();
             });
             
             /**
-             * FUNCION PARA BUSCAR CLIENTE POR EL MODAL
+             * FUNCIONES PARA LLAMAR A LOS MODALES DE BUSQUEDA
+             * ===============================================
              */
             function buscarCliente()
             {
                 $("#modal_buscarClientePorNombre").dialog("open");
             }
+            function buscarEmpresaContratante()
+            {
+                $("#modal_buscarEmpContratantePorNombre").dialog("open");
+            }
+            function buscarEmpresaGerenteProyecto()
+            {
+                $("#modal_buscarEmpGerenteProyecto").dialog("open");
+            }
+            function buscarEmpresaSupervisoraProyecto()
+            {
+                $("#modal_buscarEmpSupervisoraProyecto").dialog("open");
+            }
             
             /***
-             * MODAL PARA BUSCAR CLIENTE POR NOMBRE
+             * MODAL PARA LAS BÚSQUEDAS
+             * ========================
+             * USCAR CLIENTE POR NOMBRE
              */
             $("#modal_buscarClientePorNombre").dialog({
                 autoOpen:false,
@@ -754,11 +772,56 @@ $contratos = $modelos->mostrarContratos();
                     }
                 }
             });
+            $("#modal_buscarEmpContratantePorNombre").dialog({
+                autoOpen:false,
+                height:100,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Ok":function() {
+                        if($("#txt_empresacontratante").val() == "")
+                            alert("Ingrese dato a buscar");
+                        recargarClientesPorFiltro($("#txt_empresacontratante").val());
+                    },
+                    "Salir":function(){
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            $("#modal_buscarEmpGerenteProyecto").dialog({
+                autoOpen:false,
+                height:100,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Ok":function() {
+                        if($("#txt_empresagerenteproyecto").val() == "")
+                            alert("Ingrese dato a buscar");
+                        recargarClientesPorFiltro($("#txt_empresagerenteproyecto").val());
+                    },
+                    "Salir":function(){
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            $("#modal_buscarEmpSupervisoraProyecto").dialog({
+                autoOpen:false,
+                height:100,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Ok":function() {
+                        if($("#txt_empsupervisoraproyecto").val() == "")
+                            alert("Ingrese dato a buscar");
+                        recargarClientesPorFiltro($("#txt_empsupervisoraproyecto").val());
+                    },
+                    "Salir":function(){
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            
              
-//            $('.cliente').click(function(){
-//                alert("click");//S------------------------------------------------------------------------------------
-//                $("#divSeleccionaCliente").dialog("open");
-//            } 
              /**
               * MODAL: Contactos
               * FIELDS: Contacto, Posicion, Compania
@@ -953,7 +1016,8 @@ $contratos = $modelos->mostrarContratos();
                 })
             });
             
-            /*
+            /**
+             * 
              * Agregar datos a los input - INPUT BY DEFAULT READONLY
              * COMENTADO MOMENTANEO ------- OJO QUE ESTE SI FUNCIONA
              */
@@ -1036,7 +1100,10 @@ $contratos = $modelos->mostrarContratos();
         <?php include_once 'modales/modal-mostrarlistareportes.php';?>
         <?php include_once 'modales/modal_r_listaContactoPosicion.php';?>
         
-        <div id="divSeleccionaCliente" title="Seleccionar Cliente - NEW FORM" style="display: none"></div>
+        <div id="divSeleccionaCliente" title="Seleccionar Cliente" style="display: none"></div>
+        <div id="divSeleccionaEmpContratante" title="Seleccionar la Empresa Contratante" style="display: none"></div>
+        <div id="divSeleccionaEmpGerenteProyecto" title="Seleccionar la Empresa Gerente del Proyecto" style="display: none"></div>
+        <div id="divSeleccionaEmpSupProyecto" title="Seleccionar la Empresa Supervisora del Proyecto" style="display: none"></div>
         
         <div id="modal-contactos" title="Seleccionar contactos">
                 <div class="" >
