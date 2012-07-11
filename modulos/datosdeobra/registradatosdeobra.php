@@ -26,10 +26,11 @@ function __autoload($name) {
 $especialidadCompania = new EspecialidadCompaniaDL();
 $especialidades = $especialidadCompania->mostrarEspecialidades();
 
-$clienteCompania = new CompaniaContactoDL();
-$clientes = $clienteCompania->mostrarCompaniaContacto();
+//$clienteCompania = new CompaniaContactoDL();
+//$clientes = $clienteCompania->mostrarCompaniaContacto();
+
 //$empresa_contacto = $clienteCompania->mostrarEmpresaContacto();
-$empresa_contacto = $clienteCompania->mostrarContactosTemporal();
+//$empresa_contacto = $clienteCompania->mostrarContactosTemporal();
 
 $contactoPersona = new ContactoPersona();
 $contactos = $contactoPersona->mostrarContactos();
@@ -64,11 +65,19 @@ $contratos = $modelos->mostrarContratos();
 <!--        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/claro/claro.css">
         <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async:true"></script>-->
         <script>
+        function recargarClientes() {
+            $("#divSeleccionaCliente").load("modales/clientes_div.php?filtro=1");
+        }   
+        function recargarClientesPorFiltro(filtro) {
+            $("#divSeleccionaCliente").load("modales/clientes_div.php?filtro="+filtro);
+        }
+        
         $(function(){
             /**
              * CARGAR DIV CON DATOS Y PREPARAOS PARA BUSCARLOS
+             * CARGA POR DEFECTO SIN FILTRO - PRIMERA CARGA
              */
-            $("#divSeleccionaCliente").load("modales/clientes_div.php");
+            $("#divSeleccionaCliente").load("modales/clientes_div.php?filtro=1");
             
             /**
              * ELIMINAR DATOS DE LA TABLA TEMPORAL SI SE DETECTA
@@ -115,9 +124,13 @@ $contratos = $modelos->mostrarContratos();
                 }
             });
             
+            /**
+             * BOTON PARA ABRIR EL MODAL DE SELECCION DE LOS CLIENTES
+             */
             $("#agregar-cliente").click(function() {
-                $("#modal-cliente").dialog("open");
-                return false;
+//                $("#modal-cliente").dialog("open");
+//                return false;
+                $("#divSeleccionaCliente").dialog("open");
             })
             
             $("#modal-cliente").dialog({
@@ -490,8 +503,6 @@ $contratos = $modelos->mostrarContratos();
               * LOS DATOS SE INGRESAN A LA TABLA: tb_contactoreportetemporal
               */
              $("input[name=id_contactoReporte]").live("click",function() {
-                
-            
                 $.ajax({
                     type:"POST",
                     data:{aleatorio:<?=$aleatorio?>,id_contacto:$(this).val(),id_reporte:getReporte()},
@@ -619,21 +630,50 @@ $contratos = $modelos->mostrarContratos();
                 modal:true,
                 buttons:{
                     "Buscar":function() {
-                        
+                        $("#txt_nombreCliente").val("");
+                        buscarCliente();
                     },
                     "Limpiar":function() {
-                        
+                        recargarClientes();
                     },
                     "Salir":function() {
-                        
+                        $(this).dialog("close");
                     }
                 }
             })
+            
+            /**
+             * FUNCION PARA BUSCAR CLIENTE POR EL MODAL
+             */
+            function buscarCliente()
+            {
+                $("#modal_buscarClientePorNombre").dialog("open");
+            }
+            
+            /***
+             * MODAL PARA BUSCAR CLIENTE POR NOMBRE
+             */
+            $("#modal_buscarClientePorNombre").dialog({
+                autoOpen:false,
+                height:100,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Ok":function() {
+                        if($("#txt_nombreCliente").val() == "")
+                            alert("Ingrese dato a buscar");
+                        recargarClientesPorFiltro($("#txt_nombreCliente").val());
+                    },
+                    "Salir":function(){
+                        $(this).dialog("close");
+                    }
+                }
+            });
              
-            $('.cliente').click(function(){
-                alert("click");------------------------------------------------------------------------------------
-                $("#divSeleccionaCliente").dialog("open");
-            } 
+//            $('.cliente').click(function(){
+//                alert("click");//S------------------------------------------------------------------------------------
+//                $("#divSeleccionaCliente").dialog("open");
+//            } 
              /**
               * MODAL: Contactos
               * FIELDS: Contacto, Posicion, Compania
@@ -832,13 +872,14 @@ $contratos = $modelos->mostrarContratos();
              * Agregar datos a los input - INPUT BY DEFAULT READONLY
              * COMENTADO MOMENTANEO ------- OJO QUE ESTE SI FUNCIONA
              */
-//            $('.cliente').click(function(){
-//                var cliente_array = $(this).text().split("-");
-//                var cli = cliente_array[1];
-//                var id_cliente =  cliente_array[0];
-//                $(".cliente-text").val(cli);
-//                $(".cliente-id").val(id_cliente);
-//            });
+            $(".cliente").live("click",function() {
+                //alert($(this).text());
+                var cliente_array = $(this).text().split("-");
+                var cli = cliente_array[1];
+                var id_cliente =  cliente_array[0];
+                $(".cliente-text").val(cli);
+                $(".cliente-id").val(id_cliente);
+            })
             
             $('.contratante').click(function(){
                 var contratante_array = $(this).text().split("-");
@@ -1140,8 +1181,13 @@ $contratos = $modelos->mostrarContratos();
                 <tr>
                     <!-- tb_companiacontacta -->
                     <td><label>Cliente:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                    <td><input id="inputext" class="cliente-text" type="text" size="30" name="cliente" READONLY /><input id="agregar-cliente"type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                    <td><input id="inputext" class="cliente-text" type="text" size="30" name="cliente" READONLY /><input id="agregar-cliente" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                     <td><input type="hidden" class="cliente-id" name="cliente--id"</td>
+                    <!-- MODAL PARA BUSCAR POR NOMBRE -->
+                    <div id="modal_buscarClientePorNombre" title="Buscar cliente" style="display:none">
+                        <label>Nombre del cliente:</label>
+                        <input type="text" id="txt_nombreCliente" />
+                    </div>    
                 </tr>
                 <tr>
                     <td><label>Empresa Contratante:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>

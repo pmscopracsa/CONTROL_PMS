@@ -1,6 +1,6 @@
 <?php
 
-//include_once '../../dl/Conexion.php';
+require_once 'Conexion.php';
 
 class CompaniaContactoDL 
 {
@@ -38,7 +38,7 @@ class CompaniaContactoDL
      */
     public function mostrarCompaniaContactoPorNombre()
     {
-            $query = "SELECT * FROM tb_companiacontacto WHERE descripcion LIKE '$this->descripcion'";
+            $query = "SELECT * FROM tb_companiacontacto WHERE descripcion LIKE '$this->descripcion%'";
         
         try {
             $conexion = new Conexion();
@@ -141,7 +141,4 @@ class CompaniaContactoDL
     public function setDescripcion($descripcion) {
         $this->descripcion = $descripcion;
     }
-
-
 }
-?>
