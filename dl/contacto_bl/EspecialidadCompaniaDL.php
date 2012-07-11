@@ -33,7 +33,7 @@ class EspecialidadCompaniaDL {
   
   public function mostrarEspecialidadesPorNombre()
   {
-      $query = "SELECT * FROM `tb_especialidadcompania` WHERE descripcion LIKE '$this->descripcion'";
+      $query = "SELECT * FROM `tb_especialidadcompania` WHERE descripcion LIKE '$this->descripcion%'";
       try
       {
           $conexion = new Conexion();

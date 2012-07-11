@@ -6,9 +6,10 @@
  * tabla: tb_personacontacto 
  */
 
-//include_once '../../dl/Conexion.php';
+require_once 'Conexion.php';
 class ContactoPersona {
     protected $id;
+    protected $nombre;
     
     public function mostrarContactos()
     {
@@ -35,5 +36,51 @@ class ContactoPersona {
             } catch (Exception $e1) {}
         }
         return $registros;
+    }
+    
+    public function mostrarContactoPorNombre()
+    {
+        $query = "SELECT * FROM tb_personacontacto WHERE nombre LIKE '$this->nombre%'";
+        
+        try
+        {
+            $conexion = new Conexion();
+            $cn = $conexion->conectar();
+            $rs = mysql_query($query,$cn);
+            $registros = array();
+            while($reg = mysql_fetch_array($rs))
+            {
+                array_push($registros, $reg);
+            }
+            mysql_free_result($rs);
+            mysql_close($cn);
+        }catch(Exception $ex){
+            try {
+                mysql_free_result($rs);
+            }  catch (Exception $e1){}
+            try {
+                mysql_close($cn);
+            } catch (Exception $e1) {}
+        }
+        return $registros;
+    }
+    
+    /***
+     * GETTERS & SETTERS
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    public function getNombre() {
+        return $this->nombre;
+    }
+
+    public function setNombre($nombre) {
+        $this->nombre = $nombre;
     }
 }

@@ -32,8 +32,8 @@ function __autoload($name) {
 //$empresa_contacto = $clienteCompania->mostrarEmpresaContacto();
 //$empresa_contacto = $clienteCompania->mostrarContactosTemporal();
 
-//$contactoPersona = new ContactoPersona();
-//$contactos = $contactoPersona->mostrarContactos();
+$contactoPersona = new ContactoPersona();
+$contactos = $contactoPersona->mostrarContactos();
 
 
 /**
@@ -61,9 +61,6 @@ $contratos = $modelos->mostrarContratos();
         <script src="../../js/cargarDatos.js" type="text/javascript"></script>
         <script src="../../js/jquery-tooltip/js/jtip.js" type="text/javascript"></script>
         <link href="../../js/jquery-tooltip/css/global.css" rel="stylesheet" type="text/css" />
-        
-<!--        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/claro/claro.css">
-        <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async:true"></script>-->
         <script>
             
         /**
@@ -84,17 +81,29 @@ $contratos = $modelos->mostrarContratos();
         }
         
         function recargarEmpGerenteProyecto() {
-            $("#divSeleccionaEmpGerenteProyecto").load("modales/empgerproyecto_div?filtro=1");
+            $("#divSeleccionaEmpGerenteProyecto").load("modales/empgerproyecto_div.php?filtro=1");
         }
         function recargarEmpGerenteProyectoPorFiltro(filtro) {
-            $("#divSeleccionaEmpGerenteProyecto").load("modales/empgerproyecto_div?filtro="+filtro);
+            $("#divSeleccionaEmpGerenteProyecto").load("modales/empgerproyecto_div.php?filtro="+filtro);
         }
         
         function recargarEmpSupervisoraProyecto() {
-            $("#divSeleccionaEmpSupProyecto").load("modales/empsupproyecto_div?filtro=1");
+            $("#divSeleccionaEmpSupProyecto").load("modales/empsupproyecto_div.php?filtro=1");
         }
         function recargarEmpSupervisoraProyectoPorFiltro(filtro) {
-            $("#divSeleccionaEmpSupProyecto").load("modales/empsupproyecto_div?filtro="+filtro);
+            $("#divSeleccionaEmpSupProyecto").load("modales/empsupproyecto_div.php?filtro="+filtro);
+        }
+        function recargarProveedorFacturar() {
+            $("#divSeleccionaProvFacturar").load("modales/proveedorfacturar_div.php?filtro=1");
+        }
+        function recargarProveedorFacturarPorFiltro(filtro) {
+            $("#divSeleccionaProvFacturar").load("modales/proveedorfacturar_div.php?filtro="+filtro)
+        }
+        function recargarContactos() {
+            $("#modal-contactos").load("modales/contactos_div.php?filtro=1");
+        }
+        function recargarContactosPorFiltro(filtro) {
+            $("#modal-contactos").load("modales/contactos_div.php?filtro="+filtro);
         }
         
         $(function(){
@@ -104,8 +113,10 @@ $contratos = $modelos->mostrarContratos();
              */
             $("#divSeleccionaCliente").load("modales/clientes_div.php?filtro=1");
             $("#divSeleccionaEmpContratante").load("modales/empcontratante_div.php?filtro=1");
-            $("#divSeleccionaEmpGerenteProyecto").load("modales/empgerproyecto_div?filtro=1");
-            $("#divSeleccionaEmpSupProyecto").load("modales/empsupproyecto_div?filtro=1");
+            $("#divSeleccionaEmpGerenteProyecto").load("modales/empgerproyecto_div.php?filtro=1");
+            $("#divSeleccionaEmpSupProyecto").load("modales/empsupproyecto_div.php?filtro=1");
+            $("#divSeleccionaProvFacturar").load("modales/proveedorfacturar_div.php?filtro=1");
+            $("#modal-contactos").load("modales/contactos_div.php?filtro=1");
             
             /**
              * ELIMINAR DATOS DE LA TABLA TEMPORAL SI SE DETECTA
@@ -132,32 +143,16 @@ $contratos = $modelos->mostrarContratos();
             
             $("#datepicker_i,#datepicker_f").datepicker({dateFormat:'yy-mm-dd'},{showAnim:'fold'});
             
-            /*
-             * MODALES
-             */            
-            $("#mostrarcontactos").click(function(){
-                $("#modal-contactos").dialog("open");
-                return false;
-            });
-            
-            $("#modal-contactos").dialog({
-                autoOpen:false,
-                height:300,
-                width:350,
-                modal:true,
-                buttons:{
-                    "Cerrar":function(){
-                        $(this).dialog("close");
-                    }
-                }
-            });
-            
             /**
              * BOTONES PARA ABRIR MODALES PADRES
              * =================================
              * BOTON PARA ABRIR EL MODAL DE SELECCION DE LOS CLIENTES
              * 
              */
+            $("#mostrarcontactos").click(function(){ //BOTON PARA ABRIR EL MODAL DE LOS CONTACTOS
+                $("#modal-contactos").dialog("open");
+            });
+            
             $("#agregar-cliente").click(function() { // MODAL PARA SELECCIONAR A LOS CLIENTES
                 $("#divSeleccionaCliente").dialog("open");
             })
@@ -229,8 +224,9 @@ $contratos = $modelos->mostrarContratos();
             })
             
             $("#agregar-proveedorfacturar").click(function() {
-                $("#modal-proveedorfacturar").dialog("open");
-                return false;
+//                $("#modal-proveedorfacturar").dialog("open");
+//                return false;
+                $("#divSeleccionaProvFacturar").dialog("open");
             })
             
             $("#modal-proveedorfacturar").dialog({
@@ -416,7 +412,7 @@ $contratos = $modelos->mostrarContratos();
               }
               
               function mostrarFirmasAsignadas(data)
-              {/****************************************************/
+              {
                  $("#tbl-empate-firmante_reporte td").remove();
                   $.each(data,function(index,value) {
                       $("#tbl-empate-firmante_reporte tbody").append(
@@ -571,7 +567,7 @@ $contratos = $modelos->mostrarContratos();
                         $(this).dialog("close");
                     }
                 }
-             })
+             });
              
              /**
               * MODAL PARE RECUPERAR LOS DATOS DE LA TABLA TEMPORAL
@@ -681,10 +677,10 @@ $contratos = $modelos->mostrarContratos();
                 buttons:{
                     "Buscar":function() {
                         $("#txt_empresacontratante").val("");
-                        //buscarCliente();
+                        buscarEmpresaContratante()
                     },
                     "Limpiar":function() {
-                        //recargarClientes();
+                        recargarEmpresaContratante();
                     },
                     "Salir":function() {
                         $(this).dialog("close");
@@ -700,10 +696,10 @@ $contratos = $modelos->mostrarContratos();
                 buttons:{
                     "Buscar":function() {
                         $("#txt_empresagerenteproyecto").val("");
-                        //buscarCliente();
+                        buscarEmpresaGerenteProyecto()
                     },
                     "Limpiar":function() {
-                        //recargarClientes();
+                        recargarEmpGerenteProyecto();
                     },
                     "Salir":function() {
                         $(this).dialog("close");
@@ -719,10 +715,48 @@ $contratos = $modelos->mostrarContratos();
                 buttons:{
                     "Buscar":function() {
                         $("#txt_empsupervisoraproyecto").val("");
-                        //buscarCliente();
+                        buscarEmpresaSupervisoraProyecto()
                     },
                     "Limpiar":function() {
-                        //recargarClientes();
+                        recargarEmpSupervisoraProyecto();
+                    },
+                    "Salir":function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            
+            $("#divSeleccionaProvFacturar").dialog({
+                autoOpen:false,
+                height:350,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Buscar":function() {
+                        $("#txt_proveedorfacturar").val("");
+                        buscarProveedorAFacturar()
+                    },
+                    "Limpiar":function() {
+                        recargarProveedorFacturar();
+                    },
+                    "Salir":function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            
+            $("#modal-contactos").dialog({
+                autoOpen:false,
+                height:350,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Buscar":function() {
+                        $("#txt_contacto").val("");
+                        buscarContacto()
+                    },
+                    "Limpiar":function() {
+                        recargarContactos();
                     },
                     "Salir":function() {
                         $(this).dialog("close");
@@ -749,6 +783,14 @@ $contratos = $modelos->mostrarContratos();
             function buscarEmpresaSupervisoraProyecto()
             {
                 $("#modal_buscarEmpSupervisoraProyecto").dialog("open");
+            }
+            function buscarProveedorAFacturar()
+            {
+                $("#modal_buscarProveedorAFacturar").dialog("open");
+            }
+            function buscarContacto()
+            {
+                $("#modal_buscarContacto").dialog("open");
             }
             
             /***
@@ -781,7 +823,7 @@ $contratos = $modelos->mostrarContratos();
                     "Ok":function() {
                         if($("#txt_empresacontratante").val() == "")
                             alert("Ingrese dato a buscar");
-                        recargarClientesPorFiltro($("#txt_empresacontratante").val());
+                        recargarEmpresaContratantePorFiltro($("#txt_empresacontratante").val());
                     },
                     "Salir":function(){
                         $(this).dialog("close");
@@ -797,7 +839,7 @@ $contratos = $modelos->mostrarContratos();
                     "Ok":function() {
                         if($("#txt_empresagerenteproyecto").val() == "")
                             alert("Ingrese dato a buscar");
-                        recargarClientesPorFiltro($("#txt_empresagerenteproyecto").val());
+                        recargarEmpGerenteProyectoPorFiltro($("#txt_empresagerenteproyecto").val());
                     },
                     "Salir":function(){
                         $(this).dialog("close");
@@ -813,14 +855,45 @@ $contratos = $modelos->mostrarContratos();
                     "Ok":function() {
                         if($("#txt_empsupervisoraproyecto").val() == "")
                             alert("Ingrese dato a buscar");
-                        recargarClientesPorFiltro($("#txt_empsupervisoraproyecto").val());
+                        recargarEmpSupervisoraProyectoPorFiltro($("#txt_empsupervisoraproyecto").val());
                     },
                     "Salir":function(){
                         $(this).dialog("close");
                     }
                 }
             });
-            
+            $("#modal_buscarProveedorAFacturar").dialog({
+                autoOpen:false,
+                height:100,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Ok":function() {
+                        if($("#txt_proveedorfacturar").val() == "")
+                            alert("Ingrese dato a buscar");
+                        recargarProveedorFacturarPorFiltro($("#txt_proveedorfacturar").val());
+                    },
+                    "Salir":function(){
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            $("#modal_buscarContacto").dialog({
+                autoOpen:false,
+                height:100,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Ok":function() {
+                        if($("#txt_contacto").val() == "")
+                            alert("Ingrese dato a buscar");
+                        recargarContactosPorFiltro($("#txt_contacto").val());
+                    },
+                    "Salir":function() {
+                        $(this).dialog("close");
+                    }
+                }
+            })
              
              /**
               * MODAL: Contactos
@@ -841,7 +914,6 @@ $contratos = $modelos->mostrarContratos();
                      $(".txt-contacto").focus();
                      return false;
                  }
-                 
                  
                 contador_firmas++; //fixed bug, not my bug, desktop bug
                 /*
@@ -957,6 +1029,17 @@ $contratos = $modelos->mostrarContratos();
                 });
             });
             
+            $("#contactos_boxes").live("click",function() {
+                $.ajax({
+                    data:{id:$(this).val()},
+                    type:"GET",
+                    dataType:"json",
+                    url:"../../includes/query_repository/getAllContacto.php",
+                    success:function(data) {
+                        resultados(data);
+                    }
+                });
+            });
             /*
              * AGREGAR DATOS DE CONTACTOS A TABLA
              */
@@ -1030,7 +1113,7 @@ $contratos = $modelos->mostrarContratos();
                 $(".cliente-id").val(id_cliente);
             })
             
-            $('.contratante').click(function(){
+            $('.contratante').live("click",function(){
                 var contratante_array = $(this).text().split("-");
                 var cli = contratante_array[1];
                 var contratante_id = contratante_array[0];
@@ -1038,7 +1121,7 @@ $contratos = $modelos->mostrarContratos();
                 $(".contratante_id").val(contratante_id);
             });
             
-            $('.gerenteproyecto').click(function(){
+            $('.gerenteproyecto').live("click",function(){
                 var gerente_array = $(this).text().split("-");
                 var cli = gerente_array[1];
                 var gerente_id = gerente_array[0];
@@ -1046,7 +1129,7 @@ $contratos = $modelos->mostrarContratos();
                 $(".gerente_id").val(gerente_id);
             });
             
-            $('.supervisorproyecto').click(function(){
+            $('.supervisorproyecto').live("click",function(){
                 var supervisor_array = $(this).text().split("-");
                 var cli = supervisor_array[1];
                 var supervisor_id = supervisor_array[0];
@@ -1054,7 +1137,7 @@ $contratos = $modelos->mostrarContratos();
                 $(".supervisor_id").val(supervisor_id);
             });
             
-            $('.proveedorfacturar').click(function(){
+            $('.proveedorfacturar').live("click",function(){
                 var proveedor_array = $(this).text().split("-");
                 var cli = proveedor_array[1];
                 var proveedor_id = proveedor_array[0];
@@ -1100,12 +1183,16 @@ $contratos = $modelos->mostrarContratos();
         <?php include_once 'modales/modal-mostrarlistareportes.php';?>
         <?php include_once 'modales/modal_r_listaContactoPosicion.php';?>
         
+        <!-- MODALES PADRES  -->
+        <!-- ++++++++++++++  -->
         <div id="divSeleccionaCliente" title="Seleccionar Cliente" style="display: none"></div>
         <div id="divSeleccionaEmpContratante" title="Seleccionar la Empresa Contratante" style="display: none"></div>
         <div id="divSeleccionaEmpGerenteProyecto" title="Seleccionar la Empresa Gerente del Proyecto" style="display: none"></div>
         <div id="divSeleccionaEmpSupProyecto" title="Seleccionar la Empresa Supervisora del Proyecto" style="display: none"></div>
+        <div id="divSeleccionaProvFacturar" title="Seleccionar la Empresa Supervisora del Proyecto" style="display: none"></div>
+        <div id="modal-contactos" title="Selecciona los contactos de la obra" style="display: none"></div>
         
-        <div id="modal-contactos" title="Seleccionar contactos">
+<!--        <div id="modal-contactos" title="Seleccionar contactos">
                 <div class="" >
                     <table id="contactos" style="width:550px;height250px" 
                            url=""
@@ -1120,19 +1207,19 @@ $contratos = $modelos->mostrarContratos();
                         <tr>
                             <td>
                                 <?php
-                                foreach ($contactos as &$valor) {
+                                /*foreach ($contactos as &$valor) {
                                     echo '<input type="checkbox" name="contacto[]" value="'.
                                             $valor[0].
                                             '"/>'.
                                             strtoupper($valor[3]).
                                             '<br />';
-                                }
+                                }*/
                                 ?>
                             </td>
                         </tr>
                     </table>
                 </div>
-        </div>
+        </div>-->
         
         <!--VENTANA MODAL PARA SETEO DEL PRESUPUESTO DE VENTA-->
         <div style="display: none" id="div-modal-pptoventa" title="Seteo Presupuesto Venta">
@@ -1377,11 +1464,6 @@ $contratos = $modelos->mostrarContratos();
             </table>
             <div id="hr"><hr /></div>
             <table>
-<!--                <tr>
-                    <td><label>Asignar firmas a reportes:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                    <td><input id="btn-asignarfirmasreportes" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
-                </tr>-->
-                
                 <tr>
                     <td><label>Par&aacute;metros Ppto. de ventas:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input id="btn-parametrospptoventa" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
@@ -1397,11 +1479,21 @@ $contratos = $modelos->mostrarContratos();
                     <td><label>Proveedor facturar a:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input type="text" class="proveedorfacturar-text" id="inputext" size="30" name="proveedor-a-facturar" READONLY/><input id="agregar-proveedorfacturar" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                     <input type="hidden" class="proveedor_id" name="proveedor--id" />
+                    <!-- MODAL PARA BUSCAR POR NOMBRE [ PROVEEDOR A FACTURAR ] -->
+                    <div id="modal_buscarProveedorAFacturar" title="Buscar proveedor a facturar" style="display:none">
+                        <label>Nombre del proveedor</label>
+                        <input type="text" id="txt_proveedorfacturar" />
+                    </div>
                 </tr>
                 
                 <tr>
                     <td>Lista de contactos:</td>
                     <td>
+                        <!-- MODAL PARA BUSCAR POR NOMBREW [ CONTACTO ] -->
+                        <div id="modal_buscarContacto" title="Buscar contacto" style="display: none">
+                            <label>Nombre del contacto</label>
+                            <input type="text" id="txt_contacto" />
+                        </div>
                         <input type="button" id="mostrarcontactos" value="Buscar contactos" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                         <div class="areaScrollModal" id="lista-contactos">
                             <table id="contactos-agregados">
