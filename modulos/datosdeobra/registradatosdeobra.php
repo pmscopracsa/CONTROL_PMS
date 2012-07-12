@@ -55,11 +55,13 @@ $contratos = $modelos->mostrarContratos();
         ?>
         <!-- ZONA JS -->
         <script src="../../js/jquery1.4.2.js.js" type="text/javascript"></script>
+        <script src="../../js/jquery.qtip-1.0.0-rc3.min.js" type="text/javascript"></script>
         <script src="../../js/calendar/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
         <script src="../../js/calendar/jquery.ui.datepicker-es.js" type="text/javascript"></script>
         <script src="../../js/cargarDatos.js" type="text/javascript"></script>
         <script src="../../js/jquery-tooltip/js/jtip.js" type="text/javascript"></script>
         <link href="../../js/jquery-tooltip/css/global.css" rel="stylesheet" type="text/css" />
+        
         <!-- sliding -->
         <script src="../../js/sliding/sliding.form.js" type="text/javascript"></script>
         <link href="../../js/sliding/css/style.css" rel="stylesheet" type="text/css" />
@@ -107,6 +109,10 @@ $contratos = $modelos->mostrarContratos();
         }
         
         $(function(){
+            $('#content a[href]').qtip({
+      // Simply use an HTML img tag within the HTML string
+      content: 'i am a qtip'
+   });
             /**
              * CARGAR DIV CON DATOS Y PREPARAOS PARA BUSCARLOS
              * CARGA POR DEFECTO SIN FILTRO - PRIMERA CARGA
@@ -1047,9 +1053,10 @@ $contratos = $modelos->mostrarContratos();
             cargar_tipovalorizacion();
             cargar_formatopresupuesto();
             
-            /*
+            /**
              * SELECCIONAR Y AGREGAR CONTACTOS PARA DATOS DE OBRA
-             */
+             * ==================================================
+             **/
             $('input:checkbox[name=contacto[]]').click(function(){
                 var id = $(this).val();
                 $.ajax({
@@ -1092,6 +1099,13 @@ $contratos = $modelos->mostrarContratos();
                     "<tr>"+
                     "<td>"+datos[index].nombre+"</td>"+
                     "<td>"+datos[index].empresa+"</td>"+
+                    "<td>"+datos[index].cargo+"</td>"+
+                    "<td>"+datos[index].email_persona+"</td>"+
+                    "<td>"+datos[index].ruc_empresa+"</td>"+
+                    "<td>"+datos[index].fax_empresa+"</td>"+
+                    "<td><input id='btn_tfijo' type='button' value='TF'/></td>"+
+                    "<td><input id='btn_tmobile' type='button' value='TM'/></td>"+
+                    "<td><input id='btn_tnextel' type='button' value='TN'/></td>"+
                     "<td>"+"<a href='#' id='del-contacto' class='button delete'>Eliminar</a>"+"</td>"+
                     '<input id="codigo" type="hidden" name="contacto'+contador_contactos+'" value="'+datos[index].id+'" />'+
                     "</tr>"    
@@ -1106,6 +1120,60 @@ $contratos = $modelos->mostrarContratos();
                         }
                     })
                 });
+            }
+            /**
+             * EVENTOS PARA OBTENER LOS NUMEROS DE TELEFONO 
+             **/
+            $("#btn_tfijo").live("mouseover",function() {
+                var codigo = $(this).parent().parent().html();
+                codigo = codigo.match(
+                    new RegExp("(\\d+)","gi")
+                );
+                $.ajax({
+                    type:"GET",
+                    dataType:"json",
+                    data:{id_contacto:codigo[2]},
+                    url:"../../dl/datos_obra/r_telefonosPersonaContacto.php?tipotelefono=1",
+                    success:function(data) {
+                        mostrarTelefonos(data,1);
+                    }
+                });    
+            }).live("mouseout",function(){
+                $("#div_telefonos").hide("slow")
+            });
+            $("#btn_tmobile").live("mouseover",function() {
+                var codigo = $(this).parent().parent().html();
+                codigo = codigo.match(
+                    new RegExp("(\\d+)","gi")
+                );
+                $.ajax({
+                    type:"GET",
+                    dataType:"json",
+                    data:{id_contacto:codigo[2]},
+                    url:"../../dl/datos_obra/r_telefonosPersonaContacto.php?tipotelefono=2",
+                    success:function(data) {
+                        mostrarTelefonos(data,2);
+                    }
+                });    
+            });
+            $("#btn_tnextel").live("mouseover",function() {
+                var codigo = $(this).parent().parent().html();
+                codigo = codigo.match(
+                    new RegExp("(\\d+)","gi")
+                );
+                $.ajax({
+                    type:"GET",
+                    dataType:"json",
+                    data:{id_contacto:codigo[2]},
+                    url:"../../dl/datos_obra/r_telefonosPersonaContacto.php?tipotelefono=3",
+                    success:function(data) {
+                        mostrarTelefonos(data,3);
+                    }
+                });    
+            });
+            
+            function mostrarTelefonos(data,tipo) {
+                $("#div_telefonos").show("slow");
             }
             
             /*
@@ -1219,6 +1287,8 @@ $contratos = $modelos->mostrarContratos();
         include_once 'modales/modal_r_listaContactoPosicion.php';
         ?>
         
+
+        
         <!-- MODALES PADRES  -->
         <!-- ++++++++++++++  -->
         <div id="divSeleccionaCliente" title="Seleccionar Cliente" style="display: none"></div>
@@ -1303,7 +1373,6 @@ $contratos = $modelos->mostrarContratos();
                 </fieldset>
             </div>    
         </div>
-        
         <!--VENTANA MODAL PARA ASIGNAR LAS FIRMAS A LOS REPORTES-->
         <div style="display: none" id="div-firmas-1" title="Firmas">
             <table id="tbl-firmas1">
@@ -1319,7 +1388,6 @@ $contratos = $modelos->mostrarContratos();
                 </tbody>
             </table>
         </div>
-        
         <!-- VENTANA MODAL PARA ASIGNAR USUARIOS PARA APROBACION -->
         <div style="display: none" id="div-modal-asigna_aprobacion" title="Usuarios acr&eacute;ditados">
             <table>
@@ -1471,6 +1539,13 @@ $contratos = $modelos->mostrarContratos();
             <div id="hr"><hr /></div>
             <table>
                 <tr>
+                            <!-- MODALE PARA MOSTRA TELEFENOS --> 
+        <!-- ++++++++++++++  -->
+
+
+                <div id="div_telefonoss">
+                    <a href="#">i am a qtip <img src="../../img/indicator.gif" style="vertical-align: middle;" border="0" alt="Smile" title="Smile" />
+                </div>        
                     <td><label>Par&aacute;metros Ppto. de ventas:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input id="btn-parametrospptoventa" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                 </tr>
@@ -1506,7 +1581,11 @@ $contratos = $modelos->mostrarContratos();
                                 <thead>
                                     <tr class="ui-widget-header">
                                         <th>Nombre de Contacto</th>
-                                        <th>Empresa
+                                        <th>Empresa</th>
+                                        <th>Cargo</th>
+                                        <th>Correo Electr&oacute;nico</th>    
+                                        <th>RUC</th>
+                                        <th>Fax</th>
                                     </tr>
                                 </thead>
                                 <tbody>
