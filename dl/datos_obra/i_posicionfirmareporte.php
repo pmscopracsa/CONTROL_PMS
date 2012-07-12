@@ -5,7 +5,7 @@
 include_once 'Conexion.php';
 $id_reporte = $_REQUEST['reporte'];
 $id_contacto = $_REQUEST['id_contacto'];
-$id_aleatorio = $_REQUEST['id_aleatorio'];
+$id_aleatorio = $_REQUEST['aleatorio'];
 $posi_firma_reportes = $_REQUEST['posi_reporte'];
 
 try {
@@ -29,8 +29,10 @@ try {
     $res = mysql_query($sql,$cn);
     $res2 = mysql_query($sql_tb_firmascontactotemporal,$cn);
     
-    if (!$res || $res2)
-        throw new Exception("Problemas en la insercion de la data: ".  mysql_error());
+    if (!$res)
+        throw new Exception("Problemas en la insercion de la data en tb_contactoreportetemporal: ".  mysql_error());
+    if (!$res2)
+        throw new Exception("Problemas en la insercion de la data en tb_firmascontactotemporal: ".  mysql_error());
 } catch ( Exception $ex ) {
     echo "-> ".$ex->getMessage(); 
 }

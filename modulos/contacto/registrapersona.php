@@ -518,7 +518,7 @@ function __autoload($name) {
                 <tr>
                     <td><label for="especialidad">Especialidad:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td>
-                        <input type="button" id="agregarEspecialidad" value="Agregar Especialidad" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                        <input type="button" id="agregarEspecialidad" value="Buscar Especialidad" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                         <div id="seleccionaEspecialidad" title="Agregar Especialidad" style="display: none" ></div>
                     </td>
                     

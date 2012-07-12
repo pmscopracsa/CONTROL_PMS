@@ -5,8 +5,8 @@
                 <th>Posici&oacute;n</th>
                 <th>Contacto</th>
                 <th>Seleccionar</th>
-                <th>Posici&oacute;n de firma en Reporte</th>
-                <th>Estado</th>
+<!--                <th>Posici&oacute;n de firma en Reporte</th>
+                <th>Estado</th>-->
             </tr>
         </thead>
         <tbody>

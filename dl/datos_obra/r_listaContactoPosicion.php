@@ -16,7 +16,7 @@ try {
     FROM tb_firmascontactotemporal fct 
     INNER JOIN tb_personacontacto pc
     ON fct.id_contacto = pc.id
-    WHERE fct.aleatorio = $aleatorio  AND fct.estado_asignado like 'n'";
+    WHERE fct.aleatorio = $aleatorio";
     
     $rs = mysql_query($sql);
     if (!$rs)
@@ -29,7 +29,6 @@ try {
         $a_firmar[$i]['nombre_contacto'] = $res['nombre_contacto'];
         $a_firmar[$i]['id_contacto'] = $res['id_contacto'];
         $a_firmar[$i]['estado_asignado'] = $res['estado_asignado'] == "n" ? "Aun no asignado" : "Ya esta asignado";
-        
         $i++;
     }
     echo json_encode($a_firmar);

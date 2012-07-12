@@ -786,7 +786,7 @@ function __autoload($name) {
                <tr>
                    <td><label for="especialidad">Especialidad:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
-                       <input type="button" id="btnAgregarEspecialidad" value="Agregar Especialidad" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                       <input type="button" id="btnAgregarEspecialidad" value="Buscar Especialidad" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                        
                        <!-- div que se alimenta con load()-->
                        <div id="divSeleccionaEspecialidad" title="Agregar Especialidad" style="display:none"></div>
@@ -822,7 +822,7 @@ function __autoload($name) {
                <tr>
                    <td><label for="representante">Representante:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
-                       <input type="button" id="btnAgregarRepresentante" value="Agregar Representante" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                       <input type="button" id="btnAgregarRepresentante" value="Buscar Representante" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                        <div id="divSeleccionaRepresentante" title="Agregar Representante" style="display: none"></div>
                        
                    </td>

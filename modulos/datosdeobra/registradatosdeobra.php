@@ -26,15 +26,14 @@ function __autoload($name) {
 //$especialidadCompania = new EspecialidadCompaniaDL();
 //$especialidades = $especialidadCompania->mostrarEspecialidades();
 
-//$clienteCompania = new CompaniaContactoDL();
+$clienteCompania = new CompaniaContactoDL();
 //$clientes = $clienteCompania->mostrarCompaniaContacto();
 
 //$empresa_contacto = $clienteCompania->mostrarEmpresaContacto();
-//$empresa_contacto = $clienteCompania->mostrarContactosTemporal();
+$empresa_contacto = $clienteCompania->mostrarContactosTemporal();
 
-$contactoPersona = new ContactoPersona();
-$contactos = $contactoPersona->mostrarContactos();
-
+//$contactoPersona = new ContactoPersona();
+//$contactos = $contactoPersona->mostrarContactos();
 
 /**
  *AUTOLOAD DE MODELOD DE CARTA Y CONTRATO 
@@ -61,6 +60,9 @@ $contratos = $modelos->mostrarContratos();
         <script src="../../js/cargarDatos.js" type="text/javascript"></script>
         <script src="../../js/jquery-tooltip/js/jtip.js" type="text/javascript"></script>
         <link href="../../js/jquery-tooltip/css/global.css" rel="stylesheet" type="text/css" />
+        <!-- sliding -->
+        <script src="../../js/sliding/sliding.form.js" type="text/javascript"></script>
+        <link href="../../js/sliding/css/style.css" rel="stylesheet" type="text/css" />
         <script>
             
         /**
@@ -72,7 +74,6 @@ $contratos = $modelos->mostrarContratos();
         function recargarClientesPorFiltro(filtro) {
             $("#divSeleccionaCliente").load("modales/clientes_div.php?filtro="+filtro);
         }
-        
         function recargarEmpresaContratante() {
             $("#divSeleccionaEmpContratante").load("modales/empcontratante_div.php?filtro=1");
         }
@@ -86,7 +87,6 @@ $contratos = $modelos->mostrarContratos();
         function recargarEmpGerenteProyectoPorFiltro(filtro) {
             $("#divSeleccionaEmpGerenteProyecto").load("modales/empgerproyecto_div.php?filtro="+filtro);
         }
-        
         function recargarEmpSupervisoraProyecto() {
             $("#divSeleccionaEmpSupProyecto").load("modales/empsupproyecto_div.php?filtro=1");
         }
@@ -129,7 +129,7 @@ $contratos = $modelos->mostrarContratos();
                     type:"POST",
                     data:{aleatorio:aleatorio},
                     url:"../../dl/datos_obra/truncate_temporal.php"
-                })
+                });
             });
             
             /**
@@ -148,8 +148,11 @@ $contratos = $modelos->mostrarContratos();
              * =================================
              * BOTON PARA ABRIR EL MODAL DE SELECCION DE LOS CLIENTES
              * 
-             */
-            $("#mostrarcontactos").click(function(){ //BOTON PARA ABRIR EL MODAL DE LOS CONTACTOS
+             **/
+            // BOTON: "Buscar Contactos"
+            // MODAL: "Selecciona los contactos de la obra"
+            // DESC.: Lista los contactos a ser seleccionados, uno por uno con un checkbox
+            $("#mostrarcontactos").click(function(){
                 $("#modal-contactos").dialog("open");
             });
             
@@ -159,8 +162,8 @@ $contratos = $modelos->mostrarContratos();
             
             $("#modal-cliente").dialog({
                 autoOpen:false,
-                height:300,
-                width:350,
+                height:350,
+                width:450,
                 modal:true,
                 buttons:{
                     "Cerrar":function(){
@@ -177,15 +180,15 @@ $contratos = $modelos->mostrarContratos();
             
             $("#modal-contratante").dialog({
                 autoOpen:false,
-                height:300,
-                width:350,
+                height:350,
+                width:450,
                 modal:true,
                 buttons:{
                     "Cerrar":function(){
                         $(this).dialog("close");
                     }
                 }
-            })
+            });
             
             $("#agregar-gerenteproyecto").click(function() {
 //                $("#modal-gerenteproyecto").dialog("open");
@@ -195,15 +198,15 @@ $contratos = $modelos->mostrarContratos();
             
             $("#modal-gerenteproyecto").dialog({
                 autoOpen:false,
-                height:300,
-                width:350,
+                height:350,
+                width:450,
                 modal:true,
                 buttons:{
                     "Cerrar":function(){
                         $(this).dialog("close");
                     }
                 }
-            })
+            });
             
             $("#agregar-supervisorproyecto").click(function() {
 //                $("#modal-supervisorproyecto").dialog("open");
@@ -213,15 +216,15 @@ $contratos = $modelos->mostrarContratos();
             
             $("#modal-supervisorproyecto").dialog({
                 autoOpen:false,
-                height:300,
-                width:350,
+                height:350,
+                width:450,
                 modal:true,
                 buttons:{
                     "Cerrar":function(){
                         $(this).dialog("close");
                     }
                 }
-            })
+            });
             
             $("#agregar-proveedorfacturar").click(function() {
 //                $("#modal-proveedorfacturar").dialog("open");
@@ -231,8 +234,8 @@ $contratos = $modelos->mostrarContratos();
             
             $("#modal-proveedorfacturar").dialog({
                 autoOpen:false,
-                height:300,
-                width:350,
+                height:350,
+                width:450,
                 modal:true,
                 buttons:{
                     "Cerrar":function(){
@@ -318,8 +321,13 @@ $contratos = $modelos->mostrarContratos();
              });
             
             /**
-             * MODAL ASIGNAR FIRMAS (1)
+             * MODALES PARA LA ASIGNACION DE FIRMAS
+             * ====================================
              */
+             // BOTON: ...
+             // MODAL: Firmas
+             // DESC.: Este modal nos permitirá seleccionar a los firmantes. 
+             // Al seleccionar a un contacto, seleccionaremos automaticamente: Puesto, Contacto y Empresa
              $("#btn-asignarfirmasreportes").click(function(){
                 $("#div-firmas-1").dialog("open");
                 return false;
@@ -351,7 +359,9 @@ $contratos = $modelos->mostrarContratos();
                      }
                  }
              });
-             
+             // MODAL: Asignar firmas a reportes
+             // DESC.: Modal que nos mostrará la lista de los documentos a firmar
+             // Se selecciona un documento y se selecciona 1 o más contactos a firmar en dicho documento.
              function mostrarEmpatarFirmasPersonas(data)
              {
                  $("#tblListaReportes td").remove();
@@ -411,6 +421,10 @@ $contratos = $modelos->mostrarContratos();
                   return reporte;
               }
               
+              /**
+               * MODAL: Asignar firmas a reportes / Segunda mitad
+               * 
+               */
               function mostrarFirmasAsignadas(data)
               {
                  $("#tbl-empate-firmante_reporte td").remove();
@@ -438,19 +452,18 @@ $contratos = $modelos->mostrarContratos();
               }
               
               /**
-               *  
+               *  COLOCARLE EL NUMERO DE POSICION DE LA FIRMA ----------------------------------------////////////////////////////////////
                **/
               $("#pos_firma_reporte").live("click",function() {
+                    
                     $(this).attr("id","inputext");
                     $(this).focusout(function(){
                        var td_padre = $(this).parent().parent().text();
                        var matches = td_padre.match(new RegExp("\\d+","gi"));
-                       //alert(matches[0]);
-                       //alert($(this).val());
                        $.ajax({
                            data:{aleatorio:<?=$aleatorio?>,posi_reporte:$(this).val(),reporte:getReporte(),id_contacto:matches[0]},
                            type:"POST",
-                           url:"../../dl/datos_obra/i_posicion_en_reportefirma.php"
+                           url:"../../dl/datos_obra/i_posicionfirmareporte.php"
                        });
                     });
               });
@@ -490,6 +503,10 @@ $contratos = $modelos->mostrarContratos();
                  $("input[name=id_contactoReporte]").attr('checked',false);
              }
              
+             /**
+              * MODAL: Firmas
+              * DESC.: Ya habiendo seleccionado un reporte se empata con un contacto
+              */
              function listaContactoPosicion()
              {
                  var aleatorio = <?=$aleatorio?>;
@@ -534,7 +551,22 @@ $contratos = $modelos->mostrarContratos();
                 $.ajax({
                     type:"POST",
                     data:{aleatorio:<?=$aleatorio?>,id_contacto:$(this).val(),id_reporte:getReporte()},
-                    url:"../../dl/datos_obra/i_contactoreportetemporal.php"
+                    url:"../../dl/datos_obra/i_contactoreportetemporal.php",
+                    success:function() {
+                        /**
+                         * SI SE HA TENIDO EXITO INGRESANDO A LA DDBB
+                         * ACTUALIZAR EL DIV
+                         */
+                        $.ajax({
+                            type:"GET",
+                            dataType:"json",
+                            data:{checked:getReporte(),aleatorio:<?=$aleatorio?>},
+                            url:"../../dl/datos_obra/r_listafirmasreportes.php",
+                            success:function(data) {
+                                mostrarFirmasAsignadas(data); // BUG: EL NUMERO DE LA POSICION NO JALA BIEN
+                            }
+                        })
+                    }
                 });
              });
              
@@ -744,7 +776,9 @@ $contratos = $modelos->mostrarContratos();
                     }
                 }
             });
-            
+            // MODAL: "Selecciona los contactos de la obra"
+            // DESC.: Los datos(contactos) seleccionados son almacenados en la tabla: temporal
+            // La tabla "temporal" será limpiada haciendo un match con el id de la sesion actual.
             $("#modal-contactos").dialog({
                 autoOpen:false,
                 height:350,
@@ -893,7 +927,7 @@ $contratos = $modelos->mostrarContratos();
                         $(this).dialog("close");
                     }
                 }
-            })
+            });
              
              /**
               * MODAL: Contactos
@@ -1172,16 +1206,18 @@ $contratos = $modelos->mostrarContratos();
         <div id="barra-superior"><div id="barra-superior-dentro"><h1 id="titulo_barra">REGISTRO DE DATOS DE OBRA</h1></div></div>
         
         <!--VENTANA MODAL PARA SELECCIONAR LOS CONTACTOS-->
-        <?php include_once 'modales/cliente-modal.php';?>
-        <?php include_once 'modales/modal-contratante.php';?>
-        <?php include_once 'modales/modal-gerenteproyecto.php';?>
-        <?php include_once 'modales/modal-supervisorproyecto.php';?>
-        <?php include_once 'modales/modal-proveedorfacturar.php';?>
-        <?php include_once 'modales/modal-addContacto.php';?>
-        <?php include_once 'modales/modal-modelocarta.php';?>
-        <?php include_once 'modales/modal-modelocontrato.php';?>
-        <?php include_once 'modales/modal-mostrarlistareportes.php';?>
-        <?php include_once 'modales/modal_r_listaContactoPosicion.php';?>
+        <?php 
+        include_once 'modales/cliente-modal.php';
+        include_once 'modales/modal-contratante.php';
+        include_once 'modales/modal-gerenteproyecto.php';
+        include_once 'modales/modal-supervisorproyecto.php';
+        include_once 'modales/modal-proveedorfacturar.php';
+        include_once 'modales/modal-addContacto.php';
+        include_once 'modales/modal-modelocarta.php';
+        include_once 'modales/modal-modelocontrato.php';
+        include_once 'modales/modal-mostrarlistareportes.php';
+        include_once 'modales/modal_r_listaContactoPosicion.php';
+        ?>
         
         <!-- MODALES PADRES  -->
         <!-- ++++++++++++++  -->
@@ -1191,35 +1227,6 @@ $contratos = $modelos->mostrarContratos();
         <div id="divSeleccionaEmpSupProyecto" title="Seleccionar la Empresa Supervisora del Proyecto" style="display: none"></div>
         <div id="divSeleccionaProvFacturar" title="Seleccionar la Empresa Supervisora del Proyecto" style="display: none"></div>
         <div id="modal-contactos" title="Selecciona los contactos de la obra" style="display: none"></div>
-        
-<!--        <div id="modal-contactos" title="Seleccionar contactos">
-                <div class="" >
-                    <table id="contactos" style="width:550px;height250px" 
-                           url=""
-                           toolbar="toolbar"
-                           rownumber="true"
-                           border="0">
-                        <thead>
-                            <tr>
-                                <th field="nombre">Nombre</th>
-                            </tr>
-                        </thead>
-                        <tr>
-                            <td>
-                                <?php
-                                /*foreach ($contactos as &$valor) {
-                                    echo '<input type="checkbox" name="contacto[]" value="'.
-                                            $valor[0].
-                                            '"/>'.
-                                            strtoupper($valor[3]).
-                                            '<br />';
-                                }*/
-                                ?>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-        </div>-->
         
         <!--VENTANA MODAL PARA SETEO DEL PRESUPUESTO DE VENTA-->
         <div style="display: none" id="div-modal-pptoventa" title="Seteo Presupuesto Venta">
@@ -1404,7 +1411,6 @@ $contratos = $modelos->mostrarContratos();
                     <td><label>Departamento:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td>
                         <select name="departamento" id="departamento-peru">
-                            <option value="0">Seleccionar departamento</option> 
                         </select>
                     </td>
                     <td><label>Moneda:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>

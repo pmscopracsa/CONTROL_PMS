@@ -22,9 +22,3 @@
         </table>
     </div>    
 </div>
-<?php
-/**
- * @TODO 
- * darle mas ancho a cada campo
- */
-?>
