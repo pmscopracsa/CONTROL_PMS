@@ -63,8 +63,8 @@ $contratos = $modelos->mostrarContratos();
         <link href="../../js/jquery-tooltip/css/global.css" rel="stylesheet" type="text/css" />
         
         <!-- sliding -->
-        <script src="../../js/sliding/sliding.form.js" type="text/javascript"></script>
-        <link href="../../js/sliding/css/style.css" rel="stylesheet" type="text/css" />
+<!--        <script src="../../js/sliding/sliding.form.js" type="text/javascript"></script>
+        <link href="../../js/sliding/css/style.css" rel="stylesheet" type="text/css" />-->
         <script>
             
         /**
@@ -109,10 +109,6 @@ $contratos = $modelos->mostrarContratos();
         }
         
         $(function(){
-            $('#content a[href]').qtip({
-      // Simply use an HTML img tag within the HTML string
-      content: 'i am a qtip'
-   });
             /**
              * CARGAR DIV CON DATOS Y PREPARAOS PARA BUSCARLOS
              * CARGA POR DEFECTO SIN FILTRO - PRIMERA CARGA
@@ -282,6 +278,12 @@ $contratos = $modelos->mostrarContratos();
                  width:450,
                  modal:true,
                  buttons:{
+                     "Seleccionar usuarios":function() {
+                         
+                     },
+                     "Asignar opciones":function() {
+                         
+                     },
                      "Cerrar":function(){
                          $(this).dialog("close");
                      }
@@ -372,6 +374,8 @@ $contratos = $modelos->mostrarContratos();
              {
                  $("#tblListaReportes td").remove();
                  $("#tblListaReportes tr").remove();
+                 $("#tbl-empate-firmante_reporte td").remove();
+                 //$("#tbl-empate-firmante_reporte tr").remove();
                  $.each(data,function(index,value) { 
                      $("#tblListaReportes tbody").append(
                         '<tr>'+
@@ -536,12 +540,12 @@ $contratos = $modelos->mostrarContratos();
                                 '<td>'+
                                 '<input type="checkbox" name="id_contactoReporte" value="'+data[index].id_contacto+'"/>'+
                                 '</td>'+
-                                '<td>'+
-                                '<input type="text" style="background:orange;color:white" id="posi_firma_reporte"/>'+ 
-                                '</td>'+
-                                '<td>'+
-                                '<input type="text" value="'+data[index].estado_asignado+'" READONLY/>'+
-                                '</td>'+
+//                                '<td>'+
+//                                '<input type="text" style="background:orange;color:white" id="posi_firma_reporte"/>'+ 
+//                                '</td>'+
+//                                '<td>'+
+//                                '<input type="text" value="'+data[index].estado_asignado+'" READONLY/>'+
+//                                '</td>'+
                                 '</tr>'    
                              )
                          });
@@ -803,6 +807,20 @@ $contratos = $modelos->mostrarContratos();
                     }
                 }
             });
+            // MODAL: "Lista de usuarios"
+            // DESC: Permite seleccionar de una lista a 1 o varios usuarios del sistema ligados 
+            // a la empresa e.g:foo@empresa.com
+            $("#modal_usuariosempresa").dialog({
+                autoOpen:false,
+                height:350,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Salir":function() {
+                        
+                    }
+                }
+            })
             
             /**
              * FUNCIONES PARA LLAMAR A LOS MODALES DE BUSQUEDA
@@ -1139,7 +1157,8 @@ $contratos = $modelos->mostrarContratos();
                     }
                 });    
             }).live("mouseout",function(){
-                $("#div_telefonos").hide("slow")
+                $("#telefonos").hide("slow")
+                $("#telefono p").remove();
             });
             $("#btn_tmobile").live("mouseover",function() {
                 var codigo = $(this).parent().parent().html();
@@ -1172,8 +1191,19 @@ $contratos = $modelos->mostrarContratos();
                 });    
             });
             
+            
+            /**
+             * MOSTRAR EN TOOLTIIP LOS TELEFONOS
+             * =================================
+             */
             function mostrarTelefonos(data,tipo) {
-                $("#div_telefonos").show("slow");
+                $("#telefonos").show("slow");
+                $.each(data,function(index,value){
+                    $("#telefonos").append(
+                        "<p id='telefono'>"+data[index].numero+"</p>"+
+                        "<br>"
+                    )
+                });
             }
             
             /*
@@ -1287,8 +1317,6 @@ $contratos = $modelos->mostrarContratos();
         include_once 'modales/modal_r_listaContactoPosicion.php';
         ?>
         
-
-        
         <!-- MODALES PADRES  -->
         <!-- ++++++++++++++  -->
         <div id="divSeleccionaCliente" title="Seleccionar Cliente" style="display: none"></div>
@@ -1392,21 +1420,6 @@ $contratos = $modelos->mostrarContratos();
         <div style="display: none" id="div-modal-asigna_aprobacion" title="Usuarios acr&eacute;ditados">
             <table>
                 <thead>
-                    <th>
-                    <th>
-                    <th>    
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="button" id="btn-asign-selecciona" value="Seleccionar usuarios" class="ui-button ui-widget ui-state-default ui-corner-all" /></td>
-                        <td><input type="button" id="btn-asign-elimina" value="Eliminar usuarios" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
-                        <td><input type="button" id="btn-asign-elimina" value="Asignar opciones" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
-                    </tr>
-                </tbody>
-            </table>
-            <hr>
-            <table>
-                <thead>
                     <tr class="ui-widget-header">
                         <th>Nombre</th>
                         <th>Usuario</th>
@@ -1453,7 +1466,6 @@ $contratos = $modelos->mostrarContratos();
         </div>
         
         <div style="display: none" id="div-firmas-reportes" title="Reportes">
-            
         </div>
         
         <form action="datosdeobratest.php" method="POST">
@@ -1539,13 +1551,6 @@ $contratos = $modelos->mostrarContratos();
             <div id="hr"><hr /></div>
             <table>
                 <tr>
-                            <!-- MODALE PARA MOSTRA TELEFENOS --> 
-        <!-- ++++++++++++++  -->
-
-
-                <div id="div_telefonoss">
-                    <a href="#">i am a qtip <img src="../../img/indicator.gif" style="vertical-align: middle;" border="0" alt="Smile" title="Smile" />
-                </div>        
                     <td><label>Par&aacute;metros Ppto. de ventas:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input id="btn-parametrospptoventa" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                 </tr>
@@ -1569,32 +1574,36 @@ $contratos = $modelos->mostrarContratos();
                 
                 <tr>
                     <td>Lista de contactos:</td>
-                    <td>
-                        <!-- MODAL PARA BUSCAR POR NOMBREW [ CONTACTO ] -->
-                        <div id="modal_buscarContacto" title="Buscar contacto" style="display: none">
-                            <label>Nombre del contacto</label>
-                            <input type="text" id="txt_contacto" />
-                        </div>
-                        <input type="button" id="mostrarcontactos" value="Buscar contactos" class="ui-button ui-widget ui-state-default ui-corner-all"/>
-                        <div class="areaScrollModal" id="lista-contactos">
-                            <table id="contactos-agregados">
-                                <thead>
-                                    <tr class="ui-widget-header">
-                                        <th>Nombre de Contacto</th>
-                                        <th>Empresa</th>
-                                        <th>Cargo</th>
-                                        <th>Correo Electr&oacute;nico</th>    
-                                        <th>RUC</th>
-                                        <th>Fax</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </td>
-                </tr>
+                        <td>
+                            <!-- MODAL PARA BUSCAR POR NOMBREW [ CONTACTO ] -->
+                            <div id="modal_buscarContacto" title="Buscar contacto" style="display: none">
+                                <label>Nombre del contacto</label>
+                                <input type="text" id="txt_contacto" />
+                            </div>
+                            <input type="button" id="mostrarcontactos" value="Buscar contactos" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                            <div class="areaScrollModal" id="lista-contactos">
+                                <table id="contactos-agregados">
+                                    <thead>
+                                        <tr class="ui-widget-header">
+                                            <th>Nombre de Contacto</th>
+                                            <th>Empresa</th>
+                                            <th>Cargo</th>
+                                            <th>Correo Electr&oacute;nico</th>    
+                                            <th>RUC</th>
+                                            <th>Fax</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- { TELEFONOS } -->
+                    <div id="telefonos"  style="display: none">
+                        
+                    </div>
             </table>
             <br />
             <hr />
