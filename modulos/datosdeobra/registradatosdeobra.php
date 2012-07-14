@@ -119,6 +119,7 @@ $contratos = $modelos->mostrarContratos();
             $("#divSeleccionaEmpSupProyecto").load("modales/empsupproyecto_div.php?filtro=1");
             $("#divSeleccionaProvFacturar").load("modales/proveedorfacturar_div.php?filtro=1");
             $("#modal-contactos").load("modales/contactos_div.php?filtro=1");
+            $("#modal_usuariosempresa").load("modales/usuarios_div.php?filtro=1");
             
             /**
              * ELIMINAR DATOS DE LA TABLA TEMPORAL SI SE DETECTA
@@ -142,6 +143,7 @@ $contratos = $modelos->mostrarContratos();
             var contador_puesto = 0;
             var contador_contacto = 0;
             var Contador_empresa = 0;
+            var contador_usuarios = 0;
             
             $("#datepicker_i,#datepicker_f").datepicker({dateFormat:'yy-mm-dd'},{showAnim:'fold'});
             
@@ -274,21 +276,43 @@ $contratos = $modelos->mostrarContratos();
              });
              $("#div-modal-asigna_aprobacion").dialog({
                  autoOpen:false,
-                 heigh:900,
-                 width:450,
+                 heigh:500,
+                 width:350,
                  modal:true,
                  buttons:{
                      "Seleccionar usuarios":function() {
-                         
+                        $("#modal_usuariosempresa").dialog("open");
                      },
                      "Asignar opciones":function() {
-                         
+                         $.ajax({
+                             type:"GET",
+                             dataType:"json",
+                             data:{aleatorio:<?=$aleatorio?>},
+                             url:"../../dl/datos_obra/r_listaopciones.php",
+                             success:function(data) {
+                                mostrarEmpatarUsuariosOpciones(data);
+                             }
+                         });
+                         $("#modal-listaopciones").dialog("open");
                      },
                      "Cerrar":function(){
                          $(this).dialog("close");
                      }
                  }
              });
+             function mostrarEmpatarUsuariosOpciones(data) {
+                $.each(data,function(index,value) {
+                    $("#tbl-empate-usuario_opcion tbody").append(
+                        "<tr>"+
+                        '<td class="usuarioopcion">'+
+                        '<input type="radio" name="opciones" value="'+data[index].id+'">'+
+                        data[index].descripcion+
+                        '<p class="descxdescripcion" style="display:none">'+data[index].descripcion+'</p>'+
+                        '</td>'+
+                        '</tr>'
+                    );
+                });
+             }
              
              /**
               * MODAL MODELO DE CARTA DE ADJUDICACION Y CONDICIONES GENERALES
@@ -359,7 +383,7 @@ $contratos = $modelos->mostrarContratos();
                              success:function(data) {
                                  mostrarEmpatarFirmasPersonas(data);
                              }
-                         })
+                         });
                          $("#modal-listareportes").dialog("open");
                      },
                      "Cerrar":function(){
@@ -502,6 +526,28 @@ $contratos = $modelos->mostrarContratos();
                     }
                 }
              });
+             /**
+              * EMPATAR OPCIONES Y USUARIOS
+              */
+              $("#modal-listaopciones").dialog({
+                show:"blind",
+                autoOpen:false,
+                height:700,
+                width:850,
+                modal:true,
+                buttons:{
+                    "Agrear usuarios":function() {
+                        /*******
+                         *
+                         *
+                         *
+                         */
+                    },
+                    "Salir":function() {
+                        $(this).dialog("close");
+                    }
+                }
+              })
              
              /**
               * FUNCION PARA EVITAR "N" PLICAR LOS DATOS
@@ -812,12 +858,12 @@ $contratos = $modelos->mostrarContratos();
             // a la empresa e.g:foo@empresa.com
             $("#modal_usuariosempresa").dialog({
                 autoOpen:false,
-                height:350,
-                width:450,
+                height:450,
+                width:350,
                 modal:true,
                 buttons:{
                     "Salir":function() {
-                        
+                        $(this).dialog("close");
                     }
                 }
             })
@@ -1075,18 +1121,18 @@ $contratos = $modelos->mostrarContratos();
              * SELECCIONAR Y AGREGAR CONTACTOS PARA DATOS DE OBRA
              * ==================================================
              **/
-            $('input:checkbox[name=contacto[]]').click(function(){
-                var id = $(this).val();
-                $.ajax({
-                    data:{id:id},
-                    type:"GET",
-                    dataType:"json",
-                    url:"../../includes/query_repository/getAllContacto.php",
-                    success:function(data) {
-                        resultados(data);
-                    }
-                });
-            });
+//            $('input:checkbox[name=contacto[]]').click(function(){
+//                var id = $(this).val();
+//                $.ajax({
+//                    data:{id:id},
+//                    type:"GET",
+//                    dataType:"json",
+//                    url:"../../includes/query_repository/getAllContacto.php",
+//                    success:function(data) {
+//                        resultados(data);
+//                    }
+//                });
+//            });
             
             $("#contactos_boxes").live("click",function() {
                 $.ajax({
@@ -1106,7 +1152,7 @@ $contratos = $modelos->mostrarContratos();
             {
                 /**
                  * FUNCION AJAX CON POST PARA INGRESAR LOS DATOS
-                 * EN LA TABLA TEMPORAL
+                 * EN LA TABLA TEMPORAL "temporal"
                  */
                 contador_contactos++;
                 var codigo;
@@ -1139,6 +1185,42 @@ $contratos = $modelos->mostrarContratos();
                     })
                 });
             }
+            
+            /**
+             * OBTENER LOS USUARIOS DEL SISTEMA
+             */
+            $("#usuarios_boxes").live("click",function() {
+                $.ajax({
+                    data:{id:$(this).val()},
+                    type:"GET",
+                    dataType:"json",
+                    url:"../../includes/query_repository/getAllUsuarios.php",
+                    success:function(data) {
+                        resultadoUsuarios(data);
+                    }
+                });
+            }); 
+            function resultadoUsuarios(data) {
+                contador_usuarios++;
+                var codigo;
+                $.each(data,function(index,value){
+                    codigo = data[index].id;
+                    $("#tbl_usuariossistema tbody").append(
+                        "<tr>"+
+                        "<td>"+data[index].nombre+"</td>"+
+                        "<td>"+data[index].nombreusuario+"</td>"+
+                        "<td>"+"<a href='#' id='del-usuario' class='button delete'>Eliminar</a>"+"</td>"+
+                        '<input id="codigo_usuario" type="hidden" name="usuario'+contador_usuarios+'" value="'+data[index].id+'" />'+
+                        "</tr>"
+                    ),
+                    $.ajax({ // INGRESAR LOS USUARTIOS DEL SISTEMA ELEGIDOS A LA DB TEMPROAL DE USUARIOS: tb_usuariosaprobaciontemporal
+                        type:"POST",
+                        data:{id:codigo,aleatorio:<?=$aleatorio?>},
+                        url:"../../dl/datos_obra/i_ingresausuarioatemporal.php"
+                    })    
+                });
+            }
+             
             /**
              * EVENTOS PARA OBTENER LOS NUMEROS DE TELEFONO 
              **/
@@ -1228,7 +1310,27 @@ $contratos = $modelos->mostrarContratos();
                     data:{id:id,aleatorio:aleatorio},
                     type:"POST",
                     url:"../../dl/datos_obra/d_eliminacontacto.php"
-                })
+                });
+            });
+            
+            /**
+             * ELIMINA USUARIO DE SISTEMA DE TABLA TEMPORAL
+             * MODAL. usuarios acreditados
+             * TABLA: tb_usuariosaprobaciontemporal
+             */
+            $("#del-usuario").live("click",function(e) {
+                e.preventDefault();
+                var value = $(this).parent().parent().html();
+                alert(value);
+                $(this).parent().parent().remove();
+                var matches = value.match(new RegExp("(\\d+)","gi"));
+                alert(matches[1]);
+               
+               $.ajax({
+                   data:{aleatorio:<?=$aleatorio?>,id:matches[1]},
+                   type:"POST",
+                   url:""
+               });
             });
             
             /**
@@ -1314,6 +1416,7 @@ $contratos = $modelos->mostrarContratos();
         include_once 'modales/modal-modelocarta.php';
         include_once 'modales/modal-modelocontrato.php';
         include_once 'modales/modal-mostrarlistareportes.php';
+        include_once 'modales/modal-mostraropcionesusuarios.php';
         include_once 'modales/modal_r_listaContactoPosicion.php';
         ?>
         
@@ -1325,6 +1428,7 @@ $contratos = $modelos->mostrarContratos();
         <div id="divSeleccionaEmpSupProyecto" title="Seleccionar la Empresa Supervisora del Proyecto" style="display: none"></div>
         <div id="divSeleccionaProvFacturar" title="Seleccionar la Empresa Supervisora del Proyecto" style="display: none"></div>
         <div id="modal-contactos" title="Selecciona los contactos de la obra" style="display: none"></div>
+        <div id="modal_usuariosempresa" title="Lista de usuarios" style="display: none"></div>
         
         <!--VENTANA MODAL PARA SETEO DEL PRESUPUESTO DE VENTA-->
         <div style="display: none" id="div-modal-pptoventa" title="Seteo Presupuesto Venta">
@@ -1418,19 +1522,15 @@ $contratos = $modelos->mostrarContratos();
         </div>
         <!-- VENTANA MODAL PARA ASIGNAR USUARIOS PARA APROBACION -->
         <div style="display: none" id="div-modal-asigna_aprobacion" title="Usuarios acr&eacute;ditados">
-            <table>
+            <table id="tbl_usuariossistema">
                 <thead>
                     <tr class="ui-widget-header">
                         <th>Nombre</th>
                         <th>Usuario</th>
-                        <th>Email</th>
-                        <th>Id</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        
-                    </tr>
+                    <tr></tr>
                 </tbody>
             </table>
         </div>

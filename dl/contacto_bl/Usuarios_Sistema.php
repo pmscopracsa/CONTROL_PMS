@@ -14,7 +14,7 @@ class Usuarios_Sistema {
     
     public function mostrarUsuarios()
     {
-        $query = "";
+        $query = "SELECT * FROM tb_usuario ORDER BY nombre ASC";
         
         try
         {
@@ -41,7 +41,7 @@ class Usuarios_Sistema {
     
     public function mostrarUsuariosPorNombre()
     {
-        $query = "";
+        $query = "SELECT * FROM tb_usuario WHERE nombre LIKE '$this->_nombre%'";
         
         try
         {
