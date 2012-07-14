@@ -302,7 +302,7 @@ $contratos = $modelos->mostrarContratos();
              });
              function mostrarEmpatarUsuariosOpciones(data) {
                 $.each(data,function(index,value) {
-                    $("#tbl-empate-usuario_opcion tbody").append(
+                    $("#tblListaOpciones tbody").append(
                         "<tr>"+
                         '<td class="usuarioopcion">'+
                         '<input type="radio" name="opciones" value="'+data[index].id+'">'+
@@ -527,7 +527,8 @@ $contratos = $modelos->mostrarContratos();
                 }
              });
              /**
-              * EMPATAR OPCIONES Y USUARIOS
+              * ASIGNAR OPCIONES A USUARIOS
+              * ===========================
               */
               $("#modal-listaopciones").dialog({
                 show:"blind",
@@ -536,12 +537,13 @@ $contratos = $modelos->mostrarContratos();
                 width:850,
                 modal:true,
                 buttons:{
-                    "Agrear usuarios":function() {
-                        /*******
-                         *
-                         *
-                         *
-                         */
+                    "Agregar usuarios":function() {
+                        if($("input[name:'opciones']:radio").is(':checked')) {
+                            listaUsuariosOpciones();
+                            alert($("input[name='opciones']:checked").val());
+                        } else {
+                            alert("Debe seleccionar una opci\xf3n de la lista");
+                        }
                     },
                     "Salir":function() {
                         $(this).dialog("close");
@@ -550,7 +552,7 @@ $contratos = $modelos->mostrarContratos();
               })
              
              /**
-              * FUNCION PARA EVITAR "N" PLICAR LOS DATOS
+              * FUNCION PARA EVITAR "N"PLICAR LOS DATOS
               * AL MOSTRALOS
               **/
              function limpiaPreviaTabla()
@@ -586,12 +588,6 @@ $contratos = $modelos->mostrarContratos();
                                 '<td>'+
                                 '<input type="checkbox" name="id_contactoReporte" value="'+data[index].id_contacto+'"/>'+
                                 '</td>'+
-//                                '<td>'+
-//                                '<input type="text" style="background:orange;color:white" id="posi_firma_reporte"/>'+ 
-//                                '</td>'+
-//                                '<td>'+
-//                                '<input type="text" value="'+data[index].estado_asignado+'" READONLY/>'+
-//                                '</td>'+
                                 '</tr>'    
                              )
                          });
@@ -599,6 +595,37 @@ $contratos = $modelos->mostrarContratos();
                  });
                  $("#modal_r_listaContactoPosicion").dialog("open");
              }
+             
+             /**
+              * MODAL: Usuarios 
+              */
+              function listaUsuarios()
+              {
+                  $.ajax({
+                      type:"GET",
+                      dataType:"json",
+                      data:{aleatorio:<?=$aleatorio?>,opcion:getOpcion()},
+                      url:"../../dl/datos_obra/r_listaContactoPosicion.php",
+                      success:function(data) {
+                          $.each(data,function(index,value){
+                            $("#tblr_listaUsuarios tbody").append(
+                                '<tr>'+
+                                '<td>'+
+                                data[index].txt_nombre+
+                                '</td>'+
+                                '<td>'+
+                                data[index].txt_nombreusuario+
+                                '</td>'+
+                                '<td>'+
+                                '<input type="checkbox" name="id_usuarioOpcion" value="'+data[index].id_usuario+'"/>'+
+                                '</td>'+
+                                '</tr>'
+                            )
+                          });
+                      }
+                  });
+              }
+              
              /**
               * DETECTA CLICK EN MODAL FIRMAS: QUE ES DONDE SE EMPATAN LOS REPORTES Y LOS CONTACTOS
               * LOS DATOS SE INGRESAN A LA TABLA: tb_contactoreportetemporal
@@ -656,6 +683,23 @@ $contratos = $modelos->mostrarContratos();
                     }
                 }
              });
+             
+             /**
+              * MODAL PARA MOSTRAR A LOS USUARIOS, Y SELECCIONARLOS CON UN CLICK EN EL
+              * CHECKBOX PARA EMPATARLOS CON UNA "OPCION"
+              */
+              $("#moda_r_listausuariosempresa").dialog({
+                show:"blind",
+                autoOpen:false,
+                height:350,
+                width:550,
+                modal:true,
+                buttons:{
+                    "Salir":function() {
+                        $(this).dialog("close");
+                    }
+                }
+              })
              
              /**
               * MODAL PARE RECUPERAR LOS DATOS DE LA TABLA TEMPORAL
@@ -1418,6 +1462,7 @@ $contratos = $modelos->mostrarContratos();
         include_once 'modales/modal-mostrarlistareportes.php';
         include_once 'modales/modal-mostraropcionesusuarios.php';
         include_once 'modales/modal_r_listaContactoPosicion.php';
+
         ?>
         
         <!-- MODALES PADRES  -->
