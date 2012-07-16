@@ -123,7 +123,7 @@ $contratos = $modelos->mostrarContratos();
             
             /**
              * ELIMINAR DATOS DE LA TABLA TEMPORAL SI SE DETECTA
-             * RECARGA DE LA PAGINA, EL VALOR ALEATORIO IDENTIFICARA 
+             * RECARGA DE LA PAGINA, EL VALOR ALEATORIO IDENTIFICAR 
              * LA SESSION DE CADA USUARIO
              */
             $(window).bind('beforeunload', function() {
@@ -168,6 +168,8 @@ $contratos = $modelos->mostrarContratos();
                 autoOpen:false,
                 height:350,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
                     "Cerrar":function(){
@@ -186,6 +188,8 @@ $contratos = $modelos->mostrarContratos();
                 autoOpen:false,
                 height:350,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
                     "Cerrar":function(){
@@ -204,6 +208,8 @@ $contratos = $modelos->mostrarContratos();
                 autoOpen:false,
                 height:350,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
                     "Cerrar":function(){
@@ -222,6 +228,8 @@ $contratos = $modelos->mostrarContratos();
                 autoOpen:false,
                 height:350,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
                     "Cerrar":function(){
@@ -240,6 +248,8 @@ $contratos = $modelos->mostrarContratos();
                 autoOpen:false,
                 height:350,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
                     "Cerrar":function(){
@@ -259,6 +269,8 @@ $contratos = $modelos->mostrarContratos();
                 autoOpen:false,
                 heigh:950,
                 width:550,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
                     "Cerrar":function(){
@@ -278,6 +290,8 @@ $contratos = $modelos->mostrarContratos();
                  autoOpen:false,
                  heigh:500,
                  width:350,
+                 resizable:false,
+                 closeOnEscape:false,
                  modal:true,
                  buttons:{
                      "Seleccionar usuarios":function() {
@@ -301,6 +315,9 @@ $contratos = $modelos->mostrarContratos();
                  }
              });
              function mostrarEmpatarUsuariosOpciones(data) {
+                $("#tblListaOpciones td").remove(); 
+                $("#tblListaOpciones tr").remove();
+                $("#tbl-empate-usuario_opcion td").remove();
                 $.each(data,function(index,value) {
                     $("#tblListaOpciones tbody").append(
                         "<tr>"+
@@ -325,6 +342,8 @@ $contratos = $modelos->mostrarContratos();
                  autoOpen:false,
                  height:500,
                  width:350,
+                 resizable:false,
+                 closeOnEscape:false,
                  modal:true,
                  buttons:{
                      "Cerrar":function(){
@@ -344,6 +363,8 @@ $contratos = $modelos->mostrarContratos();
                  autoOpen:false,
                  height:500,
                  width:350,
+                 resizable:false,
+                 closeOnEscape:false,
                  modal:true,
                  buttons:{
                      "Cerrar":function(){
@@ -368,6 +389,8 @@ $contratos = $modelos->mostrarContratos();
                  autoOpen:false,
                  height:300,
                  width:750,
+                 resizable:false,
+                 closeOnEscape:false,
                  modal:true,
                  buttons:{
                      "Agregar contactos":function(){
@@ -418,9 +441,11 @@ $contratos = $modelos->mostrarContratos();
                 autoOpen:false,
                 height:300,
                 width:350,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Salir":function(){
+                    "Cerrar":function(){
                         $(this).dialog("close");
                     }
                 }
@@ -455,8 +480,9 @@ $contratos = $modelos->mostrarContratos();
                   $.ajax({
                       type:"GET",
                       dataType:"json",
-                      data:{opcion:$("input[name='opciones']:checked").val(), aleatorio:<?=$aleatorio?>},
-                      url:"../../dl/datos_obra/r_listausuariosopciones.php",
+                      data:{id_opcion:$("input[name='opciones']:checked").val(), id_aleatorio:<?=$aleatorio?>},
+                      //url:"../../dl/datos_obra/r_listausuariosopciones.php",
+                      url:"../../dl/datos_obra/r_usuariosopciontemporal.php",
                       success:function(data){
                           mostrarOpcionesAsignadas(data);
                       }
@@ -505,6 +531,7 @@ $contratos = $modelos->mostrarContratos();
                         '<input type="text" name="pos_firma_reporte" id="pos_firma_reporte"/ value="'+data[index].numero_posi+'">'+
                         "</td>"+
                         "<td>"+
+                        "<td><a href='#' id='del-contacto_reporte' class='button delete'>Eliminarr</a></td>"+
                         '<p style="display:none">'+data[index].id_contacto+"</p>"+
                         "</td>"+
                         "</tr>"    
@@ -518,9 +545,9 @@ $contratos = $modelos->mostrarContratos();
                */
               function mostrarOpcionesAsignadas(data)
               {
-                  $("#tbl-empate-usuario_opcion tbody").remove(); //->modal-mostraropcionesusuarios.php
+                  $("#tbl-empate-usuario_opcion td").remove(); //->modal-mostraropcionesusuarios.php
                   $.each(data,function(index,value) {
-                      $("#").append(
+                      $("#tbl-empate-usuario_opcion tbody").append(
                         "<tr>"+
                         "<td>"+
                         data[index].nombre+
@@ -528,6 +555,7 @@ $contratos = $modelos->mostrarContratos();
                         "<td>"+
                         data[index].nombreusuario+
                         "</td>"+
+                        "<td><a href='#' id='del-contacto_reporte' class='button delete'>Eliminar</a></td>"+
                         "<td>"+
                         '<p style="display:none">'+data[index].id_usuario+"</p>"+
                         "</td>"+
@@ -559,8 +587,10 @@ $contratos = $modelos->mostrarContratos();
              $("#modal-listareportes").dialog({
                 show:"blind",
                 autoOpen:false,
-                height:700,
-                width:850,
+                height:400,
+                width:650,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
                     "Agregar firmantes":function() {//SELECCIONAR DATOS DE LA TABLA -> tb_firmascontactotemporal
@@ -571,7 +601,7 @@ $contratos = $modelos->mostrarContratos();
                             alert("Debe seleccionar un reporte de la lista");
                         }
                     },
-                    "Salir":function(){
+                    "Cerrar":function(){
                         $(this).dialog("close");
                     }
                 }
@@ -583,8 +613,10 @@ $contratos = $modelos->mostrarContratos();
               $("#modal-listaopciones").dialog({
                 show:"blind",
                 autoOpen:false,
-                height:700,
-                width:850,
+                height:350,
+                width:400,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
                     "Agregar usuarios":function() {
@@ -595,11 +627,11 @@ $contratos = $modelos->mostrarContratos();
                             alert("Debe seleccionar una opci\xf3n de la lista");
                         }
                     },
-                    "Salir":function() {
+                    "Cerrar":function() {
                         $(this).dialog("close");
                     }
                 }
-              })
+              });
              
              /**
               * FUNCION PARA EVITAR "N"PLICAR LOS DATOS
@@ -695,10 +727,7 @@ $contratos = $modelos->mostrarContratos();
                     data:{aleatorio:<?=$aleatorio?>,id_contacto:$(this).val(),id_reporte:getReporte()},
                     url:"../../dl/datos_obra/i_contactoreportetemporal.php",
                     success:function() {
-                        /**
-                         * SI SE HA TENIDO EXITO INGRESANDO A LA DDBB
-                         * ACTUALIZAR EL DIV
-                         */
+                         // SI SE HA TENIDO EXITO INGRESANDO A LA DDBB ACTUALIZAR EL DIV
                         $.ajax({
                             type:"GET",
                             dataType:"json",
@@ -707,7 +736,7 @@ $contratos = $modelos->mostrarContratos();
                             success:function(data) {
                                 mostrarFirmasAsignadas(data);
                             }
-                        })
+                        });
                     }
                 });
              });
@@ -722,14 +751,14 @@ $contratos = $modelos->mostrarContratos();
               $("input[name=id_usuarioOpcion]").live("click",function() {
                 $.ajax({
                     type:"POST",
-                    data:{aleatorio:<?=$aleatorio?>,id_opcion:getOpcion(),id_usuario:$(this).val()},
-                    url:"",
+                    data:{id_aleatorio:<?=$aleatorio?>,id_opcion:getOpcion(),id_usuario:$(this).val()},
+                    url:"../../dl/datos_obra/i_usuariosopciontemporal.php",
                     success:function() {
                         $.ajax({
                             type:"GET",
                             dataType:"json",
-                            data:{id_opcion:getOpcion(),aleatorio:<?=$aleatorio?>},
-                            url:"",
+                            data:{id_opcion:getOpcion(),id_aleatorio:<?=$aleatorio?>},
+                            url:"../../dl/datos_obra/r_usuariosopciontemporal.php",
                             success:function(data) {
                                 mostrarOpcionesAsignadas(data);
                             }
@@ -762,9 +791,11 @@ $contratos = $modelos->mostrarContratos();
                 autoOpen:false,
                 height:350,
                 width:550,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Salir":function() {
+                    "Cerrar":function() {
                         $(this).dialog("close");
                     }
                 }
@@ -779,9 +810,11 @@ $contratos = $modelos->mostrarContratos();
                 autoOpen:false,
                 height:350,
                 width:550,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Salir":function() {
+                    "Cerrar":function() {
                         $(this).dialog("close");
                     }
                 }
@@ -846,6 +879,8 @@ $contratos = $modelos->mostrarContratos();
                 autoOpen:false,
                 height:300,
                 width:350,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
                     "Cerrar":function(){
@@ -872,6 +907,8 @@ $contratos = $modelos->mostrarContratos();
                 autoOpen:false,
                 height:350,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
                     "Buscar":function() {
@@ -881,7 +918,7 @@ $contratos = $modelos->mostrarContratos();
                     "Limpiar":function() {
                         recargarClientes();
                     },
-                    "Salir":function() {
+                    "Cerrar":function() {
                         $(this).dialog("close");
                     }
                 }
@@ -891,6 +928,8 @@ $contratos = $modelos->mostrarContratos();
                autoOpen:false,
                 height:350,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
                     "Buscar":function() {
@@ -900,7 +939,7 @@ $contratos = $modelos->mostrarContratos();
                     "Limpiar":function() {
                         recargarEmpresaContratante();
                     },
-                    "Salir":function() {
+                    "Cerrar":function() {
                         $(this).dialog("close");
                     }
                 }
@@ -910,6 +949,8 @@ $contratos = $modelos->mostrarContratos();
                 autoOpen:false,
                 height:350,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
                     "Buscar":function() {
@@ -919,7 +960,7 @@ $contratos = $modelos->mostrarContratos();
                     "Limpiar":function() {
                         recargarEmpGerenteProyecto();
                     },
-                    "Salir":function() {
+                    "Cerrar":function() {
                         $(this).dialog("close");
                     }
                 }
@@ -929,6 +970,8 @@ $contratos = $modelos->mostrarContratos();
                 autoOpen:false,
                 height:350,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
                     "Buscar":function() {
@@ -938,7 +981,7 @@ $contratos = $modelos->mostrarContratos();
                     "Limpiar":function() {
                         recargarEmpSupervisoraProyecto();
                     },
-                    "Salir":function() {
+                    "Cerrar":function() {
                         $(this).dialog("close");
                     }
                 }
@@ -948,6 +991,8 @@ $contratos = $modelos->mostrarContratos();
                 autoOpen:false,
                 height:350,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
                     "Buscar":function() {
@@ -957,7 +1002,7 @@ $contratos = $modelos->mostrarContratos();
                     "Limpiar":function() {
                         recargarProveedorFacturar();
                     },
-                    "Salir":function() {
+                    "Cerrar":function() {
                         $(this).dialog("close");
                     }
                 }
@@ -969,6 +1014,8 @@ $contratos = $modelos->mostrarContratos();
                 autoOpen:false,
                 height:350,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
                     "Buscar":function() {
@@ -978,7 +1025,7 @@ $contratos = $modelos->mostrarContratos();
                     "Limpiar":function() {
                         recargarContactos();
                     },
-                    "Salir":function() {
+                    "Cerrar":function() {
                         $(this).dialog("close");
                     }
                 }
@@ -988,11 +1035,13 @@ $contratos = $modelos->mostrarContratos();
             // a la empresa e.g:foo@empresa.com
             $("#modal_usuariosempresa").dialog({
                 autoOpen:false,
-                height:450,
-                width:350,
+                height:350,
+                width:300,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Salir":function() {
+                    "Cerrar":function() {
                         $(this).dialog("close");
                     }
                 }
@@ -1034,27 +1083,31 @@ $contratos = $modelos->mostrarContratos();
              */
             $("#modal_buscarClientePorNombre").dialog({
                 autoOpen:false,
-                height:100,
+                height:80,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Ok":function() {
+                    "¡Busca!":function() {
                         if($("#txt_nombreCliente").val() == "")
                             alert("Ingrese dato a buscar");
                         recargarClientesPorFiltro($("#txt_nombreCliente").val());
                     },
-                    "Salir":function(){
+                    "Cerrar":function(){
                         $(this).dialog("close");
                     }
                 }
             });
             $("#modal_buscarEmpContratantePorNombre").dialog({
                 autoOpen:false,
-                height:100,
+                height:80,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Ok":function() {
+                    "¡Busca!":function() {
                         if($("#txt_empresacontratante").val() == "")
                             alert("Ingrese dato a buscar");
                         recargarEmpresaContratantePorFiltro($("#txt_empresacontratante").val());
@@ -1066,11 +1119,13 @@ $contratos = $modelos->mostrarContratos();
             });
             $("#modal_buscarEmpGerenteProyecto").dialog({
                 autoOpen:false,
-                height:100,
+                height:80,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Ok":function() {
+                    "¡Busca!":function() {
                         if($("#txt_empresagerenteproyecto").val() == "")
                             alert("Ingrese dato a buscar");
                         recargarEmpGerenteProyectoPorFiltro($("#txt_empresagerenteproyecto").val());
@@ -1082,11 +1137,13 @@ $contratos = $modelos->mostrarContratos();
             });
             $("#modal_buscarEmpSupervisoraProyecto").dialog({
                 autoOpen:false,
-                height:100,
+                height:80,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Ok":function() {
+                    "¡Busca!":function() {
                         if($("#txt_empsupervisoraproyecto").val() == "")
                             alert("Ingrese dato a buscar");
                         recargarEmpSupervisoraProyectoPorFiltro($("#txt_empsupervisoraproyecto").val());
@@ -1098,11 +1155,13 @@ $contratos = $modelos->mostrarContratos();
             });
             $("#modal_buscarProveedorAFacturar").dialog({
                 autoOpen:false,
-                height:100,
+                height:80,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Ok":function() {
+                    "¡Busca!":function() {
                         if($("#txt_proveedorfacturar").val() == "")
                             alert("Ingrese dato a buscar");
                         recargarProveedorFacturarPorFiltro($("#txt_proveedorfacturar").val());
@@ -1114,11 +1173,13 @@ $contratos = $modelos->mostrarContratos();
             });
             $("#modal_buscarContacto").dialog({
                 autoOpen:false,
-                height:100,
+                height:80,
                 width:450,
+                resizable:false,
+                closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Ok":function() {
+                    "¡Busca!":function() {
                         if($("#txt_contacto").val() == "")
                             alert("Ingrese dato a buscar");
                         recargarContactosPorFiltro($("#txt_contacto").val());
@@ -1213,10 +1274,35 @@ $contratos = $modelos->mostrarContratos();
               * botón de eliminarcontacto del modal "Firmas"
               */
              $("#del-firma").live("click",function(e){
+                 var value = $(this).parent().parent().html();
+                 var matches = value.match(new RegExp("(\\d+)","gi"));
                  e.preventDefault();
                  contador_firmas--;
                  $(this).parent().parent().remove();
-             })
+
+                 $.ajax({
+                     data:{id:matches[0],aleatorio:<?=$aleatorio?>},
+                     type:"POST",
+                     url:"../../dl/datos_obra/d_eliminaFirmaContacto.php"
+                 });
+             });
+             
+             /**
+              * BTON DE ELIMINAR CONTACTO - POSICION-------------------------------------------------------------
+              */
+             $("#del-contacto_reporte").live("click",function(e) {
+                 var value = $(this).parent().parent().html();
+                 var matches = value.match(new RegExp("(\\d+)","gi"));
+                 e.preventDefault();
+                 $(this).parent().parent().remove();
+                 alert(value);
+                 alert(matches);
+                 $.ajax({
+                     data:{id:matches[0],aleatorio:<?=$aleatorio?>},
+                     type:"POST",
+                     url:"../../dl/datos_obra/d_eliminaContactoPosicion.php"
+                 });
+             });
              
              /**
               * EDITAR POSICION DEL CONTACTO, AFECTA AL FORMULARIO
@@ -1419,7 +1505,7 @@ $contratos = $modelos->mostrarContratos();
             }
             
             /*
-             * ELIMINAR CONTACTO DE TABLA
+             * ELIMINAR CONTACTO DE TABLA TEMPORAL
              **/
             $("#del-contacto").live("click", function(e) {
                 var value = $(this).parent().parent().html();
@@ -1442,6 +1528,8 @@ $contratos = $modelos->mostrarContratos();
                     url:"../../dl/datos_obra/d_eliminacontacto.php"
                 });
             });
+            // ELIMINAR DE TABLA FIMAS
+
             
             /**
              * ELIMINA USUARIO DE SISTEMA DE TABLA TEMPORAL
