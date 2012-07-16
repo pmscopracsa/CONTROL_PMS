@@ -427,10 +427,11 @@ $contratos = $modelos->mostrarContratos();
              });
              
              /**
-              * DETECTAR CLICK EN UN RADIO BUTTON Y HACER LA CONSULTA
+              * DETECTAR CLICK EN UN RADIO BUTTON (REPORTE) Y HACER LA CONSULTA
+              * DE QUE SI EXISTE O AUN NO "ALGUN USUARIO O USUARIOS EMPATADOS
+              * CON DICHO REPORTE
               **/
               $("input[name='reportes']").live("click",function(e) {
-                  //alert($("input[name='reportes']:checked").val());
                   setReporte($("input[name='reportes']:checked").val());
                   var checked = $("input[name='reportes']:checked").val();
                   var aleatorio = <?=$aleatorio?>;
@@ -445,6 +446,24 @@ $contratos = $modelos->mostrarContratos();
                   });
               });
               /**
+               * DETECTAR CLICK EN UN RADIO BUTTON (OPCION) Y HACER LA CONSULTA
+               * DE QUE SI EXISTE O AUN NO "ALGUN USUARIO DEL SISTEMA" EMPATADO
+               * CON UNA OPCI0ON DE LA LISTA
+               */
+              $("input[name='opciones']").live("click",function(e) {
+                  setOpcion($("input[name='opciones']:checked").val());
+                  $.ajax({
+                      type:"GET",
+                      dataType:"json",
+                      data:{opcion:$("input[name='opciones']:checked").val(), aleatorio:<?=$aleatorio?>},
+                      url:"../../dl/datos_obra/r_listausuariosopciones.php",
+                      success:function(data){
+                          mostrarOpcionesAsignadas(data);
+                      }
+                  })
+              })
+              
+              /**
                * GETTER Y SETTER DEL REPORTE A USAR EN EL MODAL: FIRMAS
                **/
               var reporte = "";
@@ -454,10 +473,18 @@ $contratos = $modelos->mostrarContratos();
               function getReporte() {
                   return reporte;
               }
-              
+              var opcion = "";
+              function setOpcion(opcion_x) {
+                  opcion = opcion_x;
+              }
+              function getOpcion() {
+                  return opcion;
+              }
               /**
-               * MODAL: Asignar firmas a reportes / Segunda mitad
-               * 
+               * MODAL: ASIGNAR FIRMAS A REPORTES
+               * DESCRIPCION: FUNCION QUE AL DARLE CLICK SOBRE UN RADIO BUTTON
+               * SE HACE LA CONSULTA PARA SABER QUE USUARIOS ESTAN EMPATADOS
+               * CON EL REPORTE SELECCIONADO
                */
               function mostrarFirmasAsignadas(data)
               {
@@ -484,9 +511,33 @@ $contratos = $modelos->mostrarContratos();
                       )
                   });
               }
+              /**
+               * MODAL:
+               * DESCRIPCION: FUNCION QUE AL DARLE CLICK A UN RADIO BUTTON DE ALGUNA OPCION
+               * NOS MUESTRA LOS USUARIOS O USUARIO EMPATADO CON DICHA OPCION
+               */
+              function mostrarOpcionesAsignadas(data)
+              {
+                  $("#tbl-empate-usuario_opcion tbody").remove(); //->modal-mostraropcionesusuarios.php
+                  $.each(data,function(index,value) {
+                      $("#").append(
+                        "<tr>"+
+                        "<td>"+
+                        data[index].nombre+
+                        "</td>"+
+                        "<td>"+
+                        data[index].nombreusuario+
+                        "</td>"+
+                        "<td>"+
+                        '<p style="display:none">'+data[index].id_usuario+"</p>"+
+                        "</td>"+
+                        "</tr>"
+                      )
+                  });
+              }
               
               /**
-               *  COLOCARLE EL NUMERO DE POSICION DE LA FIRMA ----------------------------------------////////////////////////////////////
+               *  COLOCARLE EL NUMERO DE POSICION DE LA FIRMA 
                **/
               $("#pos_firma_reporte").live("click",function() {
                     
@@ -514,8 +565,7 @@ $contratos = $modelos->mostrarContratos();
                 buttons:{
                     "Agregar firmantes":function() {//SELECCIONAR DATOS DE LA TABLA -> tb_firmascontactotemporal
                         if($("input[name:'reportes']:radio").is(':checked')) {
-                            //alert($("input[name='reportes']:checked").val());
-                            limpiaPreviaTabla();
+                            limpiaPreviaTabla("reportes");
                             listaContactoPosicion();
                         } else {
                             alert("Debe seleccionar un reporte de la lista");
@@ -539,8 +589,8 @@ $contratos = $modelos->mostrarContratos();
                 buttons:{
                     "Agregar usuarios":function() {
                         if($("input[name:'opciones']:radio").is(':checked')) {
-                            listaUsuariosOpciones();
-                            alert($("input[name='opciones']:checked").val());
+                            limpiaPreviaTabla("opciones");
+                            listaUsuarios();
                         } else {
                             alert("Debe seleccionar una opci\xf3n de la lista");
                         }
@@ -553,12 +603,21 @@ $contratos = $modelos->mostrarContratos();
              
              /**
               * FUNCION PARA EVITAR "N"PLICAR LOS DATOS
-              * AL MOSTRALOS
+              * AL MOSTRALOS EN EL MODAL QUE CONSULTA LAS TABLAS TEMPORALES
               **/
-             function limpiaPreviaTabla()
+             function limpiaPreviaTabla(which_table)
              {
-                 $("#tblr_listaContactoPosicion td").remove();
-                 $("input[name=id_contactoReporte]").attr('checked',false);
+                 switch(which_table)
+                 {
+                     case "reportes":
+                         $("#tblr_listaContactoPosicion td").remove();
+                         $("input[name=id_contactoReporte]").attr('checked',false);
+                         break;
+                     case "opciones":
+                         $("#tblr_listaUsuarioSistema td").remove();
+                         $("input[name=id_usuarioOpcion]").attr('checked',false);
+                         break;
+                 }
              }
              
              /**
@@ -605,16 +664,16 @@ $contratos = $modelos->mostrarContratos();
                       type:"GET",
                       dataType:"json",
                       data:{aleatorio:<?=$aleatorio?>,opcion:getOpcion()},
-                      url:"../../dl/datos_obra/r_listaContactoPosicion.php",
+                      url:"../../dl/datos_obra/r_listaUsuariosSistemaTemporal.php",
                       success:function(data) {
                           $.each(data,function(index,value){
-                            $("#tblr_listaUsuarios tbody").append(
+                            $("#tblr_listaUsuarioSistema tbody").append(
                                 '<tr>'+
                                 '<td>'+
-                                data[index].txt_nombre+
+                                data[index].nombre+
                                 '</td>'+
                                 '<td>'+
-                                data[index].txt_nombreusuario+
+                                data[index].nombreusuario+
                                 '</td>'+
                                 '<td>'+
                                 '<input type="checkbox" name="id_usuarioOpcion" value="'+data[index].id_usuario+'"/>'+
@@ -623,7 +682,7 @@ $contratos = $modelos->mostrarContratos();
                             )
                           });
                       }
-                  });
+                  });$("#modal_r_listaUsuarioSistema").dialog("open");
               }
               
              /**
@@ -646,12 +705,39 @@ $contratos = $modelos->mostrarContratos();
                             data:{checked:getReporte(),aleatorio:<?=$aleatorio?>},
                             url:"../../dl/datos_obra/r_listafirmasreportes.php",
                             success:function(data) {
-                                mostrarFirmasAsignadas(data); // BUG: EL NUMERO DE LA POSICION NO JALA BIEN
+                                mostrarFirmasAsignadas(data);
                             }
                         })
                     }
                 });
              });
+             
+             /**
+              * MODAL: USUARIOS
+              * DESCRIPCION: DETECTA CLICK EN CHECKBOX Y LO MANDA AL
+              * MODAL ANTERIOR, EMPATANDOLO CON LA "OPCION" SELECCIONADA PREVIAMENTE 
+              * EL MODAL ANTERIOR SE VOLVERA A CARGAR CON ESE RADIOBUTTON SELECCIOADO
+              * PARA MOSTRAR UN EFECTO DE REFRESCO DEL LADO DEL USUARIO
+              */ 
+              $("input[name=id_usuarioOpcion]").live("click",function() {
+                $.ajax({
+                    type:"POST",
+                    data:{aleatorio:<?=$aleatorio?>,id_opcion:getOpcion(),id_usuario:$(this).val()},
+                    url:"",
+                    success:function() {
+                        $.ajax({
+                            type:"GET",
+                            dataType:"json",
+                            data:{id_opcion:getOpcion(),aleatorio:<?=$aleatorio?>},
+                            url:"",
+                            success:function(data) {
+                                mostrarOpcionesAsignadas(data);
+                            }
+                        });
+                    }
+                });
+              });
+              
              
              /**
               * MODAL: FIRMAS
@@ -688,7 +774,7 @@ $contratos = $modelos->mostrarContratos();
               * MODAL PARA MOSTRAR A LOS USUARIOS, Y SELECCIONARLOS CON UN CLICK EN EL
               * CHECKBOX PARA EMPATARLOS CON UNA "OPCION"
               */
-              $("#moda_r_listausuariosempresa").dialog({
+              $("#modal_r_listaUsuarioSistema").dialog({
                 show:"blind",
                 autoOpen:false,
                 height:350,
@@ -1462,7 +1548,7 @@ $contratos = $modelos->mostrarContratos();
         include_once 'modales/modal-mostrarlistareportes.php';
         include_once 'modales/modal-mostraropcionesusuarios.php';
         include_once 'modales/modal_r_listaContactoPosicion.php';
-
+        include_once 'modales/modal_r_listaUsuarioSistema.php';
         ?>
         
         <!-- MODALES PADRES  -->
