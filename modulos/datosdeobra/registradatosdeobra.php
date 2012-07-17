@@ -539,7 +539,7 @@ $contratos = $modelos->mostrarContratos();
                   });
               }
               /**
-               * MODAL:
+               * MODAL: ASIGNAR OPCIONES A USUARIOS
                * DESCRIPCION: FUNCION QUE AL DARLE CLICK A UN RADIO BUTTON DE ALGUNA OPCION
                * NOS MUESTRA LOS USUARIOS O USUARIO EMPATADO CON DICHA OPCION
                */
@@ -555,14 +555,33 @@ $contratos = $modelos->mostrarContratos();
                         "<td>"+
                         data[index].nombreusuario+
                         "</td>"+
-                        "<td><a href='#' id='del-contacto_reporte' class='button delete'>Eliminar</a></td>"+
+                        "<td><a href='#' id='del-asignar_opciones_usuarios' class='button delete'>Eliminar</a></td>"+
                         "<td>"+
-                        '<p style="display:none">'+data[index].id_usuario+"</p>"+
+                        '<p style="display:none">'+data[index].id+"</p>"+
                         "</td>"+
                         "</tr>"
                       )
                   });
               }
+              
+              /**
+               * ELIMINAR A USUARIO EMPATADO CON OPCION
+               */
+              $("#del-asignar_opciones_usuarios").live("click",function(e){
+                  var value = $(this).parent().parent().html();
+                  //alert(value);
+                  //alert(getOpcion());
+                  var matches = value.match(new RegExp("(\\d+)","gi"));
+                  //alert(matches);
+                  e.preventDefault();
+                  $(this).parent().parent().remove();
+                  
+                  $.ajax({
+                      data:{id:matches[0], aleatorio:<?=$aleatorio?>,id_opcion:getOpcion()},
+                      type:"POST",
+                      url:"../../dl/datos_obra/d_eliminarusuariosopciontemporal.php"
+                  });
+              });
               
               /**
                *  COLOCARLE EL NUMERO DE POSICION DE LA FIRMA 
@@ -1262,7 +1281,7 @@ $contratos = $modelos->mostrarContratos();
                     '<td id="id_puesto" name="puesto'+contador_firmas+'"><input id="puesto_editar" type="text" value="' +puesto+'" /></td>'+
                     '<td name="contacto'+contador_firmas+'">'+contacto+"</td>"+
                     '<td name="empresa'+contador_firmas+'">'+empresa+"</td>"+
-                    '<td>'+'<a href="#" id="del-firma" class="button delete">Eliminar</a>'+'</td>'+
+                    '<td>'+'<a href="#" id="del-firma" class="button delete">Eliminaraa</a>'+'</td>'+
                     "</tr>"    
                 );
                     
@@ -1376,7 +1395,7 @@ $contratos = $modelos->mostrarContratos();
                 $.each(datos,function(index,value){
                     codigo = datos[index].id;
                     $("#contactos-agregados tbody").append(
-                    "<tr>"+
+                    "<tr id='tbl_listacontactogrid'>"+
                     "<td>"+datos[index].nombre+"</td>"+
                     "<td>"+datos[index].empresa+"</td>"+
                     "<td>"+datos[index].cargo+"</td>"+
@@ -1404,6 +1423,7 @@ $contratos = $modelos->mostrarContratos();
             
             /**
              * OBTENER LOS USUARIOS DEL SISTEMA
+             * ================================
              */
             $("#usuarios_boxes").live("click",function() {
                 $.ajax({
@@ -1415,7 +1435,12 @@ $contratos = $modelos->mostrarContratos();
                         resultadoUsuarios(data);
                     }
                 });
-            }); 
+            });
+            
+            /**
+             * MOSTRAR LOS USUARIOS DEL SISTEMA SELECCIONADOS
+             * ==============================================
+             */
             function resultadoUsuarios(data) {
                 contador_usuarios++;
                 var codigo;
@@ -1425,7 +1450,7 @@ $contratos = $modelos->mostrarContratos();
                         "<tr>"+
                         "<td>"+data[index].nombre+"</td>"+
                         "<td>"+data[index].nombreusuario+"</td>"+
-                        "<td>"+"<a href='#' id='del-usuario' class='button delete'>Eliminar</a>"+"</td>"+
+                        "<td>"+"<a href='#' id='del-usuario' class='button delete'>Eliminaraw</a>"+"</td>"+
                         '<input id="codigo_usuario" type="hidden" name="usuario'+contador_usuarios+'" value="'+data[index].id+'" />'+
                         "</tr>"
                     ),
@@ -1433,7 +1458,7 @@ $contratos = $modelos->mostrarContratos();
                         type:"POST",
                         data:{id:codigo,aleatorio:<?=$aleatorio?>},
                         url:"../../dl/datos_obra/i_ingresausuarioatemporal.php"
-                    })    
+                    });    
                 });
             }
              
@@ -1506,26 +1531,50 @@ $contratos = $modelos->mostrarContratos();
             
             /*
              * ELIMINAR CONTACTO DE TABLA TEMPORAL
+             * ===================================
              **/
             $("#del-contacto").live("click", function(e) {
                 var value = $(this).parent().parent().html();
-                $(this).parent().parent().remove();
-                
-                /**
-                 * FUNCION AJAX CON POST PARA ELIMINAR VALOR
-                 * DE LA TABLA TEMPORAL
-                 */
+
+                var elimina = 0;
                 e.preventDefault();
                 var aleatorio = <?=$aleatorio?>;
                 
-                var matches = value.match(
-                                        new RegExp("(\\w+)","gi"));
+                var matches = value.match(new RegExp("(\\w+)","gi"));
                 var id =     matches[matches.length-3];                        
-                //alert(matches[matches.length-3]);                            
+                //alert(matches[matches.length-3]);
+                
+                /**
+                 * COMPROBAR SI EL USUARIO ES UN POTENCIAL FIRMANTE
+                 * CONSULTANDO A LA TABLA: tb_firmascontactotemporal
+                 */
                 $.ajax({
-                    data:{id:id,aleatorio:aleatorio},
-                    type:"POST",
-                    url:"../../dl/datos_obra/d_eliminacontacto.php"
+                    data:{id:id, aleatorio:aleatorio},
+                    dataType:"text",
+                    url:"../../dl/datos_obra/d_eliminacontacto.php?accion=1",
+                    success:function(data) {
+                        if (data == "1") {
+                            alert("Usted no puede eliminar a este contacto por ser un potencial firmante.")
+                            return;
+                        } else {
+                            elimina = 1;
+                           /**
+                            * FUNCION AJAX CON POST PARA ELIMINAR VALOR
+                            * DE LA TABLA TEMPORAL
+                            */
+                            $.ajax({
+                                data:{id:id,aleatorio:aleatorio},
+                                type:"POST",
+                                url:"../../dl/datos_obra/d_eliminacontacto.php?accion=2",
+                                success:function(){
+                                    alert("remover");
+                                    //$(this).parent().parent().remove();
+                                    $("#tbl_listacontactogrid").remove();
+                                    
+                                }
+                            });
+                        }
+                    }
                 });
             });
             // ELIMINAR DE TABLA FIMAS
@@ -1539,15 +1588,13 @@ $contratos = $modelos->mostrarContratos();
             $("#del-usuario").live("click",function(e) {
                 e.preventDefault();
                 var value = $(this).parent().parent().html();
-                alert(value);
                 $(this).parent().parent().remove();
                 var matches = value.match(new RegExp("(\\d+)","gi"));
-                alert(matches[1]);
                
                $.ajax({
                    data:{aleatorio:<?=$aleatorio?>,id:matches[1]},
                    type:"POST",
-                   url:""
+                   url:"../../dl/datos_obra/d_eliminarusuarioaprobaciontemporal.php"
                });
             });
             
