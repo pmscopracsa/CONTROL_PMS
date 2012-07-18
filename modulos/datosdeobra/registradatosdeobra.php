@@ -212,7 +212,32 @@ $contratos = $modelos->mostrarContratos();
             var Contador_empresa = 0;
             var contador_usuarios = 0;
             
-            $("#datepicker_i,#datepicker_f").datepicker({dateFormat:'yy-mm-dd'},{showAnim:'fold'});
+            /**
+             * FECHAS DE INICIO Y FIN DE OBRA
+             */
+            $("#fecha_desde").datepicker({
+                defaultDate:"+1w",
+                changeMonth:true,
+                numberOfMonths:1,
+                dateFormat:"yy-mm-dd",
+                changeMonth:true,
+                changeYear:true,
+                onSelect:function(selectedDate) {
+                    $("#fecha_hasta").datepicker("option","minDate",selectedDate);
+                }
+            });
+            $("#fecha_hasta").datepicker({
+                defaultDate:"+1w",
+                changeMonth:true,
+                numberOfMonth:1,
+                dateFormat:"yy-mm-dd",
+                changeMonth:true,
+                changeYear:true,
+                onSelect:function(selectedDate) {
+                    $("#fecha_desde").datepicker("option","maxDate",selectedDate);
+                }
+            });
+            //$("#datepicker_i,#datepicker_f").datepicker({dateFormat:'yy-mm-dd'},{showAnim:'fold'});
             
             /**
              * BOTONES PARA ABRIR MODALES PADRES
@@ -673,7 +698,7 @@ $contratos = $modelos->mostrarContratos();
              $("#modal-listareportes").dialog({
                 show:"blind",
                 autoOpen:false,
-                height:400,
+                height:600,
                 width:650,
                 resizable:false,
                 closeOnEscape:false,
@@ -1169,7 +1194,7 @@ $contratos = $modelos->mostrarContratos();
              */
             $("#modal_buscarClientePorNombre").dialog({
                 autoOpen:false,
-                height:80,
+                height:100,
                 width:450,
                 resizable:false,
                 closeOnEscape:false,
@@ -1187,7 +1212,7 @@ $contratos = $modelos->mostrarContratos();
             });
             $("#modal_buscarEmpContratantePorNombre").dialog({
                 autoOpen:false,
-                height:80,
+                height:100,
                 width:450,
                 resizable:false,
                 closeOnEscape:false,
@@ -1205,7 +1230,7 @@ $contratos = $modelos->mostrarContratos();
             });
             $("#modal_buscarEmpGerenteProyecto").dialog({
                 autoOpen:false,
-                height:80,
+                height:100,
                 width:450,
                 resizable:false,
                 closeOnEscape:false,
@@ -1223,7 +1248,7 @@ $contratos = $modelos->mostrarContratos();
             });
             $("#modal_buscarEmpSupervisoraProyecto").dialog({
                 autoOpen:false,
-                height:80,
+                height:100,
                 width:450,
                 resizable:false,
                 closeOnEscape:false,
@@ -1241,7 +1266,7 @@ $contratos = $modelos->mostrarContratos();
             });
             $("#modal_buscarProveedorAFacturar").dialog({
                 autoOpen:false,
-                height:80,
+                height:100,
                 width:450,
                 resizable:false,
                 closeOnEscape:false,
@@ -1259,7 +1284,7 @@ $contratos = $modelos->mostrarContratos();
             });
             $("#modal_buscarContacto").dialog({
                 autoOpen:false,
-                height:80,
+                height:100,
                 width:450,
                 resizable:false,
                 closeOnEscape:false,
@@ -1393,7 +1418,7 @@ $contratos = $modelos->mostrarContratos();
              });
              
              /**
-              * BTON DE ELIMINAR CONTACTO - POSICION-------------------------------------------------------------
+              * BTON DE ELIMINAR CONTACTO - POSICION
               */
              $("#del-contacto_reporte").live("click",function(e) {
                  var value = $(this).parent().parent().html();
@@ -1819,7 +1844,12 @@ $contratos = $modelos->mostrarContratos();
         <div id="modal-contactos" title="Selecciona los contactos de la obra" style="display: none"></div>
         <div id="modal_usuariosempresa" title="Lista de usuarios" style="display: none"></div>
         
-        <!--VENTANA MODAL PARA SETEO DEL PRESUPUESTO DE VENTA-->
+
+        
+        <!-- INICIO DE FORMULARIO --> 
+        <!-- ******************** -->
+        <form action="datosdeobratest.php" method="POST">
+                <!--VENTANA MODAL PARA SETEO DEL PRESUPUESTO DE VENTA-->
         <div style="display: none" id="div-modal-pptoventa" title="Seteo Presupuesto Venta">
             <div class="">
                 <fieldset>
@@ -1868,11 +1898,11 @@ $contratos = $modelos->mostrarContratos();
                         <table>    
                         <tr>
                             <td><label>Gasto General</label></td>
-                            <td><input size="5" id="inputext" type="text" name="txt-gastogeneral_gg" />&#37;<td>
+                            <td><input size="5" id="inputext" type="text" name="txt-gastogeneral_pc" />&#37;<td>
                         </tr>
                         <tr>
                             <td><label>Utilidad</label></td>
-                            <td><input size="5" id="inputext" type="text" name="txt-utilidad_gg" />&#37;</td>
+                            <td><input size="5" id="inputext" type="text" name="txt-utilidad_pc" />&#37;</td>
                         </tr>
                         </table>
                     </div>
@@ -1955,10 +1985,8 @@ $contratos = $modelos->mostrarContratos();
         </div>
         
         <div style="display: none" id="div-firmas-reportes" title="Reportes">
-        </div>
-        
-        <form action="datosdeobratest.php" method="POST">
-           
+        </div>    
+        <!-- LO DE ARRIBA ES MODAL -->   
         <div id="main">
              <div class="info">
             Los campos obligatorios est&aacute;n marcados con <img src="../../img/required_star.gif" alt="dato requerido" />
@@ -1969,12 +1997,12 @@ $contratos = $modelos->mostrarContratos();
                     <td><input id="inputext" type="text" size="15" name="codigo" /><span class="formInfo"><a href="../../js/jquery-tooltip/ajax.htm" class="jTip" id="one" name="El codigo debe tener el siguiente formato">!</a></span></td>
                     <td><label>Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input id="inputext" type="text" size="35" name="nombre"/></td>
-                    <td><label>Fecha inicio obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="datepicker_f" type="text" name="f_inicio" /></td>
-                    <td><label>Fecha fin de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="datepicker_f" type="text" name="f_fin" /></td>
+                    <td><label>Fecha inicio obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="fecha_desde" type="text" name="f_inicio" /></td>
+                    <td><label>Fecha fin de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="fecha_hasta" type="text" name="f_fin" /></td>
                 </tr>
                 <tr>
                     <td><label>Direcci&oacute;n de la obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                    <td><input type="text" id="inputext" size="30" name="direccion" /></td>
+                    <td><input type="text" id="inputext" size="30" name="direccion_obra" /></td>
                 </tr>
                 <tr>
                     <td><label>Departamento:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
@@ -1995,7 +2023,7 @@ $contratos = $modelos->mostrarContratos();
                 <tr>
                     <!-- tb_companiacontacta -->
                     <td><label>Cliente:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                    <td><input id="inputext" class="cliente-text" type="text" size="30" name="cliente" READONLY /><input id="agregar-cliente" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                    <td><input id="inputext" class="cliente-text" type="text" size="45" name="cliente" READONLY /><input id="agregar-cliente" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                     <td><input type="hidden" class="cliente-id" name="cliente--id"</td>
                     <!-- MODAL PARA BUSCAR POR NOMBRE { CLIENTES } -->
                     <div id="modal_buscarClientePorNombre" title="Buscar cliente" style="display:none">
@@ -2005,7 +2033,7 @@ $contratos = $modelos->mostrarContratos();
                 </tr>
                 <tr>
                     <td><label>Empresa Contratante:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                    <td><input type="text" id="inputext" class="empresacontratante-text" size="30" name="empresa-contratante" READONLY/><input id="agregar-contratante" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                    <td><input type="text" id="inputext" class="empresacontratante-text" size="45" name="empresa-contratante" READONLY/><input id="agregar-contratante" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                     <td><input type="hidden" class="contratante_id" name="contratante--id" /></td>
                     <!-- MODAL PARA BUSCAR POR NOMBRE { EMPRESA CONTRATANTE } -->
                     <div id="modal_buscarEmpContratantePorNombre" title="Buscar Empresa Contratante" style="display:none">
@@ -2018,7 +2046,7 @@ $contratos = $modelos->mostrarContratos();
             <table>
                 <tr>
                     <td><label>Empresa Gerente de proyecto:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                    <td><input id="inputext" class="empresagerente-text" type="text" size="30" name="gerente-proyecto" READONLY/><input id="agregar-gerenteproyecto" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                    <td><input id="inputext" class="empresagerente-text" type="text" size="45" name="gerente-proyecto" READONLY/><input id="agregar-gerenteproyecto" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                     <td><input type="hidden" class="gerente_id" name="gerente--id" /></td>
                     <!-- MODAL PARA BUSCAR POR NOMBRE [ EMPRESA GERENTE DE PROYECTO ] -->
                     <div id="modal_buscarEmpGerenteProyecto" title="Buscar empresa gerente de Proyecto" style="display:none">
@@ -2028,7 +2056,7 @@ $contratos = $modelos->mostrarContratos();
                 </tr>
                 <tr>
                     <td><label>Empresa Supervisora de proyecto:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                    <td><input type="text" class="empresasupervisora-text" id="inputext" size="30" name="supervisora-proyecto" READONLY/><input id="agregar-supervisorproyecto" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                    <td><input type="text" class="empresasupervisora-text" id="inputext" size="45" name="supervisora-proyecto" READONLY/><input id="agregar-supervisorproyecto" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                     <input type="hidden" class="supervisor_id" name="supervisor--id" />
                     <!-- MODAL PARA BUSCAR POR NOMBRE [ EMPRESA SUPERVISORA DE PROEYCTO ] -->
                     <div id="modal_buscarEmpSupervisoraProyecto" title="Buscar Empresa Supervisora de Proyecto" style="display:none">
@@ -2052,7 +2080,7 @@ $contratos = $modelos->mostrarContratos();
             <table>
                 <tr>
                     <td><label>Proveedor facturar a:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                    <td><input type="text" class="proveedorfacturar-text" id="inputext" size="30" name="proveedor-a-facturar" READONLY/><input id="agregar-proveedorfacturar" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                    <td><input type="text" class="proveedorfacturar-text" id="inputext" size="45" name="proveedor-a-facturar" READONLY/><input id="agregar-proveedorfacturar" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                     <input type="hidden" class="proveedor_id" name="proveedor--id" />
                 </tr>
             </table>
@@ -2115,7 +2143,7 @@ $contratos = $modelos->mostrarContratos();
                     <table>
                         <tr>
                             <td>
-                                <input type="text" class="txtcartafianza_p" id="inputext" name="carta-fianza" size="5"/>
+                                <input type="text" class="txtcartafianza_p" id="inputext" name="txtcarta-fianza" size="5"/>
                             </td>
                             <td>
                                 <p>Porcentaje de la carta fianza fiel cumplimiento para Contratistas/Proveedores<input  name="porcentage_fielcumplimiento" type="checkbox" /></p>
@@ -2123,23 +2151,23 @@ $contratos = $modelos->mostrarContratos();
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" id="inputext" class="txtdiasdesembolso" name="dias-desembolso" size="5"/>
+                                <input type="text" id="inputext" class="txtdiasdesembolso" name="txtdias-desembolso" size="5"/>
                             </td>
                             <td>
-                                <p>Dias habiles para el desembolso, despues de presentada la factura</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" class="txtfondoretencion_p" id="inputext" name="fondo-retencion" size="5"/>
-                            </td>
-                            <td>
-                                <p>Porcentaje de fondo de retencion</p>
+                                <p>D&iacute;as h&aacute;biles para el desembolso, despues de presentada la factura</p>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" id="inputext" class="txtdiasdevolucion" name="dias-devolucion-fondoretencion" size="5"/>
+                                <input type="text" class="txtfondoretencion_p" id="inputext" name="txtfondo-retencion" size="5"/>
+                            </td>
+                            <td>
+                                <p>Porcentaje de fondo de retenci&oacute;n</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" id="inputext" class="txtdiasdevolucion" name="txtdias-devolucion-fondoretencion" size="5"/>
                             </td>
                             <td>
                                 <p>Dias habiles para la devolucion del fondo de retencion, contados a partir de la retencion de obra sin observaciones(Acta definitiva)</p>
@@ -2149,7 +2177,7 @@ $contratos = $modelos->mostrarContratos();
                     <table>
                         <tr>
                             <td><p>Monto contratado mayor a:</p></td>
-                            <td><input type="text" class="txtmayora" id="inputext" name="mayor-a" size="10"/></td>
+                            <td><input type="text" class="txtmayora" id="inputext" name="txtmayor-a" size="10"/></td>
                             <td></td>
                             <td></td>
                             <td>
@@ -2164,9 +2192,9 @@ $contratos = $modelos->mostrarContratos();
                         </tr>
                         <tr>
                             <td><p>Monto contratado entre:</p></td>
-                            <td><input type="text" class="txtlimiteinferior" id="inputext" name="entre-a" size="10" READONLY/></td>
+                            <td><input type="text" class="txtlimiteinferior" id="inputext" name="txtentre-inferior" size="10" READONLY/></td>
                             <td> y </td>
-                            <td><input type="text" class="txtlimitesuperior" id="inputext" name="entre-b" size="10" READONLY/></td>
+                            <td><input type="text" class="txtlimitesuperior" id="inputext" name="txtentre-superior" size="10" READONLY/></td>
                             <td>
                                 <p><input type="checkbox" name="oc_oc_entre"CHECKED DISABLED/>OC/OT</p>
                             </td>
@@ -2179,7 +2207,7 @@ $contratos = $modelos->mostrarContratos();
                         </tr>
                         <tr>
                             <td><p>Monto contratado menor a:</p></td>
-                            <td><input type="text" class="txtmenora" id="inputext" name="menor-a" size="10"/></td>
+                            <td><input type="text" class="txtmenora" id="inputext" name="txtmenor-a" size="10"/></td>
                             <td></td>
                             <td></td>
                             <td>

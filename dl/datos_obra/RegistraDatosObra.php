@@ -137,16 +137,247 @@ class RegistraDatosObra
         }
     }
 
-        /**
+    /**
      * GETTERS & SETTERS 
      */
-    public function get_contactos() {
-        return $this->_contactos;
+    public function get_id() {
+        return $this->_id;
     }
 
-    public function set_contactos($_contactos) {
-        $this->_contactos = $_contactos;
+    public function set_id($_id) {
+        $this->_id = $_id;
     }
 
+    public function get_codigo() {
+        return $this->_codigo;
+    }
+
+    public function set_codigo($_codigo) {
+        $this->_codigo = $_codigo;
+    }
+
+    public function get_nombre() {
+        return $this->_nombre;
+    }
+
+    public function set_nombre($_nombre) {
+        $this->_nombre = $_nombre;
+    }
+
+    public function get_finicio() {
+        return $this->_finicio;
+    }
+
+    public function set_finicio($_finicio) {
+        $this->_finicio = $_finicio;
+    }
+
+    public function get_ffin() {
+        return $this->_ffin;
+    }
+
+    public function set_ffin($_ffin) {
+        $this->_ffin = $_ffin;
+    }
+
+    public function get_direccionobra() {
+        return $this->_direccionobra;
+    }
+
+    public function set_direccionobra($_direccionobra) {
+        $this->_direccionobra = $_direccionobra;
+    }
+
+    public function get_tbdepartamentoid() {
+        return $this->_tbdepartamentoid;
+    }
+
+    public function set_tbdepartamentoid($_tbdepartamentoid) {
+        $this->_tbdepartamentoid = $_tbdepartamentoid;
+    }
+
+    public function get_tbmonedaid() {
+        return $this->_tbmonedaid;
+    }
+
+    public function set_tbmonedaid($_tbmonedaid) {
+        $this->_tbmonedaid = $_tbmonedaid;
+    }
+
+    public function get_tbclienteid() {
+        return $this->_tbclienteid;
+    }
+
+    public function set_tbclienteid($_tbclienteid) {
+        $this->_tbclienteid = $_tbclienteid;
+    }
+
+    public function get_empresacontratante() {
+        return $this->_empresacontratante;
+    }
+
+    public function set_empresacontratante($_empresacontratante) {
+        $this->_empresacontratante = $_empresacontratante;
+    }
+
+    public function get_empresagerenteproyecto() {
+        return $this->_empresagerenteproyecto;
+    }
+
+    public function set_empresagerenteproyecto($_empresagerenteproyecto) {
+        $this->_empresagerenteproyecto = $_empresagerenteproyecto;
+    }
+
+    public function get_empresasupervisoraproyecto() {
+        return $this->_empresasupervisoraproyecto;
+    }
+
+    public function set_empresasupervisoraproyecto($_empresasupervisoraproyecto) {
+        $this->_empresasupervisoraproyecto = $_empresasupervisoraproyecto;
+    }
+
+    public function get_tbtipovalorizacionid() {
+        return $this->_tbtipovalorizacionid;
+    }
+
+    public function set_tbtipovalorizacionid($_tbtipovalorizacionid) {
+        $this->_tbtipovalorizacionid = $_tbtipovalorizacionid;
+    }
+
+    public function get_tbformatopresupuesto() {
+        return $this->_tbformatopresupuesto;
+    }
+
+    public function set_tbformatopresupuesto($_tbformatopresupuesto) {
+        $this->_tbformatopresupuesto = $_tbformatopresupuesto;
+    }
+
+    public function get_factorcoreccion() {
+        return $this->_factorcoreccion;
+    }
+
+    public function set_factorcoreccion($_factorcoreccion) {
+        $this->_factorcoreccion = $_factorcoreccion;
+    }
+
+    public function get_retencionfondogarantia() {
+        return $this->_retencionfondogarantia;
+    }
+
+    public function set_retencionfondogarantia($_retencionfondogarantia) {
+        $this->_retencionfondogarantia = $_retencionfondogarantia;
+    }
+
+    public function get_retencionfielcumplimiento() {
+        return $this->_retencionfielcumplimiento;
+    }
+
+    public function set_retencionfielcumplimiento($_retencionfielcumplimiento) {
+        $this->_retencionfielcumplimiento = $_retencionfielcumplimiento;
+    }
+
+    public function get_gastogeneralpresupuestocontractual() {
+        return $this->_gastogeneralpresupuestocontractual;
+    }
+
+    public function set_gastogeneralpresupuestocontractual($_gastogeneralpresupuestocontractual) {
+        $this->_gastogeneralpresupuestocontractual = $_gastogeneralpresupuestocontractual;
+    }
+
+    public function get_utilidadpresupuestocontractual() {
+        return $this->_utilidadpresupuestocontractual;
+    }
+
+    public function set_utilidadpresupuestocontractual($_utilidadpresupuestocontractual) {
+        $this->_utilidadpresupuestocontractual = $_utilidadpresupuestocontractual;
+    }
+
+    public function get_gastogeneralordenescambio() {
+        return $this->_gastogeneralordenescambio;
+    }
+
+    public function set_gastogeneralordenescambio($_gastogeneralordenescambio) {
+        $this->_gastogeneralordenescambio = $_gastogeneralordenescambio;
+    }
+
+    public function get_utilidadordenescambio() {
+        return $this->_utilidadordenescambio;
+    }
+
+    public function set_utilidadordenescambio($_utilidadordenescambio) {
+        $this->_utilidadordenescambio = $_utilidadordenescambio;
+    }
+
+    public function get_provevedorafacturar() {
+        return $this->_provevedorafacturar;
+    }
+
+    public function set_provevedorafacturar($_provevedorafacturar) {
+        $this->_provevedorafacturar = $_provevedorafacturar;
+    }
+
+    public function get_porcentajecartafianza() {
+        return $this->_porcentajecartafianza;
+    }
+
+    public function set_porcentajecartafianza($_porcentajecartafianza) {
+        $this->_porcentajecartafianza = $_porcentajecartafianza;
+    }
+
+    public function get_diashabilesdesembolso() {
+        return $this->_diashabilesdesembolso;
+    }
+
+    public function set_diashabilesdesembolso($_diashabilesdesembolso) {
+        $this->_diashabilesdesembolso = $_diashabilesdesembolso;
+    }
+
+    public function get_porcentajefondoretencion() {
+        return $this->_porcentajefondoretencion;
+    }
+
+    public function set_porcentajefondoretencion($_porcentajefondoretencion) {
+        $this->_porcentajefondoretencion = $_porcentajefondoretencion;
+    }
+
+    public function get_diashabilesdevolucion() {
+        return $this->_diashabilesdevolucion;
+    }
+
+    public function set_diashabilesdevolucion($_diashabilesdevolucion) {
+        $this->_diashabilesdevolucion = $_diashabilesdevolucion;
+    }
+
+    public function get_montomayor() {
+        return $this->_montomayor;
+    }
+
+    public function set_montomayor($_montomayor) {
+        $this->_montomayor = $_montomayor;
+    }
+
+    public function get_montomenor() {
+        return $this->_montomenor;
+    }
+
+    public function set_montomenor($_montomenor) {
+        $this->_montomenor = $_montomenor;
+    }
+
+    public function get_modelocartaadjudicacion() {
+        return $this->_modelocartaadjudicacion;
+    }
+
+    public function set_modelocartaadjudicacion($_modelocartaadjudicacion) {
+        $this->_modelocartaadjudicacion = $_modelocartaadjudicacion;
+    }
+
+    public function get_modelocontrato() {
+        return $this->_modelocontrato;
+    }
+
+    public function set_modelocontrato($_modelocontrato) {
+        $this->_modelocontrato = $_modelocontrato;
+    }
 
 }
