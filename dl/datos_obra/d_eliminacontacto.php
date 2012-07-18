@@ -20,12 +20,14 @@ try {
         case 2:
             $sql = "DELETE FROM temporal WHERE id_contacto=$id AND random_code = $aleatorio";
             $res = mysql_query($sql,$cn);
+            if (!$res)
+                throw new Exception("Problemas en la eliminacion de la data: ".  mysql_error());
+            break;
         default:
             break;
     }
     
-    if (!$res)
-        throw new Exception("Problemas en la eliminacion de la data: ".  mysql_error());
+    
 } catch (Exception $ex) {
     echo "->".$ex->getMessage();
 }

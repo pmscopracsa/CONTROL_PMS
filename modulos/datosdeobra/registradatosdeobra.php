@@ -60,6 +60,7 @@ $contratos = $modelos->mostrarContratos();
         <script src="../../js/calendar/jquery.ui.datepicker-es.js" type="text/javascript"></script>
         <script src="../../js/cargarDatos.js" type="text/javascript"></script>
         <script src="../../js/jquery-tooltip/js/jtip.js" type="text/javascript"></script>
+        <script src="../../js/monedas_formato.js" type="text/javascript"></script>
         <link href="../../js/jquery-tooltip/css/global.css" rel="stylesheet" type="text/css" />
         
         <!-- sliding -->
@@ -109,6 +110,72 @@ $contratos = $modelos->mostrarContratos();
         }
         
         $(function(){
+            /**
+             * PONER LOS LIMITES INFERIOS Y SUPERIOR EN LOS MONTOS A CONTRATAR
+             * Y SUS SIMBOLOS MONETARIOS RESPECTIVAMENTE, PRIMERO
+             * DETECTAR CON QUE MONEDA SE VA A TRABAJAR
+             */
+            //$("#moneda-id").change(function() {
+                /**
+                 * PRIMERO NOS FIJAMOS SI YA EXISTEN MONTOS
+                 * EN LAS CAJAS DE TEXTO, SI EXISTE NOS FIJAMOS QUE
+                 * MONEDA HEMOS SELECCIONADO 
+                 *//*
+                if($(".txtmayora").val()!="") {
+                    if($("#moneda-id").val()=="Dolares") {
+                        $(".txtmayora").val(formatNumber($(".txtmayora").val(),"$"));
+                    } else {
+                        $(".txtmayora").val(formatNumber($(".txtmayora").val(),"S/."));
+                    }
+                }
+            });*/
+            
+            $(".txtmayora").focusout(function() {
+                var moneda;
+                if ($("#moneda-id").val() == "Dolares")
+                    moneda = "$";
+                else
+                    moneda = "S/.";
+                
+                $(".txtmayora").val(formatNumber($(".txtmayora").val(), moneda));
+                $(".txtlimiteinferior").val($(".txtmayora").val());
+            });
+            $(".txtmenora").focusout(function() {
+                var moneda;
+                if ($("#moneda-id").val() == "Dolares")
+                    moneda = "$";
+                else
+                    moneda = "S/.";
+                
+                $(".txtmenora").val(formatNumber($(".txtmenora").val(), moneda));
+                $(".txtlimitesuperior").val($(".txtmenora").val());
+            });
+            /**
+             * PONER EL SIMBOLO DE PORCENTAJE 
+             */
+            $(".txtcartafianza_p").focusout(function() {
+                $(".txtcartafianza_p").val('%'+$(".txtcartafianza_p").val());
+            });
+            $(".txtfondoretencion_p").focusout(function() {
+                $(".txtfondoretencion_p").val('%'+$(".txtfondoretencion_p").val());
+            });
+            /**
+             * VALIDAR QUE LOS DIAS SEAN NUMEROS ENTEROS
+             */
+            $(".txtdiasdesembolso").focusout(function() {
+                if($(".txtdiasdesembolso").val() % 1 != 0) {
+                    alert("Este valor debe ser un entero, Se redondeará.");
+                    $(".txtdiasdesembolso").val(Math.round($(".txtdiasdesembolso").val()));
+                }
+            });
+            $(".txtdiasdevolucion").focusout(function() {
+                if($(".txtdiasdevolucion").val() % 1 != 0) {
+                    alert("Este valor debe ser un entero, Se redondeará.");
+                    $(".txtdiasdevolucion").val(Math.round($(".txtdiasdevolucion").val()));
+                }
+            });
+            
+            
             /**
              * CARGAR DIV CON DATOS Y PREPARAOS PARA BUSCARLOS
              * CARGA POR DEFECTO SIN FILTRO - PRIMERA CARGA
@@ -1276,7 +1343,7 @@ $contratos = $modelos->mostrarContratos();
                  *    ingresaro a la tabla temporal.
                  */
                 $("#tbl-firmas1 tbody").append(
-                    "<tr name=\"firmas\">"+
+                    "<tr name=\"firmas\" id='tbl_firmas1grid'>"+
                     '<input id="id_contacto" type="hidden" value="'+id_contacto+'" />'+    
                     '<td id="id_puesto" name="puesto'+contador_firmas+'"><input id="puesto_editar" type="text" value="' +puesto+'" /></td>'+
                     '<td name="contacto'+contador_firmas+'">'+contacto+"</td>"+
@@ -1302,7 +1369,26 @@ $contratos = $modelos->mostrarContratos();
                  $.ajax({
                      data:{id:matches[0],aleatorio:<?=$aleatorio?>},
                      type:"POST",
-                     url:"../../dl/datos_obra/d_eliminaFirmaContacto.php"
+                     url:"../../dl/datos_obra/d_eliminaFirmaContacto.php?accion=1",
+                     success:function(data) {
+                         if (data == "1") {
+                             alert("Usted no puede eliminar a este contacto porque ya se le ha asigado algun reporte para firmarlo.");
+                             return;
+                         } else {
+                             /**
+                              * FUNCION AJAX PARA ELIMINAR VALOR
+                              * DE LA TABLA tb_contactoreportetemporal
+                              */
+                             $.ajax({
+                                 data:{id:matches[0],aleatorio:<?=$aleatorio?>},
+                                 type:"POST",
+                                 url:"../../dl/datos_obra/d_eliminaFirmaContacto.php?accion=2",
+                                 success:function(){
+                                     $("#tbl_firmas1grid").remove();
+                                 }
+                             })
+                         }
+                     }
                  });
              });
              
@@ -1536,7 +1622,6 @@ $contratos = $modelos->mostrarContratos();
             $("#del-contacto").live("click", function(e) {
                 var value = $(this).parent().parent().html();
 
-                var elimina = 0;
                 e.preventDefault();
                 var aleatorio = <?=$aleatorio?>;
                 
@@ -1544,10 +1629,19 @@ $contratos = $modelos->mostrarContratos();
                 var id =     matches[matches.length-3];                        
                 //alert(matches[matches.length-3]);
                 
+                //alert(rs);
+                if (!temporalon(id,<?=$aleatorio?>))
+                    {
+                        alert("No puede eliminar el dato");
+                    }
+                else
+                    {
+                        $(this).parent().parent().remove();
+                    }
                 /**
                  * COMPROBAR SI EL USUARIO ES UN POTENCIAL FIRMANTE
                  * CONSULTANDO A LA TABLA: tb_firmascontactotemporal
-                 */
+                 *//*
                 $.ajax({
                     data:{id:id, aleatorio:aleatorio},
                     dataType:"text",
@@ -1555,9 +1649,39 @@ $contratos = $modelos->mostrarContratos();
                     success:function(data) {
                         if (data == "1") {
                             alert("Usted no puede eliminar a este contacto por ser un potencial firmante.")
-                            return;
+                            return false;
                         } else {
-                            elimina = 1;
+                           /**
+                            * FUNCION AJAX CON POST PARA ELIMINAR VALOR
+                            * DE LA TABLA TEMPORAL
+                            *//*
+                            $.ajax({
+                                data:{id:id,aleatorio:aleatorio},
+                                type:"POST",
+                                url:"../../dl/datos_obra/d_eliminacontacto.php?accion=2",
+                                success:function(){
+                                    alert($(this).parent().parent().html());
+                                    $(this).parent().parent().remove();
+                                    //$("#tbl_listacontactogrid").remove();
+                                    
+                                }
+                            });
+                        }
+                    }
+                });*/
+            });
+            function temporalon(id,aleatorio) {
+                //alert(id);
+                //alert(aleatorio);
+                rs = true;
+                $.ajax({
+                    data:{id:id, aleatorio:aleatorio},
+                    dataType:"text",
+                    url:"../../dl/datos_obra/d_eliminacontacto.php?accion=1",
+                    success:function(data) {
+                        if (data == "1") {
+                            rs = false;
+                        } else {
                            /**
                             * FUNCION AJAX CON POST PARA ELIMINAR VALOR
                             * DE LA TABLA TEMPORAL
@@ -1565,18 +1689,17 @@ $contratos = $modelos->mostrarContratos();
                             $.ajax({
                                 data:{id:id,aleatorio:aleatorio},
                                 type:"POST",
-                                url:"../../dl/datos_obra/d_eliminacontacto.php?accion=2",
-                                success:function(){
-                                    alert("remover");
-                                    //$(this).parent().parent().remove();
-                                    $("#tbl_listacontactogrid").remove();
-                                    
-                                }
+                                url:"../../dl/datos_obra/d_eliminacontacto.php?accion=2"
                             });
                         }
                     }
                 });
-            });
+                alert("devuelvo: "+rs);
+                if (rs)
+                    return true;
+                else
+                    return false;
+            }
             // ELIMINAR DE TABLA FIMAS
 
             
@@ -1931,6 +2054,11 @@ $contratos = $modelos->mostrarContratos();
                     <td><label>Proveedor facturar a:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input type="text" class="proveedorfacturar-text" id="inputext" size="30" name="proveedor-a-facturar" READONLY/><input id="agregar-proveedorfacturar" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                     <input type="hidden" class="proveedor_id" name="proveedor--id" />
+                </tr>
+            </table>
+            <div id="hr"><hr /></div>
+            <table>
+                <tr>
                     <!-- MODAL PARA BUSCAR POR NOMBRE [ PROVEEDOR A FACTURAR ] -->
                     <div id="modal_buscarProveedorAFacturar" title="Buscar proveedor a facturar" style="display:none">
                         <label>Nombre del proveedor</label>
@@ -1987,15 +2115,15 @@ $contratos = $modelos->mostrarContratos();
                     <table>
                         <tr>
                             <td>
-                                <input type="text" id="inputext" name="carta-fianza" size="5"/>
+                                <input type="text" class="txtcartafianza_p" id="inputext" name="carta-fianza" size="5"/>
                             </td>
                             <td>
-                                <p>Porcentaje de la carta fianza fiel cumplimiento para Contratistas/Proveedores<input name="porcentage_fielcumplimiento" type="checkbox" /></p>
+                                <p>Porcentaje de la carta fianza fiel cumplimiento para Contratistas/Proveedores<input  name="porcentage_fielcumplimiento" type="checkbox" /></p>
                             </td> 
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" id="inputext" name="dias-desembolso" size="5"/>
+                                <input type="text" id="inputext" class="txtdiasdesembolso" name="dias-desembolso" size="5"/>
                             </td>
                             <td>
                                 <p>Dias habiles para el desembolso, despues de presentada la factura</p>
@@ -2003,7 +2131,7 @@ $contratos = $modelos->mostrarContratos();
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" id="inputext" name="fondo-retencion" size="5"/>
+                                <input type="text" class="txtfondoretencion_p" id="inputext" name="fondo-retencion" size="5"/>
                             </td>
                             <td>
                                 <p>Porcentaje de fondo de retencion</p>
@@ -2011,7 +2139,7 @@ $contratos = $modelos->mostrarContratos();
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" id="inputext" name="dias-devolucion-fondoretencion" size="5"/>
+                                <input type="text" id="inputext" class="txtdiasdevolucion" name="dias-devolucion-fondoretencion" size="5"/>
                             </td>
                             <td>
                                 <p>Dias habiles para la devolucion del fondo de retencion, contados a partir de la retencion de obra sin observaciones(Acta definitiva)</p>
@@ -2021,7 +2149,7 @@ $contratos = $modelos->mostrarContratos();
                     <table>
                         <tr>
                             <td><p>Monto contratado mayor a:</p></td>
-                            <td><input type="text" id="inputext" name="mayor-a" size="5"/></td>
+                            <td><input type="text" class="txtmayora" id="inputext" name="mayor-a" size="10"/></td>
                             <td></td>
                             <td></td>
                             <td>
@@ -2036,9 +2164,9 @@ $contratos = $modelos->mostrarContratos();
                         </tr>
                         <tr>
                             <td><p>Monto contratado entre:</p></td>
-                            <td><input type="text" id="inputext" name="entre-a" size="5" READONLY/></td>
+                            <td><input type="text" class="txtlimiteinferior" id="inputext" name="entre-a" size="10" READONLY/></td>
                             <td> y </td>
-                            <td><input type="text" id="inputext" name="entre-b" size="5" READONLY/></td>
+                            <td><input type="text" class="txtlimitesuperior" id="inputext" name="entre-b" size="10" READONLY/></td>
                             <td>
                                 <p><input type="checkbox" name="oc_oc_entre"CHECKED DISABLED/>OC/OT</p>
                             </td>
@@ -2051,7 +2179,7 @@ $contratos = $modelos->mostrarContratos();
                         </tr>
                         <tr>
                             <td><p>Monto contratado menor a:</p></td>
-                            <td><input type="text" id="inputext" name="menor-a" size="5"/></td>
+                            <td><input type="text" class="txtmenora" id="inputext" name="menor-a" size="10"/></td>
                             <td></td>
                             <td></td>
                             <td>
