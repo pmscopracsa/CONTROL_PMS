@@ -132,21 +132,25 @@ $contratos = $modelos->mostrarContratos();
             
             $(".txtmayora").focusout(function() {
                 var moneda;
-                if ($("#moneda-id").val() == "Dolares")
+                //alert($("#moneda-id option:selected").text());
+                if ($("#moneda-id option:selected").text() == "Dolares")
                     moneda = "$";
                 else
                     moneda = "S/.";
                 
+                // PONIENDO EL VALOR
+                $("#txt_sfmontomayora").val($(".txtmayora").val());
                 $(".txtmayora").val(formatNumber($(".txtmayora").val(), moneda));
                 $(".txtlimiteinferior").val($(".txtmayora").val());
             });
             $(".txtmenora").focusout(function() {
                 var moneda;
-                if ($("#moneda-id").val() == "Dolares")
+                if ($("#moneda-id option:selected").text() == "Dolares")
                     moneda = "$";
                 else
                     moneda = "S/.";
                 
+                $("#txt_sfmonotmenora").val($(".txtmenora").val());
                 $(".txtmenora").val(formatNumber($(".txtmenora").val(), moneda));
                 $(".txtlimitesuperior").val($(".txtmenora").val());
             });
@@ -154,10 +158,12 @@ $contratos = $modelos->mostrarContratos();
              * PONER EL SIMBOLO DE PORCENTAJE 
              */
             $(".txtcartafianza_p").focusout(function() {
-                $(".txtcartafianza_p").val('%'+$(".txtcartafianza_p").val());
+                $("#txt_sfcartafianza").val($(".txtcartafianza_p").val());
+                $(".txtcartafianza_p").val($(".txtcartafianza_p").val()+'%');
             });
             $(".txtfondoretencion_p").focusout(function() {
-                $(".txtfondoretencion_p").val('%'+$(".txtfondoretencion_p").val());
+                $("#txt_sffondoretencion").val($(".txtfondoretencion_p").val());
+                $(".txtfondoretencion_p").val($(".txtfondoretencion_p").val()+'%');
             });
             /**
              * VALIDAR QUE LOS DIAS SEAN NUMEROS ENTEROS
@@ -174,7 +180,6 @@ $contratos = $modelos->mostrarContratos();
                     $(".txtdiasdevolucion").val(Math.round($(".txtdiasdevolucion").val()));
                 }
             });
-            
             
             /**
              * CARGAR DIV CON DATOS Y PREPARAOS PARA BUSCARLOS
@@ -215,7 +220,7 @@ $contratos = $modelos->mostrarContratos();
             /**
              * FECHAS DE INICIO Y FIN DE OBRA
              */
-            $("#fecha_desde").datepicker({
+            $(".fecha_desde").datepicker({
                 defaultDate:"+1w",
                 changeMonth:true,
                 numberOfMonths:1,
@@ -223,10 +228,10 @@ $contratos = $modelos->mostrarContratos();
                 changeMonth:true,
                 changeYear:true,
                 onSelect:function(selectedDate) {
-                    $("#fecha_hasta").datepicker("option","minDate",selectedDate);
+                    $(".fecha_hasta").datepicker("option","minDate",selectedDate);
                 }
             });
-            $("#fecha_hasta").datepicker({
+            $(".fecha_hasta").datepicker({
                 defaultDate:"+1w",
                 changeMonth:true,
                 numberOfMonth:1,
@@ -234,7 +239,7 @@ $contratos = $modelos->mostrarContratos();
                 changeMonth:true,
                 changeYear:true,
                 onSelect:function(selectedDate) {
-                    $("#fecha_desde").datepicker("option","maxDate",selectedDate);
+                    $(".fecha_desde").datepicker("option","maxDate",selectedDate);
                 }
             });
             //$("#datepicker_i,#datepicker_f").datepicker({dateFormat:'yy-mm-dd'},{showAnim:'fold'});
@@ -357,7 +362,7 @@ $contratos = $modelos->mostrarContratos();
                 $("#div-modal-pptoventa").dialog("open");
                 return false;
             }); 
-            $("#div-modal-pptoventa").dialog({
+            var ppto_venta = $("#div-modal-pptoventa").dialog({
                 autoOpen:false,
                 heigh:950,
                 width:550,
@@ -369,7 +374,7 @@ $contratos = $modelos->mostrarContratos();
                         $(this).dialog("close");
                     }
                 }
-            }); 
+            });ppto_venta.parent().appendTo($("#frm_datosobra")); 
             
             /**
              * MODAL ASIGNAR USUARIOS PARA APROBACION
@@ -620,11 +625,11 @@ $contratos = $modelos->mostrarContratos();
                         data[index].nombre_compania+
                         "</td>"+
                         "<td>"+
-                        '<input type="text" name="pos_firma_reporte" id="pos_firma_reporte"/ value="'+data[index].numero_posi+'">'+
+                        '<input type="text" name="txtpos_firma_reporte" id="pos_firma_reporte" value="'+data[index].numero_posi+'">'+
                         "</td>"+
-                        "<td>"+
                         "<td><a href='#' id='del-contacto_reporte' class='button delete'>Eliminarr</a></td>"+
-                        '<p style="display:none">'+data[index].id_contacto+"</p>"+
+                        "<td>"+
+                        '<p id="id_contacto" style="display:none">'+data[index].id_contacto+"</p>"+
                         "</td>"+
                         "</tr>"    
                       )
@@ -678,20 +683,19 @@ $contratos = $modelos->mostrarContratos();
               /**
                *  COLOCARLE EL NUMERO DE POSICION DE LA FIRMA 
                **/
-              $("#pos_firma_reporte").live("click",function() {
-                    
-                    $(this).attr("id","inputext");
-                    $(this).focusout(function(){
-                       var td_padre = $(this).parent().parent().text();
-                       var matches = td_padre.match(new RegExp("\\d+","gi"));
-                       $.ajax({
-                           data:{aleatorio:<?=$aleatorio?>,posi_reporte:$(this).val(),reporte:getReporte(),id_contacto:matches[0]},
-                           type:"POST",
-                           url:"../../dl/datos_obra/i_posicionfirmareporte.php"
-                       });
-                    });
-              });
-             
+              $("#pos_firma_reporte").live("focusout",function() {
+//                alert($(this).val());
+                    var td_padre = $(this).parent().parent().html();
+                    var matches = td_padre.match(new RegExp("\\d+","gi"));
+//                    alert(td_padre);
+//                    alert(matches[1]);
+                  $.ajax({
+                        data:{aleatorio:<?=$aleatorio?>,posi_reporte:$(this).val(),reporte:getReporte(),id_contacto:matches[1]},
+                        type:"POST",
+                        url:"../../dl/datos_obra/i_posicionfirmareporte.php"
+                   });
+              }); 
+
              /**
               * EMPATAR REPORTES Y FIRMANTES
               */
@@ -1848,9 +1852,16 @@ $contratos = $modelos->mostrarContratos();
         
         <!-- INICIO DE FORMULARIO --> 
         <!-- ******************** -->
-        <form action="datosdeobratest.php" method="POST">
+        <form id="frm_datosobra" action="datosdeobratest.php" method="POST">
+        <!-- TEXT INPUT INVISIBLES PARA PASAR DATOS SIN FORMATOS : sf == sin formato-->
+        <div id="valores_sinformato" style="display: none">
+            <input type="text" id="txt_sfcartafianza" name="txtsfcartafianza" />
+            <input type="text" id="txt_sffondoretencion" name="txt_sffondoretencion" />
+            <input type="text" id="txt_sfmontomayora" name="txt_sfmontomayora" />
+            <input type="text" id="txt_sfmonotmenora" name="txtsfmonotmenora" />
+        </div>    
                 <!--VENTANA MODAL PARA SETEO DEL PRESUPUESTO DE VENTA-->
-        <div style="display: none" id="div-modal-pptoventa" title="Seteo Presupuesto Venta">
+        <div  id="div-modal-pptoventa" title="Seteo Presupuesto Venta">
             <div class="">
                 <fieldset>
                     <div id="inner-textfield-modal">
@@ -1993,25 +2004,28 @@ $contratos = $modelos->mostrarContratos();
             </div>
             <table>
                 <tr>
-                    <td><label>C&oacute;digo:</label></td>
-                    <td><input id="inputext" type="text" size="15" name="codigo" /><span class="formInfo"><a href="../../js/jquery-tooltip/ajax.htm" class="jTip" id="one" name="El codigo debe tener el siguiente formato">!</a></span></td>
-                    <td><label>Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                    <td><input id="inputext" type="text" size="35" name="nombre"/></td>
-                    <td><label>Fecha inicio obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="fecha_desde" type="text" name="f_inicio" /></td>
-                    <td><label>Fecha fin de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="fecha_hasta" type="text" name="f_fin" /></td>
+                    <td><label>C&oacute;digo:</label><input id="inputext" type="text" size="15" name="codigo" /><span class="formInfo"><a href="../../js/jquery-tooltip/ajax.htm" class="jTip" id="one" name="El codigo debe tener el siguiente formato">!</a></span></td>
                 </tr>
                 <tr>
-                    <td><label>Direcci&oacute;n de la obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                    <td><input type="text" id="inputext" size="30" name="direccion_obra" /></td>
+                    <td><label>Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="inputext" type="text" size="35" name="nombre"/></td> 
                 </tr>
                 <tr>
-                    <td><label>Departamento:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                    <td>
+                    <td><label>Fecha inicio obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="inputext" class="fecha_desde" type="text" name="f_inicio" /></td>
+                </tr>
+                <tr>
+                    <td><label>Fecha fin de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="inputext" class="fecha_hasta" type="text" name="f_fin" /></td>                    
+                </tr>
+                <tr>
+                    <td><label>Direcci&oacute;n de la obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input type="text" id="inputext" size="30" name="direccion_obra" /></td>
+                </tr>
+                <tr>
+                    <td><label>Departamento:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label>
                         <select name="departamento" id="departamento-peru">
                         </select>
                     </td>
-                    <td><label>Moneda:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                    <td>
+                </tr>
+                <tr>
+                    <td><label>Moneda:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label>
                         <select name="moneda" id="moneda-id">
                             <option value="0">Seleccionar moneda</option>
                         </select>
