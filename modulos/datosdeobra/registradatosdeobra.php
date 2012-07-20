@@ -316,8 +316,6 @@ $contratos = $modelos->mostrarContratos();
             });
             
             $("#agregar-supervisorproyecto").click(function() {
-//                $("#modal-supervisorproyecto").dialog("open");
-//                return false;
                 $("#divSeleccionaEmpSupProyecto").dialog("open");
             })
             
@@ -1789,11 +1787,13 @@ $contratos = $modelos->mostrarContratos();
             });
             
             $('.proveedorfacturar').live("click",function(){
+                
                 var proveedor_array = $(this).text().split("-");
                 var cli = proveedor_array[1];
                 var proveedor_id = proveedor_array[0];
+                alert(proveedor_array[0])
                 $(".proveedorfacturar-text").val(cli);
-                $(".contrato_id").val(proveedor_id);
+                $(".proveedor_id").val(proveedor_id);
             });
             
             $('.carta').click(function(){

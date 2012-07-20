@@ -6,8 +6,6 @@
                     rownumber="true"
                     border="0">
                 <thead>
-<!--                    <tr>
-                        <th field="descripcion">Descripci&oacute;n-->
                 </thead>
                 <tr>
                     <td>
