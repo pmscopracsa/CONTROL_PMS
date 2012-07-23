@@ -5,10 +5,8 @@
         <title></title>
     </head>
     <body>
-        <h1>CONTROL PMS</h1>
-        
-<div style="position:relative; width:200px; height:125px;">
-  
-</div>
+        <?php
+        // put your code here
+        ?>
     </body>
 </html>

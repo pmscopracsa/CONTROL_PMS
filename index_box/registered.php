@@ -20,7 +20,7 @@ if(isset($_GET['logoff']))
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>¡&Aacute;rea de usuarios registrados!</title>
-    <link rel="stylesheet" type="text/css" href="demo.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="index.css" media="screen" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
     <script>
 $(document).ready(function()
@@ -32,7 +32,7 @@ $(document).ready(function()
 		//check the username exists or not from ajax
 		$.post("../security/sec_user.php",{ user_name:$('#idtxtusuaorio').val(),password:$('#idtxtpassword').val()} ,function(data)
                 {
-		  if(data=='yes') //if correct login detail
+		  if(data=='administrador' || data=='usuario') //if correct login detail
 		  {
 		  	$("#msgbox").fadeTo(200,0.1,function()  //start fading the messagebox
 			{ 
@@ -40,16 +40,11 @@ $(document).ready(function()
 			  $(this).html('Logging in.....').addClass('messageboxok').fadeTo(900,1,
               function()
 			  { 
-			  	 //redirect to secure pag
-//                                 var usuario = <?=$_SESSION['rol']?>;
-//                                 alert(usuario);
-//                                 if (usuario == "administrador")
-                                    alert(<?=$_SESSION['rol']?>);
-                                    document.location='secure.php';
-//                                 else if (usuario == "usuario")
-//                                     document.location='../index.php';
-//                                 else
-//                                     documento.location = 'http://www.google.com';
+                              if (data == 'administrador')
+                                  document.location='secure.php';
+                              else if (data == 'usuario')
+                                  document.location = '../modulos/selecciondirectorio/selecciondirectorio.php';
+                                  //document.location = '../index.php';
 			  });
 			  
 			});
@@ -131,7 +126,7 @@ $(document).ready(function()
         </div>
         <?php
         }
-	else echo '<h1>Por favor, <a href="demo.php">inicie sesion</a> y vuelva luego</h1>';
+	else echo '<h1>Por favor, <a href="../index.php">inicie sesion</a> y vuelva luego</h1>';
     ?>
     </div>
     
