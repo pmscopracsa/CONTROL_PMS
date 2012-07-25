@@ -1,5 +1,4 @@
 <?php
-
 define('INCLUDE_CHECK',true);
 
 require 'index_box/connect.php';
@@ -103,6 +102,9 @@ else if($_POST['submit']=='Register')
 	if(!count($err))
 	{
 		// If there are no errors
+            /**
+             * OBTENER EL CORREO DEL ADMINISTRADOR DE LA EMPRESA O ETC 
+             */
 		
 		$pass = substr(md5($_SERVER['REMOTE_ADDR'].microtime().rand(1,100000)),0,6);
 		// Generate a random password
@@ -227,7 +229,7 @@ if($_SESSION['msg'])
 					<input class="field" type="text" name="username" id="username" value="" size="23" />
                                         <label class="grey" for="password">Contrasen&ntilde;a:</label>
 					<input class="field" type="password" name="password" id="password" size="23" />
-	            	<label><input name="rememberMe" id="rememberMe" type="checkbox" value="1" /> &nbsp;Recordarme</label>
+                                        <label><input name="rememberMe" id="rememberMe" type="checkbox" checked="checked" value="1" /> &nbsp;Recordarme</label>
         			<div class="clear"></div>
 					<input type="submit" name="submit" value="Login" class="bt_login" />
 				</form>
@@ -235,7 +237,7 @@ if($_SESSION['msg'])
 			<div class="left right">			
 				<!-- Register Form -->
 				<form action="" method="post">
-                                    <h1>¿A&uacute;n no ha probado el Sistema de Gestion de Proyectos?</h1>		
+                                    <h1>¿A&uacute;n no ha probado CONTROL PMS?</h1>		
                                     <h3>Br&iacute;ndenos los siguientes datos por favor:</h3>
                     
                     <?php

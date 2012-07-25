@@ -1,17 +1,17 @@
 <?php
-
+session_start();
 session_name('tzLogin');
 session_set_cookie_params(2*7*24*60*60);
-session_start();
 
-if(isset($_GET['logoff']))
-{
-	$_SESSION = array();
-	session_destroy();
-	
-	header("Location: demo.php");
-	exit;
-}
+
+//if(isset($_GET['logoff']))
+//{
+//	$_SESSION = array();
+//	session_destroy();
+//	
+//	header("Location: ../index.php");
+//	exit;
+//}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -101,6 +101,7 @@ $(document).ready(function()
 <div id="main">
   <div class="container">
     <h1>¡Solamente usuarios registrados!</h1>
+    <p>Usuario: <?=$_SESSION['id']?></p>
     <h2>Para mayor seguridad se le est&aacute; haciendo seguimiento de su n&uacute;mero IP</h2>
     </div>
     
