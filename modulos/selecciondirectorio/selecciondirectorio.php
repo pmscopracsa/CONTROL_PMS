@@ -9,7 +9,6 @@ if (isset($_GET['logoff']))
     header("Location: ../../index.php");
     exit;
 }    
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,8 +18,10 @@ if (isset($_GET['logoff']))
         <link rel="stylesheet" href="../../js/wizard/css/formToWizard.css" /> 
         <link rel="stylesheet" href="../../js/wizard/css/validationEngine.jquery.css" />
         <link rel="stylesheet" href="../../index_box/index.css" />
+        <link rel="stylesheet" href="../../css/jquery-ui-1.8.18.custom.css" />
         
         <script src="../../js/jquery-1.7.1.min.js"></script> 
+        <script src="../../js/calendar/jquery-ui-1.8.18.custom.min.js"></script>
         <script src="../../js/wizard/jquery.formToWizard.js"></script> 
         <script src="../../js/wizard/jquery.validationEngine.js"></script> 
         <script src="../../js/wizard/jquery.validationEngine-en.js"></script> 
@@ -44,6 +45,27 @@ if (isset($_GET['logoff']))
         #steps { margin: 80px 0 0 0 }
     </style>
     <script>
+    /**
+     * CARGA DE LOS DIRECTORIOS SIN FILTRO (PARA RECARGAR SIN FILTRO) Y POR FILTRO (CUANDO SE DESEA BUSCAR DE UNA LARGA LISTA)
+     */    
+    function recargarDirectorio() {
+        $("#divSeleccionaDirectorio").load("modales_seteo/div_seleccionaDirectorio.php?filtro=1");
+    }
+    function recargarDirectorioBusqueda(filtro) {
+        $("#divSeleccionaObra").load("modales_seteo/div_seleccionaDirectorio.php?filtro="+filtro);
+    }
+    
+    /**
+     * CARGA DE LAS OBRAS SIN FILTRO (PARA RECARGAR SIN FILTRO)  Y POR FILTRO (CUANDO SE DESEA BUSCAR DE UNA LARGA LISTA)
+     */
+    function recargarObra() {
+        $("#divSeleccionaObra").load("modales_seteo/div_seleccionaObra.php?filtro=1");
+    }
+    function recargarObraBusqueda(filtro) {
+        $("#divSeleccionaObra").load("modales_seteo/div_seleccionaObra.php?filtro="+filtro);
+    }
+        
+        
     $(function() {
         var $seteo = $("#seleccionprevia");
         $seteo.validationEngine();
@@ -58,32 +80,107 @@ if (isset($_GET['logoff']))
                     return $seteo.validationEngine('validate');
                 }
             });
-    })
+            
+      /**
+       * BOTON PARA ABRIR MODAL DE DIRECTORIOS
+       */      
+      $("#idbtnBuscarDirectorio").click(function() {
+          $("#divSeleccionaDirectorio").dialog("open");
+      })
+      
+      /**
+       * BOTON PARA ABRIR MODAL DE OBRAS
+       */
+      $("#idbtnBuscarObra").click(function() {
+          $("#divSeleccionaObra").dialog("open");
+      })
+       
+       /**
+        * CARGA POR DEFECTO DE LOS DIRECTORIOS
+        */
+       $("#divSeleccionaDirectorio").load("modales_seteo/div_seleccionaDirectorio.php?filtro=1");
+       /**
+        * CARGA PÓR DEFECTO DE LAS OBRAS
+        */
+       $("#divSeleccionaObra").load("modales_seteo/div_seleccionaObra.php?filtro=1");
+       
+       /**
+        * MODAL PARA LA SELECCIONA DEL DIRECTORIO
+        */
+        $("#divSeleccionaDirectorio").dialog({
+            autoOpen:false,
+            height:350,
+            width:450,
+            resizable:false,
+            closeOnEscape:false,
+            modal:true,
+            buttons:{
+                "Buscar": function() {
+
+                },
+                "Limpiar": function() {
+
+                },
+                "Cerrar": function() {
+                    $(this).dialog("close");
+                } 
+            }
+        });
+       
+       /**
+        * MODAL PARA LA SELECCION DE LA OBRA 
+        */
+        $("#divSeleccionaObra").dialog({
+            autoOpen:false,
+            height:350,
+            width:450,
+            resizable:false,
+            closeOnEscape:false,
+            modal:true,
+            buttons:{
+                "Buscar":function() {
+
+                },
+                "Limpiar": function() {
+
+                },
+                "Cerrar": function() {
+                    $(this).dialog("close");
+                }
+            }
+        });
+    });
     </script>
     </head>
     <body>
+        <!-- MODALES PARA SETEAR DATOS DE OBRA  -->
+        <!-- ---------------------------------  -->
+        <div id="divSeleccionaDirectorio" title="Seleccionar Directorio"></div>
+        <div id="divSeleccionaObra" title="Seleccionar Obra"></div> 
+        <!-- ---------------------------------  -->
+
         <div id="main">
             <form id="seleccionprevia" method="post" action="">
                 <fieldset>
                     <legend>Directorios Principales</legend>
                     <label for="DirectorioPrincipal">Directorio Principal</label>
-                    <input type="text" id="idtxtdirectorio" name="txtdirectorio" class="validate[required]" />
+                    <input type="text" id="idtxtdirectorio" name="txtdirectorio" class="validate[required]" READONLY/>
                     <input type="button" id="idbtnBuscarDirectorio" name="btnBuscarDirectorio" value="..." />
                 </fieldset>    
                 <fieldset>
                     <legend>Seleccion de Obra</legend>
                     <label for="Obra">Seleccion de Obra</label>
-                    <input type="text" id="idtxtobra" name="txtobra" class="validate[required]" />
+                    <input type="text" id="idtxtobra" name="txtobra" class="validate[required]" READONLY/>
                     <input type="button" id="idbtnBuscarObra" name="btnBuscarObra" value="..." />
                 </fieldset>
                 <fieldset>
                     <legend>Cambio del día segun SUNAT</legend>
                     <label for="ventaSunat">T.C. Venta SUNAT</label>
-                    <input type="text" id="idtxtvsunat" name="txtvsunat"  value="" />
+                    <input type="text" id="idtxtvsunat" name="txtvsunat"  value="" size="5" maxlength="5"/>
                     <label for="compraSunat">T.C. Compra SUNAT</label>
-                    <input type="text" id="idtxtcsunat" name="txtcsunat" value="" />
+                    <input type="text" id="idtxtcsunat" name="txtcsunat" value="" size="5" maxlength="5"/>
                     <label for="ventaBanco">T.C Venta Banco</label>
-                    <input type="text" id="idtxtvbanco" name="txtvbanco" value="" />
+                    <input type="text" id="idtxtvbanco" name="txtvbanco" value="" size="5" maxlength="5"/>
                 </fieldset>    
                 <p>
                     <input type="button" value="Confirmar datos iniciales" id="setuped" /> 

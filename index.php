@@ -85,7 +85,7 @@ else if($_POST['submit']=='Register')
 	
 	$err = array();
 	
-	if(strlen($_POST['username'])<4 || strlen($_POST['username'])>32)
+	if(strlen($_POST['username']) < 4 || strlen($_POST['username'])>32)
 	{
 		$err[]='Your username must be between 3 and 32 characters!';
 	}
@@ -189,6 +189,7 @@ if($_SESSION['msg'])
 
 <body>
 
+
 <!-- Panel -->
 <div id="toppanel">
 	<div id="panel">
@@ -226,7 +227,7 @@ if($_SESSION['msg'])
 					<input class="field" type="text" name="username" id="username" value="" size="23" />
                                         <label class="grey" for="password">Contrasen&ntilde;a:</label>
 					<input class="field" type="password" name="password" id="password" size="23" />
-	            	<label><input name="rememberMe" id="rememberMe" type="checkbox" checked="checked" value="1" /> &nbsp;Recordarme</label>
+	            	<label><input name="rememberMe" id="rememberMe" type="checkbox" value="1" /> &nbsp;Recordarme</label>
         			<div class="clear"></div>
 					<input type="submit" name="submit" value="Login" class="bt_login" />
 				</form>

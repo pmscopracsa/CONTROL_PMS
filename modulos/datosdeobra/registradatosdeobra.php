@@ -63,9 +63,6 @@ $contratos = $modelos->mostrarContratos();
         <script src="../../js/monedas_formato.js" type="text/javascript"></script>
         <link href="../../js/jquery-tooltip/css/global.css" rel="stylesheet" type="text/css" />
         
-        <!-- sliding -->
-<!--        <script src="../../js/sliding/sliding.form.js" type="text/javascript"></script>
-        <link href="../../js/sliding/css/style.css" rel="stylesheet" type="text/css" />-->
         <script>
             
         /**
