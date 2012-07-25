@@ -1,4 +1,6 @@
 <?php
+session_name('tzLogin');
+session_set_cookie_params(2*7*24*60*60);
 session_start();
 ?>
 <!DOCTYPE html>
@@ -101,7 +103,6 @@ session_start();
             </table>
         </div>
     </div>
-        
        
         
     <div id="mainwrap">
@@ -154,5 +155,7 @@ session_start();
             <div style="clear:both"></div>
         </div>
     </div>  
-        
+    <!-- MODALES EMBEBIDOS -->
+    <!-- ----------------- -->
+    
 </html>

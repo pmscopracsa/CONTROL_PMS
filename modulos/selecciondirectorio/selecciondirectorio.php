@@ -1,14 +1,25 @@
 <?php 
+session_name('tzLogin');
+session_set_cookie_params(2*7*24*60*60);
 session_start();
 
-if (isset($_GET['logoff']))
-{
-    $_SESSION = array();
-    session_destroy();
-    
-    header("Location: ../../index.php");
-    exit;
-}    
+/**
+ * RECIEN AL DARLE SUBMIT LOS VALORES:
+ * id de la empresa
+ * id del directorio
+ * id de la obra
+ * SERAN ALMACENADOS EN LAS VARIABLES DE
+ * SESION, CASO CONTRARIO SE ESTARAN SOBRE ESCRIBIENDO
+ * CON ALTAS PROBABILIDADES DE QUEDARSE PEGADO
+ * ALGUN VALOR NO DESEADO
+ * 
+ * PARA HACER EL CAMBIO EN CALIENTE DEL DIRECTORIO Y DE LA OBRA SE PONDRÁ
+ * EN LA PARTE SUPERIOR UNA PESTAÑA QUE SE MUESTRA POR DEMANDA. DICHA PESTAÑA
+ * NOS MOSTRARA 2 COMBOS ASOCIADOS (DIRECTORIO & OBRA). 
+ * AL SELECCIONAR OTRO DIRECTORIO - OBRA EN CALIENTE PREGUNTAR AL USUARIO SI DESEA
+ * PROSEGUIR CON E CAMBIO, YA QUE LOS DATOS HASTA ESE MOMENTO ESCRITOS EN EL FORMULARIO
+ * SERÁN BORRADOS, TANTO DE TABLAS TEMPORALES COMO DE VARIABLES DE SESION 
+ */
 ?>
 <!DOCTYPE html>
 <html>
@@ -80,6 +91,10 @@ if (isset($_GET['logoff']))
                     return $seteo.validationEngine('validate');
                 }
             });
+      /**
+       * CARGAR DIRECTORIOS PRO PRIMERA VEZ - SIN FILTRO
+       */      
+      $("#divSeleccionaDirectorio").load("modales_seteo/div_seleccionaDirectorio.php?filtro=1");
             
       /**
        * BOTON PARA ABRIR MODAL DE DIRECTORIOS
@@ -153,10 +168,19 @@ if (isset($_GET['logoff']))
     </script>
     </head>
     <body>
+        <?php
+        if (!$_SESSION['id']) {
+            echo "No estas permitido de ingresar a esta zona";
+            header("Location: http://localhost/control_pms/");
+        }
+        ?>
         <!-- MODALES PARA SETEAR DATOS DE OBRA  -->
         <!-- ---------------------------------  -->
-        <div id="divSeleccionaDirectorio" title="Seleccionar Directorio"></div>
-        <div id="divSeleccionaObra" title="Seleccionar Obra"></div> 
+        <div id="divSeleccionaDirectorio" title="Seleccionar Directorio">
+        </div>
+        
+        <div id="divSeleccionaObra" title="Seleccionar Obra">
+        </div> 
         <!-- ---------------------------------  -->
 
         <div id="main">
@@ -189,7 +213,7 @@ if (isset($_GET['logoff']))
             <img src="<?='../../img/cliente/'.$_SESSION['logo'].'.png';?>" alt="logo_empresa"/>
         
             <div class="container tutorial-info">
-                <a href="?logoff">Cerrar sesi&oacute;n</a> | <a href="../../index_usuario.php">Usuario</a>
+                <a href="../../index_usuario.php">Menu de Usuario</a>
             </div>
         </div>
     </body>

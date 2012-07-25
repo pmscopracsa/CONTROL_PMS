@@ -5,7 +5,6 @@ require 'index_box/connect.php';
 require 'index_box/functions.php';
 // Those two files can be included only if INCLUDE_CHECK is defined
 
-
 session_name('tzLogin');
 // Starting the session
 
@@ -51,9 +50,10 @@ if($_POST['submit']=='Login')
 		$_POST['rememberMe'] = (int)$_POST['rememberMe'];
 		
 		// Escaping all input data
-
+                $nombre_usuario = $_POST['username'];
+                $password = $_POST['password'];
 		//$row = mysql_fetch_assoc(mysql_query("SELECT id,usr FROM tb_empresa WHERE usr='{$_POST['username']}' AND pass='".md5($_POST['password'])."'"));
-                $row = mysql_fetch_assoc(mysql_query("SELECT id,nombre,logo FROM tb_empresa WHERE nombre='{$_POST['username']}' AND password='".$_POST['password']."'"));
+                $row = mysql_fetch_assoc(mysql_query("SELECT id,nombre,logo FROM tb_empresa WHERE nombre='$nombre_usuario' AND password='$password'"));
 
 		if($row['nombre'])
 		{
@@ -65,7 +65,6 @@ if($_POST['submit']=='Login')
                         $_SESSION['logo'] = $row['logo'];
 			
 			// Store some data in the session
-			
 			setcookie('tzRemember',$_POST['rememberMe']);
 		}
 		else $err[]='¡Nombre de empresa o contraseña incorrecto!';
@@ -80,61 +79,35 @@ if($_POST['submit']=='Login')
 }
 else if($_POST['submit']=='Register')
 {
+   
 	// If the Register form has been submitted
 	
 	$err = array();
+        
+        $destinatario = "miguel.alc@gmail.com";
+        $asunto = "Deseo probar el sistema Control PMS";
+        $cuerpo = "------------------------------------";
+        
 	
-	if(strlen($_POST['username']) < 4 || strlen($_POST['username'])>32)
+	if(strlen($_POST['username']) < 5 || strlen($_POST['username'])>32)
 	{
-		$err[]='Your username must be between 3 and 32 characters!';
+		$err[]='Su nombre debe tener al menos 5 caracteres';
 	}
 	
 	if(preg_match('/[^a-z0-9\-\_\.]+/i',$_POST['username']))
 	{
-		$err[]='Your username contains invalid characters!';
+		$err[]='Su nombre tiene caracteres no válidos!';
 	}
 	
 	if(!checkEmail($_POST['email']))
 	{
-		$err[]='Your email is not valid!';
+		$err[]='Su correo no es valido';
 	}
 	
 	if(!count($err))
 	{
-		// If there are no errors
-            /**
-             * OBTENER EL CORREO DEL ADMINISTRADOR DE LA EMPRESA O ETC 
-             */
-		
-		$pass = substr(md5($_SERVER['REMOTE_ADDR'].microtime().rand(1,100000)),0,6);
-		// Generate a random password
-		
-		$_POST['email'] = mysql_real_escape_string($_POST['email']);
-		$_POST['username'] = mysql_real_escape_string($_POST['username']);
-		// Escape the input data
-		
-		
-		mysql_query("	INSERT INTO tz_members(usr,pass,email,regIP,dt)
-						VALUES(
-						
-							'".$_POST['username']."',
-							'".md5($pass)."',
-							'".$_POST['email']."',
-							'".$_SERVER['REMOTE_ADDR']."',
-							NOW()
-							
-						)");
-		
-		if(mysql_affected_rows($link)==1)
-		{
-			send_mail(	'demo-test@tutorialzine.com',
-						$_POST['email'],
-						'Registration System Demo - Your New Password',
-						'Your password is: '.$pass);
-
-			$_SESSION['msg']['reg-success']='We sent you an email with your new password!';
-		}
-		else $err[]='This username is already taken!';
+            
+            send_mail($_POST['email'],$destinatario,$asunto,$cuerpo);
 	}
 
 	if(count($err))
@@ -205,17 +178,15 @@ if($_SESSION['msg'])
 			</div>
             
             
-            <?php
-			
-			if(!$_SESSION['id']):
-			
-			?>
-            
+                    <?php	
+                    if(!$_SESSION['id']):
+
+                    ?>
 			<div class="left">
 				<!-- Login Form -->
 				<form class="clearfix" action="" method="post">
                                     <h1>Inicio de sesi&oacute;n</h1>
-                    
+
                     <?php
 						
 						if($_SESSION['msg']['login-err'])

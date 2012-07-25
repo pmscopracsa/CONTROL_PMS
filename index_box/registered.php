@@ -1,17 +1,7 @@
 <?php
-session_start();
 session_name('tzLogin');
 session_set_cookie_params(2*7*24*60*60);
-
-
-//if(isset($_GET['logoff']))
-//{
-//	$_SESSION = array();
-//	session_destroy();
-//	
-//	header("Location: ../index.php");
-//	exit;
-//}
+session_start();
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -68,32 +58,32 @@ $(document).ready(function()
 	});
 });
     </script>
-    <style>
-        #buttondiv {
-            margin-top: 10px;
-        }
-        .messageboxok{
-	position:absolute;
-	width:auto;
-	margin-left:30px;
-	border:1px solid #349534;
-	background:#C9FFCA;
-	padding:3px;
-	font-weight:bold;
-	color:#008000;
-	
-        }
-        .messageboxerror{
-                position:absolute;
-                width:auto;
-                margin-left:30px;
-                border:1px solid #CC0000;
-                background:#F7CBCA;
-                padding:3px;
-                font-weight:bold;
-                color:#CC0000;
-        }
-    </style>
+<style>
+    #buttondiv {
+        margin-top: 10px;
+    }
+    .messageboxok{
+        position:absolute;
+        width:auto;
+        margin-left:30px;
+        border:1px solid #349534;
+        background:#C9FFCA;
+        padding:3px;
+        font-weight:bold;
+        color:#008000;session_name('tzLogin');
+session_set_cookie_params(2*7*24*60*60);
+    }
+    .messageboxerror{
+        position:absolute;
+        width:auto;
+        margin-left:30px;
+        border:1px solid #CC0000;
+        background:#F7CBCA;
+        padding:3px;
+        font-weight:bold;
+        color:#CC0000;
+    }
+</style>
 </head>
 
 <body>
@@ -101,7 +91,6 @@ $(document).ready(function()
 <div id="main">
   <div class="container">
     <h1>¡Solamente usuarios registrados!</h1>
-    <p>Usuario: <?=$_SESSION['id']?></p>
     <h2>Para mayor seguridad se le est&aacute; haciendo seguimiento de su n&uacute;mero IP</h2>
     </div>
     
@@ -109,7 +98,7 @@ $(document).ready(function()
     
     <?php
 	if($_SESSION['id']) {
-            echo '<h1>¡Hola, '.$_SESSION['usr'].'!</h1>';
+            echo '<h1>¡Bienvenido a CONTROL PMS de '.  strtoupper($_SESSION['usr']).'!</h1>';
         ?>
         <div class="left">
             <form class="clearfix" action="" method="post" id="login_usuario">
@@ -132,7 +121,7 @@ $(document).ready(function()
     </div>
     
   <div class="container tutorial-info">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. <a href="?logoff">Cerrar sesi&oacute;n</a></div>
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. <a href="../index.php">Inicio</a></div>
 </div>
 
 
