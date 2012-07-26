@@ -6,20 +6,24 @@ require_once 'Conexion.php';
  */
 
 /**
- * Description of DirectoriosDL
+ * Description of ObrasDL
  *
  * @author root
  */
-class DirectoriosDL 
+class ObrasDL 
 {
     protected $_id;
     protected $_descripcion;
-    protected $_nombre;
     protected $_idEmpresa;
+    protected $_idDirectorio;
     
-    public function mostrarDirectorio()
+    // Esta funcion siempre tendrá 2 filtros, el idEmpresa y el idDirectorio
+    public function mostrarObras()
     {
-        $query = "SELECT nombre,descripcion FROM tb_directorio WHERE tb_empresa_id = $this->_idEmpresa ORDER BY nombre ASC";
+        $query = "SELECT DISTINCT ob.id, ob.codigoobra, ob.descripcion
+        FROM tb_directorio AS dir
+        INNER JOIN tb_obra  AS ob
+        WHERE dir.tb_empresa_id = $this->_idEmpresa AND ob.tb_directorio_nombre = '$this->_idDirectorio'";
         
         try {
             $conexion = new Conexion();
@@ -43,35 +47,13 @@ class DirectoriosDL
     return $registros;    
     }
     
-    public function mostrarDirectorioPorNombre()
+    // Funcion de búsqueda
+    public function mostrarObrasPorNombre()
     {
-        $query = "SELECT nombre,descripcion FROM tb_directorio WHERE nombre LIKE '$this->_nombre'";
         
-        try {
-            $conexion = new Conexion();
-            $cn = $conexion->conectar();
-            $rs = mysql_query($query,$cn);
-            $registros = array();
-            while($reg = mysql_fetch_array($rs))
-            {
-                array_push($registros,$reg);
-            }
-            mysql_free_result($rs);
-            mysql_close($cn);
-        } catch (Exception $exc) {
-            try {
-                mysql_free_result($rs);
-            } catch(Exception $e1){}
-            try {
-                mysql_close($cn);
-            }catch(Exception $e1){}
-        }
-    return $registros;    
     }
     
-    /**
-     * G & S 
-     */
+    // g & s
     public function get_id() {
         return $this->_id;
     }
@@ -87,15 +69,7 @@ class DirectoriosDL
     public function set_descripcion($_descripcion) {
         $this->_descripcion = $_descripcion;
     }
-    
-    public function get_nombre() {
-        return $this->_nombre;
-    }
 
-    public function set_nombre($_nombre) {
-        $this->_nombre = $_nombre;
-    }
-    
     public function get_idEmpresa() {
         return $this->_idEmpresa;
     }
@@ -103,4 +77,13 @@ class DirectoriosDL
     public function set_idEmpresa($_idEmpresa) {
         $this->_idEmpresa = $_idEmpresa;
     }
+
+    public function get_idDirectorio() {
+        return $this->_idDirectorio;
+    }
+
+    public function set_idDirectorio($_idDirectorio) {
+        $this->_idDirectorio = $_idDirectorio;
+    }
+
 }

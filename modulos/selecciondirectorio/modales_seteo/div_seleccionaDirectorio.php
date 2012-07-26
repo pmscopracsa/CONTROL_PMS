@@ -3,12 +3,13 @@ require_once '../../../dl/contacto_bl/seteoOpciones/DirectoriosDL.php';
 $directorioGeneral = new DirectoriosDL();
 
 $q = $_REQUEST['filtro'];
+$directorioGeneral->set_idEmpresa($_REQUEST['idEmpresa']);
 
 if ($q == "1") {
     $directorios = $directorioGeneral->mostrarDirectorio();
     
     foreach ($directorios as &$valor) {
-        echo '<table><tr style="cursor:pointer;"><td class="cliente">'.
+        echo '<table><tr style="cursor:pointer;"><td class="directorio">'.
         $valor[0].
         ' | '.
         $valor[1].        
@@ -19,7 +20,7 @@ if ($q == "1") {
     $directorios = $directorioGeneral->mostrarDirectorioPorNombre();
     
     foreach ($directorios as &$valor) {
-        echo '<table><tr style="cursor:pointer;"><td class="cliente">'.
+        echo '<table><tr style="cursor:pointer;"><td class="directorio">'.
         $valor[0].
         ' | '.
         $valor[1].        

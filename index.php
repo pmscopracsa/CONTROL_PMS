@@ -161,7 +161,14 @@ if($_SESSION['msg'])
     
     <?php echo $script; ?>
 </head>
-
+    <script>
+    function newPopup(url) {
+        popupWindow = window.open(
+        url,'popupWindow','height=700,width=800,left=50,top=20,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=yes'
+        )
+    }   
+        
+    </script>    
 <body>
 
 
@@ -173,7 +180,8 @@ if($_SESSION['msg'])
 				<h1>CONTROL PMS</h1>
                                 <h2>La soluci&oacute;n a sus proyectos</h2>		
 				<p class="grey">Control PMS Project Management Software, nace a partir de la necesidad de concentrar la información y
-                                    compartirla a través de un Servidor con todo el personal de una empresa.<a>(Seguir leyendo)</a></p>
+                                    compartirla a través de un Servidor con todo el personal de una empresa.
+                                    <a href="Javascript:newPopup('info.html');">(Seguir leyendo)</a></p>
 				
 			</div>
             

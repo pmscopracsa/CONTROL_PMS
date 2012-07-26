@@ -27,7 +27,7 @@ $(document).ready(function()
 		  	$("#msgbox").fadeTo(200,0.1,function()  //start fading the messagebox
 			{ 
 			  //add message and change the class of the box and start fading
-			  $(this).html('Logging in.....').addClass('messageboxok').fadeTo(900,1,
+			  $(this).html('Accediendo.....').addClass('messageboxok').fadeTo(900,1,
               function()
 			  { 
                               if (data == 'administrador')
