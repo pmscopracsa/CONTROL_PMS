@@ -112,10 +112,12 @@ session_start();
                 <div class="easyui-accordion" border="false">
                     <div title="Busca Personas">
                         <ul class="pitem">
-                            <li><a href="modulos/contacto/registracompania.php" target="_blank">Registro de Compa&ntilde;ias</a></li>
+                            <li><a href="modulos/seleccion.php?frmName=compania" target="_blank">Compa&ntilde;ias</a></li>
+                            <li><a href="modulos/seleccion.php?frmName=persona" target="_blank">Personas</a></li>
+                            <li><a href="modulos/seleccion.php?frmName=listas" target="_blank">Listas de Distribuci&oacute;n</a></li>
+<!--                        <li><a href="modulos/contacto/registracompania.php" target="_blank">Registro de Compa&ntilde;ias</a></li>
                             <li><a href="modulos/contacto/registrapersona.php" target="_blank">Registro de Persona</a></li>
-                            <li><a href="modulos/contacto/registrolistadistribucion.php" target="_blank">Listas de Distribuci&oacute;n</a></li>
-<!--                            <li><a href="modulos/contacto/reporteporespecialidad.php" onClik="open1('index_embeded.php');" target="_blank">Reporte por Especialidad</a></li>-->
+                            <li><a href="modulos/contacto/registrolistadistribucion.php" target="_blank">Listas de Distribuci&oacute;n</a></li>-->
                             <li><a href="#" onClick="seleccion('seleccionReporteEspecialidad.php');">Reporte por Especialidad</a></li>
                         </ul>
                     </div>
