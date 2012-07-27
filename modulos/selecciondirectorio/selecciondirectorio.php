@@ -62,16 +62,13 @@ session_start();
         $("#divSeleccionaDirectorio").load("modales_seteo/div_seleccionaDirectorio.php?filtro=1");
     }
     function recargarDirectorioBusqueda(filtro) {
-        $("#divSeleccionaObra").load("modales_seteo/div_seleccionaDirectorio.php?filtro="+filtro+"&idEmpresa="+<?=$_SESSION['id']?>);
+        $("#divSeleccionaDirectorio").load("modales_seteo/div_seleccionaDirectorio.php?filtro="+filtro+"&idEmpresa="+<?=$_SESSION['id']?>);
     }
     
     /**
      * CARGA DE LAS OBRAS SIN FILTRO (PARA RECARGAR SIN FILTRO)  Y POR FILTRO (CUANDO SE DESEA BUSCAR DE UNA LARGA LISTA)
      */
-    function cargarObras(idEmpresa,idDirectorio)
-    {
-        $("#divSeleccionaObra").load("modales_seteo/div_seleccionaObra.php?filtro=1"+"&idEmpresa="+idEmpresa+"&idDirectorio="+idDirectorio);
-    }
+
     
     function recargarObra() {
         $("#divSeleccionaObra").load("modales_seteo/div_seleccionaObra.php?filtro=1");
@@ -81,6 +78,11 @@ session_start();
     }
         
     $(function() {
+        function cargarObras(idEmpresa,idDirectorio)
+        {
+            $("#divSeleccionaObra").append("modales_seteo/div_seleccionaObra.php?filtro=1"+"&idEmpresa="+idEmpresa+"&idDirectorio="+idDirectorio);
+        }
+                
         var $seteo = $("#seleccionprevia");
         $seteo.validationEngine();
         
@@ -109,13 +111,10 @@ session_start();
         $("#divSeleccionaObra").dialog("open");
       });
        
-       
-       
        /**
         * CARGA POR DEFECTO DE LOS DIRECTORIOS
         */
        $("#divSeleccionaDirectorio").load("modales_seteo/div_seleccionaDirectorio.php?filtro=1"+"&idEmpresa="+<?=$_SESSION['id']?>);
-
        
        /**
         * MODAL PARA LA SELECCIONA DEL DIRECTORIO
@@ -188,7 +187,6 @@ session_start();
         <!-- MODALES PARA SETEAR DATOS DE OBRA  -->
         <!-- ---------------------------------  -->
         <div id="divSeleccionaDirectorio" title="Seleccionar Directorio"></div>
-        
         <div id="divSeleccionaObra" title="Seleccionar Obra"></div> 
         <!-- ---------------------------------  -->
 

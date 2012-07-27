@@ -19,6 +19,32 @@ $frm = "";
         <title></title>
     </head>
     <body>
-        Editar formulario: <?=$_REQUEST['frm']?>
+        <?php
+        if (!$_SESSION['id']) {
+        ?>
+        <div id="error">
+            No autorizado
+        </div>
+        <?php
+        }
+        else {
+        ?>
+        <div id="tituloFrm">
+            Editar formulario: <?=$_REQUEST['frm']?>
+        </div>
+        <div id="cajaBuscar">
+            <?php
+                    switch ($_REQUEST['frm']) {
+                        case 'compania':
+                            break;
+
+                        default:
+                            break;
+                    }
+            ?>
+        </div>
+        <?php
+        }
+        ?>
     </body>
 </html>
