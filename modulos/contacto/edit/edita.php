@@ -36,6 +36,7 @@ $frm = "";
             <?php
                     switch ($_REQUEST['frm']) {
                         case 'compania':
+                            
                             break;
 
                         default:

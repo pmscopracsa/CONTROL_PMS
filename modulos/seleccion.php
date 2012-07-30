@@ -11,17 +11,17 @@ switch ($_REQUEST['frmName']) {
     case 'compania':
         $title = "Compañia";
         $nuevo = "contacto/registracompania.php";
-        $modificar = "contacto/edit/edita.php?frm=compania";
+        $modificar = "contacto/edit/editacompania.php?frm=compania";
         break;
     case 'persona':
         $title = "Personas";
         $nuevo = "contacto/registrapersona.php";
-        $modificar = "contacto/edit/edita.php?frm=persona";
+        $modificar = "contacto/edit/editapersona.php?frm=persona";
         break;
     case 'listas':
         $title = "Listas de Distribución";
         $nuevo = "contacto/registrolistadistribucion.php";
-        $modificar = "contacto/edit/edita.php?frm=listas";
+        $modificar = "contacto/edit/editalistadistribucion.php?frm=listas";
         break;
     default:
         break;

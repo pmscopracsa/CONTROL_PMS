@@ -231,6 +231,60 @@ class RegistraCompania
         
     }
     
+    public function s_buscaCompaniaPorRuc()
+    {
+        $query = "SELECT * FROM tb_compania WHERE ruc = $this->_ruc";
+        
+        try {
+            $conexion = new Conexion();
+            $cn = $conexion->conectar();
+            
+            if (!$cn)
+                throw new Exception("Error al conectar: ".  mysql_error());
+            
+            $sql = mysql_query($query, $cn);
+            
+            if (!$sql)
+                throw new Exception("Error en consulta: ".  mysql_error());
+            
+            $companiadatos = array();
+            
+            while ($res = mysql_fetch_assoc($sql)) {
+                
+            }
+            
+        } catch (Exception $e) {
+            echo "Error al consultar compania por ruc. Error: ".$e->getMessage();
+        }
+    }
+    
+    public function s_buscarCompaniaPorNombre()
+    {
+        $query = "SELECT * FROM tb_compania     WHERE descripcion = '$this->_descripcion' ";
+        
+        try {
+            $conexion = new Conexion();
+            $cn = $conexion->conectar();
+            
+            if (!$cn) 
+                throw new Exception("Error al conectar: ".mysql_error ());
+            
+            $sql = mysql_query($query,$cn);
+            
+            if (!$sql)
+                throw new Exception("Error en consulta: ".  mysql_error());
+            
+            
+        } catch (Exception $e) {
+            echo "Error al consultar compania por nombre. Error: ".$e->getMessage();
+        }
+    }        
+    
+    public function s_buscaCompanias()
+    {
+        
+    }
+    
     /**
      * GETTERS Y SETTERS DE LAS VARIABLES DE LA CLASE
      */
