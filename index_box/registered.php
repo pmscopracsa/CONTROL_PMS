@@ -3,8 +3,7 @@ session_name('tzLogin');
 session_set_cookie_params(2*7*24*60*60);
 session_start();
 ?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -70,8 +69,7 @@ $(document).ready(function()
         background:#C9FFCA;
         padding:3px;
         font-weight:bold;
-        color:#008000;session_name('tzLogin');
-session_set_cookie_params(2*7*24*60*60);
+        color:#008000;
     }
     .messageboxerror{
         position:absolute;
@@ -123,7 +121,5 @@ session_set_cookie_params(2*7*24*60*60);
   <div class="container tutorial-info">
       Lorem Ipsum is simply dummy text of the printing and typesetting industry. <a href="../index.php">Inicio</a></div>
 </div>
-
-
 </body>
 </html>

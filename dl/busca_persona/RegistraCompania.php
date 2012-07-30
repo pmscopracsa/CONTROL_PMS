@@ -65,7 +65,7 @@ class RegistraCompania
     
     
     public function __construct() {
-        $this->_idempresa = 1;
+        //$this->_idempresa = 1;
     }
     
     public function prueba() {
@@ -233,7 +233,22 @@ class RegistraCompania
     
     public function s_buscaCompaniaPorRuc()
     {
-        $query = "SELECT * FROM tb_compania WHERE ruc = $this->_ruc";
+        $query = "SELECT DISTINCT
+        cc.id
+        ,cc.ruc
+        ,cc.descripcion
+        ,cc.nombrecomercial
+        ,cc.partidaregistral
+        ,cc.actividadprincipal
+        ,cc.fax
+        ,cc.observacion
+        ,cc.email
+        ,cc.web
+        ,e.nombre
+        FROM tb_empresa e
+        INNER JOIN tb_companiacontacto cc ON e.id = cc.tb_empresa_id
+        INNER JOIN tb_usuario u ON u.tb_empresa_id = e.id
+        WHERE cc.ruc = $this->_ruc AND cc.tb_empresa_id = $this->_idempresa";
         
         try {
             $conexion = new Conexion();
@@ -248,10 +263,21 @@ class RegistraCompania
                 throw new Exception("Error en consulta: ".  mysql_error());
             
             $companiadatos = array();
-            
+            $i = 0;
             while ($res = mysql_fetch_assoc($sql)) {
-                
+                $companiadatos[$i]['id'] = $res['id'];
+                $companiadatos[$i]['ruc'] = $res['ruc'];
+                $companiadatos[$i]['descripcion'] = $res['descripcion'];
+                $companiadatos[$i]['nombrecomercial'] = $res['nombrecomercial'];
+                $companiadatos[$i]['partidaregistral'] = $res['partidaregistral'];
+                $companiadatos[$i]['actividadprincipal'] = $res['actividadprincipal'];
+                $companiadatos[$i]['fax'] = $res['fax'];
+                $companiadatos[$i]['observacion'] = $res['observacion'];
+                $companiadatos[$i]['email'] = $res['email'];
+                $companiadatos[$i]['web'] = $res['web'];
+                $i++;
             }
+            echo json_encode($companiadatos);
             
         } catch (Exception $e) {
             echo "Error al consultar compania por ruc. Error: ".$e->getMessage();
@@ -260,7 +286,22 @@ class RegistraCompania
     
     public function s_buscarCompaniaPorNombre()
     {
-        $query = "SELECT * FROM tb_compania     WHERE descripcion = '$this->_descripcion' ";
+        $query = "SELECT DISTINCT
+        cc.id
+        ,cc.ruc
+        ,cc.descripcion
+        ,cc.nombrecomercial
+        ,cc.partidaregistral
+        ,cc.actividadprincipal
+        ,cc.fax
+        ,cc.observacion
+        ,cc.email
+        ,cc.web
+        ,e.nombre
+        FROM tb_empresa e
+        INNER JOIN tb_companiacontacto cc ON e.id = cc.tb_empresa_id
+        INNER JOIN tb_usuario u ON u.tb_empresa_id = e.id
+        WHERE cc.descripcion = '$this->_descripcion' AND cc.tb_empresa_id = $this->_idempresa";
         
         try {
             $conexion = new Conexion();
@@ -274,6 +315,22 @@ class RegistraCompania
             if (!$sql)
                 throw new Exception("Error en consulta: ".  mysql_error());
             
+            $companiadatos = array();
+            $i = 0;
+            while ($res = mysql_fetch_assoc($sql)) {
+                $companiadatos[$i]['id'] = $res['id'];
+                $companiadatos[$i]['ruc'] = $res['ruc'];
+                $companiadatos[$i]['descripcion'] = $res['descripcion'];
+                $companiadatos[$i]['nombrecomercial'] = $res['nombrecomercial'];
+                $companiadatos[$i]['partidaregistral'] = $res['partidaregistral'];
+                $companiadatos[$i]['actividadprincipal'] = $res['actividadprincipal'];
+                $companiadatos[$i]['fax'] = $res['fax'];
+                $companiadatos[$i]['observacion'] = $res['observacion'];
+                $companiadatos[$i]['email'] = $res['email'];
+                $companiadatos[$i]['web'] = $res['web'];
+                $i++;
+            }
+            echo json_encode($companiadatos);
             
         } catch (Exception $e) {
             echo "Error al consultar compania por nombre. Error: ".$e->getMessage();
