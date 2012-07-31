@@ -263,21 +263,20 @@ class RegistraCompania
                 throw new Exception("Error en consulta: ".  mysql_error());
             
             $companiadatos = array();
-            $i = 0;
-            while ($res = mysql_fetch_assoc($sql)) {
-                $companiadatos[$i]['id'] = $res['id'];
-                $companiadatos[$i]['ruc'] = $res['ruc'];
-                $companiadatos[$i]['descripcion'] = $res['descripcion'];
-                $companiadatos[$i]['nombrecomercial'] = $res['nombrecomercial'];
-                $companiadatos[$i]['partidaregistral'] = $res['partidaregistral'];
-                $companiadatos[$i]['actividadprincipal'] = $res['actividadprincipal'];
-                $companiadatos[$i]['fax'] = $res['fax'];
-                $companiadatos[$i]['observacion'] = $res['observacion'];
-                $companiadatos[$i]['email'] = $res['email'];
-                $companiadatos[$i]['web'] = $res['web'];
-                $i++;
+
+            while ($res = mysql_fetch_array($sql,MYSQL_ASSOC)) {
+                array_push($companiadatos,$res['id']);
+                array_push($companiadatos,$res['ruc'] == NULL ? "" : $res['ruc']);
+                array_push($companiadatos,$res['descripcion'] == NULL ? "" : $res['descripcion']);
+                array_push($companiadatos,$res['nombrecomercial'] == NULL ? "" : $res['nombrecomercial']);
+                array_push($companiadatos,$res['partidaregistral'] == NULL ? "" : $res['partidaregistral']);
+                array_push($companiadatos,$res['actividadprincipal'] == NULL ? "" : $res['actividadprincipal']);
+                array_push($companiadatos,$res['fax'] == NULL ? "" : $res['fax']);
+                array_push($companiadatos,$res['observacion'] == NULL ? "" : $res['observacion']);
+                array_push($companiadatos,$res['email'] == NULL ? "" : $res['email']);
+                array_push($companiadatos,$res['web'] == NULL ? "" : $res['web']);
             }
-            echo json_encode($companiadatos);
+            return $companiadatos;
             
         } catch (Exception $e) {
             echo "Error al consultar compania por ruc. Error: ".$e->getMessage();
@@ -316,21 +315,20 @@ class RegistraCompania
                 throw new Exception("Error en consulta: ".  mysql_error());
             
             $companiadatos = array();
-            $i = 0;
-            while ($res = mysql_fetch_assoc($sql)) {
-                $companiadatos[$i]['id'] = $res['id'];
-                $companiadatos[$i]['ruc'] = $res['ruc'];
-                $companiadatos[$i]['descripcion'] = $res['descripcion'];
-                $companiadatos[$i]['nombrecomercial'] = $res['nombrecomercial'];
-                $companiadatos[$i]['partidaregistral'] = $res['partidaregistral'];
-                $companiadatos[$i]['actividadprincipal'] = $res['actividadprincipal'];
-                $companiadatos[$i]['fax'] = $res['fax'];
-                $companiadatos[$i]['observacion'] = $res['observacion'];
-                $companiadatos[$i]['email'] = $res['email'];
-                $companiadatos[$i]['web'] = $res['web'];
-                $i++;
+
+            while ($res = mysql_fetch_array($sql,MYSQL_ASSOC)) {
+                array_push($companiadatos,$res['id']);
+                array_push($companiadatos,$res['ruc'] == NULL ? "" : $res['ruc']);
+                array_push($companiadatos,$res['descripcion'] == NULL ? "" : $res['descripcion']);
+                array_push($companiadatos,$res['nombrecomercial'] == NULL ? "" : $res['nombrecomercial']);
+                array_push($companiadatos,$res['partidaregistral'] == NULL ? "" : $res['partidaregistral']);
+                array_push($companiadatos,$res['actividadprincipal'] == NULL ? "" : $res['actividadprincipal']);
+                array_push($companiadatos,$res['fax'] == NULL ? "" : $res['fax']);
+                array_push($companiadatos,$res['observacion'] == NULL ? "" : $res['observacion']);
+                array_push($companiadatos,$res['email'] == NULL ? "" : $res['email']);
+                array_push($companiadatos,$res['web'] == NULL ? "" : $res['web']);
             }
-            echo json_encode($companiadatos);
+            return $companiadatos;
             
         } catch (Exception $e) {
             echo "Error al consultar compania por nombre. Error: ".$e->getMessage();
