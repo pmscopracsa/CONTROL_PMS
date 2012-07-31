@@ -234,17 +234,17 @@ class RegistraCompania
     public function s_buscaCompaniaPorRuc()
     {
         $query = "SELECT DISTINCT
-        cc.id
-        ,cc.ruc
-        ,cc.descripcion
-        ,cc.nombrecomercial
-        ,cc.partidaregistral
-        ,cc.actividadprincipal
-        ,cc.fax
-        ,cc.observacion
-        ,cc.email
-        ,cc.web
-        ,e.nombre
+        cc.id id
+        ,cc.ruc ruc
+        ,cc.descripcion descripcion
+        ,cc.nombrecomercial nombrecomercial
+        ,cc.partidaregistral partidaregistral
+        ,cc.actividadprincipal actividadprincipal
+        ,cc.fax fax
+        ,cc.observacion observacion
+        ,cc.email email
+        ,cc.web web
+        ,e.nombre nombre
         FROM tb_empresa e
         INNER JOIN tb_companiacontacto cc ON e.id = cc.tb_empresa_id
         INNER JOIN tb_usuario u ON u.tb_empresa_id = e.id
@@ -266,15 +266,15 @@ class RegistraCompania
 
             while ($res = mysql_fetch_array($sql,MYSQL_ASSOC)) {
                 array_push($companiadatos,$res['id']);
-                array_push($companiadatos,$res['ruc'] == NULL ? "" : $res['ruc']);
-                array_push($companiadatos,$res['descripcion'] == NULL ? "" : $res['descripcion']);
-                array_push($companiadatos,$res['nombrecomercial'] == NULL ? "" : $res['nombrecomercial']);
-                array_push($companiadatos,$res['partidaregistral'] == NULL ? "" : $res['partidaregistral']);
-                array_push($companiadatos,$res['actividadprincipal'] == NULL ? "" : $res['actividadprincipal']);
-                array_push($companiadatos,$res['fax'] == NULL ? "" : $res['fax']);
-                array_push($companiadatos,$res['observacion'] == NULL ? "" : $res['observacion']);
-                array_push($companiadatos,$res['email'] == NULL ? "" : $res['email']);
-                array_push($companiadatos,$res['web'] == NULL ? "" : $res['web']);
+                array_push($companiadatos,$res['ruc'] == NULL || "NULL" ? "" : $res['ruc']);
+                array_push($companiadatos,$res['descripcion'] == NULL || "NULL"  ? "" : $res['descripcion']);
+                array_push($companiadatos,$res['nombrecomercial'] == NULL || "NULL"  ? "" : $res['nombrecomercial']);
+                array_push($companiadatos,$res['partidaregistral'] == NULL || "NULL"  ? "" : $res['partidaregistral']);
+                array_push($companiadatos,$res['actividadprincipal'] == NULL || "NULL"  ? "" : $res['actividadprincipal']);
+                array_push($companiadatos,$res['fax'] == NULL || "NULL"  ? "" : $res['fax']);
+                array_push($companiadatos,$res['observacion'] == NULL || "NULL"  ? "" : $res['observacion']);
+                array_push($companiadatos,$res['email'] == NULL || "NULL"  ? "" : $res['email']);
+                array_push($companiadatos,$res['web'] == NULL || "NULL"  ? "" : $res['web']);
             }
             return $companiadatos;
             
@@ -318,15 +318,15 @@ class RegistraCompania
 
             while ($res = mysql_fetch_array($sql,MYSQL_ASSOC)) {
                 array_push($companiadatos,$res['id']);
-                array_push($companiadatos,$res['ruc'] == NULL ? "" : $res['ruc']);
-                array_push($companiadatos,$res['descripcion'] == NULL ? "" : $res['descripcion']);
-                array_push($companiadatos,$res['nombrecomercial'] == NULL ? "" : $res['nombrecomercial']);
-                array_push($companiadatos,$res['partidaregistral'] == NULL ? "" : $res['partidaregistral']);
-                array_push($companiadatos,$res['actividadprincipal'] == NULL ? "" : $res['actividadprincipal']);
-                array_push($companiadatos,$res['fax'] == NULL ? "" : $res['fax']);
-                array_push($companiadatos,$res['observacion'] == NULL ? "" : $res['observacion']);
-                array_push($companiadatos,$res['email'] == NULL ? "" : $res['email']);
-                array_push($companiadatos,$res['web'] == NULL ? "" : $res['web']);
+                array_push($companiadatos,$res['ruc'] == NULL || "NULL" ? "" : $res['ruc']);
+                array_push($companiadatos,$res['descripcion'] == NULL || "NULL"  ? "" : $res['descripcion']);
+                array_push($companiadatos,$res['nombrecomercial'] == NULL || "NULL"  ? "" : $res['nombrecomercial']);
+                array_push($companiadatos,$res['partidaregistral'] == NULL || "NULL"  ? "" : $res['partidaregistral']);
+                array_push($companiadatos,$res['actividadprincipal'] == NULL || "NULL"  ? "" : $res['actividadprincipal']);
+                array_push($companiadatos,$res['fax'] == NULL || "NULL"  ? "" : $res['fax']);
+                array_push($companiadatos,$res['observacion'] == NULL || "NULL"  ? "" : $res['observacion']);
+                array_push($companiadatos,$res['email'] == NULL || "NULL"  ? "" : $res['email']);
+                array_push($companiadatos,$res['web'] == NULL || "NULL"  ? "" : $res['web']);
             }
             return $companiadatos;
             

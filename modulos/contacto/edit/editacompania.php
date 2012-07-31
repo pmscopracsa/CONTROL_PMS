@@ -86,38 +86,60 @@ session_start();
             /**
              * detectar click 
              */
-            $("#actualizar").live("click", function(e) {
-                alert($("#txthdn_id").val());
-            })
+//            $("#actualizar").live("click", function(e) {
+//                alert($("#txthdn_id").val());
+//                
+//            })
+            /**
+             * ELIMINAR GIRO
+             */
+            $(".delRow").live("click",function() {
+                 $(this).parent().remove();
+            });
+            
+            /**
+             * AGREGAR NUEVO GIRO
+             */
+            $(".addRow").live("click",function() {
+                alert($(this).parent().parent().html());
+                var giro = '<tr id="tr_giro"><td>'+
+                            '<input type="text" size="30" name="giro" value="" />'+
+                            '<td><input type="button" class="addRow" value="+" /></td>'+
+                            '<td><input type="button" class="delRow" value="-" /></td>'+
+                            '</td></tr>';
+                $("#tr_giro").after(giro);        
+            });
         });
         </script>
     </head>
     <body>
-        <?php
-        // VERIFICAR SI EXISTE SESIONA CTIVA
-        ?>
-        <h1>EDICION DE COMPAÑIA | <?=$_SESSION['usr']?></h1>
-        <label>Criterio de b&uacute;squeda:</label><br />
-        <input type="radio" name="criteriobusqueda" value="ruc" />Por RUC<br /> 
-        <input type="radio" name="criteriobusqueda" value="nombre" />Por Nombre<br />
-        <div id="divbusqueda">
-            <div id="ruc_div" style="display: none">
-                <label>RUC:</label>
-                <input type="text" size="12" name="txtruc" class="ruc_empresa" placeholder="Ingrese RUC" value="" />
-            </div>
-            <div id="nombre_div" style="display: none">
-                <label>Nombre de Compa&ncaron;&iacute;a:</label>
-                <input type="text" size="30"  name="txtnombre" class="nombre_empresa" placeholder="Ingrese nombre de la Compañía" value="" />
+        
+            <?php
+            // VERIFICAR SI EXISTE SESIONA CTIVA
+            ?>
+            <h1>EDICION DE COMPAÑIA | <?=$_SESSION['usr']?></h1>
+            <label>Criterio de b&uacute;squeda:</label><br />
+            <input type="radio" name="criteriobusqueda" value="ruc" />Por RUC<br /> 
+            <input type="radio" name="criteriobusqueda" value="nombre" />Por Nombre<br />
+            <div id="divbusqueda">
+                <div id="ruc_div" style="display: none">
+                    <label>RUC:</label>
+                    <input type="text" size="12" name="txtruc" class="ruc_empresa" placeholder="Ingrese RUC" value="" />
+                </div>
+                <div id="nombre_div" style="display: none">
+                    <label>Nombre de Compa&ncaron;&iacute;a:</label>
+                    <input type="text" size="30"  name="txtnombre" class="nombre_empresa" placeholder="Ingrese nombre de la Compañía" value="" />
+                </div>    
+                <div id="divbtn" style="display: none">
+                    <input type="button" id="btnBuscar" value="¡Buscar!" />
+                    <input type="button" name="imprimir" value="Imprimir" onclick="window.print();"
+                </div>
             </div>    
-            <div id="divbtn" style="display: none">
-                 <input type="button" id="btnBuscar" value="¡Buscar!" />
-                 <input type="button" name="imprimir" value="Imprimir" onclick="window.print();"
-            </div>
-        </div>    
-            <div id="divmensajebusqueda" style="display: none">
-                No ha especificado criterio alguno para su búsqueda. Rellene un campo e intente de nuevo.
-            </div>
-        <hr />
-        <div id="tmp"></div>
+                <div id="divmensajebusqueda" style="display: none">
+                    No ha especificado criterio alguno para su búsqueda. Rellene un campo e intente de nuevo.
+                </div>
+            <hr />
+            <div id="tmp"></div>
+         
     </body>
 </html>

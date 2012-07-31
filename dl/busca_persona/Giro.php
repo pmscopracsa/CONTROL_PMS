@@ -24,7 +24,7 @@ class Giro
     
     public function r_obtenerGirosPorCompania()
     {
-        $query = "SELECT g.descripcion
+        $query = "SELECT g.id id, g.descripcion descripcion
         FROM tb_companiacontacto cc
         INNER JOIN tb_giro g ON cc.id = g.tb_compania_id
         WHERE cc.tb_empresa_id = $this->_tb_empresa_id AND cc.id = $this->_tb_compania_id";
@@ -44,9 +44,12 @@ class Giro
             
             $giros = array();
             
+            $i = 0;
             while ($res = mysql_fetch_array($sql,MYSQL_ASSOC))
             {
-                array_push($giros, $res);
+                array_push($giros, $res['descripcion']);
+                
+                $i++;
             }
             return $giros;
             

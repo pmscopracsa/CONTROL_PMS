@@ -12,6 +12,7 @@ require_once '../../dl/busca_persona/RegistraCompania.php';
 $rcompania = new RegistraCompania();
 $rcompania->set_idempresa($_SESSION['id']);
 $res = array();
+$giros = array();
 
 require_once '../../dl/busca_persona/Giro.php';
 $giro = new Giro();
@@ -27,12 +28,17 @@ if ($_REQUEST['opcion'] == "ruc")
 elseif ($_REQUEST['opcion'] == "nombre") {
     $rcompania->set_descripcion($_REQUEST['nombre']);
     $res = $rcompania->s_buscarCompaniaPorNombre();
-    toHtml($res);
+    
+    $giro->set_tb_compania_id($res[0]);
+    $giros = $giro->r_obtenerGirosPorCompania();
+    toHtml($res,$giros);
 }
 
-function toHtml($res) {
+function toHtml($res,$giros) {
+    
     echo 
     '
+    <form action="editatest.php" method="POST">    
     <table>
             <tr>
             <td>Tipo de Compañia:</td><td><select id="" name=""><option></option></select></td>
@@ -50,8 +56,26 @@ function toHtml($res) {
                 <td>Partida Registral:</td><td><input type="text" id="txtregistral" placeholder="Partida Registral" size="50" name="txtregistral" value="'.$res[4].'"/></td>
             </tr>    
             <tr>
-                <td>Giro:</td>
-                <td></td>
+                <td><label for="giro">Giro:</label></td>
+                <td>
+            <table border="0" class="atable">
+            <tr>
+                <th>
+                <th colspan="2">
+            </tr>';
+      for ($i=0;$i<count($giros);$i++) {
+            echo'<tr id="tr_giro'.$i.'"><td>
+                <input type="text" size="30" name="giro" value="'.
+                $giros[$i]
+                .'" />
+                <td><input type="button" class="addRow" value="+"/></td>    
+                <td><input type="button" class="delRow" value="-"/></td>
+                </td></tr>';
+      }
+      echo
+      '
+            </table>
+            </td>
             </tr>    
             <tr>
                 <td>Actividad Principal:</td><td><input type="text" id="txtactividad" size="50" name="txtactividad" value="'.$res[5].'"/></td>
@@ -91,8 +115,9 @@ function toHtml($res) {
             </tr>
             <tr>
                 <input type="hidden" id="txthdn_id" value="'.$res[0].'" />
-                <td><input type="button" id="actualizar" value="Actualizar registro" /></td>
+                <td><input type="submit" id="actualizar" value="Actualizar registro" /></td>
             </tr>
     </table>
+    </form>
     ';
 }
