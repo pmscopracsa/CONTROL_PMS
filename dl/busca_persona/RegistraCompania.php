@@ -13,6 +13,7 @@ include_once 'Comun.php';
  * 
  * tb_viaenvio
  * tb_tipocompania
+ * -=-=-=-=-=
  */
 class RegistraCompania 
 {
