@@ -41,8 +41,18 @@ function toHtml($res,$giros) {
     <form action="editatest.php" method="POST">    
     <table>
             <tr>
-            <td>Tipo de Compañia:</td><td><select id="" name=""><option></option></select></td>
+                <td>Tipo de Compañia:</td><td><input type="text" id="txttipocompania" name="txttipocompania" value="'.$res[10].'" READONLY /></td>
+                <td><input type="button" id="btnEditarTipoCompania" value="Editar" />    
             </tr>
+            
+            <tr>
+                <td>
+                    <select name="tipocompaniaseleccionada" id="tipocompaniaid" style="display:none">
+                        <option value="0">Seleccione un tipo de Compania</option>
+                    </select>
+                </td>
+            </tr>
+            
             <tr>
                 <td>RUC:</td><td><input type="text" id="txtruc" placeholder="RUC" name="txtruc" size="50" value="'.$res[1].'" /></td>
             </tr>

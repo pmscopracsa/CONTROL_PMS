@@ -8,4 +8,3 @@ $tipocompanias = $selects->cargaTipoCompania();
 foreach ($tipocompanias as $key => $value) {
     echo "<option value=\"$key\">$value</option>";
 }
-?>

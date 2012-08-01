@@ -14,6 +14,7 @@ session_start();
         <!-- JS ZONE -->
         <script src="../../../js/jquery1.4.2.js.js" type="text/javascript"></script>
         <script src="../../../js/autocomplete/jquery.autocomplete.js" type="text/javascript"></script> 
+        <script src="../../../js/cargarDatos.js" type="text/javascript"></script>
         <script>
         var tipobusqueda = "";    
         //auto completar
@@ -111,6 +112,13 @@ session_start();
                             '</td></tr>';
                 $("#tr_giro").after(giro);        
             });
+            //DETECTAR INTENCION DE CAMBIO DE TIPO DE COMPANIA
+            $("#btnEditarTipoCompania").live("click", function() {
+                $("#tipocompaniaid").css("display","block");
+            });
+            
+            //CARGAR DATOS PARA COMBOS
+            cargar_tipocompania();
         });
         </script>
     </head>
