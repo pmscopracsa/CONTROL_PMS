@@ -266,15 +266,15 @@ class RegistraCompania
 
             while ($res = mysql_fetch_array($sql,MYSQL_ASSOC)) {
                 array_push($companiadatos,$res['id']);
-                array_push($companiadatos,$res['ruc'] == NULL || "NULL" ? "" : $res['ruc']);
-                array_push($companiadatos,$res['descripcion'] == NULL || "NULL"  ? "" : $res['descripcion']);
-                array_push($companiadatos,$res['nombrecomercial'] == NULL || "NULL"  ? "" : $res['nombrecomercial']);
-                array_push($companiadatos,$res['partidaregistral'] == NULL || "NULL"  ? "" : $res['partidaregistral']);
-                array_push($companiadatos,$res['actividadprincipal'] == NULL || "NULL"  ? "" : $res['actividadprincipal']);
-                array_push($companiadatos,$res['fax'] == NULL || "NULL"  ? "" : $res['fax']);
-                array_push($companiadatos,$res['observacion'] == NULL || "NULL"  ? "" : $res['observacion']);
-                array_push($companiadatos,$res['email'] == NULL || "NULL"  ? "" : $res['email']);
-                array_push($companiadatos,$res['web'] == NULL || "NULL"  ? "" : $res['web']);
+                array_push($companiadatos,$res['ruc'] == NULL ? "" : $res['ruc']);
+                array_push($companiadatos,$res['descripcion'] == NULL ? "" : $res['descripcion']);
+                array_push($companiadatos,$res['nombrecomercial'] == NULL ? "" : $res['nombrecomercial']);
+                array_push($companiadatos,$res['partidaregistral'] == NULL ? "" : $res['partidaregistral']);
+                array_push($companiadatos,$res['actividadprincipal'] == NULL ? "" : $res['actividadprincipal']);
+                array_push($companiadatos,$res['fax'] == NULL ? "" : $res['fax']);
+                array_push($companiadatos,$res['observacion'] == NULL ? "" : $res['observacion']);
+                array_push($companiadatos,$res['email'] == NULL ? "" : $res['email']);
+                array_push($companiadatos,$res['web'] == NULL ? "" : $res['web']);
             }
             return $companiadatos;
             
@@ -318,16 +318,17 @@ class RegistraCompania
 
             while ($res = mysql_fetch_array($sql,MYSQL_ASSOC)) {
                 array_push($companiadatos,$res['id']);
-                array_push($companiadatos,$res['ruc'] == NULL || "NULL" ? "" : $res['ruc']);
-                array_push($companiadatos,$res['descripcion'] == NULL || "NULL"  ? "" : $res['descripcion']);
-                array_push($companiadatos,$res['nombrecomercial'] == NULL || "NULL"  ? "" : $res['nombrecomercial']);
-                array_push($companiadatos,$res['partidaregistral'] == NULL || "NULL"  ? "" : $res['partidaregistral']);
-                array_push($companiadatos,$res['actividadprincipal'] == NULL || "NULL"  ? "" : $res['actividadprincipal']);
-                array_push($companiadatos,$res['fax'] == NULL || "NULL"  ? "" : $res['fax']);
-                array_push($companiadatos,$res['observacion'] == NULL || "NULL"  ? "" : $res['observacion']);
-                array_push($companiadatos,$res['email'] == NULL || "NULL"  ? "" : $res['email']);
-                array_push($companiadatos,$res['web'] == NULL || "NULL"  ? "" : $res['web']);
+                array_push($companiadatos,$res['ruc'] == NULL ? "" : $res['ruc']);
+                array_push($companiadatos,$res['descripcion'] == NULL ? "" : $res['descripcion']);
+                array_push($companiadatos,$res['nombrecomercial'] == NULL ? "" : $res['nombrecomercial']);
+                array_push($companiadatos,$res['partidaregistral'] == NULL ? "" : $res['partidaregistral']);
+                array_push($companiadatos,$res['actividadprincipal'] == NULL ? "" : $res['actividadprincipal']);
+                array_push($companiadatos,$res['fax'] == NULL ? "" : $res['fax']);
+                array_push($companiadatos,$res['observacion'] == NULL ? "" : $res['observacion']);
+                array_push($companiadatos,$res['email'] == NULL ? "" : $res['email']);
+                array_push($companiadatos,$res['web'] == NULL ? "" : $res['web']);
             }
+            
             return $companiadatos;
             
         } catch (Exception $e) {

@@ -36,11 +36,13 @@ session_start();
                     $("#nombre_div").css("display","none");
                     $("#ruc_div").css("display","block");
                     $("#divbtn").css("display","block");
+                    $(".ruc_empresa").focus();
                 } else if ($(this).val() == "nombre") {
                     $(".ruc_empresa").val("");
                     $("#ruc_div").css("display","none");
                     $("#nombre_div").css("display","block");
                     $("#divbtn").css("display","block");
+                    $(".nombre_empresa").focus();
                 }
             });
             
@@ -63,7 +65,7 @@ session_start();
                             }
                         });
                     }
-                    else // BUSQUEDA EM CASO DE QUE SEA POR NOMBRE
+                    else // BUSQUEDA EN CASO DE QUE SEA POR NOMBRE
                     {
                         $.ajax({
                             type:"GET",
@@ -94,7 +96,7 @@ session_start();
              * ELIMINAR GIRO
              */
             $(".delRow").live("click",function() {
-                 $(this).parent().remove();
+                 $(this).parent().parent().remove();
             });
             
             /**

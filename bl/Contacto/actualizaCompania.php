@@ -5,7 +5,6 @@ session_start();
 
 /**
  * OBTENER LOS DATOS EXISTENTES DE UNA COMPANIA EXISTENTE PARA ACTUALIZARLOS 
- * FROM HOMMY
  */
 
 // DATOS DE LA TABLA tb_compnia
@@ -45,7 +44,7 @@ function toHtml($res,$giros) {
             <td>Tipo de Compañia:</td><td><select id="" name=""><option></option></select></td>
             </tr>
             <tr>
-                <td>RUC:</td><td><input type="text" id="txtruc" name="txtruc" size="50" value="'.$res[1].'" /></td>
+                <td>RUC:</td><td><input type="text" id="txtruc" placeholder="RUC" name="txtruc" size="50" value="'.$res[1].'" /></td>
             </tr>
             <tr>
                 <td>Nombre de Compañía:</td><td><input type="text" id="txtcompania" name="txtcompania" size="50" value="'.$res[2].'"/></td>
