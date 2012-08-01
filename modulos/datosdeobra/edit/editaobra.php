@@ -2,6 +2,7 @@
 session_name('tzLogin');
 session_set_cookie_params(2*7*24*60*60);
 session_start();
+require_once '';
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,8 +49,8 @@ session_start();
                     if (tipobusqueda == "codigo") {
                         $.ajax({
                             type:"GET",
-                            url:"",
-                            data:{},
+                            url:"../../../bl/DatosObra/actualizaObra.php?opcion=codigo",
+                            data:{codigo:$(".codigoobra").val()},
                             dataType:"html",
                             success:function(data) {
                                 toHtml(data);
@@ -58,8 +59,8 @@ session_start();
                     } else if(tipobusqueda == "nombre") {
                         $.ajax({
                             type:"GET",
-                            url:"",
-                            data:{},
+                            url:"../../../bl/DatosObra/actualizaObra.php?opcion=nombre",
+                            data:{nombre:$(".nombreobra").val()},
                             dataType:"html",
                             success:function(data) {
                                 toHtml(data);

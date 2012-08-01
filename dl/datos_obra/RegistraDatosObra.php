@@ -59,6 +59,9 @@ class RegistraDatosObra
     protected $_modelocartaadjudicacion;
     protected $_modelocontrato;
     
+    // EMPRESA QUE ALQUILA EL SW
+    protected $_idempresa;
+    
     public function __construct() {
         
     }
@@ -135,6 +138,58 @@ class RegistraDatosObra
         } catch (Exception $ex) {
             echo $ex->getMessage();
         }
+    }
+    
+    public function s_buscaObraPorCodigo()
+    {
+        $query = "SELECT 
+        o.id oid 
+        ,o.codigoobra ocodigoobra
+        ,o.descripcion odescripcion
+        ,o.fechainicio ofechainicio
+        ,o.fechafin ofechafin
+        ,o.direccion odireccion
+        ,o.porcentajecartafianza oporcentajecartafianza
+        ,o.diasdesembolso odiasdesembolso
+        ,o.porcentajefondoretencion oporcentajefondoretencion
+        ,o.diasdevolucionfondoretencion odiasdevolucionfondoretencion
+        ,o.montocontratadomayora omontocontratadomayora
+        ,o.montocontratadomenora omontocontratadomenora
+        ,o.cartaadjudicacion ocartaadjudicacion
+        ,o.modelocontrato omodelocontrato
+        ,o.factorcorreccion ofactorcorreccion
+        ,o.retencionfondogarantia oretencionfondogarantia
+        ,o.retencionfielcumplimiento oretencionfielcumplimiento
+        ,o.gastogeneral_precontra ogastogeneral_precontra
+        ,o.utilidad_precontra outilidad_precontra
+        ,o.gastogeneral_ordcamb ogastogeneral_ordcamb
+        ,o.utilidad_ordcamb outilidad_ordcamb
+        ,o.nombreLista onombreLista
+        ,o.nombreFormulario onombreFormulario
+        FROM tb_empresa e
+        INNER JOIN tb_obra o ON e.id = o.tb_empresa_id 
+        WHERE o.codigoobra = '$this->_codigo' AND e.id = $this->_idempresa";
+        
+        try {
+            $conexion = new Conexion();
+            $cn = $conexion->conectar();
+            
+            if (!$cn)
+                throw new Exception("Error al conectar:".  mysql_error());
+            
+            $sql = mysql_query($query,$cn);
+            
+            if (!$sql)
+                throw new Exception("Error en la consulta:".  mysql_error());
+            
+        } catch (Exception $ex) {
+            echo "Error al consultar obra por codigo. Error: ".$ex->getMessage();
+        }
+    }
+    
+    public function s_buscaObraPorNombre()
+    {
+        
     }
 
     /**
@@ -379,5 +434,12 @@ class RegistraDatosObra
     public function set_modelocontrato($_modelocontrato) {
         $this->_modelocontrato = $_modelocontrato;
     }
+    
+    public function get_idempresa() {
+        return $this->_idempresa;
+    }
 
+    public function set_idempresa($_idempresa) {
+        $this->_idempresa = $_idempresa;
+    }
 }
