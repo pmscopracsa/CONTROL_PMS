@@ -142,7 +142,6 @@ session_start();
                 </div>    
                 <div id="divbtn" style="display: none">
                     <input type="button" id="btnBuscar" value="¡Buscar!" />
-                    <input type="button" name="imprimir" value="Imprimir" onclick="window.print();"
                 </div>
             </div>    
                 <div id="divmensajebusqueda" style="display: none">
@@ -150,6 +149,5 @@ session_start();
                 </div>
             <hr />
             <div id="tmp"></div>
-         
     </body>
 </html>

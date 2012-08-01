@@ -78,9 +78,10 @@ session_start();
     }
         
     $(function() {
+        
         function cargarObras(idEmpresa,idDirectorio)
         {
-            $("#divSeleccionaObra").append("modales_seteo/div_seleccionaObra.php?filtro=1"+"&idEmpresa="+idEmpresa+"&idDirectorio="+idDirectorio);
+            $("#divSeleccionaObra").load("modales_seteo/div_seleccionaObra.php?filtro=1"+"&idEmpresa="+idEmpresa+"&idDirectorio="+idDirectorio);
         }
                 
         var $seteo = $("#seleccionprevia");
@@ -96,71 +97,11 @@ session_start();
                     return $seteo.validationEngine('validate');
                 }
             });
-            
-      /**
-       * BOTON PARA ABRIR MODAL DE DIRECTORIOS
-       */      
-      $("#idbtnBuscarDirectorio").click(function() {
-          $("#divSeleccionaDirectorio").dialog("open");
-      });
-      
-      /**
-       * BOTON PARA ABRIR MODAL DE OBRAS
-       */
-      $("#idbtnBuscarObra").click(function() {
-        $("#divSeleccionaObra").dialog("open");
-      });
        
        /**
         * CARGA POR DEFECTO DE LOS DIRECTORIOS
         */
        $("#divSeleccionaDirectorio").load("modales_seteo/div_seleccionaDirectorio.php?filtro=1"+"&idEmpresa="+<?=$_SESSION['id']?>);
-       
-       /**
-        * MODAL PARA LA SELECCIONA DEL DIRECTORIO
-        */
-        $("#divSeleccionaDirectorio").dialog({
-            autoOpen:false,
-            height:350,
-            width:450,
-            resizable:false,
-            closeOnEscape:false,
-            modal:true,
-            buttons:{
-                "Buscar": function() {
-
-                },
-                "Limpiar": function() {
-
-                },
-                "Cerrar": function() {
-                    $(this).dialog("close");
-                } 
-            }
-        });
-       
-       /**
-        * MODAL PARA LA SELECCION DE LA OBRA 
-        */
-        $("#divSeleccionaObra").dialog({
-            autoOpen:false,
-            height:350,
-            width:450,
-            resizable:false,
-            closeOnEscape:false,
-            modal:true,
-            buttons:{
-                "Buscar":function() {
-
-                },
-                "Limpiar": function() {
-
-                },
-                "Cerrar": function() {
-                    $(this).dialog("close");
-                }
-            }
-        });
         
         /**
          * EVENTO CLICK: SE DETECTA EL EVENTO CLICK A UNA FILA Y ESTA 
@@ -172,6 +113,15 @@ session_start();
             $("#idtxtdirectorio").val($(this).text());
             cargarObras(<?=$_SESSION['id']?>,directorio_array[0]);
         });
+        
+        // EDITAR OBRA
+        $("#aeditar").click(function(e) {
+            e.preventDefault();
+            //verificar si se ha seleccionado una obra para editarla
+            if ($("#idtxtidobra").val() == "") {
+                alert("Debe seleccionar una obra para poder editarla.")
+            }
+        })
     });
     </script>
     </head>
@@ -184,29 +134,23 @@ session_start();
         }
         else {
         ?>
-        <!-- MODALES PARA SETEAR DATOS DE OBRA  -->
-        <!-- ---------------------------------  -->
-        <div id="divSeleccionaDirectorio" title="Seleccionar Directorio"></div>
-        <div id="divSeleccionaObra" title="Seleccionar Obra"></div> 
-        <!-- ---------------------------------  -->
-
         <div id="main">
             <form id="seleccionprevia" method="post" action="">
                 <fieldset>
                     <legend>Directorios Principales</legend>
-                    <label for="DirectorioPrincipal">Directorio Principal</label>
+                    <div id="divSeleccionaDirectorio" title="Seleccionar Directorio"></div>
                     <input type="text" id="idtxtdirectorio" name="txtdirectorio" class="validate[required]" READONLY/>
                     <!-- CAMPO OCULTO QUE RETIENE EL ID DEL DIRECTORIO SELECCIONADO -->
                     <input type="hidden" id="idtxtiddirectorio" name="txtiddirectorio" value="" READONLY />
-                    <input type="button" id="idbtnBuscarDirectorio" name="btnBuscarDirectorio" value="Buscar Directorio" />
                 </fieldset>    
                 <fieldset>
                     <legend>Seleccion de Obra</legend>
-                    <label for="Obra">Seleccion de Obra</label>
+                    <div id="divSeleccionaObra" title="Seleccionar Obra"></div> 
                     <input type="text" id="idtxtobra" name="txtobra" class="validate[required]" READONLY/>
                     <!-- CAMPO OCULTO QUE RETINENE EL ID DE LA OBRA SELECCIONADA -->
                     <input type="hidden" id="idtxtidobra" name="txtidobra" value="" READONLY />
-                    <input type="button" id="idbtnBuscarObra" name="btnBuscarObra" value="Buscar Obra" />
+                    <a id="anuevo" href="../datosdeobra/registradatosdeobra.php">Nuevo</a> <a href="#"> | </a> 
+                    <a id="aeditar" href="#">Editar</a><a href="#"> | </a><a id="aeditarOk" href="../datosdeobra/edit/editaobra.php">Editar OK</a>
                 </fieldset>
                 <fieldset>
                     <legend>Cambio del día segun SUNAT</legend>
