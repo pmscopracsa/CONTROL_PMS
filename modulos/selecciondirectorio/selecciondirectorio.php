@@ -173,7 +173,7 @@ session_start();
             <form id="seleccionprevia" method="post" action="">
                  <fieldset>
                     <legend>Cambio del día segun SUNAT</legend>
-                    <label for="ventaSunat">T.C. Venta SUNAT</label>
+                    <label for="ventaSunat">T.C. Venta SUNATT</label>
                     <input type="text" id="idtxtvsunat" name="txtvsunat"  value="" size="5" maxlength="5" class="validate[required]"/>
                     <label for="compraSunat">T.C. Compra SUNAT</label>
                     <input type="text" id="idtxtcsunat" name="txtcsunat" value="" size="5" class="validate[required]" maxlength="5"/>
