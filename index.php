@@ -170,7 +170,7 @@ if($_SESSION['msg'])
         
     </script>    
 <body>
-
+<?php echo "......";print_r($_POST); ?>
 
 <!-- Panel -->
 <div id="toppanel">
