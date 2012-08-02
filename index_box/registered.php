@@ -106,6 +106,7 @@ $(document).ready(function()
                     <label class="grey" for="password">Contrase&ntilde;a:</label> 
                     <input class="field" type="password" name="txtpassword" id="idtxtpassword" size="23" />
                 </div>
+                <label><a href="../ayuda/identificarse.php?ctx=recover">¿Olvidaste tu contrase&ntilde;a?</a>
                 <div id="buttondiv">
                     <input type="submit" value="Iniciar sesion" style="margin-left: -10px; height: 23px" /> 
                     <span id="msgbox"style="display: none"></span>
@@ -117,7 +118,6 @@ $(document).ready(function()
 	else echo '<h1>Por favor, <a href="../index.php">inicie sesion</a> y vuelva luego</h1>';
     ?>
     </div>
-    
   <div class="container tutorial-info">
       Lorem Ipsum is simply dummy text of the printing and typesetting industry. <a href="../index.php">Inicio</a></div>
 </div>
