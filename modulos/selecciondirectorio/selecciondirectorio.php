@@ -2,6 +2,7 @@
 session_name('tzLogin');
 session_set_cookie_params(2*7*24*60*60);
 session_start();
+
 /**
  * RECIEN AL DARLE SUBMIT LOS VALORES:
  * id de la empresa
@@ -82,7 +83,6 @@ session_start();
                 $("#divSeleccionaObra").html(data);
             }
         });
-           //$("#obras").load("modales_seteo/div_seleccionaObra.php?filtro=1"+"&idEmpresa="+idEmpresa+"&idDirectorio="+idDirectorio);
     }
         
     $(document).ready(function() {
@@ -124,19 +124,36 @@ session_start();
          * EVENTO CLICK SE DETECTA EN OBRA
          */
         $(".obra").live("click",function() {
+            var obra_array = $(this).text().split("|");
+            
+            
             $("#idtxtobra").val($(this).text());
             $("#diveditar").css("display","block");
-            
-        })
+        });
         
         // EDITAR OBRA
         // IR AL FORMULARIO DE EDITAR OBRA
         $("#aeditar").click(function(e){
+            alert("")
             e.preventDefault();
-            linkDestino = "../datosdeobra/edit/editaobra.php";
+            linkDestino = "../datosdeobra/edit/editaobra.php?idObra=";
             $("body").fadeOut(5000, redireccionaEditar(linkDestino));
         });
         
+        /**
+         * CONFIRMAR DATOS INICIALES
+         */
+        $("#setuped").click(function() {
+            /**
+             * VALIDAR QUE LOS DATOS DE SETEO HAN SIDO ESCOGIDOS
+             */
+            linkDestino = "../../index_usuario.php";
+            $("body").fadeOut(2000, redireccionaEditar(linkDestino));
+        });
+        
+        /**
+         * REDIRECCIONAR
+         */
         function redireccionaEditar(linkDestino) {
             window.location = linkDestino;
         }
@@ -190,7 +207,7 @@ session_start();
 <!--            <img src="<?='../../img/cliente/'.$_SESSION['logo'].'.png';?>" alt="logo_empresa"/>-->
         
             <div class="container tutorial-info">
-                <a href="../../index_usuario.php">Menu de Usuario</a>
+                <a href="../../index.php"><?=$_SESSION['usr']?></a>
             </div>
         </div>
         <?php
