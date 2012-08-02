@@ -13,7 +13,7 @@ session_set_cookie_params(2*7*24*60*60);
 
 session_start();
 
-if($_SESSION['id'] && !isset($_COOKIE['tzRemember']) && !$_SESSION['rememberMe'])
+if(@$_SESSION['id'] && !isset($_COOKIE['tzRemember']) && !$_SESSION['rememberMe'])
 {
 	// If you are logged in, but you don't have the tzRemember cookie (browser restart)
 	// and you have not checked the rememberMe checkbox:
@@ -32,7 +32,7 @@ if(isset($_GET['logoff']))
 	exit;
 }
 
-if($_POST['submit']=='Login')
+if(@$_POST['submit']=='Login')
 {
 	// Checking whether the Login form has been submitted
 	
@@ -77,7 +77,7 @@ if($_POST['submit']=='Login')
 	header("Location: index.php");
 	exit;
 }
-else if($_POST['submit']=='Register')
+else if(@$_POST['submit']=='Register')
 {
    
 	// If the Register form has been submitted
@@ -121,7 +121,7 @@ else if($_POST['submit']=='Register')
 
 $script = '';
 
-if($_SESSION['msg'])
+if(@$_SESSION['msg'])
 {
 	// The script below shows the sliding panel on page load
 	
@@ -170,8 +170,6 @@ if($_SESSION['msg'])
         
     </script>    
 <body>
-<?php echo "......";print_r($_POST); ?>
-
 <!-- Panel -->
 <div id="toppanel">
 	<div id="panel">
@@ -197,7 +195,7 @@ if($_SESSION['msg'])
 
                     <?php
 						
-						if($_SESSION['msg']['login-err'])
+						if(@$_SESSION['msg']['login-err'])
 						{
 							echo '<div class="err">'.$_SESSION['msg']['login-err'].'</div>';
 							unset($_SESSION['msg']['login-err']);
@@ -221,13 +219,13 @@ if($_SESSION['msg'])
                     
                     <?php
 						
-						if($_SESSION['msg']['reg-err'])
+						if(@$_SESSION['msg']['reg-err'])
 						{
 							echo '<div class="err">'.$_SESSION['msg']['reg-err'].'</div>';
 							unset($_SESSION['msg']['reg-err']);
 						}
 						
-						if($_SESSION['msg']['reg-success'])
+						if(@$_SESSION['msg']['reg-success'])
 						{
 							echo '<div class="success">'.$_SESSION['msg']['reg-success'].'</div>';
 							unset($_SESSION['msg']['reg-success']);
@@ -274,10 +272,10 @@ if($_SESSION['msg'])
 	<div class="tab">
 		<ul class="login">
 	    	<li class="left">&nbsp;</li>
-	        <li>¡Bienvenido <?php echo $_SESSION['usr'] ? $_SESSION['usr'] : 'Invitado';?>!</li>
+	        <li>¡Bienvenido <?php echo @$_SESSION['usr'] ? @$_SESSION['usr'] : 'Invitado';?>!</li>
 			<li class="sep">|</li>
 			<li id="toggle">
-				<a id="open" class="open" href="#"><?php echo $_SESSION['id']?'Abrir Panel':'Log In';?></a>
+				<a id="open" class="open" href="#"><?php echo @$_SESSION['id']?'Abrir Panel':'Log In';?></a>
 				<a id="close" style="display: none;" class="close" href="#">Cerrar</a>			
 			</li>
 	    	<li class="right">&nbsp;</li>
