@@ -157,11 +157,11 @@ session_start();
                  <fieldset>
                     <legend>Cambio del día segun SUNAT</legend>
                     <label for="ventaSunat">T.C. Venta SUNAT</label>
-                    <input type="text" id="idtxtvsunat" name="txtvsunat"  value="" size="5" maxlength="5"/>
+                    <input type="text" id="idtxtvsunat" name="txtvsunat"  value="" size="5" maxlength="5" class="validate[required]"/>
                     <label for="compraSunat">T.C. Compra SUNAT</label>
-                    <input type="text" id="idtxtcsunat" name="txtcsunat" value="" size="5" maxlength="5"/>
+                    <input type="text" id="idtxtcsunat" name="txtcsunat" value="" size="5" class="validate[required]" maxlength="5"/>
                     <label for="ventaBanco">T.C Venta Banco</label>
-                    <input type="text" id="idtxtvbanco" name="txtvbanco" value="" size="5" maxlength="5"/>
+                    <input type="text" id="idtxtvbanco" name="txtvbanco" value="" size="5" class="validate[required]" maxlength="5"/>
                     <hr /><br />
                     <iframe scrolling="auto" width="700" height="250" marginwidth="50" marginheight="50" name="sunat" src="http://www.sunat.gob.pe/cl-at-ittipcam/tcS01Alias"></iframe>
                 </fieldset>    
@@ -187,7 +187,7 @@ session_start();
                 </p>   
             </form>
             <div id="error"></div>
-            <img src="<?='../../img/cliente/'.$_SESSION['logo'].'.png';?>" alt="logo_empresa"/>
+<!--            <img src="<?='../../img/cliente/'.$_SESSION['logo'].'.png';?>" alt="logo_empresa"/>-->
         
             <div class="container tutorial-info">
                 <a href="../../index_usuario.php">Menu de Usuario</a>
