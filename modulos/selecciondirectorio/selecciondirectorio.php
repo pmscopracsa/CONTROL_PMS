@@ -86,6 +86,9 @@ session_start();
     }
         
     $(document).ready(function() {
+        $("body").css("display","none");
+        $("body").fadeIn(2000);
+    
         var $seteo = $("#seleccionprevia");
         $seteo.validationEngine();
         
@@ -114,6 +117,7 @@ session_start();
             $("#idtxtiddirectorio").val(directorio_array[0])
             $("#idtxtdirectorio").val($(this).text());
             cargarObras(<?=$_SESSION['id']?>,directorio_array[0]);
+            
         });
         
         /**
@@ -121,16 +125,21 @@ session_start();
          */
         $(".obra").live("click",function() {
             $("#idtxtobra").val($(this).text());
+            $("#diveditar").css("display","block");
+            
         })
         
         // EDITAR OBRA
-        $("#aeditar").click(function(e) {
+        // IR AL FORMULARIO DE EDITAR OBRA
+        $("#aeditar").click(function(e){
             e.preventDefault();
-            //verificar si se ha seleccionado una obra para editarla
-            if ($("#idtxtidobra").val() == "") {
-                alert("Debe seleccionar una obra para poder editarla.")
-            }
-        })
+            linkDestino = "../datosdeobra/edit/editaobra.php";
+            $("body").fadeOut(5000, redireccionaEditar(linkDestino));
+        });
+        
+        function redireccionaEditar(linkDestino) {
+            window.location = linkDestino;
+        }
     });
     </script>
     </head>
@@ -145,6 +154,17 @@ session_start();
         ?>
         <div id="main">
             <form id="seleccionprevia" method="post" action="">
+                 <fieldset>
+                    <legend>Cambio del día segun SUNAT</legend>
+                    <label for="ventaSunat">T.C. Venta SUNAT</label>
+                    <input type="text" id="idtxtvsunat" name="txtvsunat"  value="" size="5" maxlength="5"/>
+                    <label for="compraSunat">T.C. Compra SUNAT</label>
+                    <input type="text" id="idtxtcsunat" name="txtcsunat" value="" size="5" maxlength="5"/>
+                    <label for="ventaBanco">T.C Venta Banco</label>
+                    <input type="text" id="idtxtvbanco" name="txtvbanco" value="" size="5" maxlength="5"/>
+                    <hr /><br />
+                    <iframe scrolling="auto" width="700" height="250" marginwidth="50" marginheight="50" name="sunat" src="http://www.sunat.gob.pe/cl-at-ittipcam/tcS01Alias"></iframe>
+                </fieldset>    
                 <fieldset>
                     <legend>Directorios Principales</legend>
                     <div id="divSeleccionaDirectorio" title="Seleccionar Directorio"></div>
@@ -158,20 +178,10 @@ session_start();
                     <input type="text" id="idtxtobra" name="txtobra" class="validate[required]" READONLY/>
                     <!-- CAMPO OCULTO QUE RETINENE EL ID DE LA OBRA SELECCIONADA -->
                     <input type="hidden" id="idtxtidobra" name="txtidobra" value="" READONLY />
-                    <a id="anuevo" href="../datosdeobra/registradatosdeobra.php">Nuevo</a> <a href="#"> | </a> 
-                    <a id="aeditar" href="#">Editar</a><a href="#"> | </a><a id="aeditarOk" href="../datosdeobra/edit/editaobra.php">Editar OK</a>
+                    <a id="anuevo" href="../datosdeobra/registradatosdeobra.php">Nuevo</a> <a href="#"></a> 
+                    <div id="diveditar"  style="display: none"><a> | </a><a id="aeditar" href="../datosdeobra/edit/editaobra.php">Editar</a></div>
                 </fieldset>
-                <fieldset>
-                    <legend>Cambio del día segun SUNAT</legend>
-                    <label for="ventaSunat">T.C. Venta SUNAT</label>
-                    <input type="text" id="idtxtvsunat" name="txtvsunat"  value="" size="5" maxlength="5"/>
-                    <label for="compraSunat">T.C. Compra SUNAT</label>
-                    <input type="text" id="idtxtcsunat" name="txtcsunat" value="" size="5" maxlength="5"/>
-                    <label for="ventaBanco">T.C Venta Banco</label>
-                    <input type="text" id="idtxtvbanco" name="txtvbanco" value="" size="5" maxlength="5"/>
-                    <hr /><br />
-                    <iframe scrolling="auto" width="700" height="250" marginwidth="50" marginheight="50" name="sunat" src="http://www.sunat.gob.pe/cl-at-ittipcam/tcS01Alias"></iframe>
-                </fieldset>    
+               
                 <p>
                     <input type="button" value="Confirmar datos iniciales" id="setuped" /> 
                 </p>   
