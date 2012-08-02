@@ -68,28 +68,24 @@ session_start();
     /**
      * CARGA DE LAS OBRAS SIN FILTRO (PARA RECARGAR SIN FILTRO)  Y POR FILTRO (CUANDO SE DESEA BUSCAR DE UNA LARGA LISTA)
      */
-
-    
-    function recargarObra() {
-        $("#divSeleccionaObra").load("modales_seteo/div_seleccionaObra.php?filtro=1");
-    }
     function recargarObraBusqueda(filtro) {
         $("#divSeleccionaObra").load("modales_seteo/div_seleccionaObra.php?filtro="+filtro+"&idEmpresa="+<?=$_SESSION['id']?>);
     }
+    
+    function cargarObras(idEmpresa,idDirectorio)
+    {   
+        $.ajax({
+            type:"GET",
+            url:"modales_seteo/div_seleccionaObra.php",
+            data:{idEmpresa:idEmpresa,idDirectorio:idDirectorio,filtro:1},
+            success:function(data) {
+                $("#divSeleccionaObra").html(data);
+            }
+        });
+           //$("#obras").load("modales_seteo/div_seleccionaObra.php?filtro=1"+"&idEmpresa="+idEmpresa+"&idDirectorio="+idDirectorio);
+    }
         
     $(document).ready(function() {
-        
-        function cargarObras(idEmpresa,idDirectorio)
-        {
-            $("#divSeleccionaObra").load("modales_seteo/div_seleccionaObra.php?filtro=1"+"&idEmpresa="+idEmpresa+"&idDirectorio="+idDirectorio,function(response,status,xhr) {
-                if (status == "error") {
-                    var msg = "Error: ";
-                    $("#error").html(msg + xhr.status + " " + xhr.statusText);
-                }
-            });
-            
-        }
-                
         var $seteo = $("#seleccionprevia");
         $seteo.validationEngine();
         
@@ -119,6 +115,13 @@ session_start();
             $("#idtxtdirectorio").val($(this).text());
             cargarObras(<?=$_SESSION['id']?>,directorio_array[0]);
         });
+        
+        /**
+         * EVENTO CLICK SE DETECTA EN OBRA
+         */
+        $(".obra").live("click",function() {
+            $("#idtxtobra").val($(this).text());
+        })
         
         // EDITAR OBRA
         $("#aeditar").click(function(e) {
@@ -151,7 +154,7 @@ session_start();
                 </fieldset>    
                 <fieldset>
                     <legend>Seleccion de Obra</legend>
-                    <div id="divSeleccionaObra" title="Seleccionar Obra"></div> 
+                    <div id="divSeleccionaObra" title="Seleccionar Obra">QWERTY</div> 
                     <input type="text" id="idtxtobra" name="txtobra" class="validate[required]" READONLY/>
                     <!-- CAMPO OCULTO QUE RETINENE EL ID DE LA OBRA SELECCIONADA -->
                     <input type="hidden" id="idtxtidobra" name="txtidobra" value="" READONLY />
@@ -166,11 +169,12 @@ session_start();
                     <input type="text" id="idtxtcsunat" name="txtcsunat" value="" size="5" maxlength="5"/>
                     <label for="ventaBanco">T.C Venta Banco</label>
                     <input type="text" id="idtxtvbanco" name="txtvbanco" value="" size="5" maxlength="5"/>
+                    <hr /><br />
+                    <iframe scrolling="auto" width="700" height="250" marginwidth="50" marginheight="50" name="sunat" src="http://www.sunat.gob.pe/cl-at-ittipcam/tcS01Alias"></iframe>
                 </fieldset>    
                 <p>
                     <input type="button" value="Confirmar datos iniciales" id="setuped" /> 
-                </p>
-                
+                </p>   
             </form>
             <div id="error"></div>
             <img src="<?='../../img/cliente/'.$_SESSION['logo'].'.png';?>" alt="logo_empresa"/>
