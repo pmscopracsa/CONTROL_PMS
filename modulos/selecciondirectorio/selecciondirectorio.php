@@ -77,11 +77,17 @@ session_start();
         $("#divSeleccionaObra").load("modales_seteo/div_seleccionaObra.php?filtro="+filtro+"&idEmpresa="+<?=$_SESSION['id']?>);
     }
         
-    $(function() {
+    $(document).ready(function() {
         
         function cargarObras(idEmpresa,idDirectorio)
         {
-            $("#divSeleccionaObra").load("modales_seteo/div_seleccionaObra.php?filtro=1"+"&idEmpresa="+idEmpresa+"&idDirectorio="+idDirectorio);
+            $("#divSeleccionaObra").load("modales_seteo/div_seleccionaObra.php?filtro=1"+"&idEmpresa="+idEmpresa+"&idDirectorio="+idDirectorio,function(response,status,xhr) {
+                if (status == "error") {
+                    var msg = "Error: ";
+                    $("#error").html(msg + xhr.status + " " + xhr.statusText);
+                }
+            });
+            
         }
                 
         var $seteo = $("#seleccionprevia");
@@ -163,8 +169,10 @@ session_start();
                 </fieldset>    
                 <p>
                     <input type="button" value="Confirmar datos iniciales" id="setuped" /> 
-                </p>    
+                </p>
+                
             </form>
+            <div id="error"></div>
             <img src="<?='../../img/cliente/'.$_SESSION['logo'].'.png';?>" alt="logo_empresa"/>
         
             <div class="container tutorial-info">

@@ -18,6 +18,9 @@ if ($q == "1") {
         '</td></tr></table>';        
     }
 } 
+elseif ($q == "2") {
+    
+}
 else 
 {
     $obrasGeneral->set_descripcion($q);
