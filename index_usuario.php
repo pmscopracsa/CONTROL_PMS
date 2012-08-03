@@ -110,6 +110,8 @@ session_start();
             <h3>Men&uacute; de Opciones</h3>
             <div style="width: 200px;float: left;background: #fafafa;">
                 <div class="easyui-accordion" border="false">
+                    <div>
+                    </div>
                     <div title="Busca Personas">
                         <ul class="pitem">
                             <li><a href="modulos/seleccion.php?frmName=compania" target="_blank">Compa&ntilde;ias</a></li>

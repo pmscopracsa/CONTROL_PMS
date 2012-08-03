@@ -29,11 +29,15 @@ $(document).ready(function()
 			  $(this).html('Accediendo.....').addClass('messageboxok').fadeTo(900,1,
               function()
 			  { 
-                              if (data == 'administrador')
-                                  document.location='secure.php';
-                              else if (data == 'usuario')
+                              if (data == 'administrador') {
+                                  document.location='administrador/index.php';//missing file
+                              }
+                              else if (data == 'usuario') {
                                   document.location = '../modulos/selecciondirectorio/selecciondirectorio.php';
-                                  //document.location = '../index.php';
+                              }
+                              else if (data == 'pasivo' ) {
+                                  document.location = 'visor/visor.php';//missing file
+                              }
 			  });
 			  
 			});
@@ -119,7 +123,7 @@ $(document).ready(function()
     ?>
     </div>
   <div class="container tutorial-info">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. <a href="../index.php">Inicio</a></div>
+      <a href="administrador/index.php">ADMINISTRADOR</a> | <a href="visor/visor.php">VISOR</a> |<a href="../index.php">Inicio</a></div>
 </div>
 </body>
 </html>

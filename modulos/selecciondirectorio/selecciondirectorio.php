@@ -88,6 +88,10 @@ session_start();
     $(document).ready(function() {
         $("body").css("display","none");
         $("body").fadeIn(2000);
+        
+        $("#sunatinfo").css("display","none");
+        $("#sunatinfo").fadeIn(6000);
+        
     
         var $seteo = $("#seleccionprevia");
         $seteo.validationEngine();
@@ -180,7 +184,9 @@ session_start();
                     <label for="ventaBanco">T.C Venta Banco</label>
                     <input type="text" id="idtxtvbanco" name="txtvbanco" value="" size="5" class="validate[required]" maxlength="5"/>
                     <hr /><br />
-                    <iframe scrolling="auto" width="700" height="250" marginwidth="50" marginheight="50" name="sunat" src="http://www.sunat.gob.pe/cl-at-ittipcam/tcS01Alias"></iframe>
+                    <div id="sunatinfo">
+                        <iframe scrolling="auto" width="700" height="250" marginwidth="50" marginheight="50" name="sunat" src="http://www.sunat.gob.pe/cl-at-ittipcam/tcS01Alias"></iframe>
+                    </div>    
                 </fieldset>    
                 <fieldset>
                     <legend>Directorios Principales</legend>
@@ -190,7 +196,7 @@ session_start();
                     <input type="hidden" id="idtxtiddirectorio" name="txtiddirectorio" value="" READONLY />
                 </fieldset>    
                 <fieldset>
-                    <legend>Seleccion de Obra</legend>
+                    <legend>Selecci&oacute;n de Proyecto</legend>
                     <div id="divSeleccionaObra" title="Seleccionar Obra">QWERTY</div> 
                     <input type="text" id="idtxtobra" name="txtobra" class="validate[required]" READONLY/>
                     <!-- CAMPO OCULTO QUE RETINENE EL ID DE LA OBRA SELECCIONADA -->
