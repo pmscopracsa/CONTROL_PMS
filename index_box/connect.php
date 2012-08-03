@@ -3,9 +3,9 @@ if(!defined('INCLUDE_CHECK')) die('You are not allowed to execute this file dire
 
 /* Database config */
 
-$db_host		= 'localhost';
-$db_user		= 'pms_admin';
-$db_pass		= 'pmsadmin123';
+$db_host	= 'localhost';
+$db_user	= 'pms_admin';
+$db_pass	= 'pmsadmin123';
 $db_database	= 'control_pms'; 
 
 /* End config */
