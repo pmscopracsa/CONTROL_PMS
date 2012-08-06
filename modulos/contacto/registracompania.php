@@ -44,7 +44,10 @@ function __autoload($name) {
     <script src="../../js/jquery.form.js" type="text/javascript"></script>
   
     <script type="text/javascript">
-    /**
+
+        
+    $(document).ready(function(){
+            /**
      * FUNCION QUE VUELVE A RECARGAR EL DIV QUE CONTIENE LA LISTA DE ESPECIALIDADES
      */    
     function recargarEspecialidades()
@@ -76,14 +79,16 @@ function __autoload($name) {
         $("#divSeleccionaRepresentante").load("modal_registracompania/representantes_div.php?filtro="+filtro);
     }
         
-    $(document).ready(function(){
+        /*
+         * ------------------------------------------------------------------------
+         */
+        
         /**
          * PRIMERA CARGA DE LA LISTA DE ESPECIALIDADES
          * PRIMERA CARGA DE LA LISTA DE REPRESENTANTES
          */
         $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro=1");
         $("#divSeleccionaRepresentante").load("modal_registracompania/representantes_div.php?filtro=1");
-        
         
         $("form").validity(function(){
             $(".ruc")

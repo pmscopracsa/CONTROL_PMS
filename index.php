@@ -52,7 +52,6 @@ if(@$_POST['submit']=='Login')
 		// Escaping all input data
                 $nombre_usuario = $_POST['username'];
                 $password = $_POST['password'];
-		//$row = mysql_fetch_assoc(mysql_query("SELECT id,usr FROM tb_empresa WHERE usr='{$_POST['username']}' AND pass='".md5($_POST['password'])."'"));
                 $row = mysql_fetch_assoc(mysql_query("SELECT id,nombre,logo FROM tb_empresa WHERE nombre='$nombre_usuario' AND password='$password'"));
 
 		if($row['nombre'])
@@ -66,6 +65,8 @@ if(@$_POST['submit']=='Login')
 			
 			// Store some data in the session
 			setcookie('tzRemember',$_POST['rememberMe']);
+                        header("Location: index_box/registered.php");
+                        exit;
 		}
 		else $err[]='¡Nombre de empresa o contraseña incorrecto!';
 	}
@@ -117,6 +118,49 @@ else if(@$_POST['submit']=='Register')
 	
 	header("Location: index.php");
 	exit;
+}
+else if(@$_POST['submit']=='Proceder') 
+{
+    header("Location: http:www.hotmail.com");
+//	if(!count($err))
+//	{
+		$nombre_usuario_licencia = mysql_real_escape_string($_POST['txtusuario']);
+		$password_licencia = mysql_real_escape_string($_POST['txtpassword']);
+		//$_POST['rememberMe'] = (int)$_POST['rememberMe'];
+
+                $rowlicencia = mysql_fetch_assoc(mysql_query("SELECT 
+                    id
+                    ,nombre
+                    ,nombreusuario
+                    ,rol
+                    ,password 
+                    FROM tb_usuario 
+                    WHERE nombreusuario = '$nombre_usuario_licencia' AND password = '$password_licencia'
+                    AND tb_empresa_id = ". $_SESSION['id']));
+
+		if($rowlicencia['nombre'])
+		{
+                    // If everything is OK login
+
+                    $_SESSION['nombreusuariolicencia']=$rowlicencia['nombre'];
+                    $_SESSION['idusuariolicencia'] = $rowlicencia['id'];
+                    $_SESSION['remembermeusuariolicencia'] = $_POST['recordarusuariolicencia'];
+
+                    // Store some data in the session
+                    //setcookie('tzRemember',$_POST['remembermeusuariolicencia']);
+                    
+                    if ($rowlicencia['rol'] == 'administrador')
+                        header("Location: ");
+                    else if($rowlicencia['rol'] == 'usuario')
+                        header("Location: index_usuario.php");
+                    else if($rowlicencia['rol'] == 'visor')
+                        header("Location: ");
+		}
+		else header("Location: http://google.com");
+////	}
+//
+//	header("Location: index.php");
+//	exit;
 }
 
 $script = '';
@@ -257,7 +301,7 @@ if(@$_SESSION['msg'])
             <a href="index_box/registered.php">PANEL DE ADMINISTRACION</a>
             <p>- o -</p>
             <a href="?logoff">Cerrar sesi&oacute;n</a>
-            
+
             </div>
             
             <div class="left right">
@@ -282,7 +326,6 @@ if(@$_SESSION['msg'])
 	    	<li class="right">&nbsp;</li>
 		</ul> 
 	</div> <!-- / top -->
-	
 </div> <!--panel -->
 
 <div class="pageContent">

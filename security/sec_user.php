@@ -15,7 +15,15 @@ $cn->conectar();
 $usuario = htmlspecialchars($_REQUEST['user_name']);
 $password = $_REQUEST['password'];
 
-$sql = "SELECT id,nombre, nombreusuario, rol, password FROM tb_usuario where nombreusuario = '".$usuario."' AND password = '".$password."'";
+$sql = "SELECT 
+        id
+        ,nombre
+        ,nombreusuario
+        ,rol
+        ,password 
+        FROM tb_usuario 
+        WHERE nombreusuario = '$usuario' AND password = '$password'
+        AND tb_empresa_id = ". $_SESSION['id'];
 $result = mysql_query($sql);
 $row = mysql_fetch_array($result);
 
