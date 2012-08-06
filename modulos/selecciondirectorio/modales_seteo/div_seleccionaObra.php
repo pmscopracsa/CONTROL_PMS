@@ -11,7 +11,8 @@ if ($q == "1") {
     
     foreach ($obras as &$valor) 
     {
-        echo '<table><tr style="cursor:pointer;"><td class="obra">'.
+        echo '<table><tr style="cursor:pointer;"><td class="obra"><p style="display:none">'.
+        $valor[0]." | </p>".
         $valor[1].
         ' | '.
         $valor[2].
@@ -26,6 +27,8 @@ else
     foreach ($obras as &$valor) 
     {
         echo '<table><tr style="cursor:pointer;"><td class="obra">'.
+        $valor[0].
+        ' | '.        
         $valor[1].
         ' | '.
         $valor[2].

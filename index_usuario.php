@@ -2,6 +2,15 @@
 session_name('tzLogin');
 session_set_cookie_params(2*7*24*60*60);
 session_start();
+
+if(isset($_GET['logoff']))
+{
+	$_SESSION = array();
+	session_destroy();
+	
+	header("Location: index.php");
+	exit;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,6 +24,8 @@ session_start();
     <link href="css/menu_principal/menu_principal.css" rel="stylesheet" type="text/css" />
     <link href="css/menu_principal/easyui.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
+        javascript:window.history.forward(1);
+        
         $(document).ready(function(){
             $("#logo_pms").hover(function() {
 		$(this).attr("src","img/pmslogo_orange.png");
@@ -97,13 +108,15 @@ session_start();
                 <div >
                         <div id="imagen">
                             <img class="logo_cliente" src="<?='img/cliente/'.$_SESSION['logo'].'.png';?>" />
+                                        <a href="?logoff">Cerrar sesi&oacute;n</a>
+
+            
                         </div>
                 </div>
                 </tr>
             </table>
         </div>
     </div>
-       
         
     <div id="mainwrap">
         <div id="content">

@@ -20,10 +20,10 @@ class ObrasDL
     // Esta funcion siempre tendrá 2 filtros, el idEmpresa y el idDirectorio
     public function mostrarObras()
     {
-        $query = "SELECT DISTINCT ob.id, ob.codigoobra, ob.descripcion
+        $query = "SELECT DISTINCT ob.id id, ob.codigoobra codigoobra, ob.descripcion descripcion
         FROM tb_directorio AS dir
         INNER JOIN tb_obra  AS ob
-        WHERE dir.tb_empresa_id = $this->_idEmpresa AND ob.tb_directorio_nombre = '$this->_idDirectorio'";
+        WHERE dir.tb_empresa_id = $this->_idEmpresa AND ob.tb_directorio_id = $this->_idDirectorio";
         
         try {
             $conexion = new Conexion();

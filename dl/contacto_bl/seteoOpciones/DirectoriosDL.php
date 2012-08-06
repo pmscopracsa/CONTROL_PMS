@@ -19,7 +19,7 @@ class DirectoriosDL
     
     public function mostrarDirectorio()
     {
-        $query = "SELECT nombre,descripcion FROM tb_directorio WHERE tb_empresa_id = $this->_idEmpresa ORDER BY nombre ASC";
+        $query = "SELECT id,nombre,descripcion FROM tb_directorio WHERE tb_empresa_id = $this->_idEmpresa ORDER BY nombre ASC";
         
         try {
             $conexion = new Conexion();

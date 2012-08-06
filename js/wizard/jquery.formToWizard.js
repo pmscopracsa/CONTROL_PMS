@@ -133,6 +133,7 @@
                 $("#step" + (i - 1)).show();
                 $(submmitButtonName).hide();
                 selectStep(i - 1);
+                
                 return false;
             });
         }

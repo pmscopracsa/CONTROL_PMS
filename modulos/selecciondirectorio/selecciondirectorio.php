@@ -117,11 +117,15 @@ session_start();
          * ES PASADA A LA CAJA DE TEXTO
          */
         $(".directorio").live("click",function() {
+            $("#idtxtobra").val("");
+            $("#idtxtidobra").val("");
+            $("#diveditar").css("display","none");
+            
             var directorio_array = $(this).text().split("|");
             $("#idtxtiddirectorio").val(directorio_array[0])
-            $("#idtxtdirectorio").val($(this).text());
+            $("#idtxtdirectorio").val(directorio_array[1]+"|"+directorio_array[2]);
+            //$("#idtxtdirectorio").val($(this).text());
             cargarObras(<?=$_SESSION['id']?>,directorio_array[0]);
-            
         });
         
         /**
@@ -130,8 +134,8 @@ session_start();
         $(".obra").live("click",function() {
             var obra_array = $(this).text().split("|");
             
-            
-            $("#idtxtobra").val($(this).text());
+            $("#idtxtidobra").val(obra_array[0]);
+            $("#idtxtobra").val(obra_array[1]+"|"+obra_array[2]);
             $("#diveditar").css("display","block");
         });
         
@@ -146,8 +150,19 @@ session_start();
         
         /**
          * CONFIRMAR DATOS INICIALES
+         * =========================
+         * Si se hace click al boton "Confirmar dato iniciales" se asumirá que el usuario
+         * va a trabajar todos los modulos con estos datos en memoria:
+         * Tipos de cambio del día
+         * Seleccion de Directorio
+         * Seleccion de Obra
          */
         $("#setuped").click(function() {
+            alert("Venta sunat"+$("#idtxtvsunat").val());
+            alert("Compra sunat: " +$("#idtxtcsunat").val());
+            alert("venta banco:" +$("#idtxtvbanco").val());
+            alert("id directorio: "+$("#idtxtiddirectorio").val());
+            alert("id obra:" +$("#idtxtidobra").val());
             /**
              * VALIDAR QUE LOS DATOS DE SETEO HAN SIDO ESCOGIDOS
              */
@@ -172,6 +187,11 @@ session_start();
             exit;
         }
         else {
+            /**
+             * VALIDAR SI YA ALGUIEN HA INGRESADO EL TIPO DE CAMBIO 
+             * SI YA HAN INGRESADO SOLO SE MOSTRARÄ EN MODO LECTURA
+             */
+            
         ?>
         <div id="main">
             <form id="seleccionprevia" method="post" action="">
@@ -180,9 +200,9 @@ session_start();
                     <label for="ventaSunat">T.C. Venta SUNAT</label>
                     <input type="text" id="idtxtvsunat" name="txtvsunat"  value="" size="5" maxlength="5" class="validate[required]"/>
                     <label for="compraSunat">T.C. Compra SUNAT</label>
-                    <input type="text" id="idtxtcsunat" name="txtcsunat" value="" size="5" class="validate[required]" maxlength="5"/>
+                    <input type="text" id="idtxtcsunat" name="txtcsunat" value="" size="5" maxlength="5" class="validate[required,maxSize[5]]" />
                     <label for="ventaBanco">T.C Venta Banco</label>
-                    <input type="text" id="idtxtvbanco" name="txtvbanco" value="" size="5" class="validate[required]" maxlength="5"/>
+                    <input type="text" id="idtxtvbanco" name="txtvbanco" value="" size="5"  class="validate[required]" maxlength="5"/>
                     <hr /><br />
                     <div id="sunatinfo">
                         <iframe scrolling="auto" width="700" height="250" marginwidth="50" marginheight="50" name="sunat" src="http://www.sunat.gob.pe/cl-at-ittipcam/tcS01Alias"></iframe>
