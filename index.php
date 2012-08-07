@@ -1,6 +1,11 @@
 <?php
 define('INCLUDE_CHECK',true);
 
+header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+header("Last-Modified: ".gmdate("D, d M Y H:i:s")."GMT");
+header("Cache-Control: no-cache, must-revalidate");
+header("Pragma: no-cache");
+
 require 'index_box/connect.php';
 require 'index_box/functions.php';
 // Those two files can be included only if INCLUDE_CHECK is defined
