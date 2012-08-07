@@ -130,17 +130,14 @@ if(isset($_GET['logoff']))
                             <li><a href="modulos/seleccion.php?frmName=compania" target="_blank">Compa&ntilde;ias</a></li>
                             <li><a href="modulos/seleccion.php?frmName=persona" target="_blank">Personas</a></li>
                             <li><a href="modulos/seleccion.php?frmName=listas" target="_blank">Listas de Distribuci&oacute;n</a></li>
-<!--                        <li><a href="modulos/contacto/registracompania.php" target="_blank">Registro de Compa&ntilde;ias</a></li>
-                            <li><a href="modulos/contacto/registrapersona.php" target="_blank">Registro de Persona</a></li>
-                            <li><a href="modulos/contacto/registrolistadistribucion.php" target="_blank">Listas de Distribuci&oacute;n</a></li>-->
                             <li><a href="#" onClick="seleccion('seleccionReporteEspecialidad.php');">Reporte por Especialidad</a></li>
                         </ul>
                     </div>
-                    <div title="Datos de Obra">
+<!--                    <div title="Datos de Obra">
                         <ul>
                             <li><a href="modulos/datosdeobra/registradatosdeobra.php" target="_blank">Datos de Obra</a></li>
                         </ul>
-                    </div>
+                    </div>-->
                     <div title="Gesti&oacute;n de Obra - Procura">
                         <ul>
                             <li><a href="modulos/procura/test_phpexcel.php" target="_blank">Gesti&oacute;n de Obra - Procura</a></li>

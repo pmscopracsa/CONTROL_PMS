@@ -158,20 +158,44 @@ session_start();
          * Seleccion de Obra
          */
         $("#setuped").click(function() {
-            alert("Venta sunat"+$("#idtxtvsunat").val());
-            alert("Compra sunat: " +$("#idtxtcsunat").val());
-            alert("venta banco:" +$("#idtxtvbanco").val());
-            alert("id directorio: "+$("#idtxtiddirectorio").val());
-            alert("id obra:" +$("#idtxtidobra").val());
-            /**
-             * VALIDAR QUE LOS DATOS DE SETEO HAN SIDO ESCOGIDOS
-             */
-            linkDestino = "../../index_usuario.php";
-            $("body").fadeOut(2000, redireccionaEditar(linkDestino));
+            $("#txtpmtvsunat").val($("#idtxtvsunat").val());
+            $("#txtpmtcsunat").val($("#idtxtcsunat").val());
+            $("#txtpmtvbanco").val($("#idtxtvbanco").val());
+            $("#txtpmtdirectorio").val($("#idtxtdirectorio").val());
+            $("#txtpmtobra").val($("#idtxtobra").val());
+            
+            $("#parametros").dialog({
+                resizable:false,
+                height:340,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Proceder":function() {
+                        $.ajax({
+                            type:"POST",
+                            url:"../../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=seteocambio",
+                            data:{ventasunat:$("#idtxtvsunat").val()
+                                ,comprasunat:$("#idtxtcsunat").val()
+                                ,iddirectorio:$("#idtxtdirectorio").val()
+                                ,idobra:$("#idtxtobra").val()},
+                            sucess:function() {
+                                
+                            }
+                        })
+                        linkDestino = "../../index_usuario.php";
+                        $("body").fadeOut(2000, redireccionaEditar(linkDestino));
+                        
+                    },
+                    "Cancelar":function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
         });
         
         /**
-         * REDIRECCIONAR
+         * REDIRECCIONAR AL MENU DE OPCIONES DEL SISEMA 
+         * PARA EL USUARIO LICENCIA
          */
         function redireccionaEditar(linkDestino) {
             window.location = linkDestino;
@@ -180,23 +204,31 @@ session_start();
     </script>
     </head>
     <body>
+        <div id="parametros" title="Guardar datos para mi sesión de trabajo" style="display: none">
+            <table>
+                <tr><td>Venta Sunat</td><td><input type="text" id="txtpmtvsunat" READONLY/></td></tr>
+                <tr><td>Compra Sunat</td><td><input type="text" id="txtpmtcsunat" READONLY/></td></tr>
+                <tr><td>Venta Banco</td><td><input type="text" id="txtpmtvbanco" READONLY/></td></tr>
+                <tr><td>Directorio</td><td><input type="text" id="txtpmtdirectorio" READONLY/></td></tr>
+                <tr><td>Obra</td><td><input type="text" id="txtpmtobra" READONLY/></td></tr>
+            </table>
+        </div>
         <?php
         if (!$_SESSION['id']) {
             echo "No estas permitido de ingresar a esta zona";
-            echo '<h2><a href="http://localhost/control_pms/">Inicie sesion</a></h2>';
+            echo '<h2><a href="http://localhost/control_pms/">Inicie sesión</a></h2>';
             exit;
         }
         else {
-            /**
-             * VALIDAR SI YA ALGUIEN HA INGRESADO EL TIPO DE CAMBIO 
-             * SI YA HAN INGRESADO SOLO SE MOSTRARÄ EN MODO LECTURA
-             */
-            
+             // VALIDAR SI YA ALGUIEN HA INGRESADO EL TIPO DE CAMBIO 
+             // SI YA HAN INGRESADO SOLO SE MOSTRARÄ EN MODO LECTURA
         ?>
         <div id="main">
             <form id="seleccionprevia" method="post" action="">
                  <fieldset>
-                    <legend>Cambio del día segun SUNAT</legend>
+                     <legend>Cambio del día seg&uacute;n SUNAT</legend>
+                    <input type="hidden" name="moneda" value="1" />
+
                     <label for="ventaSunat">T.C. Venta SUNAT</label>
                     <input type="text" id="idtxtvsunat" name="txtvsunat"  value="" size="5" maxlength="5" class="validate[required]"/>
                     <label for="compraSunat">T.C. Compra SUNAT</label>
@@ -230,8 +262,6 @@ session_start();
                 </p>   
             </form>
             <div id="error"></div>
-<!--            <img src="<?='../../img/cliente/'.$_SESSION['logo'].'.png';?>" alt="logo_empresa"/>-->
-        
             <div class="container tutorial-info">
                 <a href="../../index.php"><?=$_SESSION['usr']?></a>
             </div>

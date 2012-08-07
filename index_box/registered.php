@@ -14,6 +14,7 @@ session_start();
     <script>
 $(document).ready(function()
 {
+    $("#idtxtusuaorio").focus();
 	$("#login_usuario").submit(function()
 	{
 		//remove all the class add the messagebox classes and start fading
@@ -32,8 +33,17 @@ $(document).ready(function()
                               if (data == 'administrador') {
                                   document.location='administrador/index.php';//missing file
                               }
-                              else if (data == 'usuario') {
-                                  document.location = '../modulos/selecciondirectorio/selecciondirectorio.php';
+                              else if (data == 'usuario') { // ANTES DE MOSTRAR LA PANTALLA DE CONFIGURACION VALIDAMOS SI YA EXISTE DATOS EN EL CAMBIO DEL DIA
+                                  $.ajax({
+                                      type:"GET",
+                                      url:"../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=existecambio",
+                                      data:{id_empresa:<?=$_SESSION['id']?>},
+                                      success:function(res) {
+                                          alert(res);
+                                          if (res == "already") document.location = '../modulos/selecciondirectorio/selecciondirectorioalready.php';
+                                          else if (res == "notyet") document.location = '../modulos/selecciondirectorio/selecciondirectorio.php';       
+                                      }
+                                  });
                               }
                               else if (data == 'pasivo' ) {
                                   document.location = 'visor/visor.php';//missing file
@@ -104,17 +114,32 @@ $(document).ready(function()
         ?>
         <div class="left">
             <form class="clearfix" action="" method="post" id="login_usuario">
-                <label class="grey" for="username">Usuario:</label>
-                <input class="field" type="text" name="txtusuario" id="idtxtusuaorio" value="" size="23" />
-                <div style="margin-top: 5px">
-                    <label class="grey" for="password">Contrase&ntilde;a:</label> 
-                    <input class="field" type="password" name="txtpassword" id="idtxtpassword" size="23" />
-                </div>
-                <label><a href="../ayuda/identificarse.php?ctx=recover">¿Olvidaste tu contrase&ntilde;a?</a>
-                <div id="buttondiv">
-                    <input type="submit" value="Iniciar sesion" style="margin-left: -10px; height: 23px" /> 
-                    <span id="msgbox"style="display: none"></span>
-                </div>    
+                <table>
+                    <tr>
+                        <td><label class="grey" for="username">Usuario:</label></td>
+                        <td><input class="field" type="text" name="txtusuario" id="idtxtusuaorio" value="" size="23" /></td>
+                    </tr>
+                    <tr>
+                        <td><label class="grey" for="password">Contrase&ntilde;a:</label></td>
+                        <td><input class="field" type="password" name="txtpassword" id="idtxtpassword" size="23" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><label><a href="../ayuda/identificarse.php?ctx=recover">¿Olvidaste tu contrase&ntilde;a?</a></label></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Iniciar sesion" style="margin-left: -10px; height: 23px" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div id="buttondiv">
+                            <span id="msgbox"style="display: none"></span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </form>
         </div>
         <?php
