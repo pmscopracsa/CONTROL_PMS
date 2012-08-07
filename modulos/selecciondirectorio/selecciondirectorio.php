@@ -173,18 +173,18 @@ session_start();
                     "Proceder":function() {
                         $.ajax({
                             type:"POST",
-                            url:"../../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=seteocambio",
+                            url:"../../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=seteocambiomoneda",
                             data:{ventasunat:$("#idtxtvsunat").val()
                                 ,comprasunat:$("#idtxtcsunat").val()
-                                ,iddirectorio:$("#idtxtdirectorio").val()
-                                ,idobra:$("#idtxtobra").val()},
-                            sucess:function() {
-                                
+                                ,iddirectorio:$("#idtxtdirectorio").val()  
+                                ,idmoneda:$("#txtidmonedaid").val()
+                                ,idobra:$("#idtxtobra").val()
+                                ,idempresa:<?=$_SESSION['id']?>},
+                            success:function() {
+                                linkDestino = "../../index_usuario.php";
+                                $("body").fadeOut(2000, redireccionaEditar(linkDestino));
                             }
-                        })
-                        linkDestino = "../../index_usuario.php";
-                        $("body").fadeOut(2000, redireccionaEditar(linkDestino));
-                        
+                        });
                     },
                     "Cancelar":function() {
                         $(this).dialog("close");
@@ -227,7 +227,7 @@ session_start();
             <form id="seleccionprevia" method="post" action="">
                  <fieldset>
                      <legend>Cambio del día seg&uacute;n SUNAT</legend>
-                    <input type="hidden" name="moneda" value="1" />
+                     <input type="hidden" id="txtidmonedaid" name="txtmonedaid" value="1" />
 
                     <label for="ventaSunat">T.C. Venta SUNAT</label>
                     <input type="text" id="idtxtvsunat" name="txtvsunat"  value="" size="5" maxlength="5" class="validate[required]"/>

@@ -56,7 +56,11 @@ class TipoCambio
     
     public function r_tipocambio()
     {
-        $query = "SELECT * FROM tb_tipodecambio WHERE fecha = CURDATE() AND  tb_empresa_id = $this->_tb_empresa_id";
+        $query = "SELECT 
+        sunatventa
+        ,sunatcompra
+        ,bancoventa
+        FROM tb_tipodecambio WHERE fecha = CURDATE() AND  tb_empresa_id = $this->_tb_empresa_id";
         
         try {
             $conexion = new Conexion();
@@ -70,6 +74,13 @@ class TipoCambio
             if (!$rs)
                 throw new Exception("Error en la consulta: ".  mysql_error());
             
+            $cambio = array();
+            while ($reg = mysql_fetch_array($rs)) {
+                array_push($cambio, $reg['sunatventa']);
+                array_push($cambio, $reg['sunatcompra']);
+                array_push($cambio, $reg['bancoventa']);
+            }
+            return $cambio;
         } catch (Exception $ex) {
             echo "Error: ".$ex->getMessage();
         }

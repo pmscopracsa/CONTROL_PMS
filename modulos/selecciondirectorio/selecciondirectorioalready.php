@@ -3,6 +3,8 @@ session_name('tzLogin');
 session_set_cookie_params(2*7*24*60*60);
 session_start();
 
+setlocale(LC_ALL, "es_ES");
+
 $directorio_id = 0;
 $obra_id = 0;
 
@@ -91,6 +93,21 @@ $obra_id = 0;
     $(document).ready(function() {
         $("body").css("display","none");
         $("body").fadeIn(2000);
+        
+        /**
+         * CARGAR EL TIPO DE CAMBIO AL DIA
+         */
+        $.ajax({
+            type:"GET",
+            dataType:"html",
+            url:"../../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=cargarcambio",
+            data:{idempresa:<?=$_SESSION['id']?>},
+            success:function(data) {
+                $("#infocambiomoneda").html(data);
+            },error:function() {
+                alert("Error");
+            }
+        });
 
         var $seteo = $("#seleccionprevia");
         $seteo.validationEngine();
@@ -142,9 +159,8 @@ $obra_id = 0;
         // EDITAR OBRA
         // IR AL FORMULARIO DE EDITAR OBRA
         $("#aeditar").click(function(e){
-            alert("")
             e.preventDefault();
-            linkDestino = "../datosdeobra/edit/editaobra.php?idObra=";
+            linkDestino = "../datosdeobra/edit/editaobra.php?idObra="+$("#idtxtidobra").val();
             $("body").fadeOut(5000, redireccionaEditar(linkDestino));
         });
         
@@ -226,6 +242,7 @@ $obra_id = 0;
                     <input type="button" value="Confirmar datos iniciales" id="setuped" /> 
                 </p>   
             </form>
+            <div class="container tutorial-info" id="infocambiomoneda" ></div>
             <div id="error"></div>
             <div class="container tutorial-info">
                 <a href="../../index.php"><?=$_SESSION['usr']?></a>

@@ -90,6 +90,7 @@ $idObra = $_REQUEST['idObra'];
         <label for="criterioBusqueda">Criterio de b&uacute;squeda:</label><br />
         <input type="radio" name="criteriobusqueda" value="codigo" />Por C&oacute;digo<br />
         <input type="radio" name="criteriobusqueda" value="nombre" />Por Nombre<br />
+        <h3>Obra a editar: <?=$_REQUEST['idObra']?></h3>
         
         <div id="divcodigo" style="display: none">
             <label>CODIGO:</label> 

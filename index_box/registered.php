@@ -39,7 +39,6 @@ $(document).ready(function()
                                       url:"../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=existecambio",
                                       data:{id_empresa:<?=$_SESSION['id']?>},
                                       success:function(res) {
-                                          alert(res);
                                           if (res == "already") document.location = '../modulos/selecciondirectorio/selecciondirectorioalready.php';
                                           else if (res == "notyet") document.location = '../modulos/selecciondirectorio/selecciondirectorio.php';       
                                       }

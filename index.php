@@ -349,7 +349,7 @@ if(@$_SESSION['msg'])
         </div>
         
       <div class="container tutorial-info">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. </div>
+          <a href="http://localhost/pmsadmin/index.php">ADMINISTRACION</a></div>
     </div>
 </div>
 </body>
