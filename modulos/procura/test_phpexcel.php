@@ -85,7 +85,6 @@ for ($index = 1; $index < $presupuesto->sheets[0]['numRows']; $index++) {
     }
 }
 
-print_r($subtotal_seccion);
 ?>
 <!DOCTYPE html>
 <html>
@@ -98,7 +97,7 @@ print_r($subtotal_seccion);
         <link type="text/css" rel="stylesheet" href="../../css/jstree_pre1.0_fix_1/_docs/!style.css" />
         <script>
         $(document).ready(function(){
-            $(function() {
+            
                 $('tr.seccion')
                     .css("cursor","pointer")
                     .attr("title","Click para expander/contraer sección")
@@ -106,16 +105,16 @@ print_r($subtotal_seccion);
                         $(this).siblings('.child-'+this.id).toggle("slow"); //hermanos de class name
                     });
                 //$('tr.seccion').trigger("click");    
-            });
+
             
-            $(function(){
+
                  $('tr#rowrow')
                     .css("cursor","pointer")
                     .attr("title","Click para expander/contraer fase")
                     .click(function(){
                         $(this).siblings('#child-'+$(this).attr("class")).toggle("slow");
                 });
-            });
+
         });
         </script>
     </head>
