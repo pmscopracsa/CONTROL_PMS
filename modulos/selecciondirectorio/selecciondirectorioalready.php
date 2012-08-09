@@ -214,7 +214,7 @@ $obra_id = 0;
         <?php
         if (!$_SESSION['id']) {
             echo "No estas permitido de ingresar a esta zona";
-            echo '<h2><a href="http://localhost/control_pms/">Inicie sesión</a></h2>';
+            echo '<h2><a href="http://192.168.1.5/control_pms/">Inicie sesión</a></h2>';
             exit;
         }
         else {

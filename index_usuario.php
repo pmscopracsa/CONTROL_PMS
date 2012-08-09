@@ -140,7 +140,7 @@ if(isset($_GET['logoff']))
                     </div>-->
                     <div title="Gesti&oacute;n de Obra - Procura">
                         <ul>
-                            <li><a href="modulos/procura/test_phpexcel.php" target="_blank">Gesti&oacute;n de Obra - Procura</a></li>
+                            <li><a href="modulos/procura/index.php" target="_blank">Gesti&oacute;n de Obra - Procura</a></li>
                         </ul>
                     </div>
                     <div title="Pagos y Rendiciones">

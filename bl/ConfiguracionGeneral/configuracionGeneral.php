@@ -24,7 +24,7 @@ if ($q == "existecambio") {
     
     $definiciones = array('Venta Sunat','Compra Sunat', 'Venta Banco');
     $html = "";
-    for ($i = 0; $i < sizeof($cambio); $i++) {
+    for ($i = 0; $i < 3; $i++) {
         $html .= $definiciones[$i]." "."<a>";
         $html .= $cambio[$i];
         $html .="</a> ";

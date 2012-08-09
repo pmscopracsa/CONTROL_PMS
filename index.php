@@ -256,7 +256,7 @@ if(@$_SESSION['msg'])
                                         <label class="grey" for="password">Contrasen&ntilde;a:</label>
 					<input class="field" type="password" name="password" id="password" size="23" />
                                         <label><input name="rememberMe" id="rememberMe" type="checkbox" checked="checked" value="1" /> &nbsp;Recordarme</label>
-                                        <label><a href="">¿Olvidó su contraseña?</a></label>
+                                        <label><a href="ayuda/identificarse.php?ctx=recoverempresa">¿Olvidó su contraseña?</a></label>
                                         
         			<div class="clear"></div>
 					<input type="submit" name="submit" value="Login" class="bt_login" />
@@ -349,7 +349,7 @@ if(@$_SESSION['msg'])
         </div>
         
       <div class="container tutorial-info">
-          <a href="http://localhost/pmsadmin/index.php">ADMINISTRACION</a></div>
+          <a href="http://192.168.1.5/pmsadmin/index.php">ADMINISTRACION</a></div>
     </div>
 </div>
 </body>
