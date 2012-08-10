@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.5.2
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 02-08-2012 a las 16:37:15
--- Versión del servidor: 5.5.25
--- Versión de PHP: 5.4.4
+-- Host: localhost
+-- Generation Time: Aug 11, 2012 at 01:08 AM
+-- Server version: 5.5.25a
+-- PHP Version: 5.4.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,16 +17,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `control_pms`
+-- Database: `control_pms`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_actadefinitivaoc`
+-- Table structure for table `tb_actadefinitivaoc`
 --
 
-CREATE TABLE `tb_actadefinitivaoc` (
+CREATE TABLE IF NOT EXISTS `tb_actadefinitivaoc` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numeracion` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
@@ -39,10 +39,10 @@ CREATE TABLE `tb_actadefinitivaoc` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_actadefinitivaot`
+-- Table structure for table `tb_actadefinitivaot`
 --
 
-CREATE TABLE `tb_actadefinitivaot` (
+CREATE TABLE IF NOT EXISTS `tb_actadefinitivaot` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numeracion` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
@@ -55,10 +55,10 @@ CREATE TABLE `tb_actadefinitivaot` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_actaprovisionaloc`
+-- Table structure for table `tb_actaprovisionaloc`
 --
 
-CREATE TABLE `tb_actaprovisionaloc` (
+CREATE TABLE IF NOT EXISTS `tb_actaprovisionaloc` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numeracion` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
@@ -71,10 +71,10 @@ CREATE TABLE `tb_actaprovisionaloc` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_actaprovisionalot`
+-- Table structure for table `tb_actaprovisionalot`
 --
 
-CREATE TABLE `tb_actaprovisionalot` (
+CREATE TABLE IF NOT EXISTS `tb_actaprovisionalot` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numeracion` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
@@ -87,10 +87,43 @@ CREATE TABLE `tb_actaprovisionalot` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_companiacontacto`
+-- Table structure for table `tb_administradorcliente`
 --
 
-CREATE TABLE `tb_companiacontacto` (
+CREATE TABLE IF NOT EXISTS `tb_administradorcliente` (
+  `id` int(11) NOT NULL,
+  `nombreadministrador` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `password` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `tb_empresa_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_tb_administradorcliente_tb_empresa1` (`tb_empresa_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_alquiler`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_alquiler` (
+  `id` int(11) NOT NULL,
+  `numerolicencias` int(11) DEFAULT NULL,
+  `costoxlicencia` decimal(6,2) DEFAULT NULL,
+  `fechapago` date DEFAULT NULL,
+  `mesesxalquilar` int(11) DEFAULT NULL,
+  `holgurapagos` int(11) DEFAULT NULL,
+  `tb_empresa_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_tb_alquiler_tb_empresa1` (`tb_empresa_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci COMMENT='Definiciones de alquiler';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_companiacontacto`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_companiacontacto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(250) DEFAULT NULL,
   `ruc` varchar(45) DEFAULT NULL,
@@ -111,7 +144,7 @@ CREATE TABLE `tb_companiacontacto` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1735 ;
 
 --
--- Volcado de datos para la tabla `tb_companiacontacto`
+-- Dumping data for table `tb_companiacontacto`
 --
 
 INSERT INTO `tb_companiacontacto` (`id`, `descripcion`, `ruc`, `nombrecomercial`, `partidaregistral`, `actividadprincipal`, `tb_tipocompania_id`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_empresa_id`) VALUES
@@ -1852,10 +1885,10 @@ INSERT INTO `tb_companiacontacto` (`id`, `descripcion`, `ruc`, `nombrecomercial`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_comuntfijo`
+-- Table structure for table `tb_comuntfijo`
 --
 
-CREATE TABLE `tb_comuntfijo` (
+CREATE TABLE IF NOT EXISTS `tb_comuntfijo` (
   `id` int(11) NOT NULL,
   `numero` varchar(25) DEFAULT NULL,
   `tb_personacontactocomun_id` int(11) NOT NULL,
@@ -1864,7 +1897,7 @@ CREATE TABLE `tb_comuntfijo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tb_comuntfijo`
+-- Dumping data for table `tb_comuntfijo`
 --
 
 INSERT INTO `tb_comuntfijo` (`id`, `numero`, `tb_personacontactocomun_id`) VALUES
@@ -1882,10 +1915,10 @@ INSERT INTO `tb_comuntfijo` (`id`, `numero`, `tb_personacontactocomun_id`) VALUE
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_comuntmobile`
+-- Table structure for table `tb_comuntmobile`
 --
 
-CREATE TABLE `tb_comuntmobile` (
+CREATE TABLE IF NOT EXISTS `tb_comuntmobile` (
   `id` int(11) NOT NULL,
   `numero` varchar(25) DEFAULT NULL,
   `tb_personacontactocomun_id` int(11) NOT NULL,
@@ -1894,7 +1927,7 @@ CREATE TABLE `tb_comuntmobile` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tb_comuntmobile`
+-- Dumping data for table `tb_comuntmobile`
 --
 
 INSERT INTO `tb_comuntmobile` (`id`, `numero`, `tb_personacontactocomun_id`) VALUES
@@ -1912,10 +1945,10 @@ INSERT INTO `tb_comuntmobile` (`id`, `numero`, `tb_personacontactocomun_id`) VAL
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_comuntnextel`
+-- Table structure for table `tb_comuntnextel`
 --
 
-CREATE TABLE `tb_comuntnextel` (
+CREATE TABLE IF NOT EXISTS `tb_comuntnextel` (
   `id` int(11) NOT NULL,
   `numero` varchar(25) DEFAULT NULL,
   `tb_personacontactocomun_id` int(11) NOT NULL,
@@ -1924,7 +1957,7 @@ CREATE TABLE `tb_comuntnextel` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tb_comuntnextel`
+-- Dumping data for table `tb_comuntnextel`
 --
 
 INSERT INTO `tb_comuntnextel` (`id`, `numero`, `tb_personacontactocomun_id`) VALUES
@@ -1942,10 +1975,10 @@ INSERT INTO `tb_comuntnextel` (`id`, `numero`, `tb_personacontactocomun_id`) VAL
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_contacto`
+-- Table structure for table `tb_contacto`
 --
 
-CREATE TABLE `tb_contacto` (
+CREATE TABLE IF NOT EXISTS `tb_contacto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_personacontacto_id` int(11) NOT NULL,
   `tb_obra_id` int(11) NOT NULL,
@@ -1957,10 +1990,10 @@ CREATE TABLE `tb_contacto` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_contactocomun`
+-- Table structure for table `tb_contactocomun`
 --
 
-CREATE TABLE `tb_contactocomun` (
+CREATE TABLE IF NOT EXISTS `tb_contactocomun` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(255) DEFAULT NULL,
   `ruc` varchar(12) DEFAULT NULL,
@@ -1976,7 +2009,7 @@ CREATE TABLE `tb_contactocomun` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Empresa - Contacto comun' AUTO_INCREMENT=11 ;
 
 --
--- Volcado de datos para la tabla `tb_contactocomun`
+-- Dumping data for table `tb_contactocomun`
 --
 
 INSERT INTO `tb_contactocomun` (`id`, `descripcion`, `ruc`, `email`, `web`, `observacion`, `nombreComercial`, `fax`, `partidaregistral`, `giro`, `actividadprincipal`) VALUES
@@ -1994,10 +2027,10 @@ INSERT INTO `tb_contactocomun` (`id`, `descripcion`, `ruc`, `email`, `web`, `obs
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_contactodelista`
+-- Table structure for table `tb_contactodelista`
 --
 
-CREATE TABLE `tb_contactodelista` (
+CREATE TABLE IF NOT EXISTS `tb_contactodelista` (
   `tb_listadistribucioncontacto_id` int(11) NOT NULL,
   `tb_companiacontacto_id` int(11) NOT NULL,
   KEY `fk_tb_contactodelista_tb_listadistribucioncontacto1` (`tb_listadistribucioncontacto_id`),
@@ -2005,7 +2038,7 @@ CREATE TABLE `tb_contactodelista` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tb_contactodelista`
+-- Dumping data for table `tb_contactodelista`
 --
 
 INSERT INTO `tb_contactodelista` (`tb_listadistribucioncontacto_id`, `tb_companiacontacto_id`) VALUES
@@ -2020,10 +2053,10 @@ INSERT INTO `tb_contactodelista` (`tb_listadistribucioncontacto_id`, `tb_compani
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_contactoenactadefinitivaoc`
+-- Table structure for table `tb_contactoenactadefinitivaoc`
 --
 
-CREATE TABLE `tb_contactoenactadefinitivaoc` (
+CREATE TABLE IF NOT EXISTS `tb_contactoenactadefinitivaoc` (
   `tb_contacto_id` int(11) NOT NULL,
   `tb_actadefinitivaoc_id` int(11) NOT NULL,
   KEY `fk_tb_contactoenacta_tb_contacto1` (`tb_contacto_id`),
@@ -2033,10 +2066,10 @@ CREATE TABLE `tb_contactoenactadefinitivaoc` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_contactoenactadefinitivaot`
+-- Table structure for table `tb_contactoenactadefinitivaot`
 --
 
-CREATE TABLE `tb_contactoenactadefinitivaot` (
+CREATE TABLE IF NOT EXISTS `tb_contactoenactadefinitivaot` (
   `tb_contacto_id` int(11) NOT NULL,
   `tb_actadefinitivaot_id` int(11) NOT NULL,
   KEY `fk_tb_contactoenacta_tb_contacto1` (`tb_contacto_id`),
@@ -2046,10 +2079,10 @@ CREATE TABLE `tb_contactoenactadefinitivaot` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_contactoreportetemporal`
+-- Table structure for table `tb_contactoreportetemporal`
 --
 
-CREATE TABLE `tb_contactoreportetemporal` (
+CREATE TABLE IF NOT EXISTS `tb_contactoreportetemporal` (
   `id_reporte` int(11) NOT NULL,
   `id_contacto` int(11) NOT NULL,
   `id_aleatorio` int(11) NOT NULL,
@@ -2059,10 +2092,10 @@ CREATE TABLE `tb_contactoreportetemporal` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_correosecundarios`
+-- Table structure for table `tb_correosecundarios`
 --
 
-CREATE TABLE `tb_correosecundarios` (
+CREATE TABLE IF NOT EXISTS `tb_correosecundarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL COMMENT 'correo electronico',
   `tb_personacontacto_id` int(11) NOT NULL,
@@ -2071,7 +2104,7 @@ CREATE TABLE `tb_correosecundarios` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Correos secundarios que podria tener la persona, ojo que tie' AUTO_INCREMENT=373617 ;
 
 --
--- Volcado de datos para la tabla `tb_correosecundarios`
+-- Dumping data for table `tb_correosecundarios`
 --
 
 INSERT INTO `tb_correosecundarios` (`id`, `descripcion`, `tb_personacontacto_id`) VALUES
@@ -2083,10 +2116,10 @@ INSERT INTO `tb_correosecundarios` (`id`, `descripcion`, `tb_personacontacto_id`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_departamento`
+-- Table structure for table `tb_departamento`
 --
 
-CREATE TABLE `tb_departamento` (
+CREATE TABLE IF NOT EXISTS `tb_departamento` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '		',
   `nombre` varchar(200) DEFAULT NULL,
   `tb_pais_id` int(11) DEFAULT NULL,
@@ -2096,7 +2129,7 @@ CREATE TABLE `tb_departamento` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4293 ;
 
 --
--- Volcado de datos para la tabla `tb_departamento`
+-- Dumping data for table `tb_departamento`
 --
 
 INSERT INTO `tb_departamento` (`id`, `nombre`, `tb_pais_id`, `ordena_cod`) VALUES
@@ -6397,10 +6430,10 @@ INSERT INTO `tb_departamento` (`id`, `nombre`, `tb_pais_id`, `ordena_cod`) VALUE
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_direccioncompaniacontacto`
+-- Table structure for table `tb_direccioncompaniacontacto`
 --
 
-CREATE TABLE `tb_direccioncompaniacontacto` (
+CREATE TABLE IF NOT EXISTS `tb_direccioncompaniacontacto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `direccion` varchar(255) DEFAULT NULL,
   `tb_pais_id` int(11) NOT NULL,
@@ -6417,7 +6450,7 @@ CREATE TABLE `tb_direccioncompaniacontacto` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Direccion de la compania contacto' AUTO_INCREMENT=6 ;
 
 --
--- Volcado de datos para la tabla `tb_direccioncompaniacontacto`
+-- Dumping data for table `tb_direccioncompaniacontacto`
 --
 
 INSERT INTO `tb_direccioncompaniacontacto` (`id`, `direccion`, `tb_pais_id`, `tb_departamento_id`, `tb_companiacontacto_id`, `tb_tipodireccion_id`, `tb_distrito_id`) VALUES
@@ -6430,35 +6463,34 @@ INSERT INTO `tb_direccioncompaniacontacto` (`id`, `direccion`, `tb_pais_id`, `tb
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_directorio`
+-- Table structure for table `tb_directorio`
 --
 
-CREATE TABLE `tb_directorio` (
+CREATE TABLE IF NOT EXISTS `tb_directorio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) CHARACTER SET latin1 NOT NULL,
   `descripcion` varchar(45) CHARACTER SET latin1 NOT NULL,
   `tb_empresa_id` int(11) NOT NULL,
-  PRIMARY KEY (`nombre`),
+  PRIMARY KEY (`id`),
   KEY `fk_tb_directorio_tb_empresa1` (`tb_empresa_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci AUTO_INCREMENT=4 ;
 
 --
--- Volcado de datos para la tabla `tb_directorio`
+-- Dumping data for table `tb_directorio`
 --
 
-INSERT INTO `tb_directorio` (`nombre`, `descripcion`, `tb_empresa_id`) VALUES
-('2010', 'Directorio de Obras del 2010', 1),
-('2011', 'Directorio de Obras del 2011', 1),
-('2012', 'Directorio de Obras del 2012', 1),
-('Marketing', 'Directorio del área de Marketing', 2),
-('Ventas', 'Directorio del área de Ventas', 2);
+INSERT INTO `tb_directorio` (`id`, `nombre`, `descripcion`, `tb_empresa_id`) VALUES
+(1, '2012', 'Proyectos del año 2012', 1),
+(2, 'Ventas', 'Proyectos del área de Ventas', 2),
+(3, 'Prueba 03', 'Directorio de prueba 03', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_distrito`
+-- Table structure for table `tb_distrito`
 --
 
-CREATE TABLE `tb_distrito` (
+CREATE TABLE IF NOT EXISTS `tb_distrito` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   `tb_departamento_id` int(11) DEFAULT NULL,
@@ -6468,7 +6500,7 @@ CREATE TABLE `tb_distrito` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1826 ;
 
 --
--- Volcado de datos para la tabla `tb_distrito`
+-- Dumping data for table `tb_distrito`
 --
 
 INSERT INTO `tb_distrito` (`id`, `nombre`, `tb_departamento_id`, `ordena_cod`) VALUES
@@ -8302,42 +8334,39 @@ INSERT INTO `tb_distrito` (`id`, `nombre`, `tb_departamento_id`, `ordena_cod`) V
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_empresa`
+-- Table structure for table `tb_empresa`
 --
 
-CREATE TABLE `tb_empresa` (
+CREATE TABLE IF NOT EXISTS `tb_empresa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
   `password` varchar(250) DEFAULT NULL,
   `logo` varchar(45) DEFAULT NULL,
-  `tb_pais_id` int(11) NOT NULL,
-  `tb_tipodireccion_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_tb_empresa_tb_pais1` (`tb_pais_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Empresa cliente que alquila el SI' AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `tb_empresa`
+-- Dumping data for table `tb_empresa`
 --
 
-INSERT INTO `tb_empresa` (`id`, `nombre`, `password`, `logo`, `tb_pais_id`, `tb_tipodireccion_id`) VALUES
-(1, 'copracsa', '20388197804', 'copracsa', 177, 1),
-(2, 'oechsle', 'oechsle123', 'oechsle', 177, 2);
+INSERT INTO `tb_empresa` (`id`, `nombre`, `password`, `logo`) VALUES
+(1, 'copracsa', '20388197804', 'copracsa'),
+(2, 'oechsle', 'oechsle123', 'oechsle');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_especialidadcompania`
+-- Table structure for table `tb_especialidadcompania`
 --
 
-CREATE TABLE `tb_especialidadcompania` (
+CREATE TABLE IF NOT EXISTS `tb_especialidadcompania` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=319 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=323 ;
 
 --
--- Volcado de datos para la tabla `tb_especialidadcompania`
+-- Dumping data for table `tb_especialidadcompania`
 --
 
 INSERT INTO `tb_especialidadcompania` (`id`, `descripcion`) VALUES
@@ -8629,25 +8658,29 @@ INSERT INTO `tb_especialidadcompania` (`id`, `descripcion`) VALUES
 (315, 'A_NEW'),
 (316, 'A15'),
 (317, 'A16'),
-(318, 'A17');
+(318, 'A17'),
+(319, 'a123'),
+(320, 'A1234'),
+(321, 'AAAA'),
+(322, 'A321');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_especialidadComun`
+-- Table structure for table `tb_especialidadcomun`
 --
 
-CREATE TABLE `tb_especialidadComun` (
+CREATE TABLE IF NOT EXISTS `tb_especialidadcomun` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
--- Volcado de datos para la tabla `tb_especialidadComun`
+-- Dumping data for table `tb_especialidadcomun`
 --
 
-INSERT INTO `tb_especialidadComun` (`id`, `descripcion`) VALUES
+INSERT INTO `tb_especialidadcomun` (`id`, `descripcion`) VALUES
 (1, 'in'),
 (2, 'Aliquam vulputate ullamcorper magna. Sed eu'),
 (3, 'morbi tristique senectus'),
@@ -8662,17 +8695,17 @@ INSERT INTO `tb_especialidadComun` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_especialidadpersona`
+-- Table structure for table `tb_especialidadpersona`
 --
 
-CREATE TABLE `tb_especialidadpersona` (
+CREATE TABLE IF NOT EXISTS `tb_especialidadpersona` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
--- Volcado de datos para la tabla `tb_especialidadpersona`
+-- Dumping data for table `tb_especialidadpersona`
 --
 
 INSERT INTO `tb_especialidadpersona` (`id`, `descripcion`) VALUES
@@ -8693,10 +8726,10 @@ INSERT INTO `tb_especialidadpersona` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_facturalicencia`
+-- Table structure for table `tb_facturalicencia`
 --
 
-CREATE TABLE `tb_facturalicencia` (
+CREATE TABLE IF NOT EXISTS `tb_facturalicencia` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fechacreacion` date DEFAULT NULL,
   `fechacaducidad` date DEFAULT NULL,
@@ -8711,24 +8744,59 @@ CREATE TABLE `tb_facturalicencia` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_fase`
+-- Table structure for table `tb_fasecosto`
 --
 
-CREATE TABLE `tb_fase` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(100) DEFAULT NULL,
-  `tb_seccion_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tb_fasecosto` (
+  `id` int(11) NOT NULL,
+  `codificacion` int(11) DEFAULT NULL,
+  `descripcion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `tb_seccioncosto_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_tb_fase_tb_seccion1` (`tb_seccion_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  KEY `fk_tb_fasecosto_tb_seccioncosto1` (`tb_seccioncosto_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_firmascontactotemporal`
+-- Table structure for table `tb_faseventa`
 --
 
-CREATE TABLE `tb_firmascontactotemporal` (
+CREATE TABLE IF NOT EXISTS `tb_faseventa` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codificacion` varchar(15) COLLATE utf8_spanish2_ci NOT NULL,
+  `descripcion` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `tb_seccionventa_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_tb_faseventa_tb_seccionventa1` (`tb_seccionventa_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=131 ;
+
+--
+-- Dumping data for table `tb_faseventa`
+--
+
+INSERT INTO `tb_faseventa` (`id`, `codificacion`, `descripcion`, `tb_seccionventa_id`) VALUES
+(118, '1.01', 'OBRAS PROVISIONALES', 22),
+(119, '1.02', 'TRABAJOS PRELIMINARES', 22),
+(120, '1.03', 'MOVIMIENTO DE TIERRAS', 22),
+(121, '1.04', 'OBRAS DE CONCRETO SIMPLE', 22),
+(122, '1.05', 'OBRAS DE CONCRETO ARMADO', 22),
+(123, '2.01', 'CIRCUITOS DERIVADOS, Alumbrado, Tomacorrientes y Salidas de Fuerza', 23),
+(124, '2.02', 'SALIDAS DE FUERZA, Pvc y Cableado', 23),
+(125, '2.03', 'SALIDAS DE CABLEADO ESTRUCTURADO, Pvc y Cajas', 23),
+(126, '2.04', 'PRUEBAS ELECTRICAS', 23),
+(127, '2.05', 'Consideraciones de Obra', 23),
+(128, '3.01', 'MOVIMIENTO DE TIERRA Y OTROS', 24),
+(129, '3.02', 'RED DE DESAGUE', 24),
+(130, '3.03', 'RED DE AGUA FRIA  ', 24);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_firmascontactotemporal`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_firmascontactotemporal` (
   `id_contacto` int(11) DEFAULT NULL,
   `txt_puesto` varchar(250) COLLATE latin1_spanish_ci DEFAULT NULL,
   `aleatorio` varchar(50) COLLATE latin1_spanish_ci DEFAULT NULL,
@@ -8736,20 +8804,27 @@ CREATE TABLE `tb_firmascontactotemporal` (
   `reporte_id` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Dumping data for table `tb_firmascontactotemporal`
+--
+
+INSERT INTO `tb_firmascontactotemporal` (`id_contacto`, `txt_puesto`, `aleatorio`, `estado_asignado`, `reporte_id`) VALUES
+(1015, 'iu', '243', 'n', 0);
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_formatopresupuesto`
+-- Table structure for table `tb_formatopresupuesto`
 --
 
-CREATE TABLE `tb_formatopresupuesto` (
+CREATE TABLE IF NOT EXISTS `tb_formatopresupuesto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `tb_formatopresupuesto`
+-- Dumping data for table `tb_formatopresupuesto`
 --
 
 INSERT INTO `tb_formatopresupuesto` (`id`, `descripcion`) VALUES
@@ -8759,10 +8834,10 @@ INSERT INTO `tb_formatopresupuesto` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_giro`
+-- Table structure for table `tb_giro`
 --
 
-CREATE TABLE `tb_giro` (
+CREATE TABLE IF NOT EXISTS `tb_giro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(255) NOT NULL,
   `tb_compania_id` int(11) DEFAULT NULL,
@@ -8771,7 +8846,7 @@ CREATE TABLE `tb_giro` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Una compania puede tener n giros' AUTO_INCREMENT=15 ;
 
 --
--- Volcado de datos para la tabla `tb_giro`
+-- Dumping data for table `tb_giro`
 --
 
 INSERT INTO `tb_giro` (`id`, `descripcion`, `tb_compania_id`) VALUES
@@ -8791,10 +8866,10 @@ INSERT INTO `tb_giro` (`id`, `descripcion`, `tb_compania_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_igv`
+-- Table structure for table `tb_igv`
 --
 
-CREATE TABLE `tb_igv` (
+CREATE TABLE IF NOT EXISTS `tb_igv` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `monto` decimal(3,1) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -8803,10 +8878,10 @@ CREATE TABLE `tb_igv` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_licencia`
+-- Table structure for table `tb_licencia`
 --
 
-CREATE TABLE `tb_licencia` (
+CREATE TABLE IF NOT EXISTS `tb_licencia` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -8815,10 +8890,10 @@ CREATE TABLE `tb_licencia` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_listadistribucioncontacto`
+-- Table structure for table `tb_listadistribucioncontacto`
 --
 
-CREATE TABLE `tb_listadistribucioncontacto` (
+CREATE TABLE IF NOT EXISTS `tb_listadistribucioncontacto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_empresa_id` int(11) NOT NULL,
   `descripcion` varchar(100) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
@@ -8828,7 +8903,7 @@ CREATE TABLE `tb_listadistribucioncontacto` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
--- Volcado de datos para la tabla `tb_listadistribucioncontacto`
+-- Dumping data for table `tb_listadistribucioncontacto`
 --
 
 INSERT INTO `tb_listadistribucioncontacto` (`id`, `tb_empresa_id`, `descripcion`, `observacion`) VALUES
@@ -8845,10 +8920,10 @@ INSERT INTO `tb_listadistribucioncontacto` (`id`, `tb_empresa_id`, `descripcion`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_listadistribucionpersonacontacto`
+-- Table structure for table `tb_listadistribucionpersonacontacto`
 --
 
-CREATE TABLE `tb_listadistribucionpersonacontacto` (
+CREATE TABLE IF NOT EXISTS `tb_listadistribucionpersonacontacto` (
   `tb_listadistribucioncontacto_id` int(11) NOT NULL,
   `tb_personacontacto_id` int(11) NOT NULL,
   KEY `fk_tb_listadistribucionpersonacontacto_tb_listadistribucionco1` (`tb_listadistribucioncontacto_id`),
@@ -8856,7 +8931,7 @@ CREATE TABLE `tb_listadistribucionpersonacontacto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tb_listadistribucionpersonacontacto`
+-- Dumping data for table `tb_listadistribucionpersonacontacto`
 --
 
 INSERT INTO `tb_listadistribucionpersonacontacto` (`tb_listadistribucioncontacto_id`, `tb_personacontacto_id`) VALUES
@@ -8866,10 +8941,10 @@ INSERT INTO `tb_listadistribucionpersonacontacto` (`tb_listadistribucioncontacto
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_modelocartacomun`
+-- Table structure for table `tb_modelocartacomun`
 --
 
-CREATE TABLE `tb_modelocartacomun` (
+CREATE TABLE IF NOT EXISTS `tb_modelocartacomun` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(250) NOT NULL,
   `path` varchar(250) NOT NULL,
@@ -8877,7 +8952,7 @@ CREATE TABLE `tb_modelocartacomun` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Modelo de carta dado por la empresa proveedora -adjudicacion' AUTO_INCREMENT=11 ;
 
 --
--- Volcado de datos para la tabla `tb_modelocartacomun`
+-- Dumping data for table `tb_modelocartacomun`
 --
 
 INSERT INTO `tb_modelocartacomun` (`id`, `descripcion`, `path`) VALUES
@@ -8895,10 +8970,10 @@ INSERT INTO `tb_modelocartacomun` (`id`, `descripcion`, `path`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_modelocartapropia`
+-- Table structure for table `tb_modelocartapropia`
 --
 
-CREATE TABLE `tb_modelocartapropia` (
+CREATE TABLE IF NOT EXISTS `tb_modelocartapropia` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(250) NOT NULL,
   `path` varchar(250) NOT NULL,
@@ -8908,7 +8983,7 @@ CREATE TABLE `tb_modelocartapropia` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Modelo de carta propia de al empresa arrendadora del sistema' AUTO_INCREMENT=12 ;
 
 --
--- Volcado de datos para la tabla `tb_modelocartapropia`
+-- Dumping data for table `tb_modelocartapropia`
 --
 
 INSERT INTO `tb_modelocartapropia` (`id`, `descripcion`, `path`, `tb_empresa_id`) VALUES
@@ -8927,10 +9002,10 @@ INSERT INTO `tb_modelocartapropia` (`id`, `descripcion`, `path`, `tb_empresa_id`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_modelocontratocomun`
+-- Table structure for table `tb_modelocontratocomun`
 --
 
-CREATE TABLE `tb_modelocontratocomun` (
+CREATE TABLE IF NOT EXISTS `tb_modelocontratocomun` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(250) NOT NULL,
   `path` varchar(250) NOT NULL,
@@ -8938,7 +9013,7 @@ CREATE TABLE `tb_modelocontratocomun` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='modelo de contrato Comun a todas las empresas' AUTO_INCREMENT=11 ;
 
 --
--- Volcado de datos para la tabla `tb_modelocontratocomun`
+-- Dumping data for table `tb_modelocontratocomun`
 --
 
 INSERT INTO `tb_modelocontratocomun` (`id`, `descripcion`, `path`) VALUES
@@ -8956,10 +9031,10 @@ INSERT INTO `tb_modelocontratocomun` (`id`, `descripcion`, `path`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_modelocontratopropio`
+-- Table structure for table `tb_modelocontratopropio`
 --
 
-CREATE TABLE `tb_modelocontratopropio` (
+CREATE TABLE IF NOT EXISTS `tb_modelocontratopropio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(250) NOT NULL,
   `path` varchar(250) NOT NULL,
@@ -8969,7 +9044,7 @@ CREATE TABLE `tb_modelocontratopropio` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
--- Volcado de datos para la tabla `tb_modelocontratopropio`
+-- Dumping data for table `tb_modelocontratopropio`
 --
 
 INSERT INTO `tb_modelocontratopropio` (`id`, `descripcion`, `path`, `tb_empresa_id`) VALUES
@@ -8987,17 +9062,17 @@ INSERT INTO `tb_modelocontratopropio` (`id`, `descripcion`, `path`, `tb_empresa_
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_moneda`
+-- Table structure for table `tb_moneda`
 --
 
-CREATE TABLE `tb_moneda` (
+CREATE TABLE IF NOT EXISTS `tb_moneda` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `tb_moneda`
+-- Dumping data for table `tb_moneda`
 --
 
 INSERT INTO `tb_moneda` (`id`, `descripcion`) VALUES
@@ -9007,10 +9082,10 @@ INSERT INTO `tb_moneda` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_obra`
+-- Table structure for table `tb_obra`
 --
 
-CREATE TABLE `tb_obra` (
+CREATE TABLE IF NOT EXISTS `tb_obra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigoobra` varchar(45) DEFAULT NULL,
   `descripcion` varchar(250) DEFAULT NULL,
@@ -9043,7 +9118,7 @@ CREATE TABLE `tb_obra` (
   `utilidad_ordcamb` int(11) DEFAULT NULL,
   `nombreLista` varchar(100) DEFAULT NULL COMMENT 'nombre que s muestra en la lista de eleccion',
   `nombreFormulario` varchar(100) DEFAULT NULL COMMENT 'nombre que se muestra en el formulario per se',
-  `tb_directorio_nombre` varchar(45) NOT NULL,
+  `tb_directorio_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_obra_tb_departamento1` (`tb_departamento_id`),
   KEY `fk_tb_obra_tb_moneda1` (`tb_moneda_id`),
@@ -9054,30 +9129,30 @@ CREATE TABLE `tb_obra` (
   KEY `fk_tb_obra_tb_companiacontacto5` (`proveedoresfacturar_id`),
   KEY `fk_tb_obra_tb_tipovalorizacion1` (`tb_tipovalorizacion_id`),
   KEY `fk_tb_obra_tb_formatopresupuesto1` (`tb_formatopresupuesto_id`),
-  KEY `fk_tb_obra_tb_directorio1` (`tb_directorio_nombre`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Obra que serA manejada por cada empresa' AUTO_INCREMENT=2 ;
+  KEY `fk_tb_obra_tb_directorio1` (`tb_directorio_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Obra que serA manejada por cada empresa' AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `tb_obra`
+-- Dumping data for table `tb_obra`
 --
 
-INSERT INTO `tb_obra` (`id`, `codigoobra`, `descripcion`, `fechainicio`, `fechafin`, `direccion`, `tb_departamento_id`, `tb_moneda_id`, `cliente_id`, `empresacontratante_id`, `gerenteproyecto_id`, `supervisoraproyecto_id`, `proveedoresfacturar_id`, `porcentajecartafianza`, `diasdesembolso`, `porcentajefondoretencion`, `diasdevolucionfondoretencion`, `montocontratadomayora`, `montocontratadomenora`, `cartaadjudicacion`, `modelocontrato`, `tb_tipovalorizacion_id`, `tb_formatopresupuesto_id`, `factorcorreccion`, `retencionfondogarantia`, `retencionfielcumplimiento`, `gastogeneral_precontra`, `utilidad_precontra`, `gastogeneral_ordcamb`, `utilidad_ordcamb`, `nombreLista`, `nombreFormulario`, `tb_directorio_nombre`) VALUES
-(1, '11111', 'Test111', '2012-07-26', '2012-12-12', 'Some Place', 177, 1, 1, 1, 1, 1, 1, 0.50, 15, 5, '8', 4, 4, '1', '1', 1, 1, 9.9, 22, '32', 22, 22, 22, 22, 'demo', 'DEMO', '2012');
+INSERT INTO `tb_obra` (`id`, `codigoobra`, `descripcion`, `fechainicio`, `fechafin`, `direccion`, `tb_departamento_id`, `tb_moneda_id`, `cliente_id`, `empresacontratante_id`, `gerenteproyecto_id`, `supervisoraproyecto_id`, `proveedoresfacturar_id`, `porcentajecartafianza`, `diasdesembolso`, `porcentajefondoretencion`, `diasdevolucionfondoretencion`, `montocontratadomayora`, `montocontratadomenora`, `cartaadjudicacion`, `modelocontrato`, `tb_tipovalorizacion_id`, `tb_formatopresupuesto_id`, `factorcorreccion`, `retencionfondogarantia`, `retencionfielcumplimiento`, `gastogeneral_precontra`, `utilidad_precontra`, `gastogeneral_ordcamb`, `utilidad_ordcamb`, `nombreLista`, `nombreFormulario`, `tb_directorio_id`) VALUES
+(2, '777', 'Obra para COPRACSA AIO de prueba', '2012-01-15', '2012-11-15', 'Loma Umbrosa 133', 177, 1, 1, 1, 1, 1, 1, 0.50, 11, 1, '15', 10000, 100000, '1', '1', 1, 1, 0.5, 45, '11', 125, 41, 65, 74, 'Foo', 'Bar', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_opcionestop`
+-- Table structure for table `tb_opcionestop`
 --
 
-CREATE TABLE `tb_opcionestop` (
+CREATE TABLE IF NOT EXISTS `tb_opcionestop` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='opciones para aprobacion' AUTO_INCREMENT=6 ;
 
 --
--- Volcado de datos para la tabla `tb_opcionestop`
+-- Dumping data for table `tb_opcionestop`
 --
 
 INSERT INTO `tb_opcionestop` (`id`, `descripcion`) VALUES
@@ -9090,10 +9165,10 @@ INSERT INTO `tb_opcionestop` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_opcionestopusuariostop`
+-- Table structure for table `tb_opcionestopusuariostop`
 --
 
-CREATE TABLE `tb_opcionestopusuariostop` (
+CREATE TABLE IF NOT EXISTS `tb_opcionestopusuariostop` (
   `tb_usuariostop_id` int(11) NOT NULL,
   `tb_opcionestop_id` int(11) NOT NULL,
   KEY `fk_tb_opcionestopusuariostop_tb_usuariostop1` (`tb_usuariostop_id`),
@@ -9103,10 +9178,10 @@ CREATE TABLE `tb_opcionestopusuariostop` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_ordencambiocompra`
+-- Table structure for table `tb_ordencambiocompra`
 --
 
-CREATE TABLE `tb_ordencambiocompra` (
+CREATE TABLE IF NOT EXISTS `tb_ordencambiocompra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_ordencompra_id` int(11) NOT NULL,
   `fecha` date DEFAULT NULL,
@@ -9119,10 +9194,10 @@ CREATE TABLE `tb_ordencambiocompra` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_ordencambiotrabajo`
+-- Table structure for table `tb_ordencambiotrabajo`
 --
 
-CREATE TABLE `tb_ordencambiotrabajo` (
+CREATE TABLE IF NOT EXISTS `tb_ordencambiotrabajo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_ordentrabajo_id` int(11) NOT NULL,
   `fecha` date DEFAULT NULL,
@@ -9135,10 +9210,10 @@ CREATE TABLE `tb_ordencambiotrabajo` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_ordencompra`
+-- Table structure for table `tb_ordencompra`
 --
 
-CREATE TABLE `tb_ordencompra` (
+CREATE TABLE IF NOT EXISTS `tb_ordencompra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_obra_id` int(11) NOT NULL,
   `tb_personacontacto_id` int(11) NOT NULL,
@@ -9189,10 +9264,10 @@ CREATE TABLE `tb_ordencompra` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_ordentrabajo`
+-- Table structure for table `tb_ordentrabajo`
 --
 
-CREATE TABLE `tb_ordentrabajo` (
+CREATE TABLE IF NOT EXISTS `tb_ordentrabajo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_obra_id` int(11) NOT NULL,
   `tb_personacontacto_id` int(11) NOT NULL,
@@ -9243,10 +9318,10 @@ CREATE TABLE `tb_ordentrabajo` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_pais`
+-- Table structure for table `tb_pais`
 --
 
-CREATE TABLE `tb_pais` (
+CREATE TABLE IF NOT EXISTS `tb_pais` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
   `ordena_cod` int(10) DEFAULT NULL,
@@ -9254,7 +9329,7 @@ CREATE TABLE `tb_pais` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=242 ;
 
 --
--- Volcado de datos para la tabla `tb_pais`
+-- Dumping data for table `tb_pais`
 --
 
 INSERT INTO `tb_pais` (`id`, `nombre`, `ordena_cod`) VALUES
@@ -9501,29 +9576,10 @@ INSERT INTO `tb_pais` (`id`, `nombre`, `ordena_cod`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_partida`
+-- Table structure for table `tb_partidacontractualoc`
 --
 
-CREATE TABLE `tb_partida` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(100) DEFAULT NULL,
-  `tb_unidadmedida_id` int(11) NOT NULL,
-  `metrado` decimal(3,1) DEFAULT NULL,
-  `precio` decimal(3,1) DEFAULT NULL,
-  `parcial` decimal(5,2) DEFAULT NULL,
-  `tb_fase_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_tb_partida_tb_unidadmedida1` (`tb_unidadmedida_id`),
-  KEY `fk_tb_partida_tb_fase1` (`tb_fase_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tb_partidacontractualoc`
---
-
-CREATE TABLE `tb_partidacontractualoc` (
+CREATE TABLE IF NOT EXISTS `tb_partidacontractualoc` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `seccion` varchar(100) DEFAULT NULL,
   `fase` varchar(100) DEFAULT NULL,
@@ -9541,10 +9597,10 @@ CREATE TABLE `tb_partidacontractualoc` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_partidacontractualot`
+-- Table structure for table `tb_partidacontractualot`
 --
 
-CREATE TABLE `tb_partidacontractualot` (
+CREATE TABLE IF NOT EXISTS `tb_partidacontractualot` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `seccion` varchar(45) DEFAULT NULL,
   `fase` varchar(45) DEFAULT NULL,
@@ -9562,10 +9618,29 @@ CREATE TABLE `tb_partidacontractualot` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_partidaordencambiooc`
+-- Table structure for table `tb_partidacosto`
 --
 
-CREATE TABLE `tb_partidaordencambiooc` (
+CREATE TABLE IF NOT EXISTS `tb_partidacosto` (
+  `id` int(11) NOT NULL,
+  `codificacion` int(11) DEFAULT NULL,
+  `descripcion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `unidadmedida` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `metrado` decimal(3,1) DEFAULT NULL,
+  `precio` decimal(3,1) DEFAULT NULL,
+  `parcial` decimal(5,2) DEFAULT NULL,
+  `tb_fasecosto_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_tb_partidacosto_tb_fasecosto1` (`tb_fasecosto_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_partidaordencambiooc`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_partidaordencambiooc` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `seccion` varchar(45) DEFAULT NULL,
   `fase` varchar(45) DEFAULT NULL,
@@ -9583,10 +9658,10 @@ CREATE TABLE `tb_partidaordencambiooc` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_partidaordencambioot`
+-- Table structure for table `tb_partidaordencambioot`
 --
 
-CREATE TABLE `tb_partidaordencambioot` (
+CREATE TABLE IF NOT EXISTS `tb_partidaordencambioot` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `seccion` varchar(45) DEFAULT NULL,
   `fase` varchar(45) DEFAULT NULL,
@@ -9604,10 +9679,51 @@ CREATE TABLE `tb_partidaordencambioot` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_personacontacto`
+-- Table structure for table `tb_partidaventa`
 --
 
-CREATE TABLE `tb_personacontacto` (
+CREATE TABLE IF NOT EXISTS `tb_partidaventa` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codificacion` varchar(15) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `descripcion` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `unidadmedida` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `metrado` decimal(3,2) DEFAULT NULL,
+  `precio` decimal(7,2) DEFAULT NULL,
+  `parcial` decimal(7,2) DEFAULT NULL,
+  `tb_faseventa_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_tb_partidaventa_tb_faseventa1` (`tb_faseventa_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=81 ;
+
+--
+-- Dumping data for table `tb_partidaventa`
+--
+
+INSERT INTO `tb_partidaventa` (`id`, `codificacion`, `descripcion`, `unidadmedida`, `metrado`, `precio`, `parcial`, `tb_faseventa_id`) VALUES
+(65, '1.0101', 'OBRAS PROVISIONALES-', 'glb', 1.00, 65832.74, 65832.74, 118),
+(66, '1.0102', 'Almacenero', 'MES ', 1.00, 1890.00, 1890.00, 118),
+(67, '1.0103', 'Prevencionista de Riesgos', 'MES ', 2.00, 3675.00, 7350.00, 118),
+(68, '1.0104', 'Seguridad y senalizacion (senaletica, barandas de seguridad para trabajos en altura, carteles)', 'MES ', 3.00, 1196.21, 3588.63, 118),
+(69, '1.0201', 'TRABAJOS PRELIMINARES-', 'glb', 1.00, 36146.18, 36146.18, 119),
+(70, '1.0301', 'MOVIMIENTO DE TIERRAS-', 'glb', 1.00, 4733.86, 4733.86, 120),
+(71, '1.0401', 'OBRAS DE CONCRETO SIMPLE-', 'glb', 1.00, 5106.87, 5106.87, 121),
+(72, '1.0501', 'OBRAS DE CONCRETO ARMADO-', 'glb', 1.00, 99999.99, 99999.99, 122),
+(73, '2.0101', 'CIRCUITOS DERIVADOS, Alumbrado, Tomacorrientes y Salidas de Fuerza-', 'glb', 1.00, 31934.95, 31934.95, 123),
+(74, '2.0201', 'SALIDAS DE FUERZA, Pvc y Cableado-', 'glb', 1.00, 3417.65, 3417.65, 124),
+(75, '2.0301', 'SALIDAS DE CABLEADO ESTRUCTURADO, Pvc y Cajas-', 'glb', 1.00, 1320.00, 1320.00, 125),
+(76, '2.0401', 'PRUEBAS ELECTRICAS-', 'glb', 1.00, 300.00, 300.00, 126),
+(77, '2.0501', 'Consideraciones de Obra-', 'glb', 1.00, 4200.00, 4200.00, 127),
+(78, '3.0101', 'MOVIMIENTO DE TIERRA Y OTROS-', 'glb', 1.00, 5850.88, 5850.88, 128),
+(79, '3.0201', 'RED DE DESAGUE-', 'glb', 1.00, 10412.42, 10412.42, 129),
+(80, '3.0301', 'RED DE AGUA FRIA  -', 'glb', 1.00, 3019.16, 3019.16, 130);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_personacontacto`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_personacontacto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_empresa_id` int(11) NOT NULL,
   `dni` varchar(45) DEFAULT NULL,
@@ -9626,7 +9742,7 @@ CREATE TABLE `tb_personacontacto` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='contacto' AUTO_INCREMENT=2276 ;
 
 --
--- Volcado de datos para la tabla `tb_personacontacto`
+-- Dumping data for table `tb_personacontacto`
 --
 
 INSERT INTO `tb_personacontacto` (`id`, `tb_empresa_id`, `dni`, `nombre`, `cargo`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_companiacontacto_id`) VALUES
@@ -11900,10 +12016,10 @@ INSERT INTO `tb_personacontacto` (`id`, `tb_empresa_id`, `dni`, `nombre`, `cargo
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_personacontactocomun`
+-- Table structure for table `tb_personacontactocomun`
 --
 
-CREATE TABLE `tb_personacontactocomun` (
+CREATE TABLE IF NOT EXISTS `tb_personacontactocomun` (
   `id` int(11) NOT NULL,
   `nombres` varchar(250) DEFAULT NULL,
   `correo` varchar(100) DEFAULT NULL,
@@ -11918,7 +12034,7 @@ CREATE TABLE `tb_personacontactocomun` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='No tiene:  tb_empresa_id tb_viaenvio';
 
 --
--- Volcado de datos para la tabla `tb_personacontactocomun`
+-- Dumping data for table `tb_personacontactocomun`
 --
 
 INSERT INTO `tb_personacontactocomun` (`id`, `nombres`, `correo`, `tb_contactocomun_id`, `dni`, `cargo`, `fax`, `observacion`, `web`) VALUES
@@ -11936,10 +12052,10 @@ INSERT INTO `tb_personacontactocomun` (`id`, `nombres`, `correo`, `tb_contactoco
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_ppfijo`
+-- Table structure for table `tb_ppfijo`
 --
 
-CREATE TABLE `tb_ppfijo` (
+CREATE TABLE IF NOT EXISTS `tb_ppfijo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(15) DEFAULT NULL,
   `tb_proveedor_id` int(11) DEFAULT NULL,
@@ -11950,10 +12066,10 @@ CREATE TABLE `tb_ppfijo` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_ppmobile`
+-- Table structure for table `tb_ppmobile`
 --
 
-CREATE TABLE `tb_ppmobile` (
+CREATE TABLE IF NOT EXISTS `tb_ppmobile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(15) DEFAULT NULL,
   `tb_proveedor_id` int(11) DEFAULT NULL,
@@ -11964,10 +12080,10 @@ CREATE TABLE `tb_ppmobile` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_ppnextel`
+-- Table structure for table `tb_ppnextel`
 --
 
-CREATE TABLE `tb_ppnextel` (
+CREATE TABLE IF NOT EXISTS `tb_ppnextel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(15) DEFAULT NULL,
   `tb_proveedor_id` int(11) DEFAULT NULL,
@@ -11978,23 +12094,10 @@ CREATE TABLE `tb_ppnextel` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_presupuesto`
+-- Table structure for table `tb_profesion`
 --
 
-CREATE TABLE `tb_presupuesto` (
-  `tb_obra_id` int(11) NOT NULL,
-  `tb_seccion_id` int(11) NOT NULL,
-  KEY `fk_tb_presupuesto_tb_obra1` (`tb_obra_id`),
-  KEY `fk_tb_presupuesto_tb_seccion1` (`tb_seccion_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tb_profesion`
---
-
-CREATE TABLE `tb_profesion` (
+CREATE TABLE IF NOT EXISTS `tb_profesion` (
   `tb_personacontacto_id` int(11) NOT NULL,
   `tb_especialidadpersona_id` int(11) NOT NULL,
   KEY `fk_tb_profesion_tb_personacontacto1` (`tb_personacontacto_id`),
@@ -12002,7 +12105,7 @@ CREATE TABLE `tb_profesion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tb_profesion`
+-- Dumping data for table `tb_profesion`
 --
 
 INSERT INTO `tb_profesion` (`tb_personacontacto_id`, `tb_especialidadpersona_id`) VALUES
@@ -12017,10 +12120,10 @@ INSERT INTO `tb_profesion` (`tb_personacontacto_id`, `tb_especialidadpersona_id`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_proveedorpublico`
+-- Table structure for table `tb_proveedorpublico`
 --
 
-CREATE TABLE `tb_proveedorpublico` (
+CREATE TABLE IF NOT EXISTS `tb_proveedorpublico` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(250) NOT NULL,
   `ruc` varchar(11) DEFAULT NULL,
@@ -12035,10 +12138,10 @@ CREATE TABLE `tb_proveedorpublico` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_reporteporpersona`
+-- Table structure for table `tb_reporteporpersona`
 --
 
-CREATE TABLE `tb_reporteporpersona` (
+CREATE TABLE IF NOT EXISTS `tb_reporteporpersona` (
   `tb_reporte_id` int(11) DEFAULT NULL,
   `tb_personacontacto_id` int(11) DEFAULT NULL,
   `id_aleatorio` int(11) DEFAULT NULL,
@@ -12049,17 +12152,17 @@ CREATE TABLE `tb_reporteporpersona` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_reportes`
+-- Table structure for table `tb_reportes`
 --
 
-CREATE TABLE `tb_reportes` (
+CREATE TABLE IF NOT EXISTS `tb_reportes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
--- Volcado de datos para la tabla `tb_reportes`
+-- Dumping data for table `tb_reportes`
 --
 
 INSERT INTO `tb_reportes` (`id`, `descripcion`) VALUES
@@ -12083,10 +12186,10 @@ INSERT INTO `tb_reportes` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_representante`
+-- Table structure for table `tb_representante`
 --
 
-CREATE TABLE `tb_representante` (
+CREATE TABLE IF NOT EXISTS `tb_representante` (
   `tb_companiacontacto_id` int(11) NOT NULL,
   `tb_personacontacto_id` int(11) NOT NULL,
   KEY `fk_tb_representante_tb_companiacontacto1` (`tb_companiacontacto_id`),
@@ -12094,7 +12197,7 @@ CREATE TABLE `tb_representante` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tb_representante`
+-- Dumping data for table `tb_representante`
 --
 
 INSERT INTO `tb_representante` (`tb_companiacontacto_id`, `tb_personacontacto_id`) VALUES
@@ -12107,10 +12210,10 @@ INSERT INTO `tb_representante` (`tb_companiacontacto_id`, `tb_personacontacto_id
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_rubro`
+-- Table structure for table `tb_rubro`
 --
 
-CREATE TABLE `tb_rubro` (
+CREATE TABLE IF NOT EXISTS `tb_rubro` (
   `tb_companiacontacto_id` int(11) NOT NULL,
   `tb_especialidadcompania_id` int(11) NOT NULL,
   KEY `fk_tb_rubro_tb_companiacontacto1` (`tb_companiacontacto_id`),
@@ -12118,7 +12221,7 @@ CREATE TABLE `tb_rubro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla que indica la especialidad o especialidades de una emp';
 
 --
--- Volcado de datos para la tabla `tb_rubro`
+-- Dumping data for table `tb_rubro`
 --
 
 INSERT INTO `tb_rubro` (`tb_companiacontacto_id`, `tb_especialidadcompania_id`) VALUES
@@ -13031,10 +13134,10 @@ INSERT INTO `tb_rubro` (`tb_companiacontacto_id`, `tb_especialidadcompania_id`) 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_rubrocomun`
+-- Table structure for table `tb_rubrocomun`
 --
 
-CREATE TABLE `tb_rubrocomun` (
+CREATE TABLE IF NOT EXISTS `tb_rubrocomun` (
   `tb_contactocomun_id` int(11) NOT NULL,
   `tb_especialidadComun_id` int(11) NOT NULL,
   KEY `fk_tb_rubrocomun_tb_contactocomun1` (`tb_contactocomun_id`),
@@ -13042,7 +13145,7 @@ CREATE TABLE `tb_rubrocomun` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tb_rubrocomun`
+-- Dumping data for table `tb_rubrocomun`
 --
 
 INSERT INTO `tb_rubrocomun` (`tb_contactocomun_id`, `tb_especialidadComun_id`) VALUES
@@ -13070,22 +13173,62 @@ INSERT INTO `tb_rubrocomun` (`tb_contactocomun_id`, `tb_especialidadComun_id`) V
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_seccion`
+-- Table structure for table `tb_seccioncosto`
 --
 
-CREATE TABLE `tb_seccion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+CREATE TABLE IF NOT EXISTS `tb_seccioncosto` (
+  `id` int(11) NOT NULL,
+  `codificacion` int(11) DEFAULT NULL,
+  `descripcion` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `tb_obra_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_tb_seccioncosto_tb_obra1` (`tb_obra_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_telefonofijocompania`
+-- Table structure for table `tb_seccionventa`
 --
 
-CREATE TABLE `tb_telefonofijocompania` (
+CREATE TABLE IF NOT EXISTS `tb_seccionventa` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codificacion` varchar(15) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `descripcion` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `tb_obra_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_tb_seccionventa_tb_obra1` (`tb_obra_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=25 ;
+
+--
+-- Dumping data for table `tb_seccionventa`
+--
+
+INSERT INTO `tb_seccionventa` (`id`, `codificacion`, `descripcion`, `tb_obra_id`) VALUES
+(22, '1', 'ESTRUCTURAS', 2),
+(23, '2', 'INSTALACIONES ELECTRICAS', 2),
+(24, '3', 'INSTALACIONES SANITARIAS', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_session`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_session` (
+  `id_empresa` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_session` int(11) NOT NULL,
+  `id_rol` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_telefonofijocompania`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_telefonofijocompania` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(45) DEFAULT NULL,
   `tb_companiacontacto_id` int(11) NOT NULL,
@@ -13094,7 +13237,7 @@ CREATE TABLE `tb_telefonofijocompania` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Volcado de datos para la tabla `tb_telefonofijocompania`
+-- Dumping data for table `tb_telefonofijocompania`
 --
 
 INSERT INTO `tb_telefonofijocompania` (`id`, `numero`, `tb_companiacontacto_id`) VALUES
@@ -13110,10 +13253,10 @@ INSERT INTO `tb_telefonofijocompania` (`id`, `numero`, `tb_companiacontacto_id`)
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_telefonofijopersona`
+-- Table structure for table `tb_telefonofijopersona`
 --
 
-CREATE TABLE `tb_telefonofijopersona` (
+CREATE TABLE IF NOT EXISTS `tb_telefonofijopersona` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(30) DEFAULT NULL,
   `tb_personacontacto_id` int(11) NOT NULL,
@@ -13122,7 +13265,7 @@ CREATE TABLE `tb_telefonofijopersona` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=777 ;
 
 --
--- Volcado de datos para la tabla `tb_telefonofijopersona`
+-- Dumping data for table `tb_telefonofijopersona`
 --
 
 INSERT INTO `tb_telefonofijopersona` (`id`, `numero`, `tb_personacontacto_id`) VALUES
@@ -13904,10 +14047,10 @@ INSERT INTO `tb_telefonofijopersona` (`id`, `numero`, `tb_personacontacto_id`) V
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_telefonomovilcompania`
+-- Table structure for table `tb_telefonomovilcompania`
 --
 
-CREATE TABLE `tb_telefonomovilcompania` (
+CREATE TABLE IF NOT EXISTS `tb_telefonomovilcompania` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(45) DEFAULT NULL,
   `tb_companiacontacto_id` int(11) NOT NULL,
@@ -13916,7 +14059,7 @@ CREATE TABLE `tb_telefonomovilcompania` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Volcado de datos para la tabla `tb_telefonomovilcompania`
+-- Dumping data for table `tb_telefonomovilcompania`
 --
 
 INSERT INTO `tb_telefonomovilcompania` (`id`, `numero`, `tb_companiacontacto_id`) VALUES
@@ -13932,10 +14075,10 @@ INSERT INTO `tb_telefonomovilcompania` (`id`, `numero`, `tb_companiacontacto_id`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_telefonomovilpersona`
+-- Table structure for table `tb_telefonomovilpersona`
 --
 
-CREATE TABLE `tb_telefonomovilpersona` (
+CREATE TABLE IF NOT EXISTS `tb_telefonomovilpersona` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(30) DEFAULT NULL,
   `tb_personacontacto_id` int(11) NOT NULL,
@@ -13944,7 +14087,7 @@ CREATE TABLE `tb_telefonomovilpersona` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=355 ;
 
 --
--- Volcado de datos para la tabla `tb_telefonomovilpersona`
+-- Dumping data for table `tb_telefonomovilpersona`
 --
 
 INSERT INTO `tb_telefonomovilpersona` (`id`, `numero`, `tb_personacontacto_id`) VALUES
@@ -14304,10 +14447,10 @@ INSERT INTO `tb_telefonomovilpersona` (`id`, `numero`, `tb_personacontacto_id`) 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_telefononextelcompania`
+-- Table structure for table `tb_telefononextelcompania`
 --
 
-CREATE TABLE `tb_telefononextelcompania` (
+CREATE TABLE IF NOT EXISTS `tb_telefononextelcompania` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(45) DEFAULT NULL,
   `tb_companiacontacto_id` int(11) NOT NULL,
@@ -14316,7 +14459,7 @@ CREATE TABLE `tb_telefononextelcompania` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
--- Volcado de datos para la tabla `tb_telefononextelcompania`
+-- Dumping data for table `tb_telefononextelcompania`
 --
 
 INSERT INTO `tb_telefononextelcompania` (`id`, `numero`, `tb_companiacontacto_id`) VALUES
@@ -14336,10 +14479,10 @@ INSERT INTO `tb_telefononextelcompania` (`id`, `numero`, `tb_companiacontacto_id
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_telefononextelpersona`
+-- Table structure for table `tb_telefononextelpersona`
 --
 
-CREATE TABLE `tb_telefononextelpersona` (
+CREATE TABLE IF NOT EXISTS `tb_telefononextelpersona` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(30) DEFAULT NULL,
   `tb_personacontacto_id` int(11) NOT NULL,
@@ -14348,7 +14491,7 @@ CREATE TABLE `tb_telefononextelpersona` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=377 ;
 
 --
--- Volcado de datos para la tabla `tb_telefononextelpersona`
+-- Dumping data for table `tb_telefononextelpersona`
 --
 
 INSERT INTO `tb_telefononextelpersona` (`id`, `numero`, `tb_personacontacto_id`) VALUES
@@ -14729,17 +14872,17 @@ INSERT INTO `tb_telefononextelpersona` (`id`, `numero`, `tb_personacontacto_id`)
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_tipocompania`
+-- Table structure for table `tb_tipocompania`
 --
 
-CREATE TABLE `tb_tipocompania` (
+CREATE TABLE IF NOT EXISTS `tb_tipocompania` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `tb_tipocompania`
+-- Dumping data for table `tb_tipocompania`
 --
 
 INSERT INTO `tb_tipocompania` (`id`, `descripcion`) VALUES
@@ -14749,33 +14892,45 @@ INSERT INTO `tb_tipocompania` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_tipodecambio`
+-- Table structure for table `tb_tipodecambio`
 --
 
-CREATE TABLE `tb_tipodecambio` (
+CREATE TABLE IF NOT EXISTS `tb_tipodecambio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha` date DEFAULT NULL,
-  `venta` decimal(5,1) DEFAULT NULL,
-  `compra` decimal(5,1) DEFAULT NULL,
+  `fecha` date NOT NULL,
+  `sunatventa` decimal(4,3) NOT NULL,
+  `sunatcompra` decimal(4,3) NOT NULL,
   `tb_moneda_id` int(11) NOT NULL,
+  `bancoventa` decimal(4,3) NOT NULL,
+  `tb_empresa_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_tb_tipodecambio_tb_moneda1` (`tb_moneda_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  KEY `fk_tb_tipodecambio_tb_moneda1` (`tb_moneda_id`),
+  KEY `fk_tb_tipodecambio_tb_empresa1` (`tb_empresa_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `tb_tipodecambio`
+--
+
+INSERT INTO `tb_tipodecambio` (`id`, `fecha`, `sunatventa`, `sunatcompra`, `tb_moneda_id`, `bancoventa`, `tb_empresa_id`) VALUES
+(2, '2012-08-07', 2.619, 2.618, 1, 2.619, 1),
+(3, '2012-08-08', 2.620, 2.620, 1, 2.620, 1),
+(4, '2012-08-08', 2.620, 2.620, 1, 2.620, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_tipodireccion`
+-- Table structure for table `tb_tipodireccion`
 --
 
-CREATE TABLE `tb_tipodireccion` (
+CREATE TABLE IF NOT EXISTS `tb_tipodireccion` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Volcado de datos para la tabla `tb_tipodireccion`
+-- Dumping data for table `tb_tipodireccion`
 --
 
 INSERT INTO `tb_tipodireccion` (`id`, `descripcion`) VALUES
@@ -14789,17 +14944,17 @@ INSERT INTO `tb_tipodireccion` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_tipodocumento`
+-- Table structure for table `tb_tipodocumento`
 --
 
-CREATE TABLE `tb_tipodocumento` (
+CREATE TABLE IF NOT EXISTS `tb_tipodocumento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `tb_tipodocumento`
+-- Dumping data for table `tb_tipodocumento`
 --
 
 INSERT INTO `tb_tipodocumento` (`id`, `descripcion`) VALUES
@@ -14809,10 +14964,10 @@ INSERT INTO `tb_tipodocumento` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_tiposaldo`
+-- Table structure for table `tb_tiposaldo`
 --
 
-CREATE TABLE `tb_tiposaldo` (
+CREATE TABLE IF NOT EXISTS `tb_tiposaldo` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '	',
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -14821,17 +14976,17 @@ CREATE TABLE `tb_tiposaldo` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_tipovalorizacion`
+-- Table structure for table `tb_tipovalorizacion`
 --
 
-CREATE TABLE `tb_tipovalorizacion` (
+CREATE TABLE IF NOT EXISTS `tb_tipovalorizacion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `tb_tipovalorizacion`
+-- Dumping data for table `tb_tipovalorizacion`
 --
 
 INSERT INTO `tb_tipovalorizacion` (`id`, `descripcion`) VALUES
@@ -14841,41 +14996,29 @@ INSERT INTO `tb_tipovalorizacion` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_unidadmedida`
+-- Table structure for table `tb_usuario`
 --
 
-CREATE TABLE `tb_unidadmedida` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tb_usuario`
---
-
-CREATE TABLE `tb_usuario` (
+CREATE TABLE IF NOT EXISTS `tb_usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_empresa_id` int(11) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   `nombreusuario` varchar(10) DEFAULT NULL,
   `password` varchar(250) DEFAULT NULL,
-  `rol` enum('administrador','usuario') NOT NULL DEFAULT 'usuario',
+  `rol` enum('administrador','usuario','visor') NOT NULL DEFAULT 'usuario',
   PRIMARY KEY (`id`),
   KEY `fk_tb_usuario_tb_empresa1` (`tb_empresa_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Tabla de la empresa que alquila el sistema. ADMINISTRADOR,PA' AUTO_INCREMENT=11 ;
 
 --
--- Volcado de datos para la tabla `tb_usuario`
+-- Dumping data for table `tb_usuario`
 --
 
 INSERT INTO `tb_usuario` (`id`, `tb_empresa_id`, `nombre`, `nombreusuario`, `password`, `rol`) VALUES
 (1, 1, 'Tiger', 'usuario', 'usuario123', 'usuario'),
 (2, 2, 'Juan Perez', 'juan', 'juan123', 'usuario'),
 (3, 1, 'Dora', 'admin', 'admin123', 'administrador'),
-(4, 1, 'Kerry', 'Suspendiss', 'WAJ79OUI4KH', 'usuario'),
+(4, 1, 'Kerry', 'pa', 'pa123', 'visor'),
 (5, 1, 'Hannah', 'mauris.', 'TQX88LWU6PS', 'usuario'),
 (6, 1, 'Lana', 'sed', 'OCU41EEC7ZL', 'usuario'),
 (7, 1, 'Harper', 'nulla.', 'XTF64DMG5JA', 'usuario'),
@@ -14886,17 +15029,17 @@ INSERT INTO `tb_usuario` (`id`, `tb_empresa_id`, `nombre`, `nombreusuario`, `pas
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_usuariosaprobaciontemporal`
+-- Table structure for table `tb_usuariosaprobaciontemporal`
 --
 
-CREATE TABLE `tb_usuariosaprobaciontemporal` (
+CREATE TABLE IF NOT EXISTS `tb_usuariosaprobaciontemporal` (
   `tb_usuario_id` int(11) DEFAULT NULL,
   `aleatorio` int(11) DEFAULT NULL,
   `tb_opcion_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla que almacena temporalmente quienes podran aprobar acci';
 
 --
--- Volcado de datos para la tabla `tb_usuariosaprobaciontemporal`
+-- Dumping data for table `tb_usuariosaprobaciontemporal`
 --
 
 INSERT INTO `tb_usuariosaprobaciontemporal` (`tb_usuario_id`, `aleatorio`, `tb_opcion_id`) VALUES
@@ -14908,17 +15051,42 @@ INSERT INTO `tb_usuariosaprobaciontemporal` (`tb_usuario_id`, `aleatorio`, `tb_o
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_usuariosopciontemporal`
+-- Table structure for table `tb_usuarioscpms`
 --
 
-CREATE TABLE `tb_usuariosopciontemporal` (
+CREATE TABLE IF NOT EXISTS `tb_usuarioscpms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombres` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `apellidos` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `nombre_usuario` varchar(15) COLLATE utf8_spanish2_ci NOT NULL,
+  `password` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `estado` enum('activo','inactivo') COLLATE utf8_spanish2_ci NOT NULL,
+  `rol` enum('administrador','noadministrador') COLLATE utf8_spanish2_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci COMMENT='Usuarios PMS (administrador y gerentes owners cpm)' AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `tb_usuarioscpms`
+--
+
+INSERT INTO `tb_usuarioscpms` (`id`, `nombres`, `apellidos`, `nombre_usuario`, `password`, `estado`, `rol`) VALUES
+(1, 'Adminito', 'Admiapellido', 'admin', 'admin123', 'activo', 'administrador'),
+(2, 'Goofy', NULL, 'usuario', 'usuario123', 'activo', 'noadministrador');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_usuariosopciontemporal`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_usuariosopciontemporal` (
   `id_opcion` int(11) DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL,
   `aleatorio` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tb_usuariosopciontemporal`
+-- Dumping data for table `tb_usuariosopciontemporal`
 --
 
 INSERT INTO `tb_usuariosopciontemporal` (`id_opcion`, `id_usuario`, `aleatorio`) VALUES
@@ -14929,10 +15097,10 @@ INSERT INTO `tb_usuariosopciontemporal` (`id_opcion`, `id_usuario`, `aleatorio`)
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_usuariostop`
+-- Table structure for table `tb_usuariostop`
 --
 
-CREATE TABLE `tb_usuariostop` (
+CREATE TABLE IF NOT EXISTS `tb_usuariostop` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) DEFAULT NULL,
   `usuario` varchar(15) DEFAULT NULL,
@@ -14945,10 +15113,27 @@ CREATE TABLE `tb_usuariostop` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_valorizacioncompra`
+-- Table structure for table `tb_usuariovisor`
 --
 
-CREATE TABLE `tb_valorizacioncompra` (
+CREATE TABLE IF NOT EXISTS `tb_usuariovisor` (
+  `id` int(11) NOT NULL,
+  `nombres` varchar(150) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `apellidos` varchar(150) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `usuario` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `password` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `tb_empresa_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_tb_usuariovisor_tb_empresa1` (`tb_empresa_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci COMMENT='Usuario pasivo de parte del cliente';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_valorizacioncompra`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_valorizacioncompra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numeracion` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
@@ -14968,10 +15153,10 @@ CREATE TABLE `tb_valorizacioncompra` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_valorizaciontrabajo`
+-- Table structure for table `tb_valorizaciontrabajo`
 --
 
-CREATE TABLE `tb_valorizaciontrabajo` (
+CREATE TABLE IF NOT EXISTS `tb_valorizaciontrabajo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numeracion` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
@@ -14991,17 +15176,17 @@ CREATE TABLE `tb_valorizaciontrabajo` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_viaenvio`
+-- Table structure for table `tb_viaenvio`
 --
 
-CREATE TABLE `tb_viaenvio` (
+CREATE TABLE IF NOT EXISTS `tb_viaenvio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Volcado de datos para la tabla `tb_viaenvio`
+-- Dumping data for table `tb_viaenvio`
 --
 
 INSERT INTO `tb_viaenvio` (`id`, `descripcion`) VALUES
@@ -15012,45 +15197,65 @@ INSERT INTO `tb_viaenvio` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `temporal`
+-- Table structure for table `temporal`
 --
 
-CREATE TABLE `temporal` (
+CREATE TABLE IF NOT EXISTS `temporal` (
   `id_contacto` int(11) DEFAULT NULL,
   `id_obra` int(11) DEFAULT NULL,
   `random_code` char(25) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Restricciones para tablas volcadas
+-- Dumping data for table `temporal`
+--
+
+INSERT INTO `temporal` (`id_contacto`, `id_obra`, `random_code`) VALUES
+(1015, 1015, '243'),
+(1015, 1015, '243');
+
+--
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `tb_actadefinitivaoc`
+-- Constraints for table `tb_actadefinitivaoc`
 --
 ALTER TABLE `tb_actadefinitivaoc`
   ADD CONSTRAINT `fk_tb_actadefinitivaoc_tb_ordencompra1` FOREIGN KEY (`tb_ordencompra_id`) REFERENCES `tb_ordencompra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_actadefinitivaot`
+-- Constraints for table `tb_actadefinitivaot`
 --
 ALTER TABLE `tb_actadefinitivaot`
   ADD CONSTRAINT `fk_tb_actadefinitivaot_tb_ordentrabajo1` FOREIGN KEY (`tb_ordentrabajo_id`) REFERENCES `tb_ordentrabajo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_actaprovisionaloc`
+-- Constraints for table `tb_actaprovisionaloc`
 --
 ALTER TABLE `tb_actaprovisionaloc`
   ADD CONSTRAINT `fk_tb_actaprovisionaloc_tb_ordencompra1` FOREIGN KEY (`tb_ordencompra_id`) REFERENCES `tb_ordencompra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_actaprovisionalot`
+-- Constraints for table `tb_actaprovisionalot`
 --
 ALTER TABLE `tb_actaprovisionalot`
   ADD CONSTRAINT `fk_tb_actaprovisionalot_tb_ordentrabajo1` FOREIGN KEY (`tb_ordentrabajo_id`) REFERENCES `tb_ordentrabajo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_companiacontacto`
+-- Constraints for table `tb_administradorcliente`
+--
+ALTER TABLE `tb_administradorcliente`
+  ADD CONSTRAINT `fk_tb_administradorcliente_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tb_alquiler`
+--
+ALTER TABLE `tb_alquiler`
+  ADD CONSTRAINT `fk_tb_alquiler_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tb_companiacontacto`
 --
 ALTER TABLE `tb_companiacontacto`
   ADD CONSTRAINT `fk_tb_companiacontacto_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -15058,65 +15263,65 @@ ALTER TABLE `tb_companiacontacto`
   ADD CONSTRAINT `fk_tb_companiacontacto_tb_viaenvio1` FOREIGN KEY (`tb_viaenvio_id`) REFERENCES `tb_viaenvio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_comuntfijo`
+-- Constraints for table `tb_comuntfijo`
 --
 ALTER TABLE `tb_comuntfijo`
   ADD CONSTRAINT `fk_tb_comuntfijo_tb_personacontactocomun1` FOREIGN KEY (`tb_personacontactocomun_id`) REFERENCES `tb_personacontactocomun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_comuntmobile`
+-- Constraints for table `tb_comuntmobile`
 --
 ALTER TABLE `tb_comuntmobile`
   ADD CONSTRAINT `fk_tb_comuntmobile_tb_personacontactocomun1` FOREIGN KEY (`tb_personacontactocomun_id`) REFERENCES `tb_personacontactocomun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_comuntnextel`
+-- Constraints for table `tb_comuntnextel`
 --
 ALTER TABLE `tb_comuntnextel`
   ADD CONSTRAINT `fk_tb_comuntnextel_tb_personacontactocomun1` FOREIGN KEY (`tb_personacontactocomun_id`) REFERENCES `tb_personacontactocomun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_contacto`
+-- Constraints for table `tb_contacto`
 --
 ALTER TABLE `tb_contacto`
   ADD CONSTRAINT `fk_tb_contacto_tb_obra1` FOREIGN KEY (`tb_obra_id`) REFERENCES `tb_obra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_contacto_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_contactodelista`
+-- Constraints for table `tb_contactodelista`
 --
 ALTER TABLE `tb_contactodelista`
   ADD CONSTRAINT `fk_tb_contactodelista_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_contactodelista_tb_listadistribucioncontacto1` FOREIGN KEY (`tb_listadistribucioncontacto_id`) REFERENCES `tb_listadistribucioncontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_contactoenactadefinitivaoc`
+-- Constraints for table `tb_contactoenactadefinitivaoc`
 --
 ALTER TABLE `tb_contactoenactadefinitivaoc`
   ADD CONSTRAINT `fk_tb_contactoenactadefinitivaoc_tb_actadefinitivaoc1` FOREIGN KEY (`tb_actadefinitivaoc_id`) REFERENCES `tb_actadefinitivaoc` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_contactoenacta_tb_contacto1` FOREIGN KEY (`tb_contacto_id`) REFERENCES `tb_contacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_contactoenactadefinitivaot`
+-- Constraints for table `tb_contactoenactadefinitivaot`
 --
 ALTER TABLE `tb_contactoenactadefinitivaot`
   ADD CONSTRAINT `fk_tb_contactoenactadefinitivaot_tb_actadefinitivaot1` FOREIGN KEY (`tb_actadefinitivaot_id`) REFERENCES `tb_actadefinitivaot` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_contactoenacta_tb_contacto10` FOREIGN KEY (`tb_contacto_id`) REFERENCES `tb_contacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_correosecundarios`
+-- Constraints for table `tb_correosecundarios`
 --
 ALTER TABLE `tb_correosecundarios`
   ADD CONSTRAINT `fk_tb_correosecundarios_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_departamento`
+-- Constraints for table `tb_departamento`
 --
 ALTER TABLE `tb_departamento`
   ADD CONSTRAINT `tb_departamento_ibfk_1` FOREIGN KEY (`tb_pais_id`) REFERENCES `tb_pais` (`id`);
 
 --
--- Filtros para la tabla `tb_direccioncompaniacontacto`
+-- Constraints for table `tb_direccioncompaniacontacto`
 --
 ALTER TABLE `tb_direccioncompaniacontacto`
   ADD CONSTRAINT `tb_direccioncompaniacontacto_ibfk_1` FOREIGN KEY (`tb_pais_id`) REFERENCES `tb_pais` (`id`),
@@ -15126,103 +15331,103 @@ ALTER TABLE `tb_direccioncompaniacontacto`
   ADD CONSTRAINT `tb_direccioncompaniacontacto_ibfk_5` FOREIGN KEY (`tb_tipodireccion_id`) REFERENCES `tb_tipodireccion` (`id`);
 
 --
--- Filtros para la tabla `tb_directorio`
+-- Constraints for table `tb_directorio`
 --
 ALTER TABLE `tb_directorio`
   ADD CONSTRAINT `fk_tb_directorio_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_distrito`
+-- Constraints for table `tb_distrito`
 --
 ALTER TABLE `tb_distrito`
   ADD CONSTRAINT `tb_distrito_ibfk_1` FOREIGN KEY (`tb_departamento_id`) REFERENCES `tb_departamento` (`id`);
 
 --
--- Filtros para la tabla `tb_empresa`
---
-ALTER TABLE `tb_empresa`
-  ADD CONSTRAINT `fk_tb_empresa_tb_pais1` FOREIGN KEY (`tb_pais_id`) REFERENCES `tb_pais` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `tb_facturalicencia`
+-- Constraints for table `tb_facturalicencia`
 --
 ALTER TABLE `tb_facturalicencia`
   ADD CONSTRAINT `fk_table1_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_table1_tb_licencia1` FOREIGN KEY (`tb_licencia_id`) REFERENCES `tb_licencia` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_fase`
+-- Constraints for table `tb_fasecosto`
 --
-ALTER TABLE `tb_fase`
-  ADD CONSTRAINT `fk_tb_fase_tb_seccion1` FOREIGN KEY (`tb_seccion_id`) REFERENCES `tb_seccion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `tb_fasecosto`
+  ADD CONSTRAINT `fk_tb_fasecosto_tb_seccioncosto1` FOREIGN KEY (`tb_seccioncosto_id`) REFERENCES `tb_seccioncosto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_giro`
+-- Constraints for table `tb_faseventa`
+--
+ALTER TABLE `tb_faseventa`
+  ADD CONSTRAINT `fk_tb_faseventa_tb_seccionventa1` FOREIGN KEY (`tb_seccionventa_id`) REFERENCES `tb_seccionventa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tb_giro`
 --
 ALTER TABLE `tb_giro`
   ADD CONSTRAINT `tb_giro_ibfk_1` FOREIGN KEY (`tb_compania_id`) REFERENCES `tb_companiacontacto` (`id`);
 
 --
--- Filtros para la tabla `tb_listadistribucioncontacto`
+-- Constraints for table `tb_listadistribucioncontacto`
 --
 ALTER TABLE `tb_listadistribucioncontacto`
   ADD CONSTRAINT `fk_tb_listadistribucioncontacto_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_listadistribucionpersonacontacto`
+-- Constraints for table `tb_listadistribucionpersonacontacto`
 --
 ALTER TABLE `tb_listadistribucionpersonacontacto`
   ADD CONSTRAINT `fk_tb_listadistribucionpersonacontacto_tb_listadistribucionco1` FOREIGN KEY (`tb_listadistribucioncontacto_id`) REFERENCES `tb_listadistribucioncontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_listadistribucionpersonacontacto_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_modelocartapropia`
+-- Constraints for table `tb_modelocartapropia`
 --
 ALTER TABLE `tb_modelocartapropia`
   ADD CONSTRAINT `fk_tb_modelocartapropia_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_modelocontratopropio`
+-- Constraints for table `tb_modelocontratopropio`
 --
 ALTER TABLE `tb_modelocontratopropio`
   ADD CONSTRAINT `fk_tb_modelocontratopropio_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_obra`
+-- Constraints for table `tb_obra`
 --
 ALTER TABLE `tb_obra`
+  ADD CONSTRAINT `fk_tb_obra_tb_directorio1` FOREIGN KEY (`tb_directorio_id`) REFERENCES `tb_directorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_obra_tb_companiacontacto1` FOREIGN KEY (`cliente_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_obra_tb_companiacontacto2` FOREIGN KEY (`empresacontratante_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_obra_tb_companiacontacto3` FOREIGN KEY (`gerenteproyecto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_obra_tb_companiacontacto4` FOREIGN KEY (`supervisoraproyecto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_obra_tb_companiacontacto5` FOREIGN KEY (`proveedoresfacturar_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_obra_tb_departamento1` FOREIGN KEY (`tb_departamento_id`) REFERENCES `tb_departamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tb_obra_tb_directorio1` FOREIGN KEY (`tb_directorio_nombre`) REFERENCES `tb_directorio` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_obra_tb_formatopresupuesto1` FOREIGN KEY (`tb_formatopresupuesto_id`) REFERENCES `tb_formatopresupuesto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_obra_tb_moneda1` FOREIGN KEY (`tb_moneda_id`) REFERENCES `tb_moneda` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_obra_tb_tipovalorizacion1` FOREIGN KEY (`tb_tipovalorizacion_id`) REFERENCES `tb_tipovalorizacion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_opcionestopusuariostop`
+-- Constraints for table `tb_opcionestopusuariostop`
 --
 ALTER TABLE `tb_opcionestopusuariostop`
   ADD CONSTRAINT `fk_tb_opcionestopusuariostop_tb_opcionestop1` FOREIGN KEY (`tb_opcionestop_id`) REFERENCES `tb_opcionestop` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_opcionestopusuariostop_tb_usuariostop1` FOREIGN KEY (`tb_usuariostop_id`) REFERENCES `tb_usuariostop` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_ordencambiocompra`
+-- Constraints for table `tb_ordencambiocompra`
 --
 ALTER TABLE `tb_ordencambiocompra`
   ADD CONSTRAINT `fk_tb_ordencambiocompra_tb_ordencompra1` FOREIGN KEY (`tb_ordencompra_id`) REFERENCES `tb_ordencompra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_ordencambiotrabajo`
+-- Constraints for table `tb_ordencambiotrabajo`
 --
 ALTER TABLE `tb_ordencambiotrabajo`
   ADD CONSTRAINT `fk_tb_ordencambiotrabajo_tb_ordentrabajo1` FOREIGN KEY (`tb_ordentrabajo_id`) REFERENCES `tb_ordentrabajo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_ordencompra`
+-- Constraints for table `tb_ordencompra`
 --
 ALTER TABLE `tb_ordencompra`
   ADD CONSTRAINT `fk_tb_ordencompra_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -15235,7 +15440,7 @@ ALTER TABLE `tb_ordencompra`
   ADD CONSTRAINT `fk_tb_ordencompra_tb_tiposaldo1` FOREIGN KEY (`tb_tiposaldo_id`) REFERENCES `tb_tiposaldo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_ordentrabajo`
+-- Constraints for table `tb_ordentrabajo`
 --
 ALTER TABLE `tb_ordentrabajo`
   ADD CONSTRAINT `fk_tb_ordentrabajo_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -15248,38 +15453,43 @@ ALTER TABLE `tb_ordentrabajo`
   ADD CONSTRAINT `fk_tb_ordentrabajo_tb_tiposaldo1` FOREIGN KEY (`tb_tiposaldo_id`) REFERENCES `tb_tiposaldo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_partida`
---
-ALTER TABLE `tb_partida`
-  ADD CONSTRAINT `fk_tb_partida_tb_fase1` FOREIGN KEY (`tb_fase_id`) REFERENCES `tb_fase` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tb_partida_tb_unidadmedida1` FOREIGN KEY (`tb_unidadmedida_id`) REFERENCES `tb_unidadmedida` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `tb_partidacontractualoc`
+-- Constraints for table `tb_partidacontractualoc`
 --
 ALTER TABLE `tb_partidacontractualoc`
   ADD CONSTRAINT `fk_tb_partidacontractual_tb_ordencompra1` FOREIGN KEY (`tb_ordencompra_id`) REFERENCES `tb_ordencompra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_partidacontractualot`
+-- Constraints for table `tb_partidacontractualot`
 --
 ALTER TABLE `tb_partidacontractualot`
   ADD CONSTRAINT `fk_tb_partidacontractualoc_copy1_tb_ordentrabajo1` FOREIGN KEY (`tb_ordentrabajo_id`) REFERENCES `tb_ordentrabajo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_partidaordencambiooc`
+-- Constraints for table `tb_partidacosto`
+--
+ALTER TABLE `tb_partidacosto`
+  ADD CONSTRAINT `fk_tb_partidacosto_tb_fasecosto1` FOREIGN KEY (`tb_fasecosto_id`) REFERENCES `tb_fasecosto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tb_partidaordencambiooc`
 --
 ALTER TABLE `tb_partidaordencambiooc`
   ADD CONSTRAINT `fk_tb_partidaordencambiooc_tb_ordencambiocompra1` FOREIGN KEY (`tb_ordencambiocompra_id`) REFERENCES `tb_ordencambiocompra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_partidaordencambioot`
+-- Constraints for table `tb_partidaordencambioot`
 --
 ALTER TABLE `tb_partidaordencambioot`
   ADD CONSTRAINT `fk_tb_partidaordencambioot_tb_ordencambiotrabajo1` FOREIGN KEY (`tb_ordencambiotrabajo_id`) REFERENCES `tb_ordencambiotrabajo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_personacontacto`
+-- Constraints for table `tb_partidaventa`
+--
+ALTER TABLE `tb_partidaventa`
+  ADD CONSTRAINT `fk_tb_partidaventa_tb_faseventa1` FOREIGN KEY (`tb_faseventa_id`) REFERENCES `tb_faseventa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tb_personacontacto`
 --
 ALTER TABLE `tb_personacontacto`
   ADD CONSTRAINT `fk_tb_personacontacto_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -15287,139 +15497,151 @@ ALTER TABLE `tb_personacontacto`
   ADD CONSTRAINT `fk_tb_personacontacto_tb_viaenvio1` FOREIGN KEY (`tb_viaenvio_id`) REFERENCES `tb_viaenvio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_personacontactocomun`
+-- Constraints for table `tb_personacontactocomun`
 --
 ALTER TABLE `tb_personacontactocomun`
   ADD CONSTRAINT `fk_tb_personacontactocomun_tb_contactocomun1` FOREIGN KEY (`tb_contactocomun_id`) REFERENCES `tb_contactocomun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_ppfijo`
+-- Constraints for table `tb_ppfijo`
 --
 ALTER TABLE `tb_ppfijo`
   ADD CONSTRAINT `tb_ppfijo_ibfk_1` FOREIGN KEY (`tb_proveedor_id`) REFERENCES `tb_proveedorpublico` (`id`);
 
 --
--- Filtros para la tabla `tb_ppmobile`
+-- Constraints for table `tb_ppmobile`
 --
 ALTER TABLE `tb_ppmobile`
   ADD CONSTRAINT `tb_ppmobile_ibfk_1` FOREIGN KEY (`tb_proveedor_id`) REFERENCES `tb_proveedorpublico` (`id`);
 
 --
--- Filtros para la tabla `tb_ppnextel`
+-- Constraints for table `tb_ppnextel`
 --
 ALTER TABLE `tb_ppnextel`
   ADD CONSTRAINT `tb_ppnextel_ibfk_1` FOREIGN KEY (`tb_proveedor_id`) REFERENCES `tb_proveedorpublico` (`id`);
 
 --
--- Filtros para la tabla `tb_presupuesto`
---
-ALTER TABLE `tb_presupuesto`
-  ADD CONSTRAINT `fk_tb_presupuesto_tb_obra1` FOREIGN KEY (`tb_obra_id`) REFERENCES `tb_obra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tb_presupuesto_tb_seccion1` FOREIGN KEY (`tb_seccion_id`) REFERENCES `tb_seccion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `tb_profesion`
+-- Constraints for table `tb_profesion`
 --
 ALTER TABLE `tb_profesion`
   ADD CONSTRAINT `fk_tb_profesion_tb_especialidadpersona1` FOREIGN KEY (`tb_especialidadpersona_id`) REFERENCES `tb_especialidadpersona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_profesion_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_proveedorpublico`
+-- Constraints for table `tb_proveedorpublico`
 --
 ALTER TABLE `tb_proveedorpublico`
   ADD CONSTRAINT `tb_proveedorpublico_ibfk_1` FOREIGN KEY (`tb_pais_id`) REFERENCES `tb_pais` (`id`);
 
 --
--- Filtros para la tabla `tb_reporteporpersona`
+-- Constraints for table `tb_reporteporpersona`
 --
 ALTER TABLE `tb_reporteporpersona`
   ADD CONSTRAINT `tb_reporteporpersona_ibfk_1` FOREIGN KEY (`tb_reporte_id`) REFERENCES `tb_reportes` (`id`),
   ADD CONSTRAINT `tb_reporteporpersona_ibfk_2` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`);
 
 --
--- Filtros para la tabla `tb_representante`
+-- Constraints for table `tb_representante`
 --
 ALTER TABLE `tb_representante`
   ADD CONSTRAINT `fk_tb_representante_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_representante_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_rubro`
+-- Constraints for table `tb_rubro`
 --
 ALTER TABLE `tb_rubro`
   ADD CONSTRAINT `fk_tb_rubro_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_rubro_tb_especialidadcompania1` FOREIGN KEY (`tb_especialidadcompania_id`) REFERENCES `tb_especialidadcompania` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_rubrocomun`
+-- Constraints for table `tb_rubrocomun`
 --
 ALTER TABLE `tb_rubrocomun`
   ADD CONSTRAINT `fk_tb_rubrocomun_tb_contactocomun1` FOREIGN KEY (`tb_contactocomun_id`) REFERENCES `tb_contactocomun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tb_rubrocomun_tb_especialidadComun1` FOREIGN KEY (`tb_especialidadComun_id`) REFERENCES `tb_especialidadComun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tb_rubrocomun_tb_especialidadComun1` FOREIGN KEY (`tb_especialidadComun_id`) REFERENCES `tb_especialidadcomun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_telefonofijocompania`
+-- Constraints for table `tb_seccioncosto`
+--
+ALTER TABLE `tb_seccioncosto`
+  ADD CONSTRAINT `fk_tb_seccioncosto_tb_obra1` FOREIGN KEY (`tb_obra_id`) REFERENCES `tb_obra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tb_seccionventa`
+--
+ALTER TABLE `tb_seccionventa`
+  ADD CONSTRAINT `fk_tb_seccionventa_tb_obra1` FOREIGN KEY (`tb_obra_id`) REFERENCES `tb_obra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tb_telefonofijocompania`
 --
 ALTER TABLE `tb_telefonofijocompania`
   ADD CONSTRAINT `fk_tb_telefonofijocompania_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_telefonofijopersona`
+-- Constraints for table `tb_telefonofijopersona`
 --
 ALTER TABLE `tb_telefonofijopersona`
   ADD CONSTRAINT `fk_tb_telefonofijopersona_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_telefonomovilcompania`
+-- Constraints for table `tb_telefonomovilcompania`
 --
 ALTER TABLE `tb_telefonomovilcompania`
   ADD CONSTRAINT `fk_tb_telefonomovilcompania_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_telefonomovilpersona`
+-- Constraints for table `tb_telefonomovilpersona`
 --
 ALTER TABLE `tb_telefonomovilpersona`
   ADD CONSTRAINT `fk_tb_telefonomovilpersona_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_telefononextelcompania`
+-- Constraints for table `tb_telefononextelcompania`
 --
 ALTER TABLE `tb_telefononextelcompania`
   ADD CONSTRAINT `fk_tb_telefononextelcompania_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_telefononextelpersona`
+-- Constraints for table `tb_telefononextelpersona`
 --
 ALTER TABLE `tb_telefononextelpersona`
   ADD CONSTRAINT `fk_tb_telefononextelpersona_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_tipodecambio`
+-- Constraints for table `tb_tipodecambio`
 --
 ALTER TABLE `tb_tipodecambio`
-  ADD CONSTRAINT `fk_tb_tipodecambio_tb_moneda1` FOREIGN KEY (`tb_moneda_id`) REFERENCES `tb_moneda` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tb_tipodecambio_tb_moneda1` FOREIGN KEY (`tb_moneda_id`) REFERENCES `tb_moneda` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tb_tipodecambio_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_usuario`
+-- Constraints for table `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
   ADD CONSTRAINT `fk_tb_usuario_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_usuariostop`
+-- Constraints for table `tb_usuariostop`
 --
 ALTER TABLE `tb_usuariostop`
   ADD CONSTRAINT `fk_tb_usuariosparaprobacion_tb_obra1` FOREIGN KEY (`tb_obra_id`) REFERENCES `tb_obra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_valorizacioncompra`
+-- Constraints for table `tb_usuariovisor`
+--
+ALTER TABLE `tb_usuariovisor`
+  ADD CONSTRAINT `fk_tb_usuariovisor_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tb_valorizacioncompra`
 --
 ALTER TABLE `tb_valorizacioncompra`
   ADD CONSTRAINT `fk_tb_valorizacioncompra_tb_partidacontractualoc1` FOREIGN KEY (`tb_partidacontractualoc_id`) REFERENCES `tb_partidacontractualoc` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tb_valorizaciontrabajo`
+-- Constraints for table `tb_valorizaciontrabajo`
 --
 ALTER TABLE `tb_valorizaciontrabajo`
   ADD CONSTRAINT `fk_tb_valorizacioncompra_tb_partidacontractualot1` FOREIGN KEY (`tb_partidacontractualot_id`) REFERENCES `tb_partidacontractualot` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;

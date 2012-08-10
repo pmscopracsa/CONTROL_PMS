@@ -1,114 +1,32 @@
 <?php 
 require_once '../../bl/DatosObra/seccion.php';
-
 /*
  * nombre del archivo en base a la empresa, fecha y usuario
  */
-require_once '../../includes/Excel/reader.php';
-$presupuesto = new Spreadsheet_Excel_Reader();
-$presupuesto->setOutputEncoding('CP1251');
-
-/*
- * recoger data en un array multidimensional
- */
-$secciones = array();
-$fases = array();
-$partidas = array();
-
-$pivot_secciones = 0;
-$pivot_fases = 0;
-$pivot_partidas = 0;
-
-$ppto = array();
-
-$subtotal_seccion = array();
-$subtotales = array();
-$dev = 0;
-$gran_total = 0;
+require '../../includes/Excel/cpms_parser.php';
+$cpms_parser = new cpms_parser();
 
 $status = "";
 if (@$_POST["action"] == "upload") {
-	// obtenemos los datos del archivo 
-	$tamano = $_FILES["archivo"]['size'];
-	$tipo = $_FILES["archivo"]['type'];
-	$archivo = $_FILES["archivo"]['name'];
-	$prefijo = substr(md5(uniqid(rand())),0,6);
-	
-	if ($archivo != "") {
-		// guardamos el archivo a la carpeta files
-                $destino =  "../../archivos_excel/".$archivo;
-		if (copy($_FILES['archivo']['tmp_name'],$destino)) {
-                        $presupuesto->read("../../archivos_excel/".$archivo);
-                        
-                        // 2 for anidados para obtener los totales de las fases
-                        for ($index = 1; $index < $presupuesto->sheets[0]['numRows']; $index++) 
-                        {
-                            for ($index1 = 1; $index1 < $presupuesto->sheets[0]['numCols']; $index1++) 
-                            {
-                                if($index1 == 8 && ($presupuesto->sheets[0]['cells'][$index][$index1] != ""))
-                                {   
-                                    $subtotales[$dev] =$presupuesto->sheets[0]['cells'][$index][$index1];
-                                    $gran_total += $presupuesto->sheets[0]['cells'][$index][$index1];
-                                    $dev++;
-                                    continue;
-                                }
-                                if ($index1 == 1)
-                                {
-                                    continue;
-                                }
-                            }
-                        }
-                        
-                        for ($index = 1; $index < $presupuesto->sheets[0]['numRows']; $index++) {
-                            for ($index1 = 1; $index1 < $presupuesto->sheets[0]['numCols']; $index1++) {
-                                //SECCIONES - DESCRIPCION
-                                if ($index1 == 1 && ($presupuesto->sheets[0]['cells'][$index][$index1] == "1"))   {
-                                    echo 'Secciones: '.$presupuesto->sheets[0]['cells'][$index][3]."<br />";
-                                    $secciones[$pivot_secciones] = $presupuesto->sheets[0]['cells'][$index][3];
-                                    $pivot_secciones++;
-                                    $pivot_fases = 0;
-                                }
-                                //FASE
-                                if ($index1 == 1 && ($presupuesto->sheets[0]['cells'][$index][$index1] == "2")) {
-                                    echo 'Fase: '.$presupuesto->sheets[0]['cells'][$index][3]."<br />";
-                                    $fases[$pivot_secciones - 1][$pivot_fases] = $presupuesto->sheets[0]['cells'][$index][3];
-                                    $pivot_fases++;
-                                    $pivot_partidas = 0;
-                                }
-                                //PARTIDA
-                                if ($index1 == 1 && ($presupuesto->sheets[0]['cells'][$index][$index1] == "3")) {
-                                    echo 'Partida: '.$presupuesto->sheets[0]['cells'][$index][3]."<br />";
-                                    $partidas[$pivot_secciones - 1][$pivot_fases - 1][$pivot_partidas] = $presupuesto->sheets[0]['cells'][$index][3];
-                                    $pivot_partidas++;
-                                }
-                                //DETALLES DE LA PARTIDA
-                                if ($index1 == 1 && ($presupuesto->sheets[0]['cells'][$index][$index1] == "3")) {  
-                                    for ($i = 0, $j = 4; $i < 4; $i++) {
-                                        $ppto
-                                            [$secciones[$pivot_secciones - 1]]
-                                            [$fases[$pivot_secciones - 1][$pivot_fases - 1]]
-                                            [$partidas[$pivot_secciones - 1][$pivot_fases - 1][$pivot_partidas - 1]]
-                                            [$i] 
-                                            = 
-                                            $presupuesto->sheets[0]['cells'][$index][$j];
-                                        $j++;
-                                    }
-                                }
-                                if ($index1 == 1 && ($presupuesto->sheets[0]['cells'][$index][$index1] == "1")) {  
-                                    $contador = 0;
-                                    $subtotal_seccion[$contador] = $presupuesto->sheets[0]['cells'][$index][8];
-                                    $contador++;
-                                }
-                            }
-                        }
-                        unlink("../../archivos_excel/".$archivo);
-			$status = "Archivo subido: <b>".$archivo."</b>";
-		} else {
-			$status = "Error al subir el archivo";
-		}
-	} else {
-		$status = "Error al subir archivo";
-	}
+    // obtenemos los datos del archivo 
+    // $tamano = $_FILES["archivo"]['size']; $tipo = $_FILES["archivo"]['type'];
+    $archivo = $_FILES["archivo"]['name'];
+        
+    if ($archivo != "") {
+        $destino =  "../../archivos_excel/".$archivo;
+
+        if (copy($_FILES['archivo']['tmp_name'],$destino)) {
+            $cpms_parser->set_xls_file($archivo);
+            $cpms_parser->dump_xls_to_db();
+        }
+        /**
+         * RECUPERAR LOS DATOS PARA PINTAR 
+         */
+        
+        
+    } else {
+        $status = "Error al subir archivo";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -119,8 +37,8 @@ if (@$_POST["action"] == "upload") {
         <link rel="stylesheet" type="text/css" href="../../css/left_menu/superfish.css" media="screen">
         <link rel="stylesheet" type="text/css" href="../../css/left_menu/superfish-vertical.css" media="screen">
         <link rel="stylesheet" href="../../css/960/reset.css" />
-        <link rel="stylesheet" href="../../css/960/css/text.css" />
-        <link rel="stylesheet" href="../../css/960/css/960.css" />
+        <link rel="stylesheet" href="../../css/960/text.css" />
+        <link rel="stylesheet" href="../../css/960/960.css" />
         <link type="text/css" rel="stylesheet" href="../../css/jstree_pre1.0_fix_1/_docs/syntax/!style.css" />
         <link type="text/css" rel="stylesheet" href="../../css/jstree_pre1.0_fix_1/_docs/!style.css" />
         <script type="text/javascript" src="../../js/jquery1.4.2.js.js"></script>
@@ -287,7 +205,7 @@ if (@$_POST["action"] == "upload") {
 	</form>
   </tr>
   <tr>
-    <td class="text" style="color:#990000"><?php echo $status; ?></td>
+    <td class="text" style="color:#990000"><?php // echo $status; ?></td>
   </tr>
 </table>
     <!---->
@@ -304,27 +222,28 @@ if (@$_POST["action"] == "upload") {
                     <th>Parcial
             </thead>
             <tbody>
-                <tr><td bgcolor="#C0C0C0" colspan="6">Gran Total<td><?=$gran_total?>
+                <tr><td bgcolor="#C0C0C0" colspan="6">Gran Total<td><?//$gran_total?>
             <?php
-            $subtotal = 0;
-            $tr_iterator = 1;
-            foreach ($ppto as $key => $value) { //->secciones
-                echo '<tr id="row'.$tr_iterator.'" class="seccion" style="cursor:pointer;"><td bgcolor="#FFECBF">'.$key;//->>
-                foreach ($value as $key => $value) { //->fases
-                    echo '<tr class="child-row'.$tr_iterator.'" id="rowrow" style="display:none; cursor:pointer;"><td><td bgcolor="#9AEED8">'.$key;//->>
-                    echo '<td><td><td><td><td bgcolor="#cccccc">'.$subtotales[$subtotal];           $subtotal++;
-                    foreach ($value as $key => $value) { //->partidas
-                        echo '<tr class="child-row'.$tr_iterator.'" style="display:none;"><td><td><td bgcolor="#ffffff">'.$key;//->>
-                        foreach ($value as $key => $values) { //->detalle partidas
-                            echo '<td>'.$values;   
-                        }
-                    }
-                }
-                $tr_iterator++;
-            }     
+//            $subtotal = 0;
+//            $tr_iterator = 1;
+//            foreach ($ppto as $key => $value) { //->secciones
+//                echo '<tr id="row'.$tr_iterator.'" class="seccion" style="cursor:pointer;"><td bgcolor="#FFECBF">'.$key;//->>
+//                foreach ($value as $key => $value) { //->fases
+//                    echo '<tr class="child-row'.$tr_iterator.'" id="rowrow" style="display:none; cursor:pointer;"><td><td bgcolor="#9AEED8">'.$key;//->>
+//                    echo '<td><td><td><td><td bgcolor="#cccccc">'.$subtotales[$subtotal];           $subtotal++;
+//                    foreach ($value as $key => $value) { //->partidas
+//                        echo '<tr class="child-row'.$tr_iterator.'" style="display:none;"><td><td><td bgcolor="#ffffff">'.$key;//->>
+//                        foreach ($value as $key => $values) { //->detalle partidas
+//                            echo '<td>'.$values;   
+//                        }
+//                    }
+//                }
+//                $tr_iterator++;
+//            }     
             ?>
             </tbody>
         </table>
+        <input style="display: none" type="button" id="confirmarupload" />
         </div>
     <!---->
     </div>
