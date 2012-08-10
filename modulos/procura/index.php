@@ -1,4 +1,6 @@
 <?php 
+require_once '../../bl/DatosObra/seccion.php';
+
 /*
  * nombre del archivo en base a la empresa, fecha y usuario
  */
@@ -24,7 +26,6 @@ $subtotales = array();
 $dev = 0;
 $gran_total = 0;
 
-
 $status = "";
 if (@$_POST["action"] == "upload") {
 	// obtenemos los datos del archivo 
@@ -35,52 +36,51 @@ if (@$_POST["action"] == "upload") {
 	
 	if ($archivo != "") {
 		// guardamos el archivo a la carpeta files
-		//$destino =  "../../archivos_excel/".$prefijo."_".$archivo;
                 $destino =  "../../archivos_excel/".$archivo;
 		if (copy($_FILES['archivo']['tmp_name'],$destino)) {
                         $presupuesto->read("../../archivos_excel/".$archivo);
                         
-                        /*
-                        * 2 for anidados para obtener los totales de las fases
-                        */
-                        for ($index = 1; $index < $presupuesto->sheets[0]['numRows']; $index++) {
-                            for ($index1 = 1; $index1 < $presupuesto->sheets[0]['numCols']; $index1++) {
-                                if($index1 == 8 && ($presupuesto->sheets[0]['cells'][$index][$index1] != "")){
+                        // 2 for anidados para obtener los totales de las fases
+                        for ($index = 1; $index < $presupuesto->sheets[0]['numRows']; $index++) 
+                        {
+                            for ($index1 = 1; $index1 < $presupuesto->sheets[0]['numCols']; $index1++) 
+                            {
+                                if($index1 == 8 && ($presupuesto->sheets[0]['cells'][$index][$index1] != ""))
+                                {   
                                     $subtotales[$dev] =$presupuesto->sheets[0]['cells'][$index][$index1];
                                     $gran_total += $presupuesto->sheets[0]['cells'][$index][$index1];
                                     $dev++;
                                     continue;
                                 }
-                                if ($index1 == 1)                    continue;
-
+                                if ($index1 == 1)
+                                {
+                                    continue;
+                                }
                             }
                         }
                         
                         for ($index = 1; $index < $presupuesto->sheets[0]['numRows']; $index++) {
-                            //$pivot_fases = 0;
                             for ($index1 = 1; $index1 < $presupuesto->sheets[0]['numCols']; $index1++) {
-
-                                //SECCIONES
+                                //SECCIONES - DESCRIPCION
                                 if ($index1 == 1 && ($presupuesto->sheets[0]['cells'][$index][$index1] == "1"))   {
-                                    //echo 'Secciones: '.$presupuesto->sheets[0]['cells'][$index][3]."<br />";
+                                    echo 'Secciones: '.$presupuesto->sheets[0]['cells'][$index][3]."<br />";
                                     $secciones[$pivot_secciones] = $presupuesto->sheets[0]['cells'][$index][3];
                                     $pivot_secciones++;
                                     $pivot_fases = 0;
                                 }
                                 //FASE
                                 if ($index1 == 1 && ($presupuesto->sheets[0]['cells'][$index][$index1] == "2")) {
-                                    //echo 'Fase: '.$presupuesto->sheets[0]['cells'][$index][3]."<br />";
+                                    echo 'Fase: '.$presupuesto->sheets[0]['cells'][$index][3]."<br />";
                                     $fases[$pivot_secciones - 1][$pivot_fases] = $presupuesto->sheets[0]['cells'][$index][3];
                                     $pivot_fases++;
                                     $pivot_partidas = 0;
                                 }
                                 //PARTIDA
                                 if ($index1 == 1 && ($presupuesto->sheets[0]['cells'][$index][$index1] == "3")) {
-                                    //echo 'Partida: '.$presupuesto->sheets[0]['cells'][$index][3]."<br />";
+                                    echo 'Partida: '.$presupuesto->sheets[0]['cells'][$index][3]."<br />";
                                     $partidas[$pivot_secciones - 1][$pivot_fases - 1][$pivot_partidas] = $presupuesto->sheets[0]['cells'][$index][3];
                                     $pivot_partidas++;
                                 }
-
                                 //DETALLES DE LA PARTIDA
                                 if ($index1 == 1 && ($presupuesto->sheets[0]['cells'][$index][$index1] == "3")) {  
                                     for ($i = 0, $j = 4; $i < 4; $i++) {
@@ -94,7 +94,6 @@ if (@$_POST["action"] == "upload") {
                                         $j++;
                                     }
                                 }
-
                                 if ($index1 == 1 && ($presupuesto->sheets[0]['cells'][$index][$index1] == "1")) {  
                                     $contador = 0;
                                     $subtotal_seccion[$contador] = $presupuesto->sheets[0]['cells'][$index][8];
@@ -102,7 +101,7 @@ if (@$_POST["action"] == "upload") {
                                 }
                             }
                         }
-                        
+                        unlink("../../archivos_excel/".$archivo);
 			$status = "Archivo subido: <b>".$archivo."</b>";
 		} else {
 			$status = "Error al subir el archivo";
@@ -116,7 +115,7 @@ if (@$_POST["action"] == "upload") {
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>PHP upload - unijimpe</title>
+<title>PROCURA</title>
         <link rel="stylesheet" type="text/css" href="../../css/left_menu/superfish.css" media="screen">
         <link rel="stylesheet" type="text/css" href="../../css/left_menu/superfish-vertical.css" media="screen">
         <link rel="stylesheet" href="../../css/960/reset.css" />
@@ -163,15 +162,6 @@ if (@$_POST["action"] == "upload") {
         </style>
 </head>
 <body>
-    <div class="container_12">
-        <div class="clear"></div>
-        <div class="grid_3">
-        QAZ
-        </div>
-        <div class="grid_9">
-        WSX    
-        </div>
-    </div>    
 <!-- -->
 <ul class="sf-menu sf-vertical">
              <!-- -->
@@ -298,24 +288,6 @@ if (@$_POST["action"] == "upload") {
   </tr>
   <tr>
     <td class="text" style="color:#990000"><?php echo $status; ?></td>
-  </tr>
-  <tr>
-    <td height="30" class="subtitulo">Listado de Archivos Subidos </td>
-  </tr>
-  <tr>
-    <td class="infsub">
-	<?php 
-	if ($gestor = opendir('../../archivos_excel/')) {
-		echo "<ul>";
-	    while (false !== ($arch = readdir($gestor))) {
-		   if ($arch != "." && $arch != "..") {
-			   echo "<li><a href=\"../../archivos_excel/".$arch."\" class=\"linkli\">".$arch."</a></li>\n";
-		   }
-	    }
-	    closedir($gestor);
-		echo "</ul>";
-	}
-	?>	</td>
   </tr>
 </table>
     <!---->
