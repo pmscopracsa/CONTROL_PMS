@@ -258,7 +258,7 @@ session_start();
                 </fieldset>
                
                 <p>
-                    <input type="button" value="Confirmar datos iniciales" id="setuped" /> 
+                    <input type="button" value="Proceder!" id="setuped" /> 
                 </p>   
             </form>
             <div id="error"></div>
