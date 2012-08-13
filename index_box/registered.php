@@ -56,7 +56,11 @@ $(document).ready(function()
 		  	$("#msgbox").fadeTo(200,0.1,function() //start fading the messagebox
 			{ 
 			  //add message and change the class of the box and start fading
-			  $(this).html('Inicio de sesion inválido...').addClass('messageboxerror').fadeTo(900,1);
+			  $(this).html('Inicio de sesion inválido...').addClass('messageboxerror').fadeTo(900,1,function() {
+                            $("#idtxtusuaorio").val("");
+                            $("#idtxtpassword").val("");
+                            $("#idtxtusuaorio").focus();
+                          });
 			});		
                   }
 				
@@ -115,11 +119,11 @@ $(document).ready(function()
             <form class="clearfix" action="" method="post" id="login_usuario">
                 <table>
                     <tr>
-                        <td><label class="grey" for="username">Usuario:</label></td>
+                        <td><label class="grey" for="username" >Usuario:</label></td>
                         <td><input class="field" type="text" name="txtusuario" id="idtxtusuaorio" value="" size="23" /></td>
                     </tr>
                     <tr>
-                        <td><label class="grey" for="password">Contrase&ntilde;a:</label></td>
+                        <td><label class="grey" for="password" >Contrase&ntilde;a:</label></td>
                         <td><input class="field" type="password" name="txtpassword" id="idtxtpassword" size="23" /></td>
                     </tr>
                     <tr>

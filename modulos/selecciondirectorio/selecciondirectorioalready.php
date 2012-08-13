@@ -212,7 +212,7 @@ $obra_id = 0;
             </table>
         </div>
         <?php
-        if (!$_SESSION['id']) {
+        if (!@$_SESSION['id']) {
             echo "No estas permitido de ingresar a esta zona";
             echo '<h2><a href="http://192.168.1.5/control_pms/">Inicie sesión</a></h2>';
             exit;
