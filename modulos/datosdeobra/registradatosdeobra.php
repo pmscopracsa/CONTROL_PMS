@@ -106,7 +106,7 @@ $contratos = $modelos->mostrarContratos();
             $("#modal-contactos").load("modales/contactos_div.php?filtro="+filtro);
         }
         
-        $(function(){
+        $(document).ready(function(){
             /**
              * PONER LOS LIMITES INFERIOS Y SUPERIOR EN LOS MONTOS A CONTRATAR
              * Y SUS SIMBOLOS MONETARIOS RESPECTIVAMENTE, PRIMERO
@@ -375,9 +375,18 @@ $contratos = $modelos->mostrarContratos();
              * MODAL ASIGNAR USUARIOS PARA APROBACION
              */
              $("#usuarios-aprobacion").click(function(){
-                $("#div-modal-asigna_aprobacion").dialog("open");
+                $("#modal_usuariosempresa").dialog("open");
+                //$("#div-modal-asigna_aprobacion").dialog("open");
                 return false;
              });
+             
+             /**
+              * DETECTA SELECCION EN CHECKBOX DE SUPER OPCIONES RELACIONADAS CON ALGUN USUARIO
+              */
+             $('#chk_cambiarid').live("click",function() {
+                 alert($(this).parent().parent().html());
+             });
+             
              $("#div-modal-asigna_aprobacion").dialog({
                  autoOpen:false,
                  heigh:500,
@@ -1146,7 +1155,7 @@ $contratos = $modelos->mostrarContratos();
             $("#modal_usuariosempresa").dialog({
                 autoOpen:false,
                 height:350,
-                width:300,
+                width:750,
                 resizable:false,
                 closeOnEscape:false,
                 modal:true,
@@ -2157,7 +2166,7 @@ $contratos = $modelos->mostrarContratos();
                                 <input type="text" class="txtcartafianza_p" id="inputext" name="txtcarta-fianza" size="5"/>
                             </td>
                             <td>
-                                <p>Porcentaje de la carta fianza fiel cumplimiento para Contratistas/Proveedores<input  name="porcentage_fielcumplimiento" type="checkbox" /></p>
+                                <p>Porcentaje de la carta fianza fiel cumplimiento para Contratistas/Proveedores</p>
                             </td> 
                         </tr>
                         <tr>

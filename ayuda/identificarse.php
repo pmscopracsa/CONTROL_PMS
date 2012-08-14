@@ -1,3 +1,14 @@
+<?php
+//require_once '../includes/phpmailer/phpmailer.inc.php';
+//require_once '../includes/phpmailer/smtp.inc.php';
+//$mail = new phpmailer();
+//$body = "PRUEBA";
+//$mail->IsSMTP();
+//$mail->Host = "mail.google.com";
+//$mail->SMTPDebug = 2;
+//$mail->smtp
+
+?>
 <!DOCTYPE html>
 <html>
     <head>

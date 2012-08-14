@@ -109,7 +109,7 @@ if(isset($_GET['logoff']))
                         <div id="imagen">
                             <img class="logo_cliente" src="<?='img/cliente/'.$_SESSION['logo'].'.png';?>" />
                                         <a href="?logoff">Cerrar sesi&oacute;n</a>
-
+                                        <label>USUARIO:</label><a hrehref="#"><?=$_SESSION['nombre_real']?></a>
             
                         </div>
                 </div>
@@ -153,12 +153,9 @@ if(isset($_GET['logoff']))
                     </div>
                     <div title="Comunicaciones">
                     </div>
-                    <div title="Mantenimiento">
+                    <div title="Env&iacute;o de e-mails">
                         <ul class="pitem">
-                            <li><a href="#">Compa&ntilde;ias</a></li>
-                            <li><a href="#">Persona</a></li>
-                            <li><a href="#">Listas de Distribuci&oacute;n</a></li>
-                            <li><a href="#">P&aacute;ginas amarillas</a></li>
+                            <li><a href="modulos/mailing/mail.php" target="_blank">Escribir mail</a></li>
                         </ul>
                     </div>
                 </div>

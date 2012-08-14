@@ -60,7 +60,23 @@ function __autoload($name) {
      */
     function recargarEspecialidadesPorFiltro(filtro)
     {
-        $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro="+filtro);
+        //$("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro="+filtro);
+        $.ajax({
+            data:{filtro:2,id:filtro},
+            type:"GET",
+            dataType:"json",
+            url:"",
+            success:function(data) {
+                $.each(data,function(index,value) {
+                    datos = '<input id="especialidades_boxes" type="checkbox" name="especialidades[]" value="'
+                    data[index].id+
+                    '"/>'+
+                    data[index].descripcion+
+                    "<br/>";
+                    $("#divSeleccionaEspecialidad").append(datos);
+                });
+            }
+        });
     }
     
     /**

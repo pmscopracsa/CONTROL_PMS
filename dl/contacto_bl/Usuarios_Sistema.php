@@ -15,6 +15,7 @@ class Usuarios_Sistema {
     public function mostrarUsuarios()
     {
         $query = "SELECT * FROM tb_usuario ORDER BY nombre ASC";
+        //$query = "SELECT tb_usuario.*,tb_opcionestop.* FROM tb_usuario,tb_opcionestop ORDER BY nombre ASC";
         
         try
         {

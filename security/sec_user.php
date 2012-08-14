@@ -30,6 +30,7 @@ $row = mysql_fetch_array($result);
 if (mysql_num_rows($result) > 0) {
     if (strcmp($row['password'], $password) == 0) {
         echo $row['rol']; 
+        $_SESSION['nombre_real'] = $row['nombre'];
         $_SESSION['rol_usuario'] = $row['rol'];
         $_SESSION['nombre_usuario'] = $row['nombreusuario'];
         $_SESSION['rol_usuario'] = $row['rol'];

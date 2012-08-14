@@ -35,7 +35,7 @@ session_start();
         <script src="../../js/calendar/jquery-ui-1.8.18.custom.min.js"></script>
         <script src="../../js/wizard/jquery.formToWizard.js"></script> 
         <script src="../../js/wizard/jquery.validationEngine.js"></script> 
-        <script src="../../js/wizard/jquery.validationEngine-en.js"></script> 
+        <script src="../../js/wizard/jquery.validationEngine-es.js"></script> 
         <style>
         body { font-family:Lucida Sans, Arial, Helvetica, Sans-Serif; font-size:13px; margin:20px;}
         #header { text-align:center; border-bottom:solid 1px #b2b3b5; margin: 0 0 20px 0; }

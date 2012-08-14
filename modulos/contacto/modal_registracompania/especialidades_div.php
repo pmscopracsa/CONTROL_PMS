@@ -15,6 +15,18 @@ if ($q == "1") {
                 $valor[1].
                 '<br />';
     }
+} elseif ($q == "2") {
+    $query = "SELECT * FROM tb_especialidadcompania ORDER BY descripcion ASC";
+    $result = mysql_query($query);
+    $especialidades = array();
+    $i = 0;
+    
+    while ($res = mysql_fetch_assoc($result)) {
+        $especialidades[$i]['id'] = $res['id'];
+        $especialidades[$i]['descripcion'] = $res['descripcion'];
+        $i++;
+    }
+    echo json_encode($especialidades);
 } else {
     $especialidadcompania->setDescripcion($q);
     $especialidades = $especialidadcompania->mostrarEspecialidadesPorNombre();
