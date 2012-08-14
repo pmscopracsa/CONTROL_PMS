@@ -159,6 +159,7 @@ session_start();
          * Seleccion de Obra
          */
         $("#setuped").click(function() {
+<<<<<<< HEAD
             var linkDestino = "";
             $.ajax({
                 type:"POST",
@@ -175,8 +176,56 @@ session_start();
                 success:function(){
                     linkDestino = "../../index_usuario.php?"+Math.random();
                     $("body").fadeOut(2000, redireccionaEditar(linkDestino));
+=======
+            $.ajax({
+                type:"POST",
+                url:"../../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=seteocambiomoneda",
+                data:{ventasunat:$("#idtxtvsunat").val()
+                    ,comprasunat:$("#idtxtcsunat").val()
+                    ,iddirectorio:$("#idtxtdirectorio").val()  
+                    ,idmoneda:$("#txtidmonedaid").val()
+                    ,idobra:$("#idtxtobra").val()
+                    ,idempresa:<?=$_SESSION['id']?>},
+                success:function() {
+                    linkDestino = "../../index_usuario.php";
+                    $("body").fadeOut(2000, redireccionaEditar(linkDestino));
                 }
             });
+            /*
+            $("#txtpmtvsunat").val($("#idtxtvsunat").val());
+            $("#txtpmtcsunat").val($("#idtxtcsunat").val());
+            $("#txtpmtvbanco").val($("#idtxtvbanco").val());
+            $("#txtpmtdirectorio").val($("#idtxtdirectorio").val());
+            $("#txtpmtobra").val($("#idtxtobra").val());
+            
+            $("#parametros").dialog({
+                resizable:false,
+                height:340,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Proceder":function() {
+                        $.ajax({
+                            type:"POST",
+                            url:"../../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=seteocambiomoneda",
+                            data:{ventasunat:$("#idtxtvsunat").val()
+                                ,comprasunat:$("#idtxtcsunat").val()
+                                ,iddirectorio:$("#idtxtdirectorio").val()  
+                                ,idmoneda:$("#txtidmonedaid").val()
+                                ,idobra:$("#idtxtobra").val()
+                                ,idempresa:<?=$_SESSION['id']?>},
+                            success:function() {
+                                linkDestino = "../../index_usuario.php";
+                                $("body").fadeOut(2000, redireccionaEditar(linkDestino));
+                            }
+                        });
+                    },
+                    "Cancelar":function() {
+                        $(this).dialog("close");
+                    }
+>>>>>>> Sin modal
+                }
+            });*/
         });
         
         /**
@@ -279,7 +328,11 @@ session_start();
             </form>
             <div id="error"></div>
             <div class="container tutorial-info">
+<<<<<<< HEAD
                 <a href="../../index_box/registered.php"><?=$_SESSION['usr']?></a>
+=======
+                    <a href="../../index_box/registered.php"><?=$_SESSION['usr']?></a>
+>>>>>>> Sin modal
             </div>
         </div>
         <?php
