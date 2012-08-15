@@ -39,8 +39,12 @@ $(document).ready(function()
                                       url:"../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=existecambio",
                                       data:{id_empresa:<?=$_SESSION['id']?>},
                                       success:function(res) {
-                                          if (res == "already") document.location = '../modulos/selecciondirectorio/selecciondirectorioalready.php';
-                                          else if (res == "notyet") document.location = '../modulos/selecciondirectorio/selecciondirectorio.php';       
+                                          if (res == "already") {
+                                              window.location.href = '../modulos/selecciondirectorio/selecciondirectorioalready.php';
+                                          }
+                                          else if (res == "notyet") {
+                                              window.location.href = '../modulos/selecciondirectorio/selecciondirectorio.php';       
+                                          }
                                       }
                                   });
                               }
@@ -125,6 +129,10 @@ $(document).ready(function()
                     <tr>
                         <td><label class="grey" for="password" >Contrase&ntilde;a:</label></td>
                         <td><input class="field" type="password" name="txtpassword" id="idtxtpassword" size="23" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="checkbox" checked="checked"/>Recordarme</td>
                     </tr>
                     <tr>
                         <td></td>

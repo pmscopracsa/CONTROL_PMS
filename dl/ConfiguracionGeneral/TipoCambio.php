@@ -1,5 +1,6 @@
 <?php
-require_once 'Conexion.php';
+define('__ROOT__', dirname(dirname(__FILE__)));
+require_once __ROOT__.'/Conexion.php';
 /*
  *CRUD
  */
@@ -22,13 +23,12 @@ class TipoCambio
     public function c_tipocambio()
     {
         $query = "INSERT INTO tb_tipodecambio 
-        (id,fecha,sunatventa,sunatcompra,tb_moneda_id,bancoventa,tb_empresa_id) VALUES(
+        (id,fecha,sunatventa,sunatcompra,tb_moneda_id,tb_empresa_id) VALUES(
         NULL
         ,CURDATE()
         ,$this->_sunatventa
         ,$this->_sunatcompra
         ,$this->_tb_moneda_id
-        ,$this->_bancoventa
         ,$this->_tb_empresa_id
         )";
         
@@ -59,7 +59,6 @@ class TipoCambio
         $query = "SELECT 
         sunatventa
         ,sunatcompra
-        ,bancoventa
         FROM tb_tipodecambio WHERE fecha = CURDATE() AND  tb_empresa_id = $this->_tb_empresa_id";
         
         try {
@@ -78,7 +77,6 @@ class TipoCambio
             while ($reg = mysql_fetch_array($rs)) {
                 array_push($cambio, $reg['sunatventa']);
                 array_push($cambio, $reg['sunatcompra']);
-                array_push($cambio, $reg['bancoventa']);
             }
             return $cambio;
         } catch (Exception $ex) {

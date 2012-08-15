@@ -532,25 +532,39 @@ function __autoload($name) {
        /**
         * AUTOCOMPLETAR SEGUN NOMBRE DE LA EMPRESA
         */
-       $(".nombre_empresa").autocomplete("../../bl/Contacto/mantenimiento/autocompletadoEmpresas.php",{
-           width:260,
-           matchContains:true,
-           selectFirst:false
-       });
+//       $(".nombre_empresa").autocomplete("../../bl/Contacto/mantenimiento/autocompletadoEmpresas.php",{
+//           width:260,
+//           matchContains:true,
+//           selectFirst:false
+//       });
+      $(".ruc_empresa").focusout(function() {
+          $.ajax({
+              type:"GET",
+              url:"../../bl/Contacto/mantenimiento/verificarExistenciaEmpresa.php",
+              data:{ruc_empresa:$(".ruc_empresa").val()},
+              success:function(data) {
+                  if (data == "tiene") {
+                      alert("LA EMPRESA QUE INTENTA REGISTRAR YA EXISTE");
+                      $(".ruc_empresa").val("");
+                      $(".ruc_empresa").focus();
+                  }
+              }
+          });
+      });  
        /**
         * AUTOCOMPLETAR SEGUN RUC DE LA EMPRESA
         */
-      $(".ruc_empresa").autocomplete("../../bl/Contacto/mantenimiento/autocompletadoEmpresasPorRuc.php",{
-           width:260,
-           matchContains:true,
-           selectFirst:false
-       });
+//      $(".ruc_empresa").autocomplete("../../bl/Contacto/mantenimiento/autocompletadoEmpresasPorRuc.php",{
+//           width:260,
+//           matchContains:true,
+//           selectFirst:false
+//       });
        
        $("#edita").click(function(e) {
            e.preventDefault();
            $("#modal-escogeEmpresa").dialog("open");
            return false;
-       })
+       });
        
        $("#modal-escogeEmpresa").dialog({
            autoOpen:false,
@@ -610,12 +624,11 @@ function __autoload($name) {
                </tr>
                <tr class="alt">
                    <td><label for="ruc">RUC:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input  class="ruc_empresa" id="inputext" type="text" size="70" placeholder="INGRESE EL RUC COMO DATO NUEVO O EMPIECE A TIPEAR UN RUC EXISTENTE" name="ruc" /></td>
+                   <td><input  class="ruc_empresa" id="inputext" type="text" size="70" name="ruc" /></td>
                </tr>
                <tr>
                    <td><label for="nombre">Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input class="nombre_empresa" id="inputext" type="text" size="70" placeholder="INGRESE EL NOMBRE COMO DATO NUEVO O EMPIECE A TIPEAR UNO YA EXISTENTE" name="nombre" /></td>
-                   <td><a id="edita" href="#"><img src="../../img/search.png" /></a></td>
+                   <td><input class="nombre_empresa" id="inputext" type="text" size="70"  name="nombre" /></td>
                </tr>
                <tr>
                    <td><label for="nombre_comercial">Nombre Comercial:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>

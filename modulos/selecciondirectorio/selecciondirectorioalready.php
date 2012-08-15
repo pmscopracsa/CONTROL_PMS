@@ -167,29 +167,26 @@ $obra_id = 0;
         /**
          * CONFIRMAR DATOS INICIALES
          * =========================
-         * Si se hace click al boton "Proceder" se asumirá que el usuario
-         * va a trabajar todos los modulos con estos datos en memoria:
-         * Seleccion de Directorio
-         * Seleccion de Obra
+         * GUARDAMOS LOS VALORES GUARDADOS POR EL USUARIO
+         * DIRECTORIO y OBRA (PROYECTO)
+         * SE ASUME QUE EL DATO DE CAMBIO DE MONEDA YA
+         * SE HA SALVADO EN LA DB
          */
         $("#setuped").click(function() {
-            $("#txtpmtdirectorio").val($("#idtxtdirectorio").val());
-            $("#txtpmtobra").val($("#idtxtobra").val());
-            
-            $("#parametros").dialog({
-                resizable:false,
-                height:200,
-                width:450,
-                modal:true,
-                buttons:{
-                    "Proceder":function() {
-                        linkDestino = "../../index_usuario.php";
-                        $("body").fadeOut(2000, redireccionaEditar(linkDestino));
-                        
-                    },
-                    "Cancelar":function() {
-                        $(this).dialog("close");
-                    }
+            alert($("#idtxtidobra").val());
+            $.ajax({
+                type:"POST",
+                url:"../../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=salvardirectorioobra",
+                data:{
+                    id_usuario:<?=$_SESSION['id_usuario']?>
+                    ,id_session:<?=session_id()?>
+                    ,id_empresa:<?=$_SESSION['id']?>
+                    ,id_directorio:$("#idtxtiddirectorio").val()
+                    ,id_obra:$("#idtxtidobra").val()
+                },
+                success:function(){
+                    linkDestino = "../../index_usuario.php";
+                    $("body").fadeOut(2000, redireccionaEditar(linkDestino));
                 }
             });
         });
@@ -205,12 +202,6 @@ $obra_id = 0;
     </script>
     </head>
     <body>
-        <div id="parametros" title="Guardar datos para mi sesión de trabajo" style="display: none">
-            <table>
-                <tr><td>Directorio</td><td><input type="text" id="txtpmtdirectorio" READONLY/></td></tr>
-                <tr><td>Obra</td><td><input type="text" id="txtpmtobra" READONLY/></td></tr>
-            </table>
-        </div>
         <?php
         if (!@$_SESSION['id']) {
             echo "No estas permitido de ingresar a esta zona";
@@ -230,7 +221,7 @@ $obra_id = 0;
                 </fieldset>    
                 <fieldset>
                     <legend>Selecci&oacute;n de Proyecto</legend>
-                    <div id="divSeleccionaObra" title="Seleccionar Obra">QWERTY</div> 
+                    <div id="divSeleccionaObra" title="Seleccionar Obra"></div> 
                     <input type="text" id="idtxtobra" name="txtobra" class="validate[required]" READONLY/>
                     <!-- CAMPO OCULTO QUE RETINENE EL ID DE LA OBRA SELECCIONADA -->
                     <input type="hidden" id="idtxtidobra" name="txtidobra" value="" READONLY />
@@ -245,7 +236,10 @@ $obra_id = 0;
             <div class="container tutorial-info" id="infocambiomoneda" ></div>
             <div id="error"></div>
             <div class="container tutorial-info">
-                <a href="../../index.php"><?=$_SESSION['usr']?></a>
+                <a href="../../index_box/registered.php"><?=$_SESSION['usr']?></a>|
+                <a href=""><?=$_SESSION['rol_usuario']?></a>|
+                <a href=""><?=session_id()?></a>|
+                <a href=""><?=$_SESSION['id_usuario']?></a>
             </div>
         </div>
         <?php

@@ -158,39 +158,22 @@ session_start();
          * Seleccion de Obra
          */
         $("#setuped").click(function() {
-            $("#txtpmtvsunat").val($("#idtxtvsunat").val());
-            $("#txtpmtcsunat").val($("#idtxtcsunat").val());
-            $("#txtpmtvbanco").val($("#idtxtvbanco").val());
-            $("#txtpmtdirectorio").val($("#idtxtdirectorio").val());
-            $("#txtpmtobra").val($("#idtxtobra").val());
-            
-            $("#parametros").dialog({
-                resizable:false,
-                height:340,
-                width:450,
-                modal:true,
-                buttons:{
-                    "Proceder":function() {
-                        $.ajax({
-                            type:"POST",
-                            url:"../../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=seteocambiomoneda",
-                            data:{ventasunat:$("#idtxtvsunat").val()
-                                ,comprasunat:$("#idtxtcsunat").val()
-                                ,iddirectorio:$("#idtxtdirectorio").val()  
-                                ,idmoneda:$("#txtidmonedaid").val()
-                                ,idobra:$("#idtxtobra").val()
-                                ,idempresa:<?=$_SESSION['id']?>},
-                            success:function() {
-                                linkDestino = "../../index_usuario.php";
-                                $("body").fadeOut(2000, redireccionaEditar(linkDestino));
-                            }
-                        });
-                    },
-                    "Cancelar":function() {
-                        $(this).dialog("close");
-                    }
+            $.ajax({
+                type:"GET",
+                url:"http://www.google.com",
+                data:{
+                    id_directorio:$("#idtxtdirectorio").val()
+                    ,id_obra:$("#idtxtobra").val()
+                    ,ventasunat:$("#idtxtvsunat").val()
+                    ,comprasunat:$("#idtxtcsunat").val()},
+                success:function(){
+                    linkDestino = "../../index_usuario.php";
+                    $("body").fadeOut(2000, redireccionaEditar(linkDestino));
+                },
+                error:function() {
+                    
                 }
-            });
+            })
         });
         
         /**
@@ -204,19 +187,10 @@ session_start();
     </script>
     </head>
     <body>
-        <div id="parametros" title="Guardar datos para mi sesión de trabajo" style="display: none">
-            <table>
-                <tr><td>Venta Sunat</td><td><input type="text" id="txtpmtvsunat" READONLY/></td></tr>
-                <tr><td>Compra Sunat</td><td><input type="text" id="txtpmtcsunat" READONLY/></td></tr>
-                <tr><td>Venta Banco</td><td><input type="text" id="txtpmtvbanco" READONLY/></td></tr>
-                <tr><td>Directorio</td><td><input type="text" id="txtpmtdirectorio" READONLY/></td></tr>
-                <tr><td>Obra</td><td><input type="text" id="txtpmtobra" READONLY/></td></tr>
-            </table>
-        </div>
         <?php
         if (!$_SESSION['id']) {
             echo "No estas permitido de ingresar a esta zona";
-            echo '<h2><a href="http://localhost/control_pms/">Inicie sesión</a></h2>';
+            echo '<h2><a href="http://192.168.1.5/control_pms/">Inicie sesión</a></h2>';
             exit;
         }
         else {
@@ -233,8 +207,8 @@ session_start();
                     <input type="text" id="idtxtvsunat" name="txtvsunat"  value="" size="5" maxlength="5" class="validate[required]"/>
                     <label for="compraSunat">T.C. Compra SUNAT</label>
                     <input type="text" id="idtxtcsunat" name="txtcsunat" value="" size="5" maxlength="5" class="validate[required,maxSize[5]]" />
-                    <label for="ventaBanco">T.C Venta Banco</label>
-                    <input type="text" id="idtxtvbanco" name="txtvbanco" value="" size="5"  class="validate[required]" maxlength="5"/>
+<!--                    <label for="ventaBanco">T.C Venta Banco</label>
+                    <input type="text" id="idtxtvbanco" name="txtvbanco" value="" size="5"  class="validate[required]" maxlength="5"/>-->
                     <hr /><br />
                     <div id="sunatinfo">
                         <iframe scrolling="auto" width="700" height="250" marginwidth="50" marginheight="50" name="sunat" src="http://www.sunat.gob.pe/cl-at-ittipcam/tcS01Alias"></iframe>
@@ -263,7 +237,7 @@ session_start();
             </form>
             <div id="error"></div>
             <div class="container tutorial-info">
-                <a href="../../index.php"><?=$_SESSION['usr']?></a>
+                <a href="../../index_box/registered.php"><?=$_SESSION['usr']?></a>
             </div>
         </div>
         <?php
