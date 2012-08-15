@@ -1,0 +1,15 @@
+.visibleDiv, #topRight
+{
+    position: fixed;
+    width: 150px;
+    border: solid 1px #e1e1e1;
+    vertical-align: middle;
+    background: #ffdab9;
+    text-align: left
+}
+
+#topRight
+{
+    top:50%;
+    
+}

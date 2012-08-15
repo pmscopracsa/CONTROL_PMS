@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 11, 2012 at 01:08 AM
+-- Generation Time: Aug 15, 2012 at 02:20 AM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -8363,7 +8363,7 @@ CREATE TABLE IF NOT EXISTS `tb_especialidadcompania` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=323 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=335 ;
 
 --
 -- Dumping data for table `tb_especialidadcompania`
@@ -8629,8 +8629,6 @@ INSERT INTO `tb_especialidadcompania` (`id`, `descripcion`) VALUES
 (257, 'VTA. MIN. EN PUESTO DE VENTA'),
 (258, 'ZAPATERIA'),
 (270, 'DAMAS DE COMPAÃ‘IA'),
-(275, 'non arcu. Vivamus sit'),
-(276, 'non arcu. Vivamus sit'),
 (278, 'in'),
 (279, 'in'),
 (280, 'non arcu. Vivamus sit'),
@@ -8640,29 +8638,13 @@ INSERT INTO `tb_especialidadcompania` (`id`, `descripcion`) VALUES
 (284, 'test102'),
 (285, 'one'),
 (286, 'Zooropa'),
-(287, 'ALIVE'),
-(289, 'FOOFIGTHER'),
-(290, 'eee'),
-(291, 'EDDY'),
-(293, 'glowsy'),
-(294, 'Even Flow'),
-(296, 'google'),
-(297, 'faixa'),
-(299, 'popup'),
-(300, 'not release'),
-(307, 'EEEE'),
-(308, 'EEE12'),
-(312, 'QAA'),
-(313, 'A11'),
-(314, 'A13'),
-(315, 'A_NEW'),
-(316, 'A15'),
-(317, 'A16'),
-(318, 'A17'),
-(319, 'a123'),
-(320, 'A1234'),
-(321, 'AAAA'),
-(322, 'A321');
+(328, 'A'),
+(329, 'AA'),
+(330, 'AAA'),
+(331, 'A1'),
+(332, 'A2'),
+(333, 'A3'),
+(334, 'A4');
 
 -- --------------------------------------------------------
 
@@ -8769,26 +8751,7 @@ CREATE TABLE IF NOT EXISTS `tb_faseventa` (
   `tb_seccionventa_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_faseventa_tb_seccionventa1` (`tb_seccionventa_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=131 ;
-
---
--- Dumping data for table `tb_faseventa`
---
-
-INSERT INTO `tb_faseventa` (`id`, `codificacion`, `descripcion`, `tb_seccionventa_id`) VALUES
-(118, '1.01', 'OBRAS PROVISIONALES', 22),
-(119, '1.02', 'TRABAJOS PRELIMINARES', 22),
-(120, '1.03', 'MOVIMIENTO DE TIERRAS', 22),
-(121, '1.04', 'OBRAS DE CONCRETO SIMPLE', 22),
-(122, '1.05', 'OBRAS DE CONCRETO ARMADO', 22),
-(123, '2.01', 'CIRCUITOS DERIVADOS, Alumbrado, Tomacorrientes y Salidas de Fuerza', 23),
-(124, '2.02', 'SALIDAS DE FUERZA, Pvc y Cableado', 23),
-(125, '2.03', 'SALIDAS DE CABLEADO ESTRUCTURADO, Pvc y Cajas', 23),
-(126, '2.04', 'PRUEBAS ELECTRICAS', 23),
-(127, '2.05', 'Consideraciones de Obra', 23),
-(128, '3.01', 'MOVIMIENTO DE TIERRA Y OTROS', 24),
-(129, '3.02', 'RED DE DESAGUE', 24),
-(130, '3.03', 'RED DE AGUA FRIA  ', 24);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=794 ;
 
 -- --------------------------------------------------------
 
@@ -9693,29 +9656,7 @@ CREATE TABLE IF NOT EXISTS `tb_partidaventa` (
   `tb_faseventa_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_partidaventa_tb_faseventa1` (`tb_faseventa_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=81 ;
-
---
--- Dumping data for table `tb_partidaventa`
---
-
-INSERT INTO `tb_partidaventa` (`id`, `codificacion`, `descripcion`, `unidadmedida`, `metrado`, `precio`, `parcial`, `tb_faseventa_id`) VALUES
-(65, '1.0101', 'OBRAS PROVISIONALES-', 'glb', 1.00, 65832.74, 65832.74, 118),
-(66, '1.0102', 'Almacenero', 'MES ', 1.00, 1890.00, 1890.00, 118),
-(67, '1.0103', 'Prevencionista de Riesgos', 'MES ', 2.00, 3675.00, 7350.00, 118),
-(68, '1.0104', 'Seguridad y senalizacion (senaletica, barandas de seguridad para trabajos en altura, carteles)', 'MES ', 3.00, 1196.21, 3588.63, 118),
-(69, '1.0201', 'TRABAJOS PRELIMINARES-', 'glb', 1.00, 36146.18, 36146.18, 119),
-(70, '1.0301', 'MOVIMIENTO DE TIERRAS-', 'glb', 1.00, 4733.86, 4733.86, 120),
-(71, '1.0401', 'OBRAS DE CONCRETO SIMPLE-', 'glb', 1.00, 5106.87, 5106.87, 121),
-(72, '1.0501', 'OBRAS DE CONCRETO ARMADO-', 'glb', 1.00, 99999.99, 99999.99, 122),
-(73, '2.0101', 'CIRCUITOS DERIVADOS, Alumbrado, Tomacorrientes y Salidas de Fuerza-', 'glb', 1.00, 31934.95, 31934.95, 123),
-(74, '2.0201', 'SALIDAS DE FUERZA, Pvc y Cableado-', 'glb', 1.00, 3417.65, 3417.65, 124),
-(75, '2.0301', 'SALIDAS DE CABLEADO ESTRUCTURADO, Pvc y Cajas-', 'glb', 1.00, 1320.00, 1320.00, 125),
-(76, '2.0401', 'PRUEBAS ELECTRICAS-', 'glb', 1.00, 300.00, 300.00, 126),
-(77, '2.0501', 'Consideraciones de Obra-', 'glb', 1.00, 4200.00, 4200.00, 127),
-(78, '3.0101', 'MOVIMIENTO DE TIERRA Y OTROS-', 'glb', 1.00, 5850.88, 5850.88, 128),
-(79, '3.0201', 'RED DE DESAGUE-', 'glb', 1.00, 10412.42, 10412.42, 129),
-(80, '3.0301', 'RED DE AGUA FRIA  -', 'glb', 1.00, 3019.16, 3019.16, 130);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=897 ;
 
 -- --------------------------------------------------------
 
@@ -13198,16 +13139,7 @@ CREATE TABLE IF NOT EXISTS `tb_seccionventa` (
   `tb_obra_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_seccionventa_tb_obra1` (`tb_obra_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=25 ;
-
---
--- Dumping data for table `tb_seccionventa`
---
-
-INSERT INTO `tb_seccionventa` (`id`, `codificacion`, `descripcion`, `tb_obra_id`) VALUES
-(22, '1', 'ESTRUCTURAS', 2),
-(23, '2', 'INSTALACIONES ELECTRICAS', 2),
-(24, '3', 'INSTALACIONES SANITARIAS', 2);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=178 ;
 
 -- --------------------------------------------------------
 
@@ -15006,7 +14938,10 @@ CREATE TABLE IF NOT EXISTS `tb_usuario` (
   `nombreusuario` varchar(10) DEFAULT NULL,
   `password` varchar(250) DEFAULT NULL,
   `rol` enum('administrador','usuario','visor') NOT NULL DEFAULT 'usuario',
+  `email` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `nombreusuario_UNIQUE` (`nombreusuario`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `fk_tb_usuario_tb_empresa1` (`tb_empresa_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Tabla de la empresa que alquila el sistema. ADMINISTRADOR,PA' AUTO_INCREMENT=11 ;
 
@@ -15014,17 +14949,17 @@ CREATE TABLE IF NOT EXISTS `tb_usuario` (
 -- Dumping data for table `tb_usuario`
 --
 
-INSERT INTO `tb_usuario` (`id`, `tb_empresa_id`, `nombre`, `nombreusuario`, `password`, `rol`) VALUES
-(1, 1, 'Tiger', 'usuario', 'usuario123', 'usuario'),
-(2, 2, 'Juan Perez', 'juan', 'juan123', 'usuario'),
-(3, 1, 'Dora', 'admin', 'admin123', 'administrador'),
-(4, 1, 'Kerry', 'pa', 'pa123', 'visor'),
-(5, 1, 'Hannah', 'mauris.', 'TQX88LWU6PS', 'usuario'),
-(6, 1, 'Lana', 'sed', 'OCU41EEC7ZL', 'usuario'),
-(7, 1, 'Harper', 'nulla.', 'XTF64DMG5JA', 'usuario'),
-(8, 1, 'Vivian', 'orci', 'ONB16WOU0TW', 'usuario'),
-(9, 1, 'Odysseus', 'adipiscing', 'ZCA88FNH3AO', 'usuario'),
-(10, 1, 'Harrison', 'ipsum', 'BIH68ITM1HG', 'usuario');
+INSERT INTO `tb_usuario` (`id`, `tb_empresa_id`, `nombre`, `nombreusuario`, `password`, `rol`, `email`) VALUES
+(1, 1, 'Tiger', 'usuario', 'usuario123', 'usuario', NULL),
+(2, 2, 'Juan Perez', 'juan', 'juan123', 'usuario', NULL),
+(3, 1, 'Dora', 'admin', 'admin123', 'administrador', NULL),
+(4, 1, 'Kerry', 'pa', 'pa123', 'visor', NULL),
+(5, 1, 'Hannah', 'mauris.', 'TQX88LWU6PS', 'usuario', NULL),
+(6, 1, 'Lana', 'sed', 'OCU41EEC7ZL', 'usuario', NULL),
+(7, 1, 'Harper', 'nulla.', 'XTF64DMG5JA', 'usuario', NULL),
+(8, 1, 'Vivian', 'orci', 'ONB16WOU0TW', 'usuario', NULL),
+(9, 1, 'Odysseus', 'adipiscing', 'ZCA88FNH3AO', 'usuario', NULL),
+(10, 1, 'Harrison', 'ipsum', 'BIH68ITM1HG', 'usuario', NULL);
 
 -- --------------------------------------------------------
 
@@ -15059,19 +14994,21 @@ CREATE TABLE IF NOT EXISTS `tb_usuarioscpms` (
   `nombres` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
   `apellidos` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `nombre_usuario` varchar(15) COLLATE utf8_spanish2_ci NOT NULL,
-  `password` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `password` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
   `estado` enum('activo','inactivo') COLLATE utf8_spanish2_ci NOT NULL,
   `rol` enum('administrador','noadministrador') COLLATE utf8_spanish2_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `email` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci COMMENT='Usuarios PMS (administrador y gerentes owners cpm)' AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `tb_usuarioscpms`
 --
 
-INSERT INTO `tb_usuarioscpms` (`id`, `nombres`, `apellidos`, `nombre_usuario`, `password`, `estado`, `rol`) VALUES
-(1, 'Adminito', 'Admiapellido', 'admin', 'admin123', 'activo', 'administrador'),
-(2, 'Goofy', NULL, 'usuario', 'usuario123', 'activo', 'noadministrador');
+INSERT INTO `tb_usuarioscpms` (`id`, `nombres`, `apellidos`, `nombre_usuario`, `password`, `estado`, `rol`, `email`) VALUES
+(1, 'Adminito', 'Admiapellido', 'admin', 'admin123', 'activo', 'administrador', NULL),
+(2, 'Goofy', NULL, 'usuario', 'usuario123', 'activo', 'noadministrador', NULL);
 
 -- --------------------------------------------------------
 

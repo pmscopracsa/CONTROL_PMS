@@ -3,9 +3,9 @@ require_once('../../../dl/contacto_bl/EspecialidadCompaniaDL.php');
 $especialidadcompania = new EspecialidadCompaniaDL();
 
 
-$q = $_REQUEST['filtro'];
-
-if ($q == "1") {
+//$q = $_REQUEST['filtro'];
+$a = 1;
+if ($a == 1) {
     $especialidades = $especialidadcompania->mostrarEspecialidades();
 
     foreach ($especialidades as &$valor) {
@@ -15,7 +15,7 @@ if ($q == "1") {
                 $valor[1].
                 '<br />';
     }
-} elseif ($q == "2") {
+} elseif ($_REQUEST['filtro']== "2") {
     $query = "SELECT * FROM tb_especialidadcompania ORDER BY descripcion ASC";
     $result = mysql_query($query);
     $especialidades = array();

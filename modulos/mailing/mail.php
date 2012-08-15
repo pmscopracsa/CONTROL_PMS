@@ -111,7 +111,7 @@ $css = scandir($CSS_PATH);
                 <div id="contact-area">
                     <form method="POST" action="">
                         <label for="Nombre">Remitente:</label>
-                        <input type="text" name="txtnombre" id="idtxtnombre" value="<?=$_SESSION['nombre_real']?>"READONLY/>
+                        <input type="text" name="txtnombre" id="idtxtnombre" value="<?=@$_SESSION['nombre_real']?>"READONLY/>
                         <label for="Destinatarios">Destinatario(s):</label>
                         <input type="button" id="btnAgregarRepresentante" value="Buscar contactos" class="ui-button ui-state-default ui-corner-all" />
                         <div id="divSeleccionaRepresentante" title="Agregar destinatarios"></div>

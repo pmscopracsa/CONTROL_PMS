@@ -47,12 +47,13 @@ function __autoload($name) {
 
         
     $(document).ready(function(){
-            /**
+     /**
      * FUNCION QUE VUELVE A RECARGAR EL DIV QUE CONTIENE LA LISTA DE ESPECIALIDADES
      */    
     function recargarEspecialidades()
     {
-        $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro=1");
+        $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?"+Math.random());
+        //$("#divSeleccionaEspecialidad").trigger("modal_registracompania/especialidades_div.php?filtro=1");
     } 
     
     /**
@@ -60,23 +61,7 @@ function __autoload($name) {
      */
     function recargarEspecialidadesPorFiltro(filtro)
     {
-        //$("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro="+filtro);
-        $.ajax({
-            data:{filtro:2,id:filtro},
-            type:"GET",
-            dataType:"json",
-            url:"",
-            success:function(data) {
-                $.each(data,function(index,value) {
-                    datos = '<input id="especialidades_boxes" type="checkbox" name="especialidades[]" value="'
-                    data[index].id+
-                    '"/>'+
-                    data[index].descripcion+
-                    "<br/>";
-                    $("#divSeleccionaEspecialidad").append(datos);
-                });
-            }
-        });
+        $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro="+filtro);
     }
     
     /**

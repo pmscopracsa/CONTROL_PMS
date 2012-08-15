@@ -1031,8 +1031,10 @@ $contratos = $modelos->mostrarContratos();
                 modal:true,
                 buttons:{
                     "Buscar":function() {
-                        $("#txt_nombreCliente").val("");
-                        buscarCliente();
+                        //$("#txt_nombreCliente").val("");
+                        //buscarCliente();
+                        //$("div_clientebuscar").live("click")
+                        //$("#div_clientebuscar").css("display","block");
                     },
                     "Limpiar":function() {
                         recargarClientes();
