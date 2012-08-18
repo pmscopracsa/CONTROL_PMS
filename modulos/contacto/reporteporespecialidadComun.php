@@ -19,6 +19,7 @@ $css = scandir($CSS_PATH);
         <link href="../../js/jqgrid/gridtree/src/css/ui.multiselect.css" rel="stylesheet" type="text/css"/>
         <!-- ZONA JS -->
         <script src="../../js/jquery1.4.2.js.js" type="text/javascript"></script>
+        <script src="../../js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
         <script src="../../js/jqgrid/gridtree/js/i18n/grid.locale-es.js" type="text/javascript"></script>
         <script src="../../js/jqgrid/gridtree/js/jquery.jqGrid.src.js" type="text/javascript"></script>
         
@@ -237,16 +238,22 @@ $css = scandir($CSS_PATH);
                  */
                 function verDetallePersona(data)
                 {
-                    var i = 2;
-                    clearDetail(i);
+                    clearDetail(2);
                     var codigo;
                     
                     $.each(data,function(index,value){
+                        var email = "";
+                        if (data[index].coreo != "<i><b>No est&aacute; especificado</b></i>")
+                            email = "<td><input type='button' value='Enviar email' id='enviaremail' />";
+                        else
+                            email = "<td>";
+                        
                         codigo = data[index].id;
                         $("#derecho-content-table-data-persona tbody").append(
-                            "<tr><th>Nombre<td>"+data[index].nombres+
-                            "<tr><th>Email<td>"+data[index].correo+    
-                            "<tr><th>Cargo<td>"+data[index].cargo
+                            "<tr><th>Nombre<td>"+data[index].nombres+"<td>"+
+                            "<tr><th>Email<td>"+data[index].correo+"<td>"+    
+                            email+
+                            "<tr><th>Cargo<td>"+data[index].cargo+"<td>"
                         );    
                         verTFEmpresa(codigo);
                         verTMEmpresa(codigo);
@@ -317,9 +324,48 @@ $css = scandir($CSS_PATH);
                 function ocultarBotonImportar() {
                     $("#derecho-content-addToMyContacts").css("display","none");
                 }
+                
+                            $("#enviaremail").live("click",function() {
+                $("#email_form").dialog("open");
+            });
+        
+              $("#email_form").dialog({
+                    autoOpen:false,
+                    height:300,
+                    width:550,
+                    modal:true,
+                    buttons:{
+                        "Enviar":function() {
+                            $(this).dialog("close");
+                        },
+                        "Salir":function() {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
             });
         </script>
     </head>
+        <div id="email_form" title="Enviar correo">
+        <table>
+            <tr>
+                <td>
+                    <label for="asunto">Asunto *</label>
+                </td>
+                <td>
+                    <input type="text" name="txtasunto" maxlength="50" size="30" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="cuerpo">Mensaje *</label>
+                </td>
+                <td>
+                    <textarea name="mensaje" maxlength="100" cols="25" rows="6"></textarea> 
+                </td>
+            </tr>
+        </table>
+    </div>
     <body class="fondo">
         <div id="barra-superior">
             <div id="barra-superior-dentro">
@@ -339,7 +385,7 @@ $css = scandir($CSS_PATH);
                 <br />
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1 class="titulo">DETALLES DE LA EMPRESA</h1>
+                        <h2 class="titulo">DETALLES DE LA EMPRESA</h2>
                         <div id="error" style="display: none">
                         <h3>No se puede consultar los datos de detalle</h3>
                         </div>
@@ -358,7 +404,7 @@ $css = scandir($CSS_PATH);
                 
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1 class="titulo">DETALLES DEL CONTACTO</h1>
+                        <h2 class="titulo">DETALLES DEL CONTACTO</h2>
                         <div id="error" style="display: none">
                         <h3>No se puede consultar los datos de detalle</h3>
                         </div>
@@ -376,7 +422,7 @@ $css = scandir($CSS_PATH);
                 <!---->
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1 class="titulo   ">TELEFONO(S) FIJO(S)</h1>
+                        <h2 class="titulo   ">TELEFONO(S) FIJO(S)</h2>
                     </div>
                     <div id="div-tfijo" title="Telefonos Fijos" style="display: none">
                     </div>
@@ -394,7 +440,7 @@ $css = scandir($CSS_PATH);
                 <!---->
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1 class="titulo   ">TELEFONO(S) MOVIL(ES)</h1>
+                        <h2 class="titulo">TELEFONO(S) MOVIL(ES)</h2>
                     </div>
                     <div id="div-tfijo" title="Telefonos Moviles" style="display: none">
                     </div>
@@ -412,7 +458,7 @@ $css = scandir($CSS_PATH);
                 <!---->
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1 class="titulo   ">TELEFONO(S) NEXTEL</h1>
+                        <h2 class="titulo">TELEFONO(S) NEXTEL</h2>
                     </div>
                     <div id="div-tfijo" title="Telefonos Nextel" style="display: none">
                     </div>

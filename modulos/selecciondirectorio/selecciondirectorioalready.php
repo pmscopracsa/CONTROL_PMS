@@ -40,7 +40,7 @@ $obra_id = 0;
         <script src="../../js/calendar/jquery-ui-1.8.18.custom.min.js"></script>
         <script src="../../js/wizard/jquery.formToWizard.js"></script> 
         <script src="../../js/wizard/jquery.validationEngine.js"></script> 
-        <script src="../../js/wizard/jquery.validationEngine-en.js"></script> 
+        <script src="../../js/wizard/jquery.validationEngine-es.js"></script> 
         <style>
         body { font-family:Lucida Sans, Arial, Helvetica, Sans-Serif; font-size:13px; margin:20px;}
         #header { text-align:center; border-bottom:solid 1px #b2b3b5; margin: 0 0 20px 0; }
@@ -179,13 +179,12 @@ $obra_id = 0;
                 url:"../../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=salvardirectorioobra",
                 data:{
                     id_usuario:<?=$_SESSION['id_usuario']?>
-                    ,id_session:<?=session_id()?>
                     ,id_empresa:<?=$_SESSION['id']?>
                     ,id_directorio:$("#idtxtiddirectorio").val()
                     ,id_obra:$("#idtxtidobra").val()
                 },
                 success:function(){
-                    linkDestino = "../../index_usuario.php";
+                    linkDestino = "../../index_usuario.php?"+Math.random();
                     $("body").fadeOut(2000, redireccionaEditar(linkDestino));
                 }
             });
@@ -196,7 +195,7 @@ $obra_id = 0;
          * PARA EL USUARIO LICENCIA
          */
         function redireccionaEditar(linkDestino) {
-            window.location = linkDestino;
+            window.location.href = linkDestino;
         }
     });
     </script>

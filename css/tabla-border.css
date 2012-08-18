@@ -55,5 +55,6 @@
     background:#FF6600;
     color:#FFFFFF;
     display:inline;
-    padding:5px;
+    padding:3px;
+    font-size: 2px !important;
 }

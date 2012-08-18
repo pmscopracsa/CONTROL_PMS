@@ -2,19 +2,19 @@
 	padding: 15px 0px 0 650px;
         
 	}
-	#derecho-content {
-		margin-right: 175px;
-		max-width: 600px;
-	}
+#derecho-content {
+        margin-right: 175px;
+        max-width: 600px;
+}
 
 #izquierdo {
 	width: 405px;
 	float: left;
 	padding: 0 0 0 15px;
 	}
-	#sidebar-content {
-		margin-left: 0px;
-                
-	}
+#sidebar-content {
+        margin-left: 0px;
+
+}
         
 .clear {clear: both;}

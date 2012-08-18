@@ -28,14 +28,15 @@ $start = $limit * $page - $limit;
 $SQL = "SELECT id,descripcion FROM tb_especialidadComun ORDER BY $sidx $sord LIMIT $start, $limit";
 $result = mysql_query($SQL);
 
+$responce = new stdClass();
 $responce->page = $page;
 $responce->total = $total_pages;
 $responce->records = $count;
 
 $i = 0;
-while($row = mysql_fetch_array($result,MYSQL_ASSOC)) {
-    $responce->rows[$i]['id'] = $row[id];
-    $responce->rows[$i]['cell'] = array($row[id],$row[descripcion]);
+while($row = mysql_fetch_assoc($result)) {
+    $responce->rows[$i]['id'] = $row['id'];
+    $responce->rows[$i]['cell'] = array($row['id'],$row['descripcion']);
     $i++;
 }
 echo json_encode($responce);

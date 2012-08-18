@@ -66,6 +66,14 @@ class Usuarios_Sistema {
         }
         return $registros;
     }
+    
+    /**
+     * MOSTRAR LISTA DE USUARIOS PRE SELLECCIONADOS PARA EMPATARLOS CON
+     * OPCIONES
+     */
+    public function showPreSelectedUsers() {
+        
+    }
     /**
      * GETTRES Y SETTERS 
      */ 

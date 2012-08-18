@@ -375,10 +375,13 @@ $contratos = $modelos->mostrarContratos();
              * MODAL ASIGNAR USUARIOS PARA APROBACION
              */
              $("#usuarios-aprobacion").click(function(){
-                $("#modal_usuariosempresa").dialog("open");
-                //$("#div-modal-asigna_aprobacion").dialog("open");
+                //$("#modal_usuariosempresa").dialog("open");
+                $("#div-modal-asigna_aprobacion").dialog("open");
                 return false;
              });
+             
+             //DIALOG - PRIMER FILTRO (USUARIOS APROBACION)
+             
              
              /**
               * DETECTA SELECCION EN CHECKBOX DE SUPER OPCIONES RELACIONADAS CON ALGUN USUARIO

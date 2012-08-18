@@ -18,15 +18,30 @@
         <script type="text/javascript" src="../js/jquery1.4.2.js.js"></script>
         <script>
         $(document).ready(function() {
+            var nombreTabla = "tb_empresa";
+            var nombreCampo = "nombre";
+            
             $("#btnresetpassword").click(function() {
                 if ($("#txtusuariosistema").val() == "") {
                     $("#msgerror").css("display","block");
             } else {
-                $("#msgerror").css("display","none");
-                
-                destino = "http://192.168.1.5/control_pms";
-                $("body").fadeOut(5000,redireccionar(destino));
-            }
+                $.ajax({
+                    type:"GET",
+                    data:{
+                        nombre_usuario:$("#txtusuariosistema").val()
+                        ,nombre_tabla:nombreTabla
+                        ,nombre_campo:nombreCampo},
+                    url:"../bl/Ayuda/ayuda.php",
+                    success:function(data) {
+                        if (data == "existe"){
+                            $("#msgerrorempresa").hide();
+                            $("#msgexito").css("display","block");
+                        }                            
+                        else
+                            $("#msgerrorempresa").css("display","block");
+                        }
+                    });
+                }
                 
             });
             
@@ -47,6 +62,7 @@
         .recuperarPassword label {float:left;margin-left: 20px}
         #msgerror p {color: #EE5757}
         #msgexito p {color: #00BBFF}
+        #msgerrorempresa p {color: #EE5757}
         </style>
     </head>
     <body>
@@ -60,12 +76,16 @@
             <form action="" method="POSt">
             <p><b>Ingrese su nombre de usuario <a href="#" title="Puedes usar: Tu nombre de usuario del sistema.">(?)</a></b></p><br />
             <input type="text" id="txtusuariosistema" size="45" placeholder="Usuario de PMS Control" />
-            <input type="button" id="btnresetpassword" value="Resetar mi contraseña &raquo;" />
+            <input type="button" id="btnresetpassword" value="Recuperar contraseña &raquo;" />
             <div id="msgerror" style="display: none">
-                <b><p>No ha ingresado ninugn dato.</p></b>
+                <b><p>Ingrese el nombre de su empresa por favor.</p></b>
             </div> 
             <div id="msgexito" style="display: none">
                 <b><p>Se ha mandado un correo a su cuenta asociada.</p></b>
+                <label><a href="http://192.168.1.5/control_pms">Vuelva al inicio</a></label>
+            </div>   
+            <div id="msgerrorempresa" style="display: none">
+                <b><p>La empresa ingresada no existe.</p></b>
             </div>   
             </form>
         </div>

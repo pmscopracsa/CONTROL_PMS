@@ -10,7 +10,8 @@ session_start();
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>¡&Aacute;rea de usuarios registrados!</title>
     <link rel="stylesheet" type="text/css" href="index.css" media="screen" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    //<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery1.4.2.js.js"></script>
     <script>
 $(document).ready(function()
 {
@@ -40,10 +41,10 @@ $(document).ready(function()
                                       data:{id_empresa:<?=$_SESSION['id']?>},
                                       success:function(res) {
                                           if (res == "already") {
-                                              window.location.href = '../modulos/selecciondirectorio/selecciondirectorioalready.php';
+                                              window.location.href = '../modulos/selecciondirectorio/selecciondirectorioalready.php?dev='+Math.floor(Math.random()*11);
                                           }
                                           else if (res == "notyet") {
-                                              window.location.href = '../modulos/selecciondirectorio/selecciondirectorio.php';       
+                                              window.location.href = '../modulos/selecciondirectorio/selecciondirectorio.php?dev='+Math.floor(Math.random()*11);       
                                           }
                                       }
                                   });

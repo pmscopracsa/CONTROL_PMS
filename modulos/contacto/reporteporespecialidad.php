@@ -1,4 +1,8 @@
 <?php
+session_name('tzLogin');
+session_set_cookie_params(2*7*24*60*60);
+session_start();
+
 $CSS_PATH = '../../css/';
 $css = array();
 $css = scandir($CSS_PATH);
@@ -9,7 +13,7 @@ $css = scandir($CSS_PATH);
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>REPORTE POR ESPECIALIDAD</title>
         <!-- zona css -->
-        <?php
+        <?php //
         foreach ($css as $value) {
             if ($value === '.' || $value === '..'){continue;}
             echo '<link href="../../css/'.$value.'" rel="stylesheet" type="text/css" />'; 
@@ -19,6 +23,7 @@ $css = scandir($CSS_PATH);
         <link href="../../js/jqgrid/gridtree/src/css/ui.multiselect.css" rel="stylesheet" type="text/css"/>
         <!-- ZONA JS -->
         <script src="../../js/jquery1.4.2.js.js" type="text/javascript"></script>
+        <script src="../../js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
         <script src="../../js/jqgrid/gridtree/js/i18n/grid.locale-es.js" type="text/javascript"></script>
         <script src="../../js/jqgrid/gridtree/js/jquery.jqGrid.src.js" type="text/javascript"></script>
         <script>
@@ -68,7 +73,7 @@ $css = scandir($CSS_PATH);
                                 data:{id:idx},
                                 type:"GET",
                                 dataType:"json",
-                                url:"../../dl/contacto_bl/testlistaespecialidades/contacto_empresaDetail",
+                                url:"../../dl/contacto_bl/testlistaespecialidades/contacto_empresaDetail.php",
                                 success:function(data){
                                     verDetalle(data);
                                 },
@@ -203,16 +208,23 @@ $css = scandir($CSS_PATH);
                 }
             
             function verDetallePersona(data){
-                var i = 2;
-                clear_detail(i);
+                clear_detail(2);
                 var codigo;
                 
                 $.each(data,function(index,value){
+                    var email = "";
+                    if(data[index].email != "<i>No tiene</i>")
+                        email = "<td><input type='button' value='Enviar email' id='enviaremail' />";
+                    else
+                        email = "<td>";
+                    
                     codigo = data[index].id;
                     $("#derecho-content-table-data-persona tbody").append(
-                    "<tr><th>Nombre<td>"+data[index].nombre+
-                    "<tr><th>DNI<td>"+data[index].dni+
-                    "<tr><th>Cargo<td>"+data[index].cargo
+                    "<tr><th>Nombre<td>"+data[index].nombre+"<td>"+
+                    "<tr><th>DNI<td>"+data[index].dni+"<td>"+
+                    "<tr><th>Cargo<td>"+data[index].cargo+"<td>"+
+                    "<tr><th>Email<td>"+data[index].email+
+                    email
                     );
                     verTFEmpresa(codigo);
                     verTMEmpresa(codigo);
@@ -241,14 +253,53 @@ $css = scandir($CSS_PATH);
             
             function errorDetalle()
             {
-                alert("Error");
-                /*$("#error").fadeIn(1000, function(){
+                
+                $("#error").fadeIn(1000, function(){
                     $("#error").fadeOut(1000);
-                })*/
+                });
             }
+            
+            $("#enviaremail").live("click",function() {
+                $("#email_form").dialog("open");
+            });
+        
+            $("#email_form").dialog({
+                autoOpen:false,
+                height:300,
+                width:550,
+                modal:true,
+                buttons:{
+                    "Enviar":function() {
+                        
+                    },
+                    "Salir":function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
         });
         </script>
     </head>
+    <div id="email_form" title="Enviar correo">
+        <table>
+            <tr>
+                <td>
+                    <label for="asunto">Asunto *</label>
+                </td>
+                <td>
+                    <input type="text" name="txtasunto" maxlength="50" size="30" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="cuerpo">Mensaje *</label>
+                </td>
+                <td>
+                    <textarea name="mensaje" maxlength="100" cols="25" rows="6"></textarea> 
+                </td>
+            </tr>
+        </table>
+    </div> 
     <body class="fondo">
         <div id="barra-superior">
             <div id="barra-superior-dentro">
@@ -273,7 +324,7 @@ $css = scandir($CSS_PATH);
                 </div>
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1 class="titulo">DETALLES DE LA EMPRESA</h1>
+                        <h2 class="titulo">DETALLES DE LA EMPRESA</h2>
                         <div id="error" style="display: none">
                         <h3>No se puede consultar los detalles de la empresa</h3>
                         </div>
@@ -290,7 +341,7 @@ $css = scandir($CSS_PATH);
                 </div>
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1 class="titulo">DETALLES DEL CONTACTO</h1>
+                        <h2 class="titulo">DETALLES DEL CONTACTO</h2>
                         <div id="error" style="display: none">
                         <h3>No se puede consultar los detalles del contacto</h3>
                         </div>
@@ -309,7 +360,7 @@ $css = scandir($CSS_PATH);
                 <!---->
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1 class="titulo   ">TELEFONO(S) FIJO(S)</h1>
+                        <h2 class="titulo   ">TELEFONO(S) FIJO(S)</h2>
                     </div>
                     <div id="div-tfijo" title="Telefonos Fijos" style="display: none">
                     </div>
@@ -327,7 +378,7 @@ $css = scandir($CSS_PATH);
                 <!---->
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1 class="titulo   ">TELEFONO(S) MOVIL(ES)</h1>
+                        <h2 class="titulo   ">TELEFONO(S) MOVIL(ES)</h2>
                     </div>
                     <div id="div-tfijo" title="Telefonos Moviles" style="display: none">
                     </div>
@@ -345,7 +396,7 @@ $css = scandir($CSS_PATH);
                 <!---->
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1 class="titulo   ">TELEFONO(S) NEXTEL</h1>
+                        <h2 class="titulo">TELEFONO(S) NEXTEL</h2>
                     </div>
                     <div id="div-tfijo" title="Telefonos Nextel" style="display: none">
                     </div>
@@ -359,6 +410,8 @@ $css = scandir($CSS_PATH);
                         </table>
                     </div>
                 </div>
+                
+               
                 <!---->
             </div>
             <div class="clear"></div>

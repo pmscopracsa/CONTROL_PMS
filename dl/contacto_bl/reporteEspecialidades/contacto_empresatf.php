@@ -15,7 +15,7 @@ $i = 0;
 $detalle = array();
 
 while ($row = mysql_fetch_assoc($result)) {
-    $detalle[$i]['numero'] = $row[numero];
+    $detalle[$i]['numero'] = $row['numero'];
     $i++;
 }
 

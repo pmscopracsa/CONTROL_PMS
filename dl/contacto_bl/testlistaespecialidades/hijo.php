@@ -35,14 +35,16 @@ switch ($examp) {
         ON compania.id = rubro.tb_companiacontacto_id
         WHERE tb_especialidadcompania_id = ".$id." ORDER BY $sidx $sord LIMIT $start , $limit"; 
         $result = mysql_query( $SQL ) or die("Couldnt execute query.".mysql_error()); 
+        
+        $responce = new stdClass();
         $responce->page = $page; 
         $responce->total = $total_pages; 
         $responce->records = $count; 
         $i=0; 
         
         while($row = mysql_fetch_array($result,MYSQL_ASSOC)) { 
-            $responce->rows[$i]['id']=$row[id]; 
-            $responce->rows[$i]['cell']=array($row[id],$row[descripcion]); 
+            $responce->rows[$i]['id']=$row['id']; 
+            $responce->rows[$i]['cell']=array($row['id'],$row['descripcion']); 
             $i++; 
         } 
         

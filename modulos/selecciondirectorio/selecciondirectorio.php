@@ -84,7 +84,10 @@ session_start();
             }
         });
     }
-        
+
+    var idusuario = <?=$_SESSION['id_usuario']?>;
+    var idempresa = <?=$_SESSION['id']?>;
+     
     $(document).ready(function() {
         $("body").css("display","none");
         $("body").fadeIn(2000);
@@ -139,12 +142,10 @@ session_start();
             $("#diveditar").css("display","block");
         });
         
-        // EDITAR OBRA
         // IR AL FORMULARIO DE EDITAR OBRA
         $("#aeditar").click(function(e){
-            alert("")
             e.preventDefault();
-            linkDestino = "../datosdeobra/edit/editaobra.php?idObra=";
+            linkDestino = "../datosdeobra/edit/editaobra.php?idObra=1";
             $("body").fadeOut(5000, redireccionaEditar(linkDestino));
         });
         
@@ -158,30 +159,69 @@ session_start();
          * Seleccion de Obra
          */
         $("#setuped").click(function() {
+            var linkDestino = "";
             $.ajax({
-                type:"GET",
-                url:"http://www.google.com",
+                type:"POST",
+                url:"../../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=seteocambiomoneda",
                 data:{
-                    id_directorio:$("#idtxtdirectorio").val()
-                    ,id_obra:$("#idtxtobra").val()
-                    ,ventasunat:$("#idtxtvsunat").val()
-                    ,comprasunat:$("#idtxtcsunat").val()},
-                success:function(){
-                    linkDestino = "../../index_usuario.php";
-                    $("body").fadeOut(2000, redireccionaEditar(linkDestino));
+                    ventasunat:$("#idtxtvsunat").val()
+                    ,comprasunat:$("#idtxtcsunat").val()
+                    ,idmoneda:$("#txtidmonedaid").val()
+                    ,idempresa:idempresa
+                    ,id_usuario:idusuario
+                    ,id_directorio:$("#idtxtiddirectorio").val()
+                    ,id_obra:$("#idtxtidobra").val()
                 },
-                error:function() {
-                    
+                success:function(){
+                    linkDestino = "../../index_usuario.php?"+Math.random();
+                    $("body").fadeOut(2000, redireccionaEditar(linkDestino));
                 }
-            })
+            });
         });
         
+        /**
+         * BOTON PARA GUARDAR TIPODE CAMBIO
+         */
+        $("#btnSaveDollar").click(function() {
+            var linkDestino = "";
+            if ($("#idtxtvsunat").val() === "" && $("#idtxtcsunat").val() === "") {
+                $("#msgError").css("display","block");
+            }else {
+                $.ajax({
+                    type:"POST",
+                    url:"../../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=saveCurrentChange",
+                    data:{
+                        ventasunat:$("#idtxtvsunat").val()
+                        ,comprasunat:$("#idtxtcsunat").val()
+                        ,idmoneda:$("#txtidmonedaid").val()
+                        ,idempresa:idempresa
+                    },
+                    success:function() {
+                        linkDestino = "selecciondirectorioalready.php";
+                        $("body").fadeOut("slow", redireccionaEditar(linkDestino));
+                    }
+                });
+            }
+        });
+        
+        // DETECTAR FOUCS EN TIPO DE CAMBIO PARA BORRA MENSAJE
+        $("#idtxtvsunat").click(function() {
+            if($("#msgError").is(':visible')) {
+                $("#msgError").css("display","none");
+            }
+        });
+        $("#idtxtcsunat").click(function() {
+            if($("#msgError").is(':visible')) {
+                $("#msgError").css("display","none");
+            }
+        });
+
         /**
          * REDIRECCIONAR AL MENU DE OPCIONES DEL SISEMA 
          * PARA EL USUARIO LICENCIA
          */
         function redireccionaEditar(linkDestino) {
-            window.location = linkDestino;
+            window.location.href = linkDestino;
         }
     });
     </script>
@@ -207,6 +247,8 @@ session_start();
                     <input type="text" id="idtxtvsunat" name="txtvsunat"  value="" size="5" maxlength="5" class="validate[required]"/>
                     <label for="compraSunat">T.C. Compra SUNAT</label>
                     <input type="text" id="idtxtcsunat" name="txtcsunat" value="" size="5" maxlength="5" class="validate[required,maxSize[5]]" />
+                    <label></label>
+                    <input type="button" id="btnSaveDollar" value="Guardar" /><div id="msgError" style="display: none;">No ha ingresado tipo de cambio</div><div id="msgSuccess" style="display: none;">El tipo de cambio se ha ingresado correctamente</div>
 <!--                    <label for="ventaBanco">T.C Venta Banco</label>
                     <input type="text" id="idtxtvbanco" name="txtvbanco" value="" size="5"  class="validate[required]" maxlength="5"/>-->
                     <hr /><br />

@@ -17,13 +17,13 @@ $i = 0;
 $detalle = array();
 while($row = mysql_fetch_assoc($result))
 {
-    $detalle[$i]['id'] = $row[id];
-    $detalle[$i]['nombre'] = $row[nombre] == NULL ? "<i>No tiene</i>" : $row[nombre];
-    $detalle[$i]['dni'] = $row[dni] == NULL ? "<i>No tiene</i>" : $row[dni];
-    $detalle[$i]['cargo'] = $row[cargo] == NULL ? "<i>No tiene</i>" : $row[cargo];
-    $detalle[$i]['fax'] = $row[fax] == NULL ? "<i>No tiene</i>" : $row[fax];
-    $detalle[$i]['email'] = $row[email] == NULL ? "<i>No tiene</i>" : $row[email];
-    $detalle[$i]['web'] = $row[web] == NULL ? "<i>No tiene</i>" : $row[web];
+    $detalle[$i]['id'] = $row['id'];
+    $detalle[$i]['nombre'] = $row['nombre'] === NULL ? "<i>No tiene</i>" : $row['nombre'];
+    $detalle[$i]['dni'] = $row['dni'] === NULL ? "<i>No tiene</i>" : $row['dni'];
+    $detalle[$i]['cargo'] = $row['cargo'] === NULL ? "<i>No tiene</i>" : $row['cargo'];
+    $detalle[$i]['fax'] = $row['fax'] === NULL ? "<i>No tiene</i>" : $row['fax'];
+    $detalle[$i]['email'] = $row['email'] === NULL ? "<i>No tiene</i>" : $row['email'];
+    $detalle[$i]['web'] = $row['web'] === NULL ? "<i>No tiene</i>" : $row['web'];
     $i++;
 }
 echo json_encode($detalle);

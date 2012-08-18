@@ -14,11 +14,11 @@ if(!$sidx) $sidx =1;
 
 switch ($examp) { 
     case 1: 
-        $result = mysql_query("SELECT compania.id, compania.descripcion 
+        $result = mysql_query("SELECT COUNT(compania.id) AS count 
         FROM tb_rubrocomun rubro INNER JOIN tb_contactocomun compania
         ON rubro.tb_contactocomun_id = compania.id
         WHERE tb_especialidadComun_id = ".$id); 
-        $row = mysql_fetch_array($result,MYSQL_ASSOC); 
+        $row = mysql_fetch_array($result,MYSQLI_ASSOC); 
         $count = $row['count']; 
         
         if( $count >0 ) { 
@@ -35,14 +35,16 @@ switch ($examp) {
         ON rubro.tb_contactocomun_id = compania.id
         WHERE tb_especialidadComun_id = ".$id." ORDER BY $sidx $sord LIMIT $start , $limit"; 
         $result = mysql_query( $SQL ) or die("Couldnt execute query.".mysql_error()); 
+        
+        $responce = new stdClass();
         $responce->page = $page; 
         $responce->total = $total_pages; 
         $responce->records = $count; 
         $i=0; 
         
         while($row = mysql_fetch_array($result,MYSQL_ASSOC)) { 
-            $responce->rows[$i]['id']=$row[id]; 
-            $responce->rows[$i]['cell']=array($row[id],$row[descripcion]); 
+            $responce->rows[$i]['id']=$row['id']; 
+            $responce->rows[$i]['cell']=array($row['id'],$row['descripcion']); 
             $i++; 
         } 
         

@@ -11,8 +11,8 @@ $i = 0;
 $detalle = array();
 while($row = mysql_fetch_assoc($result))
 {
-    $detalle[$i]['descripcion'] = $row[descripcion] == NULL ? "<i>No tiene</>" : $row[descripcion];
-    $detalle[$i]['ruc'] = $row[ruc] == NULL ? "<i>No tiene</i>" : $row[ruc];
+    $detalle[$i]['descripcion'] = $row['descripcion'] == NULL ? "<i>No tiene</>" : $row['descripcion'];
+    $detalle[$i]['ruc'] = $row['ruc'] == NULL ? "<i>No tiene</i>" : $row['ruc'];
     $i++;
 }
 echo json_encode($detalle);

@@ -16,10 +16,10 @@ $i = 0;
 $detalle = array();
 
 while ($row = mysql_fetch_assoc($result)) {
-    $detalle[$i]['id'] = $row[id] == NULL ? "<i><b>No est&aacute; especificado</b></i>" : $row[id];
-    $detalle[$i]['nombres'] = $row[nombres] == NULL ? "<i><b>No est&aacute; especificado</b></i>" : $row[nombres];
-    $detalle[$i]['correo'] = $row[correo] == NULL ? "<i><b>No est&aacute; especificado</b></i>" : $row[correo];
-    $detalle[$i]['cargo'] = $row[cargo] == NULL ? "<i><b>No est&aacute; especificado</b></i>" : $row[cargo];
+    $detalle[$i]['id'] = $row['id'] == NULL ? "<i><b>No est&aacute; especificado</b></i>" : $row['id'];
+    $detalle[$i]['nombres'] = $row['nombres'] == NULL ? "<i><b>No est&aacute; especificado</b></i>" : $row['nombres'];
+    $detalle[$i]['correo'] = $row['correo'] == NULL ? "<i><b>No est&aacute; especificado</b></i>" : $row['correo'];
+    $detalle[$i]['cargo'] = $row['cargo'] == NULL ? "<i><b>No est&aacute; especificado</b></i>" : $row['cargo'];
     $i++;
 }
 

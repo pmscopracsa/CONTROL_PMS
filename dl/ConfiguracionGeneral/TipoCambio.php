@@ -1,15 +1,7 @@
 <?php
 define('__ROOT__', dirname(dirname(__FILE__)));
 require_once __ROOT__.'/Conexion.php';
-/*
- *CRUD
- */
 
-/**
- * Description of TipoCambio
- *
- * @author malcantara
- */
 class TipoCambio 
 {
     protected $_id;
