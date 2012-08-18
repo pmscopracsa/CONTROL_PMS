@@ -10,7 +10,6 @@ session_start();
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>¡&Aacute;rea de usuarios registrados!</title>
     <link rel="stylesheet" type="text/css" href="index.css" media="screen" />
-    //<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
     <script type="text/javascript" src="../js/jquery1.4.2.js.js"></script>
     <script>
 $(document).ready(function()
@@ -137,7 +136,7 @@ $(document).ready(function()
                     </tr>
                     <tr>
                         <td></td>
-                        <td><label><a href="../ayuda/identificarse.php?ctx=recover">¿Olvidaste tu contrase&ntilde;a?</a></label></td>
+                        <td><label><a href="../ayuda/identificarse.php?ctx=recoverusuario">¿Olvidaste tu contrase&ntilde;a?</a></label></td>
                     </tr>
                     <tr>
                         <td></td>

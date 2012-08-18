@@ -24,6 +24,7 @@ function  __autoload($name) {
             echo '<link href="../../css/'.$value.'" rel="stylesheet" type="text/css" />';
         }
         ?>
+        <link href="../../css/reveal/styles.css" rel="stylesheet" type="text/css" />
         <!-- ZONA JS -->
         <script src="../../js/jquery1.4.2.js.js" type="text/javascript"></script>
         <script src="../../js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
@@ -31,10 +32,8 @@ function  __autoload($name) {
         <script src="../../dl/contacto_bl/Obras/Obras.js"></script>
         <script src="../../js/jquery.form.js" type="text/javascript"></script>
         <script src="../../js/autocomplete/jquery.autocomplete.js" type="text/javascript"></script>
+        <script src="../../js/jquery.reveal.js" type="text/javascript"></script>
         <script>
-         
-            
-            
         function recargarRepresentantes()
         {
             $("#modal-contactos").load("modal_registracompania/representantes_div.php?filtro=1");
@@ -194,6 +193,33 @@ function  __autoload($name) {
                 selectFirst:false
             });
             
+            $(".nombre_lista").focusout(function() {
+                $.ajax({
+                   type:"GET",
+                   url:"../../bl/Contacto/mantenimiento/verificarExistenciaLista.php",
+                   data:{nombre_lista:$(".nombre_lista").val()},
+                   success:function(data) {
+                       if (data == "tiene") {
+                                $('#modal').reveal({ // The item which will be opened with reveal
+                                animation: 'fade',                   // fade, fadeAndPop, none
+                                animationspeed: 600,                       // how fast animtions are
+                                closeonbackgroundclick: false,              // if you click background will modal close?
+                                dismissmodalclass: 'close'    // the class of a button or element that will close an open modal
+                        });
+                       }
+                   }
+                });
+            });
+            
+      $("#btnContinuar").click(function(e) {
+          e.preventDefault();
+          window.location = "http://192.168.1.5/control_pms/modulos/contacto/registrolistadistribucion.php";
+          
+      })
+      $("#btnModificar").click(function(e) {
+          e.preventDefault();
+          window.location = "http://192.168.1.5/control_pms/modulos/contacto/edit/editalistadistribucion.php?frm=listas"
+      })
             /**
              * BUSCAR DATOS PARA EDITAR 
              * BTNPORNOMBRE
@@ -229,6 +255,21 @@ function  __autoload($name) {
         </script>
     </head>
     <body >
+         <!-- INICIO MODAL -->
+    <div id="modal">
+	<div id="heading">
+                La lista de distribucion que desea ingresra ya existe
+	</div>
+
+	<div id="content">
+		<p>Dele click a <b>"Continuar"</b> si desea seguir usando este formulario. De lo contrario <b>"Modificar"</b></p>
+
+                <a href="#" id="btnContinuar" class="button green close"><img src="../../css/reveal/images/tick.png">Continuar</a>
+
+		<a href="#" id="btnModificar" class="button red close"><img src="../../css/reveal/images/cross.png">Modificar</a>
+	</div>
+    </div>
+    <!-- FIN MODAL -->
         <div >
         </div>
         <!-- ventana modal para seleccionar los contactos -->
@@ -253,12 +294,11 @@ function  __autoload($name) {
                     <tr>
                         <td><label>Nombre de la lista:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td><input class="nombre_lista" id="inputext" type="text" name="nombre" /></td>
-                        <td><input id="btnBuscaPorNombre" type="button" value="Buscar..."/></td>
                     </tr>
                     <tr>
                         <td><label>Nombre de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                        <td><input id="inputext" class="obra" type="text" name="codigo" READONLY/></td>
-                        <td><input id="btnBuscarPorObra" type="button" value="Buscar..." DISABLED /></td>
+                        <td><input id="inputext" class="obra" type="text" name="codigo" /></td>
+                        <td><input id="btnBuscarPorObra" type="button" value="Buscar..." /></td>
                     </tr>
                     <tr>
                         <td><label>A&ncaron;adir Contacto:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>

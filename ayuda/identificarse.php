@@ -7,7 +7,6 @@
 //$mail->Host = "mail.google.com";
 //$mail->SMTPDebug = 2;
 //$mail->smtp
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,11 +16,14 @@
         <title>PMS CONTROL</title>
         <script type="text/javascript" src="../js/jquery1.4.2.js.js"></script>
         <script>
+        
         $(document).ready(function() {
+            
             var nombreTabla = "tb_empresa";
             var nombreCampo = "nombre";
             
             $("#btnresetpassword").click(function() {
+                
                 if ($("#txtusuariosistema").val() == "") {
                     $("#msgerror").css("display","block");
             } else {
@@ -81,8 +83,8 @@
                 <b><p>Ingrese el nombre de su empresa por favor.</p></b>
             </div> 
             <div id="msgexito" style="display: none">
-                <b><p>Se ha mandado un correo a su cuenta asociada.</p></b>
-                <label><a href="http://192.168.1.5/control_pms">Vuelva al inicio</a></label>
+                <b><p>Se ha enviado un correo a su cuenta asociada.</p></b>
+                <label><a href="http://192.168.1.5/control_pms">Volver al inicio</a></label>
             </div>   
             <div id="msgerrorempresa" style="display: none">
                 <b><p>La empresa ingresada no existe.</p></b>

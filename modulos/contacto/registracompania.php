@@ -32,6 +32,7 @@ function __autoload($name) {
         echo '<link href="../../css/'.$value.'" rel="stylesheet" type="text/css" />'; 
     }
     ?>
+    <link href="../../css/reveal/styles.css" rel="stylesheet" type="text/css" />
     <!-- ZONA JS -->
     <script src="../../js/jquery1.4.2.js.js" type="text/javascript"></script>
     <script src="../../js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
@@ -42,11 +43,15 @@ function __autoload($name) {
     <script src="../../js/jquery.validity/jQuery.validity.js" type="text/javascript"></script>
     <link href="../../js/jquery.validity/jquery.validity.css" rel="stylesheet" type="text/css" />
     <script src="../../js/jquery.form.js" type="text/javascript"></script>
+    <script src="../../js/jquery.reveal.js" type="text/javascript"></script>
   
     <script type="text/javascript">
 
         
     $(document).ready(function(){
+    
+    
+        
      /**
      * FUNCION QUE VUELVE A RECARGAR EL DIV QUE CONTIENE LA LISTA DE ESPECIALIDADES
      */    
@@ -544,13 +549,29 @@ function __autoload($name) {
               data:{ruc_empresa:$(".ruc_empresa").val()},
               success:function(data) {
                   if (data == "tiene") {
-                      alert("LA EMPRESA QUE INTENTA REGISTRAR YA EXISTE");
-                      $(".ruc_empresa").val("");
-                      $(".ruc_empresa").focus();
+                      $('#modal').reveal({ // The item which will be opened with reveal
+                                animation: 'fade',                   // fade, fadeAndPop, none
+                                animationspeed: 600,                       // how fast animtions are
+                                closeonbackgroundclick: false,              // if you click background will modal close?
+                                dismissmodalclass: 'close'    // the class of a button or element that will close an open modal
+                        });
+//                      alert("LA EMPRESA QUE INTENTA REGISTRAR YA EXISTE");
+//                      $(".ruc_empresa").val("");
+//                      $(".ruc_empresa").focus();
                   }
               }
           });
       });  
+      
+      $("#btnContinuar").click(function(e) {
+          e.preventDefault();
+            $(".ruc_empresa").val("");
+            $(".ruc_empresa").focus();
+      })
+      $("#btnModificar").click(function(e) {
+          e.preventDefault();
+          window.location = "http://192.168.1.5/control_pms/modulos/contacto/edit/editacompania.php?frm=compania"
+      })
        /**
         * AUTOCOMPLETAR SEGUN RUC DE LA EMPRESA
         */
@@ -598,6 +619,21 @@ function __autoload($name) {
     <title>REGISTRO DE COMPA&Ntilde;IAS</title>
 </head>
 <body class="fondo">
+    <!-- INICIO MODAL -->
+    <div id="modal">
+	<div id="heading">
+                La empresa que usted intenta registrar ya existe
+	</div>
+
+	<div id="content">
+		<p>Dele click a <b>"Continuar"</b> si desea seguir usando este formulario. De lo contrario <b>"Modificar"</b></p>
+
+                <a href="#" id="btnContinuar" class="button green close"><img src="../../css/reveal/images/tick.png">Continuar</a>
+
+		<a href="#" id="btnModificar" class="button red close"><img src="../../css/reveal/images/cross.png">Modificar</a>
+	</div>
+    </div>
+    <!-- FIN MODAL -->
     <div id="barra-superior">
         <?php            include_once 'modal_registracompania/modal-escogeEmpresa.php';?>
         <div id="barra-superior-dentro">
