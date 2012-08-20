@@ -555,9 +555,6 @@ function __autoload($name) {
                                 closeonbackgroundclick: false,              // if you click background will modal close?
                                 dismissmodalclass: 'close'    // the class of a button or element that will close an open modal
                         });
-//                      alert("LA EMPRESA QUE INTENTA REGISTRAR YA EXISTE");
-//                      $(".ruc_empresa").val("");
-//                      $(".ruc_empresa").focus();
                   }
               }
           });
@@ -565,8 +562,7 @@ function __autoload($name) {
       
       $("#btnContinuar").click(function(e) {
           e.preventDefault();
-            $(".ruc_empresa").val("");
-            $(".ruc_empresa").focus();
+            window.location = "http://192.168.1.5/control_pms/modulos/contacto/registracompania.php";
       })
       $("#btnModificar").click(function(e) {
           e.preventDefault();
@@ -626,11 +622,9 @@ function __autoload($name) {
 	</div>
 
 	<div id="content">
-		<p>Dele click a <b>"Continuar"</b> si desea seguir usando este formulario. De lo contrario <b>"Modificar"</b></p>
-
-                <a href="#" id="btnContinuar" class="button green close"><img src="../../css/reveal/images/tick.png">Continuar</a>
-
-		<a href="#" id="btnModificar" class="button red close"><img src="../../css/reveal/images/cross.png">Modificar</a>
+            <p>Dele click a <b>"Continuar"</b> si desea seguir usando este formulario. De lo contrario <b>"Modificar"</b></p>
+            <a href="#" id="btnContinuar" class="button green close"><img src="../../css/reveal/images/tick.png">Continuar</a>
+            <a href="#" id="btnModificar" class="button red close"><img src="../../css/reveal/images/cross.png">Modificar</a>
 	</div>
     </div>
     <!-- FIN MODAL -->
@@ -936,7 +930,7 @@ function __autoload($name) {
             <hr />
         </div>
         <input type="hidden" value="<?=$id_empresa;?>" name="id_empresa" />
-        <input type="submit" id="submit" value="test" />
+        <input type="submit" id="submit" value="Guardar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
     </form>
 </div>
 </body>

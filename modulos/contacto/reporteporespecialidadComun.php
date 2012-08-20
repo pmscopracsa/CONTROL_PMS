@@ -10,11 +10,21 @@ $css = scandir($CSS_PATH);
         <title>PAGINAS AMARILLAS</title>
         <!-- zona css -->
         <?php
-        foreach ($css as $value) {
+        /*foreach ($css as $value) {
             if ($value === '.' || $value === '..'){continue;}
             echo '<link href="../../css/'.$value.'" rel="stylesheet" type="text/css" />'; 
-        }
+        }*/
         ?>
+                <link href="../../css/!style.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/barrasuperior.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/botones.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/cuerpo.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/dos-columnas.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/barrasuperior.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/google-buttons.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/tabla-border.css" rel="stylesheet" type="text/css" />
+        
         <link href="../../js/jqgrid/gridtree/src/css/ui.jqgrid.css" rel="stylesheet" type="text/css"/>
         <link href="../../js/jqgrid/gridtree/src/css/ui.multiselect.css" rel="stylesheet" type="text/css"/>
         <!-- ZONA JS -->
@@ -331,8 +341,8 @@ $css = scandir($CSS_PATH);
         
               $("#email_form").dialog({
                     autoOpen:false,
-                    height:300,
-                    width:550,
+                    height:350,
+                    width:350,
                     modal:true,
                     buttons:{
                         "Enviar":function() {
@@ -353,7 +363,7 @@ $css = scandir($CSS_PATH);
                     <label for="asunto">Asunto *</label>
                 </td>
                 <td>
-                    <input type="text" name="txtasunto" maxlength="50" size="30" />
+                    <input type="text" name="txtasunto" maxlength="50" size="40" />
                 </td>
             </tr>
             <tr>
@@ -361,7 +371,7 @@ $css = scandir($CSS_PATH);
                     <label for="cuerpo">Mensaje *</label>
                 </td>
                 <td>
-                    <textarea name="mensaje" maxlength="100" cols="25" rows="6"></textarea> 
+                    <textarea name="mensaje" maxlength="100" cols="40" rows="14"></textarea> 
                 </td>
             </tr>
         </table>

@@ -31,9 +31,8 @@
                     type:"GET",
                     data:{
                         nombre_usuario:$("#txtusuariosistema").val()
-                        ,nombre_tabla:nombreTabla
-                        ,nombre_campo:nombreCampo},
-                    url:"../bl/Ayuda/ayuda.php",
+                    },
+                    url:"../bl/Ayuda/ayuda.php?recover=empresa",
                     success:function(data) {
                         if (data == "existe"){
                             $("#msgerrorempresa").hide();
@@ -46,10 +45,6 @@
                 }
                 
             });
-            
-            function redireccionar(destino) {
-                window.location = destino;
-            }
         }) ;   
         </script>    
         <style>

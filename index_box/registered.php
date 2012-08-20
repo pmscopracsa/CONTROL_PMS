@@ -136,7 +136,7 @@ $(document).ready(function()
                     </tr>
                     <tr>
                         <td></td>
-                        <td><label><a href="../ayuda/identificarse.php?ctx=recoverusuario">¿Olvidaste tu contrase&ntilde;a?</a></label></td>
+                        <td><label><a href="../ayuda/identificarseusuario.php">¿Olvidaste tu contrase&ntilde;a?</a></label></td>
                     </tr>
                     <tr>
                         <td></td>

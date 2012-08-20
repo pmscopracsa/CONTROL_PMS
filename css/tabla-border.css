@@ -43,10 +43,7 @@
 	background: #d0dafd;
 }
 
-/*
-*titluos
 
-*/
 .titulo {
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
@@ -54,7 +51,8 @@
     border-top-right-radius: 50px; 
     background:#FF6600;
     color:#FFFFFF;
-    display:inline;
     padding:3px;
-    font-size: 2px !important;
+/*    display:inline;
+    
+    font-size: 2px !important;*/
 }
