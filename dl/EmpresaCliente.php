@@ -11,6 +11,34 @@ class EmpresaCliente {
         
     }
     
+    public function existePassword($cn) {
+        $rs = "";
+        $query = "SELECT * FROM tb_empresa WHERE id = $this->_id AND password = '$this->_password'";
+        
+        $rs = mysql_query($query,$cn);
+        
+        if (@mysql_num_rows($rs) == 1)
+            $rs = "correcto";
+        else
+            $rs = "incorrecto";
+        
+        return $rs;
+    }
+    
+    public function resetPassword($cn) {
+        $res = "";
+        $query = "UPDATE tb_empresa password SET password = '$this->_password' WHERE id = $this->_id";
+        
+        $rs = mysql_query($query, $cn);
+        
+        if ($rs)
+            $res = "correcto";
+        else
+            $res = "incorrecto";
+        
+        return $res;
+    }
+    
     // G&S
     public function get_id() {
         return $this->_id;

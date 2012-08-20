@@ -14,6 +14,12 @@ class ContactoPersona {
     public function mostrarContactos()
     {
         $query = "SELECT * FROM tb_personacontacto ORDER BY nombre ASC";
+//        $query = "SELECT  DISTINCT pc.nombre, tf.numero
+//                    FROM tb_personacontacto pc
+//                    INNER JOIN tb_comuntfijo tf ON pc.id = tf.tb_personacontactocomun_id
+//                    INNER JOIN tb_comuntmobile tm ON pc.id = tm.tb_personacontactocomun_id
+//                    INNER JOIN tb_comuntnextel tn ON pc.id = tn.tb_personacontactocomun_id
+//                    GROUP BY pc.id";
         
         try
         {

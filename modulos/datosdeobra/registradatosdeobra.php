@@ -377,7 +377,6 @@ $contratos = $modelos->mostrarContratos();
              $("#usuarios-aprobacion").click(function(){
                 //$("#modal_usuariosempresa").dialog("open");
                 $("#div-modal-asigna_aprobacion").dialog("open");
-                return false;
              });
              
              //DIALOG - PRIMER FILTRO (USUARIOS APROBACION)
@@ -1526,9 +1525,12 @@ $contratos = $modelos->mostrarContratos();
                     "<td>"+datos[index].email_persona+"</td>"+
                     "<td>"+datos[index].ruc_empresa+"</td>"+
                     "<td>"+datos[index].fax_empresa+"</td>"+
-                    "<td><input id='btn_tfijo' type='button' value='TF'/></td>"+
-                    "<td><input id='btn_tmobile' type='button' value='TM'/></td>"+
-                    "<td><input id='btn_tnextel' type='button' value='TN'/></td>"+
+//                    "<td>"+datos[index].tf+"</td>"+
+//                    "<td>"+datos[index].tm+"</td>"+
+//                    "<td>"+datos[index].tn+"</td>"+
+//                    "<td><input id='btn_tfijo' type='button' value='TF'/></td>"+
+//                    "<td><input id='btn_tmobile' type='button' value='TM'/></td>"+
+//                    "<td><input id='btn_tnextel' type='button' value='TN'/></td>"+
                     "<td>"+"<a href='#' id='del-contacto' class='button delete'>Eliminar</a>"+"</td>"+
                     '<input id="codigo" type="hidden" name="contacto'+contador_contactos+'" value="'+datos[index].id+'" />'+
                     "</tr>"    
@@ -2138,6 +2140,9 @@ $contratos = $modelos->mostrarContratos();
                                             <th>Correo Electr&oacute;nico</th>    
                                             <th>RUC</th>
                                             <th>Fax</th>
+                                            <th>T. Fijo</th>
+                                            <th>T. Mobile</th>
+                                            <th>T. Nextel</th>
                                         </tr>
                                     </thead>
                                     <tbody>

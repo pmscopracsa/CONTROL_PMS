@@ -107,7 +107,7 @@ if(isset($_GET['logoff']))
                 </div>
                 <div >
                         <div id="imagen">
-                            <img class="logo_cliente" src="<?='img/cliente/'.$_SESSION['logo'].'.png';?>" />
+                            <img class="logo_cliente" src="<?='img/cliente/'.$_SESSION['logo'];?>" />
                                         <a href="?logoff">Cerrar sesi&oacute;n</a>
                                         <label>USUARIO:</label><a hrehref="#"><?=@$_SESSION['nombre_real']?></a>
             

@@ -3,10 +3,8 @@ session_name('tzLogin');
 session_set_cookie_params(2*7*24*60*60);
 session_start();
 
-if(@$_POST["action"] == "upload") {
-    move_uploaded_file($filename, $destination);
-}
 ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,11 +15,21 @@ if(@$_POST["action"] == "upload") {
         <script src="../../js/tabs/jquery.ui.widget.js"></script>
         <script src="../../js/tabs/jquery.ui.tabs.js"></script>
         <script src="../../js/jquery-ui-1.8.18.custom.min.js"></script>
+        <script src="../../js/ajaxfileupload.js"></script>
         
         <link rel="stylesheet" href="../../css/tabs.css">
         <link rel="stylesheet" href="../../css/jquery-ui-1.8.18.custom.css">
+        
         <script>
+        function cargarDirectorios() {
+            $("#divSeleccionaDirectorio").load("../../index_box/administrador/modales/directorios_div.php");
+        }
         $(document).ready(function() {
+            /* div de directorios carga por defecto*/
+            $("#divSeleccionaDirectorio").load("../../index_box/administrador/modales/directorios_div.php");
+            /* div usuarios por ddefecto */
+            $("#divSeleccionUsuarios").load("../../modulos/datosdeobra/modales/usuarios_div.php?filtro=1");
+ 
             /**
              * OCULTAR POR DEFCTO CAMPOS PARA CAMBIO DE PASSWORD
              */
@@ -30,18 +38,59 @@ if(@$_POST["action"] == "upload") {
                     $("#password_change_old").css("display","block");
                     $("#password_change_new").css("display","block");
                     $("#password_change_repeat").css("display","block");
+                    
                 }
                 else {
                     $("#password_change_old").css("display","none");
                     $("#password_change_new").css("display","none");
                     $("#password_change_repeat").css("display","none");
+                    $("#password_change_button").css("display","none");
                 }
-                    
             });
+            
+            /*
+             * VER SI EXISTE PASSWORD
+             */
+            $("#txtoldpassword").focusout(function() {
+                $.ajax({
+                    type:"GET",
+                    data:{old_pass:$("#txtoldpassword").val(),id_empresa:<?=$_SESSION['id']?>},
+                    url:"../../bl/EmpresaCliente_BL.php?parameter=existePassword",
+                    success:function(data) {
+                        if (data == "incorrecto")
+                            $("#oldpasswrong").css("display","block");
+                        else
+                            $("#password_change_button").css("display","block");
+                    }
+                });
+            });
+            
+            /*
+             * VerIfiar igualdad en password
+             */
+            $("#btnActualizapass").click(function() {
+                if($("#txtnewpassword").val() === $("#txtrepassword").val()){
+                    $.ajax({
+                        type:"POST",
+                        data:{new_pass:$("#txtnewpassword").val(),id_empresa:<?=$_SESSION['id']?>},
+                        url:"../../bl/EmpresaCliente_BL.php?parameter=resetpassword",
+                        success:function(data){
+                            if(data == "correcto")
+                                alert("Password actualizado correctamente");
+                            else
+                                alert("No se pudo actualizar");
+                        }
+                    });
+                }else{
+                    alert("my bad");
+                }
+            }) 
+             
+            
             /*
              * CARGAR USUARIOS EN TABLA 
              */
-            $("#listaUsuarios").load("../../modulos/datosdeobra/modales/usuarios_div.php?filtro=2");
+            $("#listaUsuarios").load("../../modulos/datosdeobra/modales/usuarios_div.php?filtro=1");
             
             // CREAR LOS TABS
             $("#tabs").tabs();
@@ -50,6 +99,7 @@ if(@$_POST["action"] == "upload") {
             $("#obras").tabs();
             $("#directorios").tabs();
             $("#empresa").tabs();
+            $("#usuariosaprobacion").tabs();
             
             // GENERAR PASSWORD ALEATORIO
             $("#btnGeneraPass").click(function() {
@@ -133,21 +183,127 @@ if(@$_POST["action"] == "upload") {
              */
             $("#btnEncuentraDirectorio").click(function() {
                 $("#tbl_datosEditarDirectorio").css("display","block");
+              
             });
             
-            /***
-             * SUBIR LOGO A LA EMPRESA 
+            /******
+             * DIRECTORIO
              */
-            $("#btnSubirLogo").click(function() {
+            //CREAR DIRECTORIO
+            $("#btnCrearDirectorio").click(function() {
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        nombre:$("#txtnombredirectorio").val()
+                        ,descripcion:$("#txtdescripciondirectorio").val()
+                        ,id_empresa:<?=$_SESSION['id']?>
+                    },
+                    url:"../../bl/DirectorioCliente_BL.php?parameter=crearDirectorio",
+                    success:function() {
+                        $("#txtnombredirectorio").val("");
+                        $("#txtdescripciondirectorio").val("");
+                        alert("si");
+                    },
+                    error:function() {
+                        alert("no");
+                    }
+                })
+            });
+            //ACTUALIZAR DIRECTORIO
+            $("#btnBuscarDirectorio").click(function() {
+                $("#divSeleccionaDirectorio").dialog("open");
+            });
+            $("#divSeleccionaDirectorio").dialog({
+                autoOpen:false,
+                height:350,
+                width:450,
+                resizable:false,
+                closeOnEscape:false,
+                modal:true,
+                buttons:{
+                    "Salir":function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            //carga para modificar el directrorio
+            $(".directorio").live("click",function(){
+                var directorio = $(this).text().split("-");
+                var nombre = directorio[1];
+                var descripcion = directorio[2];
                 
+                $("#txtnombredirectoriobsucar").val(nombre);
+                $("#txtnombredirectorioEdit").val(nombre);
+                $("#txtdescripciondirectorioEdit").val(descripcion);
+            });
+            
+            /******
+             * USUARIOS PARA APROBACION
+             */
+            //filtrar los usuarios
+            $("#btnSeleccionUsuarios").click(function() {
+                $("#divSeleccionUsuarios").dialog("open");
+            });
+            $("#divSeleccionUsuarios").dialog({
+                 autoOpen:false,
+                 heigh:500,
+                 width:350,
+                 resizable:false,
+                 closeOnEscape:false,
+                 modal:true,
+                 buttons:{
+                     "Salir":function() {
+                         $(this).dialog("close");
+                     }
+                 }
+            });
+            
+            $("#listausuarios").live("click",function() {
+                $.ajax({
+                    data:{id:$(this).val()},
+                    dataType:"json",
+                    url:"../../includes/query_repository/getAllUsuarios.php",
+                    success:function(data) {
+                        resultados(data);
+                    }
+                });
+            });
+            function resultados(data) {
+                $.each(data,function(index, value) {
+                    $("#tbllista_usuarios tbody").append(
+                    '<tr id="tbl_listausuariosgrid">'+
+                    '<td>'+data[index].nombre+"</td>"+
+                    '<input type="hidden" name="usuario" value="'+data[index].id+'" />'+
+                    '<td><a href="#" id="del-usuario" class="button delete">Eliminar</a></td>'
+                    )
+                });
+            }
+            $("#del-usuario").live("click",function(e) {
+                alert($(this).parent().parent().html());
             })
         });    
         </script>
         <style>
-            #password_change_old, #password_change_new,#password_change_repeat {display:none;}
+            #password_change_old, #password_change_new,#password_change_repeat,#password_change_button {display:none;}
         </style>
     </head>
     <body>
+        <!-- MODAL SELECCION USUARIOS -->
+        <div id="divSeleccionUsuarios" title="Seleccion de usuarios">
+            <table id="tbl_seleccionusuarios">
+                <thead>
+                    <tr>
+                        <th>Usuario
+                </thead>
+                <tbody>
+                    <tr></tr>
+                </tbody>
+            </table>    
+        </div>
+        
+        <!-- model directorio -->
+        <div id="divSeleccionaDirectorio" title="Seleccione el directorio"></div> 
+        
        <!-- MODALES -->
        <div id="listaUsuarios" title="Usuarios para aprobaciones">
            <table>
@@ -166,6 +322,7 @@ if(@$_POST["action"] == "upload") {
                 <li><a href="#tabs-2">DIRECTORIOS</a></li>
                 <li><a href="#tabs-3">PROYECTOS</a></li>
                 <li><a href="#tabs-4">USUARIOS</a></li>
+                <li><a href="#tabs-5">APROBACION</a></li>
             </ul>
            <div id="tabs-1">
                <div id="empresa">
@@ -175,24 +332,117 @@ if(@$_POST["action"] == "upload") {
                     </ul>
 
                     <div id="tabs-empresa-1">
-                        <form method="post" action="">
+                        <form method="POST" action="index.php" enctype="multipart/form-data">
                             <table>
+                                    <?php
+                                    if (isset($_SESSION['logo'])) {
+                                        echo '<tr><td><label>Logo actual de su empresa.</label>';
+                                        echo "<tr><td><img src='../../img/cliente/".$_SESSION['logo']."' width='80px' height='74px' alt='logo'/>";
+                                    }    
+                                    else {
+                                        echo 'Esta empresa aun no tiene logo';
+                                    ?>
                                     <tr><td><label>Empresa:</label><td><?= strtoupper(@$_SESSION['usr'])?>
-                                    <tr><td><label>Seleccionar logo:</label><td><input type="file" class="ui-button ui-widget ui-state-default ui-corner-all"/>
-                                    <tr><td><td><input type="button" value="upload" id="btnSubirLogo" />
+                                    <tr><td><input type="hidden" name="MAX_FILE_SIZE" value="100000" />      
+                                    <tr><td><label>Seleccionar logo:</label><td><input name="archivo" type="file" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                                    <tr><td><td><input type="submit" value="Subir logo" id="btnSubirLogo" />
+                                            <input type="hidden" name="action" value="upload" />
+                                            <?php
+                                            if(@$_POST["action"] == "upload") {
+                                                $nombre_archivo = $_FILES['archivo']['name'];
+                                                $tipo_archivo = $_FILES['archivo']['type'];
+                                                $tamano_archivo = $_FILES['archivo']['size'];
+                                                $safe_filename = preg_replace( 
+                                                    array("/\s+/", "/[^-\.\w]+/"), 
+                                                    array("_", ""), 
+                                                    trim(rand(0, 500).$_FILES['archivo']['name'])); 
 
+                                                
+
+                                                if ($nombre_archivo != "" && (strpos($tipo_archivo, "png")) && ($tamano_archivo <= 1048576)) {
+                                                    $destino = "../../img/cliente/".$safe_filename;
+                                                    if (move_uploaded_file($_FILES['archivo']['tmp_name'], $destino)) {
+                                                        echo '<p>El logo se ha subido correctamente: </p>'.$safe_filename;
+                                                        //VERFICAR SI EXISTE PREVIAMENTE UN LOGO, SI EXISTE EL LOGO REEMPLAZARLO
+                                                        
+                                                        
+                                                    } else {
+                                                        echo 'Houdson, tenemos problemas.';
+                                                    }
+                                                } else {
+                                                    echo '<p>El tipo de archivo debe ser png y el tamano menor a 1 MB.</p>';
+                                                    echo 'Usted ha intetado subir un archivo de tipo:'.$tipo_archivo.". Con un peso de: ".$tamano_archivo;
+                                                }
+                                            }
+                                    }        
+                                            ?>
                             </table>
+                            
                          </form>
                     </div>
                     <div id="tabs-empresa-2">
-                        <table>
-                            <tr><td><label>Cambiar logo</label><td><input type="file" class="ui-button ui-widget ui-state-default ui-corner-all"/>
-                            <tr><td><label>¿Desea cambiar el password?</label><input type="radio" name="changepassword" value="no" checked>NO<input type="radio" name="changepassword" value="si">SI
-                            <tr id="password_change_old"><td><label>Ingrese su password actual:</label></td><td><input type="text" name="txtoldpassword" /></td></tr>
-                            <tr id="password_change_new"><td><label>Ingrese su password nuevo:</label></td><td><input type="text" name="txtnewpassword" /></td></tr>
-                            <tr id="password_change_repeat"><td><label>Repita su password nuevo:</label></td><td><input type="text" name="txtrepassword" /></td></tr>
-                            <tr><td><input type="button" value="Actualizar" />
-                        </table>
+                        <form method="POST" action="index.php" enctype="multipart/form-data">
+                            <table>
+                                
+                                <tr><td><label>Seleccionar logo</label><td><input type="file" name="newlogo" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                                
+                                <tr><td><input type="submit" value="Subir logo" />
+                                        <input type="hidden" name="action_edit" value="upload_editlogo" />
+                                        <?php
+                                        
+                                        if (@$_POST['action_edit'] == "upload_editlogo") {
+                                            echo 'Quieren subir algo....'.$_FILES['newlogo']['name'];
+                                            
+                                            $nombre_archivo = $_FILES['newlogo']['name'];
+                                            $tipo_archivo = $_FILES['newlogo']['type'];
+                                            $tamano_archivo = $_FILES['newlogo']['size'];
+                                            $safe_filename = preg_replace( 
+                                                array("/\s+/", "/[^-\.\w]+/"), 
+                                                array("_", ""), 
+                                                trim(rand(0, 500).$_FILES['newlogo']['name'])); 
+
+                                            if ($nombre_archivo != "" && (strpos($tipo_archivo, "png")) && ($tamano_archivo <= 1048576)) {
+                                                $destino = "../../img/cliente/".$safe_filename;
+                                                if (move_uploaded_file($_FILES['newlogo']['tmp_name'], $destino)) {
+                                                    //unlink("../../img/cliente/".$_SESSION['logo'].".png");
+                                                    echo '<p>El logo se ha subido correctamente: </p>'.$safe_filename;
+                                                    //VERFICAR SI EXISTE PREVIAMENTE UN LOGO, SI EXISTE EL LOGO REEMPLAZARLO
+                                                    require_once '../../dl/Conexion.php';
+                                                    
+                                                    try {
+                                                        $conexion = new Conexion();
+                                                        $cn = $conexion->conectar();
+                                                        
+                                                        if(!$cn)
+                                                            throw new Exception("No se pude conectar: ".  mysql_error());
+                                                    
+                                                        $sql = "UPDATE tb_empresa SET logo = '".$safe_filename."' WHERE id = ".$_SESSION['id'];
+                                                        $row = mysql_fetch_assoc(mysql_query("SELECT id,nombre,logo FROM tb_empresa WHERE id=".$_SESSION['id']));
+                                                        $_SESSION['logo'] = $row['logo'];
+                                                        
+                                                        $rs = mysql_query($sql,$cn);
+                                                        if(!$rs)
+                                                            throw new Exception("No se pude consultar".  mysql_error());
+                                                    } catch(Exception $ex) {
+                                                        echo 'Error: '.$ex->getMessage();
+                                                    }
+
+                                                } else {
+                                                    echo 'Houdson, tenemos problemas.';
+                                                }
+                                            } else {
+                                                echo '<p>El tipo de archivo debe ser png y el tamano menor a 1 MB.</p>';
+                                                echo 'Usted ha intetado subir un archivo de tipo:'.$tipo_archivo.". Con un peso de: ".$tamano_archivo;
+                                            }
+                                        }
+                                        ?>
+                                <tr><td><label>¿Desea cambiar el password?</label><input type="radio" name="changepassword" value="no" checked>NO<input type="radio" name="changepassword" value="si">SI
+                                <tr id="password_change_old"><td><label>Ingrese su password actual:</label></td><td><input type="password" name="txtoldpassword" id="txtoldpassword"/><td><div id="oldpasswrong" style="display: none">No es correcto</div>
+                                <tr id="password_change_new"><td><label>Ingrese su password nuevo:</label></td><td><input type="password" name="txtnewpassword" id="txtnewpassword" /></td></tr>
+                                <tr id="password_change_repeat"><td><label>Repita su password nuevo:</label></td><td><input type="password" name="txtrepassword" id="txtrepassword"/></td></tr>
+                                <tr id="password_change_button"><td><td><input type="button" value="Actualizar password" id="btnActualizapass"/>
+                            </table>
+                        </form>
                     </div>
                </div>    
            </div>
@@ -205,17 +455,19 @@ if(@$_POST["action"] == "upload") {
                
                     <div id="directorio_crear-1">
                         <table>
-                            <tr><td><label>Nombre:</label><td><input type="text" name="txtnombredirectorio" />
-                            <tr><td><label>Descripci&oacute;n:</label><td><input type="text" name="txtdescripciondirectorio" />
+                            <tr><td><label>Nombre:</label><td><input type="text" name="txtnombredirectorio" id="txtnombredirectorio" />
+                            <tr><td><label>Descripci&oacute;n:</label><td><input type="text" name="txtdescripciondirectorio" id="txtdescripciondirectorio" />
+                            <tr><td><td><input type="button" value="Crear" id="btnCrearDirectorio" />        
                         </table>
                     </div>
                     <div id="directorio_editar-2">
                         <table>
-                            <tr><td><label>Nombre:</label><td><input type="text" name="txtnombredirectoriobsucar" READONLY/><td><input type="button" value="..." id="btnBuscarDirectorio" />
+                            <tr><td><label>Nombre:</label><td><input type="text" name="txtnombredirectoriobsucar" id="txtnombredirectoriobsucar" READONLY/><td><input type="button" value="..." id="btnBuscarDirectorio" />
                             <tr><td><input type="button" value="Buscar" id="btnEncuentraDirectorio" />
                                     <table id="tbl_datosEditarDirectorio" style="display: none">
-                                        <tr><td><label>Nombre:</label><td><input type="text" name="txtnombredirectorioEdit" />
-                                        <tr><td><label>Descripci&oacute;n:</label><td><input type="text" name="txtdescripciondirectorioEdit" />
+                                        <tr><td><label>Nombre:</label><td><input type="text" name="txtnombredirectorioEdit" id="txtnombredirectorioEdit" />
+                                        <tr><td><label>Descripci&oacute;n:</label><td><input type="text" name="txtdescripciondirectorioEdit" id="txtdescripciondirectorioEdit" />
+                                        <tr><td><td><input type="button" id="btnActualizarDirectorio" value="Actualizar" />
                                     </table>    
                         </table>
                     </div>
@@ -287,6 +539,35 @@ if(@$_POST["action"] == "upload") {
                     </div>
                </div>    
            </div>
+           <div id="tabs-5">
+               <div id="usuariosaprobacion">
+                   <ul>
+                       <li><a href="#usuarioaprobacionasigna-1">Asignar</a></li>
+                       <li><a href="#usuarioaprobacionedita-2">Editar</a></li>
+                   </ul>
+                   <div id="usuarioaprobacionasigna-1">
+                       <table>
+                           <tr><td><label>Seleccionar usuarios:</label></td><td><input type="button" id="btnSeleccionUsuarios" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td></tr>
+                           <tr><td>
+                                   <table class="areaScrollModal" id="tbllista_usuarios">
+                                       <thead>
+                                           <tr class="ui-widget-header">
+                                               <th>Usuario</th>
+                                           </tr>
+                                       </thead>
+                                       <tbody>
+                                           <tr></tr>
+                                       </tbody>
+                                   </table>
+                       </table>
+                   </div>
+                   <div id="usuarioaprobacionedita-2">
+                       <table>
+                           
+                       </table>
+                   </div>
+               </div>
+           </div>    
        </div>
        
 <!--       <div id="tabs">

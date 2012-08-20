@@ -66,6 +66,7 @@ if(@$_POST['submit']=='Login')
 			$_SESSION['usr']=$row['nombre'];
 			$_SESSION['id'] = $row['id'];
 			$_SESSION['rememberMe'] = $_POST['rememberMe'];
+                        unset($_SESSION['logo']);
                         $_SESSION['logo'] = $row['logo'];
 			
 			// Store some data in the session
@@ -301,7 +302,7 @@ if(@$_SESSION['msg'])
             <div class="left">
             
                 <h1>Panel de <?=$_SESSION['usr']?></h1>
-                <img src="<?='img/cliente/'.$_SESSION['logo'].'.png'; ?>" alt="logo_empresa" height="85" width="185"/>
+                <img src="<?='img/cliente/'.$_SESSION['logo']; ?>" alt="logo_empresa" height="85" width="185"/>
             
             <p>TODO: Informaci&oacute;n relevenante para la empresa</p>
             <a href="index_box/registered.php">PANEL DE ADMINISTRACION</a>
