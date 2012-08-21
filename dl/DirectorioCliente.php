@@ -41,7 +41,19 @@ class DirectorioCliente {
             echo 'Error: '.$ex->getMessage();
         }
     }
-
+    
+    public function actualizarDirectorios($cn) {
+        $query = "UPDATE tb_directorio SET nombre = '$this->_nombre', descripcion = '$this->_descripcion' WHERE tb_empresa_id = $this->_tb_empresa_id AND id = $this->_id";
+        
+        try {
+            $rs = mysql_query($query, $cn);
+            if (!$rs)
+                throw new Exception("Error en consulta: ".  mysql_error());
+            
+        } catch (Exception $ex) {
+            echo 'Error: '.$ex->getMessage();
+        }
+    }
 
     /*
      * G&S

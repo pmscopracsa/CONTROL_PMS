@@ -336,7 +336,7 @@ function  __autoload($name) {
                 </table>
                 <div id="footer"><hr />
                 </div>
-                <input type="submit" id="submit" value="test" />
+                <input type="submit" id="submit" value="Guardar" class="ui-button ui-widget ui-state-default ui-corner-all" />
             </form>
         </div>
         <div id="id_session"></div>

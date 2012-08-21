@@ -2,9 +2,7 @@
 session_name('tzLogin');
 session_set_cookie_params(2*7*24*60*60);
 session_start();
-
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,10 +23,13 @@ session_start();
             $("#divSeleccionaDirectorio").load("../../index_box/administrador/modales/directorios_div.php");
         }
         $(document).ready(function() {
+            
             /* div de directorios carga por defecto*/
             $("#divSeleccionaDirectorio").load("../../index_box/administrador/modales/directorios_div.php");
             /* div usuarios por ddefecto */
             $("#divSeleccionUsuarios").load("../../modulos/datosdeobra/modales/usuarios_div.php?filtro=1");
+            /* div proyectos por defecto */
+            $("#divSeleccionaProyecto").load("modales/proyectos_div.php")
  
             /**
              * OCULTAR POR DEFCTO CAMPOS PARA CAMBIO DE PASSWORD
@@ -191,7 +192,10 @@ session_start();
              */
             //CREAR DIRECTORIO
             $("#btnCrearDirectorio").click(function() {
-                $.ajax({
+                if ($("#txtnombredirectorio").val() === "" || $("#txtdescripciondirectorio").val() === "") {
+                    alert("Ambos campos son obligatorios");
+                } else {
+                  $.ajax({
                     type:"POST",
                     data:{
                         nombre:$("#txtnombredirectorio").val()
@@ -206,8 +210,11 @@ session_start();
                     },
                     error:function() {
                         alert("no");
-                    }
-                })
+                        }
+                    });
+                }
+                
+
             });
             //ACTUALIZAR DIRECTORIO
             $("#btnBuscarDirectorio").click(function() {
@@ -229,14 +236,39 @@ session_start();
             //carga para modificar el directrorio
             $(".directorio").live("click",function(){
                 var directorio = $(this).text().split("-");
+                
                 var nombre = directorio[1];
                 var descripcion = directorio[2];
                 
                 $("#txtnombredirectoriobsucar").val(nombre);
                 $("#txtnombredirectorioEdit").val(nombre);
                 $("#txtdescripciondirectorioEdit").val(descripcion);
+                $("#id_directorio").val(directorio[0]);
             });
-            
+            $("#btnActualizarDirectorio").click(function() {
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        nombre_editar:$("#txtnombredirectorioEdit").val()
+                        ,descripcion_editar:$("#txtdescripciondirectorioEdit").val()
+                        ,id_empresa:<?=$_SESSION['id']?>
+                        ,id_directorio:$("#id_directorio").val()
+                    },
+                    url:"../../bl/DirectorioCliente_BL.php?parameter=actualizarDirectorio",
+                    success:function() {
+                        $("#succcesseditdirectorio").fadeIn("slow", function() {
+                            $("#succcesseditdirectorio").fadeOut(4000); 
+                            $("#txtnombredirectorioEdit").val("");
+                            $("#txtdescripciondirectorioEdit").val("");
+                            $("#txtnombredirectoriobsucar").val("");
+                            $("#tbl_datosEditarDirectorio").css("display","none");
+                        });
+                    },
+                    error:function() {
+                        
+                    }
+                });
+            });
             /******
              * USUARIOS PARA APROBACION
              */
@@ -281,6 +313,83 @@ session_start();
             $("#del-usuario").live("click",function(e) {
                 alert($(this).parent().parent().html());
             })
+            
+            /*****
+             * OBRAS
+             */
+            //CREAR OBRA(PROYECTO) MINIMO
+            $("#btnCrearObra").click(function() {
+                if ($("#txtObraCodificacion").val() === "" || $("#txtObraNombre").val() === "") {
+                    alert("Ambbos campos son requeridos");
+                } else {
+                    $.ajax({
+                        type:"POST",
+                        data:{
+                            obracodificacion:$("#txtObraCodificacion").val()
+                            ,obranombre:$("#txtObraNombre").val()
+                            ,id_empresa:<?=$_SESSION['id']?>
+                        },
+                        url:"../../bl/obraClienteAdministrador.php?parameter=crearProyectoBasico",
+                        success:function() {
+                            $("#divExitoCrearObra").fadeIn("slow", function() {
+                                $("#divExitoCrearObra").fadeOut(4000);
+                                $("#txtObraCodificacion").val("");
+                                $("#txtObraNombre").val("");
+                            });
+                            
+                        }
+                    });
+                }
+            });
+            //EDITAR OBRA(PROYECTO) MINIMO
+            $("#btnListarObras").click(function() {
+                $("#divSeleccionaProyecto").dialog("open");
+            });
+            $("#divSeleccionaProyecto").dialog({
+                autoOpen:false,
+                height:350,
+                width:450,
+                resizable:false,
+                closeOnEscape:false,
+                modal:true,
+                buttons:{
+                    "Salir":function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            //DETECTAR SELECCION DE PROYECTO
+            $(".proyecto").live("click",function() {
+                var proyecto = $(this).text().split("-");
+                $("#txtnombreobraEdit").val(proyecto[2]);
+                $("#id_proyecto").val(proyecto[0]);
+                $("#txtproyectoeditacodigo").val(proyecto[1]);
+                $("#txtproyectoeditanombre").val(proyecto[2]);
+            });
+            // CLICK EN EL BOTON BUSCAR
+            $("#btnBuscarObraEdit").click(function() {
+                $("#tbl_Editarproyecto").css("display","block");
+            });
+            // ACTUALIZAR PROYECTO
+            $("#btnUpdateProject").click(function() {
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        codigoobra:$("#txtproyectoeditacodigo").val()
+                        ,descripcion:$("#txtproyectoeditanombre").val()
+                        ,idproyecto:$("#id_proyecto").val()
+                    },
+                    url:"../../bl/obraClienteAdministrador.php?parameter=editarProyectoBasico",
+                    success:function() {
+                        $("#successupdateproyecto").fadeIn("slow", function() {
+                            $("#successupdateproyecto").fadeOut(4000);
+                            $("#txtnombreobraEdit").val("");
+                            $("#txtproyectoeditacodigo").val("");
+                            $("#txtproyectoeditanombre").val("");
+                        });
+                    }
+                });
+            });
         });    
         </script>
         <style>
@@ -301,8 +410,11 @@ session_start();
             </table>    
         </div>
         
-        <!-- model directorio -->
+        <!-- MODAL DIRECTORIOS -->
         <div id="divSeleccionaDirectorio" title="Seleccione el directorio"></div> 
+        
+        <!-- MODAL PROYECTOS -->
+        <div id="divSeleccionaProyecto" title="Seleccione el proyecto"></div>
         
        <!-- MODALES -->
        <div id="listaUsuarios" title="Usuarios para aprobaciones">
@@ -457,17 +569,20 @@ session_start();
                         <table>
                             <tr><td><label>Nombre:</label><td><input type="text" name="txtnombredirectorio" id="txtnombredirectorio" />
                             <tr><td><label>Descripci&oacute;n:</label><td><input type="text" name="txtdescripciondirectorio" id="txtdescripciondirectorio" />
-                            <tr><td><td><input type="button" value="Crear" id="btnCrearDirectorio" />        
+                            <tr><td><td><input type="button" value="Crear" id="btnCrearDirectorio" class="ui-button ui-widget ui-state-default ui-corner-all"/>        
                         </table>
                     </div>
                     <div id="directorio_editar-2">
                         <table>
-                            <tr><td><label>Nombre:</label><td><input type="text" name="txtnombredirectoriobsucar" id="txtnombredirectoriobsucar" READONLY/><td><input type="button" value="..." id="btnBuscarDirectorio" />
-                            <tr><td><input type="button" value="Buscar" id="btnEncuentraDirectorio" />
+                            <tr><td><label>Nombre:</label><td><input type="text" name="txtnombredirectoriobsucar" id="txtnombredirectoriobsucar" READONLY/><td><input type="button" value="Seleccionar directorio" id="btnBuscarDirectorio" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                            <tr><td><input type="button" value="Buscar" id="btnEncuentraDirectorio" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                                     <table id="tbl_datosEditarDirectorio" style="display: none">
                                         <tr><td><label>Nombre:</label><td><input type="text" name="txtnombredirectorioEdit" id="txtnombredirectorioEdit" />
                                         <tr><td><label>Descripci&oacute;n:</label><td><input type="text" name="txtdescripciondirectorioEdit" id="txtdescripciondirectorioEdit" />
-                                        <tr><td><td><input type="button" id="btnActualizarDirectorio" value="Actualizar" />
+                                                <input type="hidden" id="id_directorio" />
+                                        <tr><td><td><input type="button" id="btnActualizarDirectorio" value="Actualizar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                                                <div id="succcesseditdirectorio" style="display: none">El directorio se ha actualizado correctamente</div>
+                                                <div id="erroreditdirectorio" style="display: none">No se ha podido actualizar el registro.</div>
                                     </table>    
                         </table>
                     </div>
@@ -483,14 +598,22 @@ session_start();
                     <div id="obra_crear-1">
                         <table>
                            <tr><td><label>Codificaci&oacute;n:</label><td><input type="text" id="txtObraCodificacion" />
-                           <tr><td><label>Nombre:</label><td><input type="text" id="txt" />
+                           <tr><td><label>Nombre:</label><td><input type="text" id="txtObraNombre" />
                            <tr><td><td><input type="button" value="Crear" id="btnCrearObra" class="ui-button ui-widget ui-state-default ui-corner-all"/>        
+                                   <div id="divExitoCrearObra" style="display: none">El proyecto se ha creado correctamente.</div>
                         </table>
                     </div>
                     <div id="obra_editar-2">
                         <table>
-                            <tr><td><label>Nombre</label><td><input type="text" id="txtnombreobraEdit" READONLY /><td><input type="button" id="btnListarObras" value="..." />
-                            <tr><td><input type="button" value="Buscar" id="btnBuscarObraEdit" />        
+                            <tr><td><label>Nombre</label><td><input type="text" id="txtnombreobraEdit" READONLY /><td><input type="button" id="btnListarObras" value="Seleccione proyecto" class="ui-button ui-widget ui-state-default ui-corner-all" />
+                            <tr><td><input type="button" value="Buscar" id="btnBuscarObraEdit" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                                    <table id="tbl_Editarproyecto" style="display: none">
+                                        <tr><td><label>Codificaci&oacute;n:</label><td><input type="text" name="txtproyectoeditacodigo" id="txtproyectoeditacodigo" />
+                                        <tr><td><label>Nombre:</label><td><input type="text" name="txtproyectoeditanombre" id="txtproyectoeditanombre" />
+                                                <input type="hidden" id="id_proyecto" />
+                                        <tr><td><td><input type="button" value="Actualizar proyecto" id="btnUpdateProject" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                                                <div id="successupdateproyecto" style="display: none">El proyecto se ha actualizado correctamente.</div>
+                                    </table>    
                         </table>
                     </div>
                </div>
@@ -562,32 +685,11 @@ session_start();
                        </table>
                    </div>
                    <div id="usuarioaprobacionedita-2">
-                       <table>
-                           
+                       <table>  
                        </table>
                    </div>
                </div>
            </div>    
        </div>
-       
-<!--       <div id="tabs">
-
-           <div id="tabs-1">
-               <div id="tabs_tablero_control">
-
-                   <div id="tabs_tc_2">
-                       <table>
-                           <tr><td><label>Usuarios para aprobaci&oacute;n:</label><td><input type="button" value="Seleccionar usuarios" id="btnSelUsuarios" class="ui-button ui-widget ui-state-default ui-corner-all"/>
-                       </table>
-                   </div>
-               </div>
-           </div>
-           <div id="tabs-3">
-               
-           </div>
-           <div id="tabs-4">
-               
-           </div>
-       </div>-->
     </body>
 </html>

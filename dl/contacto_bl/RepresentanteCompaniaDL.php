@@ -26,7 +26,7 @@ class RepresentanteCompaniaDL {
     
     public function mostrarRepresentatesPorNombre()
     {
-        $query = "SELECT * FROM tb_personacontacto  WHERE nombre LIKE '$this->_descripcionpersona'";
+        $query = "SELECT * FROM tb_personacontacto  WHERE nombre LIKE '$this->_descripcionpersona%'";
         
         $conexion = new Conexion();
         $cn = $conexion->conectar();

@@ -11,4 +11,10 @@ if ($_REQUEST['parameter'] == 'crearDirectorio') {
     $directorio->set_descripcion($_REQUEST['descripcion']);
     $directorio->set_tb_empresa_id($_REQUEST['id_empresa']);
     $directorio->crearDirectorio($cn);
+} elseif ($_REQUEST['parameter'] == 'actualizarDirectorio') {
+    $directorio->set_nombre($_REQUEST['nombre_editar']);
+    $directorio->set_descripcion($_REQUEST['descripcion_editar']);
+    $directorio->set_tb_empresa_id($_REQUEST['id_empresa']);
+    $directorio->set_id($_REQUEST['id_directorio']);
+    $directorio->actualizarDirectorios($cn);
 }

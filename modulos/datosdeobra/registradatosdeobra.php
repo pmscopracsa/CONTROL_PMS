@@ -1032,12 +1032,15 @@ $contratos = $modelos->mostrarContratos();
                 closeOnEscape:false,
                 modal:true,
                 buttons:{
+                    /***
+                     * ESTA FUNCION DE BUSCAR DEBE SER REEMPLAZADA
+                     
                     "Buscar":function() {
-                        //$("#txt_nombreCliente").val("");
-                        //buscarCliente();
-                        //$("div_clientebuscar").live("click")
-                        //$("#div_clientebuscar").css("display","block");
-                    },
+                        $("#txt_nombreCliente").val("");
+                        buscarCliente();
+                        $("div_clientebuscar").live("click")
+                        $("#div_clientebuscar").css("display","block");
+                    },*/
                     "Limpiar":function() {
                         recargarClientes();
                     },
@@ -1055,10 +1058,10 @@ $contratos = $modelos->mostrarContratos();
                 closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Buscar":function() {
+                    /*"Buscar":function() {
                         $("#txt_empresacontratante").val("");
                         buscarEmpresaContratante()
-                    },
+                    },*/
                     "Limpiar":function() {
                         recargarEmpresaContratante();
                     },
@@ -1076,10 +1079,10 @@ $contratos = $modelos->mostrarContratos();
                 closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Buscar":function() {
+                    /*"Buscar":function() {
                         $("#txt_empresagerenteproyecto").val("");
                         buscarEmpresaGerenteProyecto()
-                    },
+                    },*/
                     "Limpiar":function() {
                         recargarEmpGerenteProyecto();
                     },
@@ -1097,10 +1100,10 @@ $contratos = $modelos->mostrarContratos();
                 closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Buscar":function() {
+                    /*"Buscar":function() {
                         $("#txt_empsupervisoraproyecto").val("");
                         buscarEmpresaSupervisoraProyecto()
-                    },
+                    },*/
                     "Limpiar":function() {
                         recargarEmpSupervisoraProyecto();
                     },
@@ -1118,10 +1121,10 @@ $contratos = $modelos->mostrarContratos();
                 closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Buscar":function() {
+                    /*"Buscar":function() {
                         $("#txt_proveedorfacturar").val("");
                         buscarProveedorAFacturar()
-                    },
+                    },*/
                     "Limpiar":function() {
                         recargarProveedorFacturar();
                     },
@@ -1823,8 +1826,33 @@ $contratos = $modelos->mostrarContratos();
                 var contrato_id = contrato_array[0];
                 $(".cls-modelocontrato").val(contrato);
                 $(".contrato_id").val(contrato_id);
-            })
+            });
+            
+            /**
+             * BUSCADORES IN LINE - WTF
+             */
+            //CLIENTE
+            $("#btnSearchCliente").live("click",function() {
+                recargarClientesPorFiltro($("#txt_divClienteBuscar").val());
+            });
+            //EMPRESA CONTRATANTE
+            $("#btnSearchEmpContratante").live("click",function() {
+                recargarEmpresaContratantePorFiltro($("#txt_divEmpContratanteBuscar").val());
+            });
+            //EMPRESA GERENTE DE PROYECTO
+            $("#btnSearchGerenProyecto").live("click",function() {
+                recargarEmpGerenteProyectoPorFiltro($("#txt_divGerenteProyectoBuscar").val());
+            });
+            // EMPRESA SUPERVISORA DEL PROYECTO
+            $("#btnSearchEmpSupervisora").live("click",function() {
+                recargarEmpSupervisoraProyectoPorFiltro($("#txt_divEmpSupervisoraBuscar").val());
+            });
+            // PROVEEDOR A FACTURAR
+            $("#btnSearchProveedorfacturar").live("click",function() {
+                recargarProveedorFacturarPorFiltro($("#txt_divProveedorFacturarBuscar").val());
+            });
         })    
+        
         </script>
         <style>
             #inner-textfield-modal{padding: 5px 5px 5px 5px;}

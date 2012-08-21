@@ -138,10 +138,10 @@ function __autoload($name) {
             width:450,
             modal:true,
             buttons:{
-                "Buscar":function() {
+                /*"Buscar":function() {
                     $("#txt_nombreEspecialidad").val("");//clean it up
                     buscarEspecialidad();
-                },
+                },*/
                 "Limpiar":function() {
                     recargarEspecialidades();
                 },
@@ -189,10 +189,10 @@ function __autoload($name) {
             width:450,
             modal:true,
             buttons:{
-                "Buscar":function(){
+                /*"Buscar":function(){
                     $("#txt_nombreRepresentante").val("");//clean it up
                     buscarRepresentante();
-                },
+                },*/
                 "Limpiar":function(){
                     recargarRepresentantes();
                 },
@@ -593,6 +593,18 @@ function __autoload($name) {
                    $(this).dialog("close");
                }
            }
+       });
+       
+       /**
+        * BUSQUEDAS IN-LINE
+        */
+       // ESPECIALIDADES
+       $("#btnSearchEspecialidad").live("click",function() {
+           recargarEspecialidadesPorFiltro($("#txt_divEspecialidadBuscar").val());
+       });
+       // REPRESENTANTES
+       $("#btnSearchRepresentante").live("click" ,function() {
+           recargarRepresentantesPorFiltro($("#txt_divRepresentanteBuscar").val());
        });
     });
     </script>

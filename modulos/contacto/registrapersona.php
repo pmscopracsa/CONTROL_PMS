@@ -371,6 +371,13 @@ function __autoload($name) {
           e.preventDefault();
           window.location = "http://192.168.1.5/control_pms/modulos/contacto/edit/editapersona.php?frm=persona"
       })
+      
+      /**
+       *  BUSQUEDA IN LINE
+       */
+      $("#btnSearchEspecialidad").live("click",function() {
+          recargarEspecialidadesPorFiltro($("#txt_divEspecialidadBuscar").val());
+      })
             
             /**
              * AUTOCOMPLETAR SEGUN NOMBRE DE LA EMPRESA
@@ -640,7 +647,7 @@ function __autoload($name) {
                 <div id="footer">
             <hr />
         </div>
-        <input type="submit" id="submit" value="test" />
+        <input type="submit" id="submit" value="Guardar" class="ui-button ui-widget ui-state-default ui-corner-all" />
             </form>
         </div>
         

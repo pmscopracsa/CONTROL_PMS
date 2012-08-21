@@ -4,10 +4,11 @@ $especialidadcompania = new EspecialidadCompaniaDL();
 
 
 //$q = $_REQUEST['filtro'];
-$a = 1;
-if ($a == 1) {
+//$a = 1;
+if (@$_REQUEST['filtro'] == "1") {
     $especialidades = $especialidadcompania->mostrarEspecialidades();
-
+    echo '<div>';
+    echo '<div  style:"float:left"><input type="text" id="txt_divEspecialidadBuscar"/><input type="button" value="Buscar" id="btnSearchEspecialidad"/></div>';
     foreach ($especialidades as &$valor) {
         echo '<input id="especialidades_boxes" type="checkbox" name="especialidades[]" value="'.
                 $valor[0].
@@ -15,7 +16,8 @@ if ($a == 1) {
                 $valor[1].
                 '<br />';
     }
-} elseif ($_REQUEST['filtro']== "2") {
+    echo '</div>';
+} elseif (@$_REQUEST['filtro']== "2") {
     $query = "SELECT * FROM tb_especialidadcompania ORDER BY descripcion ASC";
     $result = mysql_query($query);
     $especialidades = array();
@@ -28,10 +30,11 @@ if ($a == 1) {
     }
     echo json_encode($especialidades);
 } else {
-    $especialidadcompania->setDescripcion($q);
+    $especialidadcompania->setDescripcion(@$_REQUEST['filtro']);
     $especialidades = $especialidadcompania->mostrarEspecialidadesPorNombre();
     
-
+    echo '<div>';
+    echo '<div  style:"float:left"><input type="text" id="txt_divEspecialidadBuscar"/><input type="button" value="Buscar" id="btnSearchEspecialidad"/></div>';
     foreach ($especialidades as &$valor) {
         echo '<input id="especialidades_boxes" type="checkbox" name="especialidades[]" value="'.
                 $valor[0].
@@ -39,4 +42,5 @@ if ($a == 1) {
                 $valor[1].
                 '<br />';
     }
+    echo '</div>';
 }

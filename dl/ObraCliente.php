@@ -5,7 +5,8 @@ class ObraCliente {
     private $_id;
     private $_codigoobra;
     private $_descripcion;
-    private$_tb_directorio_id;
+    private $_tb_directorio_id;
+    private $_tb_empresa_id;
     
     /**
      * CARGAS 
@@ -44,6 +45,59 @@ class ObraCliente {
     }
     
     /**
+     * CREAR OBRA SOLO CON: CODIFICACION y DESCRIPCION
+     * LUEGO PODRA SER ACTUALIZADA
+     * @param type $cn 
+     */
+    public function crearObraMinimo($cn) {
+        $query = "INSERT INTO tb_obra (id, codigoobra,descripcion, tb_empresa_id) VALUES (
+            NULL
+            ,'$this->_codigoobra'
+            ,'$this->_descripcion'
+            ,$this->_tb_empresa_id)";
+        
+        try {
+            $rs = mysql_query($query,$cn);
+            if (!$rs)
+                throw new Exception("Error en consulta: ".  mysql_error());   
+        } catch(Exception $ex) {
+            echo 'Error: '.$ex->getMessage();
+        }
+    }
+    
+    /**
+     *funcion para la edicion por el administrador de la empresa 
+     */
+    public function listarProyectos($cn) {
+        $query = "SELECT id,codigoobra,descripcion FROM tb_obra WHERE tb_empresa_id = $this->_tb_empresa_id";
+        try {
+            $rs = mysql_query($query, $cn);
+            if (!$rs)
+                throw new Exception("Error en la consulta: ".  mysql_error());
+            
+            $proyectos = array();
+            
+            while ($reg = mysql_fetch_array($rs)) {
+                array_push($proyectos, $reg);
+            }
+            return $proyectos;
+        } catch(Exception $ex) {
+            echo 'Error: '.$ex->getMessage();
+        }
+    }
+    
+    public function actualizarProyecto($cn) {
+        $query = "UPDATE tb_obra SET codigoobra = '$this->_codigoobra', descripcion = '$this->_descripcion' WHERE id = $this->_id";
+        try {
+            $rs = mysql_query($query, $cn);
+            if (!$rs)
+                throw new Exception("Error en la consulta: ".  mysql_error()); 
+        } catch(Exception $ex) {
+            echo 'Error: '.$ex->getMessage();
+        }
+    }
+    
+    /**
      * G&S 
      */
     public function get_id() {
@@ -76,5 +130,13 @@ class ObraCliente {
 
     public function set_tb_directorio_id($_tb_directorio_id) {
         $this->_tb_directorio_id = $_tb_directorio_id;
+    }
+    
+    public function get_tb_empresa_id() {
+        return $this->_tb_empresa_id;
+    }
+
+    public function set_tb_empresa_id($_tb_empresa_id) {
+        $this->_tb_empresa_id = $_tb_empresa_id;
     }
 }

@@ -173,7 +173,6 @@ $obra_id = 0;
          * SE HA SALVADO EN LA DB
          */
         $("#setuped").click(function() {
-            alert($("#idtxtidobra").val());
             $.ajax({
                 type:"POST",
                 url:"../../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=salvardirectorioobra",

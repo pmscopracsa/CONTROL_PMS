@@ -19,10 +19,10 @@ foreach ($directorios as &$valor) {
         '</p>'.
         '<p style="display:none">-</p>'.    
         '<p style="display:none">'.
-        $valor[2].    
+        $valor[1].    
         '</p>'.    
         '<p style="display:none">-</p>'.
-        $valor[1].
+        $valor[2].
         '</td></tr></table>';
 }
 echo '</div>';
