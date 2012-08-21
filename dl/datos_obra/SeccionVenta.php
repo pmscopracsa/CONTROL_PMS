@@ -43,12 +43,12 @@ class SeccionVenta
                 ,sv.codificacion sv_codificacion
                 ,sv.descripcion sv_descripcion
                 ,sv.tb_obra_id sv_tb_obra_id
+                ,sv.total sv_total
                 FROM tb_empresa e
                 INNER JOIN tb_directorio d ON e.id = d.tb_empresa_id
                 INNER JOIN tb_obra o ON d.id = tb_directorio_id
                 INNER JOIN tb_seccionventa sv ON o.id = sv.tb_obra_id
                 WHERE e.id = $this->_empresa_id AND d.id = $this->_directorio_id AND o.id = $this->_tb_obra_id";
-        
         try {
             $con = new Conexion();
             $cn = $con->conectar();
@@ -67,6 +67,7 @@ class SeccionVenta
                 $secciones[$i]['sv_id'] = $row['sv_id'];
                 $secciones[$i]['sv_codificacion'] = $row['sv_codificacion'];
                 $secciones[$i]['sv_descripcion'] = $row['sv_descripcion'];
+                $secciones[$i]['sv_total'] = $row['sv_total'];
                 $i++;
             }
             return json_encode($secciones);

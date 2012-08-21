@@ -49,7 +49,7 @@ function __autoload($name) {
     
         function recargarEspecialidadesPorFiltro(filtro)
         {
-            $("#seleccionaEspecialidad").load("modal_registracompania/especialidades_div?filtro="+filtro);
+            $("#seleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro="+filtro);
         }
             
         $(document).ready(function(){
@@ -377,7 +377,7 @@ function __autoload($name) {
        */
       $("#btnSearchEspecialidad").live("click",function() {
           recargarEspecialidadesPorFiltro($("#txt_divEspecialidadBuscar").val());
-      })
+      });
             
             /**
              * AUTOCOMPLETAR SEGUN NOMBRE DE LA EMPRESA

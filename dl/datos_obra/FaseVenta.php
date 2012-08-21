@@ -38,6 +38,7 @@ class FaseVenta
                 id fv_id
                 ,codificacion fv_codificacion
                 ,descripcion fv_descripcion
+                ,total fv_total
                 FROM tb_faseventa WHERE tb_seccionventa_id = $this->_tb_seccionventa_id";
         
         try {
@@ -58,6 +59,7 @@ class FaseVenta
                 $fases[$i]['fv_id'] = $row['fv_id'];
                 $fases[$i]['fv_codificacion'] = $row['fv_codificacion'];
                 $fases[$i]['fv_descripcion'] = $row['fv_descripcion'];
+                $fases[$i]['fv_total'] = $row['fv_total'];
                 $i++;
             }
             return json_encode($fases);

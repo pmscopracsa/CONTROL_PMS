@@ -63,10 +63,10 @@ function  __autoload($name) {
                 width:350,
                 modal:true,
                 buttons:{
-                    "Buscar":function() {
+                    /*"Buscar":function() {
                         $("#txt_nombreRepresentante").val("");
                         buscarRepresentante();
-                    },
+                    },*/
                     "Limpiar":function() {
                         recargarRepresentantes();
                     },
@@ -237,6 +237,13 @@ function  __autoload($name) {
             $("#btnBuscarPorObra").click(function() {
                 
             })
+            
+            /***
+             * BUSQUEDA IN LINE
+             */
+            $("#btnSearchRepresentante").live("click",function() {
+                recargarRepresentantesPorFiltro($("#txt_divRepresentanteBuscar").val());
+            });
         });    
         </script>
         <script type="text/javascript">

@@ -85,10 +85,6 @@ function __autoload($name) {
         $("#divSeleccionaRepresentante").load("modal_registracompania/representantes_div.php?filtro="+filtro);
     }
         
-        /*
-         * ------------------------------------------------------------------------
-         */
-        
         /**
          * PRIMERA CARGA DE LA LISTA DE ESPECIALIDADES
          * PRIMERA CARGA DE LA LISTA DE REPRESENTANTES

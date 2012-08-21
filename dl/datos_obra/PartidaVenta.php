@@ -83,6 +83,31 @@ class PartidaVenta
             echo "Error: ".$ex->getMessage();
         }
     }
+    
+    public function totalSumatoriaPartidas($id_obra) {
+        $query = "SELECT SUM(pv.parcial) 
+            FROM tb_seccionventa sv
+            INNER JOIN tb_faseventa fv ON sv.id = fv.tb_seccionventa_id
+            INNER JOIN tb_partidaventa pv ON fv.id = pv.tb_faseventa_id
+            WHERE sv.tb_obra_id = $id_obra";
+        
+        try {
+            $cnx = new Conexion();
+            $cn = $cnx->conectar();
+            
+            if (!$cn)
+                throw new Exception("Error en la conexion: ".  mysql_error());
+            
+            $rs = mysql_query($query);
+            
+            if(!$rs) 
+                throw new Exception("Error en la consulta: ".  mysql_error());
+            
+            return mysql_result($rs, 0);
+        } catch (Exception $ex) {
+            echo 'Error: '.$ex->getMessage();
+        }
+    }
     /**
      * G&S 
      */

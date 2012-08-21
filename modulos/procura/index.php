@@ -2,6 +2,11 @@
 session_name('tzLogin');
 session_set_cookie_params(2*7*24*60*60);
 session_start();
+
+/**
+ * CONF PARA LA MONEDA 
+ */
+
 //require_once '../../bl/DatosObra/seccion.php';
 require_once '../../dl/datos_obra/SeccionVenta.php';
 require_once '../../dl/datos_obra/FaseVenta.php';
@@ -34,14 +39,20 @@ if (@$_POST["action"] == "upload") {
     }
 }
         /**
-        * RECUPERA LAS SECCIONES
-        */
+         * RECUPERA LAS SECCIONES
+         * CAMBIAR POR LA SESION
+         */
         $seccion_venta->set_empresa_id(1);//$_SESSION['id'];
         $seccion_venta->set_directorio_id(1);//$_SESSION[''];
         $seccion_venta->set_tb_obra_id(2);//$_SESSION[''];
         $secciones_json = $seccion_venta->obtenerSecciones();
         $secciones_obje = json_decode($secciones_json);
         $tr_iterator = 1;
+        
+        /**
+         * RECUPERAR LOS SUBTOTALES 
+         */
+        
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,9 +61,8 @@ if (@$_POST["action"] == "upload") {
 <title>PROCURA</title>
         <link rel="stylesheet" type="text/css" href="../../css/left_menu/superfish.css" media="screen">
         <link rel="stylesheet" type="text/css" href="../../css/left_menu/superfish-vertical.css" media="screen">
-<!--        <link rel="stylesheet" href="../../css/960/reset.css" />
-        <link rel="stylesheet" href="../../css/960/text.css" />
-        <link rel="stylesheet" href="../../css/960/960.css" />-->
+        <link rel="stylesheet" type="text/css" href="../../css/barrasuperior.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/cuerpo.css" />
         <link type="text/css" rel="stylesheet" href="../../css/jstree_pre1.0_fix_1/_docs/syntax/!style.css" />
         <link type="text/css" rel="stylesheet" href="../../css/jstree_pre1.0_fix_1/_docs/!style.css" />
         <script type="text/javascript" src="../../js/jquery1.4.2.js.js"></script>
@@ -70,53 +80,66 @@ if (@$_POST["action"] == "upload") {
                 .attr("title","Click para expander/contraer seccion")
                 .click(function(){
                     $(this).siblings('.child-'+this.id).toggle("slow"); //hermanos de class name
-                });
-                    
-             $('tr#rowrow')
+            });        
+            $('tr#rowrow')
                 .css("cursor","pointer")
                 .attr("title","Click para expander/contraer fase")
                 .click(function(){
                     $(this).siblings('#child-'+$(this).attr("class")).toggle("slow");
-                });
+             });
+             /**
+              * CONTROL PANEL HIDE OR SHOW DEPENDES ON REQUEST 
+              */
+             // PRESUPUESTO COSTO META
+             // PRESUPUESTO COSTO META - INGRESO DE PARTIDAS DESDE EXCEL
+             $("#href_ingresopartidasexcel").click(function(e) {
+                 e.preventDefault();
+                 $("#div_formPresupuestoCostoMeta").css("display","block");
+                 $("#div_prsupuestocostometafromexcel").css("display","block");
+             });
         });    
         </script>
         <style>
-            .container_12 {
-                background-image: url('../../css/12_col.gif');
-            }
+            
         </style>
 </head>
-<body>
-    <?php
-    if (!@$_SESSION['id']) {
+<body class="fondo">
+    <?php 
+    /*if (!@$_SESSION['id']) {
         print 'No estas logeado.';
-    }
+    }*/
     ?>
+    <div id="barra-superior">
+        <div id="barra-superior-dentro">
+            <h1 id="titulo_barra">PROCURA</h1>
+        </div>
+    </div>    
+    <div id="main">
 <!-- -->
-<ul class="sf-menu sf-vertical">
+    <ul class="sf-menu">
              <!-- -->
              <li>
-                <a href="#">Directorios/Proyectos</a>
+                <a href="#" id="href_directorios_proyectos">Directorios/Proyectos</a>
                 <ul>
                     <li>
-                        <a href="#">Directorios</a>
+                        <a href="#" id="href_directorios">Directorios</a>
                     </li>
                     <li>
-                        <a href="#">Proyectos</a>
+                        <a href="#" id="href_proyectos">Proyectos</a>
                     </li>
                 </ul>
             </li>
             <!---->
             <li class="current">
-                <a href="" id="02">Presupuesto Costo Meta</a>
+                <a href="" id="02" id="href_presupuestocostometa">Presupuesto Costo Meta</a>
                 <ul>
                     <li>
-                        <a id="mnu_2_1" href="">Ingreso de partidas desde Excel </a>
+                        <a id="href_ingresopartidasexcel" href="#">Ingreso de partidas desde Excel </a>
                     </li>
                     <li class="current">
-                        <a href="#ab">Ingreso/Modificaci&oacute;n directa de Partidas</a>
+                        <a href="#ab" id="href_inlinenewupdatepartidas">Ingreso/Modificaci&oacute;n directa de Partidas</a>
                         <ul>
-                            <li class="current"><a href="#">Ingreso/Modificaci&oacute;n directa de Partidas</a></li>
+                            <li class="current"><a href="#" id="">Ingreso/Modificaci&oacute;n directa de Partidas</a></li>
                             <li><a href="#">Subir Partida</a></li>
                             <li><a href="#abb">menu item</a></li>
                             <li><a href="#abc">menu item</a></li>
@@ -202,14 +225,16 @@ if (@$_POST["action"] == "upload") {
             </li>
 	
     </ul>
-<!-- -->    
-<div id="div_02_01" >
-   
+
+<!-- FORMULARIO DE SUBIDA DEL PRESUPUESTO COSTO/META FORMATO EXCEL -->    
+<div id="div_formPresupuestoCostoMeta" style="display: none">   
 <form action="index.php" method="post" enctype="multipart/form-data">
     <table width="413" border="0" cellspacing="0" cellpadding="0">
+        <tr></tr>
         <tr>
             <td class="text">Por favor seleccione el archivo a subir:</td>
         </tr>
+        <tr></tr>
         <tr>
             <td class="text">
                 <input name="archivo" type="file" class="casilla" id="archivo" size="35" />
@@ -222,64 +247,66 @@ if (@$_POST["action"] == "upload") {
         </tr>
     </table>
 </form>
-  
-    <!---->
-    <div id="container">
-        <table width="795" id="customers" border="0" cellspacing="0" cellpadding="1">
-            <thead>
-                <tr>
-                    <th width="50" bgcolor="#A9F5F2"><input type="button" value="1" /><input type="button" value="2" /></th>
-                    <th width="70" bgcolor="#A9F5F2">Secci&oacute;n</th>
-                    <th width="70" bgcolor="#A9F5F2">Fase</th>
-                    <th width="140" bgcolor="#A9F5F2">Partida</th>
-                    <th width="40" bgcolor="#A9F5F2">Unidad</th>
-                    <th width="40" bgcolor="#A9F5F2">Metrado</th>
-                    <th width="40" bgcolor="#A9F5F2">P.U</th>
-                    <th width="40" bgcolor="#A9F5F2">Parcial</th>
-                </tr>    
-            </thead>
-            <tbody>
-                <tr>
-                    <td bgcolor="#A9F5F2"></td>
-                    <td bgcolor="#C0C0C0" colspan="7">Gran Total</td>
-                </tr>        
-                
-            <?php
-
-            foreach ($secciones_obje as $key=>$value) { //->SECCIONES
+<!-- FIN: FORMULARIO DE SUBIDA DEL PRESUPUESTO COSTO/META FORMATO EXCEL -->
+        <div id="container">
+            <table width="1200" id="customers" border="0" cellspacing="0" cellpadding="1">
+                <thead>
+                    <tr>
+                        <th width="15" bgcolor="#A9F5F2"></th>
+                        <th width="60" bgcolor="#A9F5F2">Secci&oacute;n</th>
+                        <th width="60" bgcolor="#A9F5F2">Fase</th>
+                        <th width="140" bgcolor="#A9F5F2">Partida</th>
+                        <th width="40" bgcolor="#A9F5F2">Unidad</th>
+                        <th width="40" bgcolor="#A9F5F2">Metrado</th>
+                        <th width="40" bgcolor="#A9F5F2">P.U</th>
+                        <th width="40" bgcolor="#A9F5F2">Parcial</th>
+                    </tr>    
+                </thead>
+                <tbody>
+                    <tr>
+                        <td bgcolor="#A9F5F2"></td>
+                        <td bgcolor="#C0C0C0" colspan="6">Gran Total:</td>
+                        <td bgcolor="#C0C0C0"><?="S/.".number_format($partida_venta->totalSumatoriaPartidas(2),2,",",".")?></td>
+                    </tr>        
+                <?php
+                foreach ($secciones_obje as $key=>$value) { //->SECCIONES
                 echo '<tr id="row'.$tr_iterator.'" class="seccion" style="cursor:pointer;">';
                 echo '<td bgcolor="#A9F5F2">+</td>';
-                echo '<td bgcolor="#FFECBF" id="td_seccion"><p><font face="Verdana,Arial,Helvetica" size="1.5">'.$value->sv_codificacion." - ".$value->sv_descripcion.'</font></p></td>';
-                echo '<td bgcolor="#FFECBF" colspan="6" id="td_seccion"></td>';
-                echo '</tr>';
-                $fase_venta->set_tb_seccionventa_id($value->sv_id);
-                $fases_json = $fase_venta->obtenerFases();
-                $fases_obj = json_decode($fases_json);
-                foreach ($fases_obj as $key=>$value) { //->FASES
-                    echo '<tr class="child-row'.$tr_iterator.'" id="rowrow" style="display:none;cursor:pointer;">';
-                    echo '<td width="50" bgcolor="#9AEED8" colspan="2"></td>';
-                    echo '<td bgcolor="#9AEED8"><p><font face="Verdana,Arial,Helvetica" size="1">'.$value->fv_codificacion." - ".$value->fv_descripcion.'</font></p></td>';
-                    echo '<td width="50" bgcolor="#9AEED8" colspan="5"></td>';
+                    echo '<td bgcolor="#FFECBF" id="td_seccion"><p><font face="Verdana,Arial,Helvetica" size="1">'.$value->sv_codificacion." - ".$value->sv_descripcion.'</font></p></td>';
+                    echo '<td bgcolor="#FFECBF" colspan="5" id="td_seccion"></td>';
+                    echo '<td bgcolor="#FFECBF">S/.'.number_format($value->sv_total,2,",",".").'</td>';
                     echo '</tr>';
-                    $partida_venta->set_tb_faseventa_id($value->fv_id);
-                    $partidas_json = $partida_venta->obtenerPartidas();
-                    $partidas_obj = json_decode($partidas_json);
-                    foreach ($partidas_obj as $key=>$value) { //->PARTIDAS
-                        echo '<tr class="child-row'.$tr_iterator.'" style="display:none;">';
-                        echo '<td bgcolor="#ffffff" colspan="3"></td>';
-                        echo '<td bgcolor="#ffffff"><p><font face="Verdana,Arial,Helvetica" size="1">'.$value->pv_codificacion." - ".$value->pv_descripcion.'</font></p></td>';
-                        echo '<td bgcolor="#ffffff"><p><font face="Verdana,Arial,Helvetica" size="1">'.$value->pv_unidadmedida.'</font></p></td>';
-                        echo '<td bgcolor="#ffffff"><p><font face="Verdana,Arial,Helvetica" size="1">'.$value->pv_metrado.'</font></p></td>';
-                        echo '<td bgcolor="#ffffff"><p><font face="Verdana,Arial,Helvetica" size="1">'.$value->pv_precio.'</font></p></td>';
-                        echo '<td bgcolor="#ffffff"><p><font face="Verdana,Arial,Helvetica" size="1">'.$value->pv_parcial.'</font></p></td>';
+                    $fase_venta->set_tb_seccionventa_id($value->sv_id);
+                    $fases_json = $fase_venta->obtenerFases();
+                    $fases_obj = json_decode($fases_json);
+                    foreach ($fases_obj as $key=>$value) { //->FASES
+                        echo '<tr class="child-row'.$tr_iterator.'" id="rowrow" style="display:none;cursor:pointer;">';
+                        echo '<td width="50" bgcolor="#9AEED8" colspan="2"></td>';
+                        echo '<td bgcolor="#9AEED8"><p><font face="Verdana,Arial,Helvetica" size="1">'.$value->fv_codificacion." - ".$value->fv_descripcion.'</font></p></td>';
+                        echo '<td width="50" bgcolor="#9AEED8" colspan="4"></td>';
+                        echo '<td bgcolor="#9AEED8">S/.'.number_format($value->fv_total,2,",",".").'</td>';
                         echo '</tr>';
+                        $partida_venta->set_tb_faseventa_id($value->fv_id);
+                        $partidas_json = $partida_venta->obtenerPartidas();
+                        $partidas_obj = json_decode($partidas_json);
+                        foreach ($partidas_obj as $key=>$value) { //->PARTIDAS
+                            echo '<tr class="child-row'.$tr_iterator.'" style="display:none;">';
+                            echo '<td bgcolor="#ffffff" colspan="3"></td>';
+                            echo '<td bgcolor="#ffffff"><p><font face="Verdana,Arial,Helvetica" size="1">'.$value->pv_codificacion." - ".$value->pv_descripcion.'</font></p></td>';
+                            echo '<td bgcolor="#ffffff"><p><font face="Verdana,Arial,Helvetica" size="1">'.$value->pv_unidadmedida.'</font></p></td>';
+                            echo '<td bgcolor="#ffffff"><p><font face="Verdana,Arial,Helvetica" size="1">'.$value->pv_metrado.'</font></p></td>';
+                            echo '<td bgcolor="#ffffff"><p><font face="Verdana,Arial,Helvetica" size="1">'.$value->pv_precio.'</font></p></td>';
+                            echo '<td bgcolor="#ffffff"><p><font face="Verdana,Arial,Helvetica" size="1">'.$value->pv_parcial.'</font></p></td>';
+                            echo '</tr>';
+                        }
                     }
+                    $tr_iterator++;
                 }
-                $tr_iterator++;
-            }
-            ?>
-            </tbody>
-        </table>
+                ?>
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
 </body>
 </html>

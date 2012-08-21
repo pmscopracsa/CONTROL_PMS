@@ -41,22 +41,24 @@ class cpms_parser
                 for ($index1 = 1; $index1 < $excel->sheets[0]['numCols']; $index1++) {
                     // SECCIONES
                     if ($index1 == 1 && ($excel->sheets[0]['cells'][$index][$index1] == "1"))   {
-                        $query_seccion = "INSERT INTO tb_seccionventa(id,codificacion,descripcion,tb_obra_id)VALUES (
+                        $query_seccion = "INSERT INTO tb_seccionventa(id,codificacion,descripcion,tb_obra_id,total)VALUES (
                             NULL
                             ,'".$excel->sheets[0]['cells'][$index][2]."'
                             ,'".$excel->sheets[0]['cells'][$index][3]."'
-                            ,".$obra_id.")";
+                            ,".$obra_id.
+                            ",".$excel->sheets[0]['cells'][$index][8].")";
                         $rs = mysql_query($query_seccion,$cn);
                         if (!$rs)                            throw new Exception("Error (SECCIONES): ".  mysql_error());
                         $last_seccion = mysql_insert_id($cn);
                     }
                     // FASES
                     if ($index1 == 1 && ($excel->sheets[0]['cells'][$index][$index1] == "2")) {
-                        $query_fase = "INSERT INTO tb_faseventa(id,codificacion,descripcion,tb_seccionventa_id) VALUES(
+                        $query_fase = "INSERT INTO tb_faseventa(id,codificacion,descripcion,tb_seccionventa_id,total) VALUES(
                             NULL
                             ,'".$excel->sheets[0]['cells'][$index][2]."'
                             ,'".$excel->sheets[0]['cells'][$index][3]."'
-                            ,".$last_seccion.")"; 
+                            ,".$last_seccion.
+                            ",".$excel->sheets[0]['cells'][$index][8].")"; 
                         $rs = mysql_query($query_fase, $cn);
                         if (!$rs)                            throw new Exception("Error (FASES): ".  mysql_error());
                         $last_fase = mysql_insert_id($cn);
