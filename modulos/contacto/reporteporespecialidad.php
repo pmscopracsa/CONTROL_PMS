@@ -336,7 +336,7 @@ $css = scandir($CSS_PATH);
                 </div>
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1 class="titulo">DETALLES DE LA EMPRESA</h1>
+                        <h2 class="titulo">DETALLES DE LA EMPRESA</h2>
                         <div id="error" style="display: none">
                         <h3>No se puede consultar los detalles de la empresa</h3>
                         </div>
@@ -353,7 +353,7 @@ $css = scandir($CSS_PATH);
                 </div>
                 <div id="derecho">
                     <div id="derecho-content">
-                        <h1 class="titulo">DETALLES DEL CONTACTO</h1>
+                        <h2 class="titulo">DETALLES DEL CONTACTO</h2>
                         <div id="error" style="display: none">
                         <h3>No se puede consultar los detalles del contacto</h3>
                         </div>

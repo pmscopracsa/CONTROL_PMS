@@ -108,6 +108,27 @@ $contratos = $modelos->mostrarContratos();
         
         $(document).ready(function(){
             /**
+             * CARGAR DATOS DE LA OBRA QUE YA FUE CREADA POR EL ADMINISTRADOR EL SISTEMA
+             */ 
+//            $(".txtCodigo").val(<?=$_REQUEST['codigo']?>);
+//            $(".txtDescripcion").val(<?=$_REQUEST['descripcion']?>);
+//            $.ajax({
+//                type:"GET",
+//                url:"../../bl/DatosObra/datosObra_BL.php?parameter=cargarDatosIniciales",
+//                data:{
+//                    id_obra:<?=$_REQUEST['obra']?>
+//                },
+//                success:function(data) {
+//                    $.each(data,function(index,value) {
+//                        alert(data[index].descripcion);
+//                    });
+//                },
+//                error:function() {
+//                    alert("Error");
+//                }
+//            });
+            
+            /**
              * PONER LOS LIMITES INFERIOS Y SUPERIOR EN LOS MONTOS A CONTRATAR
              * Y SUS SIMBOLOS MONETARIOS RESPECTIVAMENTE, PRIMERO
              * DETECTAR CON QUE MONEDA SE VA A TRABAJAR
@@ -2049,10 +2070,10 @@ $contratos = $modelos->mostrarContratos();
             </div>
             <table>
                 <tr>
-                    <td><label>C&oacute;digo:</label><input id="inputext" type="text" size="15" name="codigo" /><span class="formInfo"><a href="../../js/jquery-tooltip/ajax.htm" class="jTip" id="one" name="El codigo debe tener el siguiente formato">!</a></span></td>
+                    <td><label>C&oacute;digo:</label><input id="inputext" type="text" size="15" name="codigo" value="<?=$_REQUEST['codigo']?>" READONLY/><span class="formInfo"><a href="../../js/jquery-tooltip/ajax.htm" class="jTip" id="one" name="El codigo debe tener el siguiente formato">!</a></span></td>
                 </tr>
                 <tr>
-                    <td><label>Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="inputext" type="text" size="35" name="nombre"/></td> 
+                    <td><label>Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="inputext" type="text" size="35" name="nombre" value="<?=$_REQUEST['descripcion']?>" READONLY/></td> 
                 </tr>
                 <tr>
                     <td><label>Fecha inicio obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="inputext" class="fecha_desde" type="text" name="f_inicio" /></td>

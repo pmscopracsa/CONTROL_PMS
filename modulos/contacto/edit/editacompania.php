@@ -9,6 +9,8 @@ session_start();
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>EDICION DE COMPAÑIA</title>
         <!-- CSS ZONE -->
+        <link href="../../../css/barrasuperior.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/cuerpo.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/autocomplete.css" rel="stylesheet" type="text/css" />
         
         <!-- JS ZONE -->
@@ -122,8 +124,13 @@ session_start();
         });
         </script>
     </head>
-    <body>
-        
+    <body class="fondo">
+        <div id="barra-superior">
+            <div id="barra-superior-dentro">
+                <h1 id="titulo_barra">EDICION DE COMPANIA</h1>
+            </div>
+        </div>
+        <div id="main">
             <?php
             // VERIFICAR SI EXISTE SESIONA CTIVA
             ?>
@@ -149,5 +156,6 @@ session_start();
                 </div>
             <hr />
             <div id="tmp"></div>
+        </div>
     </body>
 </html>

@@ -153,48 +153,36 @@ if (@$_POST["action"] == "upload") {
                     <li>
                         <a href="#">Ordenes</a>
                         <ul>
-                            <li><a href="#">short</a></li>
-                            <li><a href="#">short</a></li>
-                            <li><a href="#">short</a></li>
-                            <li><a href="#">short</a></li>
-                            <li><a href="#">short</a></li>
+                            <li><a href="#">De Compra</a></li>
+                            <li><a href="#">De trabajo</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#">Cambio</a>
                         <ul>
-                            <li><a href="#">menu item</a></li>
-                            <li><a href="#">menu item</a></li>
-                            <li><a href="#">menu item</a></li>
-                            <li><a href="#">menu item</a></li>
-                            <li><a href="#">menu item</a></li>
+                            <li><a href="#">De Compra</a></li>
+                            <li><a href="#">De Trabajo</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#">Valorizaciones</a>
                         <ul>
-                            <li><a href="#">menu item</a></li>
-                            <li><a href="#">menu item</a></li>
-                            <li><a href="#">menu item</a></li>
-                            <li><a href="#">menu item</a></li>
-                            <li><a href="#">menu item</a></li>
+                            <li><a href="#">De Compra</a></li>
+                            <li><a href="#">De Trabajo</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#">Actas de Recepci&oacute;n</a>
                         <ul>
-                            <li><a href="#">menu item</a></li>
-                            <li><a href="#">menu item</a></li>
-                            <li><a href="#">menu item</a></li>
-                            <li><a href="#">menu item</a></li>
-                            <li><a href="#">menu item</a></li>
+                            <li><a href="#">Provisional</a></li>
+                            <li><a href="#">Definitiva</a></li>
                         </ul>
                     </li>
                 </ul>
             </li>
             <!-- -->
              <li>
-                <a href="#">Contratistas-Proveedores</a>
+                <a href="#">Reportes</a>
                 <ul>
                     <li>
                         <a href="#">Costo de Obra General Por Partida</a>

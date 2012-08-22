@@ -98,6 +98,26 @@ class ObraCliente {
         }
     }
     
+    public function mostrarDatosBasicos($cn) {
+        $query = "SELECT codigoobra, descripcion FROM tb_obra WHERE id = $this->_id";
+        try {
+            $rs = mysql_query($query, $cn);
+            if (!$rs)
+                throw new Exception("Error al consultar: ".  mysql_error());
+            
+            $obra_data = array();
+            while ($obra = mysql_fetch_assoc($rs)) {
+                $codigo = $obra['codigoobra'];
+                $descripcion = $obra['descripcion'];
+                $obra_data[$codigo] = $descripcion;
+            }
+            return $obra_data;
+            
+        } catch (Exception $ex) {
+            echo 'Error: '.$ex->getMessage();
+        }
+    }
+    
     /**
      * G&S 
      */

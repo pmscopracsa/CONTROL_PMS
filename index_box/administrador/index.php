@@ -178,13 +178,77 @@ session_start();
                 }
                 return password;     
             };
+            /***
+             * EMPRESA
+             */
+            //EDITAR NOMBRE DE LA EMPRESA
+            $("#btnEditNombreEmpresa").click(function() {
+                if ($(this).attr("value") === "Editar") {
+                    $("#nombre_empresaEdit").css({'background-color':'#FFA500'});
+                    $(this).attr("value","Guardar");
+                    $("#nombre_empresaEdit").attr("readonly",false);
+                } else {
+                    $(this).attr("value","Editar");
+                    $("#nombre_empresaEdit").css({'background-color':'#72A4D2'});
+                    $("#nombre_empresaEdit").attr("readonly",true);
+                    // GUARDAMOS EL NUEVO VALOR
+                    $.ajax({
+                        type:"POST",
+                        url:"../../bl/EmpresaCliente_BL.php?parameter=actualizarNombre",
+                        data:{
+                            nombreEmpresa:$("#nombre_empresaEdit").val()
+                            ,id_empresa:<?=$_SESSION['id']?>
+                        },
+                        success:function() {
+                            $("#divExitoUpdateNombreEmpresa").fadeIn("slow", function() {
+                                $("#divExitoUpdateNombreEmpresa").fadeOut(5000);
+                            });
+                        }
+                    });
+                }
+            });
+            
+            $("#btnEditEditDireccionEmpresa").click(function() {
+                if ($(this).attr("value") === "Editar") {
+                    $("#direccion_empresaEdit").css({'background-color':'#FFA500'});
+                    $(this).attr("value","Guardar");
+                    $("#direccion_empresaEdit").attr("readonly",false);
+                } else {
+                    $(this).attr("value","Editar");
+                    $("#direccion_empresaEdit").css({'background-color':'#72A4D2'});
+                    $("#direccion_empresaEdit").attr("reaonly",true);
+                    // GUARDAMOS EL NUEVO VALOR
+                    $.ajax({
+                        type:"POST",
+                        url:"../../bl/EmpresaCliente_BL.php?parameter=actualizarDireccion",
+                        data:{
+                            direccionEmpresa:$("#direccion_empresaEdit").val()
+                            ,id_empresa:<?=$_SESSION['id']?>
+                        },
+                        success:function() {
+                            $("#idvExitoUpdateDireccionEmpresa").fadeIn("slow", function() {
+                                $("#idvExitoUpdateDireccionEmpresa").fadeOut(5000);
+                            })
+                        }
+                    });
+                }
+            })
+            
             
             /****
              * EDITAR DIRECTORIO
              */
             $("#btnEncuentraDirectorio").click(function() {
-                $("#tbl_datosEditarDirectorio").css("display","block");
-              
+                if ($(this).attr("value") === "Buscar") {
+                    $(this).attr("value","Cancelar");
+                    $("#tbl_datosEditarDirectorio").css("display","block");
+                } else {
+                    $(this).attr("value","Buscar");
+                    $("#tbl_datosEditarDirectorio").css("display","none");
+                    $("#txtnombredirectoriobsucar").val("");
+                    $("#txtnombredirectorioEdit").val("");
+                    $("#txtdescripciondirectorioEdit").val("");
+                }
             });
             
             /******
@@ -254,13 +318,16 @@ session_start();
             $(".directorio").live("click",function(){
                 var directorio = $(this).text().split("-");
                 
-                var nombre = directorio[1];
-                var descripcion = directorio[2];
-                
-                $("#txtnombredirectoriobsucar").val(nombre);
-                $("#txtnombredirectorioEdit").val(nombre);
-                $("#txtdescripciondirectorioEdit").val(descripcion);
+                $("#txtnombredirectoriobsucar").val(directorio[1]);
+                $("#txtnombredirectorioEdit").val(directorio[1]);
+                $("#txtdescripciondirectorioEdit").val(directorio[2]);
                 $("#id_directorio").val(directorio[0]);
+                $("#divSeleccionaDirectorio").dialog("close");
+                
+                /**
+                 * MOSTRAR CAJAS A EDITAR
+                 */
+                $("#tbl_datosEditarDirectorio").fadeIn(4000);
             });
             $("#btnActualizarDirectorio").click(function() {
                 $.ajax({
@@ -416,6 +483,8 @@ session_start();
                 $("#id_proyecto").val(proyecto[0]);
                 $("#txtproyectoeditacodigo").val(proyecto[1]);
                 $("#txtproyectoeditanombre").val(proyecto[2]);
+                $("#divSeleccionaProyecto").dialog("close");
+                $("#tbl_Editarproyecto").fadeIn(4000);
             });
             // CLICK EN EL BOTON BUSCAR
             $("#btnBuscarObraEdit").click(function() {
@@ -602,8 +671,8 @@ session_start();
                                             }
                                         }
                                         ?>
-                                <tr><td><label>Nombre de la empresa:</label><td><input type="text" READONLY /><input type="button" id="btnEditNombreEmpresa" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
-                                <tr><td><label>Direcci&oacute;n de la empresa:</label><td><input type="text" READONLY /><input type="button" id="btnEditEditDireccionEmpresa" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all"/>        
+                                <tr><td><label>Nombre de la empresa:</label><td><input style="background-color: #72A4D2;" id="nombre_empresaEdit" type="text" READONLY value="<?=$_SESSION['usr']?>"/><input type="button" id="btnEditNombreEmpresa" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all"/><div id="divExitoUpdateNombreEmpresa" style="display: none">Se actualiz&oacute; correctamente.</div><div id="divFailUpdateNombreEmpresa" style="display: none">No se ha podido actualizar el registro.</div>
+                                <tr><td><label>Direcci&oacute;n de la empresa:</label><td><input style="background-color: #72A4D2;" id="direccion_empresaEdit" type="text" value="<?=$_SESSION['direccionempresa']?>" READONLY /><input type="button" id="btnEditEditDireccionEmpresa" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all"/><div id="idvExitoUpdateDireccionEmpresa" style="display: none">Se actualiz&oacute; correctamente.</div><div id="divFailUpdateDireccionEmpresa" style="display: none">No se ha podido actualizar el registro.</div>        
                                 <tr><td><label>¿Desea cambiar el password?</label><input type="radio" name="changepassword" value="no" checked>NO<input type="radio" name="changepassword" value="si">SI
                                 <tr id="password_change_old"><td><label>Ingrese su password actual:</label></td><td><input type="password" name="txtoldpassword" id="txtoldpassword"/><td><div id="oldpasswrong" style="display: none">No es correcto</div>
                                 <tr id="password_change_new"><td><label>Ingrese su password nuevo:</label></td><td><input type="password" name="txtnewpassword" id="txtnewpassword" /></td></tr>
@@ -631,8 +700,7 @@ session_start();
                     </div>
                     <div id="directorio_editar-2">
                         <table>
-                            <tr><td><label>Nombre:</label><td><input type="text" name="txtnombredirectoriobsucar" id="txtnombredirectoriobsucar" READONLY/><td><input type="button" value="Seleccionar directorio" id="btnBuscarDirectorio" class="ui-button ui-widget ui-state-default ui-corner-all"/>
-                            <tr><td><input type="button" value="Buscar" id="btnEncuentraDirectorio" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                            <tr><td><input type="button" value="Seleccionar directorio" id="btnBuscarDirectorio" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                                     <table id="tbl_datosEditarDirectorio" style="display: none">
                                         <tr><td><label>Nombre:</label><td><input type="text" name="txtnombredirectorioEdit" id="txtnombredirectorioEdit" />
                                         <tr><td><label>Descripci&oacute;n:</label><td><input type="text" name="txtdescripciondirectorioEdit" id="txtdescripciondirectorioEdit" />
@@ -664,8 +732,8 @@ session_start();
                     </div>
                     <div id="obra_editar-2">
                         <table>
-                            <tr><td><label>Nombre</label><td><input type="text" id="txtnombreobraEdit" READONLY /><td><input type="button" id="btnListarObras" value="Seleccione proyecto" class="ui-button ui-widget ui-state-default ui-corner-all" />
-                            <tr><td><input type="button" value="Buscar" id="btnBuscarObraEdit" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                            <tr><td><td><input type="button" id="btnListarObras" value="Seleccione proyecto" class="ui-button ui-widget ui-state-default ui-corner-all" />
+                            
                                     <table id="tbl_Editarproyecto" style="display: none">
                                         <tr><td><label>Codificaci&oacute;n:</label><td><input type="text" name="txtproyectoeditacodigo" id="txtproyectoeditacodigo" />
                                         <tr><td><label>Nombre:</label><td><input type="text" name="txtproyectoeditanombre" id="txtproyectoeditanombre" />

@@ -153,6 +153,8 @@ $obra_id = 0;
             
             $("#idtxtidobra").val(obra_array[0]);
             $("#idtxtobra").val(obra_array[1]+"|"+obra_array[2]);
+            $("#txtcodigoObra_").val(obra_array[1]);
+            $("#txtnombreObra_").val(obra_array[2]);
             $("#diveditar").css("display","block");
         });
         
@@ -183,7 +185,7 @@ $obra_id = 0;
                     ,id_obra:$("#idtxtidobra").val()
                 },
                 success:function(){
-                    linkDestino = "../../index_usuario.php?"+Math.random();
+                    linkDestino = "../../index_usuario.php?proyecto="+$("#idtxtidobra").val()+"&codigObra="+$("#txtcodigoObra_").val()+"&descObra="+$("#txtnombreObra_").val();
                     $("body").fadeOut(2000, redireccionaEditar(linkDestino));
                 }
             });
@@ -223,8 +225,10 @@ $obra_id = 0;
                     <input type="text" id="idtxtobra" name="txtobra" class="validate[required]" READONLY/>
                     <!-- CAMPO OCULTO QUE RETINENE EL ID DE LA OBRA SELECCIONADA -->
                     <input type="hidden" id="idtxtidobra" name="txtidobra" value="" READONLY />
-                    <a id="anuevo" href="../datosdeobra/registradatosdeobra.php">Nuevo</a> <a href="#"></a> 
-                    <div id="diveditar"  style="display: none"><a> >> </a><a id="aeditar" href="../datosdeobra/edit/editaobra.php?id_directorio=">Editar</a></div>
+                    <inut type="hidden" id="txtcodigoObra_" />
+                    <input type="hidden" id="txtnombreObra_" />
+<!--                    <a id="anuevo" href="../datosdeobra/registradatosdeobra.php">Nuevo</a> <a href="#"></a> 
+                    <div id="diveditar"  style="display: none"><a> >> </a><a id="aeditar" href="../datosdeobra/edit/editaobra.php?id_directorio=">Editar</a></div>-->
                 </fieldset>
                
                 <p>

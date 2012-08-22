@@ -110,6 +110,7 @@ if(isset($_GET['logoff']))
                             <img class="logo_cliente" src="<?='img/cliente/'.$_SESSION['logo'];?>" />
                                         <a href="?logoff">Cerrar sesi&oacute;n</a>
                                         <label>USUARIO:</label><a hrehref="#"><?=@$_SESSION['nombre_real']?></a>
+                                        <label>PROYECTO:<?=$_REQUEST['proyecto']?></label>
             
                         </div>
                 </div>
@@ -133,11 +134,11 @@ if(isset($_GET['logoff']))
                             <li><a href="#" onClick="seleccion('seleccionReporteEspecialidad.php');">Reporte por Especialidad</a></li>
                         </ul>
                     </div>
-<!--                    <div title="Datos de Obra">
+                    <div title="Datos de Obra">
                         <ul>
-                            <li><a href="modulos/datosdeobra/registradatosdeobra.php" target="_blank">Datos de Obra</a></li>
+                            <li><a href="modulos/datosdeobra/registradatosdeobra.php?obra=<?=$_REQUEST['proyecto']?>&codigo=<?=$_REQUEST['codigObra']?>&descripcion=<?=$_REQUEST['descObra']?>" target="_blank">Datos de Obra</a></li>
                         </ul>
-                    </div>-->
+                    </div>
                     <div title="Gesti&oacute;n de Obra - Procura">
                         <ul>
                             <li><a href="modulos/procura/index.php" target="_blank">Gesti&oacute;n de Obra - Procura</a></li>

@@ -6,6 +6,7 @@ class EmpresaCliente {
     private $_nombre;
     private $_password;
     private $_logo;
+    private $_direccion;
     
     public function listarEmpresas() {
         
@@ -27,7 +28,7 @@ class EmpresaCliente {
     
     public function resetPassword($cn) {
         $res = "";
-        $query = "UPDATE tb_empresa password SET password = '$this->_password' WHERE id = $this->_id";
+        $query = "UPDATE tb_empresa SET password = '$this->_password' WHERE id = $this->_id";
         
         $rs = mysql_query($query, $cn);
         
@@ -39,6 +40,27 @@ class EmpresaCliente {
         return $res;
     }
     
+    public function updateName($cn) {
+        $query = "UPDATE tb_empresa SET nombre = '$this->_nombre' WHERE id = $this->_id";
+        try {
+            $rs = mysql_query($query,$cn);
+            if (!$rs)
+                throw new Exception("Error en la consulta: ".  mysql_error());
+        } catch(Exception $ex) {
+            echo 'Error: '.$ex->getMessage();
+        }
+    }
+    
+    public function updateAddress($cn) {
+        $query = "UPDATE tb_empresa SET direccion = '$this->_direccion' WHERE id = $this->_id";
+        try {
+            $rs = mysql_query($query,$cn);
+            if (!$rs)
+                throw new Exception("Error en la consulta: ".  mysql_error());
+        } catch(Exception $ex) {
+            echo 'Error: '.$ex->getMessage();
+        }
+    }
     // G&S
     public function get_id() {
         return $this->_id;
@@ -70,5 +92,13 @@ class EmpresaCliente {
 
     public function set_logo($_logo) {
         $this->_logo = $_logo;
+    }
+    
+    public function get_direccion() {
+        return $this->_direccion;
+    }
+
+    public function set_direccion($_direccion) {
+        $this->_direccion = $_direccion;
     }
 }

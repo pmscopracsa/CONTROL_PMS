@@ -57,7 +57,7 @@ if(@$_POST['submit']=='Login')
 		// Escaping all input data
                 $nombre_usuario = $_POST['username'];
                 $password = $_POST['password'];
-                $row = mysql_fetch_assoc(mysql_query("SELECT id,nombre,logo FROM tb_empresa WHERE nombre='$nombre_usuario' AND password='$password'"));
+                $row = mysql_fetch_assoc(mysql_query("SELECT id,nombre,logo,direccion FROM tb_empresa WHERE nombre='$nombre_usuario' AND password='$password'"));
 
 		if($row['nombre'])
 		{
@@ -68,6 +68,7 @@ if(@$_POST['submit']=='Login')
 			$_SESSION['rememberMe'] = $_POST['rememberMe'];
                         unset($_SESSION['logo']);
                         $_SESSION['logo'] = $row['logo'];
+                        $_SESSION['direccionempresa'] = $row['direccion'];
 			
 			// Store some data in the session
 			setcookie('tzRemember',$_POST['rememberMe']);
