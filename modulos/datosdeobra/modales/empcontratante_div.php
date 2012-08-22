@@ -7,7 +7,7 @@ $q = $_REQUEST['filtro'];
 if ($q == "1") {
     $clientes = $clienteCompania->mostrarCompaniaContacto();
     echo '<div>';
-    echo '<div  style:"float:left"><input type="text" id="txt_divEmpContratanteBuscar"/><input type="button" value="Buscar" id="btnSearchEmpContratante"/></div>';
+    echo '<div  style:"float:left"><input type="text" id="txt_divEmpContratanteBuscar"/><input type="button" value="Buscar" id="btnSearchEmpContratante" class="ui-button ui-widget ui-state-default ui-corner-all"/></div>';
     foreach ($clientes as &$valor) {
         echo '<table><tr style="cursor:pointer;"><td class="contratante"><p style="display:none">'.
                 $valor[0].
@@ -21,7 +21,7 @@ if ($q == "1") {
     $clienteCompania->setDescripcion($q);
     $clientes = $clienteCompania->mostrarCompaniaContactoPorNombre();
     echo '<div>';
-    echo '<div  style:"float:left"><input type="text" id="txt_divEmpContratanteBuscar"/><input type="button" value="Buscar" id="btnSearchEmpContratante"/></div>';
+    echo '<div  style:"float:left"><input type="text" id="txt_divEmpContratanteBuscar"/><input type="button" value="Buscar" id="btnSearchEmpContratante" class="ui-button ui-widget ui-state-default ui-corner-all"/></div>';
     foreach ($clientes as &$valor) { 
         echo '<table><tr style="cursor:pointer;"><td class="contratante"><p style="display:none">'.
                 $valor[0].

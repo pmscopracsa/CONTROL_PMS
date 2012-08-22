@@ -17,4 +17,8 @@ if ($_REQUEST['parameter'] == 'crearDirectorio') {
     $directorio->set_tb_empresa_id($_REQUEST['id_empresa']);
     $directorio->set_id($_REQUEST['id_directorio']);
     $directorio->actualizarDirectorios($cn);
+} elseif ($_REQUEST['parameter'] == 'existenombreDirectorio') {
+    $directorio->set_nombre($_REQUEST['nombre']);
+    $rs = $directorio->existeNombreDirectorio($cn);
+    echo $rs;
 }

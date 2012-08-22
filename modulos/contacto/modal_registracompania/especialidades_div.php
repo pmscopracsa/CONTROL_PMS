@@ -8,7 +8,7 @@ $especialidadcompania = new EspecialidadCompaniaDL();
 if (@$_REQUEST['filtro'] == "1") {
     $especialidades = $especialidadcompania->mostrarEspecialidades();
     echo '<div>';
-    echo '<div  style:"float:left"><input type="text" id="txt_divEspecialidadBuscar"/><input type="button" value="Buscar" id="btnSearchEspecialidad"/></div>';
+    echo '<div  style:"float:left"><input type="text" id="txt_divEspecialidadBuscar"/><input type="button" value="Buscar" id="btnSearchEspecialidad" class="ui-button ui-widget ui-state-default ui-corner-all"/></div>';
     foreach ($especialidades as &$valor) {
         echo '<input id="especialidades_boxes" type="checkbox" name="especialidades[]" value="'.
                 $valor[0].
@@ -34,7 +34,7 @@ if (@$_REQUEST['filtro'] == "1") {
     $especialidades = $especialidadcompania->mostrarEspecialidadesPorNombre();
     
     echo '<div>';
-    echo '<div  style:"float:left"><input type="text" id="txt_divEspecialidadBuscar"/><input type="button" value="Buscar" id="btnSearchEspecialidad"/></div>';
+    echo '<div  style:"float:left"><input type="text" id="txt_divEspecialidadBuscar"/><input type="button" value="Buscar" id="btnSearchEspecialidad" class="ui-button ui-widget ui-state-default ui-corner-all"/></div>';
     foreach ($especialidades as &$valor) {
         echo '<input id="especialidades_boxes" type="checkbox" name="especialidades[]" value="'.
                 $valor[0].

@@ -12,6 +12,7 @@ try {
     if ($_REQUEST['parameter'] == 'crearProyectoBasico') {
         $obra_cliente->set_codigoobra($_REQUEST['obracodificacion']);
         $obra_cliente->set_descripcion($_REQUEST['obranombre']);
+        $obra_cliente->set_tb_directorio_id($_REQUEST['id_directorio']);
         $obra_cliente->set_tb_empresa_id($_REQUEST['id_empresa']);
         $obra_cliente->crearObraMinimo($cn);
     } elseif ($_REQUEST['parameter'] == 'editarProyectoBasico') {

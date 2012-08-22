@@ -14,8 +14,6 @@ function __autoload($name) {
     $fullpath = '../../dl/contacto_bl/'.$name.'.php';
     if (file_exists($fullpath))        require_once ($fullpath);
 }
-//$especialidadContacto = new EspecialidadPersonaDL();
-//$especialidades = $especialidadContacto->mostrarEspecialidades();
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,6 +49,11 @@ function __autoload($name) {
         {
             $("#seleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro="+filtro);
         }
+        
+        function recargarEmpresa(filtro) 
+        {
+            $("#divBuscarCompania").load("../datosdeobra/modales/empcontratante_div.php?filtro="+filtro);
+        }
             
         $(document).ready(function(){
             
@@ -58,6 +61,11 @@ function __autoload($name) {
              * PRIMERA CARGA DE LA LISTA DE ESPECIALIDADES
              */
             $("#seleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?filtro=1");
+            
+            /**
+             * PRIMERA CARGA DE LA LISTA DE EMPRESAS
+             */
+            $("#divBuscarCompania").load("../datosdeobra/modales/empcontratante_div.php?filtro=1");
             
             var contador_especialidades = 0;
             var con_especia = 0;
@@ -70,17 +78,17 @@ function __autoload($name) {
                 width:450,
                 modal:true,
                 buttons:{
-                    "Buscar":function() {
+                    /*"Buscar":function() {
                         $("txt_nombreEspecialidad").val("");
                         buscarEspecialidad();
-                    },
+                    },*/
                     "Limpiar":function() {
                       recargarEspecialidades();  
                     },
                     "Crear nueva especialidad":function(){
                         $("#divNuevaEspecialidad").dialog("open");
                     },
-                    "Salir":function(){
+                    "Cerrar":function(){
                         $(this).dialog("close");
                     }
                 }
@@ -108,7 +116,7 @@ function __autoload($name) {
                              alert("Ingrese dato a buscar");
                          recargarEspecialidadesPorFiltro($("#txt_nombreEspecialidad").val());
                      },
-                     "Salir":function(){
+                     "Cerrar":function(){
                          $(this).dialog("close");
                      }
                  }
@@ -125,7 +133,7 @@ function __autoload($name) {
                 width:350,
                 modal:true,
                 buttons:{
-                    "Salir":function() {
+                    "Cerrar":function() {
                         $(this).dialog("close");
                     }
                 }
@@ -345,18 +353,18 @@ function __autoload($name) {
                 matchContains:true,
                 selectFirst:false
             });
-            $(".nombre_persona").focusout(function() {
+            /*$(".nombre_persona").focusout(function() {
                 $.ajax({
                     type:"GET",
                     url:"../../bl/Contacto/mantenimiento/verificarExistenciaPersona.php",
                     data:{nombre_persona:$(".nombre_persona").val()},
                     success:function(data) {
                             if (data == "tiene") {
-                                $('#modal').reveal({ // The item which will be opened with reveal
-                                    animation: 'fade',                   // fade, fadeAndPop, none
-                                    animationspeed: 600,                       // how fast animtions are
-                                    closeonbackgroundclick: false,              // if you click background will modal close?
-                                    dismissmodalclass: 'close'    // the class of a button or element that will close an open modal
+                                $('#modal').reveal({ 
+                                    animation: 'fade',            
+                                    animationspeed: 600,          
+                                    closeonbackgroundclick: false,
+                                    dismissmodalclass: 'close'    
                             });
                         }
                     }
@@ -366,17 +374,50 @@ function __autoload($name) {
            e.preventDefault();
            window.location = "http://192.168.1.5/control_pms/modulos/contacto/registrapersona.php"
             
-      })
+      });
       $("#btnModificar").click(function(e) {
           e.preventDefault();
           window.location = "http://192.168.1.5/control_pms/modulos/contacto/edit/editapersona.php?frm=persona"
-      })
+      });*/
       
       /**
        *  BUSQUEDA IN LINE
        */
       $("#btnSearchEspecialidad").live("click",function() {
           recargarEspecialidadesPorFiltro($("#txt_divEspecialidadBuscar").val());
+      });
+      
+      /**
+       * BUSCAR EMPRESA
+       */ 
+      // BOTON PARA ABRIR MODAL DE EMPRESA
+      $("#btnBuscarCompania").click(function() {
+          $("#divBuscarCompania").dialog("open");
+      });
+      // MODAL PARA LA BUSQUEDA DE EMPRESA
+      $("#divBuscarCompania").dialog({
+          autoOpen:false,
+          height:300,
+          width:350,
+          modal:true,
+          buttons:{
+              "Cerrar":function() {
+                  $(this).dialog("close");
+              }
+          }
+      });
+      // BUSCADOR DE EMPRESA
+      $("#btnSearchEmpContratante").live("click",function() {
+          recargarEmpresa($("#txt_divEmpContratanteBuscar").val());  
+      });
+      
+      // ASIGNAR EMPRESA A CAMPO
+      $('.contratante').live("click",function(){
+           var contratante_array = $(this).text().split("-");
+           var cli = contratante_array[1];
+           var contratante_id = contratante_array[0];
+           $(".nombre_empresa").val(cli);
+           $("#txtidempresa").val(contratante_id);
       });
             
             /**
@@ -419,6 +460,10 @@ function __autoload($name) {
             </div>
         </div>
         <!-- FIN MODAL -->
+        
+        <!-- modal escoge empresa -->
+        <div id="divBuscarCompania" title="Escoge una empresa"></div>
+        
     <body class="fondo">
         <div id="barra-superior">
             <div id="barra-superior-dentro">
@@ -457,11 +502,10 @@ function __autoload($name) {
                         <td>
                             <label>Compania:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td>
-                            <input class="nombre_empresa" id="inputext" type="text" size="70"  name="companiaseleccionada" />
-<!--                            <select name="companiaseleccionada" id="companiaseleccionada">
-                                <option value="0">Seleccione una compania</option>
-                            </select>-->
+                            <input class="nombre_empresa" id="inputext" type="text" size="70"  name="companiaseleccionada" READONLY />
                         </td>
+                        <td><input type="button" id="btnBuscarCompania" value="Buscar Compania" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                    <input type="hidden" id="txtidempresa" />
                     </tr>
                         <td><label>Cargo:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td><input id="inputext" type="text" size="25" name="cargo"</td>

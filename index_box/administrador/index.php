@@ -22,8 +22,8 @@ session_start();
         function cargarDirectorios() {
             $("#divSeleccionaDirectorio").load("../../index_box/administrador/modales/directorios_div.php");
         }
-        $(document).ready(function() {
-            
+        
+        $(document).ready(function() {    
             /* div de directorios carga por defecto*/
             $("#divSeleccionaDirectorio").load("../../index_box/administrador/modales/directorios_div.php");
             /* div usuarios por ddefecto */
@@ -190,6 +190,23 @@ session_start();
             /******
              * DIRECTORIO
              */
+            // COMPROBAR SI EXISTE NOMBRE DIRECTORIO 
+            $("#txtnombredirectorio").focusout(function() {
+                $.ajax({
+                    type:"GET",
+                    url:"../../bl/DirectorioCliente_BL.php?parameter=existenombreDirectorio",
+                    data:{nombre:$("#txtnombredirectorio").val()},
+                    success:function(data) {
+                        if(data === "si") {
+                            alert("El nombre que usted intenta ingresar ya existe. Debe poner otro nombre por favor.");
+                            $("#txtnombredirectorio").val("");
+                            $("#txtnombredirectorio").focus();
+                        }
+                            
+                    }
+                });
+            });
+            
             //CREAR DIRECTORIO
             $("#btnCrearDirectorio").click(function() {
                 if ($("#txtnombredirectorio").val() === "" || $("#txtdescripciondirectorio").val() === "") {
@@ -206,15 +223,15 @@ session_start();
                     success:function() {
                         $("#txtnombredirectorio").val("");
                         $("#txtdescripciondirectorio").val("");
-                        alert("si");
+                        $("#msgExitoCreaDirectorio").fadeIn("slow", function() {
+                            $("#msgExitoCreaDirectorio").fadeOut("70000");
+                        });
                     },
                     error:function() {
                         alert("no");
                         }
                     });
-                }
-                
-
+                }  
             });
             //ACTUALIZAR DIRECTORIO
             $("#btnBuscarDirectorio").click(function() {
@@ -328,6 +345,7 @@ session_start();
                             obracodificacion:$("#txtObraCodificacion").val()
                             ,obranombre:$("#txtObraNombre").val()
                             ,id_empresa:<?=$_SESSION['id']?>
+                            ,id_directorio:$("#txtIdDirectorioProyecto").val()
                         },
                         url:"../../bl/obraClienteAdministrador.php?parameter=crearProyectoBasico",
                         success:function() {
@@ -335,12 +353,45 @@ session_start();
                                 $("#divExitoCrearObra").fadeOut(4000);
                                 $("#txtObraCodificacion").val("");
                                 $("#txtObraNombre").val("");
+                                $("#txtNombreDirectorio").val("");
                             });
                             
                         }
                     });
                 }
             });
+            //SELECCIONAR DIRECTORIO - OBRA
+            $("#btnSelDirectorio").click(function() {
+                $.ajax({
+                   type:"GET",
+                   url:"modales/directoriosobra_div.php",
+                   success:function(data) {
+                       $("#divDirectorioObra").append(data);
+                       $("#divDirectorioObra").dialog("open");
+                   }
+                });
+            });
+            // MODAL PARA SELECCION DE DIRECTORIO
+            $("#divDirectorioObra").dialog({
+                autoOpen:false,
+                height:350,
+                width:450,
+                resizable:false,
+                closeOnEscape:false,
+                modal:true,
+                buttons:{
+                    "Cerrar":function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            // SELECCION DE DIRCTORIO PARA EMPATAR CON OBRA
+            $(".directorioobra").live("click",function() {
+                var directorio_obra = $(this).text().split("-");
+                $("#txtNombreDirectorio").val(directorio_obra[2]);
+                $("#txtIdDirectorioProyecto").val(directorio_obra[0]);
+            });
+            
             //EDITAR OBRA(PROYECTO) MINIMO
             $("#btnListarObras").click(function() {
                 $("#divSeleccionaProyecto").dialog("open");
@@ -353,7 +404,7 @@ session_start();
                 closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Salir":function() {
+                    "Cerrar":function() {
                         $(this).dialog("close");
                     }
                 }
@@ -409,6 +460,9 @@ session_start();
                 </tbody>
             </table>    
         </div>
+        
+        <!-- MODAL DIRECTORIO - PROYECTO (OBRA) --> 
+        <div id="divDirectorioObra" title="Seleccione el directorio"></div>
         
         <!-- MODAL DIRECTORIOS -->
         <div id="divSeleccionaDirectorio" title="Seleccione el directorio"></div> 
@@ -548,6 +602,8 @@ session_start();
                                             }
                                         }
                                         ?>
+                                <tr><td><label>Nombre de la empresa:</label><td><input type="text" READONLY /><input type="button" id="btnEditNombreEmpresa" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                                <tr><td><label>Direcci&oacute;n de la empresa:</label><td><input type="text" READONLY /><input type="button" id="btnEditEditDireccionEmpresa" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all"/>        
                                 <tr><td><label>¿Desea cambiar el password?</label><input type="radio" name="changepassword" value="no" checked>NO<input type="radio" name="changepassword" value="si">SI
                                 <tr id="password_change_old"><td><label>Ingrese su password actual:</label></td><td><input type="password" name="txtoldpassword" id="txtoldpassword"/><td><div id="oldpasswrong" style="display: none">No es correcto</div>
                                 <tr id="password_change_new"><td><label>Ingrese su password nuevo:</label></td><td><input type="password" name="txtnewpassword" id="txtnewpassword" /></td></tr>
@@ -569,7 +625,8 @@ session_start();
                         <table>
                             <tr><td><label>Nombre:</label><td><input type="text" name="txtnombredirectorio" id="txtnombredirectorio" />
                             <tr><td><label>Descripci&oacute;n:</label><td><input type="text" name="txtdescripciondirectorio" id="txtdescripciondirectorio" />
-                            <tr><td><td><input type="button" value="Crear" id="btnCrearDirectorio" class="ui-button ui-widget ui-state-default ui-corner-all"/>        
+                            <tr><td><td><input type="button" value="Crear" id="btnCrearDirectorio" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                            <tr><td><div id="msgExitoCreaDirectorio" style="display: none">El directorio se ha creado correctamente.</div>
                         </table>
                     </div>
                     <div id="directorio_editar-2">
@@ -599,6 +656,8 @@ session_start();
                         <table>
                            <tr><td><label>Codificaci&oacute;n:</label><td><input type="text" id="txtObraCodificacion" />
                            <tr><td><label>Nombre:</label><td><input type="text" id="txtObraNombre" />
+                           <tr><td><label>Directorio:</label><td><input type="text" id="txtNombreDirectorio" READONLY/><input type="button" id="btnSelDirectorio" value="Seleccionar directorio" class="ui-button ui-widget ui-state-default ui-corner-all"/>         
+                                   <input type="hidden" id="txtIdDirectorioProyecto" />
                            <tr><td><td><input type="button" value="Crear" id="btnCrearObra" class="ui-button ui-widget ui-state-default ui-corner-all"/>        
                                    <div id="divExitoCrearObra" style="display: none">El proyecto se ha creado correctamente.</div>
                         </table>

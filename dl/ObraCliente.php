@@ -50,10 +50,11 @@ class ObraCliente {
      * @param type $cn 
      */
     public function crearObraMinimo($cn) {
-        $query = "INSERT INTO tb_obra (id, codigoobra,descripcion, tb_empresa_id) VALUES (
+        $query = "INSERT INTO tb_obra (id, codigoobra, descripcion, tb_directorio_id, tb_empresa_id) VALUES (
             NULL
             ,'$this->_codigoobra'
             ,'$this->_descripcion'
+            ,$this->_tb_directorio_id    
             ,$this->_tb_empresa_id)";
         
         try {

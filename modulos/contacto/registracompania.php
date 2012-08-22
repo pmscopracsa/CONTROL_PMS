@@ -15,12 +15,6 @@ function __autoload($name) {
     $fullpath = '../../dl/contacto_bl/'.$name.'.php';
     if (file_exists($fullpath))        require_once ($fullpath);
 }
-
-//$representantescompania = new RepresentanteCompaniaDL();
-//$representantes = $representantescompania->mostrarRepresentantes();
-
-//$empresas = new CompaniaContactoDL();
-//$lista_empresas = $empresas->mostrarCompaniaContacto();
 ?>
 <!DOCTYPE HTML>
 <html class="no-js">
@@ -144,7 +138,7 @@ function __autoload($name) {
                 "Crear nueva especialidad":function(){
                     $("#divNuevaEspecialidad").dialog("open");
                 },
-                "Salir":function(){
+                "Cerrar":function(){
                     $(this).dialog("close");
                     recargarEspecialidades();
                 }
@@ -170,7 +164,7 @@ function __autoload($name) {
                         alert("Ingrese dato para buscar");
                     recargarEspecialidadesPorFiltro($("#txt_nombreEspecialidad").val());
                 },
-                "Salir":function(){
+                "Cerrar":function(){
                     $(this).dialog("close");
                 }
             }
@@ -192,7 +186,7 @@ function __autoload($name) {
                 "Limpiar":function(){
                     recargarRepresentantes();
                 },
-                "Salir":function(){
+                "Cerrar":function(){
                     $(this).dialog("close");
                 }
             }
@@ -234,6 +228,64 @@ function __autoload($name) {
             width:450,
             modal:true,
             buttons:{
+                "Agregar":function() {
+                    /**
+             * VALIDACIONES PARA LAS DIRECCIONES
+             */
+            if ($('#direccion_text').val() == "") {
+                alert("Ingrese la direcci\xf3n por favor.");
+                return;
+            }
+            if (($('#tipodireccionid option:selected').val()) == 0) {
+                alert("Escoja un tipo de direcci\xf3n por favor");
+                return;
+            }
+            
+            //contador para saber cuantas direcciones existen
+            contador_direcciones++;
+            /**
+             * VARIABLES QUE AYUDARAN A DIFERENCIAR EL ATRIBUTO NAME DEL INPUT TYPE HIDDEN
+             */
+            contador_tipodireccion++;
+            contador_direccion++;
+            contador_pais++;
+            contador_departamento++;
+            contador_distrito++;
+            //OBTENEMOS LOS ID DE LOS VALORES SELECCIONADOS EN EL COMBOBOX
+            var tipodireccion_id = $('#tipodireccionid option:selected').val();
+            var departamento_id = $('#departamentoid option:selected').val();
+            var distrito_id = $('#distritoid option:selected').val();
+            var pais_id = $('#paisid option:selected').val();
+            
+            //OBTENEMOS LOS VALORES A MOSTRAR DE LOS DATOS ELEGIDOS EN EL COMBOBX
+            var tipodireccion_value = $('#tipodireccionid option:selected').html();
+            var direccion_value = $('#direccion_text').val();
+            var pais_value = $('#paisid option:selected').html();
+            var departamento_value = $('#departamentoid option:selected').html();
+            var distrito_value = $('#distritoid option:selected').html();
+            
+            /*
+             * Scroll de direcciones
+             * con la opcionde eliminar
+             **/
+            $("#direcciones tbody").append(
+                "<tr name=\"direccion\">"+
+                "<td name=\"tipodireccion\">"+tipodireccion_value+"</td>"+    
+                '<input type="hidden" name="tipodireccion'+contador_tipodireccion+'" value="'+tipodireccion_id+'" />'+
+                "<td>"+direccion_value+"</td>"+
+                '<input type="hidden" name="direccion'+contador_direccion+'" value="'+direccion_value+'" />'+
+                "<td>"+pais_value+"</td>"+
+                '<input type="hidden" name="pais'+contador_pais+'" value="'+pais_id+'" />'+
+                "<td>"+departamento_value+"</td>"+
+                '<input type="hidden" name="departamento'+contador_departamento+'" value="'+departamento_id+'" />'+
+                "<td>"+distrito_value+"</td>"+
+                '<input type="hidden" name="distrito'+contador_distrito+'" value="'+distrito_id+'" />'+
+                "<td>"+"<a href='#' id='del-direccion' class='button delete'>Eliminar</a>"+"</td>"+
+                "</tr>"
+            );
+            contador++;
+            return false;
+                },
                 "Cerrar":function(){
                     $(this).dialog("close");
                 }
@@ -425,66 +477,6 @@ function __autoload($name) {
                 
              });
          }
-        
-        $("#agregarRegistroDireccion").click(function() {
-            
-            /**
-             * VALIDACIONES PARA LAS DIRECCIONES
-             */
-            if ($('#direccion_text').val() == "") {
-                alert("Ingrese la direcci\xf3n por favor.");
-                return;
-            }
-            if (($('#tipodireccionid option:selected').val()) == 0) {
-                alert("Escoja un tipo de direcci\xf3n por favor");
-                return;
-            }
-            
-            //contador para saber cuantas direcciones existen
-            contador_direcciones++;
-            /**
-             * VARIABLES QUE AYUDARAN A DIFERENCIAR EL ATRIBUTO NAME DEL INPUT TYPE HIDDEN
-             */
-            contador_tipodireccion++;
-            contador_direccion++;
-            contador_pais++;
-            contador_departamento++;
-            contador_distrito++;
-            //OBTENEMOS LOS ID DE LOS VALORES SELECCIONADOS EN EL COMBOBOX
-            var tipodireccion_id = $('#tipodireccionid option:selected').val();
-            var departamento_id = $('#departamentoid option:selected').val();
-            var distrito_id = $('#distritoid option:selected').val();
-            var pais_id = $('#paisid option:selected').val();
-            
-            //OBTENEMOS LOS VALORES A MOSTRAR DE LOS DATOS ELEGIDOS EN EL COMBOBX
-            var tipodireccion_value = $('#tipodireccionid option:selected').html();
-            var direccion_value = $('#direccion_text').val();
-            var pais_value = $('#paisid option:selected').html();
-            var departamento_value = $('#departamentoid option:selected').html();
-            var distrito_value = $('#distritoid option:selected').html();
-            
-            /*
-             * Scroll de direcciones
-             * con la opcionde eliminar
-             **/
-            $("#direcciones tbody").append(
-                "<tr name=\"direccion\">"+
-                "<td name=\"tipodireccion\">"+tipodireccion_value+"</td>"+    
-                '<input type="hidden" name="tipodireccion'+contador_tipodireccion+'" value="'+tipodireccion_id+'" />'+
-                "<td>"+direccion_value+"</td>"+
-                '<input type="hidden" name="direccion'+contador_direccion+'" value="'+direccion_value+'" />'+
-                "<td>"+pais_value+"</td>"+
-                '<input type="hidden" name="pais'+contador_pais+'" value="'+pais_id+'" />'+
-                "<td>"+departamento_value+"</td>"+
-                '<input type="hidden" name="departamento'+contador_departamento+'" value="'+departamento_id+'" />'+
-                "<td>"+distrito_value+"</td>"+
-                '<input type="hidden" name="distrito'+contador_distrito+'" value="'+distrito_id+'" />'+
-                "<td>"+"<a href='#' id='del-direccion' class='button delete'>Eliminar</a>"+"</td>"+
-                "</tr>"
-            );
-            contador++;
-            return false;
-        });
         
         /*
          * saber cuantas direcciones existen
@@ -802,9 +794,6 @@ function __autoload($name) {
                                         </select>
                                     </td>
                                     <tr>
-                                    <td>
-                                        <input type="button" id="agregarRegistroDireccion" value="Agregar" />
-                                    </td>
                                 </tr>
                             </table>
                        </div>

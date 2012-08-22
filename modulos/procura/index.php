@@ -6,7 +6,6 @@ session_start();
 /**
  * CONF PARA LA MONEDA 
  */
-
 //require_once '../../bl/DatosObra/seccion.php';
 require_once '../../dl/datos_obra/SeccionVenta.php';
 require_once '../../dl/datos_obra/FaseVenta.php';

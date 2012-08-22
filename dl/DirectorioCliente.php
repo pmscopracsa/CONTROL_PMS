@@ -54,6 +54,25 @@ class DirectorioCliente {
             echo 'Error: '.$ex->getMessage();
         }
     }
+    
+    public function existeNombreDirectorio($cn) {
+        $existe = "no";
+        $query = "SELECT * FROM tb_directorio WHERE nombre = '$this->_nombre'";
+        
+        try {
+            $rs = mysql_query($query,$cn);
+            if(!$rs)
+                throw new Exception("Error en la consulta: ".  mysql_error());
+            
+        if (@mysql_num_rows($rs) > 0)
+            $existe = "si";
+        
+        return $existe;
+            
+        } catch (Exception $ex) {
+            echo 'Error: '.$ex->getMessage();
+        }
+    }
 
     /*
      * G&S

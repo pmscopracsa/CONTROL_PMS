@@ -1144,10 +1144,10 @@ $contratos = $modelos->mostrarContratos();
                 closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Buscar":function() {
+                    /*"Buscar":function() {
                         $("#txt_contacto").val("");
                         buscarContacto()
-                    },
+                    },*/
                     "Limpiar":function() {
                         recargarContactos();
                     },
@@ -1851,6 +1851,10 @@ $contratos = $modelos->mostrarContratos();
             $("#btnSearchProveedorfacturar").live("click",function() {
                 recargarProveedorFacturarPorFiltro($("#txt_divProveedorFacturarBuscar").val());
             });
+            // CONTACTO
+            $("#btnSearchContacto").live("click",function() {
+                recargarContactosPorFiltro($("#txt_divContactoBuscar").val());
+            });
         })    
         
         </script>
@@ -2126,10 +2130,10 @@ $contratos = $modelos->mostrarContratos();
                     <td><label>Par&aacute;metros Ppto. de ventas:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input id="btn-parametrospptoventa" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                 </tr>
-                <tr>
+<!--             SE MUEVE A ADMINISTRACION   <tr>
                     <td><label>Usuarios para aprobaci&oacute;n:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                     <td><input id="usuarios-aprobacion" type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
-                </tr>
+                </tr>-->
             </table>
             <div id="hr"><hr /></div>
             <table>
@@ -2299,7 +2303,7 @@ $contratos = $modelos->mostrarContratos();
                 </div>
             </fieldset>
             <div id="footer"><hr/></div>
-        <input type="submit" id="submit" value="test" />
+        <input type="submit" id="submit" value="Guardar" class="ui-button ui-widget ui-state-default ui-corner-all" />
         </div>
         </form>
     </body>

@@ -70,7 +70,7 @@ function  __autoload($name) {
                     "Limpiar":function() {
                         recargarRepresentantes();
                     },
-                    "Salir":function(){
+                    "Cerrar":function(){
                         $(this).dialog("close");
                     }
                 }
@@ -305,7 +305,7 @@ function  __autoload($name) {
                     <tr>
                         <td><label>Nombre de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td><input id="inputext" class="obra" type="text" name="codigo" /></td>
-                        <td><input id="btnBuscarPorObra" type="button" value="Buscar..." /></td>
+<!--                        <td><input id="btnBuscarPorObra" type="button" value="Buscar..." /></td>-->
                     </tr>
                     <tr>
                         <td><label>A&ncaron;adir Contacto:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
