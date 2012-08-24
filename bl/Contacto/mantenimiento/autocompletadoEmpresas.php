@@ -23,6 +23,7 @@ try {
     
     while ($registro = mysql_fetch_array($rs)) {
         $empresas = $registro['descripcion'];
+        $idcia = $registro['id'];
         echo $empresas."\n";
     }
 } catch ( Exception $ex ) {

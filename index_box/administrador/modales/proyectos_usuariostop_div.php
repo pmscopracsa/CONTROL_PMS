@@ -13,14 +13,13 @@ $proyectos = $obrascliente->listarProyectos($cn);
 
 echo '<div>';
 foreach ($proyectos as $valor) {
-    echo '<table>
-        <tr style="cursor:pointer;">
-        <td class="proyecto">
-        <p style="display:none">'.$valor[0].'</p>'.
+    echo '<table><tr style="cursor:pointer;"><td class="proyectousertop"><p style="display:none">'.
+        $valor[0].
+        '</p>'.
         '<p style="display:none">-</p>'.    
-        '<p style="display:none">'.$valor[1].'</p>'.    
-        '<p style="display:none">-</p>'.    
-        '<p style="display:none">'.$valor[3].'</p>'.    
+        '<p style="display:none">'.
+        $valor[1].    
+        '</p>'.    
         '<p style="display:none">-</p>'.
         $valor[2].
         '</td></tr></table>';

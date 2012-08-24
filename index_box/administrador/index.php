@@ -14,22 +14,29 @@ session_start();
         <script src="../../js/tabs/jquery.ui.tabs.js"></script>
         <script src="../../js/jquery-ui-1.8.18.custom.min.js"></script>
         <script src="../../js/ajaxfileupload.js"></script>
+        <script src="js_cargadatosedicion/cargarDatosEdicion.js"></script>
         
         <link rel="stylesheet" href="../../css/tabs.css">
         <link rel="stylesheet" href="../../css/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="../../css/google-buttons.css">
         
         <script>
         function cargarDirectorios() {
             $("#divSeleccionaDirectorio").load("../../index_box/administrador/modales/directorios_div.php");
         }
         
-        $(document).ready(function() {    
+        $(document).ready(function() {
+            //CARGAR DIRECTORIOS
+            cargar_Directorios(<?=$_SESSION['id']?>);
+            
             /* div de directorios carga por defecto*/
             $("#divSeleccionaDirectorio").load("../../index_box/administrador/modales/directorios_div.php");
             /* div usuarios por ddefecto */
             $("#divSeleccionUsuarios").load("../../modulos/datosdeobra/modales/usuarios_div.php?filtro=1");
             /* div proyectos por defecto */
             $("#divSeleccionaProyecto").load("modales/proyectos_div.php")
+            /* div proyectos usuarios top seleccion */
+            $("#divSeleccionaProyectosUsuariosTop").load("modales/proyectos_usuariostop_div.php")
  
             /**
              * OCULTAR POR DEFCTO CAMPOS PARA CAMBIO DE PASSWORD
@@ -128,7 +135,7 @@ session_start();
                     "Asignar Aprobaciones":function() {
                         
                     },
-                    "Salir":function() {
+                    "Cerrar":function() {
                         $(this).dialog("close");
                     }
                 }
@@ -309,7 +316,7 @@ session_start();
                 closeOnEscape:false,
                 modal:true,
                 buttons:{
-                    "Salir":function() {
+                    "Cerrar":function() {
                         $(this).dialog("close");
                     }
                 }
@@ -368,7 +375,7 @@ session_start();
                  closeOnEscape:false,
                  modal:true,
                  buttons:{
-                     "Salir":function() {
+                     "Cerrar":function() {
                          $(this).dialog("close");
                      }
                  }
@@ -385,10 +392,20 @@ session_start();
                 });
             });
             function resultados(data) {
+                contador = 1;
                 $.each(data,function(index, value) {
                     $("#tbllista_usuarios tbody").append(
                     '<tr id="tbl_listausuariosgrid">'+
                     '<td>'+data[index].nombre+"</td>"+
+                    '<td align="center"><input type="checkbox" id="chkOpcionesTop1" name="checkOption" value="'+contador+++'-'+data[index].id+'"/></td>'+
+                    '<td align="center"><input type="checkbox" id="chkOpcionesTop2" name="checkOption" value="'+contador+++'-'+data[index].id+'"/></td>'+
+                    '<td align="center"><input type="checkbox" id="chkOpcionesTop3" name="checkOption" value="'+contador+++'-'+data[index].id+'"/></td>'+
+                    '<td align="center"><input type="checkbox" id="chkOpcionesTop4" name="checkOption" value="'+contador+++'-'+data[index].id+'"/></td>'+
+                    '<td align="center"><input type="checkbox" id="chkOpcionesTop6" name="checkOption" value="'+contador+++'-'+data[index].id+'"/></td>'+
+                    '<td align="center"><input type="checkbox" id="chkOpcionesTop7" name="checkOption" value="'+contador+++'-'+data[index].id+'"/></td>'+
+                    '<td align="center"><input type="checkbox" id="chkOpcionesTop8" name="checkOption" value="'+contador+++'-'+data[index].id+'"/></td>'+
+                    '<td align="center"><input type="checkbox" id="chkOpcionesTop9" name="checkOption" value="'+contador+++'-'+data[index].id+'"/></td>'+
+                    '<td align="center"><input type="checkbox" id="chkOpcionesTop5" name="checkOption" value="'+contador+++'-'+data[index].id+'"/></td>'+
                     '<input type="hidden" name="usuario" value="'+data[index].id+'" />'+
                     '<td><a href="#" id="del-usuario" class="button delete">Eliminar</a></td>'
                     )
@@ -397,6 +414,19 @@ session_start();
             $("#del-usuario").live("click",function(e) {
                 alert($(this).parent().parent().html());
             })
+            //DETECT CLICK ON CHECKBOX
+            //DETECTA QUE CHECBKOX SE HA PULSADO (DE LOS 5)
+            /*$("#chkOpcionesTop1").live("click",function() {
+                alert($(this).parent().html());
+            })*/
+            $('input:checkbox[name=checkOption]').live("click",function() {
+                alert($(this).val());
+                var option = $(this).val();
+                var opcion_usuario = $(this).text().split("-");
+                $.ajax({
+                    
+                });
+            });
             
             /*****
              * OBRAS
@@ -457,6 +487,7 @@ session_start();
                 var directorio_obra = $(this).text().split("-");
                 $("#txtNombreDirectorio").val(directorio_obra[2]);
                 $("#txtIdDirectorioProyecto").val(directorio_obra[0]);
+                $("#divDirectorioObra").dialog("close");
             });
             
             //EDITAR OBRA(PROYECTO) MINIMO
@@ -482,10 +513,18 @@ session_start();
                 $("#txtnombreobraEdit").val(proyecto[2]);
                 $("#id_proyecto").val(proyecto[0]);
                 $("#txtproyectoeditacodigo").val(proyecto[1]);
-                $("#txtproyectoeditanombre").val(proyecto[2]);
+                $("#txtproyectoeditanombre").val(proyecto[3]);
+                $("#txtproyecto_directorioEdit").val(proyecto[2]);
                 $("#divSeleccionaProyecto").dialog("close");
                 $("#tbl_Editarproyecto").fadeIn(4000);
             });
+            //
+            $("#editDirectorioProyecto").click(function(e) {
+                e.preventDefault();
+                $("#editDirectorioProyecto").attr("class","button save");
+                $("#editDirectorioProyecto").attr("value","Guardar");
+            });
+            
             // CLICK EN EL BOTON BUSCAR
             $("#btnBuscarObraEdit").click(function() {
                 $("#tbl_Editarproyecto").css("display","block");
@@ -510,6 +549,52 @@ session_start();
                     }
                 });
             });
+            
+            /**
+             * APROBACION 
+             */
+             //CLICK AL BOTON PARA MOSTRAR EL MDAL DE LOA PROYECTODS
+             $("#btnSeleccionarProyecto").click(function() {
+                $("#divSeleccionaProyectosUsuariosTop").dialog("open");
+             });
+             // MODAL DE PROYECTOS
+             $("#divSeleccionaProyectosUsuariosTop").dialog({
+                 autoOpen:false,
+                 height:250,
+                 width:250,
+                 resizable:false,
+                 closeOnEscape:false,
+                 modal:true,
+                 buttons:{
+                     "Cerrar":function() {
+                         $(this).dialog("close");
+                     }
+                 }
+             });
+             //CLICK AL PROYECTO
+             $(".proyectousertop").live("click",function() {
+                $.ajax({
+                    type:"GET",
+                    dataType:"json",
+                    url:"../../bl/opcionesUsuariosTop.php?parameter=listarOpcionesTH",
+                    success:function(data) {
+                        $.each(data,function(index,value) {
+                            datos = 
+                                "<th>"+data[index].descripcion+"</th>";
+                            $("#tbllista_usuarios thead tr").append(datos);
+                        });
+                        var proyecto = $(this).text().split("-");
+                        $("#txtProyectoUsuariosTop").val(proyecto[2]);
+                        $("#divSeleccionaProyectosUsuariosTop").dialog("close");
+                        $("#tr_seleccionausuarios").css("display","block");
+                        $("#tb_asignausuarios").css("display","block");
+
+                        $("#btnSeleccionarProyecto").fadeOut("slow");
+                    }
+                })
+                
+                
+             });
         });    
         </script>
         <style>
@@ -538,6 +623,9 @@ session_start();
         
         <!-- MODAL PROYECTOS -->
         <div id="divSeleccionaProyecto" title="Seleccione el proyecto"></div>
+        
+        <!-- MODAL PROYECTOS - USUARIOS TOP -->
+        <div id="divSeleccionaProyectosUsuariosTop" title="Seleccione Proyecto"></div>
         
        <!-- MODALES -->
        <div id="listaUsuarios" title="Usuarios para aprobaciones">
@@ -733,10 +821,11 @@ session_start();
                     <div id="obra_editar-2">
                         <table>
                             <tr><td><td><input type="button" id="btnListarObras" value="Seleccione proyecto" class="ui-button ui-widget ui-state-default ui-corner-all" />
-                            
                                     <table id="tbl_Editarproyecto" style="display: none">
                                         <tr><td><label>Codificaci&oacute;n:</label><td><input type="text" name="txtproyectoeditacodigo" id="txtproyectoeditacodigo" />
                                         <tr><td><label>Nombre:</label><td><input type="text" name="txtproyectoeditanombre" id="txtproyectoeditanombre" />
+                                        <tr><td><label>Directorio:</label><td><input type="text" id="txtproyecto_directorioEdit" READONLY><a href="#" id="editDirectorioProyecto" class="button flag">Modificar</a>
+                                                <select name="" id="selDirectorio" name=""></select>       
                                                 <input type="hidden" id="id_proyecto" />
                                         <tr><td><td><input type="button" value="Actualizar proyecto" id="btnUpdateProject" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                                                 <div id="successupdateproyecto" style="display: none">El proyecto se ha actualizado correctamente.</div>
@@ -754,9 +843,20 @@ session_start();
                
                     <div id="usuarios_crear-1">
                         <table>
-                            <tr><td><label>Nombres:</label><td><input type="text" id="txtnombreusuario" /><td><input type="button" value="..." />
+                            <tr><td><label>Nombres:</label><td><input type="text" id="txtnombreusuario" /><td><input type="button" value="Buscar usuario" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                             <tr><td><label>Apellidos:</label><td><input type="text" id="txtapellidosusuario" />        
                             <tr><td><label>Usuario:</label><td><input type="text" id="txtusuario" />        
+                            <tr><td><label>Rol:</label><td>    
+                                    <select>
+                                        <optgroup label="Administrativo">
+                                            <option value="">Administrador Sistema</option>
+                                            <option value="">Gerente</option>
+                                        </optgroup>
+                                        <optgroup label="Licencia">
+                                            <option value="">Acceso Total</option>
+                                            <option value="">Acceso Retringido</option>
+                                        </optgroup>
+                                    </select>
                             <tr><td><label>Password:</label><td><input type="password" id="txtpassword" READONLY/><td><input type="button" value="Generar" id="btnGeneraPass" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                             <tr><td><td><input type="button" value="Crear" id="btnCrearUsuario" class="ui-button ui-widget ui-state-default ui-corner-all" />        
                         </table>
@@ -779,7 +879,7 @@ session_start();
                                                         <option value="">Gerente</option>
                                                     </optgroup>
                                                     <optgroup label="Licencia">
-                                                        <option value="">Full</option>
+                                                        <option value="">Acceso Ttoal</option>
                                                         <option value="">Acceso Retringido</option>
                                                     </optgroup>
                                                 </select>
@@ -797,18 +897,30 @@ session_start();
                    </ul>
                    <div id="usuarioaprobacionasigna-1">
                        <table>
-                           <tr><td><label>Seleccionar usuarios:</label></td><td><input type="button" id="btnSeleccionUsuarios" value="..." class="ui-button ui-widget ui-state-default ui-corner-all"/></td></tr>
-                           <tr><td>
+                           <tr><td><input type="button" value="Seleccionar Proyecto" id="btnSeleccionarProyecto" class="ui-button ui-widget ui-state-default ui-corner-all"/></td></tr>
+                           <tr><td><input type="text" id="txtProyectoUsuariosTop" READONLY/>
+                           <tr id="tr_seleccionausuarios" style="display: none"><td><input type="button" id="btnSeleccionUsuarios" value="Seleccionar usuarios" class="ui-button ui-widget ui-state-default ui-corner-all"/></td></tr>
+                           <tr id="tb_asignausuarios" style="display: none"><td>
                                    <table class="areaScrollModal" id="tbllista_usuarios">
                                        <thead>
                                            <tr class="ui-widget-header">
                                                <th>Usuario</th>
+                                               <!--<th>Cambiar ID</th>
+                                               <th>Modificar Total Estimado por Costo General por Partida</th>
+                                               <th>Modificar Ordenes</th>
+                                               <th>Aprobar nuevo Total estimado</th>
+                                               <th>Eliminar documentos registrados</th>
+                                               <th>Modificar Total Estimado</th>
+                                               <th>Eliminar Requisiciones de Cambio</th>
+                                               <th>Anular Ordenes de Cambio</th>
+                                               <th>Eliminar Valorizaciones hacia el Cliente</th>
+                                               <th>Eliminar</th>-->
                                            </tr>
                                        </thead>
                                        <tbody>
                                            <tr></tr>
                                        </tbody>
-                                   </table>
+                                   </table>       
                        </table>
                    </div>
                    <div id="usuarioaprobacionedita-2">

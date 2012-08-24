@@ -142,5 +142,24 @@ class ComboBoxTipos extends ComboBoxSql
             return FALSE;
         }
     }
+    
+    public function cargarDirectoriosEditar($id_empresa)
+    {
+        $consulta = parent::__construct();
+        $consulta = parent::consulta("SELECT id,descripcion FROM tb_directorio WHERE tb_empresa_id = $id_empresa ORDER BY descripcion");
+        $total_registros = parent::num_rows($consulta);
+        
+        if ($total_registros > 0) {
+            $directorios = array();
+            
+            while ($directorio = parent::fetch_assoc($consulta)) {
+                $id = $directorio['id'];
+                $descripcion = $directorio['descripcion'];
+                $directorios[$id] = $descripcion;
+            }
+            return $directorios;
+        } else {
+            return FALSE;
+        }
+    }
 }
-?>

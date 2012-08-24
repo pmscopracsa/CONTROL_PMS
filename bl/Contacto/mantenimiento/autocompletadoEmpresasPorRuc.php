@@ -22,7 +22,7 @@ try {
         throw new Exception("Error en la conexion. Archivo: ".$path_info['basename']." Error DB: ".  mysql_error(). "\n");
     
     //$sql = "SELECT DISTINCT ruc FROM tb_companiacontacto WHERE ruc LIKE '%$q%'";
-    $sql = "SELECT DISTINCT cc.ruc
+    $sql = "SELECT DISTINCT cc.id, cc.ruc
             FROM tb_empresa e
             INNER JOIN tb_companiacontacto cc ON e.id = cc.tb_empresa_id
             WHERE e.id = $idEmpresa AND cc.ruc LIKE '%$q%'";
@@ -34,6 +34,7 @@ try {
     
     while ($registro = mysql_fetch_array($rs)) {
         $empresas = $registro['ruc'];
+        $ruc = $registro['id'];
         echo $empresas."\n";
     }
 } catch ( Exception $ex ) {

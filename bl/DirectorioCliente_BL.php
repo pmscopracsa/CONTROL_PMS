@@ -2,6 +2,12 @@
 require_once '../dl/Conexion.php';
 require_once '../dl/DirectorioCliente.php';
 
+// REQUIRE FOR COMBOS
+require_once 'ComboBoxSql.php';
+require_once 'ComboBoxTipos.php';
+$selects = new ComboBoxTipos();
+
+
 $conexion = new Conexion();
 $cn = $conexion->conectar();
 $directorio = new DirectorioCliente();
@@ -21,4 +27,9 @@ if ($_REQUEST['parameter'] == 'crearDirectorio') {
     $directorio->set_nombre($_REQUEST['nombre']);
     $rs = $directorio->existeNombreDirectorio($cn);
     echo $rs;
+} elseif ($_REQUEST['parameter'] == 'cargarDirectorioEditarlo') {
+    $directorios = $selects->cargarDirectoriosEditar($_REQUEST['idEmpresa']);
+    foreach ($directorios as $key => $value) {
+        echo "<option value=\"$key\">$value</option>";
+    }
 }

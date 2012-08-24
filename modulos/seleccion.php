@@ -11,7 +11,7 @@ switch ($_REQUEST['frmName']) {
     case 'compania':
         $title = "Compañia";
         $nuevo = "contacto/registracompania.php";
-        $modificar = "contacto/edit/editacompania.php?frm=compania";
+        $modificar = "contacto/edit/editacompania.php?from=none";
         break;
     case 'persona':
         $title = "Personas";

@@ -35,6 +35,7 @@ $obra_id = 0;
         <link rel="stylesheet" href="../../js/wizard/css/validationEngine.jquery.css" />
         <link rel="stylesheet" href="../../index_box/index.css" />
         <link rel="stylesheet" href="../../css/jquery-ui-1.8.18.custom.css" />
+        <link rel="stylesheet" href="../../css/areascroll.css" />
         
         <script src="../../js/jquery-1.7.1.min.js"></script> 
         <script src="../../js/calendar/jquery-ui-1.8.18.custom.min.js"></script>
@@ -200,6 +201,13 @@ $obra_id = 0;
         }
     });
     </script>
+    <style>
+        #divSeleccionaDirectorio, #divSeleccionaObra {
+            border-color: #ff9999;
+            border-width: 1px;
+            border-style: solid;
+        }
+    </style>
     </head>
     <body>
         <?php
@@ -214,14 +222,14 @@ $obra_id = 0;
             <form id="seleccionprevia" method="post" action="">
                 <fieldset>
                     <legend>Directorios Principales</legend>
-                    <div id="divSeleccionaDirectorio" title="Seleccionar Directorio"></div>
+                    <div id="divSeleccionaDirectorio" class="areaScrollSelDirectorio" title="Seleccionar Directorio"></div>
                     <input type="text" id="idtxtdirectorio" name="txtdirectorio" class="validate[required]" READONLY/>
                     <!-- CAMPO OCULTO QUE RETIENE EL ID DEL DIRECTORIO SELECCIONADO -->
                     <input type="hidden" id="idtxtiddirectorio" name="txtiddirectorio" value="" READONLY />
                 </fieldset>    
                 <fieldset>
                     <legend>Selecci&oacute;n de Proyecto</legend>
-                    <div id="divSeleccionaObra" title="Seleccionar Obra"></div> 
+                    <div id="divSeleccionaObra" class="areaScrollSelDirectorio" title="Seleccionar Obra"></div> 
                     <input type="text" id="idtxtobra" name="txtobra" class="validate[required]" READONLY/>
                     <!-- CAMPO OCULTO QUE RETINENE EL ID DE LA OBRA SELECCIONADA -->
                     <input type="hidden" id="idtxtidobra" name="txtidobra" value="" READONLY />
@@ -232,7 +240,7 @@ $obra_id = 0;
                 </fieldset>
                
                 <p>
-                    <input type="button" value="Confirmar datos iniciales" id="setuped" /> 
+                    <input type="button" value="Aceptar" id="setuped" /> 
                 </p>   
             </form>
             <div class="container tutorial-info" id="infocambiomoneda" ></div>

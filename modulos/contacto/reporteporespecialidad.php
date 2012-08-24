@@ -227,15 +227,16 @@ $css = scandir($CSS_PATH);
                     if(data[index].email != "<i>No tiene</i>")
                         email = "<td><input type='button' value='Enviar email' id='enviaremail' />";
                     else
-                        email = "<td>";
+                        email = "";
                     
                     codigo = data[index].id;
                     $("#derecho-content-table-data-persona tbody").append(
                     "<tr><th>Nombre<td>"+data[index].nombre+"<td>"+
                     "<tr><th>DNI<td>"+data[index].dni+"<td>"+
                     "<tr><th>Cargo<td>"+data[index].cargo+"<td>"+
-                    "<tr><th>Email<td>"+data[index].email+
-                    email
+                    "<tr><th>Email<td>"+data[index].email+"<td>"+
+                    email+
+                    "<tr><th>Direccion<td>"+data[index].direccion+"<td>"
                     );
                     verTFEmpresa(codigo);
                     verTMEmpresa(codigo);

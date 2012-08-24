@@ -12,6 +12,8 @@ session_start();
         <link href="../../../css/barrasuperior.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/cuerpo.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/autocomplete.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/botones.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/google-buttons.css" rel="stylesheet" type="text/css" />
         
         <!-- JS ZONE -->
         <script src="../../../js/jquery1.4.2.js.js" type="text/javascript"></script>
@@ -19,7 +21,6 @@ session_start();
         <script src="../../../js/cargarDatos.js" type="text/javascript"></script>
         <script>
         var tipobusqueda = "";    
-        //auto completar
         $(document).ready(function() {
             $(".ruc_empresa").autocomplete("../../../bl/Contacto/mantenimiento/autocompletadoEmpresasPorRuc.php",{
                 width:260,
@@ -50,7 +51,7 @@ session_start();
             });
             
             // DETECTAR CLICK PARA REALIZAR BUSQUEDA
-            $("#btnBuscar").click(function() {                
+            $("#btnBuscar").click(function() {
                 if ($(".nombre_empresa").val().length < 0 || $(".ruc_empresa").val().length < 0) {
                     $("#divmensajebusqueda").fadeIn("slow");
                     $("#divmensajebusqueda").fadeOut("slow");
@@ -91,10 +92,10 @@ session_start();
             /**
              * detectar click 
              */
-//            $("#actualizar").live("click", function(e) {
-//                alert($("#txthdn_id").val());
-//                
-//            })
+            $("#actualizar").live("click", function(e) {
+                alert("Actualizar");
+                
+            })
             /**
              * ELIMINAR GIRO
              */
@@ -135,6 +136,7 @@ session_start();
             // VERIFICAR SI EXISTE SESIONA CTIVA
             ?>
             <h1>EDICION DE COMPAÑIA | <?=$_SESSION['usr']?></h1>
+            
             <label>Criterio de b&uacute;squeda:</label><br />
             <input type="radio" name="criteriobusqueda" value="ruc" />Por RUC<br /> 
             <input type="radio" name="criteriobusqueda" value="nombre" />Por Nombre<br />
@@ -148,9 +150,11 @@ session_start();
                     <input type="text" size="30"  name="txtnombre" class="nombre_empresa" placeholder="Ingrese nombre de la Compañía" value="" />
                 </div>    
                 <div id="divbtn" style="display: none">
-                    <input type="button" id="btnBuscar" value="¡Buscar!" />
+                    <input type="hidden" id="txtidCiaToSearch" />
+                    <input type="button" id="btnBuscar" value="Buscar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                 </div>
-            </div>    
+            </div>
+            
                 <div id="divmensajebusqueda" style="display: none">
                     No ha especificado criterio alguno para su búsqueda. Rellene un campo e intente de nuevo.
                 </div>

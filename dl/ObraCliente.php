@@ -70,7 +70,16 @@ class ObraCliente {
      *funcion para la edicion por el administrador de la empresa 
      */
     public function listarProyectos($cn) {
-        $query = "SELECT id,codigoobra,descripcion FROM tb_obra WHERE tb_empresa_id = $this->_tb_empresa_id";
+        //$query = "SELECT id,codigoobra,descripcion FROM tb_obra WHERE tb_empresa_id = $this->_tb_empresa_id";
+        $query = "SELECT 
+        o.id idproyecto
+        ,o.codigoobra codigoproyecto
+        ,o.descripcion proyecto
+        ,d.descripcion directorio
+        FROM 
+        tb_directorio d INNER JOIN tb_obra o ON d.id = o.tb_directorio_id
+        WHERE o.tb_empresa_id = $this->_tb_empresa_id";
+        
         try {
             $rs = mysql_query($query, $cn);
             if (!$rs)

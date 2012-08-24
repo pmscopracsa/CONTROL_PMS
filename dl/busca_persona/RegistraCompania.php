@@ -247,11 +247,13 @@ class RegistraCompania
         ,cc.web ccweb
         ,e.nombre enombre
         ,tc.descripcion tcdescripcion
+        ,ve.descripcion vedescripcion
         FROM tb_empresa e
         INNER JOIN tb_companiacontacto cc ON e.id = cc.tb_empresa_id
         INNER JOIN tb_usuario u ON u.tb_empresa_id = e.id
         INNER JOIN tb_tipocompania tc ON tc.id = cc.tb_tipocompania_id
-        WHERE cc.descripcion = $this->_ruc AND cc.tb_empresa_id = $this->_idempresa";
+        INNER JOIN tb_viaenvio ve ON cc.tb_viaenvio_id = ve.id
+        WHERE cc.ruc = '$this->_ruc' AND cc.tb_empresa_id = $this->_idempresa";
         
         try {
             $conexion = new Conexion();
@@ -279,6 +281,7 @@ class RegistraCompania
                 array_push($companiadatos,$res['ccemail'] == NULL ? "" : $res['ccemail']);
                 array_push($companiadatos,$res['ccweb'] == NULL ? "" : $res['ccweb']);
                 array_push($companiadatos,$res['tcdescripcion'] == NULL ? "" : $res['tcdescripcion']);
+                array_push($companiadatos,$res['vedescripcion'] == NULL ? "" : $res['vedescripcion']);
             }
             return $companiadatos;
             

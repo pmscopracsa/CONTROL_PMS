@@ -25,3 +25,12 @@
     padding-bottom: 10px;
     padding-top: 10px;
 }
+
+.areaScrollSelDirectorio 
+{
+    height: 90px;
+    overflow: auto;
+    width: 300px;
+    border: 1px solid #c2e1ef;
+    padding-right: 10px;
+}

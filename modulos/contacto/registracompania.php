@@ -19,6 +19,7 @@ function __autoload($name) {
 <!DOCTYPE HTML>
 <html class="no-js">
     <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />    
     <!-- zona css -->
     <?php
     foreach($css as $value) {
@@ -299,11 +300,22 @@ function __autoload($name) {
         $("#divNuevaEspecialidad").dialog({
             show:"blind",
             autoOpen:false,
-            height:300,
-            width:350,
+            height:150,
+            width:300,
             modal:true,
             buttons:{
-                "Salir":function(){
+                "Crear":function() {
+                    $.ajax({
+                    type:"POST",
+                    url:'../../bl/Contacto/mantenimiento/especialidadcompania_crear.php',
+                    data:"descripcion="+$('.input-descripcion').attr('value'),
+                    success:function(){
+                        //$("#divNuevaEspecialidad").dialog('close');
+                        recargarEspecialidades();
+                    }
+                });
+                },
+                "Cerrar":function(){
                     $(this).dialog("close");
                 }
             }
@@ -554,7 +566,7 @@ function __autoload($name) {
       })
       $("#btnModificar").click(function(e) {
           e.preventDefault();
-          window.location = "http://192.168.1.5/control_pms/modulos/contacto/edit/editacompania.php?frm=compania"
+          window.location = "http://192.168.1.5/control_pms/modulos/contacto/edit/editacompaniacur.php?ruc="+$(".ruc_empresa").val();
       })
        /**
         * AUTOCOMPLETAR SEGUN RUC DE LA EMPRESA
@@ -840,7 +852,7 @@ function __autoload($name) {
                         <div id="divNuevaEspecialidad" title="Crear nueva especialidad" style="display: none">
                             <label>Especialidad:</label>
                             <input id="inputext" class="input-descripcion" type="text" />
-                            <input id="btn-nuevaespecialidad" type="button" value="Crear" />
+<!--                            <input id="btn-nuevaespecialidad" type="button" value="Crear" />-->
                         </div>
                         <!-- MODAL PARA BUSCAR ESPECIALIDAD POR NOMBRE -->    
                         <div id="modal_buscarEspecialidadPorNombre" title="Buscar Especialidad" style="display: none">
