@@ -445,6 +445,47 @@ session_start();
             });
             
             // ELIMINAR TELEFONO NEXTEL
+            $("#btnEliminarTN").live("click",function() {
+                $(this).parent().parent().remove();
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        id_tnextel:$(this).parent().parent().children().children('#idTNextel').attr("value"),
+                        idCompania:$("#idCompania").val(),
+                        idEmpresa:<?=$_SESSION['id']?>
+                    },
+                    url:"../../../bl/editaCompania_BL.php?parameter=tn_elimina",
+                    success:function() {
+                        alertExito();
+                    }
+                });
+            });
+            
+            /** FAX */
+            // EDITAR FAX
+            $("#btnEditarFax").live("click",function() {
+                if ($("#btnEditarFax").val() === "Editar") {
+                    $("#txtfax").removeAttr("READONLY");
+                    $("#btnEditarFax").attr("value","Guardar");
+                } else {
+                    if ($("#txtfax").attr("value") === "") {
+                        alertCampoVacion();
+                    } else {
+                        $.ajax({
+                            type:"POST",
+                            data:{
+                                fax:$("#txtfax").val(),
+                                idCompania:$("#idCompania").val(),
+                                idEmpresa:<?=$_SESSION['id']?>
+                            },
+                            url:"../../../bl/editaCompania_BL.php?parameter=fax_actualiza",
+                            success:function() {
+                                alertExito();
+                            }
+                        });
+                    }
+                }
+            });
             
             function alertCampoVacion() {
                 alert("Este campo debe contener datos.")

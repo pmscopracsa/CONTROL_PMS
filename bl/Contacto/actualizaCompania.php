@@ -271,7 +271,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                 </td>
             </tr>
             <tr>
-                <td>Fax:</td><td><input type="text" name="txtfax" size="50" value="'.$res[6].'"/></td>
+                <td>Fax:</td><td><input type="text" id="txtfax" name="txtfax" size="50" value="'.$res[6].'" READONLY/></td>
                 <td><input type="button" value="Editar" id="btnEditarFax"/>    
             </tr>
             <tr>

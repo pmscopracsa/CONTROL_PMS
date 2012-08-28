@@ -98,6 +98,16 @@ class EditaCompania
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
                     break;
+                case 'tn_elimina':
+                    $query = "DELETE FROM tb_telefononextelcompania WHERE id = $this->id AND tb_companiacontacto_id = $this->idCompania";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;
+                case 'fax_actualiza':
+                    $query = "UPDATE tb_companiacontacto SET fax = '$this->value' WHERE id = $this->idCompania AND tb_empresa_id = $this->idEmpresa";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;
                 default:
                     break;
             }

@@ -72,6 +72,14 @@ try{
         $edita_compania->setValue($_REQUEST['val_tnextel']);
         $edita_compania->setId($_REQUEST['id_tnextel']);
         $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == "tn_elimina") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setId($_REQUEST['id_tnextel']);
+        $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == "fax_actualiza") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['fax']);
+        $edita_compania->actualizarObjetoCompania($cn);
     }
 }catch(Exception $ex) {
     echo 'Error: '.$ex->getMessage();
