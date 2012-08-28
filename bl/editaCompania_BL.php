@@ -45,6 +45,33 @@ try{
         $edita_compania->setAActualizar($_REQUEST['parameter']);
         $edita_compania->setId($_REQUEST['id_giro']);
         $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == "actividadprincipal") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['actividadprincipal']);
+        $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == "tf_actualiza") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['val_tf']);
+        $edita_compania->setId($_REQUEST['id_tf']);
+        $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == "tf_elimina") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setId($_REQUEST['id_tf']);
+        $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == "tm_edita") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['val_tm']);
+        $edita_compania->setId($_REQUEST['id_tm']);
+        $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == "tm_elimina") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setId($_REQUEST['id_tmobile']);
+        $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == "tn_actualiza") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['val_tnextel']);
+        $edita_compania->setId($_REQUEST['id_tnextel']);
+        $edita_compania->actualizarObjetoCompania($cn);
     }
 }catch(Exception $ex) {
     echo 'Error: '.$ex->getMessage();

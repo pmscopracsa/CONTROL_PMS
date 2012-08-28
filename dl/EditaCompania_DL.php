@@ -67,6 +67,37 @@ class EditaCompania
                     $query = "DELETE FROM tb_giro WHERE id = $this->id AND tb_compania_id = $this->idCompania";
                     $rs = mysql_query($query,$cn);
                     if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;
+                case 'actividadprincipal':
+                    $query = "UPDATE tb_companiacontacto SET actividadprincipal = '$this->value' WHERE id = $this->idCompania AND tb_empresa_id = $this->idEmpresa";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;
+                case 'tf_actualiza':
+                    $query = "UPDATE tb_telefonofijocompania SET numero = '$this->value' WHERE id = $this->id AND tb_companiacontacto_id = $this->idCompania";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;
+                case 'tf_elimina':
+                    $query = "DELETE FROM tb_telefonofijocompania WHERE id = $this->id AND tb_companiacontacto_id = $this->idCompania";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;
+                case 'tm_edita':
+                    $query = "UPDATE tb_telefonomovilcompania SET numero = '$this->value' WHERE id = $this->id AND tb_companiacontacto_id = $this->idCompania";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;
+                case 'tm_elimina':
+                    $query = "DELETE FROM tb_telefonomovilcompania WHERE id = $this->id AND tb_companiacontacto_id = $this->idCompania";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;
+                case 'tn_actualiza':
+                    $query = "UPDATE tb_telefononextelcompania SET numero = '$this->value' WHERE id = $this->id AND tb_companiacontacto_id = $this->idCompania";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;
                 default:
                     break;
             }

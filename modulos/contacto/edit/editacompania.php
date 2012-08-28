@@ -252,14 +252,11 @@ session_start();
                         });
                     }
                 }
-            })
+            });
             
             /** CAMBIAR GIRO */
             // EDITAR GIRO
             $("#btnEditarGiro").live("click",function() {
-                var value_giro= $(this).parent().parent().children().children('#txtGiro').attr("value");
-                var id_giro= $(this).parent().parent().children('#idGiro').attr("value");
-                
                 if ($("#btnEditarGiro").val() === "Editar") {
                     $("#txtGiro").removeAttr("READONLY");
                     $("#btnEditarGiro").attr("value","Guardar");
@@ -287,7 +284,7 @@ session_start();
             });
             // ELIMINAR GIRO
             $("#btnEliminarGiro").live("click",function() {
-                alert($(this).parent().parent().children('#idGiro').attr("value"));
+                $(this).parent().parent().remove();
                 $.ajax({
                    type:"POST",
                    data:{
@@ -297,11 +294,157 @@ session_start();
                    },
                    url:"../../../bl/editaCompania_BL.php?parameter=giro_elimina",
                    success:function() {
-                       $(this).parent().parent().remove();
                        alertExito();
                    }
                 });
             });
+            
+            /** ACTIVIDAD PRINCIPAL */
+            // EDITAR ACTIVIDAD PRINCIPAL
+            $("#btnEditarActividadPrincipal").live("click",function() {
+                if($("#btnEditarActividadPrincipal").val() === "Editar") {
+                    $("#txtactividad").removeAttr("READONLY");
+                    $("#btnEditarActividadPrincipal").attr("value","Guardar");
+                } else {
+                    if ($("#txtactividad").val() === "") {
+                        alertCampoVacion();
+                    } else {
+                        $.ajax({
+                            type:"POST",
+                            data:{
+                                actividadprincipal:$("#txtactividad").val(),
+                                idEmpresa:<?=$_SESSION['id']?>,
+                                idCompania:$("#idCompania").val()
+                            },
+                            url:"../../../bl/editaCompania_BL.php?parameter=actividadprincipal",
+                            success:function(){
+                                alertExito();
+                            }
+                        });
+                    }    
+                }    
+            });
+            
+            /** TELEFONO FIJO */
+            // EDITAR TELEFONO FIJO
+            $("#btnEditarTelefonoFijo").live("click",function() {
+                if($("#btnEditarTelefonoFijo").val() === "Editar") {
+                    $("#txtTelefonoFijo").removeAttr("READONLY");
+                    $("#btnEditarTelefonoFijo").attr("value","Guardar");
+                } else {
+                    if ($("#txtTelefonoFijo").val() === "") {
+                        alertCampoVacion();
+                    } else {
+                        $.ajax({
+                           type:"POST",
+                           data:{
+                                val_tf:$(this).parent().parent().children().children('#txtTelefonoFijo').attr("value"),
+                                id_tf:$(this).parent().parent().children().children('#idTFijo').attr("value"),
+                                idCompania:$("#idCompania").val(),
+                                idEmpresa:<?=$_SESSION['id']?>
+                           },
+                           url:"../../../bl/editaCompania_BL.php?parameter=tf_actualiza",
+                           success:function() {
+                               $("#txtTelefonoFijo").attr("READONLY",true);
+                               $("#btnEditarTelefonoFijo").attr("value","Editar");
+                               alertExito();
+                           }
+                        });
+                    }
+                }
+            });
+            // ELIMINAR TELEFONO FIJO
+            $("#btnEliminarTF").live("click",function() {
+                $(this).parent().parent().remove();
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        id_tf:$(this).parent().parent().children().children('#idTFijo').attr("value"),
+                        idCompania:$("#idCompania").val(),
+                        idEmpresa:<?=$_SESSION['id']?>
+                    },
+                    url:"../../../bl/editaCompania_BL.php?parameter=tf_elimina",
+                    success:function() {
+                        alertExito();
+                    }
+                });
+            });
+            
+            /** TELEFONO MOBILE */
+            // EDITAR T MOBILE
+            $("#btnEditarTelefonoMobile").live("click",function() {
+                if ($("#btnEditarTelefonoMobile").val() === "Editar") {
+                    $("#txtTelefonoMobile").removeAttr("READONLY");
+                    $(this).attr("value","Guardar");
+                } else {
+                    if ($("#txtTelefonoMobile").val() === "") {
+                        alertCampoVacion();
+                    } else {
+                        $.ajax({
+                            type:"POST",
+                            data:{
+                                val_tm:$(this).parent().parent().children().children('#txtTelefonoMobile').attr("value"),
+                                id_tm:$(this).parent().parent().children().children('#idTMobile').attr("value"),
+                                idCompania:$("#idCompania").val(),
+                                idEmpresa:<?=$_SESSION['id']?>
+                            },
+                            url:"../../../bl/editaCompania_BL.php?parameter=tm_edita",
+                            success:function() {
+                                $("#txtTelefonoMobile").attr("READONLY",true);
+                                $("#btnEditarTelefonoMobile").attr("value","Editar");
+                                alertExito();
+                            }
+                        });
+                    }
+                }
+            });
+            // ELIMINAR T MOBILE
+            $("#btnEliminarTM").live("click",function() {
+                $(this).parent().parent().remove();
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        id_tmobile:$(this).parent().parent().children().children('#idTMobile').attr("value"),
+                        idCompania:$("#idCompania").val(),
+                        idEmpresa:<?=$_SESSION['id']?>
+                    },
+                    url:"../../../bl/editaCompania_BL.php?parameter=tm_elimina",
+                    success:function() {
+                        alertExito();
+                    }
+                });
+            });
+            
+            /** TELEFONO NEXTEL */
+            // EDITAR TELEFONO NEXTEL
+            $("#btnEditarTelefonoNextel").live("click",function() {
+                if($("#btnEditarTelefonoNextel").val() === "Editar") {
+                    $("#txtTelefonoNextel").removeAttr("READONLY");
+                    $("#btnEditarTelefonoNextel").attr("value","Guardar");
+                } else {
+                    if ($("#txtTelefonoNextel").attr("value") === "") {
+                        alertCampoVacion();
+                    } else {
+                        $.ajax({
+                            type:"POST",
+                            data:{
+                                val_tnextel:$(this).parent().parent().children().children('#txtTelefonoNextel').attr("value"),
+                                id_tnextel:$(this).parent().parent().children().children('#idTNextel').attr("value"),
+                                idCompania:$("#idCompania").val(),
+                                idEmpresa:<?=$_SESSION['id']?>
+                            },
+                            url:"../../../bl/editaCompania_BL.php?parameter=tn_actualiza",
+                            success:function() {
+                                $("#txtTelefonoNextel").attr("READONLY", "true");
+                                $("#btnEditarTelefonoNextel").attr("value","Editar");
+                                alertExito();
+                            }
+                        });
+                    }
+                }
+            });
+            
+            // ELIMINAR TELEFONO NEXTEL
             
             function alertCampoVacion() {
                 alert("Este campo debe contener datos.")
