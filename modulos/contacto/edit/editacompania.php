@@ -117,11 +117,34 @@ session_start();
             });
             //DETECTAR INTENCION DE CAMBIO DE TIPO DE COMPANIA
             $("#btnEditarTipoCompania").live("click", function() {
-                $("#tipocompaniaid").css("display","block");
+                if ($("#btnEditarTipoCompania").val() === "Editar"){
+                    $("#tipocompaniaid").fadeIn("slow", function(){
+                        $("#btnEditarTipoCompania").attr("value","Guardar");
+                    });
+                } else {
+                    $("#tipocompaniaid").fadeOut("slow", function(){
+                        $("#btnEditarTipoCompania").attr("value","Editar");
+                        $.ajax({
+                            type:"POST",
+                            data:{
+                                tipocompania_id:$("#tipocompaniaid").val(),
+                                idEmpresa:<?=$_SESSION['id']?>,
+                                idCompania:$("#idCompania").val(),    
+                                idTipoCompania:$("#tipocompaniaid").val()
+                            },
+                            url:"../../../bl/editaCompania_BL.php?parameter=tipocompania",
+                            success:function() {
+                                alert("Se ha actualizado correctamente su peticion");
+                            }
+                        });
+                    });
+                }
             });
-            
-            //CARGAR DATOS PARA COMBOS
-            cargar_tipocompania();
+            //DETECTAR INTENCION DE CAMBIO VIA DE ENVIO
+            // DETECTAR ACTUALIZACION EN GIRO
+            $("#btnEditarGiro").live("click",function() {
+                alert($(this).parent().parent().html());
+            });
         });
         </script>
     </head>

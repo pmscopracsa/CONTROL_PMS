@@ -9,7 +9,9 @@ class TelefonoFijo {
     
     public function obtenerTelefonosPorCompania(){
         //$query = "SELECT id,numero FROM tb_telefonofijocompania WHERE tb_companiacontacto_id = $this->_tb_companiacontacto_id";
-        $query = "SELECT tc.id,tc.numero 
+        $query = "SELECT 
+                tc.id
+                ,tc.numero 
                 FROM 
                 tb_companiacontacto cc INNER JOIN tb_telefonofijocompania tc ON cc.id = tc.tb_companiacontacto_id
                 WHERE cc.ruc = '$this->_ruc'";
@@ -27,6 +29,7 @@ class TelefonoFijo {
             $telefonos = array();
             
             while ($res = mysql_fetch_array($rs,MYSQL_ASSOC)) {
+                array_push($telefonos,$res['id']);
                 array_push($telefonos,$res['numero']);
             }
             return $telefonos;

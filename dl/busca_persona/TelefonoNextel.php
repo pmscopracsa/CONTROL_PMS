@@ -8,7 +8,9 @@ class TelefonoNextel {
     private $_ruc;
     
     public function obtenerTelefonosPorCompania(){
-        $query = "SELECT tm.id,tm.numero 
+        $query = "SELECT 
+                tm.id
+                ,tm.numero 
                 FROM 
                 tb_companiacontacto cc INNER JOIN tb_telefononextelcompania tm ON cc.id = tm.tb_companiacontacto_id
                 WHERE cc.ruc = '$this->_ruc'";
@@ -26,6 +28,7 @@ class TelefonoNextel {
             $telefonos = array();
             
             while ($res = mysql_fetch_array($rs,MYSQL_ASSOC)) {
+                array_push($telefonos,$res['id']);
                 array_push($telefonos,$res['numero']);
             }
             return $telefonos;

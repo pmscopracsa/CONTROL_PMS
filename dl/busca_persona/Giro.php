@@ -24,11 +24,12 @@ class Giro
     
     public function r_obtenerGirosPorCompania()
     {
-        $query = "SELECT g.id id, g.descripcion descripcion
+        $query = "SELECT 
+        g.id id
+        ,g.descripcion descripcion
         FROM tb_companiacontacto cc
         INNER JOIN tb_giro g ON cc.id = g.tb_compania_id
         WHERE cc.tb_empresa_id = $this->_tb_empresa_id AND cc.id = $this->_tb_compania_id";
-
         
         try {
             $conn = new Conexion();
@@ -43,18 +44,21 @@ class Giro
                 throw new Exception("Error en consulta: ".  mysql_error());
             
             $giros = array();
-            
-            $i = 0;
+            $i=0;
             while ($res = mysql_fetch_array($sql,MYSQL_ASSOC))
             {
+                array_push($giros, $res['id']);
                 array_push($giros, $res['descripcion']);
-                
+            }
+            while($res = mysql_fetch_assoc($sql)) {
+                $giros[$i]['id'] = $res['id'];
+                $giros[$i]['descripcion'] = $res['descripcion'];
                 $i++;
             }
             return $giros;
             
         } catch (Exception $ex) {
-            
+            echo 'Error: '.$ex->getMessage();
         }
     }
     
