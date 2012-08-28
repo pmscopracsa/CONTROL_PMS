@@ -135,7 +135,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
     <table>
             <tr>
                 <input type="hidden" value="'.$res[0].'" id="idCompania"/>
-                <td>Tipo de Compañia:</td><td><input type="text" id="txttipocompania" name="txttipocompania" value="'.$res[10].'" READONLY /></td>
+                <td>Tipo de Compañia:</td><td><input type="text" id="txttipocompania" name="txttipocompania" value="'.$res[11].'" READONLY /></td>
                 <td><input type="button" id="btnEditarTipoCompania" value="Editar" />    
             </tr>
             
@@ -152,15 +152,15 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                 <td><input type="button" id="btnUpdateRuc" value="Editar" />    
             </tr>
             <tr>
-                <td>Nombre:</td><td><input type="text" id="txtcompania" name="txtcompania" size="50" value="'.$res[2].'"/></td>
+                <td>Nombre:</td><td><input type="text" id="txtcompania" name="txtcompania" size="50" value="'.$res[2].'" READONLY/></td>
                 <td><input type="button" id="btnUpdateNombre" value="Editar"/>    
             </tr>
             <tr>
-                <td>Nombre Comercial:</td><td><input type="text" id="txtcomercia" size="50" name="txtcomercial" value="'.$res[3].'"/></td>
-                <td><input type="button" id="btnUpdateNombrecomercial" value="Editar"/>    
+                <td>Nombre Comercial:</td><td><input type="text" id="txtcomercia" size="50" name="txtcomercial" value="'.$res[3].'" READONLY/></td>
+                <td><input type="button" id="btnUpdateNombrecomercial" value="Editar""/>    
             </tr>    
             <tr>
-                <td>Partida Registral:</td><td><input type="text" id="txtregistral" size="50" name="txtregistral" value="'.$res[4].'"/></td>
+                <td>Partida Registral:</td><td><input type="text" id="txtregistral" size="50" name="txtregistral" value="'.$res[4].'" READONLY/></td>
                 <td><input type="button" id="btnUpdatePartidaRegistral" value="Editar" />    
             </tr>    
             <tr>
@@ -174,14 +174,14 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
       /** MUESTRA CADA GIRO CON SU RESPECTIVO ID PARA ELIMINAR O ACTUALIZAR ;D */
       for ($i=0;$i<count($giros);$i++) {
           if($i%2 != 0) {
-              echo'<tr id="tr_giro'.$i.'"><td>
-                <input type="text" size="30" name="giro" value="'.
+              echo'<tr id="tr_giro">
+                <td>
+                <input type="text" id="txtGiro" name="giro" value="'.
                 $giros[$i]
-                .'" />
-                <input type="hidden" value="'.$giros[$i-1].'" />    
-                <td><input type="button" class="delRow" value=" " id="btnEliminarGiro"/></td>
-                <td><input type="button" value="Editar" id="btnEditarGiro"/>
-                </td>
+                .'" READONLY/></td>
+                <input id="idGiro" type="hidden" value="'.$giros[$i-1].'" />    
+                <td><input type="button" class="delRow" id="btnEliminarGiro"/></td>
+                <td><input type="button" value="Editar" id="btnEditarGiro"/></td>
                 </tr>';
               continue;
           }
@@ -192,8 +192,8 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
             </td>
             </tr>    
             <tr>
-                <td>Actividad Principal:</td><td><input type="text" id="txtactividad" size="50" name="txtactividad" value="'.$res[5].'"/></td>
-                <input type="button" value="Editar" id="btnEditarActividadPrincipal" />   
+                <td>Actividad Principal:</td><td><input type="text" id="txtactividad" size="50" name="txtactividad" value="'.$res[5].'" READONLY/></td>
+                <td><input type="button" value="Editar" id="btnEditarActividadPrincipal" />   
             </tr>
             <tr>
                 <td><label>T. Fijo</label></td>
@@ -208,7 +208,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
             echo'<tr id="tr_tfijo'.$i.'"><td>
                 <input type="text" size="30" name="tfijo" value="'.
                     $telefonosf[$i]
-                    .'" />
+                    .'" READONLY/>
                     <input type="hidden" value="'.$telefonosf[$i-1].'" />
                     <td><input type="button" class="delRow" value=" "/></td>
                     <td><input type="button" value="Editar" id="btnEditarTelefonoFijo"/>
@@ -233,7 +233,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
             echo'<tr id="tr_tfijo'.$i.'"><td>
                 <input type="text" size="30" name="tfijo" value="'.
                     $telefonosm[$i]
-                    .'" />
+                    .'" READONLY/>
                     <input type="hidden" value="'.$telefonosm[$i-1].'" />    
                     <td><input type="button" class="delRow" value=" "/></td>
                     <td><input type="button" value="Editar" id="btnEditarTelefonoMobile"/>
@@ -258,7 +258,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
             echo'<tr id="tr_tfijo'.$i.'"><td>
                 <input type="text" size="30" name="tfijo" value="'.
                     $telefnosn[$i]
-                    .'" />
+                    .'" READONLY/>
                     <input type="hidden" value="'.$telefnosn[$i-1].'" />    
                     <td><input type="button" class="delRow" value=" "/></td>
                     <td><input type="button" value="Editar" id="btnEditarTelefonoNextel"/>
@@ -306,7 +306,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
           echo'<tr id="tr_tfijo'.$i.'"><td>
               <input type="text" size="30" name="tfijo" value="'.
                   $especialidades_array[$i]
-                  .'" />
+                  .'" READONLY/>
                  <td><input type="button" class="delRow" value=" "/></td>
                  <td><input type="button" value="Editar" id="btnEditarEspecialidades"/>
                  </td></tr>';    
@@ -327,7 +327,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
           echo'<tr id="tr_tfijo'.$i.'"><td>
               <input type="text" size="30" name="tfijo" value="'.
                   $representantes_array[$i]
-                  .'" />
+                  .'" READONLY/>
                  <td><input type="button" class="delRow" value=" "/></td>
                  <td><input type="button" value="Editar" id="btnEditarRepresentante"/>
                  </td></tr>';    
@@ -341,15 +341,16 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                 <td><input type="button" value="Editar" id="btnEditarObservacion"/>    
             </tr>
             <tr>
-                <td>Email:</td><td><input type="text" name="txtemail" size="50" value="'.$res[8].'"/></td>
+                <td>Email:</td><td><input type="text" name="txtemail" size="50" value="'.$res[8].'" READONLY/></td>
                 <td><input type="button" value="Editar" id="btnEditarEmail"/>    
             </tr>
             <tr>
-                <td>Web:</td><td><input type="text" name="txtweb" size="50" value="'.$res[9].'"/></td>
-                <td><input type="button" value="Editar" id="btnEditarWeb/>
+                <td>Web:</td><td><input type="text" name="txtweb" size="50" value="'.$res[9].'" READONLY/></td>
+                <td><input type="button" value="Editar" id="btnEditarWeb" />
             </tr>
             <tr>
-                <td>Vía de Envío:</td><td><input type="text" id="txtViaEnvioEdit" READONLY value="'.$res[12].'" /></td>
+                <td>Vía de Envío:</td><td><input type="text" id="txtviaenvio" name="txtviaenvio" value="'.$res[12].'" READONLY /></td>
+                <td><input type="button" id="btnEditarViaEnvio" value="Editar" />    
             </tr>
             <tr>
                 <td>
@@ -357,10 +358,6 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                         <option value="0">Seleccione via de Envio</option>
                     </select>
                 </td>
-            </tr>
-            <tr>
-                <input type="hidden" id="txthdn_id" value="'.$res[0].'" />
-                <td><input type="submit" id="actualizar" value="Actualizar registro" /></td>
             </tr>
     </table>
     </form>

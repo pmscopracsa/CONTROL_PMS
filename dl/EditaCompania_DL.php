@@ -3,6 +3,9 @@
 
 class EditaCompania 
 {
+    /** Determina que se desea actualizar */
+    protected $aActualizar;
+    
     /** Tabla en la que haremos la consulta */
     protected $tabla;
     
@@ -15,20 +18,55 @@ class EditaCompania
     /** Dato nuevo */
     protected $value;
     
+    /** Llave foranea */
+    protected $fk;
+    
+    /** Llave primaria */
+    protected $id;
+    
     public function actualizarObjetoCompania($cn)
     {
         try {
-            switch ($this->tabla) {
-                case 'tb_companiacontacto':
+            switch ($this->aActualizar) {
+                case 'tipocompania':
                     $query = "UPDATE tb_companiacontacto SET tb_tipocompania_id = $this->value WHERE id = $this->idCompania AND tb_empresa_id = $this->idEmpresa";
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error en consulta edita tipo compania: ".  mysql_error());
                     break;
-                case 'tb_companiacontacto':
+                case 'viaenvio':
                     $query = "UPDATE tb_companiacontacto SET tb_viaenvio_id = $this->value WHERE id = $this->idCompania AND tb_empresa_id = $this->idEmpresa";
                     $rs = mysql_query($query,$cn);
                     if (!$rs)                        throw new Exception("Error en consulta: ".  mysql_error());
                     break;
+                case 'ruc':
+                    $query = "UPDATE tb_companiacontacto SET ruc = '$this->value' WHERE id = $this->idCompania AND tb_empresa_id = $this->idEmpresa";
+                    $rs = mysql_query($query,$cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;
+                case 'nombre':
+                    $query = "UPDATE tb_companiacontacto SET descripcion = '$this->value' WHERE id = $this->idCompania AND tb_empresa_id = $this->idEmpresa";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;
+                case 'nombrecomercial':
+                    $query = "UPDATE tb_companiacontacto SET nombrecomercial = '$this->value' WHERE id = $this->idCompania AND tb_empresa_id = $this->idEmpresa";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                       throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;
+                case 'partidaregistral':
+                    $query = "UPDATE tb_companiacontacto SET partidaregistral = '$this->value' WHERE id = $this->idCompania AND tb_empresa_id = $this->idEmpresa";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;
+                case 'giro_actualiza':
+                    $query = "UPDATE tb_giro SET descripcion = '$this->value' WHERE id = $this->id AND tb_compania_id = $this->idCompania";
+                    $rs = mysql_query($query,$cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;
+                case 'giro_elimina':
+                    $query = "DELETE FROM tb_giro WHERE id = $this->id AND tb_compania_id = $this->idCompania";
+                    $rs = mysql_query($query,$cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
                 default:
                     break;
             }
@@ -36,6 +74,7 @@ class EditaCompania
             echo 'Error: '.$ex->getMessage();
         }
     }
+    
      /** G & S*/
      public function getTabla() {
          return $this->tabla;
@@ -67,5 +106,29 @@ class EditaCompania
 
      public function setValue($value) {
          $this->value = $value;
+     }
+     
+     public function getAActualizar() {
+         return $this->aActualizar;
+     }
+
+     public function setAActualizar($aActualizar) {
+         $this->aActualizar = $aActualizar;
+     }
+     
+     public function getFk() {
+         return $this->fk;
+     }
+
+     public function setFk($fk) {
+         $this->fk = $fk;
+     }
+
+     public function getId() {
+         return $this->id;
+     }
+
+     public function setId($id) {
+         $this->id = $id;
      }
 }

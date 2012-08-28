@@ -96,12 +96,7 @@ session_start();
                 alert("Actualizar");
                 
             })
-            /**
-             * ELIMINAR GIRO
-             */
-            $(".delRow").live("click",function() {
-                 $(this).parent().parent().remove();
-            });
+
             
             /**
              * AGREGAR NUEVO GIRO
@@ -122,7 +117,10 @@ session_start();
                         $("#btnEditarTipoCompania").attr("value","Guardar");
                     });
                 } else {
-                    $("#tipocompaniaid").fadeOut("slow", function(){
+                    if ($("#tipocompaniaid").val() == 0) {
+                        alert("Debe escoger una opcion");
+                    } else {
+                        $("#tipocompaniaid").fadeOut("slow", function(){
                         $("#btnEditarTipoCompania").attr("value","Editar");
                         $.ajax({
                             type:"POST",
@@ -134,17 +132,184 @@ session_start();
                             },
                             url:"../../../bl/editaCompania_BL.php?parameter=tipocompania",
                             success:function() {
+                                $("#txttipocompania").val($("#tipocompaniaid option:selected").text());
                                 alert("Se ha actualizado correctamente su peticion");
                             }
+                            });
                         });
-                    });
+                    }
+                    
                 }
             });
-            //DETECTAR INTENCION DE CAMBIO VIA DE ENVIO
-            // DETECTAR ACTUALIZACION EN GIRO
-            $("#btnEditarGiro").live("click",function() {
-                alert($(this).parent().parent().html());
+            /** CAMBIAR RUC */
+            // EDITAR RUC
+            $("#btnUpdateRuc").live("click",function() {
+                if ($("#btnUpdateRuc").val() === "Editar") {
+                    $("#txtruc").removeAttr("READONLY");
+                    $("#btnUpdateRuc").attr("value","Guardar");
+                } else {
+                    if ($("#txtruc").val() === "") {
+                        alertCampoVacion();
+                    } else {
+                        $.ajax({
+                            type:"POST",
+                            data:{
+                                ruc:$("#txtruc").val(),
+                                idEmpresa:<?=$_SESSION['id']?>,
+                                idCompania:$("#idCompania").val()    
+                            },
+                            url:"../../../bl/editaCompania_BL.php?parameter=ruc",
+                            success:function() {
+                                $("#txtruc").attr("READONLY",true);
+                                $("#btnUpdateRuc").attr("value","Editar");
+                                alertExito();
+                            }
+                        })
+                    }
+                }
+                
             });
+            
+            /** CAMBIAR NOMBRE */
+            // EDITAR NOMBRE
+            $("#btnUpdateNombre").live("click",function() {
+                if ($("#btnUpdateNombre").val() === "Editar") {
+                    $("#txtcompania").removeAttr("READONLY");
+                    $("#btnUpdateNombre").attr("value","Guardar");
+                } else {
+                    if ($("#txtcompania").val() === "") {
+                        alertCampoVacion();
+                    } else {
+                        $.ajax({
+                            type:"POST",
+                            data:{
+                                nombre:$("#txtcompania").val(),
+                                idEmpresa:<?=$_SESSION['id']?>,
+                                idCompania:$("#idCompania").val()
+                            },
+                            url:"../../../bl/editaCompania_BL.php?parameter=nombre",
+                            success:function() {
+                                $("#txtcompania").attr("READONLY",true);
+                                $("#btnUpdateNombre").attr("value","Editar");
+                                alertExito();
+                            }
+                        });
+                    }
+                }
+            });
+            
+            /** CAMBIAR NOMBRE COMERCIAL */
+            // EDITAR NOMBRE COMERCIAL
+            $("#btnUpdateNombrecomercial").live("click",function() {
+                if ($("#btnUpdateNombrecomercial").val() === "Editar") {
+                    $("#txtcomercia").removeAttr("READONLY");
+                    $("#btnUpdateNombrecomercial").attr("value","Guardar");
+                } else {
+                    if ($("#txtcomercia").val() === "") {
+                        alertCampoVacion();
+                    } else {
+                        $.ajax({
+                            type:"POST",
+                            data:{
+                                nombrecomercial:$("#txtcomercia").val(),
+                                idEmpresa:<?=$_SESSION['id']?>,
+                                idCompania:$("#idCompania").val()
+                            },
+                            url:"../../../bl/editaCompania_BL.php?parameter=nombrecomercial",
+                            success:function() {
+                                $("#txtcomercia").attr("READONLY",true);
+                                $("#btnUpdateNombrecomercial").attr("value","Editar");
+                                alertExito();
+                            }
+                        })
+                    }
+                }
+            })
+            
+            /** CAMBIAR PARTIDA REGISTRAL */
+            // EDITAR PARTIDA REGISTRAL
+            $("#btnUpdatePartidaRegistral").live("click",function() {
+                if($("#btnUpdatePartidaRegistral").val() === "Editar") {
+                    $("#txtregistral").removeAttr("READONLY");
+                    $("#btnUpdatePartidaRegistral").attr("value","Guardar");
+                } else {
+                    if ($("#txtregistral").val() === "") {
+                        alertCampoVacion();
+                    } else {
+                        $.ajax({
+                            type:"POST",
+                            data:{
+                                partidaregistral:$("#txtregistral").val(),
+                                idEmpresa:<?=$_SESSION['id']?>,
+                                idCompania:$("#idCompania").val()
+                            },
+                            url:"../../../bl/editaCompania_BL.php?parameter=partidaregistral",
+                            success:function() {
+                                $("#txtregistral").attr("READONLY",true);
+                                $("#btnUpdatePartidaRegistral").attr("value","Editar");
+                                alertExito();
+                            }
+                        });
+                    }
+                }
+            })
+            
+            /** CAMBIAR GIRO */
+            // EDITAR GIRO
+            $("#btnEditarGiro").live("click",function() {
+                var value_giro= $(this).parent().parent().children().children('#txtGiro').attr("value");
+                var id_giro= $(this).parent().parent().children('#idGiro').attr("value");
+                
+                if ($("#btnEditarGiro").val() === "Editar") {
+                    $("#txtGiro").removeAttr("READONLY");
+                    $("#btnEditarGiro").attr("value","Guardar");
+                } else {
+                    if ($("#txtGiro").val() === "") {
+                        alertCampoVacion();
+                    } else {
+                        $.ajax({
+                            type:"POST",
+                            data:{
+                                val_giro:$(this).parent().parent().children().children('#txtGiro').attr("value"),
+                                id_giro:$(this).parent().parent().children('#idGiro').attr("value"),
+                                idCompania:$("#idCompania").val(),
+                                idEmpresa:<?=$_SESSION['id']?>
+                            },
+                            url:"../../../bl/editaCompania_BL.php?parameter=giro_actualiza",
+                            success:function() {
+                                $("#txtGiro").attr("READONLY",true);
+                                $("#btnEditarGiro").attr("value","Editar");
+                                alertExito();
+                            }
+                        });
+                    }
+                }
+            });
+            // ELIMINAR GIRO
+            $("#btnEliminarGiro").live("click",function() {
+                alert($(this).parent().parent().children('#idGiro').attr("value"));
+                $.ajax({
+                   type:"POST",
+                   data:{
+                        id_giro:$(this).parent().parent().children('#idGiro').attr("value"),
+                        idCompania:$("#idCompania").val(),
+                        idEmpresa:<?=$_SESSION['id']?>
+                   },
+                   url:"../../../bl/editaCompania_BL.php?parameter=giro_elimina",
+                   success:function() {
+                       $(this).parent().parent().remove();
+                       alertExito();
+                   }
+                });
+            });
+            
+            function alertCampoVacion() {
+                alert("Este campo debe contener datos.")
+            }
+            
+            function alertExito() {
+                alert("Su operacion ha sido satisfactoria");
+            }
         });
         </script>
     </head>

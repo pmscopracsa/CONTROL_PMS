@@ -101,10 +101,17 @@ input[type="text"]:focus:hover {
 }
 
 .delRow {
-    background-image: url('../img/delete.gif');
+    background-image: url('../img/edit-delete.png');
     background-repeat: no-repeat;
     border: none;
-    width: 12px;
-    height: 12px;
+    width: 16px;
+    height: 16px;
+}
+.editRow {
+    background-image: url('../img/edit-edit.png');
+    background-repeat: no-repeat;
+    border: none;
+    width: 16px;
+    height: 16px;
 }
 

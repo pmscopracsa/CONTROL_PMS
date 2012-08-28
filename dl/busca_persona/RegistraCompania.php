@@ -280,6 +280,7 @@ class RegistraCompania
                 array_push($companiadatos,$res['ccobservacion'] == NULL ? "" : $res['ccobservacion']);
                 array_push($companiadatos,$res['ccemail'] == NULL ? "" : $res['ccemail']);
                 array_push($companiadatos,$res['ccweb'] == NULL ? "" : $res['ccweb']);
+                array_push($companiadatos,$res['enombre'] == NULL ? "" : $res['enombre']);
                 array_push($companiadatos,$res['tcdescripcion'] == NULL ? "" : $res['tcdescripcion']);
                 array_push($companiadatos,$res['vedescripcion'] == NULL ? "" : $res['vedescripcion']);
             }
