@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 25, 2012 at 01:26 AM
+-- Generation Time: Aug 29, 2012 at 01:19 AM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -149,12 +149,12 @@ CREATE TABLE IF NOT EXISTS `tb_companiacontacto` (
 --
 
 INSERT INTO `tb_companiacontacto` (`id`, `descripcion`, `ruc`, `nombrecomercial`, `partidaregistral`, `actividadprincipal`, `tb_tipocompania_id`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_empresa_id`) VALUES
-(1, 'AA SIN COMPAÑÍA', '00000000020', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 3, 1),
+(1, 'AA SIN COMPAÑÍA', '00000000020', NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, 3, 1),
 (2, 'ARTURO LIÑAN ZARATE', '10090945225', NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, 3, 1),
 (3, 'ANA MARIA NIELSEN MENACHO', '10100034102', NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, 3, 1),
 (4, 'BANCO FINANCIERO', '20100105862', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 1, 1),
 (5, 'BANCO CONTINENTAL', '20100130204', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 3, 1),
-(6, 'COPRACSA AIO', '20388197804', 'COPRACSA AIO', '12345', 'Ac', 1, '456', 'Sin onbs', 'copracsa@copracsa.com', 'www.copracsa.com', 3, 1),
+(6, 'COPRACSA AIO', '20388197804', 'COPRACSA AIO', '777', 'Actividad', 2, '789', 'Sin onbs', 'copracsa@copracsa.com', 'www.copracsa.com', 3, 1),
 (7, 'AIS PERU', '20390680016', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 3, 1),
 (8, 'BANCO DE LA NACION', '23456789', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 3, 1),
 (9, 'DRYWALLTEC SUPPLY SAC', '20375074070', NULL, NULL, NULL, 1, NULL, NULL, 'GMOYA@DRYWALLTEC.COM.PE', NULL, 3, 1),
@@ -6448,7 +6448,7 @@ CREATE TABLE IF NOT EXISTS `tb_direccioncompaniacontacto` (
   KEY `tb_companiacontacto_id` (`tb_companiacontacto_id`),
   KEY `tb_distrito_id` (`tb_distrito_id`),
   KEY `tb_tipodireccion_id` (`tb_tipodireccion_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Direccion de la compania contacto' AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Direccion de la compania contacto' AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `tb_direccioncompaniacontacto`
@@ -6459,7 +6459,9 @@ INSERT INTO `tb_direccioncompaniacontacto` (`id`, `direccion`, `tb_pais_id`, `tb
 (2, '1', 1, 1, 1724, 1, 1),
 (3, 'qqqqq', 177, 2911, 1723, 2, 1240),
 (4, 'uuu', 177, 2911, 1733, 6, 1240),
-(5, 'alvacete', 177, 2911, 1734, 6, 1240);
+(5, 'alvacete', 177, 2911, 1734, 6, 1240),
+(6, 'Qaz', 177, 2911, 6, 3, 1240),
+(7, 'Another', 177, 2911, 6, 3, 1240);
 
 -- --------------------------------------------------------
 
@@ -8758,7 +8760,7 @@ CREATE TABLE IF NOT EXISTS `tb_faseventa` (
   `total` decimal(8,2) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_faseventa_tb_seccionventa1` (`tb_seccionventa_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=965 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -8820,9 +8822,7 @@ CREATE TABLE IF NOT EXISTS `tb_giro` (
 --
 
 INSERT INTO `tb_giro` (`id`, `descripcion`, `tb_compania_id`) VALUES
-(3, 'giro 1', 6),
-(4, 'primer giro', 6),
-(5, 'segundo giro', 6),
+(3, 'tercer giro', 6),
 (6, 'primer giro', 1729),
 (7, 'segundo giro', 1729),
 (8, 'primer giro', 1730),
@@ -9154,7 +9154,7 @@ CREATE TABLE IF NOT EXISTS `tb_opcionestop` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='opciones para aprobacion' AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='opciones para aprobacion' AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `tb_opcionestop`
@@ -9702,7 +9702,7 @@ CREATE TABLE IF NOT EXISTS `tb_partidaventa` (
   `tb_faseventa_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_partidaventa_tb_faseventa1` (`tb_faseventa_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1131 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -12194,7 +12194,8 @@ INSERT INTO `tb_representante` (`tb_companiacontacto_id`, `tb_personacontacto_id
 (1731, 632),
 (1733, 1381),
 (1733, 970),
-(1734, 634);
+(1734, 634),
+(6, 634);
 
 -- --------------------------------------------------------
 
@@ -13188,7 +13189,7 @@ CREATE TABLE IF NOT EXISTS `tb_seccionventa` (
   `total` decimal(8,2) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_seccionventa_tb_obra1` (`tb_obra_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=219 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -13209,7 +13210,8 @@ CREATE TABLE IF NOT EXISTS `tb_session` (
 --
 
 INSERT INTO `tb_session` (`id_empresa`, `id_usuario`, `fecha`, `directorio`, `obra`) VALUES
-(1, 1, '2012-08-16 11:54:08', 1, 2);
+(1, 1, '2012-08-16 11:54:08', 1, 2),
+(1, 1, '2012-08-27 09:15:24', 8, 13);
 
 -- --------------------------------------------------------
 
@@ -13223,7 +13225,7 @@ CREATE TABLE IF NOT EXISTS `tb_telefonofijocompania` (
   `tb_companiacontacto_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_telefonofijocompania_tb_companiacontacto1` (`tb_companiacontacto_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `tb_telefonofijocompania`
@@ -13237,7 +13239,8 @@ INSERT INTO `tb_telefonofijocompania` (`id`, `numero`, `tb_companiacontacto_id`)
 (5, '112', 1730),
 (6, '111', 1731),
 (7, '111', 1733),
-(8, '111', 1734);
+(8, '111', 1734),
+(9, '777', 6);
 
 -- --------------------------------------------------------
 
@@ -14045,7 +14048,7 @@ CREATE TABLE IF NOT EXISTS `tb_telefonomovilcompania` (
   `tb_companiacontacto_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_telefonomovilcompania_tb_companiacontacto1` (`tb_companiacontacto_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `tb_telefonomovilcompania`
@@ -14059,7 +14062,8 @@ INSERT INTO `tb_telefonomovilcompania` (`id`, `numero`, `tb_companiacontacto_id`
 (5, '5563', 1730),
 (6, '5563', 1731),
 (7, '4536453', 1731),
-(8, '5563', 1733);
+(8, '5563', 1733),
+(10, '9658', 6);
 
 -- --------------------------------------------------------
 
@@ -14445,7 +14449,7 @@ CREATE TABLE IF NOT EXISTS `tb_telefononextelcompania` (
   `tb_companiacontacto_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_telefononextelcompania_tb_companiacontacto1` (`tb_companiacontacto_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `tb_telefononextelcompania`
@@ -14463,7 +14467,8 @@ INSERT INTO `tb_telefononextelcompania` (`id`, `numero`, `tb_companiacontacto_id
 (9, '789*456', 1731),
 (10, '1211*777', 1731),
 (11, '789*456', 1733),
-(12, '1211*777', 1733);
+(12, '1211*777', 1733),
+(13, '123*9877', 6);
 
 -- --------------------------------------------------------
 
@@ -14895,7 +14900,7 @@ CREATE TABLE IF NOT EXISTS `tb_tipodecambio` (
   PRIMARY KEY (`id`),
   KEY `fk_tb_tipodecambio_tb_moneda1` (`tb_moneda_id`),
   KEY `fk_tb_tipodecambio_tb_empresa1` (`tb_empresa_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `tb_tipodecambio`
@@ -14911,7 +14916,9 @@ INSERT INTO `tb_tipodecambio` (`id`, `fecha`, `sunatventa`, `sunatcompra`, `tb_m
 (21, '2012-08-20', 2.613, 2.612, 1, NULL, 1),
 (22, '2012-08-22', 2.612, 2.611, 1, NULL, 1),
 (23, '2012-08-23', 2.613, 2.613, 1, NULL, 1),
-(24, '2012-08-24', 2.615, 2.614, 1, NULL, 1);
+(24, '2012-08-24', 2.615, 2.614, 1, NULL, 1),
+(25, '2012-08-27', 2.614, 2.613, 1, NULL, 1),
+(26, '2012-08-28', 2.613, 2.611, 1, NULL, 1);
 
 -- --------------------------------------------------------
 
