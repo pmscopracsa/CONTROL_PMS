@@ -80,7 +80,11 @@ try{
         $edita_compania->setAActualizar($_REQUEST['parameter']);
         $edita_compania->setValue($_REQUEST['fax']);
         $edita_compania->actualizarObjetoCompania($cn);
-    }
+    } elseif ($_REQUEST['parameter'] == "viaenvio") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['viaenvio_id']);
+        $edita_compania->actualizarObjetoCompania($cn);
+    } 
 }catch(Exception $ex) {
     echo 'Error: '.$ex->getMessage();
 }

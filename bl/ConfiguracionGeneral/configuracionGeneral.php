@@ -48,7 +48,9 @@ elseif ($_REQUEST['parametro'] == "salvardirectorioobra") {
     // SESSION
     $session->set_id_empresa($_REQUEST['id_empresa']);
     $session->set_id_usuario($_REQUEST['id_usuario']);
-    $session->set_id_rol($_REQUEST['rol_usuario']);
+    $session->set_directorio($_REQUEST['id_directorio']);
+    $session->set_obra($_REQUEST['id_obra']);
+    //$session->set_id_rol($_REQUEST['rol_usuario']);
     $session->guardarDirectorioObraSeteoTrabajo();
 } elseif ($_REQUEST['parametro'] == "saveCurrentChange") {
     $tipocambio->set_sunatventa($_REQUEST['ventasunat']);

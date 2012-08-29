@@ -354,7 +354,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
             </tr>
             <tr>
                 <td>
-                    <select name="viaEnvioseleccionada" id="viaenvioid" >
+                    <select name="viaEnvioseleccionada" id="viaenvioid" style="display:none">
                         <option value="0">Seleccione via de Envio</option>
                     </select>
                 </td>

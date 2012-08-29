@@ -195,7 +195,7 @@ if(@$_SESSION['msg'])
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>- CONTROL PMS -</title>
+<title>CONTROL PMS</title>
     
     <link rel="stylesheet" type="text/css" href="index_box/index.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="index_box/login_panel/css/slide.css" media="screen" />

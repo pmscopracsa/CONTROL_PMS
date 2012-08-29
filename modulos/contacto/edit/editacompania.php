@@ -486,6 +486,37 @@ session_start();
                     }
                 }
             });
+            /** VIA DE ENVIO */
+            // EDITAR VIA DE ENVIO
+            $("#btnEditarViaEnvio").live("click", function() {
+                if ($("#btnEditarViaEnvio").val() === "Editar"){
+                    $("#viaenvioid").fadeIn("slow", function(){
+                        $("#btnEditarViaEnvio").attr("value","Guardar");
+                    });
+                } else {
+                    if ($("#viaenvioid").val() == 0) {
+                        alert("Debe escoger una opcion");
+                    } else {
+                        $("#viaenvioid").fadeOut("slow", function(){
+                        $("#btnEditarViaEnvio").attr("value","Editar");
+                        $.ajax({
+                            type:"POST",
+                            data:{
+                                viaenvio_id:$("#viaenvioid").val(),
+                                idEmpresa:<?=$_SESSION['id']?>,
+                                idCompania:$("#idCompania").val()
+                            },
+                            url:"../../../bl/editaCompania_BL.php?parameter=viaenvio",
+                            success:function() {
+                                $("#txtviaenvio").val($("#viaenvioid option:selected").text());
+                                alert("Se ha actualizado correctamente su peticion");
+                            }
+                            });
+                        });
+                    }
+                    
+                }
+            });
             
             function alertCampoVacion() {
                 alert("Este campo debe contener datos.")
