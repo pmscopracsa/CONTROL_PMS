@@ -17,9 +17,6 @@ try{
         $edita_compania->setAActualizar($_REQUEST['parameter']);
         $edita_compania->setValue($_REQUEST['idTipoCompania']);
         $edita_compania->actualizarObjetoCompania($cn);
-    } elseif ($_REQUEST['parameter'] == "viaenvio") {
-        $edita_compania->setAActualizar($_REQUEST['parameter']);
-        $edita_compania->actualizarObjetoCompania($cn);
     } elseif ($_REQUEST['parameter'] == "ruc") {
         $edita_compania->setAActualizar($_REQUEST['parameter']);
         $edita_compania->setValue($_REQUEST['ruc']);
@@ -84,7 +81,21 @@ try{
         $edita_compania->setAActualizar($_REQUEST['parameter']);
         $edita_compania->setValue($_REQUEST['viaenvio_id']);
         $edita_compania->actualizarObjetoCompania($cn);
-    } 
+    } elseif ($_REQUEST['parameter'] == "especialidad_actualiza") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['id_especialidad_new']);
+        $edita_compania->setFk($_REQUEST['id_especialidad_old']);
+        $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == "especialidad_elimina") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['id_especialidad_old']);
+        $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == "representante_actualiza") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['id_representante_new']);
+        $edita_compania->setFk($_REQUEST['id_representante_old']);
+        $edita_compania->actualizarObjetoCompania($cn);
+    }
 }catch(Exception $ex) {
     echo 'Error: '.$ex->getMessage();
 }

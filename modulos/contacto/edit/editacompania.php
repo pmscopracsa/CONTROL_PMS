@@ -52,52 +52,48 @@ session_start();
             
             // DETECTAR CLICK PARA REALIZAR BUSQUEDA
             $("#btnBuscar").click(function() {
-                if ($(".nombre_empresa").val().length < 0 || $(".ruc_empresa").val().length < 0) {
-                    $("#divmensajebusqueda").fadeIn("slow");
-                    $("#divmensajebusqueda").fadeOut("slow");
-                    
-                } else {
                     if (tipobusqueda == "ruc") //BUSQUEDA EN CASO DE QUE SEA POR RUC
-                    {   
-                        $.ajax({
-                            type:"GET",
-                            url:"../../../bl/Contacto/actualizaCompania.php?opcion=ruc",
-                            data:{ruc:$(".ruc_empresa").val()},
-                            dataType:"html",
-                            success:function(data) {
-                                toHtml(data)
-                            }
-                        });
+                    {
+                        if ($(".ruc_empresa").attr("value") === "") {
+                            $("#divmensajebusqueda").fadeIn("slow");
+                        }
+                        else {
+                            $("#divmensajebusqueda").fadeOut("slow");
+                            $.ajax({
+                                type:"GET",
+                                url:"../../../bl/Contacto/actualizaCompania.php?opcion=ruc",
+                                data:{ruc:$(".ruc_empresa").val()},
+                                dataType:"html",
+                                success:function(data) {
+                                    toHtml(data)
+                                }
+                            });
+                        }
                     }
                     else // BUSQUEDA EN CASO DE QUE SEA POR NOMBRE
                     {
-                        $.ajax({
-                            type:"GET",
-                            url:"../../../bl/Contacto/actualizaCompania.php?opcion=nombre",
-                            data:{nombre:$(".nombre_empresa").val()},
-                            dataType:"html",
-                            success:function(data) {
-                                toHtml(data);
-                            }
-                        });
+                        if($(".nombre_empresa").attr("value") === "") {
+                            $("#divmensajebusqueda").fadeIn("slow");
+                        } else {
+                            $("#divmensajebusqueda").fadeOut("slow");
+                            $.ajax({
+                                type:"GET",
+                                url:"../../../bl/Contacto/actualizaCompania.php?opcion=nombre",
+                                data:{nombre:$(".nombre_empresa").val()},
+                                dataType:"html",
+                                success:function(data) {
+                                    toHtml(data);
+                                }
+                            });
+                        }
                     }    
-                }
             });
             
             function toHtml(data)
             {
                 $("#tmp").html(data);
             }
-            
-            /**
-             * detectar click 
-             */
-            $("#actualizar").live("click", function(e) {
-                alert("Actualizar");
-                
-            })
 
-            
             /**
              * AGREGAR NUEVO GIRO
              */
@@ -486,6 +482,53 @@ session_start();
                     }
                 }
             });
+            
+            /** ESPECIALIDAD */
+            // EDITAR ESPECIALIDAD
+            $("#btnEditarEspecialidades").live("click",function(){
+                $("#especialidadid").fadeIn("slow");
+                if ($("#btnEditarEspecialidades").val() === "Editar") {
+                    $("#txtEspecialidad").removeAttr("READONLY");
+                    $("#btnEditarEspecialidades").attr("value","Guardar");
+                } else {
+                    if ($("#especialidadid").attr("value") == 0) {
+                        alertCampoVacion();
+                    } else {
+                        $.ajax({
+                            type:"POST",
+                            data:{
+                                id_especialidad_new:$("#especialidadid").attr("value"),
+                                id_especialidad_old:$(this).parent().parent().children().children('#idEspecialidad').attr("value"),
+                                idCompania:$("#idCompania").val(),
+                                idEmpresa:<?=$_SESSION['id']?>
+                            },
+                            url:"../../../bl/editaCompania_BL.php?parameter=especialidad_actualiza",
+                            success:function() {
+                                alertExito();
+                                $("#txtEspecialidad").val($("#especialidadid option:selected").text());
+                                $("#especialidadid").fadeOut("slow");
+                            }
+                        });
+                    }
+                }
+            });
+            // ELIMINAR ESPECIALIDAD
+            $("#btnEliminarEspecialidad").live("click",function() {
+                $(this).parent().parent().remove();
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        id_especialidad_old:$(this).parent().parent().children().children('#idEspecialidad').attr("value"),
+                        idCompania:$("#idCompania").val(),
+                        idEmpresa:<?=$_SESSION['id']?>
+                    },
+                    url:"../../../bl/editaCompania_BL.php?parameter=especialidad_elimina",
+                    success:function() {
+                        alertExito();
+                    }
+                });
+            });
+            
             /** VIA DE ENVIO */
             // EDITAR VIA DE ENVIO
             $("#btnEditarViaEnvio").live("click", function() {
@@ -514,15 +557,41 @@ session_start();
                             });
                         });
                     }
-                    
+                }
+            });
+
+            /** REPRESENTANTES */
+            //EDITAR REPRESENTANTE
+            $("#btnEditarRepresentante").live("click",function() {
+                if ($("#btnEditarRepresentante").attr("value") === "Editar") {
+                    $("#representanteid").fadeIn("slow", function(){
+                        $("#btnEditarRepresentante").attr("value","Guardar");
+                    });
+                } else {
+                    if ($("#representanteid").attr("value") == 0) {
+                        alert("Debe escoger un representante.");
+                    } else {
+                        $("#representanteid").fadeOut("slow", function() {
+                            $("#btnEditarRepresentante").attr("value","Editar");
+                            $.ajax({
+                                type:"POST",
+                                data:{
+                                    id_representante_new:$("#representanteid").attr("value"),
+                                    id_representante_old:$(this).parent().parent().children().children('#idRepresentante').attr("value"),
+                                    idCompania:$("#idCompania").val(),
+                                    idEmpresa:<?=$_SESSION['id']?>
+                                },
+                                url:"../../../bl/editaCompania_BL.php?parameter=representante_actualiza",
+                                success:function() {
+                                    alertExito();
+                                }
+                            })
+                        });
+                    }
                 }
             });
             
-            /** VIA DE ENVIO */
-            // EDITAR
-            $("#btnEditarViaEnvio").live("click",function() {
-            
-            })
+            // ELIMINAR REPRESENTANTE
             
             function alertCampoVacion() {
                 alert("Este campo debe contener datos.")
@@ -565,7 +634,7 @@ session_start();
             </div>
             
                 <div id="divmensajebusqueda" style="display: none">
-                    No ha especificado criterio alguno para su búsqueda. Rellene un campo e intente de nuevo.
+                    <p style="color: red">No ha especificado criterio alguno para su búsqueda. Rellene un campo e intente de nuevo.</p>
                 </div>
             <hr />
             <div id="tmp"></div>

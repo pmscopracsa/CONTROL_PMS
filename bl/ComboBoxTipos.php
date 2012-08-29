@@ -162,4 +162,44 @@ class ComboBoxTipos extends ComboBoxSql
             return FALSE;
         }
     }
+    
+    public function cargarEspecialidades()
+    {
+        $consulta = parent::__construct();
+        $consulta = parent::consulta("SELECT id, descripcion FROM tb_especialidadcompania");
+        $total_registros = parent::num_rows($consulta);
+        
+        if ($total_registros > 0) {
+            $especialidades = array();
+            
+            while($especialidad = parent::fetch_assoc($consulta)) {
+                $id = $especialidad['id'];
+                $descripcion = $especialidad['descripcion'];
+                $especialidades[$id] = $descripcion;
+            }
+            return $especialidades;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    public function cargarRepresentantes()
+    {
+        $consulta = parent::__construct();
+        $consulta = parent::consulta("SELECT id, nombre FROM tb_personacontacto");
+        $total_registros = parent::num_rows($consulta);
+        
+        if ($total_registros > 0) {
+            $representantes = array();
+            
+            while ($representante = parent::fetch_assoc($consulta)) {
+                $id = $representante['id'];
+                $descripcion = $representante['nombre'];
+                $representantes[$id] = $descripcion;
+            }
+            return $representantes;
+        } else {
+            return FALSE;
+        }
+    }
 }

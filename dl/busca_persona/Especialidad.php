@@ -27,9 +27,8 @@ class Especialidad
             
             $especialidades = array();
             while ($res = mysql_fetch_array($rs,MYSQL_ASSOC)) {
+                array_push($especialidades, $res['ecid']);
                 array_push($especialidades, $res['edescripcion']);
-                /*array_push($especialidades, $res['ccid']);
-                array_push($especialidades, $res['ecid']);*/
             }
             return $especialidades;
         } catch(Exception $ex) {

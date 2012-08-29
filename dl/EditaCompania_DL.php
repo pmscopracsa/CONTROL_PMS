@@ -111,7 +111,23 @@ class EditaCompania
                 case 'viaenvio':
                     $query = "UPDATE tb_companiacontacto SET tb_viaenvio_id = $this->value WHERE id = $this->idCompania AND tb_empresa_id = $this->idEmpresa";
                     $rs = mysql_query($query, $cn);
-                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    if (!$rs)                        throw new Exception("Error en la consulta via envio: ".  mysql_error());
+                    break;
+                case 'especialidad_actualiza':
+                    $query = "UPDATE tb_rubro SET tb_especialidadcompania_id = $this->value WHERE tb_companiacontacto_id = $this->idCompania AND tb_especialidadcompania_id = $this->fk";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;
+                case 'especialidad_elimina':
+                    $query = "DELETE FROM tb_rubro WHERE tb_companiacontacto_id = $this->idCompania AND tb_especialidadcompania_id = $this->value";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_elimina: ".  mysql_error());
+                    break;
+                case 'representante_actualiza':
+                    $query = "UPDATE tb_representante SET tb_personacontacto_id = $this->value WHERE tb_companiacontacto_id = $this->idCompania AND tb_personacontacto_id = $this->fk";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;
                 default:
                     break;
             }

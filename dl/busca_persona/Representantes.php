@@ -29,9 +29,8 @@ class Representantes
             
             $representantes = array();
             while ($res = mysql_fetch_array($rs,MYSQL_ASSOC)) {
+                array_push($representantes, $res['personaId']);
                 array_push($representantes, $res['nombre']);
-                /*array_push($representantes, $res['companiaId']);
-                array_push($representantes, $res['personaId']);*/
             }
             return $representantes;
         } catch(Exception $ex) {

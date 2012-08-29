@@ -127,7 +127,25 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                 success:function(data) {
                     $("#viaenvioid").append(data);
                 }
-            })
+            });
+            
+            // AGREGAR ESPECIALIDAD
+            $.ajax({
+                dataType:"html",
+                url:"../../../bl/Contacto/cmb_cargarEspecialidadCompania.php",
+                success:function(data){
+                    $("#especialidadid").append(data);
+                }
+            });
+            
+            // AGREGAR REPRESENTANTE
+            $.ajax({
+                dataType:"html",
+                url:"../../../bl/Contacto/cmb_cargarRepresentantes.php",
+                success:function(data){
+                    $("#representanteid").append(data);
+                }
+            });
     });
     </script>
     
@@ -308,14 +326,23 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                         <th colspan="2">
                     </tr>';
       for ($i = 0; $i < count($especialidades_array);$i++) {
-          echo'<tr id="tr_tfijo'.$i.'"><td>
-              <input type="text" size="20" name="tfijo" value="'.
-                  $especialidades_array[$i]
-                  .'" READONLY/>
-                 <td><input type="button" class="delRow" value=" "/></td>
-                 <td><input type="button" value="Editar" id="btnEditarEspecialidades"/>
-                 </td>
+          if ($i % 2 != 0) {
+              echo'<tr id="tr_tfijo'.$i.'">
+                  <td>
+                    <input id="txtEspecialidad" type="text" size="35" name="tfijo" value="'.$especialidades_array[$i].'" READONLY/>
+                    <input id="idEspecialidad" type="hidden" value="'.$especialidades_array[$i-1].'" />     
+                  <td><input type="button" class="delRow" id="btnEliminarEspecialidad"/></td>
+                  <td><input type="button" value="Editar" id="btnEditarEspecialidades"/></td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <select name="especialidad" id="especialidadid" style="display:none">
+                            <option value="0">Seleccione especialidad</option>
+                        </select>
+                    </td>
                  </tr>';    
+                 continue;
+          }
       }
       echo
                     '</table>
@@ -330,13 +357,24 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                         <th colspan="2">
                     </tr>';
       for ($i = 0; $i < count($representantes_array);$i++) {
-          echo'<tr id="tr_tfijo'.$i.'"><td>
-              <input type="text" size="20" name="tfijo" value="'.
-                  $representantes_array[$i]
-                  .'" READONLY/>
-                 <td><input type="button" class="delRow" value=" "/></td>
-                 <td><input type="button" value="Editar" id="btnEditarRepresentante"/>
-                 </td></tr>';    
+          if ($i % 2 != 0) {
+            echo'<tr id="tr_rep'.$i.'">
+                <td>
+                <input type="text" size="20" name="tfijo" value="'.$representantes_array[$i].'" READONLY/>
+                    <input type="hidden" id="idRepresentante" value="'.$representantes_array[$i-1].'" />
+                    <td><input type="button" class="delRow" value=" "/></td>
+                    <td><input type="button" value="Editar" id="btnEditarRepresentante"/>
+                    </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select name="especialidad" id="representanteid" style="display:none">
+                                <option value="0">Seleccione un representante</option>
+                            </select>
+                        </td>
+                    </tr>';    
+            continue;
+          }
       }
       echo
                     '</table>
