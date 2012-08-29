@@ -487,6 +487,12 @@ session_start();
                 }
             });
             
+            /** VIA DE ENVIO */
+            // EDITAR
+            $("#btnEditarViaEnvio").live("click",function() {
+            
+            })
+            
             function alertCampoVacion() {
                 alert("Este campo debe contener datos.")
             }
