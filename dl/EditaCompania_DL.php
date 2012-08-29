@@ -108,6 +108,10 @@ class EditaCompania
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
                     break;
+                case 'viaenvio':
+                    $query = "UPDATE tb_companiacontacto SET tb_viaenvio_id = $this->value WHERE id = $this->idCompania AND tb_empresa_id = $this->idEmpresa";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
                 default:
                     break;
             }

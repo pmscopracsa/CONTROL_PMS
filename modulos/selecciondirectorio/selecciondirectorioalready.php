@@ -176,6 +176,7 @@ $obra_id = 0;
          * SE HA SALVADO EN LA DB
          */
         $("#setuped").click(function() {
+            
             $.ajax({
                 type:"POST",
                 url:"../../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=salvardirectorioobra",
@@ -188,6 +189,11 @@ $obra_id = 0;
                 success:function(){
                     linkDestino = "../../index_usuario.php?proyecto="+$("#idtxtidobra").val()+"&codigObra="+$("#txtcodigoObra_").val()+"&descObra="+$("#txtnombreObra_").val();
                     $("body").fadeOut(2000, redireccionaEditar(linkDestino));
+                },
+                error:function(jqXHR, exception){
+                    if (jqXHR.status === 0) alert("No se ha conectado");
+                    else if (jqXHR.status == 404) alert("La pagina no existe 404");
+                    else if (jqXHR.status == 500) alert("Error interno del servidor 500");
                 }
             });
         });
