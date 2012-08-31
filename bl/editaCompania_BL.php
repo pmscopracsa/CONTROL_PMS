@@ -95,6 +95,10 @@ try{
         $edita_compania->setValue($_REQUEST['id_representante_new']);
         $edita_compania->setFk($_REQUEST['id_representante_old']);
         $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == "giro_nuevo") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['val_nuevogiro']);
+        $edita_compania->actualizarObjetoCompania($cn);
     }
 }catch(Exception $ex) {
     echo 'Error: '.$ex->getMessage();

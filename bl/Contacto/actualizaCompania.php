@@ -198,8 +198,9 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                 $giros[$i]
                 .'" READONLY/></td>
                 <input id="idGiro" type="hidden" value="'.$giros[$i-1].'" />    
+                <td><input type="button" value="Editar" id="btnEditarGiro"/></td>    
                 <td><input type="button" class="delRow" id="btnEliminarGiro"/></td>
-                <td><input type="button" value="Editar" id="btnEditarGiro"/></td>
+                <td><input type="button" class="addRow" id="btnAgregarGiro"/></td>
                 </tr>';
               continue;
           }

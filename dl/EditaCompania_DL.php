@@ -128,6 +128,11 @@ class EditaCompania
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
                     break;
+                case 'giro_nuevo' :
+                    $query = "INSERT INTO tb_giro(id,descripcion,tb_compania_id)VALUES(NULL,'$this->value',$this->idCompania)";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;
                 default:
                     break;
             }

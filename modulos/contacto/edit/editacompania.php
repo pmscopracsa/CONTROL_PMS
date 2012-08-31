@@ -94,18 +94,7 @@ session_start();
                 $("#tmp").html(data);
             }
 
-            /**
-             * AGREGAR NUEVO GIRO
-             */
-            $(".addRow").live("click",function() {
-                alert($(this).parent().parent().html());
-                var giro = '<tr id="tr_giro"><td>'+
-                            '<input type="text" size="30" name="giro" value="" />'+
-                            '<td><input type="button" class="addRow" value="+" /></td>'+
-                            '<td><input type="button" class="delRow" value="-" /></td>'+
-                            '</td></tr>';
-                $("#tr_giro").after(giro);        
-            });
+
             //DETECTAR INTENCION DE CAMBIO DE TIPO DE COMPANIA
             $("#btnEditarTipoCompania").live("click", function() {
                 if ($("#btnEditarTipoCompania").val() === "Editar"){
@@ -293,6 +282,31 @@ session_start();
                        alertExito();
                    }
                 });
+            });
+            // CREAR NUEVO GIRO
+            $(".addRow").live("click",function() {
+                var giro = '<tr id="tr_giro"><td>'+
+                            '<input type="text" size="30" id="txtGiroNuevo" name="giro" value="" />'+
+                            '<td><input type="button" value="Guardar" id="btnNuevoGiroGiro"/></td>'+
+                            '<td><input type="button" class="delRow" id="btnEliminarGiro"/></td>'+
+                            '<td><input type="button" class="addRow" /></td>'+
+                            '</td></tr>';
+                $("#tr_giro").after(giro);        
+            });
+            //GUARDAR NUEVO GIRO
+            $("#btnNuevoGiroGiro").live("click",function() {
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        val_nuevogiro:$(this).parent().parent().children().children("#txtGiroNuevo").attr("value"),
+                        idCompania:$("#idCompania").val(),
+                        idEmpresa:<?=$_SESSION['id']?>
+                    },
+                    url:"../../../bl/editaCompania_BL.php?parameter=giro_nuevo",
+                    success:function() {
+                        alertExito()
+                    }
+                })
             });
             
             /** ACTIVIDAD PRINCIPAL */
