@@ -133,8 +133,24 @@ class EditaCompania
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
                     break;
+                case 'tf_nuevo' :
+                    $query = "INSERT INTO tb_telefonofijocompania(id,numero,tb_companiacontacto_id)VALUES(NULL,'$this->value',$this->idCompania)";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;
+                case 'tm_nuevo' :    
+                    $query = "INSERT INTO tb_telefonomovilcompania(id,numero,tb_companiacontacto_id)VALUES(NULL,'$this->value',$this->idCompania)";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;
+                case 'tn_nuevo' :
+                    $query = "INSERT INTO tb_telefononextelcompania(id,numero,tb_companiacontacto_id)VALUES(NULL,'$this->value',$this->idCompania)";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;
                 default:
                     break;
+                    
             }
         } catch(Exception $ex) {
             echo 'Error: '.$ex->getMessage();

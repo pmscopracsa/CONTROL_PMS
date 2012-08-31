@@ -99,6 +99,18 @@ try{
         $edita_compania->setAActualizar($_REQUEST['parameter']);
         $edita_compania->setValue($_REQUEST['val_nuevogiro']);
         $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == "tf_nuevo") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['val_nuevotf']);
+        $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == "tm_nuevo") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['val_nuevotm']);
+        $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == "tn_nuevo") {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['val_nuevotn']);
+        $edita_compania->actualizarObjetoCompania($cn);
     }
 }catch(Exception $ex) {
     echo 'Error: '.$ex->getMessage();

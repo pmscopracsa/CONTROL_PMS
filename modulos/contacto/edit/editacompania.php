@@ -32,6 +32,31 @@ session_start();
                 matchContains:true,
                 selectFirst:false
             });
+            // RELOAD WITH NEW CHANGES
+            function reload(){
+                if ($('.ruc_empresa').attr("value") != "") {
+                    $.ajax({
+                        type:"GET",
+                        url:"../../../bl/Contacto/actualizaCompania.php?opcion=ruc",
+                        data:{ruc:$(".ruc_empresa").val()},
+                        dataType:"html",
+                        success:function(data) {
+                            toHtml(data)
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        type:"GET",
+                        url:"../../../bl/Contacto/actualizaCompania.php?opcion=nombre",
+                        data:{nombre:$(".nombre_empresa").val()},
+                        dataType:"html",
+                        success:function(data) {
+                            toHtml(data);
+                        }
+                    });
+                }
+            }
+            
             // DETECTAR EL CAMBIO EN EL RADIO BUTTON DEL CRITERIO DE BUSQUEDA
             $("input:radio[name=criteriobusqueda]").click(function() {
                 tipobusqueda = $(this).val();
@@ -283,13 +308,16 @@ session_start();
                    }
                 });
             });
+            //CANCELAR
+            $("#btnCancelar").live("click",function() {
+                $(this).parent().parent().remove();
+            });
             // CREAR NUEVO GIRO
-            $(".addRow").live("click",function() {
+            $("#btnAgregarGiro").live("click",function() {
                 var giro = '<tr id="tr_giro"><td>'+
                             '<input type="text" size="30" id="txtGiroNuevo" name="giro" value="" />'+
                             '<td><input type="button" value="Guardar" id="btnNuevoGiroGiro"/></td>'+
-                            '<td><input type="button" class="delRow" id="btnEliminarGiro"/></td>'+
-                            '<td><input type="button" class="addRow" /></td>'+
+                            '<td><input type="button" value="Cancelar" id="btnCancelar"/></td>'+
                             '</td></tr>';
                 $("#tr_giro").after(giro);        
             });
@@ -304,9 +332,9 @@ session_start();
                     },
                     url:"../../../bl/editaCompania_BL.php?parameter=giro_nuevo",
                     success:function() {
-                        alertExito()
+                        reload();
                     }
-                })
+                });
             });
             
             /** ACTIVIDAD PRINCIPAL */
@@ -379,6 +407,30 @@ session_start();
                     }
                 });
             });
+            //CREAR NUEVO TELEFONO FIJO
+            $("#btnAgregarTF").live("click",function() {
+                var giro = '<tr id="tr_tfijo"><td>'+
+                            '<input type="text" size="30" id="txtTFNuevo" name="tf" value="" />'+
+                            '<td><input type="button" value="Guardar" id="btnNuevoTF"/></td>'+
+                            '<td><input type="button" value="Cancelar" id="btnCancelar"/></td>'+
+                            '</td></tr>';
+                $("#tr_tfijo").after(giro);        
+            });
+            // GUARDAR NUEVO TELEFONO FIJO
+            $("#btnNuevoTF").live("click",function() {
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        val_nuevotf:$(this).parent().parent().children().children("#txtTFNuevo").attr("value"),
+                        idCompania:$("#idCompania").val(),
+                        idEmpresa:<?=$_SESSION['id']?>
+                    },
+                    url:"../../../bl/editaCompania_BL.php?parameter=tf_nuevo",
+                    success:function() {
+                        reload();
+                    }
+                });
+            });
             
             /** TELEFONO MOBILE */
             // EDITAR T MOBILE
@@ -421,6 +473,30 @@ session_start();
                     url:"../../../bl/editaCompania_BL.php?parameter=tm_elimina",
                     success:function() {
                         alertExito();
+                    }
+                });
+            });
+            // CREAR NUEVO TM
+            $("#btnAgregarTM").live("click",function() {
+                var giro = '<tr id="tr_tmobile"><td>'+
+                            '<input type="text" size="30" id="txtTMNuevo" name="tf" value="" />'+
+                            '<td><input type="button" value="Guardar" id="btnNuevoTM"/></td>'+
+                            '<td><input type="button" value="Cancelar" id="btnCancelar"/></td>'+
+                            '</td></tr>';
+                $("#tr_tmobile").after(giro);        
+            });
+            // GUARDAR NUEVO TM
+            $("#btnNuevoTM").live("click",function() {
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        val_nuevotm:$(this).parent().parent().children().children("#txtTMNuevo").attr("value"),
+                        idCompania:$("#idCompania").val(),
+                        idEmpresa:<?=$_SESSION['id']?>
+                    },
+                    url:"../../../bl/editaCompania_BL.php?parameter=tm_nuevo",
+                    success:function() {
+                        reload();
                     }
                 });
             });
@@ -467,6 +543,31 @@ session_start();
                     url:"../../../bl/editaCompania_BL.php?parameter=tn_elimina",
                     success:function() {
                         alertExito();
+                    }
+                });
+            });
+            
+            // CREAR NUEVO TN
+            $("#btnAgregarTN").live("click",function() {
+                var giro = '<tr id="tr_tnextel"><td>'+
+                            '<input type="text" size="30" id="txtTNNuevo" name="tf" value="" />'+
+                            '<td><input type="button" value="Guardar" id="btnNuevoTN"/></td>'+
+                            '<td><input type="button" value="Cancelar" id="btnCancelar"/></td>'+
+                            '</td></tr>';
+                $("#tr_tnextel").after(giro);        
+            });
+            // GUARDAR NUEVO TN
+            $("#btnNuevoTN").live("click",function() {
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        val_nuevotn:$(this).parent().parent().children().children("#txtTNNuevo").attr("value"),
+                        idCompania:$("#idCompania").val(),
+                        idEmpresa:<?=$_SESSION['id']?>
+                    },
+                    url:"../../../bl/editaCompania_BL.php?parameter=tn_nuevo",
+                    success:function() {
+                        reload();
                     }
                 });
             });
@@ -606,6 +707,9 @@ session_start();
             });
             
             // ELIMINAR REPRESENTANTE
+            
+            /** CAJAS DE TEXTO */
+            $("#txttipocompania").addclass()
             
             function alertCampoVacion() {
                 alert("Este campo debe contener datos.")
