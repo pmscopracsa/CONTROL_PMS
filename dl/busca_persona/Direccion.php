@@ -30,15 +30,22 @@ class Direccion {
                 throw new Exception("Error al consultar: ".  mysql_error());
             
             $datos = array();
-            
-            while ($res = mysql_fetch_array($rs,MYSQL_ASSOC)) {
-                array_push($datos,$res['direccion']);
+            $i = 0;
+            while ($res = mysql_fetch_assoc($rs)) {
+                /*array_push($datos,$res['direccion']);
                 array_push($datos,$res['pais']);
                 array_push($datos,$res['departamento']);
                 array_push($datos,$res['distrito']);
-                array_push($datos,$res['tipodireccion']);
+                array_push($datos,$res['tipodireccion']);*/
+                $datos[$i]['direccion'] = $res['direccion']; 
+                $datos[$i]['pais'] = $res['pais'];
+                $datos[$i]['departamento'] = $res['departamento'];
+                $datos[$i]['distrito'] = $res['distrito'];
+                $datos[$i]['tipodireccion'] = $res['tipodireccion'];
+                $i++;
             }
-            return $datos;
+            //return $datos;
+            echo json_encode($datos);
             
         } catch(Exception $ex) {
             echo 'Error: '.$ex->getMessage();

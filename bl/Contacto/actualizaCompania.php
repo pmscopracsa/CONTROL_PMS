@@ -68,13 +68,14 @@ if ($_REQUEST['opcion'] == "ruc") {
     $especialidades->set_tb_companiacontacto_ruc($_REQUEST['ruc']);
     $especialidades_array = $especialidades->obtenerEspecialidadesPorCompania();
     
-    $direcciones->set_ruc($_REQUEST['ruc']);
-    $direcciones_array = $direcciones->obtenerDireccionesPorCompania();
+    /*$direcciones->set_ruc($_REQUEST['ruc']);
+    $direcciones_array = $direcciones->obtenerDireccionesPorCompania();*/
     
     $representantes->setRuc($_REQUEST['ruc']);
     $representantes_array = $representantes->obtenerRepresentantesPorCompania();
     
-    toHtml($res,$giros,$telefonosf, $telefonosm, $telefnosn,$especialidades_array,$direcciones_array,$representantes_array);
+    //toHtml($res,$giros,$telefonosf, $telefonosm, $telefnosn,$especialidades_array,$direcciones_array,$representantes_array);
+    toHtml($res,$giros,$telefonosf, $telefonosm, $telefnosn,$especialidades_array,$direcciones_array,$representantes_array,$res[1]);
 }
 elseif ($_REQUEST['opcion'] == "nombre") {
     $rcompania->set_idempresa($_SESSION['id']);
@@ -96,16 +97,17 @@ elseif ($_REQUEST['opcion'] == "nombre") {
     $especialidades->set_tb_companiacontacto_ruc($res[1]);
     $especialidades_array = $especialidades->obtenerEspecialidadesPorCompania();
     
-    $direcciones->set_ruc($res[1]);
-    $direcciones_array = $direcciones->obtenerDireccionesPorCompania();
+    /*$direcciones->set_ruc($res[1]);
+    $direcciones_array = $direcciones->obtenerDireccionesPorCompania();*/
     
     $representantes->setRuc($res[1]);
     $representantes_array = $representantes->obtenerRepresentantesPorCompania();
     
-    toHtml($res,$giros, $telefonosf, $telefonosm, $telefnosn, $especialidades_array, $direcciones_array,$representantes_array);
+    //toHtml($res,$giros, $telefonosf, $telefonosm, $telefnosn, $especialidades_array, $direcciones_array,$representantes_array);
+    toHtml($res,$giros, $telefonosf, $telefonosm, $telefnosn, $especialidades_array, $direcciones_array,$representantes_array,$res[1]);
 }
 
-function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_array, $direcciones_array,$representantes_array) {
+function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_array, $direcciones_array,$representantes_array,$ruc) {
     
     echo 
     '
@@ -144,6 +146,42 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                 url:"../../../bl/Contacto/cmb_cargarRepresentantes.php",
                 success:function(data){
                     $("#representanteid").append(data);
+                }
+            });
+            
+            /** OBTENER PAIS */
+            $.ajax({
+                dataType:"html",
+                url:"../../../bl/Contacto/cargarPaises.php",
+                success:function(data){
+                    $("#paisid").append(data);
+                }
+            });
+
+            /** OBTENER DEPARTAMENTO */
+            $.ajax({
+                dataType:"html",
+                url:"../../../bl/Contacto/cargarDepartamentos.php",
+                success:function(data){
+                    $("#departamentoid").append(data);
+                }
+            });
+
+            /** OBTENER DISTRITO */
+            $.ajax({
+                dataType:"html",
+                url:"../../../bl/Contacto/cargarDistritos.php",
+                success:function(data){
+                    $("#distritoid").append(data);
+                }
+            });
+            
+            /** OBTENER TIPO DIRECCION */
+            $.ajax({
+                dataType:"html",
+                url:"../../../bl/Contacto/cargarTipoDireccion.php",
+                success:function(data){
+                    $("#tipodireccionid").append(data);
                 }
             });
     });
@@ -312,10 +350,33 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                 <td>Fax:</td><td><input type="text" id="txtfax" name="txtfax" size="15" value="'.$res[6].'" READONLY/></td>
                 <td><input type="button" value="Editar" id="btnEditarFax"/>    
             </tr>
-            <tr>
-                <td>Direccion</td>
+            <tr>';
+      require_once '../../dl/busca_persona/Direccion.php';
+      $direcciones = new Direccion();
+      $direcciones->set_ruc($ruc);
+      echo '
+          <script>
+          $(document).ready(function(){
+            $.ajax({
+                data:{ruc:';echo $ruc;echo'},
+                type:"GET",
+                dataType:"json",
+                url:"../../dl/busca_persona/Direccion.json.php",
+                success:function(data){
+                    $.each(data,function(index,value){
+                       $("#direccion_full tbody).append(
+                            "<tr id="tbl_direccion">
+                            "<td>"+data[index].direccion+"</td>"
+                            "</tr>"
+                       ) 
+                    });
+                }
+            });
+          });
+          </script>';
+           echo'<td>Direccion</td>
                 <td>
-                    <table border="0" class="atable">
+                    <table border="0" class="atable" id="direccion_full">
                     <tr>
                         <th>Direccion</th>
                         <th>Pais</th>
@@ -323,18 +384,31 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                         <th>Distrito</th>
                         <th>Tipo de Direccion</th>
                     </tr>';
-      for ($i = 0; $i < count($direcciones_array);$i++) {
-          if ($i % 5 == 0)
-            echo'<tr id="tr_tfijo'.$i.'">';
-          echo'<td>
-            <input type="text" size="10" name="tfijo" value="'.
-                $direcciones_array[$i]
-                .'" />';
-          if($i == 4)
-                echo'<td><input type="button" class="delRow" />';    
-      }
       echo
-                    '</table>
+                    '<tbody>
+                        <tr></tr>
+                     </tbody>   
+                     </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select name="pais" id="paisid"></select> 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select name="departamento" id="departamentoid"></select> 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select name="distrito" id="distritoid"></select> 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select name="tipodireccion" id="tipodireccionid"></select> 
                 </td>
             </tr>
             <tr>
@@ -402,7 +476,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
             if ($i % 2 != 0) {
               echo'<tr id="tr_representante">
                   <td>
-                  <input type="text" size="20" name="tfijo" value="'.$representantes_array[$i].'" READONLY/>
+                  <input type="text" size="35" name="tfijo" value="'.$representantes_array[$i].'" READONLY/>
                       <input type="hidden" id="idRepresentante" value="'.$representantes_array[$i-1].'" />
                       <td><input type="button" class="delRow" id="btnEliminarRepresentante"/></td>
                       <td><input type="button" value="Editar" id="btnEditarRepresentante"/>

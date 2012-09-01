@@ -1552,9 +1552,6 @@ $contratos = $modelos->mostrarContratos();
                     "<td>"+datos[index].tf+"</td>"+
                     "<td>"+datos[index].tm+"</td>"+
                     "<td>"+datos[index].tn+"</td>"+
-//                    "<td><input id='btn_tfijo' type='button' value='TF'/></td>"+
-//                    "<td><input id='btn_tmobile' type='button' value='TM'/></td>"+
-//                    "<td><input id='btn_tnextel' type='button' value='TN'/></td>"+
                     "<td>"+"<a href='#' id='del-contacto' class='button delete'>Eliminar</a>"+"</td>"+
                     '<input id="codigo" type="hidden" name="contacto'+contador_contactos+'" value="'+datos[index].id+'" />'+
                     "</tr>"    
