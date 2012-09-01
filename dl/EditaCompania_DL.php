@@ -148,6 +148,36 @@ class EditaCompania
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
                     break;
+                case 'especialidad_nuevo' :
+                    $query = "INSERT INTO tb_rubro(tb_companiacontacto_id,tb_especialidadcompania_id)VALUES($this->idCompania,$this->value)";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;
+                case 'representante_nuevo' :
+                    $query = "INSERT INTO tb_representante(tb_companiacontacto_id,tb_personacontacto_id)VALUES($this->idCompania,$this->value)";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;    
+                case 'editar_observacion' :    
+                    $query = "UPDATE tb_companiacontacto SET observacion = '$this->value' WHERE id = $this->idCompania AND tb_empresa_id = $this->idEmpresa";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;    
+                case 'editar_email'  :    
+                    $query = "UPDATE tb_companiacontacto SET email = '$this->value' WHERE id = $this->idCompania AND tb_empresa_id = $this->idEmpresa";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;      
+                case 'editar_web'    :    
+                    $query = "UPDATE tb_companiacontacto SET web = '$this->value' WHERE id = $this->idCompania AND tb_empresa_id = $this->idEmpresa";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;      
+                case 'representante_elimina'    :    
+                    $query = "DELETE FROM tb_representante WHERE tb_companiacontacto_id = $this->idCompania AND tb_personacontacto_id = $this->value";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;      
                 default:
                     break;
                     

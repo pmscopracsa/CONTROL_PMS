@@ -190,19 +190,23 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                 <th colspan="2">
             </tr>';
       /** MUESTRA CADA GIRO CON SU RESPECTIVO ID PARA ELIMINAR O ACTUALIZAR ;D */
-      for ($i=0;$i<count($giros);$i++) {
-          if($i%2 != 0) {
-              echo'<tr id="tr_giro">
-                <td>
-                <input type="text" id="txtGiro" name="giro" value="'.
-                $giros[$i]
-                .'" READONLY/></td>
-                <input id="idGiro" type="hidden" value="'.$giros[$i-1].'" />    
-                <td><input type="button" value="Editar" id="btnEditarGiro"/></td>    
-                <td><input type="button" class="delRow" id="btnEliminarGiro"/></td>
-                <td><input type="button" class="addRow" id="btnAgregarGiro"/></td>
-                </tr>';
-              continue;
+      if (count($giros) === 0) {
+          echo '<tr id="tr_giro"><td><input type="button" class="addRow" id="btnAgregarGiro" /></td></tr>';
+      } else { 
+          for ($i=0;$i<count($giros);$i++) {
+              if($i%2 != 0) {
+                  echo'<tr id="tr_giro">
+                    <td>
+                    <input type="text" id="txtGiro" name="giro" value="'.
+                    $giros[$i]
+                    .'" READONLY/></td>
+                    <input id="idGiro" type="hidden" value="'.$giros[$i-1].'" />    
+                    <td><input type="button" value="Editar" id="btnEditarGiro"/></td>    
+                    <td><input type="button" class="delRow" id="btnEliminarGiro"/></td>
+                    <td><input type="button" class="addRow" id="btnAgregarGiro"/></td>
+                    </tr>';
+                  continue;
+              }
           }
       }
       echo
@@ -222,20 +226,24 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                         <th>
                         <th colspan="2">
                     </tr>';
-      for ($i = 0; $i < count($telefonosf);$i++) {
-          if ($i % 2 != 0) {
-            echo'<tr id="tr_tfijo"><td>
-                <input id="txtTelefonoFijo" type="text" size="20" name="tfijo" value="'.
-                    $telefonosf[$i]
-                    .'" READONLY/>
-                    <input id="idTFijo" type="hidden" value="'.$telefonosf[$i-1].'" />
-                    <td><input type="button" class="delRow" id="btnEliminarTF" value=" "/></td>
-                    <td><input type="button" value="Editar" id="btnEditarTelefonoFijo"/></td>
-                    <td><input type="button" class="addRow" id="btnAgregarTF" /></td>
-                    </tr>';    
-                    continue;
-          }
-      }
+      if (count($telefonosf) === 0) {
+          echo '<tr id="tr_tfijo"><td><input type="button" class="addRow" id="btnAgregarTF" /></td></tr>';
+      } else {
+        for ($i = 0; $i < count($telefonosf);$i++) {
+            if ($i % 2 != 0) {
+              echo'<tr id="tr_tfijo"><td>
+                  <input id="txtTelefonoFijo" type="text" size="20" name="tfijo" value="'.
+                      $telefonosf[$i]
+                      .'" READONLY/>
+                      <input id="idTFijo" type="hidden" value="'.$telefonosf[$i-1].'" />
+                      <td><input type="button" class="delRow" id="btnEliminarTF" value=" "/></td>
+                      <td><input type="button" value="Editar" id="btnEditarTelefonoFijo"/></td>
+                      <td><input type="button" class="addRow" id="btnAgregarTF" /></td>
+                      </tr>';    
+                      continue;
+            }
+        }
+      }  
       echo
                     '</table>
                 </td>
@@ -248,19 +256,23 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                         <th>
                         <th colspan="2">
                     </tr>';
-      for ($i = 0; $i < count($telefonosm);$i++) {
-          if ($i % 2 != 0) {
-            echo'<tr id="tr_tmobile"><td>
-                <input id="txtTelefonoMobile" type="text" size="20" name="tfijo" value="'.
-                    $telefonosm[$i]
-                    .'" READONLY/>
-                    <input id="idTMobile" type="hidden" value="'.$telefonosm[$i-1].'" />    
-                    <td><input type="button" class="delRow" id="btnEliminarTM"/></td>
-                    <td><input type="button" value="Editar" id="btnEditarTelefonoMobile" /></td>
-                    <td><input type="button" class="addRow" id="btnAgregarTM" /></td>
-                    </tr>';    
-                    continue;
-          }
+      if (count($telefonosm) === 0) {
+          echo '<tr id="tr_tmobile"><td><input type="button" class="addRow" id="btnAgregarTM" /></td></tr>';
+      } else {
+        for ($i = 0; $i < count($telefonosm);$i++) {
+            if ($i % 2 != 0) {
+              echo'<tr id="tr_tmobile"><td>
+                  <input id="txtTelefonoMobile" type="text" size="20" name="tfijo" value="'.
+                      $telefonosm[$i]
+                      .'" READONLY/>
+                      <input id="idTMobile" type="hidden" value="'.$telefonosm[$i-1].'" />    
+                      <td><input type="button" class="delRow" id="btnEliminarTM"/></td>
+                      <td><input type="button" value="Editar" id="btnEditarTelefonoMobile" /></td>
+                      <td><input type="button" class="addRow" id="btnAgregarTM" /></td>
+                      </tr>';    
+                      continue;
+            }
+        }
       }
       echo
                     '</table>
@@ -333,25 +345,37 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                         <th>
                         <th colspan="2">
                     </tr>';
-      for ($i = 0; $i < count($especialidades_array);$i++) {
-          if ($i % 2 != 0) {
-              echo'<tr id="tr_tfijo'.$i.'">
-                  <td>
-                    <input id="txtEspecialidad" type="text" size="35" name="tfijo" value="'.$especialidades_array[$i].'" READONLY/>
-                    <input id="idEspecialidad" type="hidden" value="'.$especialidades_array[$i-1].'" />     
-                  <td><input type="button" class="delRow" id="btnEliminarEspecialidad"/></td>
-                  <td><input type="button" value="Editar" id="btnEditarEspecialidades"/></td>
-                  </tr>
-                  <tr>
+      if (count($especialidades_array) === 0) {
+              echo '<tr id="tr_especialidad"><td><input type="button" class="addRow" id="btnNuevaEspecialidad" /></td></tr>';
+              echo '<tr>
+                      <td>
+                          <select name="especialidad" id="especialidadid" style="display:none">
+                              <option value="0">Seleccione especialidad</option>
+                          </select>
+                      </td>
+                   </tr>';
+      } else {
+        for ($i = 0; $i < count($especialidades_array);$i++) {
+            if ($i % 2 != 0) {
+                echo'<tr id="tr_especialidad">
                     <td>
-                        <select name="especialidad" id="especialidadid" style="display:none">
-                            <option value="0">Seleccione especialidad</option>
-                        </select>
-                    </td>
-                 </tr>';    
-                 continue;
-          }
-      }
+                      <input id="txtEspecialidad" type="text" size="35" name="tfijo" value="'.$especialidades_array[$i].'" READONLY/>
+                      <input id="idEspecialidad" type="hidden" value="'.$especialidades_array[$i-1].'" />     
+                    <td><input type="button" class="delRow" id="btnEliminarEspecialidad"/></td>
+                    <td><input type="button" value="Editar" id="btnEditarEspecialidades"/></td>
+                    <td><input type="button" class="addRow" id="btnNuevaEspecialidad"/></td>
+                    </tr>
+                    <tr>
+                      <td>
+                          <select name="especialidad" id="especialidadid" style="display:none">
+                              <option value="0">Seleccione especialidad</option>
+                          </select>
+                      </td>
+                   </tr>';    
+                   continue;
+            }
+        }
+      }  
       echo
                     '</table>
                 </td>
@@ -364,40 +388,52 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                         <th>
                         <th colspan="2">
                     </tr>';
-      for ($i = 0; $i < count($representantes_array);$i++) {
-          if ($i % 2 != 0) {
-            echo'<tr id="tr_rep'.$i.'">
-                <td>
-                <input type="text" size="20" name="tfijo" value="'.$representantes_array[$i].'" READONLY/>
-                    <input type="hidden" id="idRepresentante" value="'.$representantes_array[$i-1].'" />
-                    <td><input type="button" class="delRow" value=" "/></td>
-                    <td><input type="button" value="Editar" id="btnEditarRepresentante"/>
-                    </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <select name="especialidad" id="representanteid" style="display:none">
-                                <option value="0">Seleccione un representante</option>
-                            </select>
-                        </td>
-                    </tr>';    
-            continue;
-          }
-      }
+      if (count($representantes_array) === 0) {
+              echo '<tr id="tr_representante"><td><input type="button" class="addRow" id="btnNewRepresentante" /></td></tr>';
+              echo '<tr>
+                      <td>
+                          <select name="representante" id="representanteid" style="display:none">
+                              <option value="0">Seleccione especialidad</option>
+                          </select>
+                      </td>
+                   </tr>';
+      } else {
+        for ($i = 0; $i < count($representantes_array);$i++) {
+            if ($i % 2 != 0) {
+              echo'<tr id="tr_representante">
+                  <td>
+                  <input type="text" size="20" name="tfijo" value="'.$representantes_array[$i].'" READONLY/>
+                      <input type="hidden" id="idRepresentante" value="'.$representantes_array[$i-1].'" />
+                      <td><input type="button" class="delRow" id="btnEliminarRepresentante"/></td>
+                      <td><input type="button" value="Editar" id="btnEditarRepresentante"/>
+                      <td><input type="button" class="addRow" id="btnNewRepresentante"/></td>
+                      </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <select name="representante" id="representanteid" style="display:none">
+                                  <option value="0">Seleccione un representante</option>
+                              </select>
+                          </td>
+                      </tr>';    
+              continue;
+            }
+        }
+      }  
       echo
                     '</table>
                 </td>
             </tr>
             <tr>
-                <td>Observacion:</td><td><textarea>'.$res[7].'</textarea></td>
-                <td><input type="button" value="Editar" id="btnEditarObservacion"/>    
+                <td>Observacion:</td><td><textarea id="txtObservacion" READONLY>'.$res[7].'</textarea></td>
+                <td><input type="button" value="Editar" id="btnEditarObservacion" />    
             </tr>
             <tr>
-                <td>Email:</td><td><input type="text" name="txtemail" size="15" value="'.$res[8].'" READONLY/></td>
+                <td>Email:</td><td><input type="text" name="txtemail" size="35" id="txtEmail" value="'.$res[8].'" READONLY/></td>
                 <td><input type="button" value="Editar" id="btnEditarEmail"/>    
             </tr>
             <tr>
-                <td>Web:</td><td><input type="text" name="txtweb" size="15" value="'.$res[9].'" READONLY/></td>
+                <td>Web:</td><td><input type="text" name="txtweb" id="txtweb" size="35" value="'.$res[9].'" READONLY/></td>
                 <td><input type="button" value="Editar" id="btnEditarWeb" />
             </tr>
             <tr>
