@@ -3,7 +3,6 @@ session_name('tzLogin');
 session_set_cookie_params(2*7*24*60*60);
 session_start();
 
-$especialidades = array();
 $emailsecundarios = array();
 
 // OBTENEMOS DATOS DE LA PERSONA
@@ -16,33 +15,47 @@ $res = $rpersona->s_buscarPersonaPorNombre();
 require_once '../../dl/busca_persona/TelefonoFijo.php';
 require_once '../../dl/busca_persona/TelefonoMobile.php';
 require_once '../../dl/busca_persona/TelefonoNextel.php';
+require_once '../../dl/busca_persona/Especialidad.php';
+
+require_once '../../dl/busca_persona/Correos.php';
 $tf = new TelefonoFijo();
 $tm = new TelefonoMobile();
 $tn = new TelefonoNextel();
+$es = new Especialidad();
+$email = new Correos();
 $tf->set_tb_personacontacto_id($res[0]);
 $telefonosf = $tf->obtenerTelefonosPorPersona();
 $tm->set_tb_companiapersona_id($res[0]);
 $telefonosm = $tm->obtenerTelefonosPorPersona($res[0]);
 $tn->set_tb_personacontacto_id($res[0]);
 $telefonosn = $tn->obtenerTelefonosPorPersona($res[0]);
+$es->set_id_nombrepersona($res[0]);
+$especialidades = $es->obtenerEspecialidadesPorPersona();
+$email->setIdPersona($res[0]);
+$correos = $email->obtenerCorreosPersona();
 
-toHtml($res,$telefonosf,$telefonosm,$telefonosn);
+toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correos);
 
-function toHtml($res,$telefonosf,$telefonosm,$telefonosn)
+function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correos)
 {
     echo'
         <table>
             <tr>
-                <td>Numero de documento:<td><input type="text" value="'.$res[1].'" />
+                <input type="hidden" value="'.$res[0].'" id="idpersonacontacto" />
+                <input type="hidden" value="'.$res[9].'" id="idviaenvio" />
+                <td>Numero de documento:<td><input id="txtnumerodocumento" type="text" value="'.$res[1].'" size="45" READONLY/>
+                <td><input type="button" value="Editar" id="btnEditarNumeroDocumento"/>    
             </tr>
             <tr>
-                <td>Nombres y apellidos:<td><input type="text" value="'.$res[2].'" />
+                <td>Nombres y apellidos:<td><input type="text" value="'.$res[2].'" size="45" READONLY/>
+                <td><input type="button" value="Editar" />
             </tr>
             <tr>
-                <td>Compania:<td><input type="text" value="'.$res[3].'" />
+                <td>Compania:<td><input type="text" value="'.$res[10].'" size="45" READONLY/>
+                <td><input type="button" value="Editar" />    
             </tr>
             <tr>
-                <td>Cargo:<td><input type="text" value="'.$res[4].'" />
+                <td>Cargo:<td><input type="text" value="'.$res[3].'" size="45" READONLY/>
             </tr>
             <tr>
                 <td>Telefono Fijo:
@@ -144,42 +157,102 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn)
                 <td>Direccion Personal:
                 <td>
                     <table border="0" class="atable" id="direccion_full">
-                        <tr>
+                        <!--<tr>
                             <th>Direccion
                             <th>Pais
                             <th>Departamento
-                            <th>Distrito
+                            <th>Distrito-->
                          <tbody>
                             <tr></tr>
                          </tbody>
                     </table>
             </tr>
             <tr>
-                <td>Direccion de Trabajo:
-            </tr>
-            <tr>
                 <td>Especialidades:
+                <td>
+                <table border="0" class="atable">
+            <tr>
+                <th>
+                <th colspan="2">
+            </tr>';
+      /** */
+      if (count($especialidades) === 0) {
+          echo '<tr id="tr_es"><td><input type="button" class="addRow" id="btnAgregarES" /></td></tr>';
+      } else { 
+          for ($i=0;$i<count($especialidades);$i++) {
+              if($i%2 != 0) {
+                  echo'<tr id="tr_es">
+                    <td>
+                    <input type="text" id="txtES" name="giro" value="'.
+                    $especialidades[$i]
+                    .'" READONLY/></td>
+                    <input id="idES" type="hidden" value="'.$telefonosn[$i-1].'" />    
+                    <td><input type="button" value="Editar" id="btnEditarES"/></td>    
+                    <td><input type="button" class="delRow" id="btnEliminarES"/></td>
+                    <td><input type="button" class="addRow" id="btnAgregarES"/></td>
+                    </tr>';
+                  continue;
+              }
+          }
+      }
+      echo
+      '
+            </table>
             </tr>
             <tr>
-                <td>Observacion:<td><input type="text" value="'.$res[5].'" id="txtobservacion"/>
+                <td>Observacion:<td><input type="text" value="'.$res[5].'" id="txtobservacion" size="45" READONLY/>
             </tr>
             <tr>
-                <td>Especialidades:
-            </tr>
-            <tr>
-                <td>Email principal:<td><input type="text" value="'.$res[6].'" id="txtemailprincipal"/>
+                <td>Email principal:<td><input type="text" value="'.$res[6].'" id="txtemailprincipal" size="45" READONLY/>
             </tr>
             <tr>
                 <td>Email Secundario:
+                <td>
+                <table border="0" class="atable">
+            <tr>
+                <th>
+                <th colspan="2">
+            </tr>';
+      
+      if (count($correos) === 0) {
+          echo '<tr id="tr_mail"><td><input type="button" class="addRow" id="btnAgregarMAIL" /></td></tr>';
+      } else { 
+          for ($i=0;$i<count($correos);$i++) {
+              if($i%2 != 0) {
+                  echo'<tr id="tr_mail">
+                    <td>
+                    <input type="text" id="txtMAIL" name="mail" value="'.
+                    $correos[$i]
+                    .'" READONLY/></td>
+                    <input id="idES" type="hidden" value="'.$correos[$i-1].'" />    
+                    <td><input type="button" value="Editar" id="btnEditarMAIL"/></td>    
+                    <td><input type="button" class="delRow" id="btnEliminarMAIL"/></td>
+                    <td><input type="button" class="addRow" id="btnAgregarMAIL"/></td>
+                    </tr>';
+                  continue;
+              }
+          }
+      }
+      echo
+      '
+            </table>
             </tr>
             <tr>
-                <td>Web:<td><input type="text" value="'.$res[7].'" id="txtweb" />
+                <td>Web:<td><input type="text" value="'.$res[7].'" id="txtweb" size="45" READONLY/>
+                <td><input type="button" value="Editar" />    
             </tr>
             <tr>
-                <td>Fax:<td><input type="text" value="'.$res[4].'" id="txtfax" />
+                <td>Fax:<td><input type="text" value="'.$res[4].'" id="txtfax" size="45" READONLY/>
+                <td><input type="button" value="Editar" />    
             </tr>
             <tr>
                 <td>Via de Envio
+                <td><div id="idviaenvio"></div>
+                <td><table border="0" class="atable" id="idviaenvio">
+                         <tbody>
+                            
+                         </tbody>
+                    </table>
             </tr>
         </table>
         ';

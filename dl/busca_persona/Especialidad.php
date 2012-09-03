@@ -4,6 +4,8 @@ require_once 'Conexion.php';
 class Especialidad 
 {
     protected $_tb_companiacontacto_ruc;
+    protected $_id_nombrepersona;
+    
     public function obtenerEspecialidadesPorCompania() 
     {
         $query = "SELECT 
@@ -36,6 +38,35 @@ class Especialidad
         }
     }
     
+    public function obtenerEspecialidadesPorPersona() {
+        $query = "SELECT 
+            ep.id
+            ,ep.descripcion
+            FROM tb_profesion p
+            INNER JOIN tb_personacontacto pc ON p.tb_personacontacto_id = pc.id
+            INNER JOIN tb_especialidadpersona ep ON p.tb_especialidadpersona_id = ep.id 
+            WHERE pc.id = $this->_id_nombrepersona";
+        
+        try {
+            $cnx = new Conexion();
+            $cn = $cnx->conectar();
+            if (!$cn)
+                throw new Exception("Error al conectar: ".  mysql_error());
+            $rs = mysql_query($query);
+            if (!$rs)
+                throw new Exception("Error al consultar: ".  mysql_error());
+            
+            $especialidades = array();
+            while ($res = mysql_fetch_array($rs,MYSQL_ASSOC)) {
+                array_push($especialidades, $res['id']);
+                array_push($especialidades, $res['descripcion']);
+            }
+            return $especialidades;
+        } catch(Exception $ex) {
+            echo 'Error: '.$ex->getMessage();
+        }
+    }
+    
      /** G & S */
     public function get_tb_companiacontacto_ruc() {
         return $this->_tb_companiacontacto_ruc;
@@ -43,5 +74,13 @@ class Especialidad
 
     public function set_tb_companiacontacto_ruc($_tb_companiacontacto_ruc) {
         $this->_tb_companiacontacto_ruc = $_tb_companiacontacto_ruc;
+    }
+    
+    public function get_id_nombrepersona() {
+        return $this->_id_nombrepersona;
+    }
+
+    public function set_id_nombrepersona($_id_nombrepersona) {
+        $this->_id_nombrepersona = $_id_nombrepersona;
     }
 }

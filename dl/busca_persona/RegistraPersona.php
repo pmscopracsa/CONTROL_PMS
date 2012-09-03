@@ -153,6 +153,8 @@ class RegistraPersona
             ,pc.email
             ,pc.web
             ,pc.direccion
+            ,pc.tb_viaenvio_id idviaenvio
+            ,cc.descripcion empresa
             FROM 
             tb_companiacontacto cc
             INNER JOIN tb_personacontacto pc ON cc.id = pc.tb_companiacontacto_id 
@@ -182,8 +184,9 @@ class RegistraPersona
                 array_push($personadatos,$res['email'] == NULL ? "" : $res['email']);
                 array_push($personadatos,$res['web'] == NULL ? "" : $res['web']);
                 array_push($personadatos,$res['direccion'] == NULL ? "" : $res['direccion']);
+                array_push($personadatos,$res['idviaenvio'] == NULL ? "" : $res['idviaenvio']);
+                array_push($personadatos,$res['empresa'] == NULL ? "" : $res['empresa']);
             }
-            
             return $personadatos;
             
         } catch (Exception $e) {

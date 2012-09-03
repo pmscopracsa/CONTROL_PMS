@@ -44,6 +44,7 @@ session_start();
                        success:function(data) {
                            toHtml(data);
                            cargarDireccionPersona($("#txtnombre").val());
+                           cargarViaEnvio($("#idviaenvio").val());
                        }
                     });
                 }
@@ -62,6 +63,30 @@ session_start();
                     }
                 })
             }
+            
+            function cargarViaEnvio(id_viaenvio) {
+                cargarviaenvioseleccted(id_viaenvio);
+                $("#idviaenvio tbody").append(
+                    "<td><select disabled='disabled' id='viaenvio'><select></td>"+
+                    "<td><input type='button' id='btnEditarViaEnvio'  value='Editar'/></td>"+
+                    "<td><input type='button' class='delRow' id='btnEliminarViaEnvio' /></td>"+
+                    "<td><input type='button' class='addRow' id='btnAgregarViaEnvio' /></td>"
+                )
+            }
+            /*function cargarDireccionPersonaEmpresa(id_persona) {
+                
+                $.ajax({
+                    type:"GET",
+                    dataType:"json",
+                    data:{
+                        idpersona:id_persona
+                    },
+                    url:"../../../dl/busca_persona/DireccionPersonaEmpresa.json.php",
+                    success:function(data) {
+                        printAddressCo(data);
+                    }
+                })
+            }*/
             
             function printAddress(data) {
                 var i = 1;
@@ -86,6 +111,59 @@ session_start();
                     i++
                 });
             }
+            
+            /** EDITAR */
+            // NUMERO DE DOCUMENTO
+            $("#btnEditarNumeroDocumento").live("click",function() {
+                if($("#btnEditarNumeroDocumento").val() === 'Editar') {
+                    $("#btnEditarNumeroDocumento").attr('value', 'Guardar');
+                    $("#txtnumerodocumento").removeAttr('readonly');
+                } else {
+                    if ($("#txtnumerodocumento").val() == "")
+                        alert("Este campo debe tener datos")
+                    else {
+                        $.ajax({
+                            type:"POST",
+                            url:"../../../bl/editaPersona_BL.php?parameter=editaNumDoc",
+                            data:{
+                                idpersonacontacto:$("#idpersonacontacto").val(),
+                                value:$("#txtnumerodocumento").val()
+                            },
+                            success:function() {
+                                $("#btnEditarNumeroDocumento").attr('value', 'Editar');
+                            }
+                        });
+                    }
+                    
+                }
+            }); 
+            
+            /*function printAddressCo(data) {
+                var i = 1;
+                $.each(data,function(index,value){
+                    alert(data[index].idpais);
+                    cargarPais(data[index].idpais,i)
+                    cargarDepartamento(data[index].iddepartamento, i);
+                    cargarDistrito(data[index].iddistrito, i);
+                    cargarDomicilio(data[index].idtipodireccion, i)
+                    $("#direccion_full_co tbody").append(
+                        "<tr id='tbl_direccion'>"+
+                        "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td>"+
+                        "<td><td><select disabled='disabled' id='pa"+i+"'></select></td></td>"+
+                        "<td><td><select disabled='disabled' id='de"+i+"'></select></td>"+
+                        "<td><td><select disabled='disabled' id='di"+i+"'></select></td>"+
+                        "<td><td><select disabled='disabled' id='do"+i+"'></select></td>"+
+                        "<td><input type='button' id='btnEditarDireccion'  value='Editar'/></td>"+
+                        "<td><input type='button' class='delRow' id='btnEliminarDireccion' /></td>"+
+                        "<td><input type='button' class='addRow' id='btnAgregarDireccion' /></td>"+
+                        "<td style='display:none'><input type='hidden' id='idDireccionHidden' value='"+i+"' /></td>"+
+                        "<td style='display:none'><input type='hidden' id='idDireccion"+i+"' value='"+data[index].direccion_id+"' /></td>"+
+                        "</tr>"
+                    ),
+                    i++
+                });
+            }*/
+            
             function cargarPais(idpais,i) {
                 $.ajax({
                     dataType:"html",
@@ -115,6 +193,30 @@ session_start();
                         $("#di"+i).append(data);
                     }
                 })
+            }
+            
+            // DOMICILIO
+            function cargarDomicilio(iddomicilio,i) {
+                $.ajax({
+                    dataType:"html",
+                    data:{id_tipodomicilio:iddomicilio},
+                    url:"../../../bl/Contacto/cargarTipoDireccionSelected.php",
+                    success:function(data){
+                        $("#do"+i).append(data);
+                    }
+                });
+            }
+            
+            // VIA ENVIO
+            function cargarviaenvioseleccted(idviaenvio) {
+                $.ajax({
+                    dataType:"html",
+                    data:{id_viaenvio:idviaenvio},
+                    url:"../../../bl/Contacto/cargarTipoDireccionSelected.php",
+                    success:function(data){
+                        $("#viaenvio").append(data);
+                    }
+                });
             }
             
             function toHtml(data)

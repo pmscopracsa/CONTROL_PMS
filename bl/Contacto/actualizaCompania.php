@@ -348,13 +348,13 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
             <td>Direccion</td>
                 <td>
                     <table border="0" class="atable" id="direccion_full">
-            <tr>
+            <!--<tr>
                         <th>Direccion</th>
                         <th>Pais</th>
                         <th>Departamento</th>
                         <th>Distrito</th>
                         <th>Tipo de Direccion</th>
-                    </tr>';
+                    </tr>-->';
       echo
                     '<tbody>
                         <tr>
