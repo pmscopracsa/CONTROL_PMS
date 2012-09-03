@@ -209,6 +209,11 @@ class EditaCompania
                         WHERE tb_companiacontacto_id = $this->idCompania AND id = $this->id";
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;   
+                case 'eliminadireccion'    :    
+                    $query = "DELETE FROM tb_direccioncompaniacontacto WHERE id = $this->value AND tb_companiacontacto_id = $this->idCompania";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
                     break;     
                 default:
                     break;

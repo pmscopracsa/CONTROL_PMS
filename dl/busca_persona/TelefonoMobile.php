@@ -5,6 +5,7 @@ class TelefonoMobile {
     private $_id;
     private $_numero;
     private $_tb_companiacontacto_id;
+    private $_tb_companiapersona_id;
     private $_ruc;
     
     public function obtenerTelefonosPorCompania(){
@@ -24,6 +25,36 @@ class TelefonoMobile {
             $rs = mysql_query($query, $cn);
             if (!$rs)
                 throw new Exception("Error al consultar: ".  mysql_error());
+            
+            $telefonos = array();
+            
+            while ($res = mysql_fetch_array($rs,MYSQL_ASSOC)) {
+                array_push($telefonos,$res['id']);
+                array_push($telefonos,$res['numero']);
+            }
+            return $telefonos;
+            
+        } catch(Exception $ex) {
+            echo 'Error: '.$ex->getMessage();
+        }
+    }
+    
+    public function obtenerTelefonosPorPersona(){
+        $query = "SELECT 
+                id
+                ,numero 
+                FROM 
+                tb_telefonomovilpersona WHERE tb_personacontacto_id = $this->_tb_companiapersona_id";
+        
+        try {
+            $cnx = new Conexion();
+            $cn = $cnx->conectar();
+            if (!$cn)
+                throw new Exception("Error al conectar: ".  mysql_error());
+            
+            $rs = mysql_query($query, $cn);
+            if (!$rs)
+                throw new Exception("Error al consultar mobile: ".  mysql_error());
             
             $telefonos = array();
             
@@ -71,5 +102,13 @@ class TelefonoMobile {
 
     public function set_ruc($_ruc) {
         $this->_ruc = $_ruc;
+    }
+    
+    public function get_tb_companiapersona_id() {
+        return $this->_tb_companiapersona_id;
+    }
+
+    public function set_tb_companiapersona_id($_tb_companiapersona_id) {
+        $this->_tb_companiapersona_id = $_tb_companiapersona_id;
     }
 }

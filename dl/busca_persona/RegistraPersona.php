@@ -139,6 +139,58 @@ class RegistraPersona
         }
     }
     
+    public function s_buscarPersonaPorNombre()
+    {
+        $query = "
+            SELECT 
+            pc.id 
+            ,pc.dni
+            ,pc.nombre
+            ,cc.descripcion
+            ,pc.cargo
+            ,pc.fax
+            ,pc.observacion
+            ,pc.email
+            ,pc.web
+            ,pc.direccion
+            FROM 
+            tb_companiacontacto cc
+            INNER JOIN tb_personacontacto pc ON cc.id = pc.tb_companiacontacto_id 
+            WHERE pc.nombre =  '$this->_nombrecompleto'";
+        
+        try {
+            $conexion = new Conexion();
+            $cn = $conexion->conectar();
+            
+            if (!$cn) 
+                throw new Exception("Error al conectar: ".mysql_error ());
+            
+            $sql = mysql_query($query,$cn);
+            
+            if (!$sql)
+                throw new Exception("Error en consulta: ".  mysql_error());
+            
+            $personadatos = array();
+
+            while ($res = mysql_fetch_array($sql,MYSQL_ASSOC)) {
+                array_push($personadatos,$res['id']);
+                array_push($personadatos,$res['dni'] == NULL ? "" : $res['dni']);
+                array_push($personadatos,$res['nombre'] == NULL ? "" : $res['nombre']);
+                array_push($personadatos,$res['cargo'] == NULL ? "" : $res['cargo']);
+                array_push($personadatos,$res['fax'] == NULL ? "" : $res['fax']);
+                array_push($personadatos,$res['observacion'] == NULL ? "" : $res['observacion']);
+                array_push($personadatos,$res['email'] == NULL ? "" : $res['email']);
+                array_push($personadatos,$res['web'] == NULL ? "" : $res['web']);
+                array_push($personadatos,$res['direccion'] == NULL ? "" : $res['direccion']);
+            }
+            
+            return $personadatos;
+            
+        } catch (Exception $e) {
+            echo "Error al consultar compania por nombre. Error: ".$e->getMessage();
+        }
+    }
+    
     /**
      * GETTERS Y SETTERS 
      */

@@ -1025,6 +1025,22 @@ session_start();
                 }
             });
             // ELIMINAR DIRECCION
+            $("#btnEliminarDireccion").live("click",function() {
+                var idaddress = $(this).parent().parent().children().children("#idDireccionHidden").attr("value");
+                $(this).parent().parent().remove();
+                $.ajax({
+                    type:"POST",
+                    url:"../../../bl/editaCompania_BL.php?parameter=eliminadireccion",
+                    data:{
+                        idregistro:$(this).parent().parent().children().children("#idDireccion"+idaddress).attr("value"),
+                        idCompania:$("#idCompania").val(),
+                        idEmpresa :<?=$_SESSION['id']?>
+                    },
+                    success:function() {
+                        
+                    }
+                });
+            });
             
             // CREAR NUEVA DIRECCION
             $("#btnAgregarDireccion").live("click",function() {

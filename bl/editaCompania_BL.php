@@ -152,6 +152,10 @@ try{
         $edita_compania->setIdtipodireccion($_REQUEST['idtipodireccion']);
         $edita_compania->setId($_REQUEST['idDireccion']);
         $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == 'eliminadireccion') {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['idregistro']);
+        $edita_compania->actualizarObjetoCompania($cn);
     }
 }catch(Exception $ex) {
     echo 'Error: '.$ex->getMessage();
