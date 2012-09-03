@@ -68,14 +68,11 @@ if ($_REQUEST['opcion'] == "ruc") {
     $especialidades->set_tb_companiacontacto_ruc($_REQUEST['ruc']);
     $especialidades_array = $especialidades->obtenerEspecialidadesPorCompania();
     
-    /*$direcciones->set_ruc($_REQUEST['ruc']);
-    $direcciones_array = $direcciones->obtenerDireccionesPorCompania();*/
-    
     $representantes->setRuc($_REQUEST['ruc']);
     $representantes_array = $representantes->obtenerRepresentantesPorCompania();
     
     //toHtml($res,$giros,$telefonosf, $telefonosm, $telefnosn,$especialidades_array,$direcciones_array,$representantes_array);
-    toHtml($res,$giros,$telefonosf, $telefonosm, $telefnosn,$especialidades_array,$direcciones_array,$representantes_array,$res[1]);
+    toHtml($res,$giros,$telefonosf, $telefonosm, $telefnosn,$especialidades_array,$representantes_array,$res[1]);
 }
 elseif ($_REQUEST['opcion'] == "nombre") {
     $rcompania->set_idempresa($_SESSION['id']);
@@ -97,9 +94,6 @@ elseif ($_REQUEST['opcion'] == "nombre") {
     $especialidades->set_tb_companiacontacto_ruc($res[1]);
     $especialidades_array = $especialidades->obtenerEspecialidadesPorCompania();
     
-    /*$direcciones->set_ruc($res[1]);
-    $direcciones_array = $direcciones->obtenerDireccionesPorCompania();*/
-    
     $representantes->setRuc($res[1]);
     $representantes_array = $representantes->obtenerRepresentantesPorCompania();
     
@@ -107,7 +101,7 @@ elseif ($_REQUEST['opcion'] == "nombre") {
     toHtml($res,$giros, $telefonosf, $telefonosm, $telefnosn, $especialidades_array, $direcciones_array,$representantes_array,$res[1]);
 }
 
-function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_array, $direcciones_array,$representantes_array,$ruc) {
+function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_array,$representantes_array,$ruc) {
     
     echo 
     '
@@ -152,7 +146,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
             /** OBTENER PAIS */
             $.ajax({
                 dataType:"html",
-                url:"../../../bl/Contacto/cargarPaises.php",
+                url:"../../../bl/Contacto/cargarPaisesSelected.php",
                 success:function(data){
                     $("#paisid").append(data);
                 }
@@ -350,34 +344,11 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                 <td>Fax:</td><td><input type="text" id="txtfax" name="txtfax" size="15" value="'.$res[6].'" READONLY/></td>
                 <td><input type="button" value="Editar" id="btnEditarFax"/>    
             </tr>
-            <tr>';
-      require_once '../../dl/busca_persona/Direccion.php';
-      $direcciones = new Direccion();
-      $direcciones->set_ruc($ruc);
-      echo '
-          <script>
-          $(document).ready(function(){
-            $.ajax({
-                data:{ruc:';echo $ruc;echo'},
-                type:"GET",
-                dataType:"json",
-                url:"../../dl/busca_persona/Direccion.json.php",
-                success:function(data){
-                    $.each(data,function(index,value){
-                       $("#direccion_full tbody).append(
-                            "<tr id="tbl_direccion">
-                            "<td>"+data[index].direccion+"</td>"
-                            "</tr>"
-                       ) 
-                    });
-                }
-            });
-          });
-          </script>';
-           echo'<td>Direccion</td>
+            <tr>
+            <td>Direccion</td>
                 <td>
                     <table border="0" class="atable" id="direccion_full">
-                    <tr>
+            <tr>
                         <th>Direccion</th>
                         <th>Pais</th>
                         <th>Departamento</th>
@@ -386,29 +357,10 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                     </tr>';
       echo
                     '<tbody>
-                        <tr></tr>
+                        <tr>
+                        </tr>
                      </tbody>   
                      </table>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <select name="pais" id="paisid"></select> 
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <select name="departamento" id="departamentoid"></select> 
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <select name="distrito" id="distritoid"></select> 
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <select name="tipodireccion" id="tipodireccionid"></select> 
                 </td>
             </tr>
             <tr>

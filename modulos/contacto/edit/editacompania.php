@@ -14,9 +14,11 @@ session_start();
         <link href="../../../css/autocomplete.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/botones.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/google-buttons.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
         
         <!-- JS ZONE -->
         <script src="../../../js/jquery1.4.2.js.js" type="text/javascript"></script>
+        <script src="../../../js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
         <script src="../../../js/autocomplete/jquery.autocomplete.js" type="text/javascript"></script> 
         <script src="../../../js/cargarDatos.js" type="text/javascript"></script>
         <script>
@@ -90,7 +92,8 @@ session_start();
                                 data:{ruc:$(".ruc_empresa").val()},
                                 dataType:"html",
                                 success:function(data) {
-                                    toHtml(data)
+                                    toHtml(data);
+                                    cargarDireccionCompaniaRUC($(".ruc_empresa").val());
                                 }
                             });
                         }
@@ -108,6 +111,7 @@ session_start();
                                 dataType:"html",
                                 success:function(data) {
                                     toHtml(data);
+                                    cargarDireccionCompaniaNOMBRE($(".nombre_empresa").val());
                                 }
                             });
                         }
@@ -872,6 +876,193 @@ session_start();
                         })
                     }
                 }
+            });
+            
+            function cargarDireccionCompaniaRUC(ruc_par)
+            {
+                $.ajax({
+                    type:"GET",
+                    dataType:"json",
+                    url:"../../../dl/busca_persona/Direccion.json.php?parameter=ruc",
+                    data:{
+                        value:ruc_par
+                    },
+                    success:function(data) {
+                        printAddress(data);
+                    }
+                });
+            }
+            
+            function cargarDireccionCompaniaNOMBRE(nombre_par)
+            {
+                $.ajax({
+                    type:"GET",
+                    dataType:"json",
+                    url:"../../../dl/busca_persona/Direccion.json.php?parameter=nombre",
+                    data:{
+                        value:nombre_par
+                    },
+                    success:function(data) {
+                        printAddress(data);
+                    }
+                });
+            }
+            
+            function printAddress(data) {
+                var i = 1;
+                $.each(data,function(index,value){
+                    cargarPais(data[index].idpais,i)
+                    cargarDepartamento(data[index].iddepartamento, i);
+                    cargarDistrito(data[index].iddistrito, i);
+                    cargarDomicilio(data[index].idtipodireccion, i)
+                    $("#direccion_full tbody").append(
+                        "<tr id='tbl_direccion'>"+
+                        "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td>"+
+                        "<td><td><select disabled='disabled' id='pa"+i+"'></select></td></td>"+
+                        "<td><td><select disabled='disabled' id='de"+i+"'></select></td>"+
+                        "<td><td><select disabled='disabled' id='di"+i+"'></select></td>"+
+                        "<td><td><select disabled='disabled' id='do"+i+"'></select></td>"+
+                        "<td><input type='button' id='btnEditarDireccion'  value='Editar'/></td>"+
+                        "<td><input type='button' class='delRow' id='btnEliminarDireccion' /></td>"+
+                        "<td><input type='button' class='addRow' id='btnAgregarDireccion' /></td>"+
+                        "<td style='display:none'><input type='hidden' id='idDireccionHidden' value='"+i+"' /></td>"+
+                        "<td style='display:none'><input type='hidden' id='idDireccion"+i+"' value='"+data[index].iddcc+"' /></td>"+
+                        "</tr>"
+                    ),
+                    i++
+                });
+            }
+            
+            /** CARGAS DE DIRECCION */
+            //PAIS
+            function cargarPais(idpais,i) {
+                $.ajax({
+                    dataType:"html",
+                    data:{id_pais:idpais},
+                    url:"../../../bl/Contacto/cargarPaisesSelected.php",
+                    success:function(data){
+                        $("#pa"+i).append(data);
+                    }
+                })
+            }
+            // DEPARTAMENTO
+            function cargarDepartamento(iddepartamento,i) {
+                $.ajax({
+                    dataType:"html",
+                    data:{id_departamento:iddepartamento},
+                    url:"../../../bl/Contacto/cargarDepartamentosSelected.php",
+                    success:function(data){
+                        $("#de"+i).append(data);
+                    }
+                })
+            }
+            // DISTRITO
+            function cargarDistrito(iddistrito,i) {
+                $.ajax({
+                    dataType:"html",
+                    data:{id_pais:iddistrito},
+                    url:"../../../bl/Contacto/cargarDistritosSelected.php",
+                    success:function(data){
+                        $("#di"+i).append(data);
+                    }
+                })
+            }
+            // DOMICILIO
+            function cargarDomicilio(iddomicilio,i) {
+                $.ajax({
+                    dataType:"html",
+                    data:{id_tipodomicilio:iddomicilio},
+                    url:"../../../bl/Contacto/cargarTipoDireccionSelected.php",
+                    success:function(data){
+                        $("#do"+i).append(data);
+                    }
+                });
+            }
+            
+            /** DIRECCION */
+            // PAIS
+            // EDITAR DIRECCION
+            $("#btnEditarDireccion").live("click",function() {
+                var idaddress = $(this).parent().parent().children().children("#idDireccionHidden").attr("value");
+                
+                if ($("#btnEditarDireccion").val() == "Editar") {
+                    $("#btnEditarDireccion").attr('value', 'Guardar');
+                    
+                    $("#pa"+idaddress).removeAttr('disabled');
+                    $("#de"+idaddress).removeAttr('disabled');
+                    $("#di"+idaddress).removeAttr('disabled');
+                    $("#do"+idaddress).removeAttr('disabled');
+                    $("#direccion").removeAttr('readonly');
+                } else {
+                    if ($("#direccion").val() === "") {
+                        alertCampoVacion();
+                    } else {
+                        alert($(this).parent().parent().children().children("#do"+idaddress).attr("value"));
+                        $.ajax({
+                            type:"POST",
+                            url:"../../../bl/editaCompania_BL.php?parameter=actualizadireccion",
+                            data:{
+                                idDireccion:$(this).parent().parent().children().children("#idDireccion"+idaddress).attr("value"),
+                                txtdireccion:$("#direccion").val(),
+                                idpais:$(this).parent().parent().children().children("#pa"+idaddress).attr("value"),
+                                iddepartamento:$(this).parent().parent().children().children("#de"+idaddress).attr("value"),
+                                iddistrito:$(this).parent().parent().children().children("#di"+idaddress).attr("value"),
+                                idtipodireccion:$(this).parent().parent().children().children("#do"+idaddress).attr("value"),
+                                idCompania:$("#idCompania").val(),
+                                idEmpresa :<?=$_SESSION['id']?>
+                            },
+                            success:function() {
+                                $("#btnEditarDireccion").attr('value', 'Editar');
+                    
+                                $("#pa"+idaddress).attr("disabled", "disabled");
+                                $("#de"+idaddress).attr("disabled", "disabled");
+                                $("#di"+idaddress).attr("disabled", "disabled");
+                                $("#do"+idaddress).attr("disabled", "disabled");
+                                $("#direccion").attr('readonly', 'true');
+                            }
+                        });    
+                    }
+                }
+            });
+            // ELIMINAR DIRECCION
+            
+            // CREAR NUEVA DIRECCION
+            $("#btnAgregarDireccion").live("click",function() {
+                $("#seleccionaDireccion").dialog("open");
+            });
+            // MODAL CREAR NUEVA DIRECCION
+            $("#seleccionaDireccion").dialog({
+                autoOpen:false,
+                height:280,
+                width:450,
+                modal:true,
+                buttons:{
+                    "Agregar":function() {
+                        if ($("#direccion_text").val() === "" || $("#tipodireccionid").val() === "0")
+                            alert("Hay un error en la direccion o el tipo de direccion.");
+                        else {
+                            $.ajax({
+                                type:"POST",
+                                url:"../../../bl/editaCompania_BL.php?parameter=nuevadireccion",
+                                data:{
+                                    txtdireccion:$("#direccion_text").val(),
+                                    idpais:$("#paisid").val(),
+                                    iddepartamento:$("#departamentoid").val(),
+                                    iddistrito:$("#distritoid").val(),
+                                    idtipodireccion:$("#tipodireccionid").val(),
+                                    idCompania:$("#idCompania").val(),
+                                    idEmpresa :<?=$_SESSION['id']?>
+                                },
+                                success:function() {
+                                    reload();
+                                }
+                            });
+                        }
+                    },
+                    "Cerrar":function() {
+                        $(this).dialog("close");
+                    }
+                }
             })
             
             function alertCampoVacion() {
@@ -885,6 +1076,7 @@ session_start();
         </script>
     </head>
     <body class="fondo">
+        <?php require_once '../../modales/agregaDireccion.php';?>
         <div id="barra-superior">
             <div id="barra-superior-dentro">
                 <h1 id="titulo_barra">EDICION DE COMPANIA</h1>
@@ -918,7 +1110,8 @@ session_start();
                     <p style="color: red">No ha especificado criterio alguno para su búsqueda. Rellene un campo e intente de nuevo.</p>
                 </div>
             <hr />
-            <div id="tmp"></div>
+            <div id="tmp">
+            </div>
         </div>
     </body>
 </html>

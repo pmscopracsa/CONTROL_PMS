@@ -135,6 +135,23 @@ try{
         $edita_compania->setAActualizar($_REQUEST['parameter']);
         $edita_compania->setValue($_REQUEST['id_representante_old']);
         $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == 'nuevadireccion') {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['txtdireccion']);
+        $edita_compania->setIdpais($_REQUEST['idpais']);
+        $edita_compania->setIddepartamento($_REQUEST['iddepartamento']);
+        $edita_compania->setIddistrito($_REQUEST['iddistrito']);
+        $edita_compania->setIdtipodireccion($_REQUEST['idtipodireccion']);
+        $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == 'actualizadireccion') {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['txtdireccion']);
+        $edita_compania->setIdpais($_REQUEST['idpais']);
+        $edita_compania->setIddepartamento($_REQUEST['iddepartamento']);
+        $edita_compania->setIddistrito($_REQUEST['iddistrito']);
+        $edita_compania->setIdtipodireccion($_REQUEST['idtipodireccion']);
+        $edita_compania->setId($_REQUEST['idDireccion']);
+        $edita_compania->actualizarObjetoCompania($cn);
     }
 }catch(Exception $ex) {
     echo 'Error: '.$ex->getMessage();

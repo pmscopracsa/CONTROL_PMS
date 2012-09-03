@@ -24,6 +24,13 @@ class EditaCompania
     /** Llave primaria */
     protected $id;
     
+    /** Para la direcccion */
+    protected $idpais;
+    protected $iddepartamento;
+    protected $iddistrito;
+    protected $idtipodireccion;
+    
+    
     public function actualizarObjetoCompania($cn)
     {
         try {
@@ -177,7 +184,32 @@ class EditaCompania
                     $query = "DELETE FROM tb_representante WHERE tb_companiacontacto_id = $this->idCompania AND tb_personacontacto_id = $this->value";
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
-                    break;      
+                    break; 
+                case 'nuevadireccion'    :    
+                    $query = "INSERT INTO tb_direccioncompaniacontacto (
+                        id,direccion,tb_pais_id,tb_departamento_id,tb_companiacontacto_id,tb_tipodireccion_id,tb_distrito_id) VALUES
+                        (NULL
+                        ,'$this->value'
+                        ,$this->idpais
+                        ,$this->iddepartamento
+                        ,$this->idCompania
+                        ,$this->idtipodireccion
+                        ,$this->iddistrito    
+                        )";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break; 
+                case 'actualizadireccion'    :    
+                    $query = "UPDATE tb_direccioncompaniacontacto 
+                        SET direccion = '$this->value'
+                        ,tb_pais_id = $this->idpais
+                        ,tb_departamento_id = $this->iddepartamento
+                        ,tb_tipodireccion_id = $this->idtipodireccion
+                        ,tb_distrito_id = $this->iddistrito    
+                        WHERE tb_companiacontacto_id = $this->idCompania AND id = $this->id";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;     
                 default:
                     break;
                     
@@ -242,5 +274,37 @@ class EditaCompania
 
      public function setId($id) {
          $this->id = $id;
+     }
+     
+     public function getIdpais() {
+         return $this->idpais;
+     }
+
+     public function setIdpais($idpais) {
+         $this->idpais = $idpais;
+     }
+
+     public function getIddepartamento() {
+         return $this->iddepartamento;
+     }
+
+     public function setIddepartamento($iddepartamento) {
+         $this->iddepartamento = $iddepartamento;
+     }
+
+     public function getIddistrito() {
+         return $this->iddistrito;
+     }
+
+     public function setIddistrito($iddistrito) {
+         $this->iddistrito = $iddistrito;
+     }
+
+     public function getIdtipodireccion() {
+         return $this->idtipodireccion;
+     }
+
+     public function setIdtipodireccion($idtipodireccion) {
+         $this->idtipodireccion = $idtipodireccion;
      }
 }
