@@ -22,13 +22,45 @@ session_start();
         <script src="../../../js/autocomplete/jquery.autocomplete.js" type="text/javascript"></script> 
         <script src="../../../js/cargarDatos.js" type="text/javascript"></script>
     <script>
+        function recargarEmpresa(filtro) 
+        {
+            $("#divBuscarCompania").load("../../datosdeobra/modales/empcontratante_div.php?filtro="+filtro);
+        }
+        
+        function recargarEmpresaSF()
+        {
+            $("#divBuscarCompania").load("../../datosdeobra/modales/empcontratante_div.php?filtro=1");
+        }
+        
         $(document).ready(function() {
+            /**
+             * PRIMERA CARGA DE LA LISTA DE EMPRESAS
+             */
+            $("#divBuscarCompania").load("../../datosdeobra/modales/empcontratante_div.php?filtro=1");
+            
             // BUSCAR CONTACTO A EDITAR
             $("#txtnombre").autocomplete("../../../bl/Contacto/mantenimiento/autocompletadoEmpresasPorContacto.php",{
                 width:260,
                 matchContains:true,
                 selectFirst:false
             });
+            
+            function reload(){
+                $.ajax({
+                       type:"GET",
+                       dataType:"html",
+                       url:"../../../bl/Contacto/actualizaPersona.php",
+                       data:{
+                           nombre:$("#txtnombre").val()
+                       },
+                       success:function(data) {
+                           toHtml(data);
+                           cargarDireccionPersona($("#txtnombre").val());
+                           cargarViaEnvio($("#idviaenvio").val());
+                       }
+               });
+            }
+            
             // BOTON PARA CARGAR DATOS DE CONTACTO A EDITAR
             $("#btnBuscar").click(function() {
                 if ($("#txtnombre").val() === "")
@@ -115,6 +147,7 @@ session_start();
             /** EDITAR */
             // NUMERO DE DOCUMENTO
             $("#btnEditarNumeroDocumento").live("click",function() {
+                
                 if($("#btnEditarNumeroDocumento").val() === 'Editar') {
                     $("#btnEditarNumeroDocumento").attr('value', 'Guardar');
                     $("#txtnumerodocumento").removeAttr('readonly');
@@ -130,13 +163,224 @@ session_start();
                                 value:$("#txtnumerodocumento").val()
                             },
                             success:function() {
-                                $("#btnEditarNumeroDocumento").attr('value', 'Editar');
+                                $("#btnEditarNumeroDocumento").attr('value', 'Editar'); 
                             }
                         });
                     }
                     
                 }
             }); 
+            // NOMBRES Y APELLIDOS
+            $("#btnEditarNombres").live("click",function() {
+                if($("#btnEditarNombres").val() === 'Editar') {
+                    $("#btnEditarNombres").attr('value', 'Guardar');
+                    $("#txtnombres").removeAttr('readonly');
+                } else {
+                    if ($("#txtnombres").val() == "")
+                        alert("Este campo debe tener datos")
+                    else {
+                        $.ajax({
+                            type:"POST",
+                            url:"../../../bl/editaPersona_BL.php?parameter=editaNombres",
+                            data:{
+                                idpersonacontacto:$("#idpersonacontacto").val(),
+                                value:$("#txtnombres").val()
+                            },
+                            success:function() {
+                                $("#btnEditarNombres").attr('value', 'Editar'); 
+                            }
+                        });
+                    }
+                }
+            });
+            // COMPANIA
+            $("#btnEditarCompania").live("click",function() {
+                if($("#btnEditarCompania").val() === "Editar"){
+                    $("#btnEditarCompania").attr('value','Guardar');
+                    $("#divBuscarCompania").dialog("open");
+                } else {
+                    $.ajax({
+                        type:"POST",
+                        url:"../../../bl/editaPersona_BL.php?parameter=editaCompania",
+                        data:{
+                            idpersonacontacto:$("#idpersonacontacto").val(),
+                            value:$("#txtidempresa").val()
+                        },
+                        success:function() {
+                            $("#btnEditarCompania").attr('value','Editar');
+                        }
+                    });
+                }    
+            });
+            
+            $("#btnSearchEmpContratante").live("click",function() {
+                recargarEmpresa($("#txt_divEmpContratanteBuscar").val());  
+            });
+            // ASIGNAR EMPRESA A CAMPO
+            $('.contratante').live("click",function(){
+                 var contratante_array = $(this).text().split("-");
+                 $("#txtcompania").val(contratante_array[1]);
+                 $("#txtidempresa").val(contratante_array[0]);
+            });
+            
+            // CARGO
+            $("#btnEditarCargo").live("click",function() {
+                if($("#btnEditarCargo").val() === 'Editar') {
+                    $("#btnEditarCargo").attr('value', 'Guardar');
+                    $("#txtcargo").removeAttr('readonly');
+                } else {
+                    if ($("#txtcargo").val() == "")
+                        alert("Este campo debe tener datos")
+                    else {
+                        $.ajax({
+                            type:"POST",
+                            url:"../../../bl/editaPersona_BL.php?parameter=editaCargo",
+                            data:{
+                                idpersonacontacto:$("#idpersonacontacto").val(),
+                                value:$("#txtcargo").val()
+                            },
+                            success:function() {
+                                $("#btnEditarCargo").attr('value', 'Editar'); 
+                            }
+                        });
+                    }
+                    
+                }
+            })
+            /** TELEFONO FIJO */
+            // EDITAR TELEFONO FIJO
+            $("#btnEditarTelefonoFijo").live("click",function() {
+                if($("#btnEditarTelefonoFijo").val() === "Editar") {
+                    $("#txtTelefonoFijo").removeAttr("READONLY");
+                    $("#btnEditarTelefonoFijo").attr("value","Guardar");
+                } else {
+                    if ($("#txtTelefonoFijo").val() === "") {
+                        alertCampoVacion();
+                    } else {
+                        $.ajax({
+                           type:"POST",
+                           data:{
+                                value:$(this).parent().parent().children().children('#txtTelefonoFijo').attr("value"),
+                                idvalue:$(this).parent().parent().children('#idTFijo').attr("value"),
+                                idpersonacontacto:$("#idpersonacontacto").val()
+                           },
+                           url:"../../../bl/editaPersona_BL.php?parameter=tf_actualiza",
+                           success:function() {
+                               $("#txtTelefonoFijo").attr("READONLY",true);
+                               $("#btnEditarTelefonoFijo").attr("value","Editar");
+                               alertExito();
+                           }
+                        });
+                    }
+                }
+            });
+            // ELIMINAR TELEFONO FIJO
+            $("#btnEliminarTF").live("click",function() {
+                $(this).parent().parent().remove();
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        idvalue:$(this).parent().parent().children('#idTFijo').attr("value"),
+                        idpersonacontacto:$("#idpersonacontacto").val()
+                    },
+                    url:"../../../bl/editaPersona_BL.php?parameter=tf_elimina",
+                    success:function() {
+                        alertExito();
+                        if (!$("#tr_tfijo").length)
+                            reload();
+                    }
+                });
+            });
+            //CREAR NUEVO TELEFONO FIJO
+            $("#btnAgregarTF").live("click",function() {
+                var giro = '<tr id="tr_tfijo"><td>'+
+                            '<input type="text" size="30" id="txtTFNuevo" name="tf" value="" />'+
+                            '<td><input type="button" value="Guardar" id="btnNuevoTF"/></td>'+
+                            '<td><input type="button" value="Cancelar" id="btnCancelar"/></td>'+
+                            '</td></tr>';
+                $("#tr_tfijo").after(giro);        
+            });
+            // GUARDAR NUEVO TELEFONO FIJO
+            $("#btnNuevoTF").live("click",function() {
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        val_nuevotf:$(this).parent().parent().children().children("#txtTFNuevo").attr("value"),
+                        idpersonacontacto:$("#idpersonacontacto").val()
+                    },
+                    url:"../../../bl/editaPersona_BL.php?parameter=tf_nuevo",
+                    success:function() {
+                        reload();
+                    }
+                });
+            });
+            /** TELEFONO MOBILE*/
+            //ACTUALIZA
+            $("#btnEditarTM").live("click",function() {
+                if($("#btnEditarTM").val() === "Editar") {
+                    $("#txtTM").removeAttr("READONLY");
+                    $("#btnEditarTM").attr("value","Guardar");
+                } else {
+                    if ($("#txtTM").val() === "") {
+                        alertCampoVacion();
+                    } else {
+                        $.ajax({
+                           type:"POST",
+                           data:{
+                                value:$(this).parent().parent().children().children('#txtTM').attr("value"),
+                                idvalue:$(this).parent().parent().children('#idtm').attr("value"),
+                                idpersonacontacto:$("#idpersonacontacto").val()
+                           },
+                           url:"../../../bl/editaPersona_BL.php?parameter=tm_actualiza",
+                           success:function() {
+                               $("#txtTM").attr("READONLY",true);
+                               $("#btnEditarTM").attr("value","Editar");
+                               alertExito();
+                           }
+                        });
+                    }
+                }
+            });
+            // ELIMINAR
+            $("#btnEliminarTM").live("click",function() {
+                $(this).parent().parent().remove();
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        idvalue:$(this).parent().parent().children('#txtTM').attr("value"),
+                        idpersonacontacto:$("#idpersonacontacto").val()
+                    },
+                    url:"../../../bl/editaPersona_BL.php?parameter=tm_elimina",
+                    success:function() {
+                        alertExito();
+                        if (!$("#tr_tm").length)
+                            reload();
+                    }
+                });
+            });
+            //CREAR NUEVO TELEFONO FIJO
+            $("#btnAgregarTF").live("click",function() {
+                var giro = '<tr id="tr_tfijo"><td>'+
+                            '<input type="text" size="30" id="txtTFNuevo" name="tf" value="" />'+
+                            '<td><input type="button" value="Guardar" id="btnNuevoTF"/></td>'+
+                            '<td><input type="button" value="Cancelar" id="btnCancelar"/></td>'+
+                            '</td></tr>';
+                $("#tr_tfijo").after(giro);        
+            });
+            // GUARDAR NUEVO TELEFONO FIJO
+            $("#btnNuevoTF").live("click",function() {
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        val_nuevotf:$(this).parent().parent().children().children("#txtTFNuevo").attr("value"),
+                        idpersonacontacto:$("#idpersonacontacto").val()
+                    },
+                    url:"../../../bl/editaPersona_BL.php?parameter=tf_nuevo",
+                    success:function() {
+                        reload();
+                    }
+                });
+            });
             
             /*function printAddressCo(data) {
                 var i = 1;
@@ -219,6 +463,22 @@ session_start();
                 });
             }
             
+            // MODAL PARA LA BUSQUEDA DE EMPRESA
+            $("#divBuscarCompania").dialog({
+                autoOpen:false,
+                height:300,
+                width:350,
+                modal:true,
+                buttons:{
+                    "Limpiar":function() {
+                        recargarEmpresaSF();
+                    },
+                    "Cerrar":function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            
             function toHtml(data)
             {
                 $("#tmp").html(data);  
@@ -227,6 +487,8 @@ session_start();
     </script>
     </head>
     <body class="fondo">
+        <!-- editar compania -->
+        <div id="divBuscarCompania" title="Escoge una empresa"></div>
         <div id="barra-superior">
             <div id="barra-superior-dentro">
                 <h1 id="titulo_barra">EDICION DE PERSONA</h1>
