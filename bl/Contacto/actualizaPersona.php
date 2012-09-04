@@ -43,6 +43,7 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
             <tr>
                 <input type="hidden" value="'.$res[0].'" id="idpersonacontacto" />
                 <input type="hidden" value="'.$res[9].'" id="idviaenvio" />
+                <input type="hidden" value="'.$res[11].'" id="idespecialidad" />    
                 <td>Numero de documento:<td><input id="txtnumerodocumento" type="text" value="'.$res[1].'" size="45" READONLY/>
                 <td><input type="button" value="Editar" id="btnEditarNumeroDocumento"/>    
             </tr>
@@ -188,7 +189,7 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
                     <input type="text" id="txtES" name="giro" value="'.
                     $especialidades[$i]
                     .'" READONLY/></td>
-                    <input id="idES" type="hidden" value="'.$telefonosn[$i-1].'" />    
+                    <input id="idES" type="hidden" value="'.$especialidades[$i-1].'" />    
                     <td><input type="button" value="Editar" id="btnEditarES"/></td>    
                     <td><input type="button" class="delRow" id="btnEliminarES"/></td>
                     <td><input type="button" class="addRow" id="btnAgregarES"/></td>
@@ -203,9 +204,11 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
             </tr>
             <tr>
                 <td>Observacion:<td><input type="text" value="'.$res[5].'" id="txtobservacion" size="45" READONLY/>
+                <td><input type="button" id="btnEditaObservacion" value="Editar"/>
             </tr>
             <tr>
                 <td>Email principal:<td><input type="text" value="'.$res[6].'" id="txtemailprincipal" size="45" READONLY/>
+                <td><input type="button" id="btnEditaEmail" value="Editar"/>
             </tr>
             <tr>
                 <td>Email Secundario:
@@ -226,7 +229,7 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
                     <input type="text" id="txtMAIL" name="mail" value="'.
                     $correos[$i]
                     .'" READONLY/></td>
-                    <input id="idES" type="hidden" value="'.$correos[$i-1].'" />    
+                    <input id="idMAIL" type="hidden" value="'.$correos[$i-1].'" />    
                     <td><input type="button" value="Editar" id="btnEditarMAIL"/></td>    
                     <td><input type="button" class="delRow" id="btnEliminarMAIL"/></td>
                     <td><input type="button" class="addRow" id="btnAgregarMAIL"/></td>
@@ -241,11 +244,11 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
             </tr>
             <tr>
                 <td>Web:<td><input type="text" value="'.$res[7].'" id="txtweb" size="45" READONLY/>
-                <td><input type="button" value="Editar" />    
+                <td><input type="button" id="btnEditarWeb" value="Editar" />    
             </tr>
             <tr>
                 <td>Fax:<td><input type="text" value="'.$res[4].'" id="txtfax" size="45" READONLY/>
-                <td><input type="button" value="Editar" />    
+                <td><input type="button" value="Editar" id="btnEditarFax" />    
             </tr>
             <tr>
                 <td>Via de Envio

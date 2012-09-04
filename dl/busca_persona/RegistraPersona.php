@@ -155,9 +155,12 @@ class RegistraPersona
             ,pc.direccion
             ,pc.tb_viaenvio_id idviaenvio
             ,cc.descripcion empresa
+            ,pro.tb_especialidadpersona_id idespecialidad
             FROM 
             tb_companiacontacto cc
-            INNER JOIN tb_personacontacto pc ON cc.id = pc.tb_companiacontacto_id 
+            LEFT JOIN tb_personacontacto pc ON cc.id = pc.tb_companiacontacto_id 
+            LEFT JOIN tb_profesion pro ON pro.tb_personacontacto_id = pc.id
+            LEFT JOIN tb_especialidadpersona ep ON pro.tb_especialidadpersona_id = ep.id
             WHERE pc.nombre =  '$this->_nombrecompleto'";
         
         try {
@@ -186,11 +189,12 @@ class RegistraPersona
                 array_push($personadatos,$res['direccion'] == NULL ? "" : $res['direccion']);
                 array_push($personadatos,$res['idviaenvio'] == NULL ? "" : $res['idviaenvio']);
                 array_push($personadatos,$res['empresa'] == NULL ? "" : $res['empresa']);
+                array_push($personadatos,$res['idespecialidad'] == NULL ? "" : $res['idespecialidad']);
             }
             return $personadatos;
             
         } catch (Exception $e) {
-            echo "Error al consultar compania por nombre. Error: ".$e->getMessage();
+            echo "Error al consultar persona. Error: ".$e->getMessage();
         }
     }
     

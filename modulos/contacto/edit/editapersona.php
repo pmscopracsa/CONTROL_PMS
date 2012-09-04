@@ -38,6 +38,10 @@ session_start();
              */
             $("#divBuscarCompania").load("../../datosdeobra/modales/empcontratante_div.php?filtro=1");
             
+            /** PRIMERA CARGA DE LA LISTA DE ESPECIALIDADES */
+            $("#divEditarEspecialidad").load("../../../modulos/contacto/modal_registracompania/modal-especialidadPersona.php");
+            $("#divEditarEspecialidadNuevo").load("../../../dl/contacto_bl/modal-especialidadPersonaNew.php");
+            
             // BUSCAR CONTACTO A EDITAR
             $("#txtnombre").autocomplete("../../../bl/Contacto/mantenimiento/autocompletadoEmpresasPorContacto.php",{
                 width:260,
@@ -100,48 +104,39 @@ session_start();
                 cargarviaenvioseleccted(id_viaenvio);
                 $("#idviaenvio tbody").append(
                     "<td><select disabled='disabled' id='viaenvio'><select></td>"+
-                    "<td><input type='button' id='btnEditarViaEnvio'  value='Editar'/></td>"+
-                    "<td><input type='button' class='delRow' id='btnEliminarViaEnvio' /></td>"+
-                    "<td><input type='button' class='addRow' id='btnAgregarViaEnvio' /></td>"
+                    "<td><input type='button' id='btnEditarViaEnvio'  value='Editar'/></td>"
                 )
             }
-            /*function cargarDireccionPersonaEmpresa(id_persona) {
-                
-                $.ajax({
-                    type:"GET",
-                    dataType:"json",
-                    data:{
-                        idpersona:id_persona
-                    },
-                    url:"../../../dl/busca_persona/DireccionPersonaEmpresa.json.php",
-                    success:function(data) {
-                        printAddressCo(data);
-                    }
-                })
-            }*/
+
             
             function printAddress(data) {
                 var i = 1;
-                $.each(data,function(index,value){
+                if(!data){
+                    $("#direccion_full tbody").append(
+                        "<tr id='tbl_direccion'>"+
+                            "<td><input type='button' class='addRow' id='btnAgregarDireccion' /></td>"+
+                        "</tr>"    
+                    )
+                }else {
+                    $.each(data,function(index,value){
                     cargarPais(data[index].idpais,i)
                     cargarDepartamento(data[index].iddepartamento, i);
                     cargarDistrito(data[index].iddistrito, i);
                     
                     $("#direccion_full tbody").append(
-                        "<tr id='tbl_direccion'>"+
-                        "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td>"+
-                        "<td><td><select disabled='disabled' id='pa"+i+"'></select></td></td>"+
-                        "<td><td><select disabled='disabled' id='de"+i+"'></select></td>"+
-                        "<td><td><select disabled='disabled' id='di"+i+"'></select></td>"+
-                        "<td><input type='button' id='btnEditarDireccion'  value='Editar'/></td>"+
-                        "<td><input type='button' class='delRow' id='btnEliminarDireccion' /></td>"+
-                        "<td><input type='button' class='addRow' id='btnAgregarDireccion' /></td>"+
-                        "<td style='display:none'><input type='hidden' id='idDireccionHidden' value='"+i+"' /></td>"+
-                        "<td style='display:none'><input type='hidden' id='idDireccion"+i+"' value='"+data[index].id+"' /></td>"+
-                        "</tr>"
-                    ),
-                    i++
-                });
+                            "<tr id='tbl_direccion'>"+
+                            "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td>"+
+                            "<td><td><select disabled='disabled' id='pa"+i+"'></select></td></td>"+
+                            "<td><td><select disabled='disabled' id='de"+i+"'></select></td>"+
+                            "<td><td><select disabled='disabled' id='di"+i+"'></select></td>"+
+                            "<td><input type='button' id='btnEditarDireccion'  value='Editar'/></td>"+
+                            "<td style='display:none'><input type='hidden' id='idDireccionHidden' value='"+i+"' /></td>"+
+                            "<td style='display:none'><input type='hidden' id='idDireccion"+i+"' value='"+data[index].id+"' /></td>"+
+                            "</tr>"
+                        ),
+                        i++
+                    });
+                }
             }
             
             /** EDITAR */
@@ -250,9 +245,9 @@ session_start();
             /** TELEFONO FIJO */
             // EDITAR TELEFONO FIJO
             $("#btnEditarTelefonoFijo").live("click",function() {
-                if($("#btnEditarTelefonoFijo").val() === "Editar") {
-                    $("#txtTelefonoFijo").removeAttr("READONLY");
-                    $("#btnEditarTelefonoFijo").attr("value","Guardar");
+                if($(this).val() === "Editar") {
+                    $(this).parent().parent().children().children("#txtTelefonoFijo").removeAttr('readonly');
+                    $(this).attr("value","Guardar");
                 } else {
                     if ($("#txtTelefonoFijo").val() === "") {
                         alertCampoVacion();
@@ -266,9 +261,7 @@ session_start();
                            },
                            url:"../../../bl/editaPersona_BL.php?parameter=tf_actualiza",
                            success:function() {
-                               $("#txtTelefonoFijo").attr("READONLY",true);
-                               $("#btnEditarTelefonoFijo").attr("value","Editar");
-                               alertExito();
+                               reload();
                            }
                         });
                     }
@@ -315,11 +308,11 @@ session_start();
                 });
             });
             /** TELEFONO MOBILE*/
-            //ACTUALIZA
+            //ACTUALIZA - EDITO
             $("#btnEditarTM").live("click",function() {
-                if($("#btnEditarTM").val() === "Editar") {
-                    $("#txtTM").removeAttr("READONLY");
-                    $("#btnEditarTM").attr("value","Guardar");
+                if($(this).val() === "Editar") {
+                    $(this).parent().parent().children().children("#txtTM").removeAttr('readonly');
+                    $(this).attr("value","Guardar");
                 } else {
                     if ($("#txtTM").val() === "") {
                         alertCampoVacion();
@@ -333,9 +326,7 @@ session_start();
                            },
                            url:"../../../bl/editaPersona_BL.php?parameter=tm_actualiza",
                            success:function() {
-                               $("#txtTM").attr("READONLY",true);
-                               $("#btnEditarTM").attr("value","Editar");
-                               alertExito();
+                               reload();
                            }
                         });
                     }
@@ -347,66 +338,365 @@ session_start();
                 $.ajax({
                     type:"POST",
                     data:{
-                        idvalue:$(this).parent().parent().children('#txtTM').attr("value"),
+                        idvalue:$(this).parent().parent().children('#idtm').attr("value"),
                         idpersonacontacto:$("#idpersonacontacto").val()
                     },
                     url:"../../../bl/editaPersona_BL.php?parameter=tm_elimina",
                     success:function() {
-                        alertExito();
                         if (!$("#tr_tm").length)
                             reload();
                     }
                 });
             });
-            //CREAR NUEVO TELEFONO FIJO
-            $("#btnAgregarTF").live("click",function() {
-                var giro = '<tr id="tr_tfijo"><td>'+
-                            '<input type="text" size="30" id="txtTFNuevo" name="tf" value="" />'+
-                            '<td><input type="button" value="Guardar" id="btnNuevoTF"/></td>'+
+            //CREAR NUEVO TELEFONO MOBILE
+            $("#btnAgregarTM").live("click",function() {
+                var giro = '<tr id="tr_tm"><td>'+
+                            '<input type="text" size="30" id="txtTM" name="tf" value="" />'+
+                            '<td><input type="button" value="Guardar" id="btnNuevoTM"/></td>'+
                             '<td><input type="button" value="Cancelar" id="btnCancelar"/></td>'+
                             '</td></tr>';
-                $("#tr_tfijo").after(giro);        
+                $("#tr_tm").after(giro);        
             });
-            // GUARDAR NUEVO TELEFONO FIJO
-            $("#btnNuevoTF").live("click",function() {
+            // GUARDAR NUEVO TELEFONO MOBILE
+            $("#btnNuevoTM").live("click",function() {
                 $.ajax({
                     type:"POST",
                     data:{
-                        val_nuevotf:$(this).parent().parent().children().children("#txtTFNuevo").attr("value"),
+                        val_nuevotf:$(this).parent().parent().children().children("#txtTM").attr("value"),
                         idpersonacontacto:$("#idpersonacontacto").val()
                     },
-                    url:"../../../bl/editaPersona_BL.php?parameter=tf_nuevo",
+                    url:"../../../bl/editaPersona_BL.php?parameter=tm_nuevo",
+                    success:function() {
+                        reload();
+                    }
+                });
+            });
+            /** TELEFONO NEXTEL*/
+            //ACTUALIZA - EDITO
+            $("#btnEditarTN").live("click",function() {
+                if($(this).val() === "Editar") {
+                    $(this).attr("value","Guardar");
+                    $(this).parent().parent().children().children("#txtTN").removeAttr('readonly');
+                } else {
+                    if ($("#txtTN").val() === "") {
+                        alertCampoVacion();
+                    } else {
+                        $.ajax({
+                           type:"POST",
+                           data:{
+                                value:$(this).parent().parent().children().children('#txtTN').attr("value"),
+                                idvalue:$(this).parent().parent().children('#idTN').attr("value"),
+                                idpersonacontacto:$("#idpersonacontacto").val()
+                           },
+                           url:"../../../bl/editaPersona_BL.php?parameter=tn_actualiza",
+                           success:function() {
+                               reload();
+                           }
+                        });
+                    }
+                }
+            });
+            // ELIMINAR
+            $("#btnEliminarTN").live("click",function() {
+            alert($(this).parent().parent().children('#idTN').attr("value"));
+                $(this).parent().parent().remove();
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        idvalue:$(this).parent().parent().children('#idTN').attr("value"),
+                        idpersonacontacto:$("#idpersonacontacto").val()
+                    },
+                    url:"../../../bl/editaPersona_BL.php?parameter=tn_elimina",
+                    success:function() {
+                        if (!$("#tr_tn").length)
+                            reload();
+                    }
+                });
+            });
+            //CREAR NUEVO TELEFONO NEXTEL
+            $("#btnAgregarTN").live("click",function() {
+                var giro = '<tr id="tr_tn"><td>'+
+                            '<input type="text" size="30" id="txtTN" name="tf" value="" />'+
+                            '<td><input type="button" value="Guardar" id="btnNuevoTN"/></td>'+
+                            '<td><input type="button" value="Cancelar" id="btnCancelar"/></td>'+
+                            '</td></tr>';
+                $("#tr_tn").after(giro);        
+            });
+            // GUARDAR NUEVO TELEFONO NEXTEL
+            $("#btnNuevoTN").live("click",function() {
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        val_nuevotn:$(this).parent().parent().children().children("#txtTN").attr("value"),
+                        idpersonacontacto:$("#idpersonacontacto").val()
+                    },
+                    url:"../../../bl/editaPersona_BL.php?parameter=tn_nuevo",
+                    success:function() {
+                        reload();
+                    }
+                });
+            });
+            /** EDITAR DIRECCION */
+            $("#btnEditarDireccion").live("click",function() {
+                var idaddress = $(this).parent().parent().children().children("#idDireccionHidden").attr("value");
+                if($("#btnEditarDireccion").val() == 'Editar') {
+                    $("#btnEditarDireccion").attr('value','Guardar');
+                    $("#pa"+idaddress).removeAttr('disabled');
+                    $("#de"+idaddress).removeAttr('disabled');
+                    $("#di"+idaddress).removeAttr('disabled');
+                    $("#direccion").removeAttr('readonly');
+                } else {
+                    if ($("#direccion").val() === "") {
+                        alert("El campo direccion esta vacio");
+                    } else {
+                        alert($(this).parent().parent().children().children("#di"+idaddress).attr("value"));
+                        $.ajax({
+                            type:"POST",
+                            url:"../../../bl/editaPersona_BL.php?parameter=actualizadireccion",
+                            data:{
+                                txtdireccion:$("#direccion").val(),
+                                idpais:$(this).parent().parent().children().children("#pa"+idaddress).attr("value"),
+                                iddepartamento:$(this).parent().parent().children().children("#de"+idaddress).attr("value"),
+                                iddistrito:$(this).parent().parent().children().children("#di"+idaddress).attr("value"),
+                                idpersonacontacto:$("#idpersonacontacto").val()
+                            },
+                            success:function() {
+                                $("#btnEditarDireccion").attr('value', 'Editar');
+                    
+                                $("#pa"+idaddress).attr("disabled", "disabled");
+                                $("#de"+idaddress).attr("disabled", "disabled");
+                                $("#di"+idaddress).attr("disabled", "disabled");
+                                $("#do"+idaddress).attr("disabled", "disabled");
+                                $("#direccion").attr('readonly', 'true');
+                            }
+                        });  
+                    }
+                }
+            });
+           /** ESPECIALIDADES */
+           // EDITAR ESPECIALIDAD
+           $("#btnEditarES").live("click",function() {
+                if ($(this).val() === 'Editar') {
+                    $(this).attr('value', 'Guardar');
+                    $("#divEditarEspecialidad").dialog("open");
+                } else {
+                    $.ajax({
+                        type:"POST",
+                        url:"../../../bl/editaPersona_BL.php?parameter=editaEspecialidad",
+                        data:{
+                            idespecialidad:$("#idES").val(),
+                            idpersonacontacto:$("#idpersonacontacto").val()
+                        },
+                        success:function() {
+                            reload();
+                        }
+                    })
+                }
+           });
+           $(".especialidad").live("click",function() {
+               var especialidad_array = $(this).text().split("-");
+               $("#idES").val(especialidad_array[0]);
+               $("#txtES").val(especialidad_array[1]);
+           });
+           // ELIMINAR ESPECIALIDAD
+           $("#btnEliminarES").live("click",function() {
+               var idespecialidad = $("#idES").val();
+               $(this).parent().parent().remove();
+               $.ajax({
+                   type:"POST",
+                   url:"../../../bl/editaPersona_BL.php?parameter=eliminarEspecialidad",
+                   data:{
+                      idpersonacontacto:$("#idpersonacontacto").val(),
+                      idespecialidad:idespecialidad
+                   },
+                   success:function() {
+                       
+                   }
+               })
+           })
+           // AGREGAR ESPECIALIDAD
+           $("#btnAgregarES").live("click",function() {
+               $("#divEditarEspecialidadNuevo").dialog("open");
+           });
+           $(".especialidad_new").live("click",function() {
+               var especialidad_array = $(this).text().split("-");
+               $.ajax({
+                   type:"POST",
+                   data:{
+                       idespecialidad:especialidad_array[0],
+                       idpersonacontacto:$("#idpersonacontacto").val()
+                   },
+                   url:"../../../bl/editaPersona_BL.php?parameter=nuevaEspecialidad",
+                   success:function() {
+                       reload();
+                   }
+               })
+           });
+           
+           /** OBSERVACION */
+           $("#btnEditaObservacion").live("click",function() {
+               if($("#btnEditaObservacion").val() === 'Editar'){
+                   $("#btnEditaObservacion").attr('value', 'Guardar');
+                   $("#txtobservacion").removeAttr('readonly');
+               } else {
+                   
+                   $.ajax({
+                       type:"POST",
+                       url:"../../../bl/editaPersona_BL.php?parameter=editaObservacion",
+                       data:{
+                           observacion:$("#txtobservacion").val()
+                       },
+                       success:function() {
+                           reload();
+                       }
+                   })
+               }
+           });
+           /** EMAIL PRINCIPAL */ 
+            $("#btnEditaEmail").live("click",function() {
+                if($("#btnEditaEmail").val() === 'Editar'){
+                   $("#btnEditaEmail").attr('value','Guardar'); 
+                   $("#txtemailprincipal").removeAttr('readonly');
+                } else {
+                    $.ajax({
+                        type:"POST",
+                        url:"../../../bl/editaPersona_BL.php?parameter=editEmail",
+                        data:{
+                            email:$("#txtemailprincipal").val(),
+                            idpersonacontacto:$("#idpersonacontacto").val()
+                        },
+                        success:function() {
+                            reload();
+                        }
+                    });
+                }
+            });
+            /** EMAIL SECUNDARIO(S) */
+            // EDITAR EMAIL SECUNDARIO
+            $("#btnEditarMAIL").live("click",function() {
+                if($(this).val() === 'Editar'){
+                   $(this).attr('value','Guardar'); 
+                   $(this).parent().parent().children().children("#txtMAIL").removeAttr('readonly');
+                } else {
+                    //alert($(this).parent().parent().children().children("#txtMAIL").attr('value'));
+                    //alert($(this).parent().parent().children("#idMAIL").attr('value'));
+                    $.ajax({
+                        type:"POST",
+                        url:"../../../bl/editaPersona_BL.php?parameter=editEmailSecundario",
+                        data:{
+                            email:$(this).parent().parent().children().children("#txtMAIL").attr('value'),
+                            idemail:$(this).parent().parent().children("#idMAIL").attr('value'),
+                            idpersonacontacto:$("#idpersonacontacto").val()
+                        },
+                        success:function() {
+                            reload();
+                        }
+                    });
+                }
+            }); 
+            // ELIMINAR EMAIL SECUNDARIO
+            $("#btnEliminarMAIL").live("click",function() {
+                var id_email = $(this).parent().parent().children("#idMAIL").attr('value');
+                $(this).parent().parent().remove();
+                $.ajax({
+                   type:"POST",
+                   url:"../../../bl/editaPersona_BL.php?parameter=eliminaEmailSecundario",
+                   data:{
+                       idemail:id_email,
+                       idpersonacontacto:$("#idpersonacontacto").val()
+                   },
+                   success:function() {
+                       
+                   }
+                });
+            });
+            // CREAR NUEVO EMAIL SECUNDARIO
+            $("#btnAgregarMAIL").live("click",function() {
+                var mailsecundarionew = '<tr id="tr_mail"><td>'+
+                                        '<input type="text" size="45" id="txtNewEmailSec"  />'+
+                                        '<td><input type="button" value="Guardar" id="btnNuevoES"/></td>'+
+                                        '<td><input type="button" value="Cancelar" id="btnCancelarES"/></td>'+
+                                        '</td></tr>';
+                                    $("#tr_mail").after(mailsecundarionew);
+            });
+            // GUARDAR NUEVO EMAIL SECUNDARIO
+            $("#btnNuevoES").live("click",function() {
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        newmail:$("#txtNewEmailSec").val(),
+                        idpersonacontacto:$("#idpersonacontacto").val()
+                    },
+                    url:"../../../bl/editaPersona_BL.php?parameter=guardarEmailSecundario",
                     success:function() {
                         reload();
                     }
                 });
             });
             
-            /*function printAddressCo(data) {
-                var i = 1;
-                $.each(data,function(index,value){
-                    alert(data[index].idpais);
-                    cargarPais(data[index].idpais,i)
-                    cargarDepartamento(data[index].iddepartamento, i);
-                    cargarDistrito(data[index].iddistrito, i);
-                    cargarDomicilio(data[index].idtipodireccion, i)
-                    $("#direccion_full_co tbody").append(
-                        "<tr id='tbl_direccion'>"+
-                        "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td>"+
-                        "<td><td><select disabled='disabled' id='pa"+i+"'></select></td></td>"+
-                        "<td><td><select disabled='disabled' id='de"+i+"'></select></td>"+
-                        "<td><td><select disabled='disabled' id='di"+i+"'></select></td>"+
-                        "<td><td><select disabled='disabled' id='do"+i+"'></select></td>"+
-                        "<td><input type='button' id='btnEditarDireccion'  value='Editar'/></td>"+
-                        "<td><input type='button' class='delRow' id='btnEliminarDireccion' /></td>"+
-                        "<td><input type='button' class='addRow' id='btnAgregarDireccion' /></td>"+
-                        "<td style='display:none'><input type='hidden' id='idDireccionHidden' value='"+i+"' /></td>"+
-                        "<td style='display:none'><input type='hidden' id='idDireccion"+i+"' value='"+data[index].direccion_id+"' /></td>"+
-                        "</tr>"
-                    ),
-                    i++
-                });
-            }*/
+            /** WEB */
+            $("#btnEditarWeb").live("click",function() {
+                var thisObj = $(this);
+                if(thisObj.val() === 'Editar') {
+                    thisObj.attr('value', 'Guardar');
+                    $("#txtweb").removeAttr('readonly');
+                } else {
+                    $.ajax({
+                        type:"POST",
+                        data:{
+                            newweb:$("#txtweb").val(),
+                            idpersonacontacto:$("#idpersonacontacto").val()
+                        },
+                        url:"../../../bl/editaPersona_BL.php?parameter=editarWeb",
+                        success:function() {
+                            thisObj.attr('value', 'Editar'); 
+                            $("#txtweb").attr('readonly', 'true');
+                        }
+                    })
+                }
+            })
+            // FAX
+            $("#btnEditarFax").live("click",function() {
+                var thisObj = $(this);
+                if (thisObj.val() === 'Editar') {
+                    thisObj.attr('value', 'Guardar');
+                    $("#txtfax").removeAttr('readonly');
+                } else {
+                    $.ajax({
+                        type:"POST",
+                        data:{
+                            newfax:$("#txtfax").val(),
+                            idpersonacontacto:$("#idpersonacontacto").val()
+                        },
+                        url:"../../../bl/editaPersona_BL.php?parameter=editarFax",
+                        success:function() {
+                            $("#txtfax").attr('readonly', 'true');
+                            thisObj.attr('value', 'Editar');
+                        }
+                    });
+                }
+            })
+            // VIA ENVIO
+            $("#btnEditarViaEnvio").live("click",function() {
+                var thisObj = $(this);
+                if (thisObj.val() === "Editar") {
+                    $("#viaenvio").removeAttr('disabled');
+                    thisObj.attr('value', 'Guardar');
+                } else {
+                    $.ajax({
+                       type:"POST",
+                       url:"../../../bl/editaPersona_BL.php?parameter=editarViaEnvio",
+                       data:{
+                           new_viaenvio:$("#viaenvio").val(),
+                           idpersonacontacto:$("#idpersonacontacto").val()
+                       },
+                       success:function() {
+                           thisObj.attr('value', 'Editar');
+                           $("#viaenvio").attr('disabled', 'true');
+                       }
+                    });
+                }
+            });
             
             function cargarPais(idpais,i) {
                 $.ajax({
@@ -456,7 +746,7 @@ session_start();
                 $.ajax({
                     dataType:"html",
                     data:{id_viaenvio:idviaenvio},
-                    url:"../../../bl/Contacto/cargarTipoDireccionSelected.php",
+                    url:"../../../bl/Contacto/cargarViaEnvioSelected.php",
                     success:function(data){
                         $("#viaenvio").append(data);
                     }
@@ -478,6 +768,29 @@ session_start();
                     }
                 }
             });
+            // MODAL PARA ESPECIALIDAD
+            $("#divEditarEspecialidad").dialog({
+                autoOpen:false,
+                heigth:300,
+                width:350,
+                modal:true,
+                buttons:{
+                    "Cerrar":function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            $("#divEditarEspecialidadNuevo").dialog({
+                autoOpen:false,
+                heigth:300,
+                width:350,
+                modal:true,
+                buttons:{
+                    "Cerrar":function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
             
             function toHtml(data)
             {
@@ -489,6 +802,9 @@ session_start();
     <body class="fondo">
         <!-- editar compania -->
         <div id="divBuscarCompania" title="Escoge una empresa"></div>
+        <div id="divEditarEspecialidad" title="Escoge una especialidad"></div>
+        <div id="divEditarEspecialidadNuevo" title="Escoge una especialidad nueva"></div>
+        
         <div id="barra-superior">
             <div id="barra-superior-dentro">
                 <h1 id="titulo_barra">EDICION DE PERSONA</h1>

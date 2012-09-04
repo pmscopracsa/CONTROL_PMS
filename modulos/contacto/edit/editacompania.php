@@ -997,7 +997,6 @@ session_start();
                     if ($("#direccion").val() === "") {
                         alertCampoVacion();
                     } else {
-                        alert($(this).parent().parent().children().children("#do"+idaddress).attr("value"));
                         $.ajax({
                             type:"POST",
                             url:"../../../bl/editaCompania_BL.php?parameter=actualizadireccion",

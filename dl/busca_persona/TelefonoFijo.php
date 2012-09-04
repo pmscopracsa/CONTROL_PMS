@@ -55,7 +55,7 @@ class TelefonoFijo {
             
             $rs = mysql_query($query, $cn);
             if (!$rs)
-                throw new Exception("Error al consultar: ".  mysql_error());
+                throw new Exception("Error al consultarXXX: ".  mysql_error());
             
             $telefonos = array();
             
