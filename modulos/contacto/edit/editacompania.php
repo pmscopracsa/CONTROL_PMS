@@ -34,16 +34,25 @@ session_start();
                 matchContains:true,
                 selectFirst:false
             });
+            
+            // PRIMERA CARGA DE ESPECIALIDADES
+            $("#modalEspecialidad").load("../modal_registracompania/modal-especialidadCompania.php");
+            // PRIMERA CARGA DE REPRESENTANTES
+            $("#modalRepresentante").load("../modal_registracompania/representantes_div_nocheckbox.php");
+            // PRIMERA CARGA DE ESPECIALIDADES
+            $("#modalEspecialidad").load("../modal_registracompania/especialidades_div.php?filtro=3");
+            
             // RELOAD WITH NEW CHANGES
             function reload(){
-                if ($('.ruc_empresa').attr("value") != "") {
+                if ($('.ruc_empresa').val() != "") {
                     $.ajax({
                         type:"GET",
                         url:"../../../bl/Contacto/actualizaCompania.php?opcion=ruc",
                         data:{ruc:$(".ruc_empresa").val()},
                         dataType:"html",
                         success:function(data) {
-                            toHtml(data)
+                            toHtml(data);
+                            cargarDireccionCompaniaRUC($(".ruc_empresa").val());
                         }
                     });
                 } else {
@@ -54,6 +63,7 @@ session_start();
                         dataType:"html",
                         success:function(data) {
                             toHtml(data);
+                            cargarDireccionCompaniaNOMBRE($(".nombre_empresa").val());
                         }
                     });
                 }
@@ -147,12 +157,10 @@ session_start();
                             url:"../../../bl/editaCompania_BL.php?parameter=tipocompania",
                             success:function() {
                                 $("#txttipocompania").val($("#tipocompaniaid option:selected").text());
-                                alert("Se ha actualizado correctamente su peticion");
                             }
                             });
                         });
                     }
-                    
                 }
             });
             /** CAMBIAR RUC */
@@ -178,10 +186,9 @@ session_start();
                                 $("#btnUpdateRuc").attr("value","Editar");
                                 alertExito();
                             }
-                        })
+                        });
                     }
                 }
-                
             });
             
             /** CAMBIAR NOMBRE */
@@ -308,7 +315,6 @@ session_start();
                        },
                        url:"../../../bl/editaCompania_BL.php?parameter=giro_elimina",
                        success:function() {
-                           alertExito();
                            if (!$("#tr_giro").length) 
                                 reload();
                        }
@@ -410,7 +416,6 @@ session_start();
                     },
                     url:"../../../bl/editaCompania_BL.php?parameter=tf_elimina",
                     success:function() {
-                        alertExito();
                         if (!$("#tr_tfijo").length)
                             reload();
                     }
@@ -481,7 +486,6 @@ session_start();
                     },
                     url:"../../../bl/editaCompania_BL.php?parameter=tm_elimina",
                     success:function() {
-                        alertExito();
                         if (!$("#tr_tmobile").length)
                             reload();
                     }
@@ -553,7 +557,6 @@ session_start();
                     },
                     url:"../../../bl/editaCompania_BL.php?parameter=tn_elimina",
                     success:function() {
-                        alertExito();
                         if (!$("#tr_tnextel").length)
                             reload();
                     }
@@ -635,6 +638,7 @@ session_start();
                                 alertExito();
                                 $("#txtEspecialidad").val($("#especialidadid option:selected").text());
                                 $("#especialidadid").fadeOut("slow");
+                                $("#btnEditarEspecialidades").attr('value', 'Editar');
                             }
                         });
                     }
@@ -652,7 +656,6 @@ session_start();
                     },
                     url:"../../../bl/editaCompania_BL.php?parameter=especialidad_elimina",
                     success:function() {
-                        alertExito();
                         if (!$("#tr_especialidad").length)
                             reload();
                     }
@@ -660,22 +663,15 @@ session_start();
             });
             // NUEVA ESPECIALIDAD
             $("#btnNuevaEspecialidad").live("click",function() {
-               
-                var giro = '<tr id="tr_especialidad"><td>'+
-                            '<input type="text" size="30" id="txtEspecialidadNuevo" name="especialidad" value="" />'+
-                            '<td><input type="button" value="Guardar" id="btnNuevoEspecialidad"/></td>'+
-                            '<td>'+$("#especialidadid").fadeIn("slow")+'</td>'+
-                            '<td><input type="button" value="Cancelar" id="btnCancelar"/></td>'+
-                            '</td></tr>';
-                $("#tr_especialidad").after(giro);        
-
+                $("#modalEspecialidad").dialog("open");
             });
             // GUARDAR ESPECIALIDAD
-            $("#btnNuevoEspecialidad").live("click",function() {
+            $(".especialidades").live('click',function() {
+                var especialidades = $(this).text().split("-");
                 $.ajax({
                     type:"POST",
                     data:{
-                        id_nuevoespecialidad:$("#especialidadid").val(),
+                        id_nuevoespecialidad:especialidades[0],
                         idCompania:$("#idCompania").val(),
                         idEmpresa:<?=$_SESSION['id']?>
                     },
@@ -685,7 +681,6 @@ session_start();
                     }
                 });
             });
-
             
             /** VIA DE ENVIO */
             // EDITAR VIA DE ENVIO
@@ -761,7 +756,6 @@ session_start();
                     },
                     url:"../../../bl/editaCompania_BL.php?parameter=representante_elimina",
                     success:function() {
-                        alertExito();
                         if (!$("#tr_representante").length)
                             reload();
                     }
@@ -770,30 +764,26 @@ session_start();
 
             // NUEVO REPRESENTANTE
             $("#btnNewRepresentante").live("click",function() {
-                var giro = '<tr id="tr_representante"><td>'+
-                            '<input type="text" size="30" id="txtRepresentanteNuevo" name="representante" value="" />'+
-                            '<td><input type="button" value="Guardar" id="btnNuevoRepresentante"/></td>'+
-                            '<td>'+$("#representanteid").fadeIn("slow")+'</td>'+
-                            '<td><input type="button" value="Cancelar" id="btnCancelarNuevoRepresentante"/></td>'+
-                            '</td></tr>';
-                $("#tr_representante").after(giro);        
+                $("#modalRepresentante").dialog("open");
             });
            
             // GUARDAR REPRESENTANTE
-            $("#btnNuevoRepresentante").live("click",function() {
-                $.ajax({
-                    type:"POST",
-                    data:{
-                        id_nuevorepresentante:$("#representanteid").val(),
-                        idCompania:$("#idCompania").val(),
-                        idEmpresa:<?=$_SESSION['id']?>
-                    },
-                    url:"../../../bl/editaCompania_BL.php?parameter=representante_nuevo",
-                    success:function() {
-                        reload();
-                    }
-                });
+            $(".contacto").live("click",function() {
+               var especialidad = $(this).text().split("-");
+               $.ajax({
+                  type:"POST",
+                  url:"../../../bl/editaCompania_BL.php?parameter=representante_nuevo",
+                  data:{
+                      id_nuevorepresentante:especialidad[0],
+                      idCompania:$("#idCompania").val(),
+                      idEmpresa:<?=$_SESSION['id']?>
+                  },
+                  success:function() {
+                      reload();
+                  }
+               });
             });
+
             // CANCELAR NUEVO REPRESENTANTE
             $("#btnCancelarNuevoRepresentante").live("click",function(){
                 $(this).parent().parent().remove();
@@ -1087,10 +1077,36 @@ session_start();
             function alertExito() {
                 alert("Su operacion ha sido satisfactoria");
             }
+            
+            /** MODALES */
+            $("#modalEspecialidad").dialog({
+                autoOpen:false,
+                height:300,
+                width:350,
+                modal:true,
+                buttons:{
+                    "Cerrar":function(){
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            $("#modalRepresentante").dialog({
+                autoOpen:false,
+                height:300,
+                width:350,
+                modal:true,
+                buttons:{
+                    "Cerrar":function(){
+                        $(this).dialog("close");
+                    }
+                }
+            })
         });
         </script>
     </head>
     <body class="fondo">
+        <div id="modalEspecialidad" title="Seleccione una especialidad"></div>
+        <div id="modalRepresentante" title="Seleccione un representante"></div>
         <?php require_once '../../modales/agregaDireccion.php';?>
         <div id="barra-superior">
             <div id="barra-superior-dentro">
@@ -1113,7 +1129,7 @@ session_start();
                 </div>
                 <div id="nombre_div" style="display: none">
                     <label>Nombre de Compa&ncaron;&iacute;a:</label>
-                    <input type="text" size="30"  name="txtnombre" class="nombre_empresa" placeholder="Ingrese nombre de la Compañía" value="" />
+                    <input type="text" size="45"  name="txtnombre" class="nombre_empresa" placeholder="Ingrese nombre de la Compañía" value="" />
                 </div>    
                 <div id="divbtn" style="display: none">
                     <input type="hidden" id="txtidCiaToSearch" />

@@ -2,13 +2,8 @@
 session_start();
 
 $CSS_PATH = '../../css/';
-$JS_PATH = '../../js/';
-
-$css = array();
-$js = array();
 
 $css = scandir($CSS_PATH);
-$js = scandir($JS_PATH);
 
 function __autoload($name) {
     $fullpath = '../../dl/contacto_bl/'.$name.'.php';
@@ -353,13 +348,16 @@ function __autoload($name) {
                 matchContains:true,
                 selectFirst:false
             });
-            /*$(".nombre_persona").focusout(function() {
+            $(".input-tipo-documento").focusout(function() {
                 $.ajax({
                     type:"GET",
                     url:"../../bl/Contacto/mantenimiento/verificarExistenciaPersona.php",
-                    data:{nombre_persona:$(".nombre_persona").val()},
+                    data:{
+                        documento:$(".input-tipo-documento").val()
+                    },
                     success:function(data) {
                             if (data == "tiene") {
+                                $("#numerodocumento").val($(".input-tipo-documento").val());
                                 $('#modal').reveal({ 
                                     animation: 'fade',            
                                     animationspeed: 600,          
@@ -368,17 +366,18 @@ function __autoload($name) {
                             });
                         }
                     }
-                })
+                });
             });
-     $("#btnContinuar").click(function(e) {
-           e.preventDefault();
-           window.location = "http://192.168.1.5/control_pms/modulos/contacto/registrapersona.php"
-            
-      });
-      $("#btnModificar").click(function(e) {
-          e.preventDefault();
-          window.location = "http://192.168.1.5/control_pms/modulos/contacto/edit/editapersona.php?frm=persona"
-      });*/
+             $("#btnContinuar").click(function(e) {
+                   e.preventDefault();
+                   window.location = "http://192.168.1.5/control_pms/modulos/contacto/registrapersona.php"
+
+              });
+              $("#btnModificar").click(function(e) {
+                  alert("numero documento: "+$("#numerodocumento").val());
+                  e.preventDefault(e);
+                  window.location = "edit/editapersonaname.php?documentodni="+$("#numerodocumento").val();
+              });
       
       /**
        *  BUSQUEDA IN LINE
@@ -487,13 +486,14 @@ function __autoload($name) {
                             </select>
                          <td>
                              <input  class="input-tipo-documento" size="8" type="text" name="numero-documento" id="inputext" required/>
+                             <input type="hidden" id="numerodocumento" />
                     </tr>
                     <tr>
                         <td><label>¿Tiene RUC?<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label>
                         <td>
                             <input type="radio" name="tieneruc" value="si">Si<br>
                             <input type="radio" name="tieneruc" value="no">No<br>
-                            <td class="td-ruc-checkbox" style="display: none"><input placeholder="RUC" type="text" id="inputext" name="ruc"/>
+                            <td class="td-ruc-checkbox" style="display: none"><input placeholder="RUC" type="text" id="inputext" name="ruc" class="txtruccarne"/>
                     <tr>
                         <td><label>Nombres y Apellidos:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td><input class="nombre_persona" id="inputext" type="text" size="70" placeholder="INGRESE EL NOMBRE COMO DATO NUEVO O EMPIECE A TIPEAR UNO YA EXISTENTE" name="nombre"</td>

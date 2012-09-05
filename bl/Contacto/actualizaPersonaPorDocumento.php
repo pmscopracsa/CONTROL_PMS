@@ -6,8 +6,8 @@ session_start();
 // OBTENEMOS DATOS DE LA PERSONA
 require_once '../../dl/busca_persona/RegistraPersona.php';
 $rpersona = new RegistraPersona();
-$rpersona->set_nombrecompleto($_REQUEST['nombre']);
-$res = $rpersona->s_buscarPersonaPorNombre();
+$rpersona->set_numerodocumento($_REQUEST['documento']);
+$res = $rpersona->s_buscarPersonaPorDocumento();
 
 // OBTENEMOS TELEFONOS
 require_once '../../dl/busca_persona/TelefonoFijo.php';

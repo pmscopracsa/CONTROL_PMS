@@ -29,6 +29,18 @@ if (@$_REQUEST['filtro'] == "1") {
         $i++;
     }
     echo json_encode($especialidades);
+} elseif (@$_REQUEST['filtro']== "3") {
+    $especialidades = $especialidadcompania->mostrarEspecialidades();
+    echo '<div>';
+    echo '<div style:"float:left"><input type="text" id="txt_divEspecialidadBuscar"/><input type="button" value="Buscar" id="btnSearchEspecialidad" class="ui-button ui-widget ui-state-default ui-corner-all"></div>';
+    foreach ($especialidades as $valor) {
+        echo '<table><tr style="cursor:pointer;"><td class="especialidades"><p style="display:none">'.
+                    $valor[0].
+                    '</p>'.
+                    '<p style="display:none">-</p>'.
+                    $valor[1].
+                    '</td></tr></table>';
+    }
 } else {
     $especialidadcompania->setDescripcion(@$_REQUEST['filtro']);
     $especialidades = $especialidadcompania->mostrarEspecialidadesPorNombre();

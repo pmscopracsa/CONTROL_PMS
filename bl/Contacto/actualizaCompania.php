@@ -98,7 +98,7 @@ elseif ($_REQUEST['opcion'] == "nombre") {
     $representantes_array = $representantes->obtenerRepresentantesPorCompania();
     
     //toHtml($res,$giros, $telefonosf, $telefonosm, $telefnosn, $especialidades_array, $direcciones_array,$representantes_array);
-    toHtml($res,$giros, $telefonosf, $telefonosm, $telefnosn, $especialidades_array, $direcciones_array,$representantes_array,$res[1]);
+    toHtml($res,$giros, $telefonosf, $telefonosm, $telefnosn, $especialidades_array,$representantes_array,$res[1]);
 }
 
 function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_array,$representantes_array,$ruc) {
@@ -414,7 +414,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                         <th>
                         <th colspan="2">
                     </tr>';
-      if (count($representantes_array) === 0) {
+      if (count($representantes_array) == 0) {
               echo '<tr id="tr_representante"><td><input type="button" class="addRow" id="btnNewRepresentante" /></td></tr>';
               echo '<tr>
                       <td>

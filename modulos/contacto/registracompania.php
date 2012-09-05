@@ -1,8 +1,9 @@
 <?php
+session_name('tzLogin');
+session_set_cookie_params(2*7*24*60*60);
 session_start();
 
 $CSS_PATH = '../../css/';
-$css = array();
 $css = scandir($CSS_PATH);
 
 /**
@@ -44,8 +45,6 @@ function __autoload($name) {
 
         
     $(document).ready(function(){
-    
-    
         
      /**
      * FUNCION QUE VUELVE A RECARGAR EL DIV QUE CONTIENE LA LISTA DE ESPECIALIDADES
@@ -53,7 +52,6 @@ function __autoload($name) {
     function recargarEspecialidades()
     {
         $("#divSeleccionaEspecialidad").load("modal_registracompania/especialidades_div.php?"+Math.random());
-        //$("#divSeleccionaEspecialidad").trigger("modal_registracompania/especialidades_div.php?filtro=1");
     } 
     
     /**
@@ -566,7 +564,8 @@ function __autoload($name) {
       })
       $("#btnModificar").click(function(e) {
           e.preventDefault();
-          window.location = "http://192.168.1.5/control_pms/modulos/contacto/edit/editacompaniacur.php?ruc="+$(".ruc_empresa").val();
+          //window.location = "http://192.168.1.5/control_pms/modulos/contacto/edit/editacompaniacur.php?ruc="+$(".ruc_empresa").val();
+          window.location = "edit/editacompaniacur.php?ruc="+$(".ruc_empresa").val();
       })
        /**
         * AUTOCOMPLETAR SEGUN RUC DE LA EMPRESA
@@ -812,11 +811,6 @@ function __autoload($name) {
                    </td>
                </tr>
                <!-- INPUT CON LA CANTIDAD DE DIRECCIONES -->
-               <!-- 
-               TODO:
-               VALIDAR QUE SI ALGUNO DE LOS DATOS REQUERIDOS NO EXISTE NO SE PERMITE AGREGAR A 
-               FORMULARIO PRINCIPAL
-               -->
                <div id="cant_direcciones"></div>
                <div id="cant_especialidades"></div>
                <div id="cant_representantes"></div>

@@ -198,6 +198,65 @@ class RegistraPersona
         }
     }
     
+    public function s_buscarPersonaPorDocumento()
+    {
+        $query = "
+            SELECT 
+            pc.id 
+            ,pc.dni
+            ,pc.nombre
+            ,cc.descripcion
+            ,pc.cargo
+            ,pc.fax
+            ,pc.observacion
+            ,pc.email
+            ,pc.web
+            ,pc.direccion
+            ,pc.tb_viaenvio_id idviaenvio
+            ,cc.descripcion empresa
+            ,pro.tb_especialidadpersona_id idespecialidad
+            FROM 
+            tb_companiacontacto cc
+            LEFT JOIN tb_personacontacto pc ON cc.id = pc.tb_companiacontacto_id 
+            LEFT JOIN tb_profesion pro ON pro.tb_personacontacto_id = pc.id
+            LEFT JOIN tb_especialidadpersona ep ON pro.tb_especialidadpersona_id = ep.id
+            WHERE pc.dni =  '$this->_numerodocumento'";
+        
+        try {
+            $conexion = new Conexion();
+            $cn = $conexion->conectar();
+            
+            if (!$cn) 
+                throw new Exception("Error al conectar: ".mysql_error ());
+            
+            $sql = mysql_query($query,$cn);
+            
+            if (!$sql)
+                throw new Exception("Error en consulta: ".  mysql_error());
+            
+            $personadatos = array();
+
+            while ($res = mysql_fetch_array($sql,MYSQL_ASSOC)) {
+                array_push($personadatos,$res['id']);
+                array_push($personadatos,$res['dni'] == NULL ? "" : $res['dni']);
+                array_push($personadatos,$res['nombre'] == NULL ? "" : $res['nombre']);
+                array_push($personadatos,$res['cargo'] == NULL ? "" : $res['cargo']);
+                array_push($personadatos,$res['fax'] == NULL ? "" : $res['fax']);
+                array_push($personadatos,$res['observacion'] == NULL ? "" : $res['observacion']);
+                array_push($personadatos,$res['email'] == NULL ? "" : $res['email']);
+                array_push($personadatos,$res['web'] == NULL ? "" : $res['web']);
+                array_push($personadatos,$res['direccion'] == NULL ? "" : $res['direccion']);
+                array_push($personadatos,$res['idviaenvio'] == NULL ? "" : $res['idviaenvio']);
+                array_push($personadatos,$res['empresa'] == NULL ? "" : $res['empresa']);
+                array_push($personadatos,$res['idespecialidad'] == NULL ? "" : $res['idespecialidad']);
+            }
+            return $personadatos;
+            
+        } catch (Exception $e) {
+            echo "Error al consultar persona. Error: ".$e->getMessage();
+        }
+    } 
+    
     /**
      * GETTERS Y SETTERS 
      */

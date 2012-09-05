@@ -23,6 +23,9 @@ session_start();
         <script src="../../../js/cargarDatos.js" type="text/javascript"></script>
         <script>
         $(document).ready(function(){
+            // CARGA POR DEFECTO DE LISTA DE CONTACTOS
+            $("#divAgregarContacto").load("../modal_registracompania/representantes_div_nocheckbox.php");
+            
             // variable global que almacena el id de la lista
             var idListaDistribucion;
             /** AUTOCOMPLETAR POR NOMBRE DE LISTA */
@@ -31,6 +34,22 @@ session_start();
                 matchContains:true,
                 selectFirst:false
             });
+            // RECARGA DE EDICION
+            function reload()
+            {
+                $.ajax({
+                    type:"GET",
+                    dataType:"html",
+                    url:"../../../bl/Contacto/actualizaListaDistribucion.php",
+                    data:{
+                        nombrelista:$(".txtnombre").val()
+                    },
+                    success:function(data) {
+                        toHtml(data);
+                    }
+                });
+            }
+            
             /** BOTON DE BUSQUEDA DE REGISTRO */
             $("#btnBuscar").click(function() {
                 if ($(".txtnombre").val()===""){alert("No ha especificado lista a buscar");}
@@ -49,9 +68,94 @@ session_start();
                 }
             });
             
-            //* AGREGAR CONTACTOS */
+            //* EDITAR NOMBRE DE LISTA */
+            $("#btnEditarNombreLista").live("click",function(){
+                thisObj = $(this);
+                if (thisObj.val() == 'Editar') {
+                    thisObj.attr('value', 'Guardar');
+                    $("#txtnombrelista").removeAttr('readonly');
+                }
+                else {
+                    $.ajax({
+                        type:"POST",
+                        url:"../../../bl/editaListaDistribucion_BL.php?parameter=editarnombrelista",
+                        data:{
+                            idlistadistribucion:$("#idlistadistribucion").val(),
+                            nombrelista:$("#txtnombrelista").val()
+                        },
+                        success:function() {
+                            $(".txtnombre").val($("#txtnombrelista").val());
+                            $("#txtnombrelista").attr('readonly', 'true');
+                            thisObj.attr('value','Editar');
+                        }
+                    });
+                }
+            });
+            
+            //* AGREGAR CONTACTOS  - ABRE MODAL*/
             $("#btnAgregarContacto").live("click",function() {
-                
+                $("#divAgregarContacto").dialog("open");
+            });
+            // MODAL AGREGAR CONTACTO - MODAL BY ITSELF
+            $("#divAgregarContacto").dialog({
+                autoOpen:false,
+                height:300,
+                width:350,
+                modal:true,
+                buttons:{
+                    "Cerrar":function(){
+                        $(this).dialog("close");
+                    }
+                }
+            })
+            // CLICK CONTACTO EN MODAL - AGREGAR A LA TABLA
+            $(".contacto").live("click",function(){
+                var contacto = $(this).text().split("-");
+                $.ajax({
+                    type:"POST",
+                    url:"../../../bl/editaListaDistribucion_BL.php?parameter=agregacontacto",
+                    data:{
+                        idnewcontacto:contacto[0],
+                        idlistadistribucion:$("#idlistadistribucion").val()
+                    },
+                    success:function() {
+                        reload();
+                    }
+                })
+            });
+            // ELIMINAR CONTACTO
+            $("#btnEliminarContacto").live("click",function() {
+                var idcontactoeliminar = $(this).parent().parent().children("#idTContacto").attr('value')
+                $(this).parent().parent().remove();
+                $.ajax({
+                    type:"POST",
+                    url:"../../../bl/editaListaDistribucion_BL.php?parameter=eliminacontacto",
+                    data:{
+                        idcontactoeliminar:idcontactoeliminar,
+                        idlistadistribucion:$("#idlistadistribucion").val()
+                    }
+                })
+            });
+            // EDITA OBSERVACION
+            $("#btnEditarObservacion").live("click",function() {
+                thisObj = $(this);
+                if(thisObj.val() === 'Editar') {
+                    thisObj.attr('value', 'Guardar');
+                    $("#txtobservacion").removeAttr('readonly');
+                } else {
+                    $.ajax({
+                        type:"POST",
+                        url:"../../../bl/editaListaDistribucion_BL.php?parameter=editaobs",
+                        data:{
+                            idlistadistribucion:$("#idlistadistribucion").val(),
+                            observacion:$("#txtobservacion").val()
+                        },
+                        success:function(){
+                            thisObj.attr('value','Editar');
+                            $("#txtobservacion").attr('readonly', 'true');
+                        }
+                    });
+                }
             });
             
             function toHtml(data)
@@ -63,6 +167,8 @@ session_start();
         </script>
     </head>
     <body class="fondo">
+        <!-- agregar contacto -->
+        <div id="divAgregarContacto" title="Escoge un contacto"></div>
         <div id="barra-superior">
             <div id="barra-superior-dentro">
                 <h1 id="titulo_barra">EDICION DE LISTA DE DISTRIBUCION</h1>

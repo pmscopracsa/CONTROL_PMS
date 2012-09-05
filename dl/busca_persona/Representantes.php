@@ -5,12 +5,12 @@ class Representantes
     protected $ruc;
     protected $tb_companiacontacto_id;
     protected $tb_personacontacto_id;
+    protected $value;
     
     public function obtenerRepresentantesPorCompania()
     {
         $query = "SELECT
             pc.nombre nombre
-            ,rep.tb_companiacontacto_id companiaId
             ,rep.tb_personacontacto_id personaId
             FROM tb_representante rep
             INNER JOIN tb_companiacontacto cc ON rep.tb_companiacontacto_id = cc.id
@@ -61,5 +61,13 @@ class Representantes
 
     public function setTb_personacontacto_id($tb_personacontacto_id) {
         $this->tb_personacontacto_id = $tb_personacontacto_id;
+    }
+    
+    public function getValue() {
+        return $this->value;
+    }
+
+    public function setValue($value) {
+        $this->value = $value;
     }
 }

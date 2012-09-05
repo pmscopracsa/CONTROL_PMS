@@ -2,7 +2,7 @@
 require_once '../../../dl/Conexion.php';
 
 try {
-    $q = strtolower($_GET['nombre_persona']);
+    $q = strtolower($_GET['documento']);
     if (!$q) return;
     
     $cone = new Conexion();
@@ -11,7 +11,7 @@ try {
     if (!$cn)
         throw new Exception("Error en la conexion: ". mysql_error(). "\n");
     
-    $sql = "SELECT * FROM tb_personacontacto WHERE nombre = '". $_REQUEST['nombre_persona']."'";
+    $sql = "SELECT * FROM tb_personacontacto WHERE dni = '$q'";
     
     $rs = mysql_query($sql);
     

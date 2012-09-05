@@ -330,7 +330,7 @@ class RegistraCompania
 
             while ($res = mysql_fetch_array($sql,MYSQL_ASSOC)) {
                 array_push($companiadatos,$res['ccid']);
-                array_push($companiadatos,$res['ccruc'] == NULL ? "" : $res['ccruc']);
+                array_push($companiadatos,$res['ccruc'] = $res['ccruc']);
                 array_push($companiadatos,$res['ccdescripcion'] == NULL ? "" : $res['ccdescripcion']);
                 array_push($companiadatos,$res['ccnombrecomercial'] == NULL ? "" : $res['ccnombrecomercial']);
                 array_push($companiadatos,$res['ccpartidaregistral'] == NULL ? "" : $res['ccpartidaregistral']);
