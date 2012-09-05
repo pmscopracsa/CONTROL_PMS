@@ -7,7 +7,7 @@ session_start();
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>ERDICION DE PERSONA</title>
+        <title>EDICION DE PERSONA</title>
         <!-- CSS ZONE -->
         <link href="../../../css/barrasuperior.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/cuerpo.css" rel="stylesheet" type="text/css" />
@@ -22,6 +22,9 @@ session_start();
         <script src="../../../js/autocomplete/jquery.autocomplete.js" type="text/javascript"></script> 
         <script src="../../../js/cargarDatos.js" type="text/javascript"></script>
     <script>
+        //para las especialidades
+        var data_newesp = new Array();
+        
         function recargarEmpresa(filtro) 
         {
             $("#divBuscarCompania").load("../../datosdeobra/modales/empcontratante_div.php?filtro="+filtro);
@@ -480,11 +483,19 @@ session_start();
                     $(this).attr('value', 'Guardar');
                     $("#divEditarEspecialidad").dialog("open");
                 } else {
+                    //var idespecialidadacambiar = $(this).parent().parent().children("#txtES").val();
+                    //alert(data_newesp[0]);
+                    //alert(data_newesp[1]);
+                    var oldyespecialidad = $(this).parent().parent().children("#idES").val();
+                    //$(this).parent().parent().children().children("#txtES").val(data_newesp[1]);
+                    //alert(oldyespecialidad);
+                    //setEspecialidadObj($(this).parent().parent().children().html());
                     $.ajax({
                         type:"POST",
                         url:"../../../bl/editaPersona_BL.php?parameter=editaEspecialidad",
                         data:{
-                            idespecialidad:$("#idES").val(),
+                            idespecialidadnueva:data_newesp[0],
+                            idespecialidadactualizar:oldyespecialidad,
                             idpersonacontacto:$("#idpersonacontacto").val()
                         },
                         success:function() {
@@ -494,10 +505,16 @@ session_start();
                 }
            });
            $(".especialidad").live("click",function() {
+               
                var especialidad_array = $(this).text().split("-");
-               $("#idES").val(especialidad_array[0]);
-               $("#txtES").val(especialidad_array[1]);
+               //$("#idES").val(especialidad_array[0]);
+               //$("#txtES").val(especialidad_array[1]);
+               nuevaEspecialidad(especialidad_array[0], especialidad_array[1])
            });
+           function nuevaEspecialidad(id,desc){
+               data_newesp[0]=id;
+               data_newesp[1]=desc;
+           }
            // ELIMINAR ESPECIALIDAD
            $("#btnEliminarES").live("click",function() {
                var idespecialidad = $("#idES").val();

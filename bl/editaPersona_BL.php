@@ -78,7 +78,8 @@ try {
         $edita_persona->actualizarPersona($cn);
     } elseif ($_REQUEST['parameter'] == 'editaEspecialidad') { // ESPECIALIDAD
         $edita_persona->setAActualizar($_REQUEST['parameter']);
-        $edita_persona->setIdvalue($_REQUEST['idespecialidad']);
+        $edita_persona->setIdvalue($_REQUEST['idespecialidadnueva']);
+        $edita_persona->setValue($_REQUEST['idespecialidadactualizar']);
         $edita_persona->actualizarPersona($cn);
     } elseif ($_REQUEST['parameter'] == 'eliminarEspecialidad') {
         $edita_persona->setAActualizar($_REQUEST['parameter']);

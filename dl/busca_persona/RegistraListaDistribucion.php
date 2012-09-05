@@ -85,6 +85,71 @@ class RegistraListaDistribucion
         }
     }
     
+    public function s_buscarListaDistribucionPorNombre()
+    {
+        $query = "SELECT 
+            id
+            ,tb_empresa_id
+            ,descripcion
+            ,observacion
+            FROM tb_listadistribucioncontacto
+            WHERE descripcion = '$this->_nombrelista'";
+        
+        try {
+            $cnx = new Conexion();
+            $cn = $cnx->conectar();
+            if(!$cn)                throw new Exception("Error al conectar: ".  mysql_error());
+            
+            $sql = mysql_query($query);
+            if (!$sql)                throw new Exception("Error al consultar: ".  mysql_error());
+            
+            $listadatos = array();
+            
+            while ($res = mysql_fetch_array($sql,MYSQL_ASSOC)){
+                array_push($listadatos, $res['id']);
+                array_push($listadatos, $res['tb_empresa_id']);
+                array_push($listadatos, $res['descripcion']);
+                array_push($listadatos, $res['observacion']);
+            }
+            return $listadatos;
+        } catch (Exception $exc) {
+            echo "Error: ".$exc->getMessage();
+        }
+    }
+
+    public function obtenerContactosPorLista()
+    {
+        $query = "SELECT 
+            pc.id
+            ,pc.nombre
+            FROM tb_listadistribucionpersonacontacto lp
+            LEFT JOIN tb_listadistribucioncontacto ld ON lp.tb_listadistribucioncontacto_id = ld.id
+            LEFT JOIN tb_personacontacto pc ON lp.tb_personacontacto_id = pc.id
+            WHERE ld.id = $this->_id";
+        
+        try {
+            $cnx = new Conexion();
+            $cn = $cnx->conectar();
+            if (!$cn)
+                throw new Exception("Error al conectar: ".  mysql_error());
+            
+            $rs = mysql_query($query, $cn);
+            if (!$rs)
+                throw new Exception("Error al consultar: ".  mysql_error());
+            
+            $contactos = array();
+            
+            while ($res = mysql_fetch_array($rs,MYSQL_ASSOC)) {
+                array_push($contactos,$res['id']);
+                array_push($contactos,$res['nombre']);
+            }
+            return $contactos;
+            
+        } catch(Exception $ex) {
+            echo 'Error: '.$ex->getMessage();
+        }
+    }
+
     public function get_id() {
         return $this->_id;
     }

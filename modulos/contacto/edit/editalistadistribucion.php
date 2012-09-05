@@ -12,11 +12,55 @@ session_start();
         <link href="../../../css/barrasuperior.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/cuerpo.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/autocomplete.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/botones.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/google-buttons.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
         
         <!-- JS ZONE -->
         <script src="../../../js/jquery1.4.2.js.js" type="text/javascript"></script>
+        <script src="../../../js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
         <script src="../../../js/autocomplete/jquery.autocomplete.js" type="text/javascript"></script> 
         <script src="../../../js/cargarDatos.js" type="text/javascript"></script>
+        <script>
+        $(document).ready(function(){
+            // variable global que almacena el id de la lista
+            var idListaDistribucion;
+            /** AUTOCOMPLETAR POR NOMBRE DE LISTA */
+            $(".txtnombre").autocomplete("../../../bl/Contacto/mantenimiento/autocompletadoListaDistribucionPorNombre.php",{
+                width:260,
+                matchContains:true,
+                selectFirst:false
+            });
+            /** BOTON DE BUSQUEDA DE REGISTRO */
+            $("#btnBuscar").click(function() {
+                if ($(".txtnombre").val()===""){alert("No ha especificado lista a buscar");}
+                else {
+                    $.ajax({
+                        type:"GET",
+                        dataType:"html",
+                        url:"../../../bl/Contacto/actualizaListaDistribucion.php",
+                        data:{
+                            nombrelista:$(".txtnombre").val()
+                        },
+                        success:function(data) {
+                            toHtml(data);
+                        }
+                    })
+                }
+            });
+            
+            //* AGREGAR CONTACTOS */
+            $("#btnAgregarContacto").live("click",function() {
+                
+            });
+            
+            function toHtml(data)
+            {
+                $("#tmp").html(data);
+            }
+            
+        })    
+        </script>
     </head>
     <body class="fondo">
         <div id="barra-superior">
@@ -25,7 +69,14 @@ session_start();
             </div>
         </div>
         <div id="main">
-            
+            <label for="nombre">Escriba el nombre de la lista:</label>
+            <div id="busqueda">
+                <input type="text" size="50" name="txtnombre" class="txtnombre" placeholder="Nombre de la lista"/>
+                <input type="button" value="Buscar" id="btnBuscar" />
+            </div>
+            <hr />
+            <div id="tmp">
+            </div>
         </div>
     </body>
 </html>
