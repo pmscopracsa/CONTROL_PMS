@@ -116,6 +116,38 @@ class RegistraListaDistribucion
             echo "Error: ".$exc->getMessage();
         }
     }
+    
+    public function s_buscarListaDistribucionPorId()
+    {
+        $query = "SELECT 
+            id
+            ,tb_empresa_id
+            ,descripcion
+            ,observacion
+            FROM tb_listadistribucioncontacto
+            WHERE id = $this->_id";
+        
+        try {
+            $cnx = new Conexion();
+            $cn = $cnx->conectar();
+            if(!$cn)                throw new Exception("Error al conectar: ".  mysql_error());
+            
+            $sql = mysql_query($query);
+            if (!$sql)                throw new Exception("Error al consultarOOO: ".  mysql_error());
+            
+            $listadatos = array();
+            
+            while ($res = mysql_fetch_array($sql,MYSQL_ASSOC)){
+                array_push($listadatos, $res['id']);
+                array_push($listadatos, $res['tb_empresa_id']);
+                array_push($listadatos, $res['descripcion']);
+                array_push($listadatos, $res['observacion']);
+            }
+            return $listadatos;
+        } catch (Exception $exc) {
+            echo "Error: ".$exc->getMessage();
+        }
+    }
 
     public function obtenerContactosPorLista()
     {
@@ -135,7 +167,7 @@ class RegistraListaDistribucion
             
             $rs = mysql_query($query, $cn);
             if (!$rs)
-                throw new Exception("Error al consultar: ".  mysql_error());
+                throw new Exception("Error al consultarYYY: ".  mysql_error());
             
             $contactos = array();
             

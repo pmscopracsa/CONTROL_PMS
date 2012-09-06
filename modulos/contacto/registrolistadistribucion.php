@@ -213,12 +213,12 @@ function  __autoload($name) {
             
       $("#btnContinuar").click(function(e) {
           e.preventDefault();
-          window.location = "http://192.168.1.5/control_pms/modulos/contacto/registrolistadistribucion.php";
+          window.location = "registrolistadistribucion.php";
           
       })
       $("#btnModificar").click(function(e) {
           e.preventDefault();
-          window.location = "http://192.168.1.5/control_pms/modulos/contacto/edit/editalistadistribucion.php?frm=listas"
+          window.location = "edit/editalistadistribucionpornombre.php?parameter="+<?=$_SESSION['datos_empresa'][0]?>;
       })
             /**
              * BUSCAR DATOS PARA EDITAR 

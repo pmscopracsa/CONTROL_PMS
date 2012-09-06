@@ -370,13 +370,13 @@ function __autoload($name) {
             });
              $("#btnContinuar").click(function(e) {
                    e.preventDefault();
-                   window.location = "http://192.168.1.5/control_pms/modulos/contacto/registrapersona.php"
+                   window.location = "registrapersona.php"
 
               });
               $("#btnModificar").click(function(e) {
-                  alert("numero documento: "+$("#numerodocumento").val());
                   e.preventDefault(e);
-                  window.location = "edit/editapersonaname.php?documentodni="+$("#numerodocumento").val();
+                  var documento = String($("#numerodocumento").val());
+                  window.location = "edit/editapersonaname.php?documentodni="+documento;
               });
       
       /**

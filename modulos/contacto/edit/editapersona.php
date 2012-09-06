@@ -310,8 +310,12 @@ session_start();
                     }
                 });
             });
+            // CANCELAR CREAR TELEFONO FIJO
+            $("#btnCancelar").live("click",function() {
+                $(this).parent().parent().remove();
+            });
             /** TELEFONO MOBILE*/
-            //ACTUALIZA - EDITO
+            //ACTUALIZA - EDITA
             $("#btnEditarTM").live("click",function() {
                 if($(this).val() === "Editar") {
                     $(this).parent().parent().children().children("#txtTM").removeAttr('readonly');
@@ -360,6 +364,9 @@ session_start();
                             '</td></tr>';
                 $("#tr_tm").after(giro);        
             });
+            $("#btnCancelar").live("click",function(){
+                $(this).parent().parent().remove();
+            })
             // GUARDAR NUEVO TELEFONO MOBILE
             $("#btnNuevoTM").live("click",function() {
                 $.ajax({
@@ -439,6 +446,9 @@ session_start();
                     }
                 });
             });
+            $("#btnCancelar").live("click",function(){
+                $(this).parent().parent().remove();
+            })
             /** EDITAR DIRECCION */
             $("#btnEditarDireccion").live("click",function() {
                 var idaddress = $(this).parent().parent().children().children("#idDireccionHidden").attr("value");

@@ -34,6 +34,7 @@ session_start();
                 },
                 success:function(data) {
                     toHtml(data);
+                    cargarDireccionCompaniaRUC(<?=$_REQUEST['ruc']?>);
                 }
             });
             
