@@ -218,7 +218,7 @@ function  __autoload($name) {
       })
       $("#btnModificar").click(function(e) {
           e.preventDefault();
-          window.location = "edit/editalistadistribucionpornombre.php?parameter="+<?=$_SESSION['datos_empresa'][0]?>;
+          window.location = "edit/editalistadistribucionpornombre.php?parameter="+<?=@$_SESSION['datos_empresa'][0]?>;
       })
             /**
              * BUSCAR DATOS PARA EDITAR 
