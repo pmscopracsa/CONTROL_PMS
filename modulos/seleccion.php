@@ -20,7 +20,7 @@ switch ($_REQUEST['frmName']) {
         break;
     case 'listas':
         $title = "Listas de Distribución";
-        $nuevo = "contacto/registrolistadistribucion.php";
+        $nuevo = "contacto/registrolistadistribucion.php?obra=".$_REQUEST['descripcion']."&codigo=".$_REQUEST['obra'];
         $modificar = "contacto/edit/editalistadistribucion.php?frm=listas";
         break;
     default:

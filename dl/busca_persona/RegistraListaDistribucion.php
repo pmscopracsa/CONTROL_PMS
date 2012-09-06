@@ -16,9 +16,10 @@ class RegistraListaDistribucion
     protected $_nombrelista;
     protected $_tbcontactoid = array();
     protected $_observacion;
+    protected $codigoobra;
     
     public function __construct() {
-        $this->_empresaid = 1;
+        
     }
     
     public function prueba() {    
@@ -39,11 +40,20 @@ class RegistraListaDistribucion
         try {
             mysql_query("BEGIN",$cn);
             
-            $query = "INSERT INTO tb_listadistribucioncontacto VALUES (
+            $query = "INSERT INTO tb_listadistribucioncontacto 
+                (
+                id
+                ,tb_empresa_id
+                ,descripcion
+                ,observacion
+                ,tb_obra_id
+                )
+                VALUES (
                 NULL
                 ,$this->_empresaid
                 ,'$this->_nombrelista'
-                ,'$this->_observacion')";
+                ,'$this->_observacion'
+                ,$this->codigoobra)";
             $tb_query = mysql_query($query,$cn);
             
             if (!$tb_query)
@@ -67,7 +77,15 @@ class RegistraListaDistribucion
                     //echo $ultimo_id."<br>";
                     $contacto = $this->_tbcontactoid[$i];
                     //$query = "INSERT INTO tb_contactodelista VALUES($ultimo_id,$contacto)";
-                    $query = "INSERT INTO tb_listadistribucionpersonacontacto VALUES($ultimo_id,$contacto)";
+                    $query = "INSERT INTO tb_listadistribucionpersonacontacto
+                        (
+                        tb_listadistribucioncontacto_id
+                        ,tb_personacontacto_id
+                        )
+                        VALUES(
+                        $ultimo_id
+                        ,$contacto
+                        )";
                     $res = mysql_query($query,$cn);
                     if (!$res) 
                         throw new Exception("tb_contactodelista. Error: ". mysql_error());
@@ -221,4 +239,13 @@ class RegistraListaDistribucion
     public function set_observacion($_observacion) {
         $this->_observacion = $_observacion;
     }
+    
+    public function getCodigoobra() {
+        return $this->codigoobra;
+    }
+
+    public function setCodigoobra($codigoobra) {
+        $this->codigoobra = $codigoobra;
+    }
+
 }

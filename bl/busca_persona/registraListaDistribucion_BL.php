@@ -8,9 +8,10 @@ $limpia = new LimpiarVariable();
 /**
  *REGISTRA FORMUALRIO PRINCIPAL
  */
-$registraListaDistribucion->set_nombrelista($_REQUEST['nombre'] == "" ? "NULL" : $limpia->Filtro($_REQUEST['nombre']));
-$registraListaDistribucion->set_codigoobra($_REQUEST['codigo'] == "" ? "NULL" : $limpia->Filtro($_REQUEST['codigo']));
-$registraListaDistribucion->set_observacion($_REQUEST['observacion'] == "" ? "NULL" : $limpia->Filtro($_REQUEST['observacion']));
+$registraListaDistribucion->set_empresaid($_REQUEST['idEmpresa']);
+$registraListaDistribucion->set_nombrelista($limpia->Filtro($_REQUEST['nombre']));
+$registraListaDistribucion->setCodigoobra($_REQUEST['idtxtobra']);
+$registraListaDistribucion->set_observacion($limpia->Filtro($_REQUEST['observacion']));
 
 /**
  * ingresar contactos  

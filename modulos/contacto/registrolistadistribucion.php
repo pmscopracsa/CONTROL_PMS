@@ -1,5 +1,8 @@
 <?php
-session_start(); 
+session_name('tzLogin');
+session_set_cookie_params(2*7*24*60*60);
+session_start();
+
 $CSS_PATH = '../../css/';
 $css = array();
 $css = scandir($CSS_PATH);
@@ -100,11 +103,8 @@ function  __autoload($name) {
                 }
             })
             
-            $("#anadir-contacto").button().click(function(){
-                //limpiar las selecciones previas
-                $('input:checkbox').removeAttr('checked');
+            $("#anadir-contacto").click(function(){
                 $("#modal-contactos").dialog("open");
-                return false;
             });
             
             /*
@@ -150,7 +150,7 @@ function  __autoload($name) {
                     $("#contactos-agregados tbody").append(
                     "<tr>"+
                     "<td>"+datos[index].nombre+"</td>"+
-                    "<td>"+datos[index].empresa+"</td>"+
+                    "<td>"+datos[index].descripcion+"</td>"+
                     "<td>"+"<a href='#' id='del-contacto' class='button delete'>Eliminar</a>"+"</td>"+
                     '<input type="hidden" name="contacto'+contador_contactos+'" value="'+datos[index].id+'" />'+
                     "</tr>"    
@@ -200,6 +200,17 @@ function  __autoload($name) {
                    data:{nombre_lista:$(".nombre_lista").val()},
                    success:function(data) {
                        if (data == "tiene") {
+                           $.ajax({
+                               type:"GET",
+                               dataType:'json',
+                               url:"../../bl/Contacto/mantenimiento/devuelveListaId.php",
+                               data:{
+                                   nombrelista:$(".nombre_lista").val()
+                               },
+                               success:function(data) {
+                                   res(data);
+                               }
+                           });
                                 $('#modal').reveal({ // The item which will be opened with reveal
                                 animation: 'fade',                   // fade, fadeAndPop, none
                                 animationspeed: 600,                       // how fast animtions are
@@ -211,6 +222,12 @@ function  __autoload($name) {
                 });
             });
             
+      function res(data){
+        $.each(data, function(index,value) {
+            $("#idLista").val(data[index].id);
+        })
+      }      
+            
       $("#btnContinuar").click(function(e) {
           e.preventDefault();
           window.location = "registrolistadistribucion.php";
@@ -218,7 +235,7 @@ function  __autoload($name) {
       })
       $("#btnModificar").click(function(e) {
           e.preventDefault();
-          window.location = "edit/editalistadistribucionpornombre.php?parameter="+<?=@$_SESSION['datos_empresa'][0]?>;
+          window.location = "edit/editalistadistribucionpornombre.php?parameter="+$("#idLista").val();
       })
             /**
              * BUSCAR DATOS PARA EDITAR 
@@ -247,10 +264,9 @@ function  __autoload($name) {
         });    
         </script>
         <script type="text/javascript">
-            $(document).ready(function(){
+            /*$(document).ready(function(){
                 var options = {
                     success:muestraRespuesta
-                    //clearForm:true
                 };
                 $("#frm-registralistadist").ajaxForm(options);
             });
@@ -258,7 +274,7 @@ function  __autoload($name) {
             function muestraRespuesta(responseText, statusText, xhr, $form) {
                 alert("Los datos han sido ingresados correctamente");
                 window.setTimeout('location.reload()',1000);
-            }
+            }*/
         </script>
     </head>
     <body >
@@ -294,23 +310,26 @@ function  __autoload($name) {
         
         <div id="main">
             <form id="frm-registralistadist" action="../../bl/busca_persona/registraListaDistribucion_BL.php" method="POST">
+<!--                <form id="frm-registralistadist" action="registratest.php" method="POST">-->
                 <div class="info">
                 Los campos obligatorios est&aacute;n marcados con <img src="../../img/required_star.gif" alt="dato requerido" />
                 </div>
                 <table>
                     <tr>
                         <td><label>Nombre de la lista:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                        <input type="hidden" id="idLista" />
                         <td><input class="nombre_lista" id="inputext" type="text" name="nombre" /></td>
                     </tr>
                     <tr>
                         <td><label>Nombre de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                        <td><input id="inputext" class="obra" type="text" name="codigo" /></td>
-<!--                        <td><input id="btnBuscarPorObra" type="button" value="Buscar..." /></td>-->
+                        <td><input id="inputext" class="obra" type="text" name="codigo" value="<?=$_REQUEST['obra']?>" READONLY/></td>
+                    <input type="hidden" name="idtxtobra" value="<?=$_REQUEST['codigo']?>"/>
+                    <input type="hidden" name="idEmpresa" value="<?=$_SESSION['id']?>" />
                     </tr>
                     <tr>
                         <td><label>A&ncaron;adir Contacto:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td>
-                            <button id="anadir-contacto">Buscar Contacto</button>
+                            <input type="button" id="anadir-contacto" value="Buscar Contacto" />
                         </td>
                     </tr>
                     <tr>

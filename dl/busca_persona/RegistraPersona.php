@@ -31,6 +31,9 @@ class RegistraPersona
     protected $_web;
     protected $_fax;
     protected $_tbviaenvioid;
+    protected $tb_pais_id;
+    protected $tb_departamento_id;
+    protected $tb_distrito_id;
     
     public function __construct() {
         $this->_idempresa = 1;
@@ -53,7 +56,23 @@ class RegistraPersona
         try {
             mysql_query("BEGIN",$cn);
             
-            $query = "INSERT INTO tb_personacontacto VALUES(
+            $query = "INSERT INTO tb_personacontacto (
+                id
+                ,tb_empresa_id
+                ,dni
+                ,nombre
+                ,cargo
+                ,fax
+                ,observacion
+                ,email
+                ,web
+                ,tb_viaenvio_id
+                ,tb_companiacontacto_id
+                ,direccion
+                ,tb_pais_id
+                ,tb_departamento_id
+                ,tb_distrito_id
+                ) VALUES(
                 NULL
                 ,$this->_idempresa
                 ,'$this->_numerodocumento'
@@ -64,7 +83,11 @@ class RegistraPersona
                 ,'$this->_emailprincipal'
                 ,'$this->_web'
                 ,$this->_tbviaenvioid
-                ,$this->_tbcompaniaid)";
+                ,$this->_tbcompaniaid    
+                ,'$this->_direccion'
+                ,$this->_pais
+                ,$this->_departamento
+                ,$this->_distrito)";
             $tb_query = mysql_query($query,$cn);
         
             if (!$tb_query)
@@ -442,5 +465,29 @@ class RegistraPersona
 
     public function set_numerodocumento($_numerodocumento) {
         $this->_numerodocumento = $_numerodocumento;
+    }
+    
+    public function getTb_pais_id() {
+        return $this->tb_pais_id;
+    }
+
+    public function setTb_pais_id($tb_pais_id) {
+        $this->tb_pais_id = $tb_pais_id;
+    }
+
+    public function getTb_departamento_id() {
+        return $this->tb_departamento_id;
+    }
+
+    public function setTb_departamento_id($tb_departamento_id) {
+        $this->tb_departamento_id = $tb_departamento_id;
+    }
+
+    public function getTb_distrito_id() {
+        return $this->tb_distrito_id;
+    }
+
+    public function setTb_distrito_id($tb_distrito_id) {
+        $this->tb_distrito_id = $tb_distrito_id;
     }
 }

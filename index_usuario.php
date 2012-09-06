@@ -130,7 +130,7 @@ if(isset($_GET['logoff']))
                         <ul class="pitem">
                             <li><a href="modulos/seleccion.php?frmName=compania" target="_blank">Compa&ntilde;ias</a></li>
                             <li><a href="modulos/seleccion.php?frmName=persona" target="_blank">Personas</a></li>
-                            <li><a href="modulos/seleccion.php?frmName=listas" target="_blank">Listas de Distribuci&oacute;n</a></li>
+                            <li><a href="modulos/seleccion.php?frmName=listas&obra=<?=$_REQUEST['proyecto']?>&codigo=<?=$_REQUEST['codigObra']?>&descripcion=<?=$_REQUEST['descObra']?>" target="_blank">Listas de Distribuci&oacute;n</a></li>
                             <li><a href="#" onClick="seleccion('seleccionReporteEspecialidad.php');">Reporte por Especialidad</a></li>
                         </ul>
                     </div>

@@ -90,15 +90,7 @@ function __autoload($name) {
                 .require()
                 .match("number");
         })
-        /**
-         * JQFORM
-         */
-        /*
-        var opciones_formulario = {
-            beforeSubmit:showRequest
-        };
-        $("#frm-registracompania").ajaxForm(opciones_formulario);
-        */
+
         /**
          * contador para especialidades
          */ 
@@ -127,10 +119,6 @@ function __autoload($name) {
             width:450,
             modal:true,
             buttons:{
-                /*"Buscar":function() {
-                    $("#txt_nombreEspecialidad").val("");//clean it up
-                    buscarEspecialidad();
-                },*/
                 "Limpiar":function() {
                     recargarEspecialidades();
                 },
@@ -178,10 +166,6 @@ function __autoload($name) {
             width:450,
             modal:true,
             buttons:{
-                /*"Buscar":function(){
-                    $("#txt_nombreRepresentante").val("");//clean it up
-                    buscarRepresentante();
-                },*/
                 "Limpiar":function(){
                     recargarRepresentantes();
                 },
@@ -457,13 +441,6 @@ function __autoload($name) {
             $(this).parent().parent().remove();
          });
          
-         /**
-          * AGERGAR FONDO AL INPUT TEXT
-          */
-         $('#inp-giro').live("click",function(e){
-             
-         })
-         
          function mostrarRepresentantesScroll(data)
          {
              /**
@@ -499,7 +476,6 @@ function __autoload($name) {
             
             if (($("#tipocompaniaid").val()) == 0) {
                 alert("Escoja un tipo de Compa\xf1 \xeda por favor");
-                //$.scrollTo($('div#tipo_compania'),100);
                 return false;
             }
             
@@ -532,14 +508,7 @@ function __autoload($name) {
        cargar_paises();
        cargar_departamentos();
        cargar_distritos();
-       /**
-        * AUTOCOMPLETAR SEGUN NOMBRE DE LA EMPRESA
-        */
-//       $(".nombre_empresa").autocomplete("../../bl/Contacto/mantenimiento/autocompletadoEmpresas.php",{
-//           width:260,
-//           matchContains:true,
-//           selectFirst:false
-//       });
+
       $(".ruc_empresa").focusout(function() {
           $.ajax({
               type:"GET",
@@ -560,21 +529,12 @@ function __autoload($name) {
       
       $("#btnContinuar").click(function(e) {
           e.preventDefault();
-            window.location = "http://192.168.1.5/control_pms/modulos/contacto/registracompania.php";
+            window.location = "registracompania.php";
       })
       $("#btnModificar").click(function(e) {
           e.preventDefault();
-          //window.location = "http://192.168.1.5/control_pms/modulos/contacto/edit/editacompaniacur.php?ruc="+$(".ruc_empresa").val();
           window.location = "edit/editacompaniacur.php?ruc="+$(".ruc_empresa").val();
       })
-       /**
-        * AUTOCOMPLETAR SEGUN RUC DE LA EMPRESA
-        */
-//      $(".ruc_empresa").autocomplete("../../bl/Contacto/mantenimiento/autocompletadoEmpresasPorRuc.php",{
-//           width:260,
-//           matchContains:true,
-//           selectFirst:false
-//       });
        
        $("#edita").click(function(e) {
            e.preventDefault();
@@ -613,7 +573,7 @@ function __autoload($name) {
                 success:function(){
                     muestraRespuesta();
                 }
-                //clearForm:true
+                
             };
             $("#frm-registracompania").ajaxForm(options);
         });
@@ -643,13 +603,14 @@ function __autoload($name) {
         <?php            include_once 'modal_registracompania/modal-escogeEmpresa.php';?>
         <div id="barra-superior-dentro">
             
-            <h1 id="titulo_barra">REGISTRO DE COMPA&Ntilde;IAS</h1>
+            <h1 id="titulo_barra">REGISTRO DE COMPA&Ntilde;IAS <?=$_SESSION['id']?></h1>
         </div>
     </div>
     
 <div id="main">
-<!--    <form id="frm-registracompania" action="../../bl/busca_persona/registraCompania_BL.php" method="POST">-->
-<form id="frm-registracompania" action="ttest/registraCompaniaTest.php" method="POST">
+    <form id="frm-registracompania" action="../../bl/busca_persona/registraCompania_BL.php" method="POST">
+<!--<form id="frm-registracompania" action="ttest/registraCompaniaTest.php" method="POST">-->
+        <input type="hidden" name="idEmpresa" value="<?=(int)$_SESSION['id']?>" />
        <div class="info">
        Los campos obligatorios est&aacute;n marcados con <img src="../../img/required_star.gif" alt="dato requerido" />
        </div>

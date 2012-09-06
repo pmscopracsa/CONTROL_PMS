@@ -72,7 +72,7 @@ class RegistraCompania
     public function prueba() {
          for ($i = 0; $i < sizeof($this->_representate); $i++) {
                         $representante = $this->_representate[$i];
-                        $query = "INSERT INTO tb_representante VALUES($ultimo_id,$representante)";
+                        $query = "INSERT INTO tb_representante (tb_companiacontacto_id, tb_personacontacto_id) VALUES($ultimo_id,$representante)";
                         $res = mysql_query($query,$cn);
                         if (!$res)
                             throw new Exception("tb_representante. Error: ".mysql_error());
@@ -88,7 +88,20 @@ class RegistraCompania
          */
         mysql_query("BEGIN",$cn);
         try {
-            $sql_tb_companiacontacto = "INSERT INTO tb_companiacontacto VALUES (
+            $sql_tb_companiacontacto = "INSERT INTO tb_companiacontacto (
+                id
+                ,descripcion
+                ,ruc
+                ,nombrecomercial
+                ,partidaregistral
+                ,actividadprincipal
+                ,tb_tipocompania_id
+                ,fax
+                ,observacion
+                ,email
+                ,web
+                ,tb_viaenvio_id
+                ,tb_empresa_id) VALUES (
                 NULL
                 ,'$this->_descripcion'
                 ,'$this->_ruc'
@@ -101,8 +114,7 @@ class RegistraCompania
                 ,'$this->_email'
                 ,'$this->_web'
                 ,$this->_viaenvio
-                ,$this->_idempresa    
-                )";
+                ,$this->_idempresa)";
             $tb_companiacontacto = mysql_query($sql_tb_companiacontacto,$cn);
             
             if (!$tb_companiacontacto)

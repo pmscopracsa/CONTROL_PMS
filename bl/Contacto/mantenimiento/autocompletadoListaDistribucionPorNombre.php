@@ -1,4 +1,6 @@
 <?php
+session_name('tzLogin');
+session_set_cookie_params(2*7*24*60*60);
 session_start();
 require_once '../../../dl/Conexion.php';
 
@@ -27,11 +29,6 @@ try {
     
     while ($registro = mysql_fetch_array($rs)) {
         $empresas = $registro['descripcion'];
-        
-        if (!isset($_SESSION['datos_empresa'])) { 
-            $datos_empresa = array( $registro['id'], $registro['tb_empresa_id'], $registro['observacion']);
-            $_SESSION['datos_empresa'] = $datos_empresa;            
-        }
         echo $empresas."\n";
     }
 } catch ( Exception $ex ) {

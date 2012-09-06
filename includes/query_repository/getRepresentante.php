@@ -15,7 +15,17 @@ $id = $_REQUEST['id'];
 /**
  * CONSULTA PARA OBTENER LOS DATOS DE LA TABLA tb_persona contacto 
  */
-$query = "SELECT * FROM tb_personacontacto WHERE id = $id";
+//$query = "SELECT * FROM tb_personacontacto WHERE id = $id";
+$query = "SELECT
+        pc.id
+        ,pc.dni
+        ,pc.nombre
+        ,pc.cargo
+        ,pc.fax
+        ,pc.email
+        ,cc.descripcion
+        FROM 
+        tb_personacontacto pc INNER JOIN tb_companiacontacto cc ON pc.tb_companiacontacto_id = cc.id WHERE pc.id = $id";
 $result = mysql_query($query,$link_identifier);
 $representante = array();
 $i = 0;
@@ -83,6 +93,7 @@ while($res = mysql_fetch_assoc($result)) {
     $representante[$i]['qnt_tn'] = mysql_num_rows($res_nextel_q) == 0 
         ? "<i id=\"sindatos\">No tiene</i>" 
         : $tnextel;
+    $representante[$i]['descripcion'] = $res['descripcion'];
     $i++;
 }
 echo json_encode($representante);

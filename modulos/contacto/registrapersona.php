@@ -1,5 +1,8 @@
 <?php
+session_name('tzLogin');
+session_set_cookie_params(2*7*24*60*60);
 session_start();
+
 
 $CSS_PATH = '../../css/';
 
@@ -16,12 +19,23 @@ function __autoload($name) {
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>REGISTRO DE PERSONAS</title>
         <!-- zona css -->
-        
+        <link href="../../css/areascroll.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/autocomplete.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/barrasuperior.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/areascroll.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/cuerpo.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/styles.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/styles.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/reveal/styles.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/botones.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/google-buttons.css" rel="stylesheet" type="text/css" />
         <?php
-        foreach ($css as $value) {
+        /*foreach ($css as $value) {
             if ($value === '.' || $value === '..') {continue;}
             echo '<link href="../../css/'.$value.'" rel="stylesheet" type="text/css" />';
-        }
+        }*/
         ?>
         <link href="../../css/reveal/styles.css" rel="stylesheet" type="text/css" />
         <!--    ZONA JS -->
@@ -343,11 +357,11 @@ function __autoload($name) {
               /**
              * AUTOCOMPLETAR SEGUN NOMBRE DE LA PERSONA
              */
-            $(".nombre_persona").autocomplete("../../bl/Contacto/mantenimiento/autocompletadoEmpresasPorContacto.php",{
+            /*$(".nombre_persona").autocomplete("../../bl/Contacto/mantenimiento/autocompletadoEmpresasPorContacto.php",{
                 width:260,
                 matchContains:true,
                 selectFirst:false
-            });
+            });*/
             $(".input-tipo-documento").focusout(function() {
                 $.ajax({
                     type:"GET",
@@ -418,15 +432,7 @@ function __autoload($name) {
            $(".nombre_empresa").val(cli);
            $("#txtidempresa").val(contratante_id);
       });
-            
-            /**
-             * AUTOCOMPLETAR SEGUN NOMBRE DE LA EMPRESA
-             */
-//            $(".nombre_empresa").autocomplete("../../bl/Contacto/mantenimiento/autocompletadoEmpresas.php",{
-//                width:260,
-//                matchContains:true,
-//                selectFirst:false
-//            });  
+             
         });
         </script>
         <script type="text/javascript">
@@ -472,7 +478,8 @@ function __autoload($name) {
         
         <div id="main">
             <form action="../../bl/busca_persona/registraPersona_BL.php" method="POST" id="frm-regpersona">
-                
+<!--                <form action="registratest.php" method="POST" id="frm-regpersona">-->
+                    <input type="hidden" name="idEmpresa" value="<?=$_SESSION['id']?>" />
                 <div class="info">
                 Los campos obligatorios est&aacute;n marcados con <img src="../../img/required_star.gif" alt="dato requerido" />
                 </div>
@@ -496,7 +503,7 @@ function __autoload($name) {
                             <td class="td-ruc-checkbox" style="display: none"><input placeholder="RUC" type="text" id="inputext" name="ruc" class="txtruccarne"/>
                     <tr>
                         <td><label>Nombres y Apellidos:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                        <td><input class="nombre_persona" id="inputext" type="text" size="70" placeholder="INGRESE EL NOMBRE COMO DATO NUEVO O EMPIECE A TIPEAR UNO YA EXISTENTE" name="nombre"</td>
+                        <td><input class="nombre_persona" id="inputext" type="text" size="70"  name="nombre"</td>
                     </tr>
                     <tr>
                         <td>
@@ -505,7 +512,7 @@ function __autoload($name) {
                             <input class="nombre_empresa" id="inputext" type="text" size="70"  name="companiaseleccionada" READONLY />
                         </td>
                         <td><input type="button" id="btnBuscarCompania" value="Buscar Compania" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
-                    <input type="hidden" id="txtidempresa" />
+                    <input type="hidden" name="txtidempresa" id="txtidempresa"/>
                     </tr>
                         <td><label>Cargo:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td><input id="inputext" type="text" size="25" name="cargo"</td>

@@ -18,7 +18,7 @@ $registracompania->set_observacion($_REQUEST['observacion'] == "" ? "NULL" : $li
 $registracompania->set_email($_REQUEST['email'] == "" ? "NULL" : $limpia->Filtro($_REQUEST['email']));
 $registracompania->set_web($_REQUEST['web'] == "" ? "NULL" : $limpia->Filtro($_REQUEST['web']));
 $registracompania->set_viaenvio($_REQUEST['viaenvioseleccionada'] == "" ? "NULL" : $limpia->Filtro($_REQUEST['viaenvioseleccionada']));
-
+$registracompania->set_idempresa($_REQUEST['idEmpresa']);
 /**
  * VALIDACION DE EXISTENCIA DE DATOS EN GIRO 
  */

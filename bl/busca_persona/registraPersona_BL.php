@@ -8,6 +8,7 @@ $limpia = new LimpiarVariable();
 /**
  * OBTENER DATOS SEGUN FORMULARIO Y SANITIZARLAS 
  */
+$registrapersona->set_idempresa($_REQUEST['idEmpresa']);
 $registrapersona->set_tipodocumento($_REQUEST['tipo-documento']);
 $registrapersona->set_numerodocumento($_REQUEST['numero-documento'] == "" ? "NULL" : $limpia->Filtro($_REQUEST['numero-documento']));
 
@@ -23,7 +24,7 @@ if ($_REQUEST['tieneruc'] == "si") {
 }
 
 $registrapersona->set_nombrecompleto($_REQUEST['nombre'] == "" ? "NULL" : $limpia->Filtro($_REQUEST['nombre']));
-$registrapersona->set_tbcompaniaid($_REQUEST['companiaseleccionada']);
+$registrapersona->set_tbcompaniaid($_REQUEST['txtidempresa']);
 $registrapersona->set_cargo($_REQUEST['cargo'] == "" ? "NULL" :$limpia->Filtro($_REQUEST['cargo']));
 
 /**
