@@ -376,7 +376,6 @@ $contratos = $modelos->mostrarContratos();
              */
             $("#btn-parametrospptoventa").click(function(){
                 $("#div-modal-pptoventa").dialog("open");
-                return false;
             }); 
             var ppto_venta = $("#div-modal-pptoventa").dialog({
                 autoOpen:false,
@@ -507,7 +506,6 @@ $contratos = $modelos->mostrarContratos();
              // Al seleccionar a un contacto, seleccionaremos automaticamente: Puesto, Contacto y Empresa
              $("#btn-asignarfirmasreportes").click(function(){
                 $("#div-firmas-1").dialog("open");
-                return false;
              });
              $("#div-firmas-1").dialog({
                  autoOpen:false,
@@ -526,7 +524,7 @@ $contratos = $modelos->mostrarContratos();
                              type:"GET",
                              dataType:"json",
                              data:{aleatorio:aleatorio},
-                             url:"../../dl/datos_obra/r_listareportes",
+                             url:"../../dl/datos_obra/r_listareportes.php",
                              success:function(data) {
                                  mostrarEmpatarFirmasPersonas(data);
                              }
@@ -1409,7 +1407,7 @@ $contratos = $modelos->mostrarContratos();
                     '<td id="id_puesto" name="puesto'+contador_firmas+'"><input id="puesto_editar" type="text" value="' +puesto+'" /></td>'+
                     '<td name="contacto'+contador_firmas+'">'+contacto+"</td>"+
                     '<td name="empresa'+contador_firmas+'">'+empresa+"</td>"+
-                    '<td>'+'<a href="#" id="del-firma" class="button delete">Eliminaraa</a>'+'</td>'+
+                    '<td>'+'<a href="#" id="del-firma" class="button delete">Eliminar</a>'+'</td>'+
                     "</tr>"    
                 );
                     
@@ -1461,8 +1459,8 @@ $contratos = $modelos->mostrarContratos();
                  var matches = value.match(new RegExp("(\\d+)","gi"));
                  e.preventDefault();
                  $(this).parent().parent().remove();
-                 alert(value);
-                 alert(matches);
+                 //alert(value);
+                 //alert(matches);
                  $.ajax({
                      data:{id:matches[0],aleatorio:<?=$aleatorio?>},
                      type:"POST",
@@ -1559,12 +1557,12 @@ $contratos = $modelos->mostrarContratos();
                     //
                     $.ajax({
                         type:"POST",
-                        data:{id:codigo, aleatorio:aleatorio},
-                        url:"../../dl/datos_obra/i_ingresacontacto.php",
-                        success:function() {
-                            
-                        }
-                    })
+                        data:{
+                            idcontacto:codigo,
+                            idobra:<?=$_REQUEST['obra']?>
+                            ,aleatorio:aleatorio},
+                        url:"../../dl/datos_obra/i_ingresacontacto.php"
+                    });
                 });
             }
             
@@ -1825,7 +1823,7 @@ $contratos = $modelos->mostrarContratos();
                 var proveedor_array = $(this).text().split("-");
                 var cli = proveedor_array[1];
                 var proveedor_id = proveedor_array[0];
-                alert(proveedor_array[0])
+                //alert(proveedor_array[0])
                 $(".proveedorfacturar-text").val(cli);
                 $(".proveedor_id").val(proveedor_id);
             });
@@ -1915,15 +1913,16 @@ $contratos = $modelos->mostrarContratos();
         
         <!-- INICIO DE FORMULARIO --> 
         <!-- ******************** -->
-        <form id="frm_datosobra" action="datosdeobratest.php" method="POST">
+        <form id="frm_datosobra" action="../../bl/DatosObra/registraObra_BL.php?random=<?=$aleatorio?>" method="POST">
+<!--        <form id="frm_datosobra" action="datosdeobratest.php" method="POST">-->
         <!-- TEXT INPUT INVISIBLES PARA PASAR DATOS SIN FORMATOS : sf == sin formato-->
-        <div id="valores_sinformato" style="display: none">
-            <input type="text" id="txt_sfcartafianza" name="txtsfcartafianza" />
-            <input type="text" id="txt_sffondoretencion" name="txt_sffondoretencion" />
-            <input type="text" id="txt_sfmontomayora" name="txt_sfmontomayora" />
-            <input type="text" id="txt_sfmonotmenora" name="txtsfmonotmenora" />
-        </div>    
-                <!--VENTANA MODAL PARA SETEO DEL PRESUPUESTO DE VENTA-->
+        <!-- VALORES SIN FORMATO -->
+            <input type="hidden" id="txt_sfcartafianza" name="txtsfcartafianza" />
+            <input type="hidden" id="txt_sffondoretencion" name="txt_sffondoretencion" />
+            <input type="hidden" id="txt_sfmontomayora" name="txt_sfmontomayora" />
+            <input type="hidden" id="txt_sfmonotmenora" name="txtsfmonotmenora" />
+        
+        <!--VENTANA MODAL PARA SETEO DEL PRESUPUESTO DE VENTA-->
         <div  id="div-modal-pptoventa" title="Seteo Presupuesto Venta">
             <div class="">
                 <fieldset>
@@ -2321,7 +2320,7 @@ $contratos = $modelos->mostrarContratos();
                 </div>
             </fieldset>
             <div id="footer"><hr/></div>
-        <input type="submit" id="submit" value="Guardar" class="ui-button ui-widget ui-state-default ui-corner-all" />
+        <input type="submit" value="Guardar" class="ui-button ui-widget ui-state-default ui-corner-all" />
         </div>
         </form>
     </body>

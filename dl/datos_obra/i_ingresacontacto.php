@@ -1,6 +1,8 @@
 <?php
 include_once 'Conexion.php';
-$id = $_REQUEST['id'];
+$idcontacto = $_REQUEST['idcontacto'];
+$idobra = $_REQUEST['idobra'];
+
 $aleatorio = $_REQUEST['aleatorio'];
 
 try {
@@ -9,7 +11,7 @@ try {
     if (!$cn) 
         throw new Exception ("Problemas en la conexion a la DDBB: ".  mysql_error());
     
-    $sql = "INSERT INTO temporal VALUES ($id, $id, $aleatorio)";
+    $sql = "INSERT INTO temporal (id_contacto,id_obra,random_code) VALUES ($idcontacto, $idobra, $aleatorio)";
     $res = mysql_query($sql,$cn);
     
     if (!$res)

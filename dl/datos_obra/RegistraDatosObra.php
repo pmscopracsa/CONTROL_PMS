@@ -62,13 +62,58 @@ class RegistraDatosObra
     // EMPRESA QUE ALQUILA EL SW
     protected $_idempresa;
     
+    // NUMERO ALEATORIO DE SESION
+    protected $aleatorio;
+    
     public function __construct() {
         
     }
     
+    /** ESTE INSERTA ES EN REALIDAD UN UPDATE YA QUE LA OBRA YA EXISTE */ 
     public function i_RegistraObra()
     {
+        $sql = "UPDATE
+	control_pms.tb_obra
+        SET
+	fechainicio = '$this->_finicio',
+	fechafin = '$this->_ffin',
+	direccion = '$this->_direccionobra',
+	tb_departamento_id = $this->_tbdepartamentoid,
+	tb_moneda_id = $this->_tbmonedaid,
+	cliente_id = $this->_tbclienteid,
+	empresacontratante_id = $this->_empresacontratante,
+	gerenteproyecto_id = $this->_empresagerenteproyecto,
+	supervisoraproyecto_id = $this->_empresasupervisoraproyecto,
+	proveedoresfacturar_id = $this->_provevedorafacturar,
+	porcentajecartafianza = $this->_porcentajecartafianza,
+	diasdesembolso = $this->_diashabilesdesembolso,
+	porcentajefondoretencion = $this->_porcentajefondoretencion,
+	diasdevolucionfondoretencion = '$this->_diashabilesdevolucion',
+	montocontratadomayora = $this->_montomayor,
+	montocontratadomenora = $this->_montomenor,
+	cartaadjudicacion = '$this->_modelocartaadjudicacion',
+	modelocontrato = '$this->_modelocontrato',
+	tb_tipovalorizacion_id = $this->_tbtipovalorizacionid,
+	tb_formatopresupuesto_id = $this->_tbformatopresupuesto,
+	factorcorreccion = $this->_factorcoreccion,
+	retencionfondogarantia = $this->_retencionfondogarantia,
+	retencionfielcumplimiento = '$this->_retencionfielcumplimiento',
+	gastogeneral_precontra = $this->_gastogeneralpresupuestocontractual,
+	utilidad_precontra = $this->_utilidadpresupuestocontractual,
+	gastogeneral_ordcamb = $this->_gastogeneralordenescambio,
+	utilidad_ordcamb = $this->_utilidadordenescambio
+        WHERE codigoobra = '$this->_codigo'";
         
+        try{
+            $cnx = new Conexion();
+            $cn = $cnx->conectar();
+            if (!$cn)                throw new Exception("Error al conectar: ".  mysql_error());
+            
+            $rs = mysql_query($sql);
+            if(!$rs)                throw new Exception("Error al consultar: ".  mysql_error());
+        } catch (Exception $ex) {
+            echo 'Error: '.$ex->getMessage();
+        }
     }
     
     /**
@@ -228,6 +273,21 @@ class RegistraDatosObra
             
             if (!$sql)
                 throw new Exception("Error en la consulta:".  mysql_error());
+            
+            /** INGRESAR CONTACTOS DE LA OBRA */
+            $tmpcontactos_contacto = "INSERT INTO tb_contacto (tb_personacontacto_id, tb_obra_id) 
+            SELECT id_contacto,id_obra FROM temporal WHERE random_code = '$this->aleatorio'";
+            
+            $rs_contacto = mysql_query($tmpcontactos_contacto);
+            if (!$rs_contacto)                throw new Exception("Error al mover a los contactos: ".  mysql_error());
+            
+            /** INGRESAR CONTACTOS Y SUS REPORTES */
+            $tmpcontactosreporte_contactoreporte = "
+                INSERT INTO tb_contactoreporte (tb_personacontacto_id,tb_reporte_id,tb_obra_id,posicion_reporte)
+                SELECT id_contacto,id_reporte, $this->_codigo, posicion_firma_en_reporte FROM tb_contactoreportetemporal WHERE id_aleatorio = $this->aleatorio";
+            
+            $rs_reportes = mysql_query($tmpcontactosreporte_contactoreporte);
+            if (!$rs_reportes)                throw new Exception("Error al mover los reportes: ".  mysql_error());
             
         } catch (Exception $ex) {
             echo "Error al consultar obra por codigo. Error: ".$ex->getMessage();
@@ -484,4 +544,14 @@ class RegistraDatosObra
     public function set_idempresa($_idempresa) {
         $this->_idempresa = $_idempresa;
     }
+    
+    public function getAleatorio() {
+        return $this->aleatorio;
+    }
+
+    public function setAleatorio($aleatorio) {
+        $this->aleatorio = $aleatorio;
+    }
+
+
 }

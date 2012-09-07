@@ -41,7 +41,7 @@ session_start();
             // PRIMERA CARGA DE ESPECIALIDADES
             $("#modalEspecialidad").load("../modal_registracompania/modal-especialidadCompania.php");
             // PRIMERA CARGA DE REPRESENTANTES
-            $("#modalRepresentante").load("../modal_registracompania/representantes_div_nocheckbox.php");
+            $("#modalRepresentante").load("../modal_registracompania/representantes_div_nocheckbox.php?ruc="+<?=$_REQUEST['ruc']?>);
             // PRIMERA CARGA DE ESPECIALIDADES
             $("#modalEspecialidad").load("../modal_registracompania/especialidades_div.php?filtro=3");
             

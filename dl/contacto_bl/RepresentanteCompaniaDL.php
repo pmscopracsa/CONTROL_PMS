@@ -5,10 +5,30 @@ class RepresentanteCompaniaDL {
     protected $tb_companiacontacto_id;
     protected $tb_personacontacto_id;
     protected $_descripcionpersona;
+    protected $ruc;
     
     public function mostrarRepresentantes()
     {
-        $query = "SELECT * FROM tb_personacontacto ORDER BY nombre ASC";
+        //$query = "SELECT * FROM tb_personacontacto ORDER BY nombre ASC";
+        $query = "select 
+            per.id
+            ,per.tb_empresa_id
+            ,per.dni
+            ,per.nombre
+            ,per.cargo
+            ,per.fax
+            ,per.observacion
+            ,per.email
+            ,per.web
+            ,per.tb_viaenvio_id
+            ,per.tb_companiacontacto_id
+            ,per.direccion
+            ,per.tb_pais_id
+            ,per.tb_departamento_id
+            ,per.tb_distrito_id
+            from tb_companiacontacto co inner join tb_personacontacto per
+            on per.tb_companiacontacto_id = co.id
+            where co.ruc = $this->ruc";
         
         $conexion = new Conexion();
         $cn = $conexion->conectar();
@@ -71,6 +91,11 @@ class RepresentanteCompaniaDL {
         $this->_descripcionpersona = $_descripcionpersona;
     }
 
+    public function getRuc() {
+        return $this->ruc;
+    }
 
+    public function setRuc($ruc) {
+        $this->ruc = $ruc;
+    }
 }
-?>

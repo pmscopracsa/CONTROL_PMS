@@ -6,11 +6,6 @@ session_start();
 $CSS_PATH = '../../css/';
 $css = scandir($CSS_PATH);
 
-/**
- * $id_empresa = $_SESSION['id_empresa'];
- * @param type $name 
- */
-$id_empresa = 1;
 
 function __autoload($name) {
     $fullpath = '../../dl/contacto_bl/'.$name.'.php';
@@ -603,7 +598,7 @@ function __autoload($name) {
         <?php            include_once 'modal_registracompania/modal-escogeEmpresa.php';?>
         <div id="barra-superior-dentro">
             
-            <h1 id="titulo_barra">REGISTRO DE COMPA&Ntilde;IAS <?=$_SESSION['id']?></h1>
+            <h1 id="titulo_barra">REGISTRO DE COMPA&Ntilde;IAS</h1>
         </div>
     </div>
     
@@ -832,7 +827,7 @@ function __autoload($name) {
                         </div>
                     </td>
                 </tr>
-               <tr>
+<!--               <tr>
                    <td><label for="representante">Representante:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td>
                        <input type="button" id="btnAgregarRepresentante" value="Buscar Representante" class="ui-button ui-widget ui-state-default ui-corner-all"/>
@@ -867,7 +862,7 @@ function __autoload($name) {
                            </table>
                        </div>
                    </td>
-               </tr>
+               </tr>-->
                <tr>
                    <td><label for="observacion">Observaci&oacute;n:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                    <td><textarea name="observacion"></textarea></td>
