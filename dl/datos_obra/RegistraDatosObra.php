@@ -1,5 +1,5 @@
 <?php
-include_once 'Conexion.php';
+include_once '../Conexion.php';
 include_once 'Comun.php';
 /**
  * @tabla principal:
@@ -73,7 +73,7 @@ class RegistraDatosObra
     public function i_RegistraObra()
     {
         $sql = "UPDATE
-	control_pms.tb_obra
+	tb_obra
         SET
 	fechainicio = '$this->_finicio',
 	fechafin = '$this->_ffin',
@@ -102,15 +102,22 @@ class RegistraDatosObra
 	utilidad_precontra = $this->_utilidadpresupuestocontractual,
 	gastogeneral_ordcamb = $this->_gastogeneralordenescambio,
 	utilidad_ordcamb = $this->_utilidadordenescambio
-        WHERE codigoobra = '$this->_codigo'";
+        WHERE id = $this->_id";
         
         try{
             $cnx = new Conexion();
             $cn = $cnx->conectar();
-            if (!$cn)                throw new Exception("Error al conectar: ".  mysql_error());
+            if (!$cn)                throw new Exception("Error al conectar en obra: ".  mysql_error());
             
-            $rs = mysql_query($sql);
-            if(!$rs)                throw new Exception("Error al consultar: ".  mysql_error());
+            $rs = mysql_query($sql,$cn);
+            if(!$rs)                throw new Exception("Error al consultar en obra: ".  mysql_error());
+            
+            
+            $sql_move_contactos = "INSERT INTO tb_contacto(tb_personacontacto_id, tb_obra_id)
+            SELECT id_contacto,id_obra FROM temporal WHERE random_code = '$this->aleatorio'";
+            
+            $rs2 = mysql_query($sql_move_contactos);
+            if(!$rs2)                throw new Exception("Error al consultar: ".  mysql_error());
         } catch (Exception $ex) {
             echo 'Error: '.$ex->getMessage();
         }

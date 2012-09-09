@@ -45,7 +45,7 @@ $contratos = $modelos->mostrarContratos();
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <title>REGISTRAR DATOS DE OBRA</title>
         <?php
         foreach($css as $value) {
@@ -1921,6 +1921,7 @@ $contratos = $modelos->mostrarContratos();
             <input type="hidden" id="txt_sffondoretencion" name="txt_sffondoretencion" />
             <input type="hidden" id="txt_sfmontomayora" name="txt_sfmontomayora" />
             <input type="hidden" id="txt_sfmonotmenora" name="txtsfmonotmenora" />
+            <input type="hidden" name="proyecto" value="<?=$_REQUEST['obra']?>" />
         
         <!--VENTANA MODAL PARA SETEO DEL PRESUPUESTO DE VENTA-->
         <div  id="div-modal-pptoventa" title="Seteo Presupuesto Venta">

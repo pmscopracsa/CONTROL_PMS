@@ -7,6 +7,7 @@ $limpia = new LimpiarVariable();
 
 
 /** tb_obra */
+$registradatosobra->set_id($_REQUEST['proyecto']);
 $registradatosobra->set_codigo($_REQUEST['codigo']);
 $registradatosobra->set_finicio($_REQUEST['f_inicio']);
 $registradatosobra->set_ffin($_REQUEST['f_fin']);
