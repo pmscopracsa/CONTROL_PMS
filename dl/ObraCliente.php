@@ -1,5 +1,5 @@
 <?php
-//require_once 'Conexion.php';
+require_once 'Conexion.php';
 
 class ObraCliente {
     private $_id;
@@ -123,6 +123,97 @@ class ObraCliente {
             return $obra_data;
             
         } catch (Exception $ex) {
+            echo 'Error: '.$ex->getMessage();
+        }
+    }
+    
+    /** MUESTRA DATOS DE LA TABLA tb_obra */
+    public function s_buscarObraPorId() 
+    {
+        $query = "SELECT
+            o.id
+            ,o.codigoobra
+            ,o.descripcion
+            ,o.fechainicio
+            ,o.fechafin
+            ,o.direccion
+            ,cc_cliente.id idcliente
+            ,cc_cliente.descripcion nombrecliente
+            ,cc_empcontratante.id idempcontratante
+            ,cc_empcontratante.descripcion nombrecontratante
+            ,cc_empgerenteproyecto.id idgerente
+            ,cc_empgerenteproyecto.descripcion nombregerente
+            ,cc_empsupervproyecto.id idsupervisor
+            ,cc_empsupervproyecto.descripcion nombresupervisor
+            ,cc_proveedorfacturar.id idafacturar
+            ,cc_proveedorfacturar.descripcion nombreafacturar
+            ,o.porcentajecartafianza
+            ,o.diasdesembolso
+            ,o.porcentajefondoretencion
+            ,o.diasdevolucionfondoretencion
+            ,o.montocontratadomayora
+            ,o.montocontratadomenora
+            ,o.cartaadjudicacion
+            ,o.modelocontrato
+            ,o.factorcorreccion
+            ,o.retencionfondogarantia
+            ,o.retencionfielcumplimiento
+            ,o.gastogeneral_precontra
+            ,o.utilidad_precontra
+            ,o.gastogeneral_ordcamb
+            ,o.utilidad_ordcamb
+            FROM tb_obra o 
+            INNER JOIN tb_companiacontacto cc_cliente ON o.cliente_id = cc_cliente.id 
+            INNER JOIN tb_companiacontacto cc_empcontratante ON o.empresacontratante_id = cc_empcontratante.id
+            INNER JOIN tb_companiacontacto cc_empgerenteproyecto ON o.empresacontratante_id = cc_empgerenteproyecto.id
+            INNER JOIN tb_companiacontacto cc_empsupervproyecto ON o.supervisoraproyecto_id = cc_empsupervproyecto.id
+            INNER JOIN tb_companiacontacto cc_proveedorfacturar ON o.proveedoresfacturar_id = cc_proveedorfacturar.id
+            WHERE o.id = $this->_id";
+        
+        try {
+            $cnx = new Conexion();
+            $cn = $cnx->conectar();
+            if (!$cn)                throw new Exception("Error en la conexion()()(): ".  mysql_error());
+            
+            $rs = mysql_query($query, $cn);
+            if (!$rs)                throw new Exception("Error en la consulta: ".  mysql_error());
+            
+            $datos = array();
+            while ($res = mysql_fetch_array($rs,MYSQL_ASSOC)) {
+                array_push($datos, $res['id']);
+                array_push($datos, $res['codigoobra']);
+                array_push($datos, $res['descripcion']);
+                array_push($datos, $res['fechainicio']);
+                array_push($datos, $res['fechafin']);
+                array_push($datos, $res['direccion']);
+                array_push($datos, $res['idcliente']);
+                array_push($datos, $res['nombrecliente']);
+                array_push($datos, $res['idempcontratante']);
+                array_push($datos, $res['nombrecontratante']);
+                array_push($datos, $res['idgerente']);
+                array_push($datos, $res['nombregerente']);
+                array_push($datos, $res['idsupervisor']);
+                array_push($datos, $res['nombresupervisor']);
+                array_push($datos, $res['idafacturar']);
+                array_push($datos, $res['nombreafacturar']);
+                array_push($datos, $res['porcentajecartafianza']);
+                array_push($datos, $res['diasdesembolso']);
+                array_push($datos, $res['porcentajefondoretencion']);
+                array_push($datos, $res['diasdevolucionfondoretencion']);
+                array_push($datos, $res['montocontratadomayora']);
+                array_push($datos, $res['montocontratadomenora']);
+                array_push($datos, $res['cartaadjudicacion']);
+                array_push($datos, $res['modelocontrato']);
+                array_push($datos, $res['factorcorreccion']);
+                array_push($datos, $res['retencionfondogarantia']);
+                array_push($datos, $res['retencionfielcumplimiento']);
+                array_push($datos, $res['gastogeneral_precontra']);
+                array_push($datos, $res['utilidad_precontra']);
+                array_push($datos, $res['gastogeneral_ordcamb']);
+                array_push($datos, $res['utilidad_ordcamb']);
+            }
+            return $datos;
+        } catch(Exception $ex) {
             echo 'Error: '.$ex->getMessage();
         }
     }

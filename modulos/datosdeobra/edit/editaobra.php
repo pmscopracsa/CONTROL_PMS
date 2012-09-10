@@ -2,114 +2,123 @@
 session_name('tzLogin');
 session_set_cookie_params(2*7*24*60*60);
 session_start();
-
-$idObra = $_REQUEST['idObra'];
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Editar Obra</title>
-        <link href="" rel="" type="text/css" />
+        <link href="../../../css/barrasuperior.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/cuerpo.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/botones.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/google-buttons.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
         
         <script src="../../../js/jquery1.4.2.js.js" type="text/javascript"></script>
+        <script src="../../../js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
         <script src="../../../js/autocomplete/jquery.autocomplete.js" type="text/javascript"></script>
         <script>
         var tipobusqueda = "";    
         $(document).ready(function() {
-            /*
-             * DETECTAR SELECCION DE CRITERIO 
-             */
-            $("input:radio[name=criteriobusqueda]").click(function() {
-                tipobusqueda = $(this).val();
-                if ($(this).val() == "codigo")
-                {
-                    $(".nombreobra").val("");
-                    $("#divnombre").css("display","none");
-                    $("#divcodigo").css("display","block");
-                    $("#divbtnBuscar").css("display","block");
-                    $(".codigoobra").focus();
+            $.ajax({
+                type:"GET",
+                url:"../../../bl/Contacto/actualizaObra.php",
+                dataType:"html",
+                data:{
+                    idObra:<?=$_REQUEST['idobra']?>
+                },
+                success:function(data){
+                    toHtml(data);
                 }
-                else if ($(this).val() == "nombre")
-                {
-                    $(".codigoobra").val("");
-                    $("#divcodigo").css("display","none");
-                    $("#divnombre").css("display","block");
-                    $("#divbtnBuscar").css("display","block");
-                    $(".nombreobra").focus();
-                }    
             });
             
-            //BOTON PARA BUSCAR
-            $("#btnBuscar").click(function() {
-                if ($(".nombreobra").val() == "" || $(".codigoobra").val() == "") {
-                    $("#divmensaje").fadeIn("slow");
-                    $("#divmensaje").fadeOut("slow");
-                }
-                else {
-                    if (tipobusqueda == "codigo") {
+            function toHtml(data){
+                $("#tmp").html(data);
+            }
+            
+            /** Editar fecha de inicio */
+            $("#btnModificaFechaInicio").live("click",function() {
+                if ($(this).val() === "Modificar") {
+                    $(this).attr('value', 'Guardar');
+                    $(".txtfinicio").removeAttr('readonly');
+                } else {
+                    if ($(".txtfinicio").val() === "") {
+                        alert("La fecha de inicio esta en blanco, corrija por favor.");
+                    } else {
                         $.ajax({
-                            type:"GET",
-                            url:"../../../bl/DatosObra/actualizaObra.php?opcion=codigo",
-                            data:{codigo:$(".codigoobra").val()},
-                            dataType:"html",
-                            success:function(data) {
-                                toHtml(data);
+                            type:"POST",
+                            url:"",
+                            data:{
+                                
+                            },
+                            success:function() {
+                                $(".txtfinicio").attr('readonly', 'true');
                             }
-                        })
-                    } else if(tipobusqueda == "nombre") {
-                        $.ajax({
-                            type:"GET",
-                            url:"../../../bl/DatosObra/actualizaObra.php?opcion=nombre",
-                            data:{nombre:$(".nombreobra").val()},
-                            dataType:"html",
-                            success:function(data) {
-                                toHtml(data);
-                            }
-                        })
+                        });
                     }
                 }
             });
-            
-            $(".").autocomplete("",{
-                width:260,
-                matchContains:true,
-                selectFirst:false
+            /** Editar fecha de fin */
+            $("#btnModificaFechaFin").live("click",function() {
+                if ($(this).val() === "Modificar") {
+                    $(this).attr('value', 'Guardar');
+                    $(".txtffin").removeAttr('readonly');
+                } else {
+                    if ($(".txtffin").val() === "") {
+                        alert("La fecha de fin esta en blanco, corrija por favor.");
+                    } else {
+                        $.ajax({
+                            type:"POST",
+                            url:"",
+                            data:{
+                                
+                            },
+                            success:function() {
+                                $(".txtffin").attr('readonly', 'true');
+                            }
+                        });
+                    }
+                }
             });
-            
-            $("").autocomplete("",{
-                width:260,
-                matchContains:true,
-                selectFirst:false
+            /** Editar direccion de obra */
+            $(".btnModificaDireccion").live("click",function() {
+                if ($(this).val() === "Modificar") {
+                    $(this).attr('value','Guardar');
+                    $(".direccion").removeAttr('readonly');
+                } else {
+                    if ($(".direccion").val() === "") {
+                        alert("Ingrese una direccion or favor.")
+                    } else {
+                        $.ajax({
+                            type:"POST",
+                            url:"",
+                            data:{
+                                
+                            },
+                            success:function() {
+                                $(".direccion").attr('readonly', 'true');
+                            }
+                        });
+                    }
+                }
             });
+            /** Edita departamento */
+            /** Edita moneda */
+            /** Edita Cliente */
+            
         });    
         </script>
     </head>
-    <body>
-        <h1>EDICION DE OBRA | <?=$_SESSION['usr']?></h1>
-        <label for="criterioBusqueda">Criterio de b&uacute;squeda:</label><br />
-        <input type="radio" name="criteriobusqueda" value="codigo" />Por C&oacute;digo<br />
-        <input type="radio" name="criteriobusqueda" value="nombre" />Por Nombre<br />
-        <h3>Obra a editar: <?=$_REQUEST['idObra']?></h3>
-        
-        <div id="divcodigo" style="display: none">
-            <label>CODIGO:</label> 
-            <input type="text" size="30" name="txtcodigo" class="codigoobra" value="" />
+    <body class="fondo">
+        <div id="barra-superior">
+            <div id="barra-superior-dentro">
+                <h1 id="titulo_barra">EDICION DE OBRA</h1>
+            </div>
         </div>
-        
-        <div id="divnombre" style="display: none">
-            <label>NOMBRE:</label>
-            <input type="text" size="30" name="txtnombre" class="nombreobra" value="" />
+        <div id="main">
+            <h1>EDICION DE OBRA</h1>
+            <HR />
+            <div id="tmp"></div>
         </div>
-        
-        <div id="divbtnBuscar" style="display: none">
-            <input type="button" id="btnBuscar" value="Buscar" />
-        </div>    
-        
-        <div id="divmensaje" style="display: none">
-            No ha especificado criterio de b&uacute;squeda.
-        </div>    
-        <hr />
-        <div id="obra"></div>
     </body>
 </html>

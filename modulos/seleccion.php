@@ -23,10 +23,14 @@ switch ($_REQUEST['frmName']) {
         $nuevo = "contacto/registrolistadistribucion.php?obra=".$_REQUEST['descripcion']."&codigo=".$_REQUEST['obra'];
         $modificar = "contacto/edit/editalistadistribucion.php?frm=listas";
         break;
+    case 'obrane':
+        $title = "Datos de Obra";
+        $nuevo = "datosdeobra/registradatosdeobra.php?obra=".$_REQUEST['proyecto']."&codigo=".$_REQUEST['codigObra']."&descripcion=".$_REQUEST['descObra'];
+        $modificar = "datosdeobra/edit/editaobra.php?idobra=".$_REQUEST['proyecto'];
+        break;
     default:
         break;
 }
-
 ?>
 <!DOCTYPE html>
 <html>
