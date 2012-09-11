@@ -250,7 +250,7 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
             </tr>
             <tr>
                 <td>Via de Envio
-                <td><div id="idviaenvio"></div>
+                
                 <td><table border="0" class="atable" id="idviaenvio">
                          <tbody>
                             

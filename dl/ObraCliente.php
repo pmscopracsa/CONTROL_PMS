@@ -162,10 +162,14 @@ class ObraCliente {
             ,o.utilidad_precontra
             ,o.gastogeneral_ordcamb
             ,o.utilidad_ordcamb
+            ,o.tb_departamento_id
+            ,o.tb_moneda_id
+            ,o.tb_tipovalorizacion_id
+            ,o.tb_formatopresupuesto_id
             FROM tb_obra o 
             INNER JOIN tb_companiacontacto cc_cliente ON o.cliente_id = cc_cliente.id 
             INNER JOIN tb_companiacontacto cc_empcontratante ON o.empresacontratante_id = cc_empcontratante.id
-            INNER JOIN tb_companiacontacto cc_empgerenteproyecto ON o.empresacontratante_id = cc_empgerenteproyecto.id
+            INNER JOIN tb_companiacontacto cc_empgerenteproyecto ON o.gerenteproyecto_id = cc_empgerenteproyecto.id
             INNER JOIN tb_companiacontacto cc_empsupervproyecto ON o.supervisoraproyecto_id = cc_empsupervproyecto.id
             INNER JOIN tb_companiacontacto cc_proveedorfacturar ON o.proveedoresfacturar_id = cc_proveedorfacturar.id
             WHERE o.id = $this->_id";
@@ -211,6 +215,10 @@ class ObraCliente {
                 array_push($datos, $res['utilidad_precontra']);
                 array_push($datos, $res['gastogeneral_ordcamb']);
                 array_push($datos, $res['utilidad_ordcamb']);
+                array_push($datos, $res['tb_departamento_id']);
+                array_push($datos, $res['tb_moneda_id']);
+                array_push($datos, $res['tb_tipovalorizacion_id']);
+                array_push($datos, $res['tb_formatopresupuesto_id']);
             }
             return $datos;
         } catch(Exception $ex) {

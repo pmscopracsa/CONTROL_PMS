@@ -136,7 +136,7 @@ if(isset($_GET['logoff']))
                     </div>
                     <div title="Datos de Obra">
                         <ul>
-                            <li><a href="modulos/datosdeobra/registradatosdeobra.php?obra=<?=$_REQUEST['proyecto']?>&codigo=<?=$_REQUEST['codigObra']?>&descripcion=<?=$_REQUEST['descObra']?>" target="_blank">Datos de Obra</a></li>
+<!--                            <li><a href="modulos/datosdeobra/registradatosdeobra.php?obra=<?=$_REQUEST['proyecto']?>&codigo=<?=$_REQUEST['codigObra']?>&descripcion=<?=$_REQUEST['descObra']?>" target="_blank">Datos de Obra</a></li>-->
                             <li><a href="modulos/seleccion.php?frmName=obrane&proyecto=<?=$_REQUEST['proyecto']?>&codigObra=<?=$_REQUEST['codigObra']?>&descObra=<?=$_REQUEST['descObra']?>" target="_blank">Datos de Obra</a></li>
                         </ul>
                     </div>

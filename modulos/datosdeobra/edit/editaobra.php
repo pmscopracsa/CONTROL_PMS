@@ -16,9 +16,12 @@ session_start();
         
         <script src="../../../js/jquery1.4.2.js.js" type="text/javascript"></script>
         <script src="../../../js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
-        <script src="../../../js/autocomplete/jquery.autocomplete.js" type="text/javascript"></script>
+        <script src="../../../js/obra/liveClick.jquery.js" type="text/javascript"></script>
+        <script src="../../../js/obra/modals.js" type="text/javascript"></script>
+        <script src="../../../js/obra/loadData.js" type="text/javascript"></script>
         <script>
-        var tipobusqueda = "";    
+        var tipobusqueda = "";
+        
         $(document).ready(function() {
             $.ajax({
                 type:"GET",
@@ -29,87 +32,39 @@ session_start();
                 },
                 success:function(data){
                     toHtml(data);
+                    cargarDepartamento($("#iddepartamento").val());
+                    cargarMoneda($("#idmoneda").val());
+                    cargarTipoValorizacion($("#idtipovalorizacion").val());
+                    cargarFormatoPresupuesto($("#idformatopresupuesto").val());
                 }
             });
-            
+                        
             function toHtml(data){
                 $("#tmp").html(data);
             }
             
-            /** Editar fecha de inicio */
-            $("#btnModificaFechaInicio").live("click",function() {
-                if ($(this).val() === "Modificar") {
-                    $(this).attr('value', 'Guardar');
-                    $(".txtfinicio").removeAttr('readonly');
-                } else {
-                    if ($(".txtfinicio").val() === "") {
-                        alert("La fecha de inicio esta en blanco, corrija por favor.");
-                    } else {
-                        $.ajax({
-                            type:"POST",
-                            url:"",
-                            data:{
-                                
-                            },
-                            success:function() {
-                                $(".txtfinicio").attr('readonly', 'true');
-                            }
-                        });
-                    }
-                }
-            });
-            /** Editar fecha de fin */
-            $("#btnModificaFechaFin").live("click",function() {
-                if ($(this).val() === "Modificar") {
-                    $(this).attr('value', 'Guardar');
-                    $(".txtffin").removeAttr('readonly');
-                } else {
-                    if ($(".txtffin").val() === "") {
-                        alert("La fecha de fin esta en blanco, corrija por favor.");
-                    } else {
-                        $.ajax({
-                            type:"POST",
-                            url:"",
-                            data:{
-                                
-                            },
-                            success:function() {
-                                $(".txtffin").attr('readonly', 'true');
-                            }
-                        });
-                    }
-                }
-            });
-            /** Editar direccion de obra */
-            $(".btnModificaDireccion").live("click",function() {
-                if ($(this).val() === "Modificar") {
-                    $(this).attr('value','Guardar');
-                    $(".direccion").removeAttr('readonly');
-                } else {
-                    if ($(".direccion").val() === "") {
-                        alert("Ingrese una direccion or favor.")
-                    } else {
-                        $.ajax({
-                            type:"POST",
-                            url:"",
-                            data:{
-                                
-                            },
-                            success:function() {
-                                $(".direccion").attr('readonly', 'true');
-                            }
-                        });
-                    }
-                }
-            });
-            /** Edita departamento */
-            /** Edita moneda */
-            /** Edita Cliente */
+            $(".txtfinicio").live("focus",function() {
+                $(this).datepicker();
+            })
             
+            $("#btnPPtoVenta").click(function() {
+                $("#foobar").dialog("open");
+            })
         });    
         </script>
     </head>
     <body class="fondo">
+        <!-- MODALS -->
+        <!-- cliente -->
+        <div id="modal_cliente" title="Seleccione al cliente"></div>
+        <!-- contratante -->
+        <div id="modal_contratante" title="Seleccione la Empresa Contratante"></div>
+        <!-- gerente -->
+        <div id="modal_gerente" title="Seleccione al Gerente del Proyecto"></div>
+        <!-- supervisor -->
+        <div id="modal_supervisor" title="Seleccione al Supervisor"></div>
+        <!-- proveedor -->
+        <div id="modal_proveedor" title="Seleccione al Proveedor"></div>
         <div id="barra-superior">
             <div id="barra-superior-dentro">
                 <h1 id="titulo_barra">EDICION DE OBRA</h1>
