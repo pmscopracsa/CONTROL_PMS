@@ -71,7 +71,25 @@ try {
         $edita_obra->setValue($_REQUEST['value']);
         $edita_obra->setColumn($_REQUEST['columna']);
         $edita_obra->actualizaObra($cn);
+    } elseif ($_REQUEST['parameter'] == 'nuevocontacto') {
+        $edita_obra->setAActualizar($_REQUEST['parameter']);
+        $edita_obra->setValue($_REQUEST['id_contacto']);
+        $edita_obra->actualizaObra($cn);
+    } elseif ($_REQUEST['parameter'] == 'eliminacontacto') {
+        $edita_obra->setAActualizar($_REQUEST['parameter']);
+        $edita_obra->setValue($_REQUEST['id_contacto']);
+        $edita_obra->actualizaObra($cn);
+    } elseif ($_REQUEST['parameter'] == 'eliminacontactopuesto') {
+        $edita_obra->setAActualizar($_REQUEST['parameter']);
+        $edita_obra->setValue($_REQUEST['id_contacto']);
+        $edita_obra->actualizaObra($cn);
+    } elseif ($_REQUEST['parameter'] == 'agregarcontactopuesto') {
+        $edita_obra->setAActualizar($_REQUEST['parameter']);
+        $edita_obra->setFk($_REQUEST['idContacto']);
+        $edita_obra->setValue($_REQUEST['puesto']);
+        $edita_obra->actualizaObra($cn);
     }
+    
     
 } catch(Exception $ex) {
     echo 'Error: '.$ex->getMessage();

@@ -7,6 +7,10 @@ require_once '../../dl/ObraCliente.php';
 $obra = new ObraCliente();
 $obra->set_id($_REQUEST['idObra']);
 $res = $obra->s_buscarObraPorId();
+
+/** Obtener contactos */
+
+
 toHtml($res);
 
 function toHtml($res) 
@@ -146,17 +150,16 @@ function toHtml($res)
                                 <th>Correo Electr&oacute;nico</th>    
                                 <th>RUC</th>
                                 <th>Fax</th>
-                                <th>T. Fijo</th>
-                                <th>T. Mobile</th>
-                                <th>T. Nextel</th>
+                                <th>
                         </thead>
                         <tbody>
                             <tr></tr>
                         </tbody>
                     </table>
                 </div>
+            <td><input type="button" value="Buscar contactos" id="btnAddContacts" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
         <tr>
-            <td><label>Asignar firmas a reportes:</label><td><input type="button" value="..." class="ui-button ui-widget ui-state-default ui-corner-all" />    
+            <td><label>Asignar firmas a reportes:</label><td><input type="button" id="btnAsignaFirmas" value="..." class="ui-button ui-widget ui-state-default ui-corner-all" />    
     </table>
     <fieldset>
         <legend>Par&aacute;metros obras(para proveedores)</legend>
@@ -216,10 +219,10 @@ function toHtml($res)
             <table>
                 <tr>
                     <td><p>Selecione modelo de carta de adjudicacion y condiciones generales</p>
-                    <td><input type="text" id="inputext" READONLY /><input id="btn-modelocartaadjudicacion" type="button" value="Modificar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                    <td><input type="text" id="inputext" READONLY size="50" /><input id="btn-modelocartaadjudicacion" type="button" value="Modificar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                 <tr>
                     <td><p>Seleccione modelo de contrato</p>
-                    <td><input type="text" id="inputext" READONLY /><input id="btn-modelocartacontrato" type="button" value="Modificar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                    <td><input type="text" id="inputext" READONLY size="50"/><input id="btn-modelocartacontrato" type="button" value="Modificar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
             </table>
         </div>
     </fieldset>

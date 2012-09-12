@@ -68,10 +68,60 @@ jQuery(function() {
      * MODAL PARAMETROS PRESUPUESTO
      * DE VENTAS
      */
-    $("#div-modal-pptoventa").dialog({
+    $("#modal_contactos").dialog({
         autoOpen:false,
-        heigh:950,
-        width:550,
+        height:350,
+        width:450,
+        resizable:false,
+        closeOnEscape:false,
+        modal:true,
+        buttons:{
+            "Cerrar":function(){
+                $(this).dialog("close");
+            }
+        }
+    });
+    
+    $("#div-firmas-1").dialog({
+        autoOpen:false,
+        height:300,
+        width:750,
+        resizable:false,
+        closeOnEscape:false,
+        modal:true,
+        buttons:{
+            "Agregar contactos":function() {
+                $("#div-addcontactos").dialog("open");
+            },
+            "Asignar firmas a reportes":function() {
+                
+            },
+            "Cerrar":function(){
+                $(this).dialog("close");
+            }
+        }
+    });
+    $("#div-addcontactos").dialog({
+        show:"blind",
+        autoOpen:false,
+        height:300,
+        width:350,
+        resizable:false,
+        closeOnEscape:false,
+        modal:true,
+        buttons:{
+            "Cerrar":function(){
+                $(this).dialog("close");
+            }
+        }
+     });
+     
+     // lista por nombres solamente de los contactos (aun no tiene puesto ni
+     // mucho menos reporte
+     $("#modal-addContacto").dialog({
+        autoOpen:false,
+        height:300,
+        width:350,
         resizable:false,
         closeOnEscape:false,
         modal:true,

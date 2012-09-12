@@ -81,12 +81,31 @@ class EditaObra_DL
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
                     break;    
-                case 'editaFactor':
+                case 'pptoventa':
                     $query = "UPDATE tb_obra SET $this->column = $this->value WHERE id = $this->pk";
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
                     break;    
-                default:    
+                case 'nuevocontacto':
+                    $query = "INSERT INTO tb_contacto (tb_personacontacto_id,tb_obra_id) VALUES($this->value,$this->pk)";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
+                    break;
+                case 'eliminacontacto':
+                    $query = "DELETE FROM tb_contacto WHERE tb_personacontacto_id = $this->value AND tb_obra_id = $this->pk";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
+                    break;  
+                case 'eliminacontactopuesto':
+                    $query = "DELETE FROM tb_firma WHERE idcontacto = $this->value AND idobra = $this->pk";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
+                    break; 
+                case 'agregarcontactopuesto':
+                    $query = "INSERT INTO tb_firma (idcontacto,idobra,posicion) VALUES($this->fk,$this->pk,'$this->value')";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
+                    break;    
                 default:
                     break;
             }

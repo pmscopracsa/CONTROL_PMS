@@ -1871,6 +1871,18 @@ $contratos = $modelos->mostrarContratos();
             $("#btnSearchContacto").live("click",function() {
                 recargarContactosPorFiltro($("#txt_divContactoBuscar").val());
             });
+            
+            /**  */
+            $("#frm_datosobra").submit(function(){
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        aleatorio:<?=$aleatorio?>,
+                        idobra:<?=$_REQUEST['obra']?>
+                    },
+                    url:"../../dl/datos_obra/RegistraDatosObra_mvTmp.php?parameter=move"
+                });
+            });
         })    
         
         </script>
@@ -2034,7 +2046,6 @@ $contratos = $modelos->mostrarContratos();
         <!-- Compañia [...] - REDONLY-->
         <div style="display: none" id="div-addcontactos" title="Contactos">
             <table border="0" class="atable">
-                
                <tr>
                     <td class="tr-padding">
                         <label>Contacto</label>

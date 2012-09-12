@@ -5,9 +5,13 @@ jQuery(function() {
     $("#modal_gerente").load("../modales/empgerproyecto_div.php?filtro=1");
     $("#modal_supervisor").load("../modales/empsupproyecto_div.php?filtro=1");
     $("#modal_proveedor").load("../modales/proveedorfacturar_div.php?filtro=1");
-    
-    
+    $("#modal_contactos").load("../modales/contactos_div.php?filtro=1");
 });
+
+/** RELOAD FORM */
+function reload(){
+    
+}
 
 /** RECARGA POR FILTRO */
 function recargaCliente(filtro) { $("#modal_cliente").load("../modales/clientes_div.php?filtro="+filtro); }
@@ -89,6 +93,71 @@ function cargarFormatoPresupuestoSelected(idformato){
         url:"../../../bl/DatosObra/cargarFormatoPresupuestoSelected.php",
         success:function(data){
             $("#formato").append(data);
+        }
+    })
+}
+
+function cargarContactos(idobra)
+{
+    $.ajax({
+        type:"GET",
+        dataType:"json",
+        data:{
+            id_obra:idobra
+        },
+        url:"../../../dl/datos_obra/r_listacontactosporobra.php",
+        success:function(data) {
+            muestraContactos(data);
+        }
+    })
+}
+
+function muestraContactos(data) {
+    $.each(data,function(index,value) {
+        $("#contactos-agregados tbody").append(
+            '<tr>'+
+            '<td>'+
+            data[index].nombre+
+            '<td>'+
+            data[index].descripcion+
+            '<td>'+
+            data[index].cargo+
+            '<td>'+
+            data[index].email+
+            '<td>'+
+            data[index].ruc+
+            '<td>'+
+            data[index].fax+
+            '<input type="hidden" id="idContacto" value="'+data[index].id+'" />'+
+            '<td><a href="#" id="del-contacto" class="button delete">Eliminar</a>'
+        )
+    })
+}
+
+// cargar contactos con sus puestos en la obra
+function cargarContactoPuesto(idobra)
+{
+    $.ajax({
+        type:"GET",
+        dataType:"json",
+        data:{
+            id_obra:idobra
+        },
+        url:"../../../dl/datos_obra/r_listacontactosfirmasporobras.php",
+        success:function(data) {
+            $.each(data,function(index,value) {
+                $("#tbl-firmas1 tbody").append(
+                    '<tr>'+
+                    '<td>'+
+                    data[index].posicion+
+                    '<td>'+
+                    data[index].nombre+
+                    '<td>'+
+                    data[index].descripcion+
+                    '<input type="hidden" id="idContacto" value="'+data[index].id+'" />'+
+                    '<td><a href="#" id="del-contactopuesto" class="button delete">Eliminar</a>'
+                )
+            })
         }
     })
 }

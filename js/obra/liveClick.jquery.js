@@ -489,8 +489,145 @@ jQuery(function() {
                 }
             })
         }
-        
-        
-        
+    });
+    
+    // PARA MOSTRAR Y AGREGAR CONTACTOS A LA OBRA
+    $("#btnAddContacts").live("click",function() {
+        $("#modal_contactos").dialog('open');
+    });
+    
+    // PARA ELIMINAR CONTACTOS
+    $("#del-contacto").live("click",function(e) {
+        e.preventDefault();
+        idContacto = $(this).parent().parent().children().children("#idContacto").attr('value');
+        $(this).parent().parent().remove();
+        $.ajax({
+            type:"POST",
+            url:"../../../bl/DatosObra/editaObra_BL.php?parameter=eliminacontacto",
+            data:{
+                id_obra:$("#id_obra").val(),
+                id_contacto:idContacto
+            }
+        })
     })
+    
+    // PARA AGREGAR UN NUEVO CONTACTO
+    $("#contactos_boxes").live("click",function() {
+        myContacto = $(this).val();
+        $.ajax({
+            data:{id:$(this).val()},
+            type:"GET",
+            dataType:"json",
+            url:"../../../includes/query_repository/getAllContacto.php",
+            success:function(data) {
+                $.each(data,function(index,value) {
+                    $("#contactos-agregados tbody").append(
+                        '<tr>'+
+                        '<td>'+
+                        data[index].nombre+
+                        '<td>'+
+                        data[index].descripcion+
+                        '<td>'+
+                        data[index].cargo+
+                        '<td>'+
+                        data[index].email+
+                        '<td>'+
+                        data[index].ruc+
+                        '<td>'+
+                        data[index].fax+
+                        '<td><a href="#" id="del-contacto" class="button delete">Eliminar</a>'
+                    ),
+                    $.ajax({
+                        type:"POST",
+                        data:{
+                            id_obra:$("#id_obra").val(),
+                            id_contacto:myContacto
+                        },
+                        url:"../../../bl/DatosObra/editaObra_BL.php?parameter=nuevocontacto"
+                    });    
+                });
+            }
+        });
+    });
+    
+    /** ASIGNAR FIRMAS A REPORTES */
+    // Primer modal para seleccionar contactos
+    $("#btnAsignaFirmas").live("click",function() {
+        $("#div-firmas-1").dialog('open');
+    });
+    // Eliminar contactos con puestos
+    $("#del-contactopuesto").live("click",function(e) {
+        e.preventDefault();
+        idContacto = $(this).parent().parent().children().children("#idContacto").attr('value');
+        $(this).parent().parent().remove();
+        $.ajax({
+            type:"POST",
+            url:"../../../bl/DatosObra/editaObra_BL.php?parameter=eliminacontactopuesto",
+            data:{
+                id_obra:$("#id_obra").val(),
+                id_contacto:idContacto
+            }
+        })
+    });
+    
+    // Abrir lista de contactos (solo mostrando el nombre)
+    $("#btn-addContacto").live("click",function(){
+        $("#modal-addContacto").dialog("open");
+        $.ajax({
+            type:"GET",
+            dataType:"json",
+            data:{
+                id_obra:$("#id_obra").val()
+            },
+            url:"../../../dl/datos_obra/r_listacontactosporobra.php",
+            success:function(data) {
+                $.each(data,function(index,value){
+                    $("#tblAddContacto tbody").append(
+                        '<tr style="cursor:pointer;">'+
+                        '<td class="contactofirma">'+
+                        '<p style="display:none">'+data[index].id+"</p>"+
+                        '<p style="display:none">-</p>'+
+                        '<a id="agregar-contacto_modal" href="#" style="text-decoration:none;">'+data[index].nombre+'</a>'+
+                        '<p style="display:none">-</p>'+
+                        '<p style="display:none">'+data[index].nombre+'</p>'+
+                        '</td>'+
+                        '</tr>'
+                    )
+                });
+                $("#modal-addContacto").dialog("open");
+            }
+        })
+    });
+    
+    $(".contactofirma").live("click",function() {
+        dataArray = $(this).text().split("-");
+        $(".txt-idcontacto").val(dataArray[0]);
+        $(".txt-contacto").val(dataArray[1]);
+        $(".txt-compania").val(dataArray[2]);
+        $("#modal-addContacto").dialog("close");
+    })
+    
+    $("#btn-agregarContacto").live("click",function() {
+        if ($(".txt-puesto").val() == ""){
+             alert("¡No has ingresado el puesto del contacto!");
+             $(".txt-puesto").focus();
+         }
+         if ($(".txt-contacto").val() == "" || $(".txt-compania").val() == ""){
+             alert("¡No has seleccionado contacto alguno!");
+             $(".txt-contacto").focus();
+         }
+         
+         $.ajax({
+             type:"POST",
+             data:{
+                 idContacto:$(".txt-idcontacto").val(),
+                 puesto:$(".txt-puesto").val(),
+                 id_obra:$("#id_obra").val()
+             },
+             url:"../../../bl/DatosObra/editaObra_BL.php?parameter=agregarcontactopuesto",
+             success:function(){
+                 $("#addcontactos").close("dialog"); 
+             }
+         });
+    });
 })

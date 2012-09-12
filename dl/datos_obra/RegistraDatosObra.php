@@ -113,8 +113,8 @@ class RegistraDatosObra
             if(!$rs)                throw new Exception("Error al consultar en obra: ".  mysql_error());
             
             
-            $sql_move_contactos = "INSERT INTO tb_contacto(tb_personacontacto_id, tb_obra_id)
-            SELECT id_contacto,id_obra FROM temporal WHERE random_code = '$this->aleatorio'";
+//            $sql_move_contactos = "INSERT INTO tb_contacto(tb_personacontacto_id, tb_obra_id)
+//            SELECT id_contacto,id_obra FROM temporal WHERE random_code = '$this->aleatorio'";
             
             $rs2 = mysql_query($sql_move_contactos);
             if(!$rs2)                throw new Exception("Error al consultar: ".  mysql_error());
