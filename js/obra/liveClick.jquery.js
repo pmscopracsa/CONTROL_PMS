@@ -433,59 +433,64 @@ jQuery(function() {
     // 
     $("#btnFactorCorreccion, #btnFondoGarantia, #btnFielCumplimiento, #btnGastoGeneralPC, #btnUtilidadPC, #btnGastoGeneralOC, #btnUtilidadOC").live("click",function() {
         var myObj = $(this);
-        var action = "";
         var value_ ;
         var columna_ = "";
         
         if(myObj.val() == 'Modificar') {
             myObj.attr('value', 'Guardar');
-        }
-        switch($(this).attr('id'))
-        {
-            case 'btnFactorCorreccion':
-                action = "editaFactor";
-                columna_ = "factorcorreccion";
-                value = $(this).parent().parent().children().children(".txtfactor").val();
-                break;
-            case 'btnFondoGarantia':
-                action = 'editaFondo';
-                value = $(this).parent().parent().children().children(".txtfondogarantia").val();
-                break;
-            case 'btnFielCumplimiento':
-                action = 'editafiel';
-                value = $(this).parent().parent().children().children(".txtfielcumplimiento").val();
-                break;
-            case 'btnGastoGeneralPC':
-                action = 'editaggpc';
-                value = $(this).parent().parent().children().children(".txtggpc").val();
-                break;
-            case 'btnUtilidadPC':
-                action = 'editaupc';
-                value = $(this).parent().parent().children().children(".txtupc").val();
-                break;
-            case 'btnGastoGeneralOC':
-                action = 'editaggoc';
-                value = $(this).parent().parent().children().children(".txtggoc").val();
-                break;
-            case 'btnUtilidadOC':
-                action = 'editauoc';
-                value = $(this).parent().parent().children().children(".txtuoc").val();
-                break;    
-            default:
-                break;
+            $(this).parent().parent().children().children("#inputext").removeAttr('readonly');
+        } else {
+            switch($(this).attr('id'))
+            {
+                case 'btnFactorCorreccion':
+                    columna_ = "factorcorreccion";
+                    value_ = $(this).parent().parent().children().children(".txtfactor").val();
+                    break;
+                case 'btnFondoGarantia':
+                    columna_ = "retencionfondogarantia";
+                    value_ = $(this).parent().parent().children().children(".txtfondogarantia").val();
+                    break;
+                case 'btnFielCumplimiento':
+                    columna_ = "retencionfielcumplimiento";
+                    value_ = $(this).parent().parent().children().children(".txtfielcumplimiento").val();
+                    break;
+                case 'btnGastoGeneralPC':
+                    columna_ = "gastogeneral_precontra";
+                    value_ = $(this).parent().parent().children().children(".txtggpc").val();
+                    break;
+                case 'btnUtilidadPC':
+                    columna_ = "utilidad_precontra";
+                    value_ = $(this).parent().parent().children().children(".txtupc").val();
+                    break;
+                case 'btnGastoGeneralOC':
+                    columna_ = "gastogeneral_ordcamb";
+                    value_ = $(this).parent().parent().children().children(".txtggoc").val();
+                    break;
+                case 'btnUtilidadOC':
+                    columna_ = "utilidad_ordcamb";
+                    value_ = $(this).parent().parent().children().children(".txtuoc").val();
+                    break;    
+                default:
+                    break;
+            }
+            
+            $.ajax({
+                type:"POST",
+                url:"../../../bl/DatosObra/editaObra_BL.php",
+                data:{
+                    parameter:"pptoventa",
+                    value:value_,
+                    id_obra:$("#id_obra").val(),
+                    columna:columna_
+                },
+                success:function() {
+                    myObj.attr('value','Modificar');
+                    $(this).parent().parent().children().children("#inputext").attr('readonly','true');
+                }
+            })
         }
         
-        $.ajax({
-            type:"POST",
-            url:"../../../bl/DatosObra/editaObra_BL.php?parameter="+action,
-            data:{
-                value:value_,
-                id_obra:$("#id_obra").val(),
-                columna:columna_
-            },
-            success:function() {
-                myObj.attr('value','Modificar');
-            }
-        })
+        
+        
     })
 })

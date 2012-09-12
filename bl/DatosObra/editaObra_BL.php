@@ -66,7 +66,7 @@ try {
         $edita_obra->setAActualizar($_REQUEST['parameter']);
         $edita_obra->setValue($_REQUEST['id_formato']);
         $edita_obra->actualizaObra($cn);
-    } elseif ($_REQUEST['parameter'] == 'editaFactor') {
+    } elseif ($_REQUEST['parameter'] == 'pptoventa') {
         $edita_obra->setAActualizar($_REQUEST['parameter']);
         $edita_obra->setValue($_REQUEST['value']);
         $edita_obra->setColumn($_REQUEST['columna']);
