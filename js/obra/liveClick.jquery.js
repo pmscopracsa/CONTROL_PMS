@@ -1,4 +1,6 @@
 jQuery(function() {
+    var id_reporte;
+    
     /**
      * CLICK BUTTONS
      */
@@ -430,7 +432,7 @@ jQuery(function() {
             })
         }
     });
-    // 
+    // Parametros de punto de venta
     $("#btnFactorCorreccion, #btnFondoGarantia, #btnFielCumplimiento, #btnGastoGeneralPC, #btnUtilidadPC, #btnGastoGeneralOC, #btnUtilidadOC").live("click",function() {
         var myObj = $(this);
         var value_ ;
@@ -497,19 +499,38 @@ jQuery(function() {
     });
     
     // PARA ELIMINAR CONTACTOS
+    // tb_contacto
     $("#del-contacto").live("click",function(e) {
         e.preventDefault();
         idContacto = $(this).parent().parent().children().children("#idContacto").attr('value');
-        $(this).parent().parent().remove();
+        // VERIFICAMOS SI EL CONTACTO SE ENCUENTRA EN LA TABLA tb_firma, si se encuentra en esta tabla
+        // no podremos eliminarlo, si no se encuentra si podremos eliminarlo
         $.ajax({
-            type:"POST",
-            url:"../../../bl/DatosObra/editaObra_BL.php?parameter=eliminacontacto",
+            type:"GET",
+            dataType:"text",
+            url:"../../../bl/DatosObra/editaObra_BL.php?parameter=existecontacto_tb_firma",
             data:{
                 id_obra:$("#id_obra").val(),
                 id_contacto:idContacto
+            },
+            success:function(data){
+                if (data == 0){
+                    $(this).parent().parent().remove();
+                    $.ajax({
+                        type:"POST",
+                        url:"../../../bl/DatosObra/editaObra_BL.php?parameter=eliminacontacto",
+                        data:{
+                            id_obra:$("#id_obra").val(),
+                            id_contacto:idContacto
+                        }
+                    });
+                } else {
+                    alert("Este dato no puede ser eliminado ya que es un potencial firmante de reportes.");
+                    return;
+                }
             }
-        })
-    })
+        });
+    });
     
     // PARA AGREGAR UN NUEVO CONTACTO
     $("#contactos_boxes").live("click",function() {
@@ -556,18 +577,37 @@ jQuery(function() {
         $("#div-firmas-1").dialog('open');
     });
     // Eliminar contactos con puestos
+    // ==============================
     $("#del-contactopuesto").live("click",function(e) {
         e.preventDefault();
         idContacto = $(this).parent().parent().children().children("#idContacto").attr('value');
-        $(this).parent().parent().remove();
+        
         $.ajax({
-            type:"POST",
-            url:"../../../bl/DatosObra/editaObra_BL.php?parameter=eliminacontactopuesto",
+            type:"GET",
+            dataType:"text",
+            url:"../../../bl/DatosObra/editaObra_BL.php?parameter=existecontactopuesto_tb_contactoreporte",
             data:{
                 id_obra:$("#id_obra").val(),
                 id_contacto:idContacto
+            },
+            success:function(data) {
+                if (data == 0){
+                    $(this).parent().parent().remove();
+                    $.ajax({
+                        type:"POST",
+                        url:"../../../bl/DatosObra/editaObra_BL.php?parameter=eliminacontactopuesto",
+                        data:{
+                            id_obra:$("#id_obra").val(),
+                            id_contacto:idContacto
+                        }
+                    });
+                } else {
+                    alert("Este dato no puede ser eliminado ya que se encuentra asociado a uno o mas reportes.")
+                }
             }
         })
+        
+        
     });
     
     // Abrir lista de contactos (solo mostrando el nombre)
@@ -627,7 +667,98 @@ jQuery(function() {
              url:"../../../bl/DatosObra/editaObra_BL.php?parameter=agregarcontactopuesto",
              success:function(){
                  $("#addcontactos").close("dialog"); 
+                 $("#tbl-firmas1 tbody").append(
+                    "<tr>"+
+                    '<td>'+
+                    data[index].posicion+
+                    '<td>'+
+                    data[index].nombre+
+                    '<td>'+
+                    data[index].descripcion+
+                    '<input type="hidden" id="idContacto" value="'+data[index].id+'" />'+
+                    '<td><a href="#" id="del-contactopuesto" class="button delete">Eliminarg</a>'  
+                );
              }
          });
     });
+    
+    $("input[name=id_contactoReporte]").live("click",function() {
+        $.ajax({
+            type:"POST",
+            data:{
+                idcontacto:$(this).val(),
+                idreporte:getIdReporte(),
+                id_obra:$("#id_obra").val()
+            },
+            url:"../../../bl/DatosObra/editaObra_BL.php?parameter=empatacontactoreporte",
+            success:function() {
+                $.ajax({
+                    type:"GET",
+                    dataType:"json",
+                    data:{
+                        idreporte:getIdReporte()
+                    },
+                    url:"../../../dl/datos_obra/r_listafirmasreportes_tb_firma.php",
+                    success:function(data) {
+                        $("#tbl-empate-firmante_reporte td").remove();
+                        $.each(data,function(index,value){
+                            $("#tbl-empate-firmante_reporte tbody").append(
+                                '<tr>'+
+                                '<td>'+
+                                data[index].posicion+
+                                '<td>'+
+                                data[index].nombre_contacto+
+                                '<td>'+
+                                data[index].nombre_compania+
+                                '<td>'+
+                                '<input type="text" name="txtpos_firma_reporte" id="pos_firma_reporte" value="" />'+
+                                '<input type="hidden" id="id_contacto" value="'+data[index].id_contacto+'" />'+
+                                "<td><a href='#' id='del-contacto_reporte' class='button delete'>Eliminar</a></td>"
+                            )
+                        })
+                    }
+                })
+            }
+        })
+    });
+    
+    /** Consultar que contactos han sido empatados con que reportes */
+    /** =========================================================== */
+    $("input[name='reportes']").live("click",function(e) {
+        $("#tbl-empate-firmante_reporte td").remove();
+        setIdReporte($(this).val());
+        $.ajax({
+            type:"GET",
+            dataType:"json",
+            data:{
+                idreporte:getIdReporte()
+            },
+            url:"../../../dl/datos_obra/r_listafirmasreportes_tb_firma.php",
+            success:function(data) {
+                $.each(data,function(index,value){
+                    $("#tbl-empate-firmante_reporte tbody").append(
+                        '<tr>'+
+                        '<td>'+
+                        data[index].posicion+
+                        '<td>'+
+                        data[index].nombre_contacto+
+                        '<td>'+
+                        data[index].nombre_compania+
+                        '<td>'+
+                        '<input type="text" name="txtpos_firma_reporte" id="pos_firma_reporte" value="" />'+
+                        '<input type="hidden" id="id_contacto" value="'+data[index].id_contacto+'" />'+
+                        "<td><a href='#' id='del-contacto_reporte' class='button delete'>Eliminar</a></td>"
+                    )
+                })
+            }
+        })
+    });
+    /** Almacenar temporalmente la seleccion del reporte */
+    function setIdReporte(idreporte) {
+        id_reporte = idreporte;
+    }
+    
+    function getIdReporte() {
+        return id_reporte;
+    }
 })

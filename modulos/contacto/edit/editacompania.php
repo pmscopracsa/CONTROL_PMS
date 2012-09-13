@@ -912,7 +912,7 @@ session_start();
                         "<td><td><select disabled='disabled' id='de"+i+"'></select></td>"+
                         "<td><td><select disabled='disabled' id='di"+i+"'></select></td>"+
                         "<td><td><select disabled='disabled' id='do"+i+"'></select></td>"+
-                        "<td><input type='button' id='btnEditarDireccion'  value='Editar'/></td>"+
+                        "<td><input type='button' id='btnEditarDireccion'  value='Editar' class='ui-button ui-widget ui-state-default ui-corner-all'/></td>"+
                         "<td><input type='button' class='delRow' id='btnEliminarDireccion' /></td>"+
                         "<td><input type='button' class='addRow' id='btnAgregarDireccion' /></td>"+
                         "<td style='display:none'><input type='hidden' id='idDireccionHidden' value='"+i+"' /></td>"+

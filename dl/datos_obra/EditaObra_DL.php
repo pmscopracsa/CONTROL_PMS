@@ -91,11 +91,25 @@ class EditaObra_DL
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
                     break;
+                case 'existecontacto_tb_firma':
+                    $query = "SELECT COUNT(*) FROM tb_firma WHERE idcontacto = $this->value AND idobra = $this->pk";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
+                    $rows_ = mysql_result($rs,0,0);
+                    echo $rows_;
+                    break;
                 case 'eliminacontacto':
                     $query = "DELETE FROM tb_contacto WHERE tb_personacontacto_id = $this->value AND tb_obra_id = $this->pk";
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
                     break;  
+                case 'existecontactopuesto_tb_contactoreporte':
+                    $query = "SELECT COUNT(*) FROM tb_contactoreporte WHERE tb_personacontacto_id = $this->value AND tb_obra_id = $this->pk";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
+                    $rows_ = mysql_result($rs,0,0);
+                    echo $rows_;
+                    break;    
                 case 'eliminacontactopuesto':
                     $query = "DELETE FROM tb_firma WHERE idcontacto = $this->value AND idobra = $this->pk";
                     $rs = mysql_query($query, $cn);
@@ -103,6 +117,11 @@ class EditaObra_DL
                     break; 
                 case 'agregarcontactopuesto':
                     $query = "INSERT INTO tb_firma (idcontacto,idobra,posicion) VALUES($this->fk,$this->pk,'$this->value')";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
+                    break;  
+                case 'empatacontactoreporte':
+                    $query = "INSERT INTO tb_contactoreporte (tb_personacontacto_id,tb_reporte_id,tb_obra_id) VALUES($this->fk,$this->value,$this->pk)";
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
                     break;    

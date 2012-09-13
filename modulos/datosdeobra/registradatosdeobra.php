@@ -579,6 +579,7 @@ $contratos = $modelos->mostrarContratos();
               * CON DICHO REPORTE
               **/
               $("input[name='reportes']").live("click",function(e) {
+                  alert("evil");
                   setReporte($("input[name='reportes']:checked").val());
                   var checked = $("input[name='reportes']:checked").val();
                   var aleatorio = <?=$aleatorio?>;
@@ -598,6 +599,7 @@ $contratos = $modelos->mostrarContratos();
                * CON UNA OPCI0ON DE LA LISTA
                */
               $("input[name='opciones']").live("click",function(e) {
+                  
                   setOpcion($("input[name='opciones']:checked").val());
                   $.ajax({
                       type:"GET",

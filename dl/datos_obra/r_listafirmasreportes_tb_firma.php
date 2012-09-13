@@ -1,7 +1,6 @@
 <?php
 include_once 'Conexion.php';
-$id_reporte = $_REQUEST['checked'];
-$id_aleatorio = $_REQUEST['aleatorio'];
+$id_reporte = $_REQUEST['idreporte'];
 
 try {
     $conexion = new Conexion();
@@ -10,12 +9,16 @@ try {
     if ( !$cn )
         throw new Exception("Error al conectar: ".  mysql_error());
     
-    $sql = "SELECT pc.id AS id_contacto,fct.txt_puesto AS posicion, pc.nombre AS nombre_contacto, cc.descripcion AS nombre_compania, crt.posicion_firma_en_reporte AS numero_posi
-    FROM tb_firmascontactotemporal fct
-    INNER JOIN tb_personacontacto AS pc ON fct.id_contacto = pc.id
-    INNER JOIN tb_companiacontacto AS cc ON pc.tb_companiacontacto_id = cc.id
-    INNER JOIN tb_contactoreportetemporal AS crt ON fct.id_contacto = crt.id_contacto
-    WHERE crt.id_reporte = $id_reporte AND crt.id_aleatorio = $id_aleatorio";
+    $sql = "SELECT
+        pc.id id_contacto
+        ,f.posicion posicion
+        ,pc.nombre nombre_contacto
+        ,cc.descripcion nombre_compania
+        FROM tb_contactoreporte r
+        INNER JOIN tb_firma f ON r.tb_personacontacto_id = f.idcontacto
+        INNER JOIN tb_personacontacto pc ON r.tb_personacontacto_id = pc.id
+        INNER JOIN tb_companiacontacto cc ON pc.tb_companiacontacto_id = cc.id
+        WHERE tb_reporte_id = $id_reporte";
     
     $rs = mysql_query($sql);
     if (!$rs)
@@ -28,7 +31,6 @@ try {
         $firmantes_reportes[$i]['posicion'] = $res['posicion'];
         $firmantes_reportes[$i]['nombre_contacto'] = $res['nombre_contacto'];
         $firmantes_reportes[$i]['nombre_compania'] = $res['nombre_compania'];
-        $firmantes_reportes[$i]['numero_posi'] = $res['numero_posi'];
         $i++;
     }
     echo json_encode($firmantes_reportes);

@@ -126,6 +126,8 @@ session_start();
         <!--  -->
         <?php
         require_once '../modales/modal-addContacto.php';
+        require_once '../modales/modal-mostrarlistareportes.php';
+        require_once '../modales/modal_r_listaContactoPosicion.php';
         ?>
         
         <div id="barra-superior">

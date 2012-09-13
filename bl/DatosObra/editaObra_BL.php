@@ -75,7 +75,15 @@ try {
         $edita_obra->setAActualizar($_REQUEST['parameter']);
         $edita_obra->setValue($_REQUEST['id_contacto']);
         $edita_obra->actualizaObra($cn);
+    }  elseif ($_REQUEST['parameter'] == 'existecontacto_tb_firma') {
+        $edita_obra->setAActualizar($_REQUEST['parameter']);
+        $edita_obra->setValue($_REQUEST['id_contacto']);
+        $edita_obra->actualizaObra($cn); 
     } elseif ($_REQUEST['parameter'] == 'eliminacontacto') {
+        $edita_obra->setAActualizar($_REQUEST['parameter']);
+        $edita_obra->setValue($_REQUEST['id_contacto']);
+        $edita_obra->actualizaObra($cn);
+    } elseif ($_REQUEST['parameter'] == 'existecontactopuesto_tb_contactoreporte') {
         $edita_obra->setAActualizar($_REQUEST['parameter']);
         $edita_obra->setValue($_REQUEST['id_contacto']);
         $edita_obra->actualizaObra($cn);
@@ -87,6 +95,11 @@ try {
         $edita_obra->setAActualizar($_REQUEST['parameter']);
         $edita_obra->setFk($_REQUEST['idContacto']);
         $edita_obra->setValue($_REQUEST['puesto']);
+        $edita_obra->actualizaObra($cn);
+    } elseif ($_REQUEST['parameter'] == 'empatacontactoreporte') {
+        $edita_obra->setAActualizar($_REQUEST['parameter']);
+        $edita_obra->setFk($_REQUEST['idcontacto']);
+        $edita_obra->setValue($_REQUEST['idreporte']);
         $edita_obra->actualizaObra($cn);
     }
     

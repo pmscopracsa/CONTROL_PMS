@@ -186,7 +186,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
             <tr>
                 <input type="hidden" value="'.$res[0].'" id="idCompania"/>
                 <td>Tipo de Compañia:</td><td><input type="text" id="txttipocompania" name="txttipocompania" value="'.$res[11].'" READONLY /></td>
-                <td><input type="button" id="btnEditarTipoCompania" value="Editar" />    
+                <td><input type="button" id="btnEditarTipoCompania" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all" />    
             </tr>
             
             <tr>
@@ -198,20 +198,20 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
             </tr>
             
             <tr>
-                <td>RUC:</td><td><input type="text" id="txtruc" name="txtruc" size="15" value="'.$res[1].'" READONLY/></td>
-                <td><input type="button" id="btnUpdateRuc" value="Editar" />    
+                <td>RUC:</td><td><input class="inputext" type="text" id="txtruc" name="txtruc" size="15" value="'.$res[1].'" READONLY/></td>
+                <td><input type="button" id="btnUpdateRuc" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
             </tr>
             <tr>
                 <td>Nombre:</td><td><input type="text" id="txtcompania" name="txtcompania" size="15" value="'.$res[2].'" READONLY/></td>
-                <td><input type="button" id="btnUpdateNombre" value="Editar"/>    
+                <td><input type="button" id="btnUpdateNombre" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
             </tr>
             <tr>
                 <td>Nombre Comercial:</td><td><input type="text" id="txtcomercia" size="15" name="txtcomercial" value="'.$res[3].'" READONLY/></td>
-                <td><input type="button" id="btnUpdateNombrecomercial" value="Editar""/>    
+                <td><input type="button" id="btnUpdateNombrecomercial" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
             </tr>    
             <tr>
                 <td>Partida Registral:</td><td><input type="text" id="txtregistral" size="15" name="txtregistral" value="'.$res[4].'" READONLY/></td>
-                <td><input type="button" id="btnUpdatePartidaRegistral" value="Editar" />    
+                <td><input type="button" id="btnUpdatePartidaRegistral" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
             </tr>    
             <tr>
                 <td><label for="giro">Giro:</label></td>
@@ -233,7 +233,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                     $giros[$i]
                     .'" READONLY/></td>
                     <input id="idGiro" type="hidden" value="'.$giros[$i-1].'" />    
-                    <td><input type="button" value="Editar" id="btnEditarGiro"/></td>    
+                    <td><input type="button" value="Editar" id="btnEditarGiro" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>    
                     <td><input type="button" class="delRow" id="btnEliminarGiro"/></td>
                     <td><input type="button" class="addRow" id="btnAgregarGiro"/></td>
                     </tr>';
@@ -248,7 +248,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
             </tr>    
             <tr>
                 <td>Actividad Principal:</td><td><input type="text" id="txtactividad" size="15" name="txtactividad" value="'.$res[5].'" READONLY/></td>
-                <td><input type="button" value="Editar" id="btnEditarActividadPrincipal" />   
+                <td><input type="button" value="Editar" id="btnEditarActividadPrincipal" class="ui-button ui-widget ui-state-default ui-corner-all"/>   
             </tr>
             <tr>
                 <td><label>T. Fijo</label></td>
@@ -269,7 +269,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                       .'" READONLY/>
                       <input id="idTFijo" type="hidden" value="'.$telefonosf[$i-1].'" />
                       <td><input type="button" class="delRow" id="btnEliminarTF" value=" "/></td>
-                      <td><input type="button" value="Editar" id="btnEditarTelefonoFijo"/></td>
+                      <td><input type="button" value="Editar" id="btnEditarTelefonoFijo" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                       <td><input type="button" class="addRow" id="btnAgregarTF" /></td>
                       </tr>';    
                       continue;
@@ -299,7 +299,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                       .'" READONLY/>
                       <input id="idTMobile" type="hidden" value="'.$telefonosm[$i-1].'" />    
                       <td><input type="button" class="delRow" id="btnEliminarTM"/></td>
-                      <td><input type="button" value="Editar" id="btnEditarTelefonoMobile" /></td>
+                      <td><input type="button" value="Editar" id="btnEditarTelefonoMobile" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                       <td><input type="button" class="addRow" id="btnAgregarTM" /></td>
                       </tr>';    
                       continue;
@@ -329,7 +329,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                       .'" READONLY/>
                       <input id="idTNextel" type="hidden" value="'.$telefnosn[$i-1].'" />    
                       <td><input type="button" class="delRow" id="btnEliminarTN"/></td>
-                      <td><input type="button" value="Editar" id="btnEditarTelefonoNextel"/></td>
+                      <td><input type="button" value="Editar" id="btnEditarTelefonoNextel" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                       <td><input type="button" class="addRow" id="btnAgregarTN" /></td>
                       </tr>';
                       continue;
@@ -342,7 +342,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
             </tr>
             <tr>
                 <td>Fax:</td><td><input type="text" id="txtfax" name="txtfax" size="15" value="'.$res[6].'" READONLY/></td>
-                <td><input type="button" value="Editar" id="btnEditarFax"/>    
+                <td><input type="button" value="Editar" id="btnEditarFax" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
             </tr>
             <tr>
             <td>Direccion</td>
@@ -388,7 +388,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                       <input id="txtEspecialidad" type="text" size="35" name="tfijo" value="'.$especialidades_array[$i].'" READONLY/>
                       <input id="idEspecialidad" type="hidden" value="'.$especialidades_array[$i-1].'" />     
                     <td><input type="button" class="delRow" id="btnEliminarEspecialidad"/></td>
-                    <td><input type="button" value="Editar" id="btnEditarEspecialidades"/></td>
+                    <td><input type="button" value="Editar" id="btnEditarEspecialidades" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
                     <td><input type="button" class="addRow" id="btnNuevaEspecialidad"/></td>
                     </tr>
                     <tr>
@@ -431,7 +431,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                   <input type="text" size="35" name="tfijo" value="'.$representantes_array[$i].'" READONLY/>
                       <input type="hidden" id="idRepresentante" value="'.$representantes_array[$i-1].'" />
                       <td><input type="button" class="delRow" id="btnEliminarRepresentante"/></td>
-                      <td><input type="button" value="Editar" id="btnEditarRepresentante"/>
+                      <td><input type="button" value="Editar" id="btnEditarRepresentante" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                       <td><input type="button" class="addRow" id="btnNewRepresentante"/></td>
                       </td>
                       </tr>
@@ -452,19 +452,19 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
             </tr>
             <tr>
                 <td>Observacion:</td><td><textarea id="txtObservacion" READONLY>'.$res[7].'</textarea></td>
-                <td><input type="button" value="Editar" id="btnEditarObservacion" />    
+                <td><input type="button" value="Editar" id="btnEditarObservacion" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
             </tr>
             <tr>
                 <td>Email:</td><td><input type="text" name="txtemail" size="35" id="txtEmail" value="'.$res[8].'" READONLY/></td>
-                <td><input type="button" value="Editar" id="btnEditarEmail"/>    
+                <td><input type="button" value="Editar" id="btnEditarEmail" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
             </tr>
             <tr>
                 <td>Web:</td><td><input type="text" name="txtweb" id="txtweb" size="35" value="'.$res[9].'" READONLY/></td>
-                <td><input type="button" value="Editar" id="btnEditarWeb" />
+                <td><input type="button" value="Editar" id="btnEditarWeb" class="ui-button ui-widget ui-state-default ui-corner-all"/>
             </tr>
             <tr>
                 <td>Vía de Envío:</td><td><input type="text" id="txtviaenvio" name="txtviaenvio" value="'.$res[12].'" READONLY /></td>
-                <td><input type="button" id="btnEditarViaEnvio" value="Editar" />    
+                <td><input type="button" id="btnEditarViaEnvio" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
             </tr>
             <tr>
                 <td>
