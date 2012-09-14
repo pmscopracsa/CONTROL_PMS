@@ -7,6 +7,23 @@ class RepresentanteCompaniaDL {
     protected $_descripcionpersona;
     protected $ruc;
     
+    public function mostrarRepresentantesAll() {
+        $query = "SELECT * FROM tb_personacontacto ORDER BY nombre ASC";
+        
+        $conexion = new Conexion();
+        $cn = $conexion->conectar();
+        $rs = mysql_query($query, $cn);
+        $registros = array();
+        
+        while($reg = mysql_fetch_array($rs)) {
+            array_push($registros, $reg);
+        }
+        mysql_free_result($rs);
+        mysql_close($cn);
+        
+        return $registros;
+    }
+    
     public function mostrarRepresentantes()
     {
         //$query = "SELECT * FROM tb_personacontacto ORDER BY nombre ASC";

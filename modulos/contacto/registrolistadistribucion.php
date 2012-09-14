@@ -22,11 +22,30 @@ function  __autoload($name) {
         <title>REGISTRO LISTA DE DISTRIBUCION</title>
         <!-- zona css -->
         <?php
-        foreach ($css as $value) {
+        /*foreach ($css as $value) {
             if ($value === '.' || $value === '..'){continue;}
             echo '<link href="../../css/'.$value.'" rel="stylesheet" type="text/css" />';
-        }
+        }*/
         ?>
+        <link href="../../css/!style.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/areascroll.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/autocomplete.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/barrasuperior.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/botones.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/buscar_flotante.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/cuerpo.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/datosobra.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/dos-columnas.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/email.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/fieldset_edit.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/google-buttons.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/login1.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/mensajes.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/info.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/styles.css" rel="stylesheet" type="text/css" />
+        
         <link href="../../css/reveal/styles.css" rel="stylesheet" type="text/css" />
         <!-- ZONA JS -->
         <script src="../../js/jquery1.4.2.js.js" type="text/javascript"></script>
@@ -56,7 +75,7 @@ function  __autoload($name) {
            /**
             * PRIMERA CARGA DE REPRESENTANTES 
             */ 
-           $("#modal-contactos").load("modal_registracompania/representantes_div.php?filtro=1");
+           $("#modal-contactos").load("modal_registracompania/representantes_div.php?filtro=3");
             
            var contador_contactos = 0;
             
@@ -356,7 +375,7 @@ function  __autoload($name) {
                     <tr>
                         <td>Observaci&oacute;n:</td>
                         <td>
-                            <textarea id="observacion" name="observacion"></textarea>
+                            <textarea id="observacion" name="observacion" rows="5" cols="113"></textarea>
                         </td>
                     </tr>
                 </table>

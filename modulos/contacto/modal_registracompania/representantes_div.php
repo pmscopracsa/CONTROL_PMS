@@ -16,6 +16,18 @@ if ($q == "1" ) {
                 '<br />';
     }
     echo '</div>';
+} elseif ($q == "3") {
+    $representantes = $representanteCompania->mostrarRepresentantesAll();
+    echo '<div>';
+    echo '<div  style:"float:left"><input type="text" id="txt_divRepresentanteBuscar"/><input type="button" value="Buscar" id="btnSearchRepresentante" class="ui-button ui-widget ui-state-default ui-corner-all"/></div>';
+    foreach ($representantes as &$valor) {
+        echo '<input id="representantes_boxes" type="checkbox" name="representantes[]" value="'.
+                $valor[0].
+                '"/>'.
+                $valor[3].
+                '<br />';
+    }
+    echo '</div>';
 } else {
     $representanteCompania->set_descripcionpersona($q);
     $representantes = $representanteCompania->mostrarRepresentatesPorNombre();

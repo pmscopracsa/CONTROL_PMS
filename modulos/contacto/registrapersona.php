@@ -19,18 +19,22 @@ function __autoload($name) {
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>REGISTRO DE PERSONAS</title>
         <!-- zona css -->
+        <link href="../../css/!style.css" rel="stylesheet" type="text/css" />
         <link href="../../css/areascroll.css" rel="stylesheet" type="text/css" />
         <link href="../../css/autocomplete.css" rel="stylesheet" type="text/css" />
         <link href="../../css/barrasuperior.css" rel="stylesheet" type="text/css" />
-        <link href="../../css/areascroll.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/botones.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/buscar_flotante.css" rel="stylesheet" type="text/css" />        
         <link href="../../css/cuerpo.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/datosobra.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/dos-columnas.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/email.css" rel="stylesheet" type="text/css" />
         <link href="../../css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
         <link href="../../css/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
         <link href="../../css/styles.css" rel="stylesheet" type="text/css" />
-        <link href="../../css/styles.css" rel="stylesheet" type="text/css" />
         <link href="../../css/reveal/styles.css" rel="stylesheet" type="text/css" />
-        <link href="../../css/botones.css" rel="stylesheet" type="text/css" />
         <link href="../../css/google-buttons.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/info.css" rel="stylesheet" type="text/css" />
         <?php
         /*foreach ($css as $value) {
             if ($value === '.' || $value === '..') {continue;}
@@ -487,11 +491,10 @@ function __autoload($name) {
                     <tr>
                         <td><label>Tipo documento:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td>
-                            <!-- VALIDAR -->
                             <select id="cmb_tipodocumento" name="tipo-documento">
                                 <option value="0">Seleccionar tipo de documento</option>
                             </select>
-                         <td>
+                         
                              <input  class="input-tipo-documento" size="8" type="text" name="numero-documento" id="inputext" required/>
                              <input type="hidden" id="numerodocumento" />
                     </tr>
@@ -500,7 +503,9 @@ function __autoload($name) {
                         <td>
                             <input type="radio" name="tieneruc" value="si">Si<br>
                             <input type="radio" name="tieneruc" value="no">No<br>
-                            <td class="td-ruc-checkbox" style="display: none"><input placeholder="RUC" type="text" id="inputext" name="ruc" class="txtruccarne"/>
+                            <div class="td-ruc-checkbox" style="display: none;">
+                            <input placeholder="RUC" type="text" id="inputext" name="ruc" class="txtruccarne"/>
+                            </div>
                     <tr>
                         <td><label>Nombres y Apellidos:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td><input class="nombre_persona" id="inputext" type="text" size="70"  name="nombre"</td>
@@ -510,8 +515,7 @@ function __autoload($name) {
                             <label>Compania:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td>
                             <input class="nombre_empresa" id="inputext" type="text" size="70"  name="companiaseleccionada" READONLY />
-                        </td>
-                        <td><input type="button" id="btnBuscarCompania" value="Buscar Compania" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>
+                            <input type="button" id="btnBuscarCompania" value="Buscar Compania" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                     <input type="hidden" name="txtidempresa" id="txtidempresa"/>
                     </tr>
                         <td><label>Cargo:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
@@ -654,7 +658,7 @@ function __autoload($name) {
                 </tr>
                 <tr>
                     <td><label>Observaci&oacute;n</label></td>
-                    <td><textarea name="observacion"></textarea></td>
+                    <td><textarea cols="114" rows="5" name="observacion"></textarea></td>
                 </tr>
                 <tr>
                     <td><label for="email">Email principal:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>

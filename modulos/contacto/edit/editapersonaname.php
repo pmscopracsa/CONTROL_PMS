@@ -15,6 +15,7 @@ session_start();
         <link href="../../../css/botones.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/google-buttons.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/fieldset_edit.css" rel="stylesheet" type="text/css" />
         
         <!-- JS ZONE -->
         <script src="../../../js/jquery1.4.2.js.js" type="text/javascript"></script>
@@ -111,10 +112,10 @@ session_start();
                     
                     $("#direccion_full tbody").append(
                             "<tr id='tbl_direccion'>"+
-                            "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td>"+
-                            "<td><td><select disabled='disabled' id='pa"+i+"'></select></td></td>"+
-                            "<td><td><select disabled='disabled' id='de"+i+"'></select></td>"+
-                            "<td><td><select disabled='disabled' id='di"+i+"'></select></td>"+
+                            "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td><tr />"+
+                            "<td><select disabled='disabled' id='pa"+i+"'></select></td><tr />"+
+                            "<td><select disabled='disabled' id='de"+i+"'></select></td><tr />"+
+                            "<td><select disabled='disabled' id='di"+i+"'></select></td><tr />"+
                             "<td><input type='button' id='btnEditarDireccion'  value='Editar' class='ui-button ui-widget ui-state-default ui-corner-all'/></td>"+
                             "<td style='display:none'><input type='hidden' id='idDireccionHidden' value='"+i+"' /></td>"+
                             "<td style='display:none'><input type='hidden' id='idDireccion"+i+"' value='"+data[index].id+"' /></td>"+

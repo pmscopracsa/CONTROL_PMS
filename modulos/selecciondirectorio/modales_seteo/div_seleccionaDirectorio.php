@@ -9,10 +9,9 @@ if ($q == "1") {
     $directorios = $directorioGeneral->mostrarDirectorio();
     
     foreach ($directorios as &$valor) {
-        echo '<table>
+        echo '<table width="100%">
             <tr style="cursor:pointer;">
-            <td class="directorio"><p style="display:none">'.
-            $valor[0]." | </p>".
+            <td class="directorio"><p style="display:none">'.$valor[0]." | </p>".
             $valor[1].      
             ' | '.        
             $valor[2].        

@@ -15,6 +15,7 @@ session_start();
         <link href="../../../css/botones.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/google-buttons.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/fieldset_edit.css" rel="stylesheet" type="text/css" />
         
         <!-- JS ZONE -->
         <script src="../../../js/jquery1.4.2.js.js" type="text/javascript"></script>
@@ -818,16 +819,16 @@ session_start();
                     cargarDomicilio(data[index].idtipodireccion, i)
                     $("#direccion_full tbody").append(
                         "<tr id='tbl_direccion'>"+
-                        "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td>"+
-                        "<td><td><select disabled='disabled' id='pa"+i+"'></select></td></td>"+
-                        "<td><td><select disabled='disabled' id='de"+i+"'></select></td>"+
-                        "<td><td><select disabled='disabled' id='di"+i+"'></select></td>"+
-                        "<td><td><select disabled='disabled' id='do"+i+"'></select></td>"+
-                        "<td><input type='button' id='btnEditarDireccion'  value='Editar'/></td>"+
+                        "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td><tr />"+
+                        "<td><select disabled='disabled' id='pa"+i+"'></select></td><tr />"+
+                        "<td><select disabled='disabled' id='de"+i+"'></select></td><tr />"+
+                        "<td><select disabled='disabled' id='di"+i+"'></select></td><tr />"+
+                        "<td><select disabled='disabled' id='do"+i+"'></select></td><tr />"+
+                        "<td><input type='button' id='btnEditarDireccion'  value='Editar' class='ui-button ui-widget ui-state-default ui-corner-all'/></td>"+
                         "<td><input type='button' class='delRow' id='btnEliminarDireccion' /></td>"+
                         "<td><input type='button' class='addRow' id='btnAgregarDireccion' /></td>"+
-                        "<td style='display:none'><input type='hidden' id='idDireccionHidden' value='"+i+"' /></td>"+
-                        "<td style='display:none'><input type='hidden' id='idDireccion"+i+"' value='"+data[index].iddcc+"' /></td>"+
+                        "<input type='hidden' id='idDireccionHidden' value='"+i+"' />"+
+                        "<input type='hidden' id='idDireccion"+i+"' value='"+data[index].iddcc+"' />"+
                         "</tr>"
                     ),
                     i++
@@ -883,10 +884,11 @@ session_start();
             // PAIS
             // EDITAR DIRECCION
             $("#btnEditarDireccion").live("click",function() {
-                var idaddress = $(this).parent().parent().children().children("#idDireccionHidden").attr("value");
+                var idaddress = $(this).parent().parent().children("#idDireccionHidden").val();
+                thisObj = $(this);
                 
-                if ($("#btnEditarDireccion").val() == "Editar") {
-                    $("#btnEditarDireccion").attr('value', 'Guardar');
+                if (thisObj.val() == "Editar") {
+                    thisObj.attr('value', 'Guardar');
                     
                     $("#pa"+idaddress).removeAttr('disabled');
                     $("#de"+idaddress).removeAttr('disabled');
@@ -901,17 +903,17 @@ session_start();
                             type:"POST",
                             url:"../../../bl/editaCompania_BL.php?parameter=actualizadireccion",
                             data:{
-                                idDireccion:$(this).parent().parent().children().children("#idDireccion"+idaddress).attr("value"),
+                                idDireccion:$(this).parent().parent().children("#idDireccion"+idaddress).val(),
                                 txtdireccion:$("#direccion").val(),
-                                idpais:$(this).parent().parent().children().children("#pa"+idaddress).attr("value"),
-                                iddepartamento:$(this).parent().parent().children().children("#de"+idaddress).attr("value"),
-                                iddistrito:$(this).parent().parent().children().children("#di"+idaddress).attr("value"),
-                                idtipodireccion:$(this).parent().parent().children().children("#do"+idaddress).attr("value"),
+                                idpais:$(this).parent().parent().children("#pa"+idaddress).val(),
+                                iddepartamento:$(this).parent().parent().children("#de"+idaddress).val(),
+                                iddistrito:$(this).parent().parent().children("#di"+idaddress).val(),
+                                idtipodireccion:$(this).parent().parent().children("#do"+idaddress).val(),
                                 idCompania:$("#idCompania").val(),
                                 idEmpresa :<?=$_SESSION['id']?>
                             },
                             success:function() {
-                                $("#btnEditarDireccion").attr('value', 'Editar');
+                                thisObj.attr('value', 'Editar');
                     
                                 $("#pa"+idaddress).attr("disabled", "disabled");
                                 $("#de"+idaddress).attr("disabled", "disabled");

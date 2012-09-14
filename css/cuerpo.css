@@ -36,10 +36,15 @@ body {
     background-image: url(../img/fnd.jpg);
 }
 
-#inputext {
+textarea {
+    resize: none;
+}
+
+/*#inputext {
     padding: 5px 5px 5px 5px;
     background-color: wheat;
-}
+    border: 2px #000000 ;
+}/*
 
 .inputext {
     padding: 5px 5px 5px 5px;
@@ -56,11 +61,11 @@ dd {
     float: right;
 }
 
-input[type="text"] {
+/*input[type="text"] {
     border: none;
     background: transparent;
     color: #333333;
-}
+}*/
 
 input[type="text"]:hover {
     border: thin #999999 outset;

@@ -313,7 +313,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
       }
       echo
                     '</table>
-                    <fieldset>    
+                    </fieldset>
                 </td>
             </tr>
             <tr>
@@ -465,7 +465,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                 </td>
             </tr>
             <tr>
-                <td>Observacion:</td><td><textarea id="txtObservacion" READONLY>'.$res[7].'</textarea></td>
+                <td>Observacion:</td><td><textarea cols="75" rows="5" id="txtObservacion" READONLY>'.$res[7].'</textarea></td>
                 <td><input type="button" value="Editar" id="btnEditarObservacion" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
             </tr>
             <tr>

@@ -164,6 +164,7 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
                 <td>Direccion Personal:
                 <td>
                     <table border="0" class="atable" id="direccion_full">
+                    <fieldset>
                         <!--<tr>
                             <th>Direccion
                             <th>Pais
@@ -172,6 +173,7 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
                          <tbody>
                             <tr></tr>
                          </tbody>
+                    </fieldset>     
                     </table>
             </tr>
             <tr>
@@ -209,8 +211,9 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
             </fieldset>
             </tr>
             <tr>
-                <td>Observacion:<td><input type="text" value="'.$res[5].'" class="inputext" id="txtobservacion" size="45" READONLY/>
+                <td>Observacion:<td><textarea class="inputext" id="txtobservacion" rows="5" cols="112" READONLY>'.$res[5].'</textarea>
                 <td><input type="button" id="btnEditaObservacion" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                
             </tr>
             <tr>
                 <td>Email principal:<td><input type="text" value="'.$res[6].'" class="inputext" id="txtemailprincipal" size="45" READONLY/>

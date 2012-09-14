@@ -18,11 +18,27 @@ function __autoload($name) {
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />    
     <!-- zona css -->
     <?php
-    foreach($css as $value) {
+    /*foreach($css as $value) {
         if ($value === '.' || $value === '..'){continue;}
         echo '<link href="../../css/'.$value.'" rel="stylesheet" type="text/css" />'; 
-    }
+    }*/
     ?>
+    <link href="../../css/!style.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/areascroll.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/autocomplete.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/barrasuperior.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/botones.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/buscar_flotante.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/cuerpo.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/datosobra.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/dos-columnas.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/email.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/google-buttons.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/info.css" rel="stylesheet" type="text/css" />
+    
     <link href="../../css/reveal/styles.css" rel="stylesheet" type="text/css" />
     <!-- ZONA JS -->
     <script src="../../js/jquery1.4.2.js.js" type="text/javascript"></script>
@@ -203,7 +219,7 @@ function __autoload($name) {
         $("#seleccionaDireccion").dialog({
             autoOpen:false,
             height:280,
-            width:450,
+            width:550,
             modal:true,
             buttons:{
                 "Agregar":function() {
@@ -621,7 +637,7 @@ function __autoload($name) {
                </tr>
                <tr class="alt">
                    <td><label for="ruc">RUC:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input  class="ruc_empresa" id="inputext" type="text" size="70" name="ruc" /></td>
+                   <td><input  class="ruc_empresa" id="inputext" type="text" maxlength="11" size="70" name="ruc" /></td>
                </tr>
                <tr>
                    <td><label for="nombre">Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
@@ -864,8 +880,8 @@ function __autoload($name) {
                    </td>
                </tr>-->
                <tr>
-                   <td><label for="observacion">Observaci&oacute;n:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><textarea name="observacion"></textarea></td>
+                   <td><label for="observacion">Observaci&oacute;n:</label></td>
+                   <td><textarea name="observacion" cols="113" rows="5"></textarea></td>
                </tr>
                <tr>
                    <td><label for="email">Email:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
