@@ -15,6 +15,7 @@ session_start();
         <link href="../../../css/botones.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/google-buttons.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/fieldset_edit.css" rel="stylesheet" type="text/css" />
         
         <!-- JS ZONE -->
         <script src="../../../js/jquery1.4.2.js.js" type="text/javascript"></script>
@@ -156,7 +157,7 @@ session_start();
                             },
                             url:"../../../bl/editaCompania_BL.php?parameter=tipocompania",
                             success:function() {
-                                $("#txttipocompania").val($("#tipocompaniaid option:selected").text());
+                                $(".txttipocompania").val($("#tipocompaniaid option:selected").text());
                             }
                             });
                         });
@@ -278,11 +279,12 @@ session_start();
             /** CAMBIAR GIRO */
             // EDITAR GIRO
             $("#btnEditarGiro").live("click",function() {
-                if ($("#btnEditarGiro").val() === "Editar") {
-                    $("#txtGiro").removeAttr("READONLY");
-                    $("#btnEditarGiro").attr("value","Guardar");
+                myObj = $(this);
+                if ($(this).val() === "Editar") {
+                    $(this).parent().parent().children().children('#txtGiro').removeAttr('readonly');
+                    $(this).attr('value','Guardar');
                 } else {
-                    if ($("#txtGiro").val() === "") {
+                    if ($(this).parent().parent().children().children('#txtGiro').val() === "") {
                         alertCampoVacion();
                     } else {
                         $.ajax({
@@ -296,8 +298,7 @@ session_start();
                             url:"../../../bl/editaCompania_BL.php?parameter=giro_actualiza",
                             success:function() {
                                 $("#txtGiro").attr("READONLY",true);
-                                $("#btnEditarGiro").attr("value","Editar");
-                                alertExito();
+                                myObj.attr('value','Editar');
                             }
                         });
                     }
@@ -379,9 +380,10 @@ session_start();
             /** TELEFONO FIJO */
             // EDITAR TELEFONO FIJO
             $("#btnEditarTelefonoFijo").live("click",function() {
-                if($("#btnEditarTelefonoFijo").val() === "Editar") {
-                    $("#txtTelefonoFijo").removeAttr("READONLY");
-                    $("#btnEditarTelefonoFijo").attr("value","Guardar");
+                myObj = $(this);
+                if($(this).val() === "Editar") {
+                    $(this).parent().parent().children().children('#txtTelefonoFijo').removeAttr('readonly');
+                    $(this).attr("value","Guardar");
                 } else {
                     if ($("#txtTelefonoFijo").val() === "") {
                         alertCampoVacion();
@@ -397,8 +399,7 @@ session_start();
                            url:"../../../bl/editaCompania_BL.php?parameter=tf_actualiza",
                            success:function() {
                                $("#txtTelefonoFijo").attr("READONLY",true);
-                               $("#btnEditarTelefonoFijo").attr("value","Editar");
-                               alertExito();
+                               myObj.attr("value","Editar");
                            }
                         });
                     }
@@ -449,8 +450,9 @@ session_start();
             /** TELEFONO MOBILE */
             // EDITAR T MOBILE
             $("#btnEditarTelefonoMobile").live("click",function() {
-                if ($("#btnEditarTelefonoMobile").val() === "Editar") {
-                    $("#txtTelefonoMobile").removeAttr("READONLY");
+                myObj = $(this);    
+                if ($(this).val() === "Editar") {
+                    $(this).parent().parent().children().children("#txtTelefonoMobile").removeAttr('readonly');
                     $(this).attr("value","Guardar");
                 } else {
                     if ($("#txtTelefonoMobile").val() === "") {
@@ -467,8 +469,7 @@ session_start();
                             url:"../../../bl/editaCompania_BL.php?parameter=tm_edita",
                             success:function() {
                                 $("#txtTelefonoMobile").attr("READONLY",true);
-                                $("#btnEditarTelefonoMobile").attr("value","Editar");
-                                alertExito();
+                                myObj.attr("value","Editar");
                             }
                         });
                     }
@@ -519,9 +520,10 @@ session_start();
             /** TELEFONO NEXTEL */
             // EDITAR TELEFONO NEXTEL
             $("#btnEditarTelefonoNextel").live("click",function() {
-                if($("#btnEditarTelefonoNextel").val() === "Editar") {
-                    $("#txtTelefonoNextel").removeAttr("READONLY");
-                    $("#btnEditarTelefonoNextel").attr("value","Guardar");
+                myObj = $(this);
+                if($(this).val() === "Editar") {
+                    $(this).parent().parent().children().children("#txtTelefonoNextel").removeAttr('readonly');
+                    $(this).attr("value","Guardar");
                 } else {
                     if ($("#txtTelefonoNextel").attr("value") === "") {
                         alertCampoVacion();
@@ -537,8 +539,7 @@ session_start();
                             url:"../../../bl/editaCompania_BL.php?parameter=tn_actualiza",
                             success:function() {
                                 $("#txtTelefonoNextel").attr("READONLY", "true");
-                                $("#btnEditarTelefonoNextel").attr("value","Editar");
-                                alertExito();
+                                myObj.attr("value","Editar");
                             }
                         });
                     }
@@ -617,10 +618,11 @@ session_start();
             /** ESPECIALIDAD */
             // EDITAR ESPECIALIDAD
             $("#btnEditarEspecialidades").live("click",function(){
+                myObj = $(this);
                 $("#especialidadid").fadeIn("slow");
-                if ($("#btnEditarEspecialidades").val() === "Editar") {
-                    $("#txtEspecialidad").removeAttr("READONLY");
-                    $("#btnEditarEspecialidades").attr("value","Guardar");
+                if ($(this).val() === "Editar") {
+                    $(this).parent().parent().children().children("#txtEspecialidad").removeAttr('readonly');
+                    $(this).attr("value","Guardar");
                 } else {
                     if ($("#especialidadid").attr("value") == 0) {
                         alertCampoVacion();
@@ -635,10 +637,7 @@ session_start();
                             },
                             url:"../../../bl/editaCompania_BL.php?parameter=especialidad_actualiza",
                             success:function() {
-                                alertExito();
-                                $("#txtEspecialidad").val($("#especialidadid option:selected").text());
-                                $("#especialidadid").fadeOut("slow");
-                                $("#btnEditarEspecialidades").attr('value', 'Editar');
+                                reload();                                
                             }
                         });
                     }
@@ -716,27 +715,29 @@ session_start();
             /** REPRESENTANTES */
             //EDITAR REPRESENTANTE
             $("#btnEditarRepresentante").live("click",function() {
-                if ($("#btnEditarRepresentante").attr("value") === "Editar") {
-                    $("#representanteid").fadeIn("slow", function(){
-                        $("#btnEditarRepresentante").attr("value","Guardar");
-                    });
+                myObj = $(this);
+                if ($(this).val() === "Editar") {
+                    $("#representanteid").fadeIn("slow");
+                    $(this).attr("value","Guardar");
                 } else {
                     if ($("#representanteid").attr("value") == 0) {
                         alert("Debe escoger un representante.");
                     } else {
+                        //alert($("#representanteid").attr("value").val())
+                        var id_old = $(this).parent().parent().children().children('#idRepresentante').val();
                         $("#representanteid").fadeOut("slow", function() {
                             $("#btnEditarRepresentante").attr("value","Editar");
                             $.ajax({
                                 type:"POST",
                                 data:{
-                                    id_representante_new:$("#representanteid").attr("value"),
-                                    id_representante_old:$(this).parent().parent().children().children('#idRepresentante').attr("value"),
+                                    id_representante_new:$("#representanteid").val(),
+                                    id_representante_old:id_old,
                                     idCompania:$("#idCompania").val(),
                                     idEmpresa:<?=$_SESSION['id']?>
                                 },
                                 url:"../../../bl/editaCompania_BL.php?parameter=representante_actualiza",
                                 success:function() {
-                                    alertExito();
+                                    reload();
                                 }
                             })
                         });
@@ -907,7 +908,7 @@ session_start();
                     cargarDomicilio(data[index].idtipodireccion, i)
                     $("#direccion_full tbody").append(
                         "<tr id='tbl_direccion'>"+
-                        "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td>"+
+                        "<td><input type='text' class='inputext' id='direccion' value='"+data[index].direccion+"' READONLY/></td>"+
                         "<td><td><select disabled='disabled' id='pa"+i+"'></select></td></td>"+
                         "<td><td><select disabled='disabled' id='de"+i+"'></select></td>"+
                         "<td><td><select disabled='disabled' id='di"+i+"'></select></td>"+

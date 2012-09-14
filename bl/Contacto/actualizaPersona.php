@@ -42,26 +42,27 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
                 <input type="hidden" value="'.$res[0].'" id="idpersonacontacto" />
                 <input type="hidden" value="'.$res[9].'" id="idviaenvio" />
                 <input type="hidden" value="'.$res[11].'" id="idespecialidad" />    
-                <td>Numero de documento:<td><input id="txtnumerodocumento" type="text" value="'.$res[1].'" size="45" READONLY/>
-                <td><input type="button" value="Editar" id="btnEditarNumeroDocumento"/>    
+                <td>Numero de documento:<td><input class="inputext" id="txtnumerodocumento" type="text" value="'.$res[1].'" size="45" READONLY/>
+                <td><input type="button" value="Editar" id="btnEditarNumeroDocumento" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
             </tr>
             <tr>
-                <td>Nombres y apellidos:<td><input type="text" id="txtnombres" value="'.$res[2].'" size="45" READONLY/>
-                <td><input type="button" value="Editar" id="btnEditarNombres"/>
+                <td>Nombres y apellidos:<td><input type="text" class="inputext" id="txtnombres" value="'.$res[2].'" size="45" READONLY/>
+                <td><input type="button" value="Editar" id="btnEditarNombres" class="ui-button ui-widget ui-state-default ui-corner-all"/>
             </tr>
             <tr>
-                <td>Compania:<td><input type="text" id="txtcompania" value="'.$res[10].'" size="45" READONLY/>
+                <td>Compania:<td><input type="text" class="inputext" id="txtcompania" value="'.$res[10].'" size="45" READONLY/>
                     <input type="hidden" id="txtidempresa" />
-                <td><input type="button" value="Editar" id="btnEditarCompania"/>    
+                <td><input type="button" value="Editar" id="btnEditarCompania" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
             </tr>
             <tr>
-                <td>Cargo:<td><input type="text" id="txtcargo" value="'.$res[3].'" size="45" READONLY/>
-                <td><input type="button" value="Editar" id="btnEditarCargo"/>    
+                <td>Cargo:<td><input type="text" class="inputext" id="txtcargo" value="'.$res[3].'" size="45" READONLY/>
+                <td><input type="button" value="Editar" id="btnEditarCargo" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
             </tr>
             <tr>
                 <td>Telefono Fijo:
                 <td>
                 <table border="0" class="atable">
+                <fieldset>
             <tr>
                 <th>
                 <th colspan="2">
@@ -74,11 +75,11 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
               if($i%2 != 0) {
                   echo'<tr id="tr_tfijo">
                     <td>
-                    <input type="text" id="txtTelefonoFijo" name="giro" value="'.
+                    <input type="text" class="inputext" id="txtTelefonoFijo" name="giro" value="'.
                     $telefonosf[$i]
                     .'" READONLY/></td>
                     <input id="idTFijo" type="hidden" value="'.$telefonosf[$i-1].'" />    
-                    <td><input type="button" value="Editar" id="btnEditarTelefonoFijo"/></td>    
+                    <td><input type="button" value="Editar" id="btnEditarTelefonoFijo" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>    
                     <td><input type="button" class="delRow" id="btnEliminarTF"/></td>
                     <td><input type="button" class="addRow" id="btnAgregarTF"/></td>
                     </tr>';
@@ -89,11 +90,13 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
       echo
       '
             </table>
+            </fieldset>
             </tr>
             <tr>
                 <td>Telefono Movil:
                 <td>
                 <table border="0" class="atable">
+                <fieldset>
             <tr>
                 <th>
                 <th colspan="2">
@@ -106,11 +109,11 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
               if($i%2 != 0) {
                   echo'<tr id="tr_tm">
                     <td>
-                    <input type="text" id="txtTM" name="giro" value="'.
+                    <input type="text" class="inputext" id="txtTM" name="giro" value="'.
                     $telefonosm[$i]
                     .'" READONLY/></td>
                     <input id="idtm" type="hidden" value="'.$telefonosm[$i-1].'" />    
-                    <td><input type="button" value="Editar" id="btnEditarTM"/></td>    
+                    <td><input type="button" value="Editar" id="btnEditarTM" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>    
                     <td><input type="button" class="delRow" id="btnEliminarTM"/></td>
                     <td><input type="button" class="addRow" id="btnAgregarTM"/></td>
                     </tr>';
@@ -121,11 +124,13 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
       echo
       '
             </table>
+            </fieldset>
             </tr>
             <tr>
                 <td>Telefono Nextel:
                 <td>
                 <table border="0" class="atable">
+                <fieldset>
             <tr>
                 <th>
                 <th colspan="2">
@@ -138,11 +143,11 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
               if($i%2 != 0) {
                   echo'<tr id="tr_tn">
                     <td>
-                    <input type="text" id="txtTN" name="giro" value="'.
+                    <input type="text" class="inputext" id="txtTN" name="giro" value="'.
                     $telefonosn[$i]
                     .'" READONLY/></td>
                     <input id="idTN" type="hidden" value="'.$telefonosn[$i-1].'" />    
-                    <td><input type="button" value="Editar" id="btnEditarTN"/></td>    
+                    <td><input type="button" value="Editar" id="btnEditarTN" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>    
                     <td><input type="button" class="delRow" id="btnEliminarTN"/></td>
                     <td><input type="button" class="addRow" id="btnAgregarTN"/></td>
                     </tr>';
@@ -153,6 +158,7 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
       echo
       '
             </table>
+            </fieldset>
             </tr>
             <tr>
                 <td>Direccion Personal:
@@ -172,6 +178,7 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
                 <td>Especialidades:
                 <td>
                 <table border="0" class="atable">
+                <fieldset>
             <tr>
                 <th>
                 <th colspan="2">
@@ -184,11 +191,11 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
               if($i%2 != 0) {
                   echo'<tr id="tr_es">
                     <td>
-                    <input type="text" id="txtES" name="giro" value="'.
+                    <input type="text" class="inputext" id="txtES" name="giro" value="'.
                     $especialidades[$i]
                     .'" READONLY/></td>
                     <input id="idES" type="hidden" value="'.$especialidades[$i-1].'" />    
-                    <td><input type="button" value="Editar" id="btnEditarES"/></td>    
+                    <td><input type="button" value="Editar" id="btnEditarES" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>    
                     <td><input type="button" class="delRow" id="btnEliminarES"/></td>
                     <td><input type="button" class="addRow" id="btnAgregarES"/></td>
                     </tr>';
@@ -199,19 +206,21 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
       echo
       '
             </table>
+            </fieldset>
             </tr>
             <tr>
-                <td>Observacion:<td><input type="text" value="'.$res[5].'" id="txtobservacion" size="45" READONLY/>
-                <td><input type="button" id="btnEditaObservacion" value="Editar"/>
+                <td>Observacion:<td><input type="text" value="'.$res[5].'" class="inputext" id="txtobservacion" size="45" READONLY/>
+                <td><input type="button" id="btnEditaObservacion" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
             </tr>
             <tr>
-                <td>Email principal:<td><input type="text" value="'.$res[6].'" id="txtemailprincipal" size="45" READONLY/>
-                <td><input type="button" id="btnEditaEmail" value="Editar"/>
+                <td>Email principal:<td><input type="text" value="'.$res[6].'" class="inputext" id="txtemailprincipal" size="45" READONLY/>
+                <td><input type="button" id="btnEditaEmail" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
             </tr>
             <tr>
                 <td>Email Secundario:
                 <td>
                 <table border="0" class="atable">
+                <fieldset>
             <tr>
                 <th>
                 <th colspan="2">
@@ -224,11 +233,11 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
               if($i%2 != 0) {
                   echo'<tr id="tr_mail">
                     <td>
-                    <input type="text" id="txtMAIL" name="mail" value="'.
+                    <input type="text" class="inputext" id="txtMAIL" name="mail" value="'.
                     $correos[$i]
                     .'" READONLY/></td>
                     <input id="idMAIL" type="hidden" value="'.$correos[$i-1].'" />    
-                    <td><input type="button" value="Editar" id="btnEditarMAIL"/></td>    
+                    <td><input type="button" value="Editar" id="btnEditarMAIL" class="ui-button ui-widget ui-state-default ui-corner-all"/></td>    
                     <td><input type="button" class="delRow" id="btnEliminarMAIL"/></td>
                     <td><input type="button" class="addRow" id="btnAgregarMAIL"/></td>
                     </tr>';
@@ -239,14 +248,15 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
       echo
       '
             </table>
+            </fieldset>
             </tr>
             <tr>
-                <td>Web:<td><input type="text" value="'.$res[7].'" id="txtweb" size="45" READONLY/>
-                <td><input type="button" id="btnEditarWeb" value="Editar" />    
+                <td>Web:<td><input type="text" value="'.$res[7].'" class="inputext" id="txtweb" size="45" READONLY/>
+                <td><input type="button" id="btnEditarWeb" value="Editar" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
             </tr>
             <tr>
-                <td>Fax:<td><input type="text" value="'.$res[4].'" id="txtfax" size="45" READONLY/>
-                <td><input type="button" value="Editar" id="btnEditarFax" />    
+                <td>Fax:<td><input type="text" value="'.$res[4].'" class="inputext" id="txtfax" size="45" READONLY/>
+                <td><input type="button" value="Editar" id="btnEditarFax" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
             </tr>
             <tr>
                 <td>Via de Envio

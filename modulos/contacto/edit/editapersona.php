@@ -15,6 +15,7 @@ session_start();
         <link href="../../../css/botones.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/google-buttons.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/fieldset_edit.css" rel="stylesheet" type="text/css" />
         
         <!-- JS ZONE -->
         <script src="../../../js/jquery1.4.2.js.js" type="text/javascript"></script>
@@ -107,7 +108,7 @@ session_start();
                 cargarviaenvioseleccted(id_viaenvio);
                 $("#idviaenvio tbody").append(
                     "<td><select disabled='disabled' id='viaenvio'><select></td>"+
-                    "<td><input type='button' id='btnEditarViaEnvio'  value='Editar'/></td>"
+                    "<td><input type='button' id='btnEditarViaEnvio'  value='Editar' class='ui-button ui-widget ui-state-default ui-corner-all'/></td>"
                 )
             }
 
@@ -132,7 +133,7 @@ session_start();
                             "<td><td><select disabled='disabled' id='pa"+i+"'></select></td></td>"+
                             "<td><td><select disabled='disabled' id='de"+i+"'></select></td>"+
                             "<td><td><select disabled='disabled' id='di"+i+"'></select></td>"+
-                            "<td><input type='button' id='btnEditarDireccion'  value='Editar'/></td>"+
+                            "<td><input type='button' id='btnEditarDireccion'  value='Editar' class='ui-button ui-widget ui-state-default ui-corner-all'/></td>"+
                             "<td style='display:none'><input type='hidden' id='idDireccionHidden' value='"+i+"' /></td>"+
                             "<td style='display:none'><input type='hidden' id='idDireccion"+i+"' value='"+data[index].id+"' /></td>"+
                             "</tr>"
@@ -842,7 +843,7 @@ session_start();
             <label for="nombre">Escriba el nombre de la persona:</label>
             <div id="busqueda">
                 <input type="text" size="30" name="txtnombre" id="txtnombre" placeholder="NOMBRE"/>
-                <input type="button" value="Buscar" id="btnBuscar" />
+                <input type="button" value="Buscar" id="btnBuscar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
             </div>
             <hr/>
             <div id="tmp">
