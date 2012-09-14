@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Aug 29, 2012 at 01:19 AM
--- Server version: 5.5.25a
--- PHP Version: 5.4.4
+-- Servidor: localhost
+-- Tiempo de generación: 14-09-2012 a las 16:11:09
+-- Versión del servidor: 5.5.25
+-- Versión de PHP: 5.4.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,16 +17,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `control_pms`
+-- Base de datos: `control_pms`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_actadefinitivaoc`
+-- Estructura de tabla para la tabla `tb_actadefinitivaoc`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_actadefinitivaoc` (
+CREATE TABLE `tb_actadefinitivaoc` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numeracion` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
@@ -39,10 +39,10 @@ CREATE TABLE IF NOT EXISTS `tb_actadefinitivaoc` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_actadefinitivaot`
+-- Estructura de tabla para la tabla `tb_actadefinitivaot`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_actadefinitivaot` (
+CREATE TABLE `tb_actadefinitivaot` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numeracion` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
@@ -55,10 +55,10 @@ CREATE TABLE IF NOT EXISTS `tb_actadefinitivaot` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_actaprovisionaloc`
+-- Estructura de tabla para la tabla `tb_actaprovisionaloc`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_actaprovisionaloc` (
+CREATE TABLE `tb_actaprovisionaloc` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numeracion` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
@@ -71,10 +71,10 @@ CREATE TABLE IF NOT EXISTS `tb_actaprovisionaloc` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_actaprovisionalot`
+-- Estructura de tabla para la tabla `tb_actaprovisionalot`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_actaprovisionalot` (
+CREATE TABLE `tb_actaprovisionalot` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numeracion` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
@@ -87,10 +87,10 @@ CREATE TABLE IF NOT EXISTS `tb_actaprovisionalot` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_administradorcliente`
+-- Estructura de tabla para la tabla `tb_administradorcliente`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_administradorcliente` (
+CREATE TABLE `tb_administradorcliente` (
   `id` int(11) NOT NULL,
   `nombreadministrador` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
   `password` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
@@ -102,10 +102,10 @@ CREATE TABLE IF NOT EXISTS `tb_administradorcliente` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_alquiler`
+-- Estructura de tabla para la tabla `tb_alquiler`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_alquiler` (
+CREATE TABLE `tb_alquiler` (
   `id` int(11) NOT NULL,
   `numerolicencias` int(11) DEFAULT NULL,
   `costoxlicencia` decimal(6,2) DEFAULT NULL,
@@ -120,10 +120,10 @@ CREATE TABLE IF NOT EXISTS `tb_alquiler` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_companiacontacto`
+-- Estructura de tabla para la tabla `tb_companiacontacto`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_companiacontacto` (
+CREATE TABLE `tb_companiacontacto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(250) DEFAULT NULL,
   `ruc` varchar(45) DEFAULT NULL,
@@ -142,10 +142,10 @@ CREATE TABLE IF NOT EXISTS `tb_companiacontacto` (
   KEY `fk_tb_companiacontacto_tb_tipocompania1` (`tb_tipocompania_id`),
   KEY `fk_tb_companiacontacto_tb_viaenvio1` (`tb_viaenvio_id`),
   KEY `fk_tb_companiacontacto_tb_empresa1` (`tb_empresa_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1735 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1742 ;
 
 --
--- Dumping data for table `tb_companiacontacto`
+-- Volcado de datos para la tabla `tb_companiacontacto`
 --
 
 INSERT INTO `tb_companiacontacto` (`id`, `descripcion`, `ruc`, `nombrecomercial`, `partidaregistral`, `actividadprincipal`, `tb_tipocompania_id`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_empresa_id`) VALUES
@@ -154,7 +154,7 @@ INSERT INTO `tb_companiacontacto` (`id`, `descripcion`, `ruc`, `nombrecomercial`
 (3, 'ANA MARIA NIELSEN MENACHO', '10100034102', NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, 3, 1),
 (4, 'BANCO FINANCIERO', '20100105862', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 1, 1),
 (5, 'BANCO CONTINENTAL', '20100130204', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 3, 1),
-(6, 'COPRACSA AIO', '20388197804', 'COPRACSA AIO', '777', 'Actividad', 2, '789', 'Sin onbs', 'copracsa@copracsa.com', 'www.copracsa.com', 3, 1),
+(6, 'COPRACSA AIO', '1234', 'COPRACSA AIO.', '777', 'Actividad', 1, '555', 'OBSERVACION DE PRUEBA PARA ESTA EMPRESA', 'copracsa@copracsa.com', 'http://www.copracsa.com', 1, 1),
 (7, 'AIS PERU', '20390680016', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 3, 1),
 (8, 'BANCO DE LA NACION', '23456789', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 3, 1),
 (9, 'DRYWALLTEC SUPPLY SAC', '20375074070', NULL, NULL, NULL, 1, NULL, NULL, 'GMOYA@DRYWALLTEC.COM.PE', NULL, 3, 1),
@@ -1881,15 +1881,22 @@ INSERT INTO `tb_companiacontacto` (`id`, `descripcion`, `ruc`, `nombrecomercial`
 (1731, 'ocnpfr--*', '104176145716', 'comercial prueba', 'registra prueba', 'consultor externo', 2, '563456345', 'NULL', 'miguel.alc@gmail.com', 'http://www.google.com', 1, 1),
 (1732, 'ocnpfr', '107485961314', 'comercial prueba', 'NULL', 'NULL', 1, 'NULL', 'NULL', 'NULL', 'NULL', 3, 1),
 (1733, 'ocnpfr', '107485961315', 'comercial prueba', 'registra prueba', 'NULL', 1, 'NULL', 'NULL', 'miguel.alc@gmail.com', 'http://www.google.com', 1, 1),
-(1734, 'miguel angel alcantara ayre', '107485961316', 'comercial prueba', 'registra prueba', 'NULL', 1, 'NULL', 'NULL', 'miguel.alc@gmail.com', 'NULL', 1, 1);
+(1734, 'miguel angel alcantara ayre', '107485961316', 'comercial prueba', 'registra prueba', 'NULL', 1, 'NULL', 'NULL', 'miguel.alc@gmail.com', 'NULL', 1, 1),
+(1735, 'qwertasdpoi', '123456444', 'p', 'p', 'p', 2, '12', 'p', 'p', 'p', 2, 1),
+(1736, 'qwertasdpoi', '1234564445', 'p', 'p', 'p', 2, '12', 'p', 'p', 'p', 2, 1),
+(1737, 'iuy', '9990909090909', 'iuy', 'iuyi', 'iyiyu', 1, '878978', 'qwqeqw', 'qqq@qqq.com', 'qqq.com', 1, 1),
+(1738, 'p', '777888', 'p', 'p', 'p', 1, '1111', '22222', 'qqq@qqq.com', 'qqq.com', 1, 1),
+(1739, 'u', '2012', 'u', 'u', 'q', 1, '1', '123', 'qqq@qqq.com', 'qqq.com', 2, 1),
+(1740, 'qwert', '2013', 'wqw', 'eeee', 'qqq', 1, 'NULL', 'qasw', 'qqq@qqq.com', 'qqq.com', 1, 1),
+(1741, 'silver', '700', 'silver co.', '129', 'venta de metal', 1, '123-1222', 'NULL', 'sales@sales.com', 'sales.com', 3, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_comuntfijo`
+-- Estructura de tabla para la tabla `tb_comuntfijo`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_comuntfijo` (
+CREATE TABLE `tb_comuntfijo` (
   `id` int(11) NOT NULL,
   `numero` varchar(25) DEFAULT NULL,
   `tb_personacontactocomun_id` int(11) NOT NULL,
@@ -1898,7 +1905,7 @@ CREATE TABLE IF NOT EXISTS `tb_comuntfijo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_comuntfijo`
+-- Volcado de datos para la tabla `tb_comuntfijo`
 --
 
 INSERT INTO `tb_comuntfijo` (`id`, `numero`, `tb_personacontactocomun_id`) VALUES
@@ -1916,10 +1923,10 @@ INSERT INTO `tb_comuntfijo` (`id`, `numero`, `tb_personacontactocomun_id`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_comuntmobile`
+-- Estructura de tabla para la tabla `tb_comuntmobile`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_comuntmobile` (
+CREATE TABLE `tb_comuntmobile` (
   `id` int(11) NOT NULL,
   `numero` varchar(25) DEFAULT NULL,
   `tb_personacontactocomun_id` int(11) NOT NULL,
@@ -1928,7 +1935,7 @@ CREATE TABLE IF NOT EXISTS `tb_comuntmobile` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_comuntmobile`
+-- Volcado de datos para la tabla `tb_comuntmobile`
 --
 
 INSERT INTO `tb_comuntmobile` (`id`, `numero`, `tb_personacontactocomun_id`) VALUES
@@ -1946,10 +1953,10 @@ INSERT INTO `tb_comuntmobile` (`id`, `numero`, `tb_personacontactocomun_id`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_comuntnextel`
+-- Estructura de tabla para la tabla `tb_comuntnextel`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_comuntnextel` (
+CREATE TABLE `tb_comuntnextel` (
   `id` int(11) NOT NULL,
   `numero` varchar(25) DEFAULT NULL,
   `tb_personacontactocomun_id` int(11) NOT NULL,
@@ -1958,7 +1965,7 @@ CREATE TABLE IF NOT EXISTS `tb_comuntnextel` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_comuntnextel`
+-- Volcado de datos para la tabla `tb_comuntnextel`
 --
 
 INSERT INTO `tb_comuntnextel` (`id`, `numero`, `tb_personacontactocomun_id`) VALUES
@@ -1976,25 +1983,32 @@ INSERT INTO `tb_comuntnextel` (`id`, `numero`, `tb_personacontactocomun_id`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_contacto`
+-- Estructura de tabla para la tabla `tb_contacto`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_contacto` (
+CREATE TABLE `tb_contacto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_personacontacto_id` int(11) NOT NULL,
   `tb_obra_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_contacto_tb_personacontacto1` (`tb_personacontacto_id`),
   KEY `fk_tb_contacto_tb_obra1` (`tb_obra_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Contactos de una obra' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Contactos de una obra' AUTO_INCREMENT=25 ;
+
+--
+-- Volcado de datos para la tabla `tb_contacto`
+--
+
+INSERT INTO `tb_contacto` (`id`, `tb_personacontacto_id`, `tb_obra_id`) VALUES
+(24, 1015, 13);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_contactocomun`
+-- Estructura de tabla para la tabla `tb_contactocomun`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_contactocomun` (
+CREATE TABLE `tb_contactocomun` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(255) DEFAULT NULL,
   `ruc` varchar(12) DEFAULT NULL,
@@ -2010,7 +2024,7 @@ CREATE TABLE IF NOT EXISTS `tb_contactocomun` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Empresa - Contacto comun' AUTO_INCREMENT=11 ;
 
 --
--- Dumping data for table `tb_contactocomun`
+-- Volcado de datos para la tabla `tb_contactocomun`
 --
 
 INSERT INTO `tb_contactocomun` (`id`, `descripcion`, `ruc`, `email`, `web`, `observacion`, `nombreComercial`, `fax`, `partidaregistral`, `giro`, `actividadprincipal`) VALUES
@@ -2028,10 +2042,10 @@ INSERT INTO `tb_contactocomun` (`id`, `descripcion`, `ruc`, `email`, `web`, `obs
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_contactodelista`
+-- Estructura de tabla para la tabla `tb_contactodelista`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_contactodelista` (
+CREATE TABLE `tb_contactodelista` (
   `tb_listadistribucioncontacto_id` int(11) NOT NULL,
   `tb_companiacontacto_id` int(11) NOT NULL,
   KEY `fk_tb_contactodelista_tb_listadistribucioncontacto1` (`tb_listadistribucioncontacto_id`),
@@ -2039,7 +2053,7 @@ CREATE TABLE IF NOT EXISTS `tb_contactodelista` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_contactodelista`
+-- Volcado de datos para la tabla `tb_contactodelista`
 --
 
 INSERT INTO `tb_contactodelista` (`tb_listadistribucioncontacto_id`, `tb_companiacontacto_id`) VALUES
@@ -2054,10 +2068,10 @@ INSERT INTO `tb_contactodelista` (`tb_listadistribucioncontacto_id`, `tb_compani
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_contactoenactadefinitivaoc`
+-- Estructura de tabla para la tabla `tb_contactoenactadefinitivaoc`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_contactoenactadefinitivaoc` (
+CREATE TABLE `tb_contactoenactadefinitivaoc` (
   `tb_contacto_id` int(11) NOT NULL,
   `tb_actadefinitivaoc_id` int(11) NOT NULL,
   KEY `fk_tb_contactoenacta_tb_contacto1` (`tb_contacto_id`),
@@ -2067,10 +2081,10 @@ CREATE TABLE IF NOT EXISTS `tb_contactoenactadefinitivaoc` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_contactoenactadefinitivaot`
+-- Estructura de tabla para la tabla `tb_contactoenactadefinitivaot`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_contactoenactadefinitivaot` (
+CREATE TABLE `tb_contactoenactadefinitivaot` (
   `tb_contacto_id` int(11) NOT NULL,
   `tb_actadefinitivaot_id` int(11) NOT NULL,
   KEY `fk_tb_contactoenacta_tb_contacto1` (`tb_contacto_id`),
@@ -2080,47 +2094,83 @@ CREATE TABLE IF NOT EXISTS `tb_contactoenactadefinitivaot` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_contactoreportetemporal`
+-- Estructura de tabla para la tabla `tb_contactoreporte`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_contactoreportetemporal` (
+CREATE TABLE `tb_contactoreporte` (
+  `tb_personacontacto_id` int(11) DEFAULT NULL,
+  `tb_reporte_id` int(11) DEFAULT NULL,
+  `tb_obra_id` int(11) DEFAULT NULL,
+  `posicion_reporte` varchar(50) DEFAULT NULL,
+  KEY `tb_personacontacto_id` (`tb_personacontacto_id`),
+  KEY `tb_reporte_id` (`tb_reporte_id`),
+  KEY `tb_obra_id` (`tb_obra_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tb_contactoreporte`
+--
+
+INSERT INTO `tb_contactoreporte` (`tb_personacontacto_id`, `tb_reporte_id`, `tb_obra_id`, `posicion_reporte`) VALUES
+(1015, 1, 13, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_contactoreportetemporal`
+--
+
+CREATE TABLE `tb_contactoreportetemporal` (
   `id_reporte` int(11) NOT NULL,
   `id_contacto` int(11) NOT NULL,
   `id_aleatorio` int(11) NOT NULL,
   `posicion_firma_en_reporte` int(11) DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Obtenemos valores temporalmente de los reportes y sus contac';
 
+--
+-- Volcado de datos para la tabla `tb_contactoreportetemporal`
+--
+
+INSERT INTO `tb_contactoreportetemporal` (`id_reporte`, `id_contacto`, `id_aleatorio`, `posicion_firma_en_reporte`) VALUES
+(1, 1015, 144, 0),
+(1, 1015, 10, 0),
+(1, 2121, 145, 2);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_correosecundarios`
+-- Estructura de tabla para la tabla `tb_correosecundarios`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_correosecundarios` (
+CREATE TABLE `tb_correosecundarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL COMMENT 'correo electronico',
   `tb_personacontacto_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_correosecundarios_tb_personacontacto1` (`tb_personacontacto_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Correos secundarios que podria tener la persona, ojo que tie' AUTO_INCREMENT=373617 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Correos secundarios que podria tener la persona, ojo que tie' AUTO_INCREMENT=373622 ;
 
 --
--- Dumping data for table `tb_correosecundarios`
+-- Volcado de datos para la tabla `tb_correosecundarios`
 --
 
 INSERT INTO `tb_correosecundarios` (`id`, `descripcion`, `tb_personacontacto_id`) VALUES
 (373613, 'miguel.alc1@gmail.com', 2273),
 (373614, 'miguel.alc2@gmail.com', 2273),
 (373615, 'miguel.alc1@gmail.com', 2275),
-(373616, 'miguel.alc2@gmail.com', 2275);
+(373616, 'miguel.alc2@gmail.com', 2275),
+(373617, 'karla@karla.com', 1),
+(373619, 'karlux@gmail.com', 1),
+(373620, 'qqq1@qqq.com', 2277),
+(373621, 'qqq2@qqq.com', 2277);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_departamento`
+-- Estructura de tabla para la tabla `tb_departamento`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_departamento` (
+CREATE TABLE `tb_departamento` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '		',
   `nombre` varchar(200) DEFAULT NULL,
   `tb_pais_id` int(11) DEFAULT NULL,
@@ -2130,7 +2180,7 @@ CREATE TABLE IF NOT EXISTS `tb_departamento` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4293 ;
 
 --
--- Dumping data for table `tb_departamento`
+-- Volcado de datos para la tabla `tb_departamento`
 --
 
 INSERT INTO `tb_departamento` (`id`, `nombre`, `tb_pais_id`, `ordena_cod`) VALUES
@@ -6431,10 +6481,10 @@ INSERT INTO `tb_departamento` (`id`, `nombre`, `tb_pais_id`, `ordena_cod`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_direccioncompaniacontacto`
+-- Estructura de tabla para la tabla `tb_direccioncompaniacontacto`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_direccioncompaniacontacto` (
+CREATE TABLE `tb_direccioncompaniacontacto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `direccion` varchar(255) DEFAULT NULL,
   `tb_pais_id` int(11) NOT NULL,
@@ -6448,28 +6498,30 @@ CREATE TABLE IF NOT EXISTS `tb_direccioncompaniacontacto` (
   KEY `tb_companiacontacto_id` (`tb_companiacontacto_id`),
   KEY `tb_distrito_id` (`tb_distrito_id`),
   KEY `tb_tipodireccion_id` (`tb_tipodireccion_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Direccion de la compania contacto' AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Direccion de la compania contacto' AUTO_INCREMENT=12 ;
 
 --
--- Dumping data for table `tb_direccioncompaniacontacto`
+-- Volcado de datos para la tabla `tb_direccioncompaniacontacto`
 --
 
 INSERT INTO `tb_direccioncompaniacontacto` (`id`, `direccion`, `tb_pais_id`, `tb_departamento_id`, `tb_companiacontacto_id`, `tb_tipodireccion_id`, `tb_distrito_id`) VALUES
 (1, 'qwerty', 177, 2911, 1723, 3, 1240),
 (2, '1', 1, 1, 1724, 1, 1),
 (3, 'qqqqq', 177, 2911, 1723, 2, 1240),
-(4, 'uuu', 177, 2911, 1733, 6, 1240),
+(4, 'uuu', 176, 2911, 1733, 6, 1240),
 (5, 'alvacete', 177, 2911, 1734, 6, 1240),
-(6, 'Qaz', 177, 2911, 6, 3, 1240),
-(7, 'Another', 177, 2911, 6, 3, 1240);
+(8, 'loma umbros777', 163, 1, 6, 6, 1240),
+(9, 'loma umbrosa 123', 177, 2911, 6, 6, 1240),
+(10, 'qqq', 177, 2911, 1740, 1, 1240),
+(11, 'qaws', 177, 2911, 1741, 6, 1240);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_directorio`
+-- Estructura de tabla para la tabla `tb_directorio`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_directorio` (
+CREATE TABLE `tb_directorio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) CHARACTER SET latin1 NOT NULL,
   `descripcion` varchar(45) CHARACTER SET latin1 NOT NULL,
@@ -6479,7 +6531,7 @@ CREATE TABLE IF NOT EXISTS `tb_directorio` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci AUTO_INCREMENT=13 ;
 
 --
--- Dumping data for table `tb_directorio`
+-- Volcado de datos para la tabla `tb_directorio`
 --
 
 INSERT INTO `tb_directorio` (`id`, `nombre`, `descripcion`, `tb_empresa_id`) VALUES
@@ -6498,10 +6550,10 @@ INSERT INTO `tb_directorio` (`id`, `nombre`, `descripcion`, `tb_empresa_id`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_distrito`
+-- Estructura de tabla para la tabla `tb_distrito`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_distrito` (
+CREATE TABLE `tb_distrito` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   `tb_departamento_id` int(11) DEFAULT NULL,
@@ -6511,7 +6563,7 @@ CREATE TABLE IF NOT EXISTS `tb_distrito` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1826 ;
 
 --
--- Dumping data for table `tb_distrito`
+-- Volcado de datos para la tabla `tb_distrito`
 --
 
 INSERT INTO `tb_distrito` (`id`, `nombre`, `tb_departamento_id`, `ordena_cod`) VALUES
@@ -8345,10 +8397,10 @@ INSERT INTO `tb_distrito` (`id`, `nombre`, `tb_departamento_id`, `ordena_cod`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_empresa`
+-- Estructura de tabla para la tabla `tb_empresa`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_empresa` (
+CREATE TABLE `tb_empresa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
   `password` varchar(250) DEFAULT NULL,
@@ -8359,7 +8411,7 @@ CREATE TABLE IF NOT EXISTS `tb_empresa` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Empresa cliente que alquila el SI' AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `tb_empresa`
+-- Volcado de datos para la tabla `tb_empresa`
 --
 
 INSERT INTO `tb_empresa` (`id`, `nombre`, `password`, `logo`, `direccion`) VALUES
@@ -8369,17 +8421,17 @@ INSERT INTO `tb_empresa` (`id`, `nombre`, `password`, `logo`, `direccion`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_especialidadcompania`
+-- Estructura de tabla para la tabla `tb_especialidadcompania`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_especialidadcompania` (
+CREATE TABLE `tb_especialidadcompania` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=344 ;
 
 --
--- Dumping data for table `tb_especialidadcompania`
+-- Volcado de datos para la tabla `tb_especialidadcompania`
 --
 
 INSERT INTO `tb_especialidadcompania` (`id`, `descripcion`) VALUES
@@ -8657,17 +8709,17 @@ INSERT INTO `tb_especialidadcompania` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_especialidadcomun`
+-- Estructura de tabla para la tabla `tb_especialidadcomun`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_especialidadcomun` (
+CREATE TABLE `tb_especialidadcomun` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
--- Dumping data for table `tb_especialidadcomun`
+-- Volcado de datos para la tabla `tb_especialidadcomun`
 --
 
 INSERT INTO `tb_especialidadcomun` (`id`, `descripcion`) VALUES
@@ -8685,17 +8737,17 @@ INSERT INTO `tb_especialidadcomun` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_especialidadpersona`
+-- Estructura de tabla para la tabla `tb_especialidadpersona`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_especialidadpersona` (
+CREATE TABLE `tb_especialidadpersona` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
--- Dumping data for table `tb_especialidadpersona`
+-- Volcado de datos para la tabla `tb_especialidadpersona`
 --
 
 INSERT INTO `tb_especialidadpersona` (`id`, `descripcion`) VALUES
@@ -8716,10 +8768,10 @@ INSERT INTO `tb_especialidadpersona` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_facturalicencia`
+-- Estructura de tabla para la tabla `tb_facturalicencia`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_facturalicencia` (
+CREATE TABLE `tb_facturalicencia` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fechacreacion` date DEFAULT NULL,
   `fechacaducidad` date DEFAULT NULL,
@@ -8734,10 +8786,10 @@ CREATE TABLE IF NOT EXISTS `tb_facturalicencia` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_fasecosto`
+-- Estructura de tabla para la tabla `tb_fasecosto`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_fasecosto` (
+CREATE TABLE `tb_fasecosto` (
   `id` int(11) NOT NULL,
   `codificacion` int(11) DEFAULT NULL,
   `descripcion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -8749,10 +8801,10 @@ CREATE TABLE IF NOT EXISTS `tb_fasecosto` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_faseventa`
+-- Estructura de tabla para la tabla `tb_faseventa`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_faseventa` (
+CREATE TABLE `tb_faseventa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codificacion` varchar(15) COLLATE utf8_spanish2_ci NOT NULL,
   `descripcion` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -8765,10 +8817,31 @@ CREATE TABLE IF NOT EXISTS `tb_faseventa` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_firmascontactotemporal`
+-- Estructura de tabla para la tabla `tb_firma`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_firmascontactotemporal` (
+CREATE TABLE `tb_firma` (
+  `idcontacto` int(11) DEFAULT NULL,
+  `idobra` int(11) DEFAULT NULL,
+  `posicion` varchar(150) DEFAULT NULL,
+  KEY `idcontacto` (`idcontacto`),
+  KEY `idobra` (`idobra`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tb_firma`
+--
+
+INSERT INTO `tb_firma` (`idcontacto`, `idobra`, `posicion`) VALUES
+(1015, 13, 'QW');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_firmascontactotemporal`
+--
+
+CREATE TABLE `tb_firmascontactotemporal` (
   `id_contacto` int(11) DEFAULT NULL,
   `txt_puesto` varchar(250) COLLATE latin1_spanish_ci DEFAULT NULL,
   `aleatorio` varchar(50) COLLATE latin1_spanish_ci DEFAULT NULL,
@@ -8777,26 +8850,30 @@ CREATE TABLE IF NOT EXISTS `tb_firmascontactotemporal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
--- Dumping data for table `tb_firmascontactotemporal`
+-- Volcado de datos para la tabla `tb_firmascontactotemporal`
 --
 
 INSERT INTO `tb_firmascontactotemporal` (`id_contacto`, `txt_puesto`, `aleatorio`, `estado_asignado`, `reporte_id`) VALUES
-(1015, 'iu', '243', 'n', 0);
+(2121, 'QWERTY', '145', 'n', 0),
+(1015, 'E', '165', 'n', 0),
+(1015, 'AA', '10', 'n', 0),
+(1015, 'A', '144', 'n', 0),
+(1015, 'A', '50', 'n', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_formatopresupuesto`
+-- Estructura de tabla para la tabla `tb_formatopresupuesto`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_formatopresupuesto` (
+CREATE TABLE `tb_formatopresupuesto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `tb_formatopresupuesto`
+-- Volcado de datos para la tabla `tb_formatopresupuesto`
 --
 
 INSERT INTO `tb_formatopresupuesto` (`id`, `descripcion`) VALUES
@@ -8806,23 +8883,22 @@ INSERT INTO `tb_formatopresupuesto` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_giro`
+-- Estructura de tabla para la tabla `tb_giro`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_giro` (
+CREATE TABLE `tb_giro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(255) NOT NULL,
   `tb_compania_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tb_compania_id` (`tb_compania_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Una compania puede tener n giros' AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Una compania puede tener n giros' AUTO_INCREMENT=24 ;
 
 --
--- Dumping data for table `tb_giro`
+-- Volcado de datos para la tabla `tb_giro`
 --
 
 INSERT INTO `tb_giro` (`id`, `descripcion`, `tb_compania_id`) VALUES
-(3, 'tercer giro', 6),
 (6, 'primer giro', 1729),
 (7, 'segundo giro', 1729),
 (8, 'primer giro', 1730),
@@ -8831,15 +8907,23 @@ INSERT INTO `tb_giro` (`id`, `descripcion`, `tb_compania_id`) VALUES
 (11, 'segundo giro', 1731),
 (12, 'giro 1', 1733),
 (13, 'segundo giro', 1733),
-(14, 'primer giro', 1734);
+(14, 'primer giro', 1734),
+(15, 'Construccion', 6),
+(17, 'Civil', 6),
+(18, 'uyi', 1737),
+(19, 'p', 1738),
+(20, 'u', 1739),
+(21, 'a', 1740),
+(22, 'b', 1740),
+(23, 'metal', 1741);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_igv`
+-- Estructura de tabla para la tabla `tb_igv`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_igv` (
+CREATE TABLE `tb_igv` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `monto` decimal(3,1) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -8848,10 +8932,10 @@ CREATE TABLE IF NOT EXISTS `tb_igv` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_licencia`
+-- Estructura de tabla para la tabla `tb_licencia`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_licencia` (
+CREATE TABLE `tb_licencia` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -8860,40 +8944,43 @@ CREATE TABLE IF NOT EXISTS `tb_licencia` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_listadistribucioncontacto`
+-- Estructura de tabla para la tabla `tb_listadistribucioncontacto`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_listadistribucioncontacto` (
+CREATE TABLE `tb_listadistribucioncontacto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_empresa_id` int(11) NOT NULL,
   `descripcion` varchar(100) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
   `observacion` varchar(100) DEFAULT NULL,
+  `tb_obra_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_tb_listadistribucioncontacto_tb_empresa1` (`tb_empresa_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+  KEY `fk_tb_listadistribucioncontacto_tb_empresa1` (`tb_empresa_id`),
+  KEY `tb_obra_id` (`tb_obra_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
--- Dumping data for table `tb_listadistribucioncontacto`
+-- Volcado de datos para la tabla `tb_listadistribucioncontacto`
 --
 
-INSERT INTO `tb_listadistribucioncontacto` (`id`, `tb_empresa_id`, `descripcion`, `observacion`) VALUES
-(2, 1, 'test4', 'qwerty'),
-(3, 1, 'test5', 'a'),
-(4, 1, 'test06', 'b'),
-(6, 1, 'ocnpfr--', 'c'),
-(7, 1, 'test555', 'd'),
-(8, 1, 'test76', 'e'),
-(9, 1, 'test555', 'f'),
-(10, 1, 'lista de prueba', 'g'),
-(11, 1, 'otra prueba', 'h');
+INSERT INTO `tb_listadistribucioncontacto` (`id`, `tb_empresa_id`, `descripcion`, `observacion`, `tb_obra_id`) VALUES
+(2, 1, 'Lista 04', 'qwerty', NULL),
+(3, 1, 'test5', 'a', NULL),
+(4, 1, 'Lista 06', 'b', NULL),
+(6, 1, 'ocnpfr--', 'c', NULL),
+(7, 1, 'Lista Number Five', 'Listita 05', NULL),
+(8, 1, 'Lista 76', 'e', NULL),
+(9, 1, 'test555', 'f', NULL),
+(10, 1, 'Lista de Prueba 01', 'No hay ninguna obs.', NULL),
+(11, 1, 'otra prueba', 'observation', NULL),
+(12, 1, 'qas', 'aaa', 13);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_listadistribucionpersonacontacto`
+-- Estructura de tabla para la tabla `tb_listadistribucionpersonacontacto`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_listadistribucionpersonacontacto` (
+CREATE TABLE `tb_listadistribucionpersonacontacto` (
   `tb_listadistribucioncontacto_id` int(11) NOT NULL,
   `tb_personacontacto_id` int(11) NOT NULL,
   KEY `fk_tb_listadistribucionpersonacontacto_tb_listadistribucionco1` (`tb_listadistribucioncontacto_id`),
@@ -8901,20 +8988,38 @@ CREATE TABLE IF NOT EXISTS `tb_listadistribucionpersonacontacto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_listadistribucionpersonacontacto`
+-- Volcado de datos para la tabla `tb_listadistribucionpersonacontacto`
 --
 
 INSERT INTO `tb_listadistribucionpersonacontacto` (`tb_listadistribucioncontacto_id`, `tb_personacontacto_id`) VALUES
 (11, 945),
-(11, 957);
+(11, 957),
+(11, 866),
+(11, 904),
+(11, 670),
+(2, 1015),
+(2, 2121),
+(2, 838),
+(8, 1015),
+(8, 2121),
+(8, 866),
+(10, 1015),
+(10, 2121),
+(7, 1015),
+(7, 2121),
+(7, 866),
+(2, 670),
+(12, 1015),
+(12, 1482),
+(12, 566);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_modelocartacomun`
+-- Estructura de tabla para la tabla `tb_modelocartacomun`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_modelocartacomun` (
+CREATE TABLE `tb_modelocartacomun` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(250) NOT NULL,
   `path` varchar(250) NOT NULL,
@@ -8922,7 +9027,7 @@ CREATE TABLE IF NOT EXISTS `tb_modelocartacomun` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Modelo de carta dado por la empresa proveedora -adjudicacion' AUTO_INCREMENT=11 ;
 
 --
--- Dumping data for table `tb_modelocartacomun`
+-- Volcado de datos para la tabla `tb_modelocartacomun`
 --
 
 INSERT INTO `tb_modelocartacomun` (`id`, `descripcion`, `path`) VALUES
@@ -8940,10 +9045,10 @@ INSERT INTO `tb_modelocartacomun` (`id`, `descripcion`, `path`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_modelocartapropia`
+-- Estructura de tabla para la tabla `tb_modelocartapropia`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_modelocartapropia` (
+CREATE TABLE `tb_modelocartapropia` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(250) NOT NULL,
   `path` varchar(250) NOT NULL,
@@ -8953,7 +9058,7 @@ CREATE TABLE IF NOT EXISTS `tb_modelocartapropia` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Modelo de carta propia de al empresa arrendadora del sistema' AUTO_INCREMENT=12 ;
 
 --
--- Dumping data for table `tb_modelocartapropia`
+-- Volcado de datos para la tabla `tb_modelocartapropia`
 --
 
 INSERT INTO `tb_modelocartapropia` (`id`, `descripcion`, `path`, `tb_empresa_id`) VALUES
@@ -8972,10 +9077,10 @@ INSERT INTO `tb_modelocartapropia` (`id`, `descripcion`, `path`, `tb_empresa_id`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_modelocontratocomun`
+-- Estructura de tabla para la tabla `tb_modelocontratocomun`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_modelocontratocomun` (
+CREATE TABLE `tb_modelocontratocomun` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(250) NOT NULL,
   `path` varchar(250) NOT NULL,
@@ -8983,7 +9088,7 @@ CREATE TABLE IF NOT EXISTS `tb_modelocontratocomun` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='modelo de contrato Comun a todas las empresas' AUTO_INCREMENT=11 ;
 
 --
--- Dumping data for table `tb_modelocontratocomun`
+-- Volcado de datos para la tabla `tb_modelocontratocomun`
 --
 
 INSERT INTO `tb_modelocontratocomun` (`id`, `descripcion`, `path`) VALUES
@@ -9001,10 +9106,10 @@ INSERT INTO `tb_modelocontratocomun` (`id`, `descripcion`, `path`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_modelocontratopropio`
+-- Estructura de tabla para la tabla `tb_modelocontratopropio`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_modelocontratopropio` (
+CREATE TABLE `tb_modelocontratopropio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(250) NOT NULL,
   `path` varchar(250) NOT NULL,
@@ -9014,7 +9119,7 @@ CREATE TABLE IF NOT EXISTS `tb_modelocontratopropio` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
--- Dumping data for table `tb_modelocontratopropio`
+-- Volcado de datos para la tabla `tb_modelocontratopropio`
 --
 
 INSERT INTO `tb_modelocontratopropio` (`id`, `descripcion`, `path`, `tb_empresa_id`) VALUES
@@ -9032,17 +9137,17 @@ INSERT INTO `tb_modelocontratopropio` (`id`, `descripcion`, `path`, `tb_empresa_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_moneda`
+-- Estructura de tabla para la tabla `tb_moneda`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_moneda` (
+CREATE TABLE `tb_moneda` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `tb_moneda`
+-- Volcado de datos para la tabla `tb_moneda`
 --
 
 INSERT INTO `tb_moneda` (`id`, `descripcion`) VALUES
@@ -9052,10 +9157,10 @@ INSERT INTO `tb_moneda` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_obra`
+-- Estructura de tabla para la tabla `tb_obra`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_obra` (
+CREATE TABLE `tb_obra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigoobra` varchar(45) DEFAULT NULL,
   `descripcion` varchar(250) DEFAULT NULL,
@@ -9081,13 +9186,11 @@ CREATE TABLE IF NOT EXISTS `tb_obra` (
   `tb_formatopresupuesto_id` int(11) DEFAULT NULL,
   `factorcorreccion` decimal(2,1) DEFAULT NULL,
   `retencionfondogarantia` int(11) DEFAULT NULL,
-  `retencionfielcumplimiento` varchar(45) DEFAULT NULL,
+  `retencionfielcumplimiento` int(11) DEFAULT NULL,
   `gastogeneral_precontra` int(11) DEFAULT NULL,
   `utilidad_precontra` int(11) DEFAULT NULL,
   `gastogeneral_ordcamb` int(11) DEFAULT NULL,
   `utilidad_ordcamb` int(11) DEFAULT NULL,
-  `nombreLista` varchar(100) DEFAULT NULL COMMENT 'nombre que s muestra en la lista de eleccion',
-  `nombreFormulario` varchar(100) DEFAULT NULL COMMENT 'nombre que se muestra en el formulario per se',
   `tb_directorio_id` int(11) DEFAULT NULL,
   `tb_empresa_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -9106,22 +9209,22 @@ CREATE TABLE IF NOT EXISTS `tb_obra` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Obra que serA manejada por cada empresa' AUTO_INCREMENT=14 ;
 
 --
--- Dumping data for table `tb_obra`
+-- Volcado de datos para la tabla `tb_obra`
 --
 
-INSERT INTO `tb_obra` (`id`, `codigoobra`, `descripcion`, `fechainicio`, `fechafin`, `direccion`, `tb_departamento_id`, `tb_moneda_id`, `cliente_id`, `empresacontratante_id`, `gerenteproyecto_id`, `supervisoraproyecto_id`, `proveedoresfacturar_id`, `porcentajecartafianza`, `diasdesembolso`, `porcentajefondoretencion`, `diasdevolucionfondoretencion`, `montocontratadomayora`, `montocontratadomenora`, `cartaadjudicacion`, `modelocontrato`, `tb_tipovalorizacion_id`, `tb_formatopresupuesto_id`, `factorcorreccion`, `retencionfondogarantia`, `retencionfielcumplimiento`, `gastogeneral_precontra`, `utilidad_precontra`, `gastogeneral_ordcamb`, `utilidad_ordcamb`, `nombreLista`, `nombreFormulario`, `tb_directorio_id`, `tb_empresa_id`) VALUES
-(2, '777', 'Obra para COPRACSA AIO de prueba', '2012-01-15', '2012-11-15', 'Loma Umbrosa 133', 177, 1, 1, 1, 1, 1, 1, 0.50, 11, 1, '15', 10000, 100000, '1', '1', 1, 1, 0.5, 45, '11', 125, 41, 65, 74, 'Foo', 'Bar', 1, NULL),
-(7, '132465', 'test3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(8, '741852', 'Test 04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 9, 1),
-(13, '99999', 'test new', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, 1);
+INSERT INTO `tb_obra` (`id`, `codigoobra`, `descripcion`, `fechainicio`, `fechafin`, `direccion`, `tb_departamento_id`, `tb_moneda_id`, `cliente_id`, `empresacontratante_id`, `gerenteproyecto_id`, `supervisoraproyecto_id`, `proveedoresfacturar_id`, `porcentajecartafianza`, `diasdesembolso`, `porcentajefondoretencion`, `diasdevolucionfondoretencion`, `montocontratadomayora`, `montocontratadomenora`, `cartaadjudicacion`, `modelocontrato`, `tb_tipovalorizacion_id`, `tb_formatopresupuesto_id`, `factorcorreccion`, `retencionfondogarantia`, `retencionfielcumplimiento`, `gastogeneral_precontra`, `utilidad_precontra`, `gastogeneral_ordcamb`, `utilidad_ordcamb`, `tb_directorio_id`, `tb_empresa_id`) VALUES
+(2, '777', 'Obra para COPRACSA AIO de prueba', '2012-01-15', '2012-11-15', 'Loma Umbrosa 133', 177, 1, 1, 1, 1, 1, 1, 0.50, 11, 1, '15', 10000, 100000, '1', '1', 1, 1, 0.5, 45, 11, 125, 41, 65, 74, 1, NULL),
+(7, '132465', 'test3', '2012-09-15', '2012-09-15', 'Moon 555', 2911, 2, 1092, 254, 1686, 1686, 1544, 5.00, 5, 5, '5', 5, 5, '4', '9', 2, 1, 7.0, 7, 7, 7, 7, 7, 7, 8, 1),
+(8, '741852', 'Test 04', '2012-09-15', '2012-09-15', 'pasaje rosa 133', 2911, 2, 1069, 1379, 1069, 938, 1379, 7.00, 7, 7, '7', 7, 7, '1', '2', 2, 1, 9.0, 9, 9, 9, 9, 9, 9, 9, 1),
+(13, '99999', 'test new', '2012-09-19', '2012-09-19', 'dir 123', 2911, 2, 1069, 1331, 1379, 1557, 1092, 1.50, 2, 2, '2', 2, 2, '1', '2', 1, 2, 6.0, 6, 6, 6, 6, 6, 6, 8, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_obra_has_tb_usuario`
+-- Estructura de tabla para la tabla `tb_obra_has_tb_usuario`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_obra_has_tb_usuario` (
+CREATE TABLE `tb_obra_has_tb_usuario` (
   `tb_obra_id` int(11) NOT NULL,
   `tb_usuario_id` int(11) NOT NULL,
   PRIMARY KEY (`tb_obra_id`,`tb_usuario_id`),
@@ -9132,10 +9235,10 @@ CREATE TABLE IF NOT EXISTS `tb_obra_has_tb_usuario` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_obra_has_tb_usuario_has_tb_opcionestop`
+-- Estructura de tabla para la tabla `tb_obra_has_tb_usuario_has_tb_opcionestop`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_obra_has_tb_usuario_has_tb_opcionestop` (
+CREATE TABLE `tb_obra_has_tb_usuario_has_tb_opcionestop` (
   `tb_obra_has_tb_usuario_tb_obra_id` int(11) NOT NULL,
   `tb_obra_has_tb_usuario_tb_usuario_id` int(11) NOT NULL,
   `tb_opcionestop_id` int(11) NOT NULL,
@@ -9147,17 +9250,17 @@ CREATE TABLE IF NOT EXISTS `tb_obra_has_tb_usuario_has_tb_opcionestop` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_opcionestop`
+-- Estructura de tabla para la tabla `tb_opcionestop`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_opcionestop` (
+CREATE TABLE `tb_opcionestop` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='opciones para aprobacion' AUTO_INCREMENT=10 ;
 
 --
--- Dumping data for table `tb_opcionestop`
+-- Volcado de datos para la tabla `tb_opcionestop`
 --
 
 INSERT INTO `tb_opcionestop` (`id`, `descripcion`) VALUES
@@ -9174,10 +9277,10 @@ INSERT INTO `tb_opcionestop` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_opcionestopusuariostop`
+-- Estructura de tabla para la tabla `tb_opcionestopusuariostop`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_opcionestopusuariostop` (
+CREATE TABLE `tb_opcionestopusuariostop` (
   `tb_usuariostop_id` int(11) NOT NULL,
   `tb_opcionestop_id` int(11) NOT NULL,
   KEY `fk_tb_opcionestopusuariostop_tb_usuariostop1` (`tb_usuariostop_id`),
@@ -9187,10 +9290,10 @@ CREATE TABLE IF NOT EXISTS `tb_opcionestopusuariostop` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_ordencambiocompra`
+-- Estructura de tabla para la tabla `tb_ordencambiocompra`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_ordencambiocompra` (
+CREATE TABLE `tb_ordencambiocompra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_ordencompra_id` int(11) NOT NULL,
   `fecha` date DEFAULT NULL,
@@ -9203,10 +9306,10 @@ CREATE TABLE IF NOT EXISTS `tb_ordencambiocompra` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_ordencambiotrabajo`
+-- Estructura de tabla para la tabla `tb_ordencambiotrabajo`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_ordencambiotrabajo` (
+CREATE TABLE `tb_ordencambiotrabajo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_ordentrabajo_id` int(11) NOT NULL,
   `fecha` date DEFAULT NULL,
@@ -9219,10 +9322,10 @@ CREATE TABLE IF NOT EXISTS `tb_ordencambiotrabajo` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_ordencompra`
+-- Estructura de tabla para la tabla `tb_ordencompra`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_ordencompra` (
+CREATE TABLE `tb_ordencompra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_obra_id` int(11) NOT NULL,
   `tb_personacontacto_id` int(11) NOT NULL,
@@ -9273,10 +9376,10 @@ CREATE TABLE IF NOT EXISTS `tb_ordencompra` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_ordentrabajo`
+-- Estructura de tabla para la tabla `tb_ordentrabajo`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_ordentrabajo` (
+CREATE TABLE `tb_ordentrabajo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_obra_id` int(11) NOT NULL,
   `tb_personacontacto_id` int(11) NOT NULL,
@@ -9327,10 +9430,10 @@ CREATE TABLE IF NOT EXISTS `tb_ordentrabajo` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_pais`
+-- Estructura de tabla para la tabla `tb_pais`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_pais` (
+CREATE TABLE `tb_pais` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
   `ordena_cod` int(10) DEFAULT NULL,
@@ -9338,7 +9441,7 @@ CREATE TABLE IF NOT EXISTS `tb_pais` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=242 ;
 
 --
--- Dumping data for table `tb_pais`
+-- Volcado de datos para la tabla `tb_pais`
 --
 
 INSERT INTO `tb_pais` (`id`, `nombre`, `ordena_cod`) VALUES
@@ -9585,10 +9688,10 @@ INSERT INTO `tb_pais` (`id`, `nombre`, `ordena_cod`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_partidacontractualoc`
+-- Estructura de tabla para la tabla `tb_partidacontractualoc`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_partidacontractualoc` (
+CREATE TABLE `tb_partidacontractualoc` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `seccion` varchar(100) DEFAULT NULL,
   `fase` varchar(100) DEFAULT NULL,
@@ -9606,10 +9709,10 @@ CREATE TABLE IF NOT EXISTS `tb_partidacontractualoc` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_partidacontractualot`
+-- Estructura de tabla para la tabla `tb_partidacontractualot`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_partidacontractualot` (
+CREATE TABLE `tb_partidacontractualot` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `seccion` varchar(45) DEFAULT NULL,
   `fase` varchar(45) DEFAULT NULL,
@@ -9627,10 +9730,10 @@ CREATE TABLE IF NOT EXISTS `tb_partidacontractualot` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_partidacosto`
+-- Estructura de tabla para la tabla `tb_partidacosto`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_partidacosto` (
+CREATE TABLE `tb_partidacosto` (
   `id` int(11) NOT NULL,
   `codificacion` int(11) DEFAULT NULL,
   `descripcion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -9646,10 +9749,10 @@ CREATE TABLE IF NOT EXISTS `tb_partidacosto` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_partidaordencambiooc`
+-- Estructura de tabla para la tabla `tb_partidaordencambiooc`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_partidaordencambiooc` (
+CREATE TABLE `tb_partidaordencambiooc` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `seccion` varchar(45) DEFAULT NULL,
   `fase` varchar(45) DEFAULT NULL,
@@ -9667,10 +9770,10 @@ CREATE TABLE IF NOT EXISTS `tb_partidaordencambiooc` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_partidaordencambioot`
+-- Estructura de tabla para la tabla `tb_partidaordencambioot`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_partidaordencambioot` (
+CREATE TABLE `tb_partidaordencambioot` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `seccion` varchar(45) DEFAULT NULL,
   `fase` varchar(45) DEFAULT NULL,
@@ -9688,10 +9791,10 @@ CREATE TABLE IF NOT EXISTS `tb_partidaordencambioot` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_partidaventa`
+-- Estructura de tabla para la tabla `tb_partidaventa`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_partidaventa` (
+CREATE TABLE `tb_partidaventa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codificacion` varchar(15) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `descripcion` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -9707,10 +9810,10 @@ CREATE TABLE IF NOT EXISTS `tb_partidaventa` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_personacontacto`
+-- Estructura de tabla para la tabla `tb_personacontacto`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_personacontacto` (
+CREATE TABLE `tb_personacontacto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_empresa_id` int(11) NOT NULL,
   `dni` varchar(45) DEFAULT NULL,
@@ -9723,2292 +9826,2303 @@ CREATE TABLE IF NOT EXISTS `tb_personacontacto` (
   `tb_viaenvio_id` int(11) NOT NULL,
   `tb_companiacontacto_id` int(11) NOT NULL,
   `direccion` varchar(250) NOT NULL DEFAULT 'Direccion 111',
+  `tb_pais_id` int(11) DEFAULT NULL,
+  `tb_departamento_id` int(11) DEFAULT NULL,
+  `tb_distrito_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_personacontacto_tb_empresa1` (`tb_empresa_id`),
   KEY `fk_tb_personacontacto_tb_viaenvio1` (`tb_viaenvio_id`),
-  KEY `fk_tb_personacontacto_tb_companiacontacto1` (`tb_companiacontacto_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='contacto' AUTO_INCREMENT=2276 ;
+  KEY `fk_tb_personacontacto_tb_companiacontacto1` (`tb_companiacontacto_id`),
+  KEY `tb_pais_id` (`tb_pais_id`),
+  KEY `tb_departamento_id` (`tb_departamento_id`),
+  KEY `tb_distrito_id` (`tb_distrito_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='contacto' AUTO_INCREMENT=2281 ;
 
 --
--- Dumping data for table `tb_personacontacto`
+-- Volcado de datos para la tabla `tb_personacontacto`
 --
 
-INSERT INTO `tb_personacontacto` (`id`, `tb_empresa_id`, `dni`, `nombre`, `cargo`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_companiacontacto_id`, `direccion`) VALUES
-(1, 1, '00000501', 'KARLA PALMA SAAVEDRA', 'UNIDAD DE MOBILIARIO DE OFICINA', NULL, NULL, 'kpalma@corp2torres.com', NULL, 3, 1096, 'Direccion 111'),
-(2, 1, '00000648', 'Kike Minauro', NULL, NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(3, 1, '06605162', 'MINAURO LA TORRE RAFAEL ANTONIO', 'Administrador', NULL, NULL, 'rminauro@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(4, 1, '00000646', 'Sheyla Rojas', NULL, NULL, NULL, 'sheyla.rojas@nextel.com.pe', NULL, 3, 33, 'Direccion 111'),
-(5, 1, '00000645', 'Roxana Guitierrez', NULL, NULL, NULL, 'finanzas.recaudaciones@nextel.com.pe', NULL, 3, 33, 'Direccion 111'),
-(6, 1, '00000655', 'J. Contreras', NULL, NULL, NULL, 'jcontreras@olserviciosgenerales.com', NULL, 3, 34, 'Direccion 111'),
-(7, 1, '00000643', 'Oscar Perez', NULL, NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(8, 1, '10256828397', 'RANCEL RAZZETO CANEVARO', 'ASISTENTE ADMINISTRATIVO', NULL, NULL, 'rrazzeto@copracsa.com', 'www.copracsa.com', 3, 8, 'Direccion 111'),
-(9, 1, '00000639', 'Dr. Ramirez', NULL, NULL, NULL, NULL, NULL, 3, 35, 'Direccion 111'),
-(10, 1, '00000638', 'Carmen Carrera', 'Contabilidad', NULL, NULL, NULL, NULL, 3, 508, 'Direccion 111'),
-(11, 1, '00000623', 'Willian Zuñiga', 'Ctas por pagar', NULL, NULL, NULL, NULL, 3, 508, 'Direccion 111'),
-(12, 1, '00000636', 'Miguel Salazar', 'Ctas por pagar', NULL, NULL, NULL, NULL, 3, 37, 'Direccion 111'),
-(13, 1, '00000649', 'Ana Lourdes Ferreira', 'Ctas por Pagar', NULL, NULL, NULL, NULL, 3, 37, 'Direccion 111'),
-(14, 1, '06283975', 'ROBINSON QUINTANA GUTARRA', 'GERENTE DE OPERACIONES', NULL, NULL, 'rquintana@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(15, 1, '10223815', 'ALBERTO BOCANEGRA', 'GERENTE GENERAL', '3492617', NULL, 'abocanegra@masterwall.com.pe', 'www.masterwall.com.pe', 3, 21, 'Direccion 111'),
-(16, 1, '00000628', 'ANTONIO SEGURA', 'RESIDENTE', NULL, NULL, NULL, NULL, 3, 19, 'Direccion 111'),
-(17, 1, '00000627', 'JOSE ARTEAGA', 'MAESTRO OBRA DE PINTURA', NULL, NULL, NULL, NULL, 3, 17, 'Direccion 111'),
-(18, 1, '00000626', 'ARTURO ANGELES', 'INGENIERO MECANICO', NULL, NULL, NULL, NULL, 3, 20, 'Direccion 111'),
-(19, 1, '00000625', 'CARLOS GARCIA', 'RESIDENTE DE OBRA', NULL, NULL, NULL, NULL, 3, 26, 'Direccion 111'),
-(20, 1, '00000624', 'CESAR CAMARENA', 'RESIDENTE', NULL, NULL, NULL, NULL, 3, 16, 'Direccion 111'),
-(21, 1, '00000635', 'FERNANDO SECLEN', 'JEFE DE SISTEMAS', NULL, NULL, NULL, NULL, 3, 12, 'Direccion 111'),
-(22, 1, '10316834', 'CANCHO ZAMORA FLAVIO ROMERO', 'GERENTE GENERAL', NULL, NULL, 'igesaperu@hotmail.com', NULL, 3, 1380, 'Direccion 111'),
-(23, 1, '00000660', 'GERALDO GUEVARA', 'RESIDENTE', NULL, NULL, NULL, NULL, 3, 13, 'Direccion 111'),
-(24, 1, '00000665', 'GINA RATTO', 'EJECUTIVA DE VENTAS', NULL, NULL, 'gina.ratto@philips.com', NULL, 3, 25, 'Direccion 111'),
-(25, 1, '00000659', 'GUILLERMO KOORT', 'GERENTE DE OPERACIONES', NULL, NULL, NULL, NULL, 3, 12, 'Direccion 111'),
-(26, 1, '06361418', 'HENRICH SPRINCKMÖLLER DE TABOADA', 'GENERAL GENERAL', NULL, NULL, 'hw@americatelnet.com.pe', NULL, 3, 19, 'Direccion 111'),
-(27, 1, '00000658', 'ISAAC BASALDUA', 'GERENTE DE PROYECTOS', NULL, NULL, 'ibasaldua@intelecperu.com.pe', 'www.intelecperu.com.pe', 3, 45, 'Direccion 111'),
-(28, 1, '00000662', 'ISRAEL CORONEL', 'JEFE DE SEGURIDAD', NULL, NULL, NULL, NULL, 3, 12, 'Direccion 111'),
-(29, 1, '00000664', 'JAIME DEXTRE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 22, 'Direccion 111'),
-(30, 1, '25815446', 'JORGE ALEJOS CALLE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1092, 'Direccion 111'),
-(31, 1, '00000651', 'JORGE CALMET', 'GERENTE DE OPERACIONES', NULL, NULL, NULL, NULL, 3, 21, 'Direccion 111'),
-(32, 1, '00000657', 'JOSE LUIS RAMIREZ', 'GERENTE DE OPERACIONES', NULL, NULL, NULL, NULL, 3, 13, 'Direccion 111'),
-(33, 1, '00000652', 'JUAN GARAYAR', 'JEFE DE OPERACIONES DE HUANCAYO', NULL, NULL, NULL, NULL, 3, 12, 'Direccion 111'),
-(34, 1, '00000018', 'LEO CARMONA CHAVEZ', 'GERENTE DE STORE PLANNING', NULL, NULL, 'leo.carmona@oechsle.pe', NULL, 3, 12, 'Direccion 111'),
-(35, 1, '00000650', 'LESTER AGUILAR', 'GERENTE DE TIENDA', NULL, NULL, NULL, NULL, 3, 12, 'Direccion 111'),
-(36, 1, '00000656', 'MARZIO DIAZ HURTADO', 'ARQUITECTO', NULL, NULL, 'marziog82@hotmail.com', NULL, 3, 20, 'Direccion 111'),
-(37, 1, '00000661', 'MAXIMO ROJAS', 'GERENTE DE OPERACIONES', NULL, NULL, NULL, NULL, 3, 16, 'Direccion 111'),
-(38, 1, '00000654', 'ROSA WU', 'SUPERVISORA DE OBRA', NULL, NULL, 'rosa.wu@oechsle.pe', NULL, 3, 12, 'Direccion 111'),
-(39, 1, '00000642', 'VICENTE', 'GERENTE GENERAL', NULL, NULL, 'esprolimsrl@hotmail.com', NULL, 3, 17, 'Direccion 111'),
-(40, 1, '00000587', 'MIGUEL MARTINEZ', 'SUPERVISOR DE OBRA', NULL, NULL, NULL, NULL, 3, 46, 'Direccion 111'),
-(41, 1, '00000598', 'ANGELA LA TORRE', 'EJECUTIVA DE VENTAS', NULL, NULL, NULL, NULL, 3, 51, 'Direccion 111'),
-(42, 1, '00000596', 'JOSE RUFINO', 'RESIDENTE', NULL, NULL, NULL, NULL, 3, 51, 'Direccion 111'),
-(43, 1, '10316427', 'JAIME CALVO', 'GERENTE DE OPERACIONES', NULL, NULL, NULL, NULL, 3, 27, 'Direccion 111'),
-(44, 1, '00000594', 'ROEL VIDAL', 'RESIDENTE DE OBRA', NULL, NULL, NULL, NULL, 3, 52, 'Direccion 111'),
-(45, 1, '00000592', 'FRANCISCO IPARRAGUIRRE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 50, 'Direccion 111'),
-(46, 1, '00000590', 'ALFREDO REYNA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 47, 'Direccion 111'),
-(47, 1, '00000578', 'ROBERTO HUARACHA', 'RESIDENTE', NULL, NULL, NULL, NULL, 3, 48, 'Direccion 111'),
-(48, 1, '08228912', 'JUAN MANUEL MACCHIAVELLO CORCUERA', 'GERENTE', NULL, NULL, 'jmachiavello@advantechperu.com', NULL, 3, 53, 'Direccion 111'),
-(49, 1, '00000588', 'SALVADOR RUJU', 'GERENTE DE OPERACIONES', NULL, NULL, 'sruju@advantechperu.com', NULL, 3, 53, 'Direccion 111'),
-(50, 1, '09304196', 'EMMA GUADALUPE GUERRERO MUNIVE', 'Gerente General', NULL, NULL, 'gguerrero@gygperu.com', NULL, 3, 429, 'Direccion 111'),
-(51, 1, '00000599', 'YUDITH GUERRERO', 'GERENTE DE VENTAS', NULL, NULL, NULL, NULL, 3, 54, 'Direccion 111'),
-(52, 1, '07547564', 'CESAR AUGUSTO PIZARRO ROBLEDO', 'REPRESENTANTE LEGAL', NULL, NULL, NULL, NULL, 3, 55, 'Direccion 111'),
-(53, 1, '00000586', 'CESAR PIZARRO', 'GERENTE DE PROYECTO', NULL, NULL, NULL, NULL, 3, 55, 'Direccion 111'),
-(54, 1, '40593973', 'DAVID WU HERRERA', NULL, NULL, NULL, NULL, NULL, 3, 56, 'Direccion 111'),
-(55, 1, '06885771', 'MELANIO FABIAN QUEZADA SALAZAR', 'GERENTE', NULL, NULL, 'm.quezadasalazar@gmail.com,mqingeniros@gmail.', NULL, 3, 57, 'Direccion 111'),
-(56, 1, '00000585', 'MICHAEL SANTOS', 'SUPERVISOR DE OBRA', NULL, NULL, NULL, NULL, 3, 58, 'Direccion 111'),
-(57, 1, '00000584', 'LEONIDAS ZAMALLOA', 'RESIDENTE DE OBRA', NULL, NULL, NULL, NULL, 3, 52, 'Direccion 111'),
-(58, 1, '00000583', 'SERGIO CORDAVA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 43, 'Direccion 111'),
-(59, 1, '00000582', 'PATRICIA SOZA CUMPA', 'SUPERVISORA - ASESORA TECNICA', NULL, NULL, 'patriciahsc@yahoo.com', NULL, 3, 59, 'Direccion 111'),
-(60, 1, '00000581', 'DAVID TRELLES GAMIOS', 'ASESOR COMERCIAL', '2710490', NULL, 'titrel@hotmail.com', NULL, 3, 60, 'Direccion 111'),
-(61, 1, '19330170', 'RONALD MICHEL SALDAÑA MENOR', 'ANALISTA DE SISTEMAS', NULL, 'encargado de los sistemas', 'rsaldana@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(62, 1, '10066447', 'ANA TERESA MADRID', 'GERENTE GENERAL', NULL, NULL, 'anat.madrid@gmail.com', NULL, 3, 1538, 'Direccion 111'),
-(63, 1, '00000579', 'FABIAN PORTOCARRERO R', 'ASESOR TECNICO COMERCIAL', NULL, NULL, 'fabian.portocarrero@amanco.com', NULL, 3, 61, 'Direccion 111'),
-(64, 1, '00000610', 'JUAN MANUEL BRICEÑO', 'GERENTE TECNICO COMERCIAL', '4525141', NULL, 'jbriceno@unispan.com.pe', 'www.unispan.com.pe', 3, 62, 'Direccion 111'),
-(65, 1, '00000612', 'MIGUEL CASTAÑEDA ALBITES', 'EJECUTIVO DE VENTAS', NULL, NULL, 'migcast_12@hotmail.com', NULL, 3, 63, 'Direccion 111'),
-(66, 1, '00000589', 'ALBERTO CASTAÑEDA', 'EJECUTIVO DE VENTAS', NULL, NULL, NULL, NULL, 3, 63, 'Direccion 111'),
-(67, 1, '00000621', 'LUIS E PORRAS VEARGAS', 'TECNICO COMERCIAL DIV PUERTAS', NULL, NULL, NULL, NULL, 3, 64, 'Direccion 111'),
-(68, 1, '00000620', 'RODOLFO GAMARRA OLIVERA', NULL, NULL, NULL, 'rodolfogam@yahoo.es', NULL, 3, 65, 'Direccion 111'),
-(69, 1, '00000619', 'MIGUEL CASTAÑEDA ALBITES', 'EJECUTIVO DE VENTAS', NULL, NULL, 'migcast_12@hotmail.com', NULL, 3, 66, 'Direccion 111'),
-(70, 1, '00000618', 'JIMMY H PARODI SARABIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 67, 'Direccion 111'),
-(71, 1, '00000617', 'BEATRIZ FLORES FLORES', 'DISEÑADORA DE INTERIORES', '2520159', NULL, NULL, NULL, 3, 68, 'Direccion 111'),
-(72, 1, '00000616', 'CHRISTIAN VELLETO V', 'DIRECTOR GERENTE', NULL, NULL, NULL, NULL, 3, 69, 'Direccion 111'),
-(73, 1, '00000615', 'GUSTAVO RODRIGUEZ LA MADRID', 'JEFE VENTAS', NULL, NULL, 'grodriguez@prodac.com.pe', 'www.prodac.com.pe', 3, 70, 'Direccion 111'),
-(74, 1, '00000614', 'JOSE ANTONIO PEREDA', 'GERENTE GENERAL', NULL, NULL, 'jpereda@prodeporperu.com', 'www.prodeporperu.com', 3, 71, 'Direccion 111'),
-(75, 1, '00000613', 'JOEL HERNANDEZ OBLITAS', NULL, NULL, NULL, 'joel.hernandez.oblitas.gmail.com', NULL, 3, 72, 'Direccion 111'),
-(76, 1, '00000600', 'ERIKA DELGADO MANRIQUE', 'ADMINISTRADORA AREA CONSTRUCTORAS', NULL, NULL, 'edelgado@hipermercadoceramico.com.pe', NULL, 3, 73, 'Direccion 111'),
-(77, 1, '00000611', 'GIANCARLO BORDA LUQUE', 'GERENTE DE AREA', NULL, NULL, 'giancarlo.borda@efcoforms.com', NULL, 3, 74, 'Direccion 111'),
-(78, 1, '00000622', 'JAIME CARITG NUÑEZ', 'ADMINISTRADOR TIENDA CHORRILLOS', NULL, NULL, 'jcaritg@hipermercadoceramico.com.pe', NULL, 3, 73, 'Direccion 111'),
-(79, 1, '00000609', 'ALDO CASTELLANO D', 'GERENTE DE MANTENIMIENTO', NULL, NULL, 'acastellano@bcp.com.pe', NULL, 3, 75, 'Direccion 111'),
-(80, 1, '00000608', 'LUIS MORAN M', 'GERENTE DE OBRAS', NULL, NULL, 'lmoran@bcp.com.pe', NULL, 3, 75, 'Direccion 111'),
-(81, 1, '00000607', 'CARLOS R GUTIERREZ RAMOS', 'COORDINADOR DE OBRAS', NULL, NULL, 'cgutierrezm@unicon.com.pe', NULL, 3, 76, 'Direccion 111'),
-(82, 1, '00000606', 'CARLOS GUZMAN QUESADA', 'NO DEFINIDO', NULL, NULL, 'argengas@gmail.com', NULL, 3, 77, 'Direccion 111'),
-(83, 1, '00000605', 'GUILLERMO FREYRE', 'REPRESENTANTE DE VENTAS', NULL, NULL, NULL, NULL, 3, 78, 'Direccion 111'),
-(84, 1, '45000146', 'CHRISTIAN STEVENS ORTIZ SEGURA', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(85, 1, '00000604', 'Ing. Anticona', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 102, 'Direccion 111'),
-(86, 1, '41465469', 'OSCAR CARBAJAL RONTOL', 'OPERARIO DRYWALL', NULL, NULL, 'UVEX_2004@HOTMAIL.COM', NULL, 3, 1, 'Direccion 111'),
-(87, 1, '09723914', 'JUAN CARLOS DEL CASTILLO', 'OPERARIO DRYWALL', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(88, 1, '00000603', 'MIGUEL CHIEZA', 'amigo (ya no es sectorista)', NULL, NULL, NULL, NULL, 3, 4, 'Direccion 111'),
-(89, 1, '00000602', 'Juan Yauyos', NULL, NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(90, 1, '00000511', 'MARCO ANTONIO ROCHA DAVILA', 'GERENTE', '4336054', 'OFICINA BOLIVIA', 'mrocha@grupobbva.com.pe', NULL, 3, 5, 'Direccion 111'),
-(91, 1, '00000514', 'JHONATAN CESAR FLORES VASQUEZ', 'SECTORISTA', NULL, NULL, 'jcflores@grupobbva.com.pe', NULL, 3, 5, 'Direccion 111'),
-(92, 1, '00000515', 'CHRISTIAN OLIVARES', 'SECTORISTA', NULL, NULL, NULL, NULL, 3, 4, 'Direccion 111'),
-(93, 1, '00000516', 'LESLIE CARRANZA', 'SECTORISTA', NULL, 'BANCA EMPRESARIAL', 'lesliecarranza@bcp.com.pe', NULL, 3, 113, 'Direccion 111'),
-(94, 1, '00000517', 'PAOLO ROSAS MALPARTIDA', 'SECTORISTA', NULL, NULL, NULL, NULL, 3, 113, 'Direccion 111'),
-(95, 1, '00000518', 'CATHERINE CEVALLOS WU', 'SECTORISTA', NULL, NULL, 'ccevallosw@intercorp.com.pe', NULL, 3, 114, 'Direccion 111'),
-(96, 1, '00000519', 'GUSTAVO JIMENEZ SALCEDO', 'ASISTENTE COMERCIAL', NULL, NULL, 'gjimenez@intercorp.com.pe', NULL, 3, 114, 'Direccion 111'),
-(97, 1, '00000520', 'MARIA EUGENIA PARODI', 'SECTORISTA', NULL, 'EL TRIGAL', NULL, NULL, 3, 114, 'Direccion 111'),
-(98, 1, '00000521', 'KARINA VILLALVA CACERES', 'SECTORISTA', NULL, 'EL TRIGAL', NULL, NULL, 3, 114, 'Direccion 111'),
-(99, 1, '00000522', 'EDISON LINARES PIZARRO', 'SECTORISTA', NULL, NULL, NULL, NULL, 3, 115, 'Direccion 111'),
-(100, 1, '00000523', 'JUAN MANUEL IZAGUIRRE', 'SECTORISTA', NULL, NULL, NULL, NULL, 3, 115, 'Direccion 111'),
-(101, 1, '10070892', 'EUSTAQUIO CHAVARRIA QUISPE', 'OPERARIO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(102, 1, '00000524', 'Luis Vegas', NULL, NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(103, 1, '00000540', 'MANUEL GONZALES', 'SECTORISTA', NULL, NULL, 'Mgonzalesd@financiero.com.pe', NULL, 3, 4, 'Direccion 111'),
-(104, 1, '00000526', 'Raúl León Placencia', 'Ingeniero Residente', NULL, 'Residente Proyecto Torres Coinsa en SI', 'RLEON@COINSA.COM.PE', NULL, 3, 116, 'Direccion 111'),
-(105, 1, '00000513', 'Ivan Diaz', 'Ingeniero', NULL, NULL, 'Idiaz@coinsa.com.pe', NULL, 3, 116, 'Direccion 111'),
-(106, 1, '10372972', 'MARCOS RAFAEL DELGADO URQUIAGA', NULL, NULL, NULL, NULL, NULL, 3, 117, 'Direccion 111'),
-(107, 1, '08236685', 'JORGE BENJAMIN GAMBOA SANCHEZ', 'GERENTE', NULL, NULL, NULL, NULL, 3, 118, 'Direccion 111'),
-(108, 1, '07587362', 'ADAN PAULINO CRUZ LAURIANO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 13, 'Direccion 111'),
-(109, 1, '07909171', 'ERNESTO PABLO SANGUINETTI REMUSGO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 13, 'Direccion 111'),
-(110, 1, '09391705', 'FRANCO ALESSANDRO SATTLER FINAZZI', 'GERENTE', NULL, NULL, NULL, NULL, 3, 15, 'Direccion 111'),
-(111, 1, '10608655', 'MONTEBLANCO RIVERA LUIS JAVIER', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 119, 'Direccion 111'),
-(112, 1, '08236919', 'RIVERA DIAZ ANA MARIA', 'SUB GERENTE', NULL, NULL, NULL, NULL, 3, 119, 'Direccion 111'),
-(113, 1, '00000529', 'MELISSA GANOZA', 'VENDEDORA', NULL, NULL, 'ventascorp@decor-center.com', NULL, 3, 15, 'Direccion 111'),
-(114, 1, '07273703', 'JOSE ORREGO HERRERA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 120, 'Direccion 111'),
-(115, 1, '07263378', 'RICARDO MARTIN QUINTANA SANZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 121, 'Direccion 111'),
-(116, 1, '06363214', 'JOSE LUIS LINO LIZIER BENAVIDES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 122, 'Direccion 111'),
-(117, 1, '000493735', 'JUAN MANUEL BUSTAMANTE FERNANDEZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 123, 'Direccion 111'),
-(118, 1, '40461425', 'VANESSA OLCESE SCHWARZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 124, 'Direccion 111'),
-(119, 1, '42588939', 'LUIS HIRAOKA TSUCHIKAME', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 125, 'Direccion 111'),
-(120, 1, '00000533', 'CARLOS KOEHNE', 'GERENTE OPERACIONES Y DESARROLLO', NULL, NULL, NULL, NULL, 3, 126, 'Direccion 111'),
-(121, 1, '08746555', 'DUILIO VARGAS RATTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 127, 'Direccion 111'),
-(122, 1, '10277159', 'OSCAR VEGA RODRIGUEZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 128, 'Direccion 111'),
-(123, 1, '00000534', 'AZUCENA GUTIERREZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 130, 'Direccion 111'),
-(124, 1, '00000535', 'Juan Blanco Colonio', NULL, NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(125, 1, '00000536', 'Juan Blanco Colonio', NULL, NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(126, 1, '07880672', 'GIOACCHINNO PERROTA VILA GARCIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 131, 'Direccion 111'),
-(127, 1, '00000537', 'JOSE ESPANTOSO', 'SOCIO', NULL, NULL, NULL, NULL, 3, 313, 'Direccion 111'),
-(128, 1, '00000538', 'GIOMAR MOYA', NULL, NULL, NULL, NULL, NULL, 3, 9, 'Direccion 111'),
-(129, 1, '00000424', 'MANUEL BARRENECHEA', NULL, NULL, NULL, 'MBARRENECHEA@TUPEMESA.COM.PE', NULL, 3, 132, 'Direccion 111'),
-(130, 1, '00000465', 'GIOMAR MOYA', 'VENTAS', NULL, NULL, NULL, NULL, 3, 133, 'Direccion 111'),
-(131, 1, '00000464', 'JUAN CARLOS SILVA', 'ASESOR VENTAS', NULL, NULL, 'JUAN.SILVA@CONSTRUTEK.COM.PE', NULL, 3, 134, 'Direccion 111'),
-(132, 1, '06485541', 'CARLOS DEL SOLAR ZIZOLD', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 135, 'Direccion 111'),
-(133, 1, '00000463', 'PATRICIA HURTADO', 'GERENTE DE VENTAS', NULL, NULL, NULL, NULL, 3, 136, 'Direccion 111'),
-(134, 1, '00000462', 'CHRISTIAN UEZU', 'GERENTE COMERCIAL Y MARKETING', NULL, NULL, NULL, NULL, 3, 137, 'Direccion 111'),
-(135, 1, '00000460', 'RICARDO BRACALE', 'GERENTE DE PROYECTOS', NULL, NULL, NULL, NULL, 3, 142, 'Direccion 111'),
-(136, 1, '10264999', 'MAURICIO VEGAS MANTERO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 143, 'Direccion 111'),
-(137, 1, '10220518', 'FREIRE GANOZA JUAN JOSE MARTIN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 324, 'Direccion 111'),
-(138, 1, '08226810', 'RODRIGO PESCHIERA MIFFLIN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 144, 'Direccion 111'),
-(139, 1, '00000459', 'FRANCO DANOVARO SANCHEZ', 'GERENTE COMERCIAL', NULL, NULL, NULL, NULL, 3, 145, 'Direccion 111'),
-(140, 1, '00000458', 'GONZALO LANATTA', 'GERENTE DE MARKETING', NULL, NULL, NULL, NULL, 3, 146, 'Direccion 111'),
-(141, 1, '00000447', 'RAFAEL DASSO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 147, 'Direccion 111'),
-(142, 1, '06447365', 'JIMENA GARCIA-CALDERON', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 148, 'Direccion 111'),
-(143, 1, 'C.E. 466541', 'SERGIO DE ASSUMPCAO VIEGAS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 52, 'Direccion 111'),
-(144, 1, '09174417', 'BLANCA VELIZ LA VERA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 149, 'Direccion 111'),
-(145, 1, '10544495', 'CLAUDIO ORTIZ TABUSSO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 150, 'Direccion 111'),
-(146, 1, '00000456', 'PIETER CORNELIS BOONE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 151, 'Direccion 111'),
-(147, 1, '00000452', 'LOURDES MONTENEGRO', NULL, NULL, NULL, NULL, NULL, 3, 153, 'Direccion 111'),
-(148, 1, '00000451', 'CESAR D. VELAZCO PALACIN', 'GERENTE COMERCIAL', NULL, NULL, 'cvelazco@alltekperu.com.pe', NULL, 3, 154, 'Direccion 111'),
-(149, 1, '08028491', 'FERNANDEZ LOPEZ EINAR MARZAL', 'PRESIDENTE', NULL, NULL, NULL, NULL, 3, 154, 'Direccion 111'),
-(150, 1, '08054158', 'CASTRO BARZOLA ENRIQUE', 'DIRECTOR', NULL, NULL, NULL, NULL, 3, 154, 'Direccion 111'),
-(151, 1, '25493426', 'GOMEZ POLO RUFINO SEGUNDO', 'DIRECTOR', NULL, NULL, NULL, NULL, 3, 154, 'Direccion 111'),
-(152, 1, '10136744', 'JUAN CARLOS POMA AGUSTIN', 'GERENTE GENERAL', NULL, NULL, 'jpoma@hpsolutionssac.com', NULL, 3, 155, 'Direccion 111'),
-(153, 1, '00000476', 'MARIANO ALVAREZ TOROMANYA', 'ALAMACENERO', NULL, NULL, NULL, NULL, 3, 2, 'Direccion 111'),
-(154, 1, '40694833', 'ALBERTO ZELAYA ATOCHE', 'ING.OFICINA TÉCNICA', NULL, NULL, 'azelaya@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(155, 1, '000171991', 'NORBERTO ROSSI', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 46, 'Direccion 111'),
-(156, 1, '00000457', 'PATRICK', 'RESIDENTE', NULL, NULL, NULL, NULL, 3, 79, 'Direccion 111'),
-(157, 1, '00000539', 'ANGEL RAMOS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 49, 'Direccion 111'),
-(158, 1, '00000484', 'CESAR VEGA', NULL, NULL, NULL, NULL, NULL, 3, 49, 'Direccion 111'),
-(159, 1, '00000483', 'ANTONIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 81, 'Direccion 111'),
-(160, 1, '00000482', 'ANNETTE POLAR', 'ARQUITECTO RESIDENTE', NULL, NULL, NULL, NULL, 3, 508, 'Direccion 111'),
-(161, 1, '00000481', 'FRANCISCO', 'ARQUIRECTO RESIDENTE', NULL, NULL, NULL, NULL, 3, 20, 'Direccion 111'),
-(162, 1, '00000480', 'JOSE LUNA', 'JEFE AREA - STORE PLANING', NULL, NULL, NULL, NULL, 3, 508, 'Direccion 111'),
-(163, 1, '00000479', 'FAUSTO', 'MANTENIMIENTO', NULL, NULL, NULL, NULL, 3, 82, 'Direccion 111'),
-(164, 1, '00000467', 'FERNANDO', NULL, NULL, NULL, NULL, NULL, 3, 82, 'Direccion 111'),
-(165, 1, '00000477', 'MARIANA CAHUAS', NULL, NULL, NULL, NULL, NULL, 3, 82, 'Direccion 111'),
-(166, 1, '00000499', 'PEDRO PANDO', 'SISTEMAS', NULL, NULL, NULL, NULL, 3, 82, 'Direccion 111'),
-(167, 1, '00000475', 'WALTER PALOMINO', 'PROYECTISTA', NULL, NULL, NULL, NULL, 3, 16, 'Direccion 111'),
-(168, 1, '00000474', 'WALTER SILVA', 'RESIDENTE', NULL, NULL, NULL, NULL, 3, 16, 'Direccion 111'),
-(169, 1, '00000473', 'LUIS ARONE', 'OPERARIO - DRY', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(170, 1, '00000472', 'RICARDO BARDALES', 'CONTRATISTA', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(171, 1, '09105472', 'BENJAMIN ASUNCION', 'OPERARIO - DRY', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(172, 1, '12345678', 'JORGE BRITO VEGA', 'JEFE TECNICO SACI', NULL, NULL, 'JORGEBRITO@PROISE.COM.PE', NULL, 3, 1594, 'Direccion 111'),
-(173, 1, '00000471', 'LUIS CRUZ', 'OPERARIO - DRY', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(174, 1, '00000470', 'EDUARDO LLANQUE', 'OPERARIO - DRY', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(175, 1, '00000469', 'RICARDO AYALA', 'OPERARIO - DRY', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(176, 1, '10653170', 'VICTOR HUAMANI ORE', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(177, 1, '10403049722', 'YUDIN WILDE ESTRADA VELASQUE', 'OPERARIO - DRY', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(178, 1, '10416862139', 'JAVIER MARTINEZ CAMPOS', 'OPERARIO - INST ELECTRICAS', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(179, 1, '00000468', 'ANTONIO AMARO', 'OPERARIO  - INST ELECTRICAS', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(180, 1, '00000445', 'ALVARO HAROLD RIVAS ARIAS', 'GERENTE OPERACIONES', NULL, NULL, 'ahrivas@hutecontratistas.com', NULL, 3, 86, 'Direccion 111'),
-(181, 1, '00000414', 'BERTA LOPEZ', 'REPRESENTANTE DE VENTAS', NULL, NULL, NULL, NULL, 3, 87, 'Direccion 111'),
-(182, 1, '00000455', 'LUIS CABANILLAS', 'TECNICO', NULL, NULL, NULL, NULL, 3, 25, 'Direccion 111'),
-(183, 1, '00000422', 'ROSA CHILCON', NULL, NULL, NULL, NULL, NULL, 3, 88, 'Direccion 111'),
-(184, 1, '00000421', 'JUAN CARLOS AMBULAY', 'SUPERVISOR', NULL, NULL, NULL, NULL, 3, 508, 'Direccion 111'),
-(185, 1, '00000420', 'DAVID PECHO', 'SUPERVISOR', NULL, NULL, NULL, NULL, 3, 508, 'Direccion 111'),
-(186, 1, '00000419', 'CESAR', 'ING RESIDENTE', NULL, NULL, NULL, NULL, 3, 48, 'Direccion 111'),
-(187, 1, '00000418', 'JUAN PABLO', 'RESIDENTE', NULL, NULL, NULL, NULL, 3, 13, 'Direccion 111'),
-(188, 1, '00000417', 'EDUARDO MARTINEZ', 'SUPERVISOR OBRA', NULL, NULL, 'Eduardo.Martinez@spsa.com.pe', NULL, 3, 12, 'Direccion 111'),
-(189, 1, '00000406', 'EDWIN CHINCHA', 'RESIDENTE', NULL, NULL, NULL, NULL, 3, 21, 'Direccion 111'),
-(190, 1, '10102755982', 'QUIJANO HURTADO KATHERINA', 'ASESORA DE VENTAS', '440-0158 Ax. 128', NULL, 'katherinaquijano@sensormatic.com.pe', NULL, 3, 26, 'Direccion 111'),
-(191, 1, '00000411', 'GILBERTO LEON', 'AUTOR DE CONSTRUCSOFT', NULL, NULL, 'construcsoft@gmail.com', 'www.construcsoft.blogspot.com', 3, 92, 'Direccion 111'),
-(192, 1, '10723273', 'ALAN MALAGA DEL AGUILA', 'ALMACENERO', NULL, NULL, 'ALAN_MALAGA_DEA77@HOTMAIL.COM', NULL, 3, 1, 'Direccion 111'),
-(193, 1, '00000410', 'ANTONIO GERMAN', 'Supervisor Indeci', NULL, NULL, 'agcp21@yahoo.com', NULL, 3, 97, 'Direccion 111'),
-(194, 1, '00000409', 'Carlos Hidalgo', 'Ing. Civil', NULL, NULL, 'chidalgo@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(195, 1, '00000408', 'CAROLINE LUYO SMITH', 'ARQ. RESIDENTE EN OBRAS', '274 - 6831', NULL, 'caroluyo@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(196, 1, '00000407', 'CECILIA ÑAÑEZ AGUILAR', 'ARQUITECTA', '274 - 6831', NULL, 'cnanez@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(197, 1, '00000435', 'FRIDA COAGUILA', 'JEFE LOGISTICA', '274 - 6831', NULL, 'fcoaguila@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(198, 1, '07802424', 'HECTOR MERCADO SCARNEO', 'GERENTE COMERCIAL', NULL, NULL, 'hmercado@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(199, 1, '00000416', 'HERNAN PAREJA', 'ING. RESIDENTE EN OBRAS', '274 - 6831', NULL, 'hpareja@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(200, 1, '09576421', 'ISABEL ROSALES', 'ADMINISTRADORA', '274 - 6831', NULL, 'irosales@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(201, 1, '19336035', 'JAVIER NER COTRINA QUISPE', 'SUPERVISOR DE OBRA', NULL, NULL, 'jcotrina@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(202, 1, '00000443', 'JOSE CARLOS ANGELINO', 'ARQ. RESIDENTE EN OBRA', '274 - 6831', NULL, 'jcangelino@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(203, 1, '10863277', 'ALEJANDRA MENDOZA MELGAREJO', 'ADMINISTRADORA DE OBRA', NULL, NULL, 'amendoza@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(204, 1, '00000441', 'MANUEL FONSECA', 'INGENIERO ELECTRICO', '274 - 6831', NULL, 'mfonseca@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(205, 1, '00000436', 'MARIANO MURGUIA', 'ARQUITECTO', '274 - 6831', NULL, 'mmurguia@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(206, 1, '40001106', 'MAURICIO CAMPOS ARBULU', 'GERENTE DE PROYECTO', NULL, NULL, 'mcampos@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(207, 1, '00000446', 'PAMELA REMAR', 'SUPERVISORA EN OBRA', NULL, NULL, 'premar@lima-airport.com', NULL, 3, 94, 'Direccion 111'),
-(208, 1, '00000432', 'LEO CARMONA', 'ARQ. STORE PLANNING', NULL, NULL, 'leo.carmona@oechsle.pe', NULL, 3, 12, 'Direccion 111'),
-(209, 1, '00000431', 'GABRIELA CASTRO', 'ASISTENTE DE DISEÑO STORE PLANNING', NULL, NULL, 'gcastroe@sagafalabella.com.pe', NULL, 3, 508, 'Direccion 111'),
-(210, 1, '00000430', 'FERNANDO GRIEBENOW', 'GERENTE DE OPERACIONES', NULL, NULL, 'fgriebenow@cafebritt.com', NULL, 3, 82, 'Direccion 111'),
-(211, 1, '00000429', 'JUAN CARLOS AMBULAY LOPEZ', 'SUPERVISOR PREVENSION DE RIESGO EN OBRAS', NULL, NULL, 'pdr_jcambulay@hotmail.com', NULL, 3, 508, 'Direccion 111'),
-(212, 1, '00000525', 'MIGUEL MARTINEZ', 'SUPERVISOR EN OBRA', NULL, NULL, 'miguel.martinez@spsa.com.pe', NULL, 3, 12, 'Direccion 111'),
-(213, 1, '00000487', 'MILLER HUARACA FLORES', 'SUPERVISOR EN OBRA', NULL, NULL, 'millerhf2@hotmail.com', NULL, 3, 508, 'Direccion 111'),
-(214, 1, '00000489', 'ROSA WU', 'ASISTENTE STORE PLANNING', NULL, NULL, 'rosa.wu@oechsle.pe', NULL, 3, 12, 'Direccion 111'),
-(215, 1, '00000490', 'ANA VALERA', 'ASISTENTE DE GERENCIA', NULL, NULL, 'avalera@gygperu.com', NULL, 3, 54, 'Direccion 111'),
-(216, 1, '00000491', 'ALFREDO BARDALES', 'ING. CIVIL RESIDENTE EN OBRAS', NULL, NULL, 'alfredo_bardales@yahoo.com', NULL, 3, 21, 'Direccion 111'),
-(217, 1, '00000208', 'NESTOR PEREZ', 'AREA TECNICA', NULL, NULL, 'areatecnica@masterwall.com.pe', NULL, 3, 21, 'Direccion 111'),
-(218, 1, '00000281', 'CARLOS INJANTE ALEJOS', 'JEFE DE PRODUCTO GRUPOS ELECTROGENOS', NULL, NULL, 'cinjante@ferreyros.com.pe', NULL, 3, 96, 'Direccion 111'),
-(219, 1, '00000282', 'CARLOS NORIEGA', 'ITO', NULL, NULL, 'cnoriega@poryectaingenieros.com.pe', NULL, 3, 58, 'Direccion 111'),
-(220, 1, '00000283', 'CARLOS RODRIGUEZ PINILLOS', 'ING. CIVIL RESIDENTE EN OBRA', NULL, NULL, 'caliropi2004@hotmail.com', NULL, 3, 53, 'Direccion 111'),
-(221, 1, '00000284', 'PATRICIA BERROCAL', 'ASISTENTE DE VENTAS', NULL, NULL, 'chesterton@cassado.com.pe', NULL, 3, 64, 'Direccion 111'),
-(222, 1, '00000285', 'CESAR ALVA', 'AREA TECNICA', NULL, NULL, 'calva@termorep.com.pe', NULL, 3, 48, 'Direccion 111'),
-(223, 1, '00000286', 'CARLOS CAMARENA FARFAN', 'ING. RESIDENTE', NULL, NULL, 'ccamarenaf@hotmail.com', NULL, 3, 16, 'Direccion 111'),
-(224, 1, '00000297', 'EDWAR ANTAYHUA SAAVEDRA', 'JEFE DE CUENTA SERVICIO COMERCIO E INDUSTRIA', NULL, NULL, 'eantayhua@ferreyros.com.pe', NULL, 3, 96, 'Direccion 111'),
-(225, 1, '00000288', 'SILVIA GUTIERREZ', 'ARQUITECTA DE PROYECTOS', NULL, NULL, 'silvia.gutierrez@philips.com', NULL, 3, 25, 'Direccion 111'),
-(226, 1, '00000290', 'ISRAEL BRAVO', 'AREA TECNICA', NULL, NULL, 'ibravo@angorasac.com', NULL, 3, 49, 'Direccion 111'),
-(227, 1, '00000292', 'JAIME CALVO', 'GERENTE DE OPERACIONES', NULL, NULL, 'jcalpe@clave3.net', NULL, 3, 27, 'Direccion 111'),
-(228, 1, '00000293', 'JULISSA TUCTO', 'RECEPCION', NULL, NULL, 'jtucto@angorasac.com', NULL, 3, 49, 'Direccion 111'),
-(229, 1, '00000294', 'SAUL TEJADA', 'SUPERVISOR DE MONTAJES', NULL, NULL, 'stejada@thyssenkrupp.com.pe', NULL, 3, 52, 'Direccion 111'),
-(230, 1, '07778278', 'ENRIQUE RAMIREZ BECERRA', 'GERENTE GENERAL', NULL, NULL, 'enrique@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(231, 1, '00000295', 'Sonia Valderrama', 'Asesora. Comercial', NULL, NULL, 'sonia.valderrama@pclink.com.pe', NULL, 3, 100, 'Direccion 111'),
-(232, 1, '00000296', 'Yenny Piscoya', 'Asesora. Comercial', NULL, NULL, 'yenny.piscoya@pclink.com.pe', NULL, 3, 100, 'Direccion 111'),
-(233, 1, '00000271', 'JOSE CARO', NULL, NULL, NULL, NULL, NULL, 3, 101, 'Direccion 111'),
-(234, 1, '00000269', 'CRIS NAVARRO HORNA', 'Asesora Comercial', NULL, NULL, 'kpantaleo@tecnologies.com.pe', NULL, 3, 39, 'Direccion 111'),
-(235, 1, '10083709346', 'ROCCA DELGADO ALEJANDRO', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(236, 1, '10651863', 'SANCHEZ ASUNCION, LUIS ALBERTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1530, 'Direccion 111'),
-(237, 1, '10640385', 'SANTOS SERAPIO LLAJAMANGO CARRANZA', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(238, 1, '442474418', 'JAIME ERIBERTO ALTEMIRANO ASUNCION', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(239, 1, '41511518', 'MARIANO SANCHEZ ASUNCION', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(240, 1, '43417596', 'PEDRO JESUS LIVISE DURAN', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(241, 1, '45652914', 'RAFAEL FIDENCIO CORPUS CORAL', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(242, 1, '43803482', 'REY AVILA LABRIN', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(243, 1, '01112560', 'BARDALES AREVALO, RICARDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1063, 'Direccion 111'),
-(244, 1, '10017547', 'TEOFILO DURAN HUAMAN', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(245, 1, '31668440', 'RICARCO MANUEL TREJO LUGO', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(246, 1, '42822081', 'JOSE SANTOS GALVAN', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(247, 1, '40283780', 'FERNANDO RAUL CHUNCHO ROJAS', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(248, 1, '40803665', 'ISAIES AVALOS QUISPE', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(249, 1, '43968265', 'ALEJANDRO JESUS LOA ROMERO', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(250, 1, '44548461', 'VICTOR JAVIER MONTERO ECHEVARRIA', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(251, 1, '44670373', 'RICARDO RUSVEL HUAMAN HERRERA', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(252, 1, '46678814', 'RICARDO JOSE LUCANO ROJAS', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(253, 1, '42396345', 'JOSUE ISAAC LOA ROMERO', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(254, 1, '70063308', 'CRISTIAN SAMUEL LOA ROMERO', 'DRYWOLERO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(255, 1, '08134134', 'MILLER HUARACA FLORES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 156, 'Direccion 111'),
-(256, 1, '08134134', 'MILLER HUARACA FLORES', 'GERENTE GENERAL', NULL, NULL, 'miller.huaraca@mhf-peru.com', NULL, 3, 156, 'Direccion 111'),
-(259, 1, '10791333', 'MIGUEL ANGEL MARRUFFO HUAPAYA', 'CONTADOR', NULL, NULL, NULL, NULL, 3, 25, 'Direccion 111'),
-(260, 1, '00000287', 'MIGUEL MONTOYA', 'VENTAS TECNICAS', NULL, NULL, 'mmontoya@petroaceros.com.pe', 'www.petroaceros.com.pe', 3, 157, 'Direccion 111'),
-(261, 1, '07792563', 'VICTOR HATCHWELL GAVIRIA', 'GERENTE GENERAL', NULL, NULL, NULL, 'www.petroaceros.com.pe', 3, 157, 'Direccion 111'),
-(262, 1, '07971610', 'IRMA ARROYO BOLAÑOS', NULL, NULL, NULL, 'rocioarroyo@raarquitectos.com', NULL, 3, 158, 'Direccion 111'),
-(263, 1, '00000264', 'OMAR MONTES', 'ARQUITECTO', NULL, NULL, NULL, NULL, 3, 158, 'Direccion 111'),
-(264, 1, '000305106', 'MAUER DETLEF WOLFGANG', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 159, 'Direccion 111'),
-(265, 1, '00000265', 'CINTHYA GARCIA', 'VENTAS', NULL, NULL, NULL, NULL, 3, 159, 'Direccion 111'),
-(266, 1, '00000266', 'CRISTHIAN ARAKAKI', 'SUPERVISOR DE OBRA', NULL, NULL, NULL, NULL, 3, 159, 'Direccion 111'),
-(267, 1, '00000267', 'Santiago Chau', 'Jefe de Abasteceimientos y Servicios', NULL, NULL, 'schau@proviasnac.gob.pe', NULL, 3, 1, 'Direccion 111'),
-(269, 1, '10303492', 'DAPHNE OLGA NARCISO MALDONADO', 'GERENTE GENERAL', NULL, NULL, 'dnarciso@arquitotal.com', 'www.arquitotal.com', 3, 160, 'Direccion 111'),
-(270, 1, '10303492', 'NARCISO MALDONADO DAPHNE OLGA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 160, 'Direccion 111'),
-(271, 1, '00000279', 'LUCY ESPADÍN RIVERA', 'VENTAS', NULL, NULL, NULL, NULL, 3, 161, 'Direccion 111'),
-(272, 1, '07908606', 'AREVALO RUIZ TEDY GILBERT', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 161, 'Direccion 111'),
-(273, 1, '26684498', 'YSIDRO RODRIGUEZ ATALAYA', 'GERENTE GENERAL', NULL, NULL, 'informes@larockasac.com', 'www.larockasac.com', 3, 162, 'Direccion 111'),
-(274, 1, '00000262', 'VLADISLAV REMAR CASTRO', 'GERENTE GENERAL', NULL, NULL, 'vremar@usg.com', NULL, 3, 163, 'Direccion 111'),
-(275, 1, '00000272', 'VLADISLAV REMAR CASTRO', 'GERENTE GENERAL', NULL, NULL, 'vremar@usg.com', NULL, 3, 163, 'Direccion 111'),
-(276, 1, '00000273', 'PETER FALSHAW', 'JEFE DE VENTAS', NULL, NULL, 'pfalshaw@dryplac.com', NULL, 3, 163, 'Direccion 111'),
-(277, 1, '00000274', 'YNES BUSTILLOS', 'GERENTE ADMINISTRATIVO Y FINANCIERO', NULL, NULL, 'ybustillos@allinterior.com', NULL, 3, 163, 'Direccion 111'),
-(278, 1, '00000276', 'EDISON LINARES PIZARRO', 'GERENTE', NULL, 'GERENTE DE AGENCIA', 'edison.linares@scotiabank.com.pe', NULL, 3, 115, 'Direccion 111'),
-(279, 1, '00000278', 'ELVIA COELLO GUEVARA', 'EJECUTIVO DE NEGOCIOS', '3624330', NULL, 'ecoello@bif.com.pe', NULL, 3, 164, 'Direccion 111'),
-(280, 1, '09333203', 'JOSE SORIANO BARRANTES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 165, 'Direccion 111'),
-(281, 1, '00000333', 'DAYANA CARHUAYA', 'SUPERVISORA', NULL, NULL, NULL, NULL, 3, 156, 'Direccion 111'),
-(282, 1, '00000289', 'MONICA CARO', 'ARQUITECTA DE INTERIORES', NULL, NULL, 'mcaro@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(284, 1, '10354721', 'GERONIMO PEREZ COSCCO', 'Gerente General', NULL, NULL, 'geotopo8@geotopo8.com', NULL, 3, 166, 'Direccion 111'),
-(285, 1, '00000318', 'CARLOS RODRIGUEZ PERALTA', 'ADMINISTRADOR', NULL, NULL, 'informes@larockasrl.com', 'www.larockasac.com', 3, 162, 'Direccion 111'),
-(286, 1, '00000319', 'ERNESTO HUAYTA GARCIA', 'INGENIERO RESIDENTE', NULL, NULL, 'informes@larockasrl.com', 'www.larockasac.com', 3, 162, 'Direccion 111'),
-(287, 1, '40884046', 'CARLOS ALBERTO VARGAS ALVAREZ', 'GERENTE GENERAL', NULL, NULL, 'cvargas@advantechperu.com', NULL, 3, 167, 'Direccion 111'),
-(288, 1, '16012963', 'BRUNO ALEJANDRO GARIBALDI VASQUEZ', 'GERENTE GENERAL', NULL, NULL, 'bgaribaldi@qiri.com.pe', NULL, 3, 168, 'Direccion 111'),
-(289, 1, '00000320', 'CARLOS BASADRE MALAGA', 'REPRESENTANTE DE VENTAS', NULL, NULL, NULL, NULL, 3, 169, 'Direccion 111'),
-(290, 1, '25701349', 'DE LA CRUZ URIOL CARLOS ALBERTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 169, 'Direccion 111'),
-(291, 1, '00000321', 'CESAR SANCHEZ', 'ARQUITECTO', NULL, NULL, 'csanchez@rrspi.com', NULL, 3, 170, 'Direccion 111'),
-(292, 1, '00000323', 'NO DEFINIDO', NULL, NULL, NULL, NULL, NULL, 3, 56, 'Direccion 111'),
-(293, 1, '07861534', 'RENZO YRIVARREN PADILLA', 'GERENTE GENERAL', NULL, NULL, 'renzoy@prodeinstal.com.pe', NULL, 3, 171, 'Direccion 111'),
-(294, 1, '00000303', 'ROMY LOAYZA', NULL, NULL, NULL, NULL, NULL, 3, 171, 'Direccion 111'),
-(295, 1, '000477748', 'GUELL FLEISCHMANN FELIPE', 'GERENTE GENERAL', '4481530', NULL, 'fguell@diaringenieros.com', NULL, 3, 16, 'Direccion 111'),
-(296, 1, '00000298', 'LETICIA DELGADO', NULL, '2416406', NULL, 'ldelgado@trianon.com', NULL, 3, 172, 'Direccion 111'),
-(297, 1, '21434359', 'JAVIER RAMOS FELIPA', 'GERENTE GENERAL', NULL, NULL, 'javierr@trianon.com.pe', NULL, 3, 172, 'Direccion 111'),
-(298, 1, '09340301', 'ALBERTO NAKANO HIGA', 'GERENTE', NULL, NULL, 'enakano@denky.com', NULL, 3, 173, 'Direccion 111'),
-(299, 1, '00000310', 'PABLO ARBULU ARBULU', 'GERENTE DE VENTAS', '4518402', NULL, NULL, NULL, 3, 173, 'Direccion 111'),
-(300, 1, '07644206', 'FELIPE LEON RUIZ', NULL, NULL, NULL, 'maqsoft@ec-red.com', NULL, 3, 1392, 'Direccion 111'),
-(301, 1, '07644206', 'LEON RUIZ FELIPE', NULL, NULL, NULL, NULL, NULL, 3, 174, 'Direccion 111'),
-(302, 1, '23935224', 'BELLOTA DE MIRANDA ASUNTA ARMIDA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 175, 'Direccion 111'),
-(304, 1, '09932684', 'BRAVO VIDAL GUILLERMO WILFREDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 176, 'Direccion 111'),
-(305, 1, '07395971', 'AROAPAZA RAMOS GREGORIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 177, 'Direccion 111'),
-(306, 1, '08244881', 'MARTICORENA ARCINIEGA JOSE ANTONIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 178, 'Direccion 111'),
-(307, 1, '08888828', 'CHILCON SILVA MELVA', 'GERENTE GENERAL', NULL, NULL, 'm.chilcon@punkkuarquitectura.com', NULL, 3, 179, 'Direccion 111'),
-(308, 1, '07433963', 'HUGO SANTIAGO FERNANDEZ RODRIGUEZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 180, 'Direccion 111'),
-(309, 1, '07811676', 'MARIO VALDIVIA CHACON', 'GERENTE GENERAL', NULL, NULL, 'valdivia.mario@gmail.com', NULL, 3, 181, 'Direccion 111'),
-(310, 1, '10491813', 'EDUARDO RAZETTO ARMESTAR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 182, 'Direccion 111'),
-(312, 1, '09486083', 'QUINTO ASPILCUETA JOSE R.', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 183, 'Direccion 111'),
-(313, 1, '07836616', 'TORRES HIDALGO LUIS ALBERTO', 'APODERADO', NULL, NULL, NULL, NULL, 3, 184, 'Direccion 111'),
-(314, 1, '000044116', 'GUZMAN SOZA FERNANDO PEDRO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 185, 'Direccion 111'),
-(315, 1, '25815446', 'JORGE LUIS ALEJOS CALLE', 'GERENTE GENERAL', NULL, NULL, 'jalejos@jjempresasperu.com', NULL, 3, 20, 'Direccion 111'),
-(316, 1, '17852449', 'JORGE CRUZ SANCHEZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 186, 'Direccion 111'),
-(317, 1, '08285363', 'DÍAZ ROMERO JUAN PABLO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 187, 'Direccion 111'),
-(318, 1, '06032050', 'LUIS ALBERTO D'' BROT TOVAR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 188, 'Direccion 111'),
-(319, 1, '10228566', 'LEVA CCUNO NATIVIDAD', 'GERENTE GENERAL', '293-3777', NULL, NULL, NULL, 3, 189, 'Direccion 111'),
-(320, 1, '08225995', 'GUEVARA PASACHE DE LAVALLE DOLORES INES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 190, 'Direccion 111'),
-(321, 1, '42313677', 'CALDERON VILLAFUERTE JOSE ALBERTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 191, 'Direccion 111'),
-(322, 1, '00000147', 'JORGE MONSALVE', 'SALES EXECUTIVE', NULL, NULL, 'ygomez@feltrex.cl', NULL, 3, 192, 'Direccion 111'),
-(323, 1, '00000153', 'JORGE MONSALVE', 'SALES EXECUTIVE', NULL, NULL, 'ygomez@feltrex.cl', NULL, 3, 192, 'Direccion 111'),
-(324, 1, '00000162', 'PATRICK MANNING', NULL, NULL, NULL, 'glasstek@speedy.com.pe', 'www.glasstekstudios.com', 3, 193, 'Direccion 111'),
-(325, 1, '00000125', 'JESSI KLATETZKI', NULL, NULL, NULL, 'k13chimeneas@yahoo.com', NULL, 3, 194, 'Direccion 111'),
-(326, 1, '00000150', 'CINTHIA CANO', NULL, NULL, NULL, 'cinthiacano_pe@hotmail.com', NULL, 3, 198, 'Direccion 111'),
-(327, 1, '08515996', 'COA INFANTE RUTH VICTORIA', 'GERENTE GENERAL', '5342882', NULL, NULL, NULL, 3, 201, 'Direccion 111'),
-(328, 1, '08251880', 'CUNNINGHAM HAMILTON FEDERICO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 202, 'Direccion 111'),
-(329, 1, '09338946', 'MAURICIO LUNA DIAZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 203, 'Direccion 111'),
-(330, 1, '00000118', 'KEIKO ZAMORA', 'EJECUTIVA DE CUENTAS', NULL, NULL, 'kzamora@letrecorp.com', NULL, 3, 203, 'Direccion 111'),
-(331, 1, '06748773', 'PEREZ RODAS ANGEL ALFONSO', 'DIRECTOR MUNICIPAL', NULL, NULL, NULL, NULL, 3, 204, 'Direccion 111'),
-(332, 1, '07607537', 'FERNANDEZ CARDENAS OSCAR ANIBAL', 'DECANO', NULL, NULL, NULL, NULL, 3, 205, 'Direccion 111'),
-(333, 1, '08748073', 'BALAREZO ALVAREZ MANUEL GUILLERMO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 206, 'Direccion 111'),
-(334, 1, '07786886', 'VALDERRAMA SALAZAR MANUEL ALBERTO', 'DIRECTOR', NULL, NULL, NULL, NULL, 3, 207, 'Direccion 111'),
-(335, 1, '16168341', 'VARGAS BELON CARLOS ADOLFO', 'ADMINISTRADOR', NULL, NULL, NULL, NULL, 3, 208, 'Direccion 111'),
-(336, 1, '08202201', 'MILOSEVICH CABALLERO DANITZA CLARA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 209, 'Direccion 111'),
-(337, 1, '08862527', 'POZO VEGA LUIS DANIEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 210, 'Direccion 111'),
-(338, 1, '00000114', 'WILFREDO HUAMAN', 'INGENIERO', NULL, NULL, 'jvaleriano@jjc.com.pe', NULL, 3, 211, 'Direccion 111'),
-(339, 1, '00000129', 'TRINIDAD CONDOR', 'ARQUITECTA', NULL, NULL, 'tcondor@jjcamet.com.pe', NULL, 3, 211, 'Direccion 111'),
-(340, 1, '00000131', 'JULIO VALERIANO', 'GERENTE PROYECTO', NULL, NULL, 'jvaleriano@jjcamet.com.pe', NULL, 3, 211, 'Direccion 111'),
-(341, 1, '00000152', 'HUGO PILLARCA', 'INGENIERO', NULL, NULL, 'hpillarca@jjcamet.com.pe', NULL, 3, 211, 'Direccion 111'),
-(342, 1, '42449843', 'ERODITA MENDOZA PRADO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 22, 'Direccion 111'),
-(344, 1, '06746415', 'PAREDES PAREJA DANTE ASDRUBAL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 212, 'Direccion 111'),
-(345, 1, '10722003', 'NINO USQUIANO BANDA', 'GERENTE GENERAL', NULL, NULL, 'nub64@hotmail.com', NULL, 3, 213, 'Direccion 111'),
-(347, 1, '09136297', 'GERMAN LUIS MENDIETA LANDEO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 214, 'Direccion 111'),
-(348, 1, '00000601', 'LUIGI VACCAREZZA B.', NULL, NULL, NULL, NULL, NULL, 3, 215, 'Direccion 111'),
-(349, 1, '10798890', 'JOAQUIN ALONZO JUAN ALBERTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 216, 'Direccion 111'),
-(350, 1, '41627839', 'GUILLEN AGUIRRE VIVIANA MERCEDES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 217, 'Direccion 111'),
-(351, 1, '000056645', 'FAJARDO ZILLERUELO RODRIGO AGUSTIN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 218, 'Direccion 111'),
-(352, 1, '08559975', 'TENOR PALOMINO ANGELICA MARITZA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 219, 'Direccion 111'),
-(353, 1, '00000214', 'Francisco Iparraguirre', 'Gerente General', NULL, NULL, NULL, NULL, 3, 50, 'Direccion 111'),
-(354, 1, '09975582', 'SANDRO RAFAEL HUALLCCA RODRIGUEZ', 'GERENTE', NULL, NULL, NULL, NULL, 3, 221, 'Direccion 111'),
-(355, 1, '00000191', 'MARIELA SILVA', 'DISEÑO', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(356, 1, '25784812', 'ROSA AMELIA SILVA MANRIQUE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 222, 'Direccion 111'),
-(357, 1, '00000192', 'ANDREI GONZALES QUEZADA', 'ARQUITECTO', NULL, NULL, 'vidrieriahaydigq@hotmail.com', 'www.vidrieriahaydi.com', 3, 223, 'Direccion 111'),
-(358, 1, '00000177', 'ANDREI GONZALES QUEZADA', 'ARQUITECTO', NULL, NULL, 'vidrieriahaydigq@hotmail.com', 'www.vidrieriahaydi.com', 3, 223, 'Direccion 111'),
-(359, 1, '00000193', 'ANDREI GONZALES QUEZADA', 'ARQUITECTO', NULL, NULL, 'vidrieriahaydigq@hotmail.com', 'www.vidrieriahaydi.com', 3, 223, 'Direccion 111'),
-(360, 1, '08297266', 'NIMER FALCON ENCISO', 'REPRESENTANTE LEGAL', NULL, NULL, 'ventas@vidrieriafalcon.com', NULL, 3, 224, 'Direccion 111'),
-(361, 1, '00000174', 'JUAN CARLOS SILVA', 'ASESOR COMERCIAL', '271-6007', NULL, 'jsilva@buildex.com.pe', NULL, 3, 225, 'Direccion 111'),
-(362, 1, '00000178', 'ALEJANDRO MONROY', 'DPTO TECNICO COMERCIAL', '271-6007', NULL, NULL, NULL, 3, 225, 'Direccion 111'),
-(363, 1, '00000180', 'VANESSA OLIVERA RODRIGUEZ', 'EJECUTIVA DE VENTAS', '4406777', NULL, 'volivera@decorlux.com.pe', 'www.decorluxonline.com', 3, 119, 'Direccion 111'),
-(364, 1, '09397079', 'CARLOS ARANA', 'GERENTE GENERAL', NULL, NULL, 'carlos@lundher.com', NULL, 3, 42, 'Direccion 111'),
-(365, 1, '00000182', 'JUAN CARLOS HUAMANI', 'JEFE TECNICO', NULL, NULL, 'jhuamani@sensormatic.com.pe', NULL, 3, 26, 'Direccion 111'),
-(366, 1, '00000092', 'ANDRES BOZA', 'GERENTE COMERCIAL', NULL, NULL, 'andresboza@sensormatic.com.pe', NULL, 3, 26, 'Direccion 111'),
-(367, 1, '10152716', 'PAULINO DE LA CRUZ JUAN JACINTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 227, 'Direccion 111'),
-(368, 1, '26684498', 'Ysidro Rodriguez Atalaya', 'Gerente General', NULL, NULL, NULL, NULL, 3, 228, 'Direccion 111'),
-(369, 1, '08252563', 'GARCIA CASSADO JUAN ANDRES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 64, 'Direccion 111'),
-(370, 1, '07687807', 'UGARTE FLORES DE CRUZ CLORINDA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 229, 'Direccion 111'),
-(371, 1, '09272406', 'MOSTAJO RIVERA EDWIN OMAR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 230, 'Direccion 111'),
-(373, 1, '08437782', 'SOSA SALINAS, MARCELO CAYETANO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 231, 'Direccion 111'),
-(374, 1, '10718752', 'LESTER IVAN CARDOSO MOQUILLAZA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 232, 'Direccion 111'),
-(375, 1, '08186738', 'VIVIANA SALMON ILLICH', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 233, 'Direccion 111'),
-(376, 1, '06014343', 'CESAR ALBERTO JIMENEZ WONG', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 234, 'Direccion 111'),
-(377, 1, '07901235', 'LUIS CARLOS RIOS OLIVERA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 235, 'Direccion 111'),
-(378, 1, '08261627', 'JORGE MANUEL VEGA MONTEFERRI', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 236, 'Direccion 111'),
-(379, 1, '07744773', 'FERNANDO BENITO LORES KANTO', 'APODERADO', NULL, NULL, NULL, NULL, 3, 237, 'Direccion 111'),
-(380, 1, '08835112', 'LUIS EDUARDO GERONIMO MIRANDA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 238, 'Direccion 111'),
-(381, 1, '10805696', 'GINO FRANCESCO TOSO PAREDES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 239, 'Direccion 111'),
-(382, 1, '41221562', 'MANUEL RICARDO PARCO FIESTAS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 240, 'Direccion 111'),
-(383, 1, '07534884', 'VICTOR RICARDO ESCOBEDO GOMEZ', 'GERENTE', NULL, NULL, NULL, NULL, 3, 241, 'Direccion 111'),
-(384, 1, '08055848', 'JURADO LOPEZ RAUL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 242, 'Direccion 111'),
-(385, 1, '08699281', 'LUIS ENRIQUE PADILLA DEL AGUILA', 'GERENTE COMERCIAL', NULL, NULL, NULL, NULL, 3, 243, 'Direccion 111'),
-(386, 1, '06593329', 'CESAR HUMBERTO VILLACORTA SPINNER', NULL, NULL, NULL, NULL, NULL, 3, 245, 'Direccion 111'),
-(387, 1, '07841744', 'LUIS ELEAZAR ENRIQUE FISCHER LLANOS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 244, 'Direccion 111'),
-(388, 1, '10718752', 'CARDOSO MOQUILLAZA LESTER IVAN', 'GERENTE', NULL, NULL, NULL, NULL, 3, 246, 'Direccion 111'),
-(389, 1, '07941222', 'NISHII ASLLA MIGUEL ANTONIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 247, 'Direccion 111'),
-(390, 1, '82369193', 'RIVERA DIAZ ANA MARIA', 'DIRECTOR', NULL, NULL, NULL, NULL, 3, 248, 'Direccion 111'),
-(391, 1, '06086554', 'MONTEBLANCO RIVERA LUIS JAVIER', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 248, 'Direccion 111'),
-(392, 1, '00000098', 'CECILIA ROSADIO', 'ASISTENTE ADMINISTRATIVA', '2515267', NULL, NULL, NULL, 3, 248, 'Direccion 111'),
-(393, 1, '00000099', 'CARLOS BARREDA ZUMAITA', 'RESIDENTE DE OBRA', NULL, NULL, 'cbarreda@hvcontratistas.com.pe', NULL, 3, 249, 'Direccion 111'),
-(394, 1, '471561', 'ALFONSO MARQUEZ ARENAS', 'APODERADO', NULL, NULL, 'amarquez@hvcontratistas.com.pe', NULL, 3, 249, 'Direccion 111'),
-(395, 1, '09342569', 'MISAEL SHIMIZU MITSUMASU', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 250, 'Direccion 111'),
-(396, 1, '00000113', 'AUGUSTO REY', NULL, NULL, NULL, NULL, NULL, 3, 250, 'Direccion 111'),
-(397, 1, '00000101', 'CARLOS HIDALGO QUIROZ', 'INGENIERO CIVIL', NULL, NULL, 'chidalgo@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(398, 1, '00000106', 'FLAVIO GUTIERREZ', NULL, NULL, NULL, 'Flavio.Gutierrez@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(399, 1, '00000108', 'BERNARDO ROELEVELD', NULL, NULL, NULL, 'Bernardo.Roeleveld@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(400, 1, '00000109', 'ANGELICA TRIGOS', NULL, NULL, NULL, 'angelica.trigos@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(401, 1, '00000068', 'CAROLINA HARRIS MORAL', NULL, NULL, NULL, 'charris@hvcontratistas.com.pe', NULL, 3, 249, 'Direccion 111'),
-(402, 1, '00000070', 'MIGUEL REAÑO', 'GERENTE DE INFRAESTRUCTURA', NULL, NULL, 'Miguel.Reano@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(403, 1, '00000073', 'MICHAEL MCGREGOR', NULL, NULL, NULL, NULL, NULL, 3, 250, 'Direccion 111'),
-(405, 1, '09879002', 'LUIS FERNANDO BOZA LLOSA', 'GERENTE GENERAL', NULL, NULL, 'lboza@divercity.com.pe', NULL, 3, 251, 'Direccion 111'),
-(406, 1, '00000085', 'RAMON GORGOY PEREZ', 'GERENTE DE OPERACIONES', NULL, NULL, 'rgorgoy@divercity.com.pe', NULL, 3, 251, 'Direccion 111'),
-(407, 1, '00000216', 'AMER YORDAN REGALADO VARGAS', 'SUPERVISOR DE OBRA', NULL, NULL, 'aregalado@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(408, 1, '10221078', 'Vanessa Garcia-Arata Novoa', 'ARQUITECTA', NULL, NULL, 'vgarciaarata@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(409, 1, '07846828', 'MUÑOZ RODRIGUEZ JUAN FERNAN', 'DECANO', NULL, NULL, NULL, NULL, 3, 252, 'Direccion 111'),
-(410, 1, '00000247', 'EMILIO BAHAMONDE', 'JEFE DE OFICINA TECNICA', NULL, NULL, 'ebahamonde@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(411, 1, '00000250', 'ROSEMARY VALENCIA VILLA', 'GERENTE DE RR.HH', '2242483', NULL, 'rosemary.valencia@oncosalud.com.pe', 'www.oncosalud.com.pe', 3, 253, 'Direccion 111'),
-(412, 1, '00000243', 'VICTOR VIGNALE', 'PARTNER', NULL, NULL, 'vv@ab.com.pe', 'www.executivesearchperu.com', 3, 254, 'Direccion 111'),
-(413, 1, '00000259', 'ELVA CANDIA', 'EJECUTIVA DE VENTAS', NULL, NULL, 'ventas@masiljoperu.com', NULL, 3, 257, 'Direccion 111'),
-(414, 1, '07971610', 'ARROYO BOLAÑOS IRMA ROCIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 256, 'Direccion 111'),
-(415, 1, '00000229', 'ELVA CANDIA', 'EJECUTIVA DE VENTAS', NULL, NULL, 'ventas@masiljoperu.com', NULL, 3, 257, 'Direccion 111'),
-(416, 1, '09553812', 'LEON ROSALES MARIBEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 257, 'Direccion 111'),
-(417, 1, '08197440', 'CARLOS ANTONIO UCCELLI LAVATELLI', NULL, NULL, NULL, 'cuccelli@yahoo.com', NULL, 3, 257, 'Direccion 111'),
-(418, 1, '00000230', 'ASIA GRIFOS Y SERVICIOS GENERALES', NULL, NULL, NULL, NULL, NULL, 3, 258, 'Direccion 111'),
-(419, 1, '00000233', 'ESTACION DE SERVICIO EL PACIFICO', NULL, NULL, NULL, NULL, NULL, 3, 259, 'Direccion 111'),
-(420, 1, '00000235', 'INVERSIONES ROMAN MUNIVE', NULL, NULL, NULL, NULL, NULL, 3, 261, 'Direccion 111'),
-(421, 1, '00000237', 'ANA LUZ BURGOS GAVANCHO', NULL, NULL, NULL, NULL, NULL, 3, 262, 'Direccion 111');
-INSERT INTO `tb_personacontacto` (`id`, `tb_empresa_id`, `dni`, `nombre`, `cargo`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_companiacontacto_id`, `direccion`) VALUES
-(422, 1, '00000238', 'RESTAURANT ANITA', NULL, NULL, NULL, NULL, NULL, 3, 263, 'Direccion 111'),
-(423, 1, '00000239', 'SERVICIOS GENERALES MULTIPLES WILSON', NULL, NULL, NULL, NULL, NULL, 3, 264, 'Direccion 111'),
-(424, 1, '00000240', 'INVERSIONES VILLA MADERO', NULL, NULL, NULL, NULL, NULL, 3, 265, 'Direccion 111'),
-(425, 1, '00000241', 'SIGDELO', NULL, NULL, NULL, NULL, NULL, 3, 266, 'Direccion 111'),
-(426, 1, '00000494', 'WARNER LOPEZ', 'INGENIERO', NULL, NULL, 'wlopez@constructoraaesa.com.pe', NULL, 3, 278, 'Direccion 111'),
-(427, 1, '00000496', 'DELOSI', NULL, NULL, NULL, NULL, NULL, 3, 267, 'Direccion 111'),
-(428, 1, '00000512', 'COVIPERU', NULL, NULL, NULL, NULL, NULL, 3, 270, 'Direccion 111'),
-(429, 1, '00000498', 'EMAPE', NULL, NULL, NULL, NULL, NULL, 3, 271, 'Direccion 111'),
-(430, 1, '00000485', 'SCOTIABANK', NULL, NULL, NULL, NULL, NULL, 3, 272, 'Direccion 111'),
-(431, 1, '06231939', 'TOBIAS TOMAS AVILA', 'GERENTE GENERAL', NULL, NULL, 'promexsrl@terra.com.pe', NULL, 3, 273, 'Direccion 111'),
-(432, 1, '07999358', 'MANUEL ARNALDO CHAVEZ MARTIN', NULL, '2711138', NULL, 'achm.sac@gmail.com', NULL, 3, 274, 'Direccion 111'),
-(433, 1, '00000500', 'MARCELO TOLEDO ZOLEZZi', 'Coordinador de Proyectos', '4342004', NULL, 'mtoledo@jockey-plaza.com.pe', 'www.jockey-plaza.com.pe', 3, 275, 'Direccion 111'),
-(434, 1, '00000503', 'MAVILON CCANTO SALCEDO', 'Supervisor de Desarrollo de Proyectos', NULL, NULL, 'mccanto@jockey-plaza.com.pe', 'www.jockey-plaza.com.pe', 3, 275, 'Direccion 111'),
-(435, 1, '00000507', 'EDITH LARA MARTINEZ', 'ADMINISTRADORA', NULL, NULL, 'elara@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(436, 1, '00000509', 'VERONICA DIOSES', 'ASISTENTE DE ADMINISTRACION', NULL, NULL, 'vdioses@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(437, 1, '08230925', 'DANIEL PAREDES GONZALES', 'GERENTE GENERAL', '226-4435', NULL, 'dparedes@dtechingenieros.com', NULL, 3, 276, 'Direccion 111'),
-(438, 1, '00000570', 'AGUSTIN JUAREZ', NULL, NULL, NULL, NULL, NULL, 3, 277, 'Direccion 111'),
-(439, 1, '00000572', 'Yanina Landa', 'GERENTE COMERCIAL Y DE MARKETING', NULL, NULL, 'ylanda@jockey-plaza.com.pe', NULL, 3, 275, 'Direccion 111'),
-(440, 1, '00000576', 'YARINA LANDA', 'GERENTE COMERCIAL Y DE MARKETING', NULL, NULL, 'ylanda@jockey-plaza.com.pe', NULL, 3, 275, 'Direccion 111'),
-(441, 1, '07046165', 'JARA CAMPOS LEONCIO ARMANDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 279, 'Direccion 111'),
-(442, 1, '00000597', 'ANGELA MONTOYA ESTRADA', NULL, NULL, NULL, 'angelamontoyaestrada@hotmail.com', NULL, 3, 251, 'Direccion 111'),
-(443, 1, '00000663', 'Juan Pablo Deustua Infante', NULL, '6286328', NULL, 'juanpablo.deustua@deustuaingenieros.com.pe', NULL, 3, 280, 'Direccion 111'),
-(444, 1, '00000653', 'Edwin Menacho Laurencio', 'Ingeniero Proyectista - Area Ingenieria Mecan', NULL, NULL, 'edwin.menacho@deustuaingenieros.com.pe', NULL, 3, 280, 'Direccion 111'),
-(445, 1, '00000630', 'Genaro Celedonio Casas', 'Ingeniero Proyectista - Area Ingenieria Elect', NULL, NULL, 'genaro.celedonio@deustuaingenieros.com.pe', NULL, 3, 280, 'Direccion 111'),
-(446, 1, '00000631', 'Alexander Machuca', 'Ingeniero Proyectista - Area Ingenieria Elect', NULL, NULL, 'alexander.machuca@deustuaingenieros.com.pe', NULL, 3, 280, 'Direccion 111'),
-(447, 1, '00000549', 'Alejandro Silva', 'Ingeniero Proyectista - Area Ingenieria Sanit', NULL, NULL, 'alejandro.silva@deustuaingenieros.com.pe', NULL, 3, 280, 'Direccion 111'),
-(448, 1, '00000551', 'RIMAC SEGUROS', NULL, '4210555', NULL, NULL, NULL, 3, 281, 'Direccion 111'),
-(449, 1, '00000552', 'RIMAC EPS', NULL, NULL, NULL, NULL, NULL, 3, 282, 'Direccion 111'),
-(450, 1, '06466077', 'ELIAS CHIPOCO HUGO ALEJANDRO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 283, 'Direccion 111'),
-(451, 1, '00000554', 'CESAR TIVEÑO GARCIA', NULL, NULL, NULL, NULL, NULL, 3, 260, 'Direccion 111'),
-(452, 1, '00000541', 'KENZO INVERSIONES', NULL, NULL, NULL, NULL, NULL, 3, 329, 'Direccion 111'),
-(453, 1, '00000559', 'PERUANA DE ESTACIONES DE SERVICIOS', NULL, NULL, NULL, NULL, NULL, 3, 330, 'Direccion 111'),
-(454, 1, '08222698', 'ENGELHARD ENGELHARD HERMAN', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(455, 1, '08222698', 'ENGELHARD ENGELHARD HERMAN', 'GERENTE', NULL, NULL, NULL, NULL, 3, 284, 'Direccion 111'),
-(456, 1, '09336742', 'VALERGA DE LA FLOR GINO HORACIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 284, 'Direccion 111'),
-(457, 1, '06692174', 'VILLALOBOS GAVIDIA LUIS ALBERTO', 'DIRECTOR GERENTE', NULL, NULL, NULL, NULL, 3, 285, 'Direccion 111'),
-(458, 1, '09072632', 'MARTINEZ VARGAS THELMA CECILIA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 285, 'Direccion 111'),
-(459, 1, '06651653', 'CARBAJAL PEREZ JAMES JAIME', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 286, 'Direccion 111'),
-(460, 1, '07880254', 'CERMAK SCHIMANETZ MIROSLAV', 'DIRECTOR', NULL, NULL, NULL, NULL, 3, 287, 'Direccion 111'),
-(461, 1, '08262822', 'CAMINO LINARES CARLOS ANTONIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 287, 'Direccion 111'),
-(462, 1, '06768328', 'TALLEDO GONZALES GERARDO MARTIN', 'APODERADO', NULL, NULL, NULL, NULL, 3, 288, 'Direccion 111'),
-(463, 1, '07825226', 'SESSAREGO ALAYZA CARLA', 'APODERADO', NULL, NULL, NULL, NULL, 3, 288, 'Direccion 111'),
-(464, 1, '08787958', 'ZUÑIGA FLORES JOSE GONZALO', 'APODERADO', NULL, NULL, NULL, NULL, 3, 288, 'Direccion 111'),
-(465, 1, '08885442', 'MENDOZA GUTIERREZ CARLOS ENRIQUE', 'APODERADO', NULL, NULL, NULL, NULL, 3, 288, 'Direccion 111'),
-(466, 1, '09161150', 'SHERRIT MAGO BERTHA DALIS', 'APODERADO', NULL, NULL, NULL, NULL, 3, 288, 'Direccion 111'),
-(467, 1, '09394805', 'FOX SANCHEZ ROBINSON', 'APODERADO', NULL, NULL, NULL, NULL, 3, 288, 'Direccion 111'),
-(468, 1, '25603969', 'CASTRO RODRIGUEZ JOSE ROBERTO', 'APODERADO', NULL, NULL, NULL, NULL, 3, 288, 'Direccion 111'),
-(469, 1, '29593324', 'POLAR GUITTON EDGARD JOSE', 'APODERADO', NULL, NULL, NULL, NULL, 3, 288, 'Direccion 111'),
-(470, 1, '00456244', 'MARCHANT MENENDEZ FRANCISCO', 'APODERADO', NULL, NULL, NULL, NULL, 3, 288, 'Direccion 111'),
-(471, 1, '18021752', 'RAMIREZ LUNA VICTORIA CESAR AUGUSTO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 289, 'Direccion 111'),
-(472, 1, '18099907', 'IBAÑEZ VASQUEZ ROBERTO CARLOS', 'SUB GERENTE', NULL, NULL, NULL, NULL, 3, 289, 'Direccion 111'),
-(473, 1, '18100507', 'VAELLA CASTAÑEDA DIOMEDES ELISEO', 'SUB GERENTE', NULL, NULL, NULL, NULL, 3, 289, 'Direccion 111'),
-(474, 1, '18159327', 'INFANTE POLLACK WILMER ENRIQUE', 'GERENTE', NULL, NULL, NULL, NULL, 3, 289, 'Direccion 111'),
-(475, 1, '18853049', 'ALBINEZ PEREZ LUIS ALBERTO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 289, 'Direccion 111'),
-(476, 1, '19028062', 'BENITEZ GAMBOA JESUS SIGIFREDO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 289, 'Direccion 111'),
-(477, 1, '25617386', 'VALDIVIA MORAN VICTOR ANDRES', 'GERENTE', NULL, NULL, NULL, NULL, 3, 289, 'Direccion 111'),
-(478, 1, '07722170', 'PRIETO CHIRA JAIME', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 290, 'Direccion 111'),
-(479, 1, '07798284', 'TUDELA GUBBINS MANUEL EMILIO', 'DIRECTOR', NULL, NULL, NULL, NULL, 3, 290, 'Direccion 111'),
-(480, 1, '16588374', 'DEL CASTILLO CORNEJO RICARDO ANTONIO JORGE', 'DIRECTOR', NULL, NULL, NULL, NULL, 3, 290, 'Direccion 111'),
-(481, 1, '08784162', 'ARELLANO MONTERO GEYNER', 'DIRECTOR', NULL, NULL, NULL, NULL, 3, 291, 'Direccion 111'),
-(482, 1, '08802079', 'CABALLERO MONTERO ALDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 291, 'Direccion 111'),
-(483, 1, '09870051', 'ARRELLANO MONTERO LEYDEN', 'DIRECTOR', NULL, NULL, NULL, NULL, 3, 291, 'Direccion 111'),
-(484, 1, '10336945', 'MONTERO VIERA ALIPIA', 'DIRECTOR', NULL, NULL, NULL, NULL, 3, 291, 'Direccion 111'),
-(485, 1, '07868221', 'ZEGARRA MULANOVICH FRANCISCO JAVIER ROBERTO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 293, 'Direccion 111'),
-(486, 1, '08244928', 'DUBREUIL RODRIGO ALEJANDRO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 293, 'Direccion 111'),
-(487, 1, '08459349', 'CORIA VASQUEZ PATRICIA CECILIA', 'CONTADOR', NULL, NULL, NULL, NULL, 3, 293, 'Direccion 111'),
-(488, 1, '07211486', 'CHAVEZ PARRA ANA MARIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 294, 'Direccion 111'),
-(489, 1, '08081335', 'NOVOA CACEDA HECTOR GUILLERMO', 'APODERADO', NULL, NULL, NULL, NULL, 3, 294, 'Direccion 111'),
-(490, 1, '08272342', 'ISOLA DE LA PEÑA JUAN BAUTISTA', 'DIRECTOR EJECUTIVO', NULL, NULL, NULL, NULL, 3, 294, 'Direccion 111'),
-(491, 1, '06039727', 'ANDALUZ MIDEIROS VICTOR', 'GTE FINANCIERO', NULL, NULL, NULL, NULL, 3, 295, 'Direccion 111'),
-(492, 1, '06057892', 'URIBE ROCHA PEDRO', 'GTE GRAL', NULL, NULL, NULL, NULL, 3, 295, 'Direccion 111'),
-(493, 1, '09344371', 'MOREYRA MARROU MIGUEL MARTIN', 'APODERADO', NULL, NULL, NULL, NULL, 3, 297, 'Direccion 111'),
-(494, 1, '41030004', 'SALCEDO ESPINOZA ALEXANDRA', 'APODERADO', NULL, NULL, NULL, NULL, 3, 297, 'Direccion 111'),
-(495, 1, '000494189', 'JUAN MANUEL PARADA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 297, 'Direccion 111'),
-(496, 1, '000510869', 'HOLZAPFEL DE LA FUENTE MATIAS', 'APODERADO', NULL, NULL, NULL, NULL, 3, 297, 'Direccion 111'),
-(497, 1, '07840226', 'NUÑEZ DEVESCOVI ARTURO JUAN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 299, 'Direccion 111'),
-(498, 1, '29275561', 'SALAS MORALES EDGARDO', 'SECRETARIO', NULL, NULL, NULL, NULL, 3, 300, 'Direccion 111'),
-(499, 1, '29521969', 'ZUZUNAGA BRICENO JOSE', 'PRESIDENTE', NULL, NULL, NULL, NULL, 3, 300, 'Direccion 111'),
-(500, 1, '09399898', 'CAVERO BELAUNDE ROSARIO ANA MARIA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 301, 'Direccion 111'),
-(501, 1, '09506178', 'SALAS CHAVEZ BERARDO WENCESLAO', 'APODERADO', NULL, NULL, NULL, NULL, 3, 301, 'Direccion 111'),
-(502, 1, '09753599', 'CAVERO BELAUNDE LUCIA MARIA MERCEDES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 301, 'Direccion 111'),
-(503, 1, '80243419', 'ZAPATA MECHAN JORGE MARTIN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 302, 'Direccion 111'),
-(504, 1, '07829683', 'FERRO DELGADO VICTOR', 'MANDATARIO', NULL, NULL, NULL, NULL, 3, 303, 'Direccion 111'),
-(505, 1, '08243131', 'RIVEROS ECHEGARAY JUAN ANDRES', 'GERENTE', NULL, NULL, NULL, NULL, 3, 303, 'Direccion 111'),
-(506, 1, '08273746', 'TIRADO HART ALFREDO MIGUEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 303, 'Direccion 111'),
-(507, 1, '07855802', 'BRACALE DELGADO LUIS R', 'APODERADO', NULL, NULL, NULL, NULL, 3, 304, 'Direccion 111'),
-(508, 1, '09394065', 'BRACALE SILVA RICARDO ALEJANDRO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 304, 'Direccion 111'),
-(509, 1, '07724637', 'VIGIL VIDAL PERCY LUIS', 'APODERADO', NULL, NULL, NULL, NULL, 3, 305, 'Direccion 111'),
-(510, 1, '09534328', 'CERDEÑA BARREDA NAPOLEON HERNAN', 'APODERADO', NULL, NULL, NULL, NULL, 3, 305, 'Direccion 111'),
-(511, 1, '29364744', 'RODRIGUEZ BARBACHAN JOSE JAVIER', 'APODERADO', NULL, NULL, NULL, NULL, 3, 305, 'Direccion 111'),
-(512, 1, '10072767875', 'WIESE DE OSMA AUGUSTO FELIPE', 'PDTE.DE DIRECT.', NULL, NULL, NULL, NULL, 3, 305, 'Direccion 111'),
-(513, 1, '10082685079', 'DE LA PUENTE Y LAVALLE GONZALO', 'DIRECTOR', NULL, NULL, NULL, NULL, 3, 305, 'Direccion 111'),
-(514, 1, '20505590849', 'ADMINISTRADORA PANAMERICANA S.A.C.', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 305, 'Direccion 111'),
-(515, 1, '07700797', 'VILA BAYO JOSE ANTONIO', 'DIRECTOR', NULL, NULL, NULL, NULL, 3, 306, 'Direccion 111'),
-(516, 1, '07709805', 'FERNANDEZ CRISTINI SERGIO ORLANDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 306, 'Direccion 111'),
-(517, 1, '66313', 'VILA ARSEDA JOSE', 'PRESIDENTE DIRECTORIO', NULL, NULL, NULL, NULL, 3, 306, 'Direccion 111'),
-(518, 1, '28308300', 'GUTIERREZ ABARCA MARGOT', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 308, 'Direccion 111'),
-(519, 1, '06040850', 'GALVEZ FIGUEROA BEATRIZ AMELIA', 'CONTADOR', NULL, NULL, NULL, NULL, 3, 309, 'Direccion 111'),
-(520, 1, '07203892', 'MUÑOZ MARTINEZ YURI BERNARDO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 309, 'Direccion 111'),
-(521, 1, '07707549', 'MACARA CHVILI HELGUERO MICHEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 309, 'Direccion 111'),
-(522, 1, '07820033', 'PINILLOS GONZALEZ CARLOS JULIO', 'DIRECTOR', NULL, NULL, NULL, NULL, 3, 309, 'Direccion 111'),
-(523, 1, '10221739', 'CHAVEZ CABELLO CAMPBELL PEDRO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 309, 'Direccion 111'),
-(524, 1, '07783565', 'RAYGADA SOMMERKAMP JAIME EUGENIO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 310, 'Direccion 111'),
-(525, 1, '07852749', 'DE LA FLOR BELAUNDE FERNANDO MARTIN', 'APODERADO', NULL, NULL, NULL, NULL, 3, 310, 'Direccion 111'),
-(526, 1, '07862583', 'VEGA DE LA FLOR MANUEL GUILLERMO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 310, 'Direccion 111'),
-(527, 1, '09335139', 'HOFFMANN ROSAS MARK ERNST', 'APODERADO', NULL, NULL, NULL, NULL, 3, 310, 'Direccion 111'),
-(528, 1, '17915894', 'TORRES MARTINEZ MILAGROS DEL ROSARIO', 'SUB GERENTE', NULL, NULL, NULL, NULL, 3, 311, 'Direccion 111'),
-(529, 1, '18140089', 'TORRES MARTINEZ GUILIANA ELIZABETH', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 311, 'Direccion 111'),
-(530, 1, '10058496', 'FIGARI TESTINO EDUARDO CESAR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 313, 'Direccion 111'),
-(531, 1, '00000387', 'Acevedo Ostolaza Pedro Ricardo', 'Apoderado', NULL, NULL, NULL, NULL, 3, 314, 'Direccion 111'),
-(532, 1, '00000386', 'Valerga De La Flor Alberto Horacio', 'Apoderado', NULL, NULL, NULL, NULL, 3, 314, 'Direccion 111'),
-(533, 1, '00000385', 'Valerga De La Flor Aldo Horacio', 'Director', NULL, NULL, NULL, NULL, 3, 314, 'Direccion 111'),
-(534, 1, '08208079', 'GOMEZ ÑATO FERNANDO LAWRENCE', 'GERENTE', NULL, NULL, NULL, NULL, 3, 315, 'Direccion 111'),
-(535, 1, '08250296', 'VELAOCHAGA RAFFO GUILLERMO JUAN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 315, 'Direccion 111'),
-(536, 1, '00000384', 'ALBERTO VIDAL MALDONADO', 'GERENTE GENERAL', NULL, NULL, 'avidalm@gygperu.com', NULL, 3, 429, 'Direccion 111'),
-(537, 1, '10224968', 'PESCETTO RAFFO ALBERTO ERNESTO', 'APODERADO', NULL, NULL, NULL, NULL, 3, 315, 'Direccion 111'),
-(538, 1, '10272752', 'SALCEDO PACHAS RAUL MARTIN', 'GERENTE', NULL, NULL, NULL, NULL, 3, 315, 'Direccion 111'),
-(539, 1, '10492042', 'BAYLY LETTS ARTURO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 316, 'Direccion 111'),
-(540, 1, '06763287', 'TORRES VILCHEZ AUGUSTO LEONARDO', 'TITULAR-GERENTE', NULL, NULL, NULL, NULL, 3, 317, 'Direccion 111'),
-(541, 1, '02849300', 'RAMOS INFANTE ROSA ELENA', 'TITULAR-GERENTE', NULL, NULL, NULL, NULL, 3, 318, 'Direccion 111'),
-(542, 1, '40815866', 'POZO VALCARCEL ETHEL ROCIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 319, 'Direccion 111'),
-(543, 1, '41934868', 'ANGULO VASQUEZ JIMMY ROUS', 'APODERADO', NULL, NULL, NULL, NULL, 3, 319, 'Direccion 111'),
-(544, 1, '07260563', 'LIU AREVALO ROCIO VERONICA', 'APODERADO', NULL, NULL, NULL, NULL, 3, 321, 'Direccion 111'),
-(545, 1, '07804563', 'JIMENEZ GARCIA JOSE ALFREDO JULIO', 'APODERADO', NULL, NULL, NULL, NULL, 3, 321, 'Direccion 111'),
-(546, 1, '09390934', 'PALACIOS HATCHWELL TEOBALDO', 'APODERADO', NULL, NULL, NULL, NULL, 3, 321, 'Direccion 111'),
-(547, 1, '10263291', 'DE LA TORRE SALAS MARIELLA GISELA', 'APODERADO', NULL, NULL, NULL, NULL, 3, 321, 'Direccion 111'),
-(548, 1, '10278082', 'LEON VEGAS VERONICA', 'APODERADO', NULL, NULL, NULL, NULL, 3, 321, 'Direccion 111'),
-(549, 1, '10471336', 'JARA CALLE LUIS RICARDO', 'APODERADO', NULL, NULL, NULL, NULL, 3, 321, 'Direccion 111'),
-(550, 1, '00000383', 'NORMA SANCHEZ', NULL, NULL, NULL, 'nsanchez@savperu.com', NULL, 3, 1, 'Direccion 111'),
-(551, 1, '00000382', 'JAVIER CASTRO', NULL, NULL, NULL, 'jcastro@savperu.com', NULL, 3, 1, 'Direccion 111'),
-(552, 1, '24461388', 'LAYME CARMONA TEOFILA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 322, 'Direccion 111'),
-(553, 1, '07855981', 'DEL BUSTO QUIÑONES JAIME RAMON', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 323, 'Direccion 111'),
-(554, 1, '06648692', 'VIVANCO VELANDO MANUEL IGNACIO', 'DIRECTOR', NULL, NULL, NULL, NULL, 3, 324, 'Direccion 111'),
-(555, 1, '10220518', 'FREIRE GANOZA JUAN JOSE MARTIN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 324, 'Direccion 111'),
-(556, 1, '10274678', 'VALENCIA ORIHUELA RICARDO ISMAEL', 'GERENTE EJECUTIVO', NULL, NULL, NULL, NULL, 3, 324, 'Direccion 111'),
-(557, 1, '10307479', 'PARDO FIGUEROA TURNER JOSE ERNESTO', 'GERENTE EJECUTIVO', NULL, NULL, NULL, NULL, 3, 324, 'Direccion 111'),
-(558, 1, '10264999', 'VEGAS MANTERO MAURICIO ALBERTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 325, 'Direccion 111'),
-(559, 1, '18901780', 'AGUILAR ZAVALETA JORGE PABLO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 326, 'Direccion 111'),
-(560, 1, '29311995', 'VELASQUEZ SILVA SANDRA VERONICA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 327, 'Direccion 111'),
-(561, 1, '29416653', 'SAENZ JIMENEZ GUILLERMO FRANCISCO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 327, 'Direccion 111'),
-(562, 1, '29576224', 'CORDOVA ZARAUZ RETH ARMANDO', 'APODERADO', NULL, NULL, NULL, NULL, 3, 327, 'Direccion 111'),
-(563, 1, '00000381', 'NEGOCIACIACION KIO S.A.C.', NULL, NULL, NULL, NULL, NULL, 3, 331, 'Direccion 111'),
-(564, 1, '00000371', 'ADMINISTRADORA Y SERVICIOS SANTIAGO S.A.C.', NULL, NULL, NULL, NULL, NULL, 3, 332, 'Direccion 111'),
-(565, 1, '00000379', 'INVERSIONES MALAGA &BENSA SOCIEDAD ANONIMA CE', NULL, NULL, NULL, NULL, NULL, 3, 333, 'Direccion 111'),
-(566, 1, '40662037', 'ADA CAROLIONA MONTOYA CHALCO', NULL, NULL, NULL, NULL, NULL, 3, 334, 'Direccion 111'),
-(567, 1, '00000388', 'AVICOLA DON BRUNO S.C.R.L.', NULL, NULL, NULL, NULL, NULL, 3, 335, 'Direccion 111'),
-(568, 1, '00000377', 'COMPU TOCK', NULL, NULL, NULL, NULL, NULL, 3, 336, 'Direccion 111'),
-(569, 1, '00000376', 'EL MIRADOR', NULL, NULL, NULL, NULL, NULL, 3, 337, 'Direccion 111'),
-(570, 1, '00000375', 'CESAR AUGUSTO TIVEÑO GARCIA', NULL, NULL, NULL, NULL, NULL, 3, 260, 'Direccion 111'),
-(571, 1, '00000374', 'CESAR AUGUSTO TIVEÑO GARCIA', NULL, NULL, NULL, NULL, NULL, 3, 260, 'Direccion 111'),
-(572, 1, '00000373', 'LIDERDATA', NULL, NULL, NULL, NULL, NULL, 3, 336, 'Direccion 111'),
-(573, 1, '00000372', 'REDM', NULL, NULL, NULL, NULL, NULL, 3, 338, 'Direccion 111'),
-(574, 1, '09099386', 'KIYAN KIYAN ARMANDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1407, 'Direccion 111'),
-(575, 1, '08995797', 'MATILDE GARCIA SALVATIERRA', NULL, NULL, NULL, NULL, NULL, 3, 341, 'Direccion 111'),
-(576, 1, '00000397', 'JUAN GUERRERA', 'SUPERVISOR', NULL, NULL, 'Juan.Guerrera@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(577, 1, '00000399', 'WILFREDO SEGOVIA', 'INGENIERO', NULL, NULL, 'wsegovia@hvcontratistas.com.pe', NULL, 3, 249, 'Direccion 111'),
-(578, 1, '00000380', 'Juan Deustua', 'Gerente General', NULL, NULL, 'j.deustua@deustuaingenieros.com.pe', NULL, 3, 280, 'Direccion 111'),
-(579, 1, '40567938', 'ALCANTARA MESIAS ENRIQUE ERICKSON', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 342, 'Direccion 111'),
-(580, 1, '18886006', 'CUEVA DE SANTOS RESURRECCION D', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 343, 'Direccion 111'),
-(581, 1, '06015429', 'AREVALO FLORES JORGE GILBERTO', 'GERENTE', '01-6188004', NULL, NULL, NULL, 3, 344, 'Direccion 111'),
-(582, 1, '06015429', 'AREVALO FLORES JORGE GILBERTO', 'GERENTE', '01-6188004', NULL, NULL, NULL, 3, 344, 'Direccion 111'),
-(583, 1, '06449030', 'ALMANDOZ FLORES ENRIQUE', 'GERENTE', '01-6110418', NULL, NULL, NULL, 3, 345, 'Direccion 111'),
-(584, 1, '07046165', 'JARA CAMPOS LEONCIO ARMANDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 346, 'Direccion 111'),
-(585, 1, '08768893', 'LI DE CHAU GLORIA DORIS', 'GERENTE GENERAL', '01-2750148', NULL, NULL, NULL, 3, 347, 'Direccion 111'),
-(586, 1, '08995797', 'SALVATIERRA GARCIA MATILDE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 348, 'Direccion 111'),
-(587, 1, '32813592', 'FANNY ELIZABETH VELASQUEZ VARAS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 349, 'Direccion 111'),
-(588, 1, '32111096', 'ORELLANA GERONIMO, KARIN CARMEN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 350, 'Direccion 111'),
-(589, 1, '32854857', 'CHATI ROJAS, ARMANDINA ELEUTERIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 351, 'Direccion 111'),
-(590, 1, '10202762', 'RUIZ VILLANUEVA WALTER JOSE', 'TITULAR-GERENTE', NULL, NULL, NULL, NULL, 3, 352, 'Direccion 111'),
-(591, 1, '10204082', 'HUGO ATUSPARIA GONZALES', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1103, 'Direccion 111'),
-(592, 1, '32917726', 'CHUQUI ENCARNACION JUAN WALBERTO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 353, 'Direccion 111'),
-(593, 1, '32932188', 'MIRANDA LOZANO EDILBERTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 354, 'Direccion 111'),
-(594, 1, '32797351', 'VILLAR MARTELL GABRIEL', 'GERENTE', NULL, NULL, NULL, NULL, 3, 355, 'Direccion 111'),
-(595, 1, '42738373', 'TORRES SALDAÑA MILAGROS ELIZABETH', 'TITULAR-GERENTE', NULL, NULL, NULL, NULL, 3, 356, 'Direccion 111'),
-(596, 1, '32841481', 'MENESES BERMUDEZ, RUTH ELENA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 357, 'Direccion 111'),
-(597, 1, '43056058', 'MARY FIORELLA  CASAVILCA MOLINA', NULL, NULL, NULL, NULL, NULL, 3, 337, 'Direccion 111'),
-(598, 1, '00000405', 'IVAN ARRIETA', NULL, NULL, NULL, NULL, NULL, 3, 347, 'Direccion 111'),
-(599, 1, '09890090', 'CARLOS ALBERTO SEGUIL CHOTA', NULL, NULL, NULL, NULL, NULL, 3, 358, 'Direccion 111'),
-(600, 1, '00000404', 'SIMON MALDONADO', 'JEFE DE OFICINA TECNICA', NULL, NULL, 'jsmaldonado@hvcontratistas.com.pe', NULL, 3, 249, 'Direccion 111'),
-(601, 1, '00000403', 'JAVIER DEL RIO', 'GERENTE DE PROYECTO', NULL, NULL, 'jdelrioa@hvcontratistas.com.pe', 'jdelrioa@hvcontratistas.com.pe', 3, 249, 'Direccion 111'),
-(602, 1, '00000402', 'ENRIQUE G. RAMIREZ BECERRA', 'GERENTE', NULL, NULL, 'enrique@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(603, 1, '40578657', 'GERARDO CASTILLO MESIA', NULL, NULL, NULL, NULL, NULL, 3, 359, 'Direccion 111'),
-(604, 1, '00000401', 'OLTURSA', NULL, NULL, NULL, NULL, NULL, 3, 89, 'Direccion 111'),
-(605, 1, '00000400', 'GIULIANO FEIJOO', 'CONTADOR GENERAL', NULL, NULL, 'giuliano.feijoo@tpsa.com.pe', NULL, 3, 12, 'Direccion 111'),
-(606, 1, '00000398', 'ALERT DEL PERU', NULL, NULL, NULL, NULL, NULL, 3, 361, 'Direccion 111'),
-(607, 1, '00000567', 'DULCES TRADICIONALES DEL SUR', NULL, NULL, NULL, NULL, NULL, 3, 362, 'Direccion 111'),
-(608, 1, '00000396', 'INVERSIONES KENZO', NULL, NULL, NULL, NULL, NULL, 3, 363, 'Direccion 111'),
-(609, 1, '00000395', 'CARMEN VEGA', 'ANALISTA DE IMPUESTOS', NULL, NULL, 'carmen.vega@tpsa.com.pe', NULL, 3, 12, 'Direccion 111'),
-(610, 1, '00000394', 'Javier Flores', 'Supervisor', NULL, NULL, 'javier.flores@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(611, 1, '00000393', 'CRUZ DEL SUR', NULL, NULL, NULL, NULL, NULL, 3, 364, 'Direccion 111'),
-(612, 1, '18208681', 'CARRILLO MARTINEZ JOHN TOMAS', 'GERENTE', NULL, NULL, NULL, NULL, 3, 365, 'Direccion 111'),
-(613, 1, '45584034', 'VERTIZ CASTRO ELVA ALEJANDRA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 366, 'Direccion 111'),
-(614, 1, '32967803', 'RODRIGUEZ PEREZ NIRIA ZULEIKA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 367, 'Direccion 111'),
-(615, 1, '00000392', 'LA RUEDA', NULL, NULL, NULL, NULL, NULL, 3, 368, 'Direccion 111'),
-(616, 1, '09145806', 'JOSE RAMIREZ BECERRA', 'JEFE DE OFICINA TECNICA', NULL, NULL, 'Jramirez@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(617, 1, '00000362', 'MARIA MANSILLA', 'ASEGURAMIENTO DE CALIDAD', NULL, NULL, 'maria.mansilla@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(618, 1, '00000566', 'JUAN GABRIEL OJEDA', 'ARQUITECTO', NULL, NULL, 'jgojeda@pintoygomezarquitectos.com', NULL, 3, 460, 'Direccion 111'),
-(619, 1, '1032250', 'CESAR DE LOS RIOS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1104, 'Direccion 111'),
-(620, 1, '00000378', 'JUAN ACOSTA', NULL, NULL, NULL, 'juan.acosta@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(621, 1, '00000351', 'ROMINA BETETA', NULL, NULL, NULL, 'romina.beteta@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(622, 1, '00000350', 'LUIS RIVERA', NULL, NULL, NULL, 'lrivera@sigral.com.pe', NULL, 3, 369, 'Direccion 111'),
-(623, 1, '00000349', 'MOISES ROJAS', NULL, NULL, NULL, 'mrojas@achavezarquitectos.com', NULL, 3, 370, 'Direccion 111'),
-(624, 1, '00000348', 'TODOS', NULL, NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(625, 1, '00000347', 'TODOS', NULL, NULL, NULL, NULL, NULL, 3, 371, 'Direccion 111'),
-(626, 1, '10003199', 'CAVALIE FIEDLER ERIK', 'GERENTE GENERAL', NULL, NULL, 'erikcavalie@rinolpavimenta.com.pe', NULL, 3, 1503, 'Direccion 111'),
-(627, 1, '10831582', 'CORREA MALACHOWSKI JUAN FERNANDO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 38, 'Direccion 111'),
-(628, 1, '00000346', 'NORKYS ICA MALL', NULL, NULL, NULL, NULL, NULL, 3, 373, 'Direccion 111'),
-(629, 1, '00000345', 'DIEGO LOPEZ', 'GERENTE DE RELACIONES COMERCIALES', '6111121', NULL, 'diego.lopez@nextel.com.pe', NULL, 3, 33, 'Direccion 111'),
-(630, 1, '00000335', 'INVERSIONES TOMAS VALLE', NULL, NULL, NULL, NULL, NULL, 3, 374, 'Direccion 111'),
-(631, 1, '00000343', 'EL POINT', NULL, NULL, NULL, NULL, NULL, 3, 375, 'Direccion 111'),
-(632, 1, '00000352', 'ALCASUR', NULL, NULL, NULL, NULL, NULL, 3, 376, 'Direccion 111'),
-(633, 1, '00000341', 'TWO CHEFF´S', NULL, NULL, NULL, NULL, NULL, 3, 377, 'Direccion 111'),
-(634, 1, '00000340', 'ACCOMP SYSTEM´S', NULL, NULL, NULL, NULL, NULL, 3, 378, 'Direccion 111'),
-(635, 1, '00000339', 'GRILL & PUB', NULL, NULL, NULL, NULL, NULL, 3, 379, 'Direccion 111'),
-(636, 1, '00000338', 'NITOS', NULL, NULL, NULL, NULL, NULL, 3, 380, 'Direccion 111'),
-(637, 1, '00000337', 'LA SIRENA', NULL, NULL, NULL, NULL, NULL, 3, 381, 'Direccion 111'),
-(638, 1, '00000360', 'MULTISERVICIOS NELLY', NULL, NULL, NULL, NULL, NULL, 3, 382, 'Direccion 111'),
-(639, 1, '00000342', 'EL SNACK ECLIPSE', NULL, NULL, NULL, NULL, NULL, 3, 383, 'Direccion 111'),
-(640, 1, '40090128', 'ANDREA HERRERA CACERES', NULL, NULL, NULL, NULL, NULL, 3, 384, 'Direccion 111'),
-(641, 1, '07568485', 'RAMIREZ URETA LUIS ALFREDO', 'GERENTE GENERAL', '01362-3816', NULL, NULL, NULL, 3, 385, 'Direccion 111'),
-(642, 1, '07854873', 'LUIS MIGUEL CICCIA VASQUEZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 386, 'Direccion 111'),
-(643, 1, '32970293', 'CORDOVA CAMPOS ORLANDO FERNANDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 387, 'Direccion 111'),
-(644, 1, '32840256', 'HONORES DE SAUCEDO RAMIRA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 388, 'Direccion 111'),
-(645, 1, '32789357', 'VASQUEZ PEREYRA NERIDA OLGA', 'GERENTE GENERAL', '043-350328', NULL, NULL, NULL, 3, 389, 'Direccion 111'),
-(646, 1, '32108108', 'AVILES ZAPATA CARLOS STALIN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 390, 'Direccion 111'),
-(647, 1, '08641354', 'ASMAT RAMIRES CARLOS MANUEL', 'DIRECTOR EJECUTIVO', '043-322281', NULL, NULL, NULL, 3, 391, 'Direccion 111'),
-(648, 1, '07939932', 'CARBO CONTE ORLANDO JESUS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 392, 'Direccion 111'),
-(649, 1, '00000344', 'AUGUSTO VILLACORTA', NULL, NULL, NULL, 'avillacorta@hvcontratistas.com.pe', NULL, 3, 249, 'Direccion 111'),
-(650, 1, '00000369', 'LUIS SANCHEZ DE LA PUENTE', 'CONTADOR EXTERNO', NULL, NULL, 'lsanchezp@sanchezyasociados.com', NULL, 3, 251, 'Direccion 111'),
-(651, 1, '00000368', 'INVERSIONES ELMILAND', NULL, NULL, NULL, NULL, NULL, 3, 395, 'Direccion 111'),
-(652, 1, '00000367', 'RESTAURANT D´MILY', NULL, NULL, NULL, NULL, NULL, 3, 396, 'Direccion 111'),
-(653, 1, '00000366', 'RESTAURANT VENEZIA', NULL, NULL, NULL, NULL, NULL, 3, 397, 'Direccion 111'),
-(654, 1, '00000365', 'ROJAS', NULL, NULL, NULL, NULL, NULL, 3, 398, 'Direccion 111'),
-(655, 1, '00000364', 'ESTACION DE SERVICIO EL CHORRILLANO', NULL, NULL, NULL, NULL, NULL, 3, 399, 'Direccion 111'),
-(656, 1, '00000363', 'SUPER GRIFO CHINCHA', NULL, NULL, NULL, NULL, NULL, 3, 400, 'Direccion 111'),
-(657, 1, '00000353', 'PIZZA CAR', NULL, NULL, NULL, NULL, NULL, 3, 401, 'Direccion 111'),
-(658, 1, '00000361', 'MARIELA SILVA', 'DISEÑADORA', NULL, NULL, 'msilvapro@terra.com.pe', NULL, 3, 402, 'Direccion 111'),
-(659, 1, '00000370', 'ROMULO TRIVEÑO', NULL, NULL, NULL, NULL, NULL, 3, 403, 'Direccion 111'),
-(660, 1, '00000359', 'GRIFOS ESPINOZA', NULL, NULL, NULL, NULL, NULL, 3, 404, 'Direccion 111'),
-(661, 1, '00000358', 'CHIFA EL GRAN LIU', NULL, NULL, NULL, NULL, NULL, 3, 405, 'Direccion 111'),
-(662, 1, '00000357', 'LORENA I', NULL, NULL, NULL, NULL, NULL, 3, 406, 'Direccion 111'),
-(663, 1, '00000356', 'JOSE FERRARI', NULL, NULL, NULL, 'jose.ferrari@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(664, 1, '00000355', 'MARIA TERESA', NULL, NULL, NULL, NULL, NULL, 3, 406, 'Direccion 111'),
-(665, 1, '00000354', 'LAVANDERIA LAVA EXPRESS', NULL, NULL, NULL, NULL, NULL, 3, 407, 'Direccion 111'),
-(666, 1, '10036343', 'LLALLAHUI SALVATIERRA ATILIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 408, 'Direccion 111'),
-(667, 1, '07937469', 'MORI MARIN VICTOR HOMERO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 409, 'Direccion 111'),
-(668, 1, '00000565', 'CARLOS HEREDIA', 'DPTO PROYECTOS', NULL, NULL, 'cheredia@vmhingenieros.com', NULL, 3, 409, 'Direccion 111'),
-(669, 1, '09145806', 'JOSE ERNESTO RAMIREZ BECERRA', NULL, NULL, NULL, NULL, NULL, 3, 410, 'Direccion 111'),
-(670, 1, '00000564', 'ACOSA', NULL, NULL, NULL, NULL, NULL, 3, 414, 'Direccion 111'),
-(671, 1, '07277564', 'CAPRILE CARBAJAL EDUARDO LUIS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 412, 'Direccion 111'),
-(672, 1, '00000390', 'OPERACIONES Y SERVICIOS GENERALES S A', NULL, NULL, NULL, NULL, NULL, 3, 415, 'Direccion 111'),
-(673, 1, '00000563', 'FERNANDO CUBA', 'VENTAS', NULL, NULL, 'Fernando.cuba@precor.com.pe', NULL, 3, 416, 'Direccion 111'),
-(674, 1, '06875616', 'MESAJIL LEON ABEL MARCELO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 411, 'Direccion 111'),
-(675, 1, '00000562', 'CASAVILCA MOLINA, MARY FIORELLA', NULL, NULL, NULL, NULL, NULL, 3, 418, 'Direccion 111'),
-(676, 1, '08214739', 'GONZALES MARTINEZ MARIA', 'S/N FND. TRES ESQUINAS', NULL, NULL, NULL, NULL, 3, 419, 'Direccion 111'),
-(677, 1, '00000561', 'CLARO', NULL, NULL, NULL, 'claro@claro', NULL, 3, 420, 'Direccion 111'),
-(678, 1, '21565870', 'YAMASHIRO ORE GUILLERMO ENRIQUE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 421, 'Direccion 111'),
-(679, 1, '09978329', 'MANUEL FONSECA SANCHEZ', 'SUPERVISOR ELECTROMECANICO', NULL, NULL, 'mfonseca@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(680, 1, '00000560', 'LUIS ESPINOLA', NULL, NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(681, 1, '80335290', 'BERNAOLA MERCHAN JULISSA', NULL, NULL, NULL, NULL, NULL, 3, 423, 'Direccion 111'),
-(682, 1, '00000558', 'MARUCHI RODRÍGUEZ MARIÁTEGUI', 'GERENTE DE MARKETING', NULL, NULL, 'maruchi@divercity.com.pe', NULL, 3, 251, 'Direccion 111'),
-(683, 1, '00000557', 'CAMEN MARIA TOCE OCAMPO', 'GERENTE COMERCIAL', NULL, NULL, 'cmtoce@divercity.com.pe', NULL, 3, 251, 'Direccion 111'),
-(684, 1, '00000556', 'WILSON VELANDIA TORRES', 'SUPERVISOR DE OBRA', NULL, NULL, 'wilsongvt@gmail.com', NULL, 3, 251, 'Direccion 111'),
-(685, 1, '43318517', 'FRANK MELO AYRE', 'SUPERVISOR DE OBRA', NULL, NULL, 'fmelo@copracsa.com', 'www.copracsa.com', 3, 6, 'Direccion 111'),
-(686, 1, '40045132', 'LUIS FERNANDO ALLENDE PUMACAHUA', 'SUPERVISOR ELECTRO MECANICO', NULL, NULL, 'lallende@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(687, 1, '10472837', 'CACIC ENRIQUEZ MILE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 424, 'Direccion 111'),
-(688, 1, '00000568', 'MILAGROS J. BARRON CHAVEZ', 'ASISTENTE ADMINISTRATIVO', NULL, NULL, 'mbarron@luzdelsur.com.pe', NULL, 3, 424, 'Direccion 111'),
-(689, 1, '09458352', 'YUBANA ESTRADA VELASQUEZ', NULL, NULL, NULL, NULL, NULL, 3, 425, 'Direccion 111'),
-(690, 1, '43436686', 'SHIRLEY E. HERNANDEZ', NULL, NULL, NULL, NULL, NULL, 3, 426, 'Direccion 111'),
-(691, 1, '00000550', 'RESTAURANT CHIFA', NULL, NULL, NULL, NULL, NULL, 3, 427, 'Direccion 111'),
-(692, 1, '21463088', 'CESAR ARTURO YAMASHIRO', NULL, NULL, NULL, NULL, NULL, 3, 428, 'Direccion 111'),
-(693, 1, '00000548', 'MILTON CASTELLANOS', 'GERENTE GENERAL', NULL, NULL, 'mcastellanos@arquitotal.com', NULL, 3, 160, 'Direccion 111'),
-(694, 1, '00000547', 'MANUEL NORIEGA RISCO', 'GERENTE COMERCIAL', NULL, NULL, 'mnoriega@masterwall.com.pe', NULL, 3, 21, 'Direccion 111'),
-(695, 1, '00000546', 'JESUS IBARCENA', 'GERENTE DE PROYECTOS', NULL, NULL, 'jibarcena@idartperu.com', NULL, 3, 430, 'Direccion 111'),
-(696, 1, '00000545', 'SEGUNDO VEGA TAFUR', 'GERENTE GENERAL', NULL, NULL, 'gerencia@servecentersym.com.pe', NULL, 3, 431, 'Direccion 111'),
-(697, 1, '00000544', 'Martin Vega Tafur', 'Gerente General', NULL, NULL, 'vepesa-07@hotmail.com', NULL, 3, 432, 'Direccion 111'),
-(698, 1, '00000543', 'CECILIA CHU', 'ASESORA DE PROYECTOS', NULL, NULL, 'cchu@stansa.com.pe', NULL, 3, 202, 'Direccion 111'),
-(699, 1, '00000647', 'Rafael Alvarez', 'Gerente General', NULL, NULL, 'ralvarez@coldimport.com.pe', NULL, 3, 13, 'Direccion 111'),
-(700, 1, '00000553', 'Miguel Salinas', 'Gerente de Proyectos', NULL, NULL, 'msalinas@termorep.com.pe', NULL, 3, 48, 'Direccion 111'),
-(701, 1, '00000555', 'ENRIQUE REVILLA', 'JEFE DE PRODUCCION', NULL, NULL, 'proyectos@rehuperu.com', NULL, 3, 433, 'Direccion 111'),
-(702, 1, '00000644', 'Henry Trou', 'Jefe de Divicion de Aire Acondicionado', NULL, NULL, 'henrytrou@ascensores-sa.com', NULL, 3, 436, 'Direccion 111'),
-(703, 1, '00000637', 'ROSA UECHI', 'JEFA DE OFICINA TECNICA', NULL, NULL, 'ruechi@instaplac.com.pe', NULL, 3, 434, 'Direccion 111'),
-(704, 1, '00000641', 'Rafael Alvarez', 'Gerente de Proyecto', NULL, NULL, 'ralvarez@coldimport.com.pe', NULL, 3, 13, 'Direccion 111'),
-(705, 1, '00000640', 'Victor Frank Delgado', 'Ejecutivo de Ventas', NULL, NULL, 'victorfrank@ascensores-sa.com', NULL, 3, 436, 'Direccion 111'),
-(706, 1, '00000634', 'Roberto Rodriguez Torres', 'Jefe de Marketing - Product Manager', NULL, NULL, 'roberto@trianon.com.pe', NULL, 3, 437, 'Direccion 111'),
-(707, 1, '06854965', 'Manuel Antonio Rodriguez Torres', 'Gerente General', NULL, NULL, 'lift@elevatronic.com', NULL, 3, 438, 'Direccion 111'),
-(708, 1, '09879058', 'Jose Antonio Larco Pedraza', 'Gerente General', NULL, NULL, 'ventas@ascensoresandinosingenieros.com.pe', NULL, 3, 439, 'Direccion 111'),
-(709, 1, '43318517', 'MELO AYRE FRANK', NULL, NULL, NULL, NULL, NULL, 3, 440, 'Direccion 111'),
-(710, 1, '379270821', 'NANCY HUALLA QUISPE', NULL, NULL, NULL, NULL, NULL, 3, 441, 'Direccion 111'),
-(711, 1, '00000629', 'D LIZIA', NULL, NULL, NULL, NULL, NULL, 3, 442, 'Direccion 111'),
-(712, 1, '29319789', 'JARRIN CACERES HERNAN', NULL, NULL, NULL, NULL, NULL, 3, 443, 'Direccion 111'),
-(713, 1, '10221078', 'GARCIA ARATA NOVOA VANESSA', NULL, NULL, NULL, NULL, NULL, 3, 444, 'Direccion 111'),
-(714, 1, '00000569', 'ALFREDO BARRIG', NULL, NULL, NULL, 'abarrigr@hotmail.com', NULL, 3, 280, 'Direccion 111'),
-(715, 1, '00000666', 'WILSON VELANDIA', 'Supervisor de Obra', NULL, NULL, 'wilsongvt@gmail.com', NULL, 3, 251, 'Direccion 111'),
-(716, 1, '10136744', 'POMA AGUSTIN JUAN CARLOS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 445, 'Direccion 111'),
-(717, 1, '09379163', 'URBINA GARCIA ROGER ANDRES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 446, 'Direccion 111'),
-(718, 1, '08254409', 'SAMBRA FOCACCI CESAR AUGUSTO MIGUEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 447, 'Direccion 111'),
-(719, 1, '08195146', 'BRAZZODURO TABUSSO RENZO ETTORE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 448, 'Direccion 111'),
-(720, 1, '09152361', 'SILVA TABUSSO GUILLERMO MARTIN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 450, 'Direccion 111'),
-(721, 1, '08262019', 'PINASCO MENCHELLI IRZIO PIETRO BRUNO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 451, 'Direccion 111'),
-(722, 1, '10121536', 'ROSALES RIVERA, VICTORIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 452, 'Direccion 111'),
-(723, 1, '06546282', 'SANDI RAMIREZ ROSA MARIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 453, 'Direccion 111'),
-(724, 1, '00000595', 'AMADO LOZANO', NULL, NULL, NULL, 'alozano@diaringenieros.com', NULL, 3, 16, 'Direccion 111'),
-(725, 1, '00000593', 'ALFONSO MERCADO', NULL, NULL, NULL, 'ventas7@refricorp.com', NULL, 3, 435, 'Direccion 111'),
-(726, 1, '00000591', 'JANIO MORAIS', 'GERENTE COMERCIAL', NULL, NULL, 'jmorais@refricorp.com', NULL, 3, 435, 'Direccion 111'),
-(727, 1, '00000577', 'Eduardo Martinez', 'Gerente de Obra', NULL, NULL, 'eduardo.martinez@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(728, 1, '10060447', 'FORD DEZA WILFRED GRAHAM', 'GERENTE', NULL, NULL, NULL, NULL, 3, 435, 'Direccion 111'),
-(729, 1, '07533428', 'Luis Gutierrez Reyes', 'Gerente General', NULL, NULL, NULL, NULL, 3, 1276, 'Direccion 111'),
-(730, 1, '00000575', 'PERCY HILARIO SOLIS', 'RESPONSABLE DE PROYECTOS', NULL, NULL, 'cotizaciones@geodatsystem.com', NULL, 3, 454, 'Direccion 111'),
-(731, 1, '00000574', 'NERY MARTINEZ ALBAN', 'GERENTE GENERAL', NULL, NULL, 'mail@aidcns.com', NULL, 3, 455, 'Direccion 111'),
-(732, 1, '00000573', 'ARLES LANDEO PACHAS', 'GERENTE GENERAL', NULL, NULL, 'econtepsac.arles@yahoo.es', NULL, 3, 456, 'Direccion 111'),
-(733, 1, '23840012', 'JOSEFINA Y. CHUQUIMIA MEJIA', NULL, NULL, NULL, NULL, NULL, 3, 457, 'Direccion 111'),
-(734, 1, '00000571', 'ANDREI GONZALES', 'DIRECTOR DE PROYECTOS', NULL, NULL, 'vidrieriahaydigq@hotmail.com', NULL, 3, 458, 'Direccion 111'),
-(735, 1, '10183854', 'GEOFFREY BRAVO SANTOS', 'GERENTE GENERAL', NULL, NULL, 'gbravo40@hotmail.com', NULL, 3, 459, 'Direccion 111'),
-(736, 1, '00000527', 'CONSTANZA DIAZ', 'ARQUITECTA', NULL, NULL, 'cdiaz@pintoygomezarquitectos.com', NULL, 3, 460, 'Direccion 111'),
-(737, 1, '00000486', 'INVERSIONES PETRO´S', NULL, NULL, NULL, NULL, NULL, 3, 461, 'Direccion 111'),
-(738, 1, '07979825', 'FERNADO CARMEN CASTRO', 'GERENTE GENERAL', NULL, NULL, 'fernandocarmen30@hotmail.com', NULL, 3, 462, 'Direccion 111'),
-(739, 1, '43382842', 'REATEGUI PEREYRA CARLOS GABRIEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 464, 'Direccion 111'),
-(740, 1, '08256115', 'GARCIA BEJAR HECTOR RAUL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 465, 'Direccion 111'),
-(741, 1, '00000013', 'Andrés Mendoza R.', 'Encargado de Ingenieria', NULL, NULL, 'andres.mendoza@airpowerperu.com]', NULL, 3, 1074, 'Direccion 111'),
-(742, 1, '00000542', 'MILTON POMA NAVARRO', 'SUPERVISOR ELECTROMECANICO', NULL, NULL, 'mpoma@hvcontratistas.com.pe', NULL, 3, 249, 'Direccion 111'),
-(743, 1, '00000510', 'Vanessa Garcia Arata', 'SUPERVISOR', NULL, NULL, 'vgarciaarata@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(744, 1, '41866258', 'Juan Carlos Kuriyama Bonnett', 'Representante Legal', NULL, NULL, 'jkuriyama83@hotmail.com', NULL, 3, 466, 'Direccion 111'),
-(745, 1, '00000508', 'Felipe Calle Wille', 'Gerente General', NULL, NULL, 'fcalle@fisaperu.com', NULL, 3, 466, 'Direccion 111'),
-(746, 1, '25800357', 'GARCIA MENDEZ EDWIN JACK', 'GERENTE GENERAL', NULL, NULL, 'egarcia@ensol.com.pe', NULL, 3, 467, 'Direccion 111'),
-(747, 1, '00000506', 'CARLA NOEMI SALAZAR PEREDA', NULL, NULL, NULL, NULL, NULL, 3, 468, 'Direccion 111'),
-(748, 1, '00000505', 'ALICIA HUALLA QUISPE', NULL, NULL, NULL, NULL, NULL, 3, 469, 'Direccion 111'),
-(749, 1, '00000504', 'INC', NULL, NULL, NULL, NULL, NULL, 3, 470, 'Direccion 111'),
-(750, 1, '10160832', 'Manuel Caceres Barreto', 'GERENTE GENERAL', NULL, NULL, 'mcaceres@tridecom.com', NULL, 3, 471, 'Direccion 111'),
-(751, 1, '00000502', 'Juan P. Zúñiga Orellana', 'COMERCIALIZACIÓN', NULL, NULL, 'juanz.orellana@tridecom.com', NULL, 3, 471, 'Direccion 111'),
-(752, 1, '09399850', 'ZAPATA NEYRA LILIANA', 'GERENTE GENERAL', NULL, NULL, 'uwatersupplier@gmail.com', NULL, 3, 472, 'Direccion 111'),
-(753, 1, '21527050', 'ROBERTO CARDENAS SARMIENTO', 'GERENTE GENERAL', NULL, NULL, 'robertocardenassarmiento@gmail.com', NULL, 3, 1105, 'Direccion 111'),
-(754, 1, '00001730', 'ALFONSO JESUS PANIZO OTERO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 542, 'Direccion 111'),
-(755, 1, '08204746', 'TORRES VELARDE GILBERTO LUIS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 473, 'Direccion 111'),
-(756, 1, '32840293', 'GUZMAN CEPEDA SEGUNDO ELOY', 'GERENTE GENERAL', '043-353473', NULL, NULL, NULL, 3, 474, 'Direccion 111'),
-(757, 1, '32772951', 'BOCANEGRA CASTRO DE VALERIO TERESA', 'APODERADO', NULL, NULL, NULL, NULL, 3, 475, 'Direccion 111'),
-(758, 1, '32885686', 'GUZMAN VERDE FREDDY RONAL', 'PTE. DEL DIRECTORIO', NULL, NULL, NULL, NULL, 3, 476, 'Direccion 111'),
-(759, 1, '41035377', 'LECCA TORRES RAFAEL JONATAN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 477, 'Direccion 111'),
-(760, 1, '32825656', 'RODRIGUEZ CHICOMA SEGUNDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 478, 'Direccion 111'),
-(761, 1, '41228518', 'LUJAN CHATI CESAR OMAR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 479, 'Direccion 111'),
-(762, 1, '00000495', 'PETROCORP', NULL, NULL, NULL, NULL, NULL, 3, 480, 'Direccion 111'),
-(763, 1, '40709781', 'GAYOSO HARO MARIELA IVETTE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 481, 'Direccion 111'),
-(764, 1, '00000317', 'ESTACION SANTA MARGARITA', NULL, NULL, NULL, NULL, NULL, 3, 482, 'Direccion 111'),
-(765, 1, '18049729', 'CABRERA LEON PAULINO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 483, 'Direccion 111'),
-(766, 1, '32116184', 'TORRE PINEDA BENITO SATURNINO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 484, 'Direccion 111'),
-(767, 1, '32942655', 'ARTEAGA MONTAÑEZ DE PERICHE MIRIAM DEL PILAR', 'TITULAR GERENTE', NULL, NULL, NULL, NULL, 3, 485, 'Direccion 111'),
-(768, 1, '32835083', 'SUYON CACEDA JOSE ALEX', 'GERENTE', NULL, NULL, NULL, NULL, 3, 486, 'Direccion 111'),
-(769, 1, '32829012', 'VELASQUEZ SOTOMAYOR MARILU GLADYS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 487, 'Direccion 111'),
-(770, 1, '44113603', 'CORTEZ VELASQUEZ PERCY ALAN', 'TITULAR - GERENTE', NULL, NULL, NULL, NULL, 3, 488, 'Direccion 111'),
-(771, 1, '08226748', 'PORCARI CARBONE ERNESTO CARLO ALBERTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 489, 'Direccion 111'),
-(772, 1, '10385295', 'BLANCO MONTESINOS MARCO ROLO', 'GERENTE GENERAL', NULL, NULL, 'mbmarquitectos@yahoo.com', NULL, 3, 490, 'Direccion 111'),
-(773, 1, '99429802', 'MARIO ASTETE B.', 'Ventas', NULL, NULL, 'ventas@elecinsa.com', NULL, 3, 181, 'Direccion 111'),
-(774, 1, '09339911', 'MESARINA SALAZAR JORGE FERNANDO', 'GERENTE GENERAL', NULL, NULL, 'jmesarina@joequispe.com', NULL, 3, 491, 'Direccion 111'),
-(775, 1, '00000225', 'GLADYS MALAGA', 'ASISTENTE GERENCIA', NULL, NULL, 'gmalaga@joequispe.com', NULL, 3, 491, 'Direccion 111'),
-(776, 1, '10215760711', 'TIPACTI HUAMANI, JOSE LUIS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 14, 'Direccion 111'),
-(777, 1, '00000242', 'ALDO MAZZINI CAMAC', 'GERENTE DE PROYECTOS', NULL, NULL, 'amazzini@advantechperu.com', NULL, 3, 53, 'Direccion 111'),
-(778, 1, '00000231', 'MARCO CADILLO FABIAN', 'GERENTE DE OPERACIONES', NULL, NULL, 'mcadilllo@ensol.com.pe', NULL, 3, 467, 'Direccion 111'),
-(779, 1, '10308234', 'JHONNY BOCIAN FORQUERA', 'GERENTE ADMINISTRATIVO', NULL, NULL, NULL, NULL, 3, 492, 'Direccion 111'),
-(780, 1, '00002080', 'Nino Usquiano Banda', NULL, NULL, NULL, NULL, NULL, 3, 213, 'Direccion 111'),
-(781, 1, '10493471', 'FREDDY ERNESTO BOCIAN FORQUERA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 492, 'Direccion 111'),
-(782, 1, '09969239', 'Ricardo Luis  Vilchez Suyón', 'Gerente General/Representante Legal', NULL, NULL, 'rvilchez@ingeycon.com', NULL, 3, 493, 'Direccion 111'),
-(783, 1, '00000831', 'Carlos Roberto Vilchez Suyón', 'Gerente de Operaciones', NULL, NULL, 'cvilchez@ingeycon.com', NULL, 3, 493, 'Direccion 111'),
-(784, 1, '10300109', 'MANUEL JOSE MARIA REGALADO REYES', 'GERENTE GENERAL/REPRESENTANTE LEGAL', NULL, NULL, NULL, NULL, 3, 494, 'Direccion 111'),
-(785, 1, '00000227', 'MIGUEL MOYA SOLORZANO', 'INGENIERO DE VENTAS DE OBRAS Y SERVICIOS', '985091192', NULL, 'mmoya@delcrosa.com.pe', NULL, 3, 494, 'Direccion 111'),
-(786, 1, '00000226', 'MARIO RICCI NICOLI', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 495, 'Direccion 111'),
-(787, 1, '00000251', 'WILDER SALAS', 'INGENIERO DE VENTAS', NULL, NULL, 'wsalas@manelsa.com.pe', NULL, 3, 495, 'Direccion 111'),
-(788, 1, '00000253', 'ROBERTO CONTRERAS', 'INGENIERO DE VENTAS', NULL, NULL, 'rcontreras@manelsa.com.pe', NULL, 3, 495, 'Direccion 111'),
-(789, 1, '00000234', 'ELECTRO FIKADY', NULL, NULL, NULL, NULL, NULL, 3, 496, 'Direccion 111'),
-(790, 1, '12345678', 'ROBERTO SIERRA', 'GERENTE DE VENTAS', NULL, NULL, 'rsierra@ensol.com.pe', NULL, 3, 467, 'Direccion 111'),
-(791, 1, '08721709', 'Carlos Augusto Mayer Reategui', 'Gerente General', NULL, NULL, 'cmayerasesoria@hotmail.com', NULL, 3, 497, 'Direccion 111'),
-(792, 1, '00000258', 'GERARDO DIAZ AGUILAR', 'Gerente General', NULL, NULL, 'obrasgediza@yahoo.es', NULL, 3, 498, 'Direccion 111'),
-(793, 1, '00000257', 'ALVARO OSTOS AGUILAR', 'GERENTE GENERAL', NULL, NULL, 'mya_inprosac@yahoo.es', NULL, 3, 499, 'Direccion 111'),
-(794, 1, '00000256', 'FERNANDO TAMARIZ CERNA', 'GERENTE GENERAL', NULL, NULL, 'ingesa.ta.fe@hotmail.com', NULL, 3, 500, 'Direccion 111'),
-(795, 1, '00000255', 'DONALD COELLO', 'Supervisor', NULL, NULL, 'dcoello@proyectaingenieros.com.pe', NULL, 3, 275, 'Direccion 111'),
-(796, 1, '00000254', 'VANESA GARGATE SILVA', 'ASISTENTE ADMINISTRATIVA', NULL, NULL, 'VGARGATE@COPRACSA.COM', NULL, 3, 6, 'Direccion 111'),
-(797, 1, '43382842', 'CARLOS GABRIEL REATEGUI PEREYRA', NULL, NULL, NULL, NULL, NULL, 3, 501, 'Direccion 111'),
-(798, 1, '06217515', 'EDUARDO BASALDUA OLIVARES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 45, 'Direccion 111'),
-(799, 1, '00000252', 'EDGAR QUISPE MUNARRIZ', 'INGENIERO DE PROYECTOS', NULL, NULL, 'equispe@intelecperu.com', NULL, 3, 45, 'Direccion 111'),
-(800, 1, '00000261', 'JULIO CESAR PARI', NULL, NULL, NULL, 'jpari@intelecperu.com', NULL, 3, 45, 'Direccion 111'),
-(801, 1, '26660755', 'CESAR WALTER CONDOR OSORIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 502, 'Direccion 111'),
-(802, 1, '00000249', 'CESAR AYALA RUMUALDO', 'JEFE PROYECTOS', NULL, NULL, 'jcayar@gmail.com', NULL, 3, 502, 'Direccion 111'),
-(803, 1, '00000248', 'Hugo Castro Barzola', 'DEPARTAMENTO DE PROYECTOS', NULL, NULL, 'hcastro@alltekperu.com.pe', NULL, 3, 154, 'Direccion 111'),
-(804, 1, '40049997', 'MANUEL ANGEL PERCCA ALAMO', 'GERENTE GENERAL', NULL, NULL, 'perccalamo@yahoo.es', NULL, 3, 503, 'Direccion 111'),
-(805, 1, '08106718', 'DANIEL GUTIERREZ CASTILLO', NULL, NULL, NULL, NULL, NULL, 3, 504, 'Direccion 111'),
-(806, 1, '00000246', 'JUAN MACCHIAVELLO CORCUERA', 'GERENTE COMERCIAL', NULL, NULL, 'jmacchiavello@advantechperu.com', NULL, 3, 167, 'Direccion 111'),
-(807, 1, '00000245', 'ALDO MAZZINI CAMAC', 'GERENTE PROYECTOS', NULL, NULL, 'amazzini@advantechperu.com', NULL, 3, 167, 'Direccion 111'),
-(808, 1, '25835522', 'Nilton Dany Martinez Sanchez', 'GERENTE GENERAL', NULL, NULL, 'consiseg@gmail.com', NULL, 3, 505, 'Direccion 111'),
-(809, 1, '09880376', 'Gino Mori Valenzuela', 'GERENTE GENERAL', NULL, NULL, 'gino.mori@prosegur.com', NULL, 3, 506, 'Direccion 111'),
-(810, 1, '07742179', 'MELITON ELIAS ARCE ALVARADO', 'Gerente General', NULL, NULL, 'meliton.arce@controlmatic.com', NULL, 3, 507, 'Direccion 111'),
-(811, 1, '000222928', 'ROCA MENDENHALL JUAN XAVIER', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 508, 'Direccion 111'),
-(812, 1, '00000260', 'ANA MILENA CASTRO', 'ARQUITECTA', NULL, NULL, 'amcastro@pintoygomezarquitectos.com', NULL, 3, 460, 'Direccion 111'),
-(813, 1, '00000232', 'LA COMPUERTA', NULL, NULL, NULL, NULL, NULL, 3, 509, 'Direccion 111'),
-(814, 1, '00000205', 'ICA MARKET', NULL, NULL, NULL, NULL, NULL, 3, 510, 'Direccion 111'),
-(815, 1, '00000204', 'MARISQUERIA MANCORA', NULL, NULL, NULL, NULL, NULL, 3, 511, 'Direccion 111'),
-(816, 1, '00000203', 'LA CANDELA', NULL, NULL, NULL, NULL, NULL, 3, 512, 'Direccion 111'),
-(817, 1, '00000202', 'SHALOM', NULL, NULL, NULL, NULL, NULL, 3, 513, 'Direccion 111'),
-(818, 1, '00000201', 'MULTISERVICIOS CAROLINA', NULL, NULL, NULL, NULL, NULL, 3, 514, 'Direccion 111'),
-(819, 1, '00000200', 'PLAZA VEA', NULL, NULL, NULL, NULL, NULL, 3, 46, 'Direccion 111'),
-(820, 1, '00000199', 'Ing. Abdul Carrillo Segura', 'Gerente General', NULL, NULL, 'abdul.carrillo@gescel.com', NULL, 3, 516, 'Direccion 111'),
-(821, 1, '00000189', 'CESAR AUGUSTO PIZARRO ROBLEDO', 'GERENTE GENERAL/ REPRESENTANTE LEGAL', NULL, NULL, 'ceserelectric@gmail.com', NULL, 3, 55, 'Direccion 111'),
-(822, 1, '00000197', 'Yuri Perales', 'Gerente de Proyectos', NULL, NULL, 'yuripg@eymintegra.com', NULL, 3, 518, 'Direccion 111'),
-(823, 1, '00000187', 'SAMUEL LAURA RAMON', 'GERENTE DE OPERACIONES', NULL, NULL, 'sideinsac@yahoo.es', NULL, 3, 519, 'Direccion 111'),
-(824, 1, '07780055', 'GARCIA DIENSTMAIER JORGE ERNESTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 436, 'Direccion 111'),
-(825, 1, '00000206', 'LA RUEDA', NULL, NULL, NULL, NULL, NULL, 3, 520, 'Direccion 111'),
-(826, 1, '00000195', 'FARMA NATURA', NULL, NULL, NULL, NULL, NULL, 3, 521, 'Direccion 111'),
-(827, 1, '00000090', 'INVERSIONES SUR', NULL, NULL, NULL, NULL, NULL, 3, 522, 'Direccion 111'),
-(828, 1, '00000087', 'FRUTICA', NULL, NULL, NULL, NULL, NULL, 3, 523, 'Direccion 111'),
-(829, 1, '00000086', 'PARQUE GOURMET', NULL, NULL, NULL, NULL, NULL, 3, 524, 'Direccion 111'),
-(830, 1, '10108823', 'ANGULO ACEVEDO PEDRO DOLORES', 'GERENTE', NULL, NULL, NULL, NULL, 3, 525, 'Direccion 111'),
-(831, 1, '00000084', 'HUAMANI ROMERO TORIBIO', NULL, NULL, NULL, NULL, NULL, 3, 526, 'Direccion 111'),
-(832, 1, '09537156', 'ALEJANDRO HUMBERTO FUENTES CARDENAS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 527, 'Direccion 111'),
-(833, 1, '00000082', 'RESTAURANTE LA ESTACION', NULL, NULL, NULL, NULL, NULL, 3, 529, 'Direccion 111'),
-(834, 1, '00000081', 'EL CRUCE', NULL, NULL, NULL, NULL, NULL, 3, 530, 'Direccion 111'),
-(835, 1, '09343334', 'JUAN JOSE FELIPE CALLE QUIROS', 'GERENTE GENERAL', NULL, NULL, 'jcalle@jockey-plaza.com.pe', NULL, 3, 528, 'Direccion 111'),
-(836, 1, '00000080', 'AZHAR', NULL, NULL, NULL, NULL, NULL, 3, 531, 'Direccion 111'),
-(837, 1, '00000079', 'KARINA RUTH OLIVA', NULL, NULL, NULL, NULL, NULL, 3, 532, 'Direccion 111'),
-(838, 1, '09166676', 'Abelardo Carlos Eyzaguirre Talledo', 'Gerente General', NULL, NULL, NULL, NULL, 3, 533, 'Direccion 111'),
-(839, 1, '00000078', 'Alejandro Ruiz Reynaga', 'Encargado de Desarrollo de Negocios', NULL, NULL, 'Alejandro.ruiz@bsi-la.com', NULL, 3, 533, 'Direccion 111'),
-(840, 1, '00000065', 'Alexander Coronel', 'Administrador', NULL, NULL, 'alex.coronel@bsi-la.com', NULL, 3, 533, 'Direccion 111'),
-(841, 1, '000569367', 'MATIAS FRANCISCO STAMM MORENO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 249, 'Direccion 111'),
-(842, 1, '00000076', 'EPS. EMAPICA', NULL, NULL, NULL, NULL, NULL, 3, 534, 'Direccion 111'),
-(843, 1, '00000088', 'MARIA TERESA RAMIREZ RABASA', 'Gerente de Cuentas Corporativas', NULL, NULL, 'mramirez@cosapidata.com.pe', 'www.cosapidata.com.pe', 3, 535, 'Direccion 111');
-INSERT INTO `tb_personacontacto` (`id`, `tb_empresa_id`, `dni`, `nombre`, `cargo`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_companiacontacto_id`, `direccion`) VALUES
-(844, 1, '00000074', 'EL OTRO PEÑONCITO', NULL, NULL, NULL, NULL, NULL, 3, 536, 'Direccion 111'),
-(845, 1, '43382842', 'IMPRESIONES ARIES', NULL, NULL, NULL, NULL, NULL, 3, 501, 'Direccion 111'),
-(846, 1, '07244357', 'LUIS HEREDIA', 'Director Gerente', NULL, NULL, 'luisheredia@acproductsperu.com', NULL, 3, 931, 'Direccion 111'),
-(847, 1, '00000072', 'JAIME RIVERA', 'Gerente Comercial', NULL, NULL, 'jaime.rivera@lge.com', NULL, 3, 538, 'Direccion 111'),
-(848, 1, '00000071', 'DANIEL GUTIERREZ CASTILLO', 'GERENTE GENERAL', NULL, NULL, 'gci@terra.com.pe', NULL, 3, 539, 'Direccion 111'),
-(849, 1, '07730978', 'LIBRERIA EL SABER', NULL, NULL, NULL, NULL, NULL, 3, 540, 'Direccion 111'),
-(850, 1, '41589516', 'JACK RONALD GONZALES MARQUEZ', NULL, NULL, NULL, NULL, NULL, 3, 541, 'Direccion 111'),
-(851, 1, '00000069', 'ROBERTO IPINCE HAAKER', NULL, NULL, NULL, 'ripince@essacweb.com', 'www.essacweb.com', 3, 542, 'Direccion 111'),
-(852, 1, '09537150', 'LUIS FERNANDO MEDINA ZAMBRANO', 'GERENTE GENERAL', NULL, NULL, 'fmedina@fmzarquitectos.com', NULL, 3, 543, 'Direccion 111'),
-(853, 1, '00000067', 'SILVI MORON ALMEYDA', 'GERENTE PLANEAMIENTO DE PROY. TERCEROS', NULL, NULL, 'silvy.moron@spsa.com', NULL, 3, 46, 'Direccion 111'),
-(854, 1, '00000066', 'CYNTHIA ZEGARRA BERNAL', 'AREA DE DISEÑO', NULL, NULL, 'cynthia.zegarra@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(855, 1, '00000100', 'HUMBERTO HUAPAYA PEREZ', 'JEFE DE DISEÑO - GERENCIA DE INFRAESTRUCTURA', NULL, NULL, 'humberto.huapaya@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(856, 1, '08817641', 'ALEJANDRO TEODORO OBREGON RIMAC', NULL, NULL, NULL, NULL, NULL, 3, 544, 'Direccion 111'),
-(857, 1, '00000102', 'LA PONDEROSA', NULL, NULL, NULL, NULL, NULL, 3, 545, 'Direccion 111'),
-(858, 1, '00000077', 'CHIFA CENTRAL', NULL, NULL, NULL, NULL, NULL, 3, 546, 'Direccion 111'),
-(859, 1, '00000111', 'CAROLA', NULL, NULL, NULL, NULL, NULL, 3, 547, 'Direccion 111'),
-(860, 1, '00000110', 'BOTICAS FASA', NULL, NULL, NULL, NULL, NULL, 3, 548, 'Direccion 111'),
-(861, 1, '32783485', 'ROMERO CHAVEZ LUIS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 549, 'Direccion 111'),
-(862, 1, '32789357', 'VASQUEZ PEREYRA NERIDA OLGA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 550, 'Direccion 111'),
-(863, 1, '00000107', 'Maria Teresa Vega Rabasa', 'Gerente de Cuentas', NULL, NULL, 'mramirez@cosapidata.com.pe', 'cosapidata.com.pe', 3, 531, 'Direccion 111'),
-(864, 1, '32967716', 'AGUILAR ROJAS HEBER LEVI', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 551, 'Direccion 111'),
-(865, 1, '00000105', 'KAREN RAMIREZ-GASTON', 'ARQUITECTA', NULL, NULL, 'KARENRG@fmzARQUITECTOS.COM', NULL, 3, 543, 'Direccion 111'),
-(866, 1, '00000104', 'abdul Carrillo', 'Gerente general', NULL, NULL, 'abdul.carrillo@gescel.com', 'www.gescel.com.pe', 3, 517, 'Direccion 111'),
-(867, 1, '00000103', 'JOSE FERRARI', 'JEFE DE INGENIERIA', NULL, NULL, 'jose.ferrari@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(868, 1, '00000089', 'Ricardo ochoa', 'Gerente General', NULL, NULL, 'rochoa@coeltaperu.com', 'www.coeltaperu.com', 3, 553, 'Direccion 111'),
-(869, 1, '25800357', 'Edwin Jack Garcia Mendez', 'Gerente  General', NULL, NULL, 'egarcia@ensol.com.pe', 'www.ensol.com.pe', 3, 554, 'Direccion 111'),
-(870, 1, '07738981', 'KAUFMAN BETTERMAN HARRY', 'GERENTE', NULL, NULL, NULL, NULL, 3, 557, 'Direccion 111'),
-(871, 1, '21565870', 'YAMASHIRO ORE GUILLERMO ENRIQUE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 558, 'Direccion 111'),
-(872, 1, '21463088', 'YAMASHIRO ORE CESAR ARTURO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 559, 'Direccion 111'),
-(873, 1, '43436686', 'HERNANDEZ MARTHANS SRIRLEY ELIZABETH', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 560, 'Direccion 111'),
-(874, 1, '10223232', 'TREISTMAN MALAMUD RAFAEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 561, 'Direccion 111'),
-(875, 1, '21562772', 'GALARZA OSCANOA VILMA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 562, 'Direccion 111'),
-(876, 1, '21567567', 'DEL CASTILLO SALGUERO ARMANDI DONATO', NULL, NULL, NULL, NULL, NULL, 3, 563, 'Direccion 111'),
-(877, 1, '24414759', 'SAYRITUPAC SANCHEZ DEMETRIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 564, 'Direccion 111'),
-(878, 1, '21532705', 'MEDINA VDA DE SPANO REBECA LILIAN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 565, 'Direccion 111'),
-(879, 1, '21544115', 'HIDALGO RAMIREZ GERBERT RAMIRO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 566, 'Direccion 111'),
-(880, 1, '32933856', 'GIL CAPURRO KELLY YVETTS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 567, 'Direccion 111'),
-(881, 1, '09736498', 'FLORES FERNANDEZ LUIS ENRIQUE', 'GERENTE', NULL, NULL, NULL, NULL, 3, 568, 'Direccion 111'),
-(882, 1, '00426915', 'FLORES CHAVEZ PASTOR TIMOTEO', NULL, NULL, NULL, NULL, NULL, 3, 569, 'Direccion 111'),
-(883, 1, '42422625', 'GALVEZ SANCHEZ CRISTIAN JORGE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 570, 'Direccion 111'),
-(884, 1, '00000097', 'ENRIQUE SAMANEZ', 'JEFE OBRAS GENERALES', NULL, NULL, 'esamanez@colegiosperuanos.edu.pe', NULL, 3, 1428, 'Direccion 111'),
-(885, 1, '06248356', 'AÑANCA QUISPE TEODOR CIPRIAN', NULL, NULL, NULL, NULL, NULL, 3, 339, 'Direccion 111'),
-(886, 1, '00000096', 'CAROLINA MURGA', 'ASESORA DE VENTAS', NULL, NULL, NULL, NULL, 3, 15, 'Direccion 111'),
-(887, 1, '00000095', 'MAURICIO MENA', 'GERENTE TIENDA IZAGUIRRE', NULL, NULL, 'mauricio.mena@spsa.com.pe', NULL, 3, 515, 'Direccion 111'),
-(888, 1, '00000094', 'JOEL FERNANDEZ', 'SUB GERENTE TIENDA PLAZA VEA IZAGUIRRE', NULL, NULL, 'subgerente.izaguirre@spsa.com.pe', NULL, 3, 515, 'Direccion 111'),
-(889, 1, '00000093', 'CRISTHIAN EGUSQUIZA SUAREZ', 'JEFE MANTENIMIENTO', NULL, NULL, 'mantenimiento.izaguirre@spsa.com.pe', NULL, 3, 515, 'Direccion 111'),
-(890, 1, '00000062', 'ELVYS FLORIAN', 'SEGURIDAD IZAGUIRRE', NULL, NULL, 'seguridad.izaguirre@spsa.com.pe', NULL, 3, 515, 'Direccion 111'),
-(891, 1, '00000091', 'OSCAR MARREROS RUIZ', 'ASISTENTE OB GENERALES', NULL, NULL, 'oscar.marreros@spsa.com.pe', NULL, 3, 515, 'Direccion 111'),
-(892, 1, '00000075', 'JOSEDUARDO CHINCHAY', 'ASISTENTE OB GENERALES', NULL, NULL, 'joseduardo.chinchay@spsa.com.pe', NULL, 3, 515, 'Direccion 111'),
-(893, 1, '00000112', 'RONALD ESPINOZA ALANYA', 'ASISTENTE BACK OFFICE', NULL, NULL, 'ronald.espinoza@spsa.com.pe', NULL, 3, 515, 'Direccion 111'),
-(894, 1, '00000053', 'MARKO ILIZARBE', 'JEFE DE COMPRAS & MANTENIMIENTO', NULL, NULL, 'marko.ilizarbe@lge.com', 'www.lge.com.pe', 3, 538, 'Direccion 111'),
-(895, 1, '00000038', 'TATIANA PAICO', 'ASISTENTE VISUAL', NULL, NULL, 'tatiana.paico@spsa.com.pe', NULL, 3, 515, 'Direccion 111'),
-(896, 1, '00000037', 'PAOLO PITA', 'GERENTE DE LOCATARIOS', NULL, NULL, 'paolo.pita@spsa.com.pe', NULL, 3, 515, 'Direccion 111'),
-(897, 1, '00000036', 'LEONARDO BERNEDO', 'SAFETY', NULL, NULL, 'leonardo.bernedo@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(898, 1, '00000035', 'JAIME SEGOVIA', 'SECURITY', NULL, NULL, 'jaime.segovia@spsa.com.pe', NULL, 3, 515, 'Direccion 111'),
-(899, 1, '00000034', 'MATILDE VASQUEZ', 'SUB GERENTE PLAZA VEA IZAGUIRRE', NULL, NULL, 'subgerente.izaguirre@spsa.com.pe', NULL, 3, 515, 'Direccion 111'),
-(900, 1, '09644367', 'LUDWIG ECHEVARRIA', 'ING. ESTRUCTURAL - GERENTE', NULL, NULL, 'lechevarria@grupolee.pe', NULL, 3, 571, 'Direccion 111'),
-(901, 1, '07817702', 'PANIZO OTERO ALFONSO JESUS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 542, 'Direccion 111'),
-(902, 1, '00000033', 'FAMA FUENTE DE SODA', NULL, NULL, NULL, NULL, NULL, 3, 572, 'Direccion 111'),
-(903, 1, '00000032', 'CESAR CASTILLO RAFAEL', NULL, NULL, NULL, 'ccastillor71@yahoo.es', NULL, 3, 1607, 'Direccion 111'),
-(904, 1, '00000031', 'ABRAHAM POBLETE', NULL, NULL, NULL, 'abrahampoblete@hotmail.com', NULL, 3, 1504, 'Direccion 111'),
-(905, 1, '00000030', 'LA CABAÑA DEL CHALAN', NULL, NULL, NULL, NULL, NULL, 3, 575, 'Direccion 111'),
-(906, 1, '00000029', 'VALEXNET', NULL, NULL, NULL, NULL, NULL, 3, 576, 'Direccion 111'),
-(907, 1, '00000019', 'BOTICAS ARCANGEL', NULL, NULL, NULL, NULL, NULL, 3, 578, 'Direccion 111'),
-(908, 1, '46043269', 'DUEÑAS VELASQUEZ, LISSETT LIDIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 580, 'Direccion 111'),
-(909, 1, '00000027', 'HOTEL ARAMELI', NULL, NULL, NULL, NULL, NULL, 3, 581, 'Direccion 111'),
-(910, 1, '07641609', 'VERA BARANDIARAN LUIS', 'APODERADO', NULL, NULL, 'luisveravm@gmail.com', NULL, 3, 582, 'Direccion 111'),
-(911, 1, '07909895', 'VIVAR ROMERO GERMAN E.', 'TITULAR', NULL, NULL, 'gvivar@terra.com.pe', NULL, 3, 583, 'Direccion 111'),
-(912, 1, '00000039', 'KIMO', NULL, NULL, NULL, NULL, NULL, 3, 584, 'Direccion 111'),
-(913, 1, '00000025', 'NAPOLITANA', NULL, NULL, NULL, NULL, NULL, 3, 585, 'Direccion 111'),
-(914, 1, '00000024', 'RESTAURANTE SAN ISIDRO', NULL, NULL, NULL, NULL, NULL, 3, 586, 'Direccion 111'),
-(915, 1, '00000023', 'ALBERTO BONOMINI M', 'GERENTE GENERAL', '421-9448', NULL, 'abonomini@tribecasac.com', 'www.tribecasac.com', 3, 1489, 'Direccion 111'),
-(916, 1, '00000022', 'TIPEOS JOSELY', NULL, NULL, NULL, NULL, NULL, 3, 588, 'Direccion 111'),
-(917, 1, '00000001', 'ANTERO RODRIGUEZ PADROS', NULL, NULL, NULL, NULL, NULL, 3, 1634, 'Direccion 111'),
-(918, 1, '00000014', 'HOTEL PREMIER', NULL, NULL, NULL, NULL, NULL, 3, 590, 'Direccion 111'),
-(919, 1, '00000021', 'ROBERTO LEVI PEREZ CHAMORRO', 'EJECUTIVO DE VENTAS', NULL, NULL, 'robertoperez@original-decor.com', NULL, 3, 1332, 'Direccion 111'),
-(920, 1, '00000011', 'LA CALETA', NULL, NULL, NULL, NULL, NULL, 3, 592, 'Direccion 111'),
-(921, 1, '000496271', 'PALMA PENALOZA LUIS DANIEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 593, 'Direccion 111'),
-(922, 1, '00000010', 'LUCY ESPADÍN RIVERA', 'VENTAS', NULL, NULL, 'construccion@disal.com.pe', NULL, 3, 593, 'Direccion 111'),
-(923, 1, '00000009', 'EDUARDO MARTINEZ', 'Gerente de Obra', NULL, NULL, 'eduardo.martinez@spsa.com.pe', NULL, 3, 515, 'Direccion 111'),
-(924, 1, '00000008', 'HONGYING ZHOU', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1652, 'Direccion 111'),
-(925, 1, '00000007', 'OMAR CHUNG', 'Supervisor de Obra', NULL, NULL, 'omarchung@gcaq.com.pe', NULL, 3, 594, 'Direccion 111'),
-(926, 1, '06772282', 'ROXANA VELASQUEZ VILADEGUT', 'INGENIERA', NULL, NULL, 'rvelasquez@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(927, 1, '10059085', 'YAÑEZ OLARDE EDMUNDO', NULL, NULL, NULL, NULL, NULL, 3, 595, 'Direccion 111'),
-(928, 1, '00000006', 'CARLOS LOO YEP', NULL, NULL, NULL, NULL, NULL, 3, 1649, 'Direccion 111'),
-(929, 1, '00000005', 'OSCAR RAUL SANCHEZ POLLI', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1584, 'Direccion 111'),
-(930, 1, '00000004', 'MARTHA INES RABANAL DE LA PUENTE', NULL, NULL, NULL, NULL, NULL, 3, 1640, 'Direccion 111'),
-(931, 1, '00000020', 'FREDDY ANDRES HUAYHUAPUMA', NULL, NULL, NULL, NULL, NULL, 3, 600, 'Direccion 111'),
-(932, 1, '00000012', 'ENRIQUEZ LOPE CARLOS', NULL, NULL, NULL, NULL, NULL, 3, 601, 'Direccion 111'),
-(933, 1, '00000026', 'ENRIQUEZ LOPE CARLOS', NULL, NULL, NULL, NULL, NULL, 3, 601, 'Direccion 111'),
-(934, 1, '00000051', 'JOSE ENRIQUE', NULL, NULL, NULL, NULL, NULL, 3, 603, 'Direccion 111'),
-(935, 1, '00000063', 'SANIGLO', NULL, NULL, NULL, NULL, NULL, 3, 604, 'Direccion 111'),
-(936, 1, '292313450', 'GERMAN JAVIER OCHOA', NULL, NULL, NULL, NULL, NULL, 3, 605, 'Direccion 111'),
-(937, 1, '00000028', 'KAREN MELIZA CARBAJAL VALDIVIA', 'COORDINADORA DE INFRAESTRUCTURA', NULL, NULL, 'Karen.Carbajal@crediscotia.com.pe', 'www.crediscotia.com.pe', 3, 602, 'Direccion 111'),
-(938, 1, '00000061', 'PEDRO SALDIAS', 'ARQUITECTO', NULL, NULL, NULL, NULL, 3, 602, 'Direccion 111'),
-(939, 1, '00000060', 'CARLOS GONZALES TABOADA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 602, 'Direccion 111'),
-(940, 1, '29524610', 'HUERTA ALPACA MONICA PASTORA', NULL, NULL, NULL, NULL, NULL, 3, 606, 'Direccion 111'),
-(941, 1, '00000059', 'LAN', NULL, NULL, NULL, NULL, NULL, 3, 607, 'Direccion 111'),
-(942, 1, '00000058', 'FUNDACION IGNACIA R. VDA DE CANEVARO', NULL, NULL, NULL, NULL, NULL, 3, 608, 'Direccion 111'),
-(943, 1, '00000057', 'MARIA PIA CALDERON', NULL, NULL, NULL, NULL, NULL, 3, 609, 'Direccion 111'),
-(944, 1, '00000056', 'CESAR ARTURO YAMASHIRO', NULL, NULL, NULL, NULL, NULL, 3, 621, 'Direccion 111'),
-(945, 1, '00000055', 'ZELADA SILVA ANIBAL', NULL, NULL, NULL, NULL, NULL, 3, 610, 'Direccion 111'),
-(946, 1, '00000054', 'ALFREDO VIZCARRA CHIRINOS', 'HB & LEGAL MANAGER', '4150084', NULL, 'alfredo.vizcarra@lge.com', 'www.lge.com.pe', 3, 538, 'Direccion 111'),
-(947, 1, '19863989', 'MARUJA AMANDA SOLIS HUAMAN', NULL, NULL, NULL, NULL, NULL, 3, 612, 'Direccion 111'),
-(948, 1, '07207982', 'CHINEN HIGA MANUEL', NULL, NULL, NULL, NULL, NULL, 3, 613, 'Direccion 111'),
-(949, 1, '00000040', 'LUIS ORTIZ IBERICO', 'GERENTE FINANCIERO', NULL, NULL, 'lortiz@cedosac.com', NULL, 3, 614, 'Direccion 111'),
-(950, 1, '00000052', 'BASILIO GUTIERREZ', NULL, NULL, NULL, NULL, NULL, 3, 615, 'Direccion 111'),
-(951, 1, '00000064', 'MORINI', NULL, NULL, NULL, NULL, NULL, 3, 616, 'Direccion 111'),
-(952, 1, '00000050', 'DORA MARIA SIMEON', NULL, NULL, NULL, NULL, NULL, 3, 617, 'Direccion 111'),
-(953, 1, '00000049', 'LINDO PERU', NULL, NULL, NULL, NULL, NULL, 3, 618, 'Direccion 111'),
-(954, 1, '00000048', 'BERYL KATHERINE ZARATE HIDALGO', NULL, NULL, NULL, NULL, NULL, 3, 619, 'Direccion 111'),
-(955, 1, '00000047', 'JANNINA LIZARBE MARQUEZ', NULL, NULL, NULL, NULL, NULL, 3, 620, 'Direccion 111'),
-(956, 1, '00000046', 'SANTA LEONARDA HUAYTA VENTURA', NULL, NULL, NULL, NULL, NULL, 3, 621, 'Direccion 111'),
-(957, 1, '51782470', 'ZENG WENCHENG', NULL, NULL, NULL, NULL, NULL, 3, 622, 'Direccion 111'),
-(958, 1, '00000045', 'RAMIREZ PALOMINO VICENTE', NULL, NULL, NULL, NULL, NULL, 3, 623, 'Direccion 111'),
-(959, 1, '09139811', 'RIVAS SANCHEZ HUGO ALVARO', 'GERENTE GENERAL', NULL, NULL, 'corporacion@hutecontratistas.com', NULL, 3, 86, 'Direccion 111'),
-(960, 1, '06248356', 'AÑANCA QUISPE TEODOR CIPRIAN', NULL, NULL, NULL, NULL, NULL, 3, 624, 'Direccion 111'),
-(961, 1, '00000044', 'E&M GROUP', NULL, NULL, NULL, NULL, NULL, 3, 625, 'Direccion 111'),
-(962, 1, '00000043', 'VENI S.A.C.', NULL, NULL, NULL, NULL, NULL, 3, 626, 'Direccion 111'),
-(963, 1, '40061885', 'ALVARO HAROLD RIVAS ARIAS', 'GERENTE DE PROYECTOS Y OBRAS', NULL, NULL, 'ahrivas@hutecontratistas.com', NULL, 3, 627, 'Direccion 111'),
-(964, 1, '09139811', 'RIVAS SANCHEZ HUGO ALVARO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 627, 'Direccion 111'),
-(965, 1, '08193531', 'Pablo Zimmermann Mujica', 'Gerente General', NULL, NULL, 'pablo.zimmermann@oechsle.pe', NULL, 3, 12, 'Direccion 111'),
-(966, 1, '40125801', 'ALCORTA DULANTO MARIA DEL ROSARIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 628, 'Direccion 111'),
-(967, 1, '08250419', 'ODRIA ARMESTAR CESAR MANUEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 79, 'Direccion 111'),
-(968, 1, '00000042', 'YANINA RUEDA M.', 'JEFA DE SERVICIOS', NULL, NULL, NULL, NULL, 3, 79, 'Direccion 111'),
-(969, 1, '00000002', 'ROSALIA AMPUERO SANDOVAL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1638, 'Direccion 111'),
-(970, 1, '00000137', 'SALUD PHARMA', NULL, NULL, NULL, NULL, NULL, 3, 630, 'Direccion 111'),
-(971, 1, '00000194', 'GRUPO PANA', NULL, NULL, NULL, NULL, NULL, 3, 631, 'Direccion 111'),
-(972, 1, '10027272', 'CASTRO RAMIREZ JUAN CARLOS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 632, 'Direccion 111'),
-(973, 1, '08145547', 'WALTER  CHUQUIANO HINOSTROZA', 'ASISTENTE ADMINISTRATIVO', NULL, NULL, 'wchuquiano@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(974, 1, '41447169', 'JOSE BRUNO SIPION', NULL, NULL, NULL, NULL, NULL, 3, 633, 'Direccion 111'),
-(975, 1, '06248356', 'AÑANCA QUISPE TEODOR CIPRIAN', NULL, NULL, NULL, NULL, NULL, 3, 339, 'Direccion 111'),
-(976, 1, '00000186', 'Julian Ramirez', 'Encargado de Mantenimiento', NULL, NULL, 'jramirez@divercity.com.pe', NULL, 3, 251, 'Direccion 111'),
-(977, 1, '07705885', 'HERRERA TAVARA JUAN JOSE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 634, 'Direccion 111'),
-(978, 1, '00000185', 'JOSE ESTELA RAMIREZ', NULL, NULL, NULL, 'Jestela@volcan.com.pe', NULL, 3, 634, 'Direccion 111'),
-(979, 1, '00000184', 'ALIM FERNANDEZ', 'ASESOR TECNICO COMERCIAL', NULL, NULL, NULL, NULL, 3, 157, 'Direccion 111'),
-(980, 1, '00000183', 'ANNELISE BLACK FERRARI', 'VENDEDORA', NULL, NULL, 'ventassal@decor-center.com', NULL, 3, 15, 'Direccion 111'),
-(981, 1, '29409248', 'BELLIDO ALEMAN JUAN HERNAN', NULL, NULL, NULL, NULL, NULL, 3, 635, 'Direccion 111'),
-(982, 1, '29703281', 'CORRALES RAMOS DIANA PAOLA', NULL, NULL, NULL, NULL, NULL, 3, 636, 'Direccion 111'),
-(983, 1, '00000181', 'ALEJANDRO CORRALES ZEA', NULL, NULL, NULL, NULL, NULL, 3, 636, 'Direccion 111'),
-(984, 1, '40294463', 'CRUZ SARAZA GERMAN', 'GERENTE GENERAL', NULL, NULL, 'mincruz25@hotmail.com', NULL, 3, 637, 'Direccion 111'),
-(985, 1, '00000179', 'FELICIANO TUESTA', 'VENDEDOR', NULL, NULL, 'ftuesta@arkiplaza.com', NULL, 3, 638, 'Direccion 111'),
-(986, 1, '10171940', 'SALOMON SANSUR MUNIR EDUARDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 638, 'Direccion 111'),
-(987, 1, '00000164', 'GERMAN JAVIER OCHOA VELASCC', NULL, NULL, NULL, NULL, NULL, 3, 640, 'Direccion 111'),
-(988, 1, '00000176', 'LUZA DE COQUE NATIVIDAD', NULL, NULL, NULL, NULL, NULL, 3, 641, 'Direccion 111'),
-(989, 1, '00000188', 'ROXANA HUANCA', NULL, NULL, NULL, NULL, NULL, 3, 642, 'Direccion 111'),
-(990, 1, '41205534', 'JORGE CALINI CHOQUE', NULL, NULL, NULL, NULL, NULL, 3, 643, 'Direccion 111'),
-(991, 1, '00000173', 'IRMA MENDOZA', NULL, NULL, NULL, NULL, NULL, 3, 644, 'Direccion 111'),
-(992, 1, '10282044', 'FLORES GORRITTI FELIPE OSCAR', NULL, NULL, NULL, NULL, NULL, 3, 646, 'Direccion 111'),
-(993, 1, '00000172', 'ALIZON HONELIA CHIRE', NULL, NULL, NULL, NULL, NULL, 3, 648, 'Direccion 111'),
-(994, 1, '00000171', 'JUAN FRANCISCO TERAN', NULL, NULL, NULL, NULL, NULL, 3, 649, 'Direccion 111'),
-(995, 1, '00000170', 'CONSUELO MARISOL YUCRA', NULL, NULL, NULL, NULL, NULL, 3, 650, 'Direccion 111'),
-(996, 1, '00000169', 'OSWALDO CHACON CARPIO', NULL, NULL, NULL, NULL, NULL, 3, 651, 'Direccion 111'),
-(997, 1, '00000168', 'JOSE ANTONIO DE LA BORDA DURAND', NULL, NULL, NULL, NULL, NULL, 3, 652, 'Direccion 111'),
-(998, 1, '00000167', 'VILMA REYMER NIETO', NULL, NULL, NULL, NULL, NULL, 3, 653, 'Direccion 111'),
-(999, 1, '00000166', 'PAOLA MARGOT FARFAN', NULL, NULL, NULL, NULL, NULL, 3, 654, 'Direccion 111'),
-(1000, 1, '29318158', 'DIAZ HUERTAS JOSE ALFONSO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 656, 'Direccion 111'),
-(1001, 1, '00000175', 'EL HERRAJE', NULL, NULL, NULL, NULL, NULL, 3, 657, 'Direccion 111'),
-(1002, 1, '41129853', 'BERNANDINO PALOMINO QUISPE', NULL, NULL, NULL, NULL, NULL, 3, 770, 'Direccion 111'),
-(1003, 1, '10223232', 'TREISTMAN MALAMUD RAFAEL', NULL, NULL, NULL, NULL, NULL, 3, 647, 'Direccion 111'),
-(1004, 1, '29324968', 'ORDOÑEZ CAMARGO RAMIRO', NULL, NULL, NULL, NULL, NULL, 3, 645, 'Direccion 111'),
-(1005, 1, '30676027', 'REMIS HUMBERTO ZEGARRA MALDONADO', NULL, NULL, NULL, NULL, NULL, 3, 794, 'Direccion 111'),
-(1006, 1, '998130521', 'LUIS BAYONA', 'SUB GERENTE DE INSTALACIONES', NULL, NULL, 'luisbayona@ascensores-sa.com', NULL, 3, 436, 'Direccion 111'),
-(1007, 1, '00000196', 'EL TABLON FOOD CENTER', NULL, NULL, NULL, NULL, NULL, 3, 658, 'Direccion 111'),
-(1008, 1, '292499120', 'JOSE ANTONIO ENRIQUE MEDINA DEL CARPIO', NULL, NULL, NULL, NULL, NULL, 3, 659, 'Direccion 111'),
-(1009, 1, '00000198', 'CORFEMIEL SAC', NULL, NULL, NULL, NULL, NULL, 3, 660, 'Direccion 111'),
-(1010, 1, '00000223', 'TOMASA VILCA', NULL, NULL, NULL, NULL, NULL, 3, 662, 'Direccion 111'),
-(1011, 1, '00000222', 'ENRIQUEZ LOPE CARLOS RENE', NULL, NULL, NULL, NULL, NULL, 3, 663, 'Direccion 111'),
-(1012, 1, '06480269', 'DALY ARBURU JAIME LUIS GONZALO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 664, 'Direccion 111'),
-(1013, 1, '07844781', 'VALLEJO LEIGH LUIS FELIPE', 'GERENTE', NULL, NULL, NULL, NULL, 3, 665, 'Direccion 111'),
-(1014, 1, '00000221', 'HUAMANI HERNANDEZ MASSIEL', NULL, NULL, NULL, NULL, NULL, 3, 666, 'Direccion 111'),
-(1015, 1, '00000220', 'A&C INVERSIONES EMPRESARIALES', NULL, NULL, NULL, NULL, NULL, 3, 667, 'Direccion 111'),
-(1016, 1, '00000219', 'VLADIMIR CUBA ASTORAY', NULL, NULL, NULL, 'thekingsun@hotmail.com', NULL, 3, 668, 'Direccion 111'),
-(1017, 1, '09298936', 'VIDAL MALDONADO, ALBERTO MARTIN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 669, 'Direccion 111'),
-(1018, 1, '00000492', 'JANNINA ZLOCZOVER', 'VENDEDORA', NULL, NULL, 'jzloczover@decor-center.com', NULL, 3, 15, 'Direccion 111'),
-(1019, 1, '00000218', 'ARIANE CARRILLO', NULL, NULL, NULL, 'ariane@lightline.com.pe', NULL, 3, 670, 'Direccion 111'),
-(1020, 1, '10082746345', 'STISIN WALLACH ARIE FELIPE', 'DIR.GERENTE', NULL, NULL, NULL, NULL, 3, 670, 'Direccion 111'),
-(1021, 1, '09753173', 'FORD DEZA MALCOLM SPENCER JUNIOR', 'GERENTE GENERAL', NULL, NULL, 'mford@refricorp.com', NULL, 3, 435, 'Direccion 111'),
-(1022, 1, '00000217', 'ROSARIO HUERTA', 'VENDEDORA', NULL, NULL, 'ventas@refricorp.com', NULL, 3, 435, 'Direccion 111'),
-(1023, 1, '00000207', 'JUAN PEDRO RIVERA', NULL, NULL, NULL, 'jprivera@air-peru.com', NULL, 3, 671, 'Direccion 111'),
-(1024, 1, '07884484', 'POLLAROLO GARCIA DE RIVERA EDDA MAGDALENA', 'GERENTE GENERAL', NULL, NULL, 'ventas@air-peru.com', NULL, 3, 671, 'Direccion 111'),
-(1025, 1, '09868461', 'IVAN FRANCIS FALCON HURTADO', 'GERENTE', NULL, NULL, 'ifalcon@amscontratistas.com', NULL, 3, 672, 'Direccion 111'),
-(1026, 1, '08826326', 'CHAMORRO CONCHA JORGE BENITO', 'GERENTE GENERAL', '8671041', NULL, NULL, NULL, 3, 673, 'Direccion 111'),
-(1027, 1, '00000224', 'LUCAS OSTOS FLORES', 'PROYECTOS', NULL, NULL, 'lucas_ostosflores@yahoo.es', NULL, 3, 673, 'Direccion 111'),
-(1028, 1, '09340301', 'NAKANO HIGA ALBERTO MITSUO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 674, 'Direccion 111'),
-(1029, 1, '00000213', 'PABLO ARBULO', 'GERENTE DE VENTAS', NULL, NULL, 'informes@denky.com', NULL, 3, 674, 'Direccion 111'),
-(1030, 1, '00000212', 'ESTEBAN NAKANO', NULL, NULL, NULL, 'informes@denky.com', NULL, 3, 674, 'Direccion 111'),
-(1031, 1, '07865136', 'SARMIENTO NOYA LEONCIO ARTURO', 'GERENTE GRAL', NULL, NULL, 'lsarmiento@limasound.com', NULL, 3, 675, 'Direccion 111'),
-(1032, 1, '00000211', 'FELIPE VARGAS', 'DIRECTOR DE PROYECTOS PROFESIONALES', '242-9301', NULL, 'fvargas@limasound.com', NULL, 3, 675, 'Direccion 111'),
-(1033, 1, '25535125', 'TORRES BELTRAN EDUARDO DANIEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 912, 'Direccion 111'),
-(1034, 1, '29571687', 'ELIZABETH D. GONZALES ESPINOZA', NULL, NULL, NULL, NULL, NULL, 3, 676, 'Direccion 111'),
-(1035, 1, '09912123', 'FLORES MEDINA CHRISTIAN', NULL, NULL, NULL, NULL, NULL, 3, 677, 'Direccion 111'),
-(1036, 1, '00000263', 'MULTIDATA', NULL, NULL, NULL, NULL, NULL, 3, 678, 'Direccion 111'),
-(1037, 1, '295653936', 'GABINO GABRIEL APAZA APAZA', NULL, NULL, NULL, NULL, NULL, 3, 679, 'Direccion 111'),
-(1038, 1, '40593973', 'DAVID WU HERRERA', 'GERENTE', NULL, NULL, 'wu_asociados@hotmail.com', NULL, 3, 681, 'Direccion 111'),
-(1039, 1, '00000190', 'FABIOLA ALVAREZ OCOLA', NULL, NULL, NULL, NULL, NULL, 3, 682, 'Direccion 111'),
-(1040, 1, '00000244', 'COMERCIAL SERGIOSS', NULL, NULL, NULL, NULL, NULL, 3, 683, 'Direccion 111'),
-(1041, 1, '29561807', 'JUAN CARLOS SARCCO QUISPE', NULL, NULL, NULL, NULL, NULL, 3, 684, 'Direccion 111'),
-(1042, 1, '00000115', 'JOSE MANUEL LONCONE', NULL, NULL, NULL, NULL, NULL, 3, 685, 'Direccion 111'),
-(1043, 1, '00000165', 'IMPRENTA MARITE', NULL, NULL, NULL, NULL, NULL, 3, 686, 'Direccion 111'),
-(1044, 1, '00000136', 'EL HUEQUITO', NULL, NULL, NULL, NULL, NULL, 3, 687, 'Direccion 111'),
-(1045, 1, '00000135', 'FARMACIA FASUR PERU', NULL, NULL, NULL, NULL, NULL, 3, 688, 'Direccion 111'),
-(1046, 1, '00000134', 'MAINSA', NULL, NULL, NULL, NULL, NULL, 3, 689, 'Direccion 111'),
-(1047, 1, '00000133', 'BAZAR NELLY', NULL, NULL, NULL, NULL, NULL, 3, 691, 'Direccion 111'),
-(1048, 1, '00000132', 'SEGURIDAD Y FERRETERIA', NULL, NULL, NULL, NULL, NULL, 3, 692, 'Direccion 111'),
-(1049, 1, '23763123', 'PARADA JUAN MANUEL', 'GERENTE', NULL, NULL, NULL, NULL, 3, 360, 'Direccion 111'),
-(1050, 1, '00000130', 'LA ESPIGA', NULL, NULL, NULL, NULL, NULL, 3, 693, 'Direccion 111'),
-(1051, 1, '43967154', 'VEYSSAL IBRIAN KASSIN', 'GERENTE', NULL, NULL, NULL, NULL, 3, 694, 'Direccion 111'),
-(1052, 1, '00000128', 'LA CASA DE MARGOTT', NULL, NULL, NULL, NULL, NULL, 3, 695, 'Direccion 111'),
-(1053, 1, '29467558', 'BATTI GAMBOA MAURICIO', NULL, NULL, NULL, NULL, NULL, 3, 696, 'Direccion 111'),
-(1054, 1, '00000126', 'MARTHA ELENA MORALES', NULL, NULL, NULL, NULL, NULL, 3, 697, 'Direccion 111'),
-(1055, 1, '00000138', 'INVERSIONES FIGUEROA', NULL, NULL, NULL, NULL, NULL, 3, 698, 'Direccion 111'),
-(1056, 1, '00000124', 'GRIFO VALCARO', NULL, NULL, NULL, NULL, NULL, 3, 699, 'Direccion 111'),
-(1057, 1, '00000123', 'JIJAED GOURMET', NULL, NULL, NULL, NULL, NULL, 3, 700, 'Direccion 111'),
-(1058, 1, '29227942', 'NANCY ESCOBAR MEDINA', NULL, NULL, NULL, NULL, NULL, 3, 702, 'Direccion 111'),
-(1059, 1, '00000122', 'GRIFOS VITO', NULL, NULL, NULL, NULL, NULL, 3, 703, 'Direccion 111'),
-(1060, 1, '29250579', 'TERRUÑO DE YARABAYA', NULL, NULL, NULL, NULL, NULL, 3, 706, 'Direccion 111'),
-(1061, 1, '00000121', 'PARRILLADAS AREQUIPEÑA', NULL, NULL, NULL, NULL, NULL, 3, 707, 'Direccion 111'),
-(1062, 1, '00000120', 'MASSIEL SOTELO', NULL, NULL, NULL, NULL, NULL, 3, 709, 'Direccion 111'),
-(1063, 1, '00000119', 'HELENA', NULL, NULL, NULL, NULL, NULL, 3, 710, 'Direccion 111'),
-(1064, 1, '29560860', 'CORRALES JARA BRENER MARTIN', NULL, NULL, NULL, NULL, NULL, 3, 711, 'Direccion 111'),
-(1065, 1, '292549674', 'CANDELARIA RAMOS DE RODRIGUEZ', NULL, NULL, NULL, NULL, NULL, 3, 712, 'Direccion 111'),
-(1066, 1, '29271635', 'DAVID SALINAS DE LA OLIVA', NULL, NULL, NULL, NULL, NULL, 3, 708, 'Direccion 111'),
-(1067, 1, '29731342', 'REYNA MARIVEL GUERREROS HINOJOSA', NULL, NULL, NULL, NULL, NULL, 3, 816, 'Direccion 111'),
-(1068, 1, '09974480', 'JOSE LUIS CUIPAL VASQUEZ', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1072, 'Direccion 111'),
-(1069, 1, '00000117', 'Milda Canales', NULL, NULL, NULL, 'mcanales@amscontratistas.com', NULL, 3, 672, 'Direccion 111'),
-(1070, 1, '00000116', 'MANOLO', NULL, NULL, NULL, NULL, NULL, 3, 713, 'Direccion 111'),
-(1071, 1, '29271991', 'CATELLIN DE DIBAN YRMA', NULL, NULL, NULL, NULL, NULL, 3, 715, 'Direccion 111'),
-(1072, 1, '29211116', 'NELIDA RAMIREZ', NULL, NULL, NULL, NULL, NULL, 3, 716, 'Direccion 111'),
-(1073, 1, '29721280', 'LAURO VARGAS PAOLA', NULL, NULL, NULL, NULL, NULL, 3, 717, 'Direccion 111'),
-(1074, 1, '29239755', 'CONCHA FERNANDEZ CASTILLO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 718, 'Direccion 111'),
-(1075, 1, '29373744', 'RODRIGUEZ CARPIO LURDES SOLEDAD', NULL, NULL, NULL, NULL, NULL, 3, 719, 'Direccion 111'),
-(1076, 1, '00000127', 'EDUARDO JUAN INDACOCHEA', NULL, NULL, NULL, NULL, NULL, 3, 720, 'Direccion 111'),
-(1077, 1, '29335732', 'RAMOS DE AGUILAR MARUJA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 722, 'Direccion 111'),
-(1078, 1, '00000161', 'LA COVACHA', NULL, NULL, NULL, NULL, NULL, 3, 723, 'Direccion 111'),
-(1079, 1, '00000160', 'FOTOCHECK DIGITAL', NULL, NULL, NULL, NULL, NULL, 3, 724, 'Direccion 111'),
-(1080, 1, '00000159', 'DIANA CANCHO', NULL, NULL, NULL, NULL, NULL, 3, 725, 'Direccion 111'),
-(1081, 1, '00000158', 'MULTISERVICIOS AREQUIPA', NULL, NULL, NULL, NULL, NULL, 3, 727, 'Direccion 111'),
-(1082, 1, '00000157', 'SILLAR WASSI', NULL, NULL, NULL, NULL, NULL, 3, 728, 'Direccion 111'),
-(1083, 1, '00000156', 'VIDRIERIA Y FERRETERIA', NULL, NULL, NULL, NULL, NULL, 3, 729, 'Direccion 111'),
-(1084, 1, '00000155', 'AMALIA SOLEDAD TINTAYA', NULL, NULL, NULL, NULL, NULL, 3, 730, 'Direccion 111'),
-(1085, 1, '00000154', 'EXSUR', NULL, NULL, NULL, NULL, NULL, 3, 731, 'Direccion 111'),
-(1086, 1, '29326793', 'GOTH KIRPAL STEFAN', NULL, NULL, NULL, NULL, NULL, 3, 733, 'Direccion 111'),
-(1087, 1, '00000139', 'ESTRUCTURAS METAL MADERA FORTEX', NULL, NULL, NULL, NULL, NULL, 3, 734, 'Direccion 111'),
-(1088, 1, '00000151', 'PAPELES Y CARTULINAS', NULL, NULL, NULL, NULL, NULL, 3, 735, 'Direccion 111'),
-(1089, 1, '00000163', 'LIBRERIA Y TOPOGRAFIA ORDONEZ', NULL, NULL, NULL, NULL, NULL, 3, 736, 'Direccion 111'),
-(1090, 1, '00000149', 'CARLOS ABAD ALCEDO', 'Jefatura de Proyectos & Ventas', NULL, NULL, 'carlos.abad@rollsteelsrl.com', 'www.rollsteelsrt.com', 3, 737, 'Direccion 111'),
-(1091, 1, '06625799', 'MASSA PALACIOS CARLOS ANTONIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 737, 'Direccion 111'),
-(1092, 1, '00000148', 'SOCIEDAD ELECTRICA DEL SUR OESTE S.A.', NULL, NULL, NULL, NULL, NULL, 3, 739, 'Direccion 111'),
-(1093, 1, '42767248', 'RAMOS CRUZ MANUEL ARTURO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 741, 'Direccion 111'),
-(1094, 1, '29291764', 'MARIN SUAREZ HERNAN MAXIMILIANO', NULL, NULL, NULL, NULL, NULL, 3, 740, 'Direccion 111'),
-(1095, 1, '00000146', 'REDM', NULL, NULL, NULL, NULL, NULL, 3, 742, 'Direccion 111'),
-(1096, 1, '00000145', 'EXCEL COMPUTER', NULL, NULL, NULL, NULL, NULL, 3, 743, 'Direccion 111'),
-(1097, 1, '29565393', 'GABINO GABRIEL APAZA APAZA', NULL, NULL, NULL, NULL, NULL, 3, 679, 'Direccion 111'),
-(1098, 1, '41205534', 'CALINI CHOQUE JORGE', NULL, NULL, NULL, NULL, NULL, 3, 639, 'Direccion 111'),
-(1099, 1, '29376855', 'LLERENA TOLEDO JULIA ELNA', NULL, NULL, NULL, NULL, NULL, 3, 930, 'Direccion 111'),
-(1100, 1, '00000144', 'Omar Sempertegui', 'Supervisor de Obra', NULL, NULL, 'osempertegui@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(1101, 1, '10783319', 'Janet Manrique Carrasco', 'Gerente General', NULL, NULL, 'finesadecor@hotmail.com', NULL, 3, 961, 'Direccion 111'),
-(1102, 1, '00000143', 'Victor Algonier Madueño', 'Encargado de PDR de Obra', NULL, NULL, 'pdr01@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(1103, 1, '00000142', 'ELECTRONCA GONZALES', NULL, NULL, NULL, NULL, NULL, 3, 744, 'Direccion 111'),
-(1104, 1, '00000141', 'SEAL', NULL, NULL, NULL, NULL, NULL, 3, 746, 'Direccion 111'),
-(1105, 1, '09627268', 'CUTISACA PONCE CARLOS SEBASTIAN', 'GERENTE', NULL, NULL, NULL, NULL, 3, 748, 'Direccion 111'),
-(1106, 1, '30423374', 'CECILIA ANGELINA  DEL ROSARIO CAMPOS QUIPUZCO', NULL, NULL, NULL, NULL, NULL, 3, 749, 'Direccion 111'),
-(1107, 1, '00000140', 'STEVE ANDERSON WONG WONG', NULL, NULL, NULL, NULL, NULL, 3, 750, 'Direccion 111'),
-(1108, 1, '00000314', 'AZNARAN NUÑEZ', NULL, NULL, NULL, NULL, NULL, 3, 751, 'Direccion 111'),
-(1109, 1, '29272233', 'ROMERO TAPIA JESUS ATILIO', NULL, NULL, NULL, NULL, NULL, 3, 752, 'Direccion 111'),
-(1110, 1, '29298321', 'ROSA MARTHA LAZO', NULL, NULL, NULL, NULL, NULL, 3, 754, 'Direccion 111'),
-(1111, 1, '00000313', 'EL TABLON - PIZZERIA', NULL, NULL, NULL, NULL, NULL, 3, 755, 'Direccion 111'),
-(1112, 1, '29479521', 'VILLANUEVA SALAS FELICITAS', NULL, NULL, NULL, NULL, NULL, 3, 756, 'Direccion 111'),
-(1113, 1, '29671908', 'POSTIGO CERPA DANIEL MARCELINO', NULL, NULL, NULL, NULL, NULL, 3, 757, 'Direccion 111'),
-(1114, 1, '00000312', 'OLAF TAFUR', 'JEFE DE VENTAS - EQUIPOS', NULL, NULL, 'otafur@lallave.com.pe', NULL, 3, 759, 'Direccion 111'),
-(1115, 1, '0903442705', 'GINATTA CORONADO ANTONIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 759, 'Direccion 111'),
-(1116, 1, '00000311', 'ASOCIACION COMITE DE TAXIS Nº 24', NULL, NULL, NULL, NULL, NULL, 3, 760, 'Direccion 111'),
-(1117, 1, '29539413', 'JAVIER ERNESTOR CARPIO FLORES', NULL, NULL, NULL, NULL, NULL, 3, 761, 'Direccion 111'),
-(1118, 1, '29600288', 'MONICA ELANA ORTIZ', NULL, NULL, NULL, NULL, NULL, 3, 762, 'Direccion 111'),
-(1119, 1, '00000309', 'LA SANGUCHERIA MERCADERES', NULL, NULL, NULL, NULL, NULL, 3, 763, 'Direccion 111'),
-(1120, 1, '00000308', 'SURGOURMET', NULL, NULL, NULL, NULL, NULL, 3, 764, 'Direccion 111'),
-(1121, 1, '29542211', 'RODRIGUEZ CARPIO ZOILA ROSSANA', NULL, NULL, NULL, NULL, NULL, 3, 765, 'Direccion 111'),
-(1122, 1, '46725626', 'APAZA CANDIA MIGUEL ANGEL', NULL, NULL, NULL, NULL, NULL, 3, 766, 'Direccion 111'),
-(1123, 1, '00000306', 'ASTORGA', NULL, NULL, NULL, NULL, NULL, 3, 767, 'Direccion 111'),
-(1124, 1, '00000315', 'COESTI', NULL, NULL, NULL, NULL, NULL, 3, 768, 'Direccion 111'),
-(1125, 1, '00000304', 'GRIFO EL AVENTURERO', NULL, NULL, NULL, NULL, NULL, 3, 769, 'Direccion 111'),
-(1126, 1, '45992232', 'MARGARITA TAY MAURTUA', 'DISEÑADORA DE INTERIORES', NULL, NULL, 'mtay@copracsa', NULL, 3, 2, 'Direccion 111'),
-(1127, 1, '06844070', 'MEJIA ROSALES VICTOR GUSTAVO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 772, 'Direccion 111'),
-(1128, 1, '40033360', 'LLERENA ZAVALAGA CONNIE MARIAM', NULL, NULL, NULL, NULL, NULL, 3, 776, 'Direccion 111'),
-(1129, 1, '00000302', 'HOTEL PAITITI AQP S.A.C.', NULL, NULL, NULL, NULL, NULL, 3, 777, 'Direccion 111'),
-(1130, 1, '00000301', 'SAN FELIPE SUITES S.A.C.', NULL, NULL, NULL, NULL, NULL, 3, 778, 'Direccion 111'),
-(1131, 1, '00000300', 'HONG KOMG - CHIFA', NULL, NULL, NULL, NULL, NULL, 3, 779, 'Direccion 111'),
-(1132, 1, '00000299', 'NEXTEL', NULL, NULL, NULL, NULL, NULL, 3, 780, 'Direccion 111'),
-(1133, 1, '00000324', 'BOTICAS FASA', NULL, NULL, NULL, NULL, NULL, 3, 781, 'Direccion 111'),
-(1134, 1, '00000326', 'LOS PORTALES ESTACIONAMIENTO S.A.C.', NULL, NULL, NULL, NULL, NULL, 3, 783, 'Direccion 111'),
-(1135, 1, '07276734', 'RODRIGUEZ LARRAIN SALINAS', 'MANDATARIO NACIONAL', NULL, NULL, NULL, NULL, 3, 784, 'Direccion 111'),
-(1136, 1, '00000307', 'LA COMPAÑIA SRL.', NULL, NULL, NULL, NULL, NULL, 3, 785, 'Direccion 111'),
-(1137, 1, '00000332', 'SOL DE ICA NICE', NULL, NULL, NULL, NULL, NULL, 3, 786, 'Direccion 111'),
-(1138, 1, '00000331', 'LA OLLA DE JUANITA', NULL, NULL, NULL, NULL, NULL, 3, 787, 'Direccion 111'),
-(1139, 1, '00000330', 'SHIRLEY ELIZABETH HERNANDEZ MARTHANS', NULL, NULL, NULL, NULL, NULL, 3, 788, 'Direccion 111'),
-(1140, 1, '00000329', 'HUARANGO', NULL, NULL, NULL, NULL, NULL, 3, 789, 'Direccion 111'),
-(1141, 1, '00000328', 'ZINHA DEL PILAR URRUNAGA CONDE', NULL, NULL, NULL, NULL, NULL, 3, 790, 'Direccion 111'),
-(1142, 1, '00000327', 'NINACEVINCHA MARIA JESUS', NULL, NULL, NULL, NULL, NULL, 3, 791, 'Direccion 111'),
-(1143, 1, '00000316', 'JOSE ANTONIO MINAYA ZEA', NULL, NULL, NULL, NULL, NULL, 3, 792, 'Direccion 111'),
-(1144, 1, '00000325', 'FLORES HNOS.', NULL, NULL, NULL, NULL, NULL, 3, 569, 'Direccion 111'),
-(1145, 1, '00000334', 'SEDAPAR S.A.', NULL, NULL, NULL, NULL, NULL, 3, 795, 'Direccion 111'),
-(1146, 1, '43759818', 'Victor Andres Algonier Madueño', 'ENCARGADO DE PREVENCION DE RIESGOS', NULL, NULL, 'pdr01@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(1147, 1, '09979263', 'BLANCO COLONIO JUAN FORTUNATO', 'GERENTE GENERAL', NULL, NULL, 'jbc_eah@hotmail.com', NULL, 3, 796, 'Direccion 111'),
-(1148, 1, '08222954', 'MANRIQUE MORALES MIGUEL FELIPE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 797, 'Direccion 111'),
-(1149, 1, '00000322', 'ALVARO FERRO CHAVEZ', NULL, NULL, NULL, NULL, NULL, 3, 593, 'Direccion 111'),
-(1150, 1, '40593973', 'WU HERRERA DAVID', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 799, 'Direccion 111'),
-(1151, 1, '29659924', 'HERRERA VERGARA FERNANDO ARTURO', 'GERENTE GENERAL', NULL, NULL, 'gerencia@grupotcmsac.com', 'www.grupotcmsac.com', 3, 800, 'Direccion 111'),
-(1152, 1, '07561550', 'SALDAÑA ESTRADA JORGE LUIS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 802, 'Direccion 111'),
-(1153, 1, '29470673', 'TEJADA MANSILLA CARMEN GUADALUPE', 'GERENTE', NULL, NULL, NULL, NULL, 3, 803, 'Direccion 111'),
-(1154, 1, '07870657', 'CHIONG YED SILVIA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 804, 'Direccion 111'),
-(1155, 1, '29622921', 'LIMA MAMANI MELCHOR', NULL, NULL, NULL, NULL, NULL, 3, 805, 'Direccion 111'),
-(1156, 1, '49838069', 'SU ZONGZHI', 'GERENTE', NULL, NULL, NULL, NULL, 3, 806, 'Direccion 111'),
-(1157, 1, '29638372', 'FERRES ROMERO DE MUÑOZ DURDANE', NULL, NULL, NULL, NULL, NULL, 3, 782, 'Direccion 111'),
-(1158, 1, '29467558', 'BATTI GAMBOA MAURIZIO', NULL, NULL, NULL, NULL, NULL, 3, 880, 'Direccion 111'),
-(1159, 1, '00000305', 'VILCHES MARTINEZ JORGE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 95, 'Direccion 111'),
-(1160, 1, '29215385', 'MELLO ALVAREZ DARIO LARO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 713, 'Direccion 111'),
-(1161, 1, '00000277', 'LEE CA SING', 'GERENTE', NULL, NULL, NULL, NULL, 3, 779, 'Direccion 111'),
-(1162, 1, '29289541', 'VALDIA VARGAS JESUS VENECIA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 728, 'Direccion 111'),
-(1163, 1, '00000275', 'LEE KA SING', NULL, NULL, NULL, NULL, NULL, 3, 779, 'Direccion 111'),
-(1164, 1, '40808499', 'STHEFANY MUÑOZ MUÑOZ', 'GERENTE', NULL, NULL, NULL, NULL, 3, 807, 'Direccion 111'),
-(1165, 1, '49851065', 'LIN MEIZHEN', NULL, NULL, NULL, NULL, NULL, 3, 808, 'Direccion 111'),
-(1166, 1, '29685618', 'FERNANDEZ ORTEGA DANNY', NULL, NULL, NULL, NULL, NULL, 3, 809, 'Direccion 111'),
-(1167, 1, '29400079', 'EMILIANA RAMOS CUYA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 810, 'Direccion 111'),
-(1168, 1, '00000270', 'JHONATAN MICHAEL SANCHEZ ARANDA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 811, 'Direccion 111'),
-(1169, 1, '07780006', 'LUQUE MADENES MARIA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 812, 'Direccion 111'),
-(1170, 1, '07780006', 'LUQUE BADENES MARIA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 813, 'Direccion 111'),
-(1171, 1, '46105482', 'ANGEL JONATHAN MENDIZABAL VILCA', NULL, NULL, NULL, NULL, NULL, 3, 814, 'Direccion 111'),
-(1172, 1, '29251659', 'GERENDO CAYRO CONTRERAS', 'GERENTE', NULL, NULL, NULL, NULL, 3, 815, 'Direccion 111'),
-(1173, 1, '29324755', 'EVANGELIO GUERREROS FLORES', NULL, NULL, NULL, NULL, NULL, 3, 816, 'Direccion 111'),
-(1174, 1, '29257418', 'GROVAS FERNANDEZ ANTONIO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 747, 'Direccion 111'),
-(1175, 1, '29257418', 'GROVAS FERNANDEZ ANTONIO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 658, 'Direccion 111'),
-(1176, 1, '30849812', 'ORTIS ZEGARRA JUAN LUIS', 'GERENTE', NULL, NULL, NULL, NULL, 3, 817, 'Direccion 111'),
-(1177, 1, '29565393', 'APAZA APAZA GABINO', NULL, NULL, NULL, NULL, NULL, 3, 818, 'Direccion 111'),
-(1178, 1, '52137411', 'GUO HONGREN', NULL, NULL, NULL, NULL, NULL, 3, 820, 'Direccion 111'),
-(1179, 1, '08132354', 'CIEZA BARAZORDA AVELINO', NULL, NULL, NULL, NULL, NULL, 3, 821, 'Direccion 111'),
-(1180, 1, '29326793', 'GOCHT KIRPAL STEFAN', 'GERENTE', NULL, NULL, NULL, NULL, 3, 579, 'Direccion 111'),
-(1181, 1, '29326793', 'GOTCHT KIRPAL STEFAN', NULL, NULL, NULL, NULL, NULL, 3, 578, 'Direccion 111'),
-(1182, 1, '10059085', 'YAÑEZ OLARTE EDMUNDO', NULL, NULL, NULL, NULL, NULL, 3, 595, 'Direccion 111'),
-(1183, 1, '07207284', 'JHONSON ALFARO KOENING MIGUEL', NULL, NULL, NULL, NULL, NULL, 3, 822, 'Direccion 111'),
-(1184, 1, '10224118', 'BAZAN ALVAREZ HECTOR MARCELO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 269, 'Direccion 111'),
-(1185, 1, '07829514', 'JAVIER DESMAISON FERNANDINI', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1240, 'Direccion 111'),
-(1186, 1, '07819514', 'DESMAISON FERNANDINI JAVIER ALEJANDRO', NULL, NULL, NULL, NULL, NULL, 3, 758, 'Direccion 111'),
-(1187, 1, '07829514', 'DESMAISON FERNADINI JAVIER ALEJANDRO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 267, 'Direccion 111'),
-(1188, 1, '13002878', 'WAGNER HANS JURGEN', NULL, NULL, NULL, NULL, NULL, 3, 771, 'Direccion 111'),
-(1189, 1, '29289541', 'VALDIVIA VARGAS JESUS VENECIA', NULL, NULL, NULL, NULL, NULL, 3, 825, 'Direccion 111'),
-(1190, 1, '06117223', 'SEGOVIA LUIS', NULL, NULL, NULL, NULL, NULL, 3, 960, 'Direccion 111'),
-(1191, 1, '29222890', 'CATALINA ROXANA CHAVEZ ASTORGA DE LLERENA', NULL, NULL, NULL, NULL, NULL, 3, 826, 'Direccion 111'),
-(1192, 1, '16659576', 'PERALTA TAPIA WILSON', NULL, NULL, NULL, NULL, NULL, 3, 827, 'Direccion 111'),
-(1193, 1, '29461584', 'NAVARRO ANDRADE MANUEL', NULL, NULL, NULL, NULL, NULL, 3, 760, 'Direccion 111'),
-(1194, 1, '07829514', 'DESMAISON FERNANDINI JAVIER', NULL, NULL, NULL, NULL, NULL, 3, 829, 'Direccion 111'),
-(1195, 1, '16639819', 'AVILA GARCIA HUGO HENRY', NULL, NULL, NULL, NULL, NULL, 3, 830, 'Direccion 111'),
-(1196, 1, '09139352', 'BLEST GARCIA JUAN JILBERTO', 'DIRECTOR GENERAL', NULL, NULL, NULL, NULL, 3, 831, 'Direccion 111'),
-(1197, 1, '40230180', 'CASTILLO HUERTA BENITO GENARO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 833, 'Direccion 111'),
-(1198, 1, '10685043', 'MERCADO MORON MIGUEL ANGEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 834, 'Direccion 111'),
-(1199, 1, '08859087', 'TELLO MACAZANA, CELSO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1337, 'Direccion 111'),
-(1200, 1, '09997821', 'CASTILLO ARANDA, JEAN PAUL AMADOR', 'GERENTE', NULL, NULL, NULL, NULL, 3, 835, 'Direccion 111'),
-(1201, 1, '10778408', 'GAMBOA ALARCON, YONY AUGUSTO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 836, 'Direccion 111'),
-(1202, 1, '29478895', 'BALLON SALAS BENITA NOEMI', 'GERENTE', NULL, NULL, NULL, NULL, 3, 837, 'Direccion 111'),
-(1203, 1, '29477588', 'CHAVEZ ARANIBAL SABINO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 838, 'Direccion 111'),
-(1204, 1, '00000291', 'SUSANA AMPARO MECEDO', NULL, NULL, NULL, NULL, NULL, 3, 839, 'Direccion 111'),
-(1205, 1, '45062355', 'OSTOS AGUILAR CONRADO ALVARO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 840, 'Direccion 111'),
-(1206, 1, '00000280', 'GILBERTO HUANCA MAMANI', NULL, NULL, NULL, NULL, NULL, 3, 841, 'Direccion 111'),
-(1207, 1, '401113962', 'GILBERTO HUANCA HUAMANI', NULL, NULL, NULL, NULL, NULL, 3, 841, 'Direccion 111'),
-(1208, 1, '44481518', 'JIMENEZ YRUPAILLA, FIORELLA VANESSA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 843, 'Direccion 111'),
-(1209, 1, '02446726', 'SARDON ROSSEL OLGA JAMILETH', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 844, 'Direccion 111'),
-(1210, 1, '43351504', 'VARGAS CRUZ PEDRO ROLANDO', NULL, NULL, NULL, NULL, NULL, 3, 845, 'Direccion 111'),
-(1211, 1, '45116770', 'YHENNI MARISOL ROCA SANCA', NULL, NULL, NULL, NULL, NULL, 3, 846, 'Direccion 111'),
-(1212, 1, '40904869', 'NOBOA CHIRINOS FERNANDO', NULL, NULL, NULL, NULL, NULL, 3, 847, 'Direccion 111'),
-(1213, 1, '12506350', 'VALDEZ JAEN ENRIQUE', NULL, NULL, NULL, NULL, NULL, 3, 848, 'Direccion 111'),
-(1214, 1, '30858784', 'GAMARRA ANDREU ATAHUALPA GUAZU', NULL, NULL, NULL, NULL, NULL, 3, 721, 'Direccion 111'),
-(1215, 1, '31041772', 'PAZ GUILLEN JAIME SANTIAGO', NULL, NULL, NULL, NULL, NULL, 3, 849, 'Direccion 111'),
-(1216, 1, '29631851', 'MARLENE BEATRIZ TORRES ALVAREZ', NULL, NULL, NULL, NULL, NULL, 3, 655, 'Direccion 111'),
-(1217, 1, '44030710', 'ADOLFO PARILLO LAZARINOS', NULL, NULL, NULL, NULL, NULL, 3, 850, 'Direccion 111'),
-(1218, 1, '456610965', 'MOREYRA RAMOS PATRICK', NULL, NULL, NULL, NULL, NULL, 3, 851, 'Direccion 111'),
-(1219, 1, '08254606', 'SALINAS SALAS PATRICIA ZENOBIA', NULL, NULL, NULL, NULL, NULL, 3, 852, 'Direccion 111'),
-(1220, 1, '292011411', 'SALEM HUDSON MONTOYA NEYRA', NULL, NULL, NULL, NULL, NULL, 3, 853, 'Direccion 111'),
-(1221, 1, '00000488', 'JIMENEZ BENGOA MILTON ELISEO', NULL, NULL, NULL, NULL, NULL, 3, 854, 'Direccion 111'),
-(1222, 1, '06833469', 'CHAVARRIA  ESTRADA DALILA HILARIA', NULL, NULL, NULL, NULL, NULL, 3, 774, 'Direccion 111'),
-(1223, 1, '29585587', 'FLORENTINO MARCIAL CAHUANA USCAMAYTA', NULL, NULL, NULL, NULL, NULL, 3, 773, 'Direccion 111'),
-(1224, 1, '30850169', 'VIDAURRAZAGA LOPEZ DE ROMAÑA JAVIER', NULL, NULL, NULL, NULL, NULL, 3, 855, 'Direccion 111'),
-(1225, 1, '00000497', 'CIAL', NULL, NULL, NULL, NULL, NULL, 3, 856, 'Direccion 111'),
-(1226, 1, '00000427', 'MAMA LUZ', NULL, NULL, NULL, NULL, NULL, 3, 857, 'Direccion 111'),
-(1227, 1, '00000428', 'PIZZA AL PASO 1', NULL, NULL, NULL, NULL, NULL, 3, 858, 'Direccion 111'),
-(1228, 1, '15750596', 'FLORES ESPINOZA VICTOR RAUL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 859, 'Direccion 111'),
-(1229, 1, '09378658', 'GARCIA RAGGIO LEANDRO LUIS MARTIN', 'GERENTE', NULL, NULL, NULL, NULL, 3, 732, 'Direccion 111'),
-(1230, 1, '29218688', 'DEL CARPIO MARQUEZ RULO RODOLFO', NULL, NULL, NULL, NULL, NULL, 3, 753, 'Direccion 111'),
-(1231, 1, '10060630', 'SALAZAR YAMIS EDUARDO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 705, 'Direccion 111'),
-(1232, 1, '30674940', 'JULIANA SULLA YUPANQUI', NULL, NULL, NULL, NULL, NULL, 3, 860, 'Direccion 111'),
-(1233, 1, '00000433', 'INVERSIONES SAN ROQUE', NULL, NULL, NULL, NULL, NULL, 3, 862, 'Direccion 111'),
-(1234, 1, '07912139', 'HIGA HIGA AGUSTIN', 'GERENTE', NULL, NULL, NULL, NULL, 3, 863, 'Direccion 111'),
-(1235, 1, '00000434', 'SERV. PIZARRO', NULL, NULL, NULL, NULL, NULL, 3, 864, 'Direccion 111'),
-(1236, 1, '00369815', 'HERMELINDA MARIÑO QUINTANILLA DE VELARDE', NULL, NULL, NULL, NULL, NULL, 3, 865, 'Direccion 111'),
-(1237, 1, '29517519', 'PASTOR PORTOCARRERO JOVAN', NULL, NULL, NULL, NULL, NULL, 3, 872, 'Direccion 111'),
-(1238, 1, '29322533', 'MARY LUZ LLERENA MEZA', NULL, NULL, NULL, NULL, NULL, 3, 867, 'Direccion 111'),
-(1239, 1, '00000426', 'COMPU OFERTAS', NULL, NULL, NULL, NULL, NULL, 3, 868, 'Direccion 111'),
-(1240, 1, '00000438', 'AMP COMPUTER', NULL, NULL, NULL, NULL, NULL, 3, 869, 'Direccion 111'),
-(1241, 1, '00000439', 'SERVICIOS LUNA', NULL, NULL, NULL, NULL, NULL, 3, 870, 'Direccion 111'),
-(1242, 1, '00000440', 'SERVI LLAVES', NULL, NULL, NULL, NULL, NULL, 3, 871, 'Direccion 111'),
-(1243, 1, '29517519', 'PASTOR PORTOCARRERO JOVAN', NULL, NULL, NULL, NULL, NULL, 3, 872, 'Direccion 111'),
-(1244, 1, '00000442', 'CHUNG ZHI CHOY', NULL, NULL, NULL, NULL, NULL, 3, 873, 'Direccion 111'),
-(1245, 1, '29208087', 'ABUAPARA CHAMI NABIH', NULL, NULL, NULL, NULL, NULL, 3, 874, 'Direccion 111'),
-(1246, 1, '30849742', 'VIDAURRAZAGA ZIMMERMANN JUAN', NULL, NULL, NULL, NULL, NULL, 3, 875, 'Direccion 111'),
-(1247, 1, '292129225', 'SUSANA QUISPE DE SARCO', NULL, NULL, NULL, NULL, NULL, 3, 876, 'Direccion 111'),
-(1248, 1, '00000437', 'CEVICHERIA ZORY MAR', NULL, NULL, NULL, NULL, NULL, 3, 877, 'Direccion 111'),
-(1249, 1, '29324641', 'ZENTENO DE CHECO MARIA', NULL, NULL, NULL, NULL, NULL, 3, 878, 'Direccion 111'),
-(1250, 1, '07568485', 'RAMIREZ URUETA LUIS ALFREDO', NULL, NULL, NULL, NULL, NULL, 3, 83, 'Direccion 111'),
-(1251, 1, '07568485', 'RAMIREZ URUETA LUIS ALFREDO', NULL, NULL, NULL, NULL, NULL, 3, 738, 'Direccion 111'),
-(1252, 1, '41383342', 'CORNEJO BALLON RICARDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 879, 'Direccion 111'),
-(1253, 1, '09484530', 'ALCCA AZURIN GRACIELA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1055, 'Direccion 111'),
-(1254, 1, '21400955', 'FIERRO MOQUIZALLA AMADOR', NULL, NULL, NULL, NULL, NULL, 3, 881, 'Direccion 111'),
-(1255, 1, '29306630', 'VALDIVIA DE GUTIERREZ ISABEL PEREGRINA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 882, 'Direccion 111'),
-(1256, 1, '29673413', 'FAURA DE MONTANCHEZ, LUCIA BEATRIZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 883, 'Direccion 111'),
-(1257, 1, '29289541', 'VALDIVIA VARGAS JESUS VENECIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 728, 'Direccion 111'),
-(1258, 1, '07876863', 'PEREZ PRIETO BOULLON RAMON RAMON', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 884, 'Direccion 111'),
-(1259, 1, '00000412', 'TELEFONICA DEL PERU', NULL, NULL, NULL, NULL, NULL, 3, 885, 'Direccion 111'),
-(1260, 1, '07487952', 'LOZADA BAUMANN, ARCEDA RACHEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 886, 'Direccion 111'),
-(1261, 1, '00000413', 'Melissa Venegas', 'Residente', NULL, NULL, 'mvenegas@arquitotal.com', 'arquitotal.com', 3, 160, 'Direccion 111'),
-(1263, 1, '00000415', 'JOSE BRUNO SIPION ASTO', 'ARQUITECTO', NULL, NULL, 'jsipion@copracsa.com', NULL, 3, 14, 'Direccion 111'),
-(1264, 1, '08966650', 'CACERES RECAVARREN BEATRIZ SOFIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 887, 'Direccion 111'),
-(1265, 1, '45441369', 'CAI XIUFANG', NULL, NULL, NULL, NULL, NULL, 3, 888, 'Direccion 111'),
-(1266, 1, '29314209', 'LILIAN EMPERATRIZ MALAGA QUEVEDO', NULL, NULL, NULL, NULL, NULL, 3, 889, 'Direccion 111'),
-(1267, 1, '44024641', 'SANDRA SANTANDER', NULL, NULL, NULL, NULL, NULL, 3, 890, 'Direccion 111'),
-(1268, 1, '29262816', 'LOPEZ VALENCIA YENNY', NULL, NULL, NULL, NULL, NULL, 3, 891, 'Direccion 111'),
-(1269, 1, '09979263', 'JUAN FORTUNATO BLANCO COLONIO', NULL, NULL, NULL, NULL, NULL, 3, 796, 'Direccion 111'),
-(1270, 1, '07780006', 'LUQUE BADENES MARIA VERONICA', NULL, NULL, NULL, NULL, NULL, 3, 893, 'Direccion 111'),
-(1271, 1, '29578086', 'HUANCA BARRIONUEVO MARISOL', NULL, NULL, NULL, NULL, NULL, 3, 894, 'Direccion 111'),
-(1272, 1, '10292499120', 'JOSE ANTONIO ENRIQUE MEDINA DEL CARPIO', NULL, NULL, NULL, NULL, NULL, 3, 763, 'Direccion 111'),
-(1273, 1, '00000423', 'Raul Garcia Ramos', NULL, NULL, NULL, NULL, NULL, 3, 892, 'Direccion 111'),
-(1274, 1, '25330501', 'GARCIA RAMOS RAUL ENRIQUE', NULL, NULL, NULL, NULL, NULL, 3, 892, 'Direccion 111'),
-(1275, 1, '40560649', 'Vanessa Villar Castrillón', 'GERENTE GENERAL', NULL, NULL, 'vvillar@miskaperu.com', NULL, 3, 895, 'Direccion 111'),
-(1276, 1, '07568485', 'RAMIREZ URUETA LUIS ALFREDO', NULL, NULL, NULL, NULL, NULL, 3, 364, 'Direccion 111'),
-(1277, 1, '29396963', 'MARIA CECILIA TOLEDO DE GARCIA', NULL, NULL, NULL, NULL, NULL, 3, 979, 'Direccion 111'),
-(1278, 1, '29470684', 'ZAGACETA MALDONADO XAVIER ARNULFO', NULL, NULL, NULL, NULL, NULL, 3, 795, 'Direccion 111'),
-(1279, 1, '29560486', 'RODRIGUEZ GONZALES JORGE ALBERTO', NULL, NULL, NULL, NULL, NULL, 3, 897, 'Direccion 111'),
-(1280, 1, '29594957', 'TEJADO AMADO SHEYNA CANDY', NULL, NULL, NULL, NULL, NULL, 3, 739, 'Direccion 111'),
-(1281, 1, '09138316', 'PRIVAT ZIMMERMANN HUGO ALBERTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 898, 'Direccion 111'),
-(1282, 1, '294803730', 'TALAVERA MEDINA DE LA MAR MARTHA LEONIDAS', NULL, NULL, NULL, NULL, NULL, 3, 899, 'Direccion 111'),
-(1283, 1, '29309592', 'CHOQUE PILCO ROBERTO', NULL, NULL, NULL, NULL, NULL, 3, 777, 'Direccion 111'),
-(1284, 1, '08507165', 'CUBA VALDERRAMA AMADO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 900, 'Direccion 111'),
-(1285, 1, '09304196', 'EMMA GUADALUPE GUERRERO MUNIVE', 'GERENTE GENERAL', NULL, NULL, 'gguerrero@gygperu.com', NULL, 3, 429, 'Direccion 111'),
-(1286, 1, '29524610', 'HUERTA ALPACA MONICA PASTORA', NULL, NULL, NULL, NULL, NULL, 3, 901, 'Direccion 111'),
-(1287, 1, '29474216', 'JUAN GERMAN CUTIPA CASTILLO', NULL, NULL, NULL, NULL, NULL, 3, 902, 'Direccion 111'),
-(1288, 1, '07780006', 'LUQUE BADENES MARIA VERONICA ESPERANZA', NULL, NULL, NULL, NULL, NULL, 3, 903, 'Direccion 111'),
-(1289, 1, '17900480', 'GARCIA DE LA CRUZ JUAN HELMER', NULL, NULL, NULL, NULL, NULL, 3, 904, 'Direccion 111'),
-(1290, 1, '295344887', 'JUAN FERNANDO FUENTES VALENCIA', NULL, NULL, NULL, NULL, NULL, 3, 905, 'Direccion 111'),
-(1291, 1, '408931741', 'SALINAS ALVARAO FRANCO', NULL, NULL, NULL, NULL, NULL, 3, 906, 'Direccion 111'),
-(1292, 1, '29244773', 'MUÑOZ DEL RIO GUSTAVO', NULL, NULL, NULL, NULL, NULL, 3, 907, 'Direccion 111'),
-(1293, 1, '29230006', 'VILMA CELINA DAVILA DE BALLON', NULL, NULL, NULL, NULL, NULL, 3, 908, 'Direccion 111'),
-(1294, 1, '70681585', 'JAIME FELIPE VELA MOSCOSO', NULL, NULL, NULL, NULL, NULL, 3, 909, 'Direccion 111');
-INSERT INTO `tb_personacontacto` (`id`, `tb_empresa_id`, `dni`, `nombre`, `cargo`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_companiacontacto_id`, `direccion`) VALUES
-(1295, 1, '08272540', 'ATUN LEON JAIME VICTOR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1168, 'Direccion 111'),
-(1296, 1, '40132619', 'LOPEZ RIVERA DANIEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 911, 'Direccion 111'),
-(1297, 1, '10326020', 'RUIZ CRUZ LUIS ALBERTO', 'Gerente General', NULL, NULL, 'indurucsa71@hotmail.com', NULL, 3, 912, 'Direccion 111'),
-(1298, 1, '31880001', 'MENDOZA ABARCA FASCIANO RAMIRO', NULL, NULL, NULL, NULL, NULL, 3, 913, 'Direccion 111'),
-(1299, 1, '29414801', 'PACCARA HUANCCO FELIX', NULL, NULL, NULL, NULL, NULL, 3, 914, 'Direccion 111'),
-(1300, 1, '10231279', 'JUAN RAMON PIZARRO QUISPE', 'GERENTE GENERAL', NULL, NULL, 'jpizarro@goodpools.com.pe', 'www.goodpools.com.pe', 3, 915, 'Direccion 111'),
-(1301, 1, '06635768', 'HANZA SANCHEZ CONCHA DE RAFO MARIA DEL CARMEN', NULL, NULL, NULL, NULL, NULL, 3, 916, 'Direccion 111'),
-(1302, 1, '09938603', 'SUI WU SEY CHUNG', NULL, NULL, NULL, NULL, NULL, 3, 917, 'Direccion 111'),
-(1303, 1, '41639528', 'CANCHO MAURIZ LUIS EDUARDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 918, 'Direccion 111'),
-(1304, 1, '09272861', 'Astete Palma Celso Victor', NULL, NULL, NULL, NULL, NULL, 3, 96, 'Direccion 111'),
-(1305, 1, '1054048', 'Ronald Edwing Orrego Carrillo', 'Gerente Comercial de Energia', NULL, NULL, NULL, NULL, 3, 96, 'Direccion 111'),
-(1306, 1, '00000478', 'GUSTAVO DAVILA', 'SUPERVISOR', NULL, NULL, 'Gustavo.Davila@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(1307, 1, '07844781', 'VALLEJO LEIGH LUIS FELIPE', NULL, NULL, NULL, NULL, NULL, 3, 607, 'Direccion 111'),
-(1308, 1, '294786452', 'WILBER SALINAS PORTUGAL', NULL, NULL, NULL, NULL, NULL, 3, 919, 'Direccion 111'),
-(1309, 1, '10100231668', 'CARMEN', 'ASISTENTE DE VENTAS', NULL, NULL, NULL, NULL, 3, 1094, 'Direccion 111'),
-(1310, 1, '06040685', 'VASQUEZ  VELA ANDERSON', 'GERENTE', NULL, NULL, NULL, NULL, 3, 979, 'Direccion 111'),
-(1311, 1, '00000448', 'CRISTIAM URRACA COA', 'Ing. de Proyectos', '105*6900', NULL, NULL, NULL, 3, 201, 'Direccion 111'),
-(1312, 1, '00000449', 'AUGUSTO WILFREDO GUTIERREZ ZUZUNAGA', 'GERENTE GENERAL', NULL, NULL, 'AGUTIERREZ@GG.COM.PE', NULL, 3, 920, 'Direccion 111'),
-(1313, 1, '00000450', 'KAREN GUGLIELMINO', 'APODERADA', NULL, NULL, 'kguglielmino@gg.com.pe', NULL, 3, 920, 'Direccion 111'),
-(1314, 1, '073199892', 'BERTHA EMESTINA VALENCIA ORELLANA', NULL, NULL, NULL, NULL, NULL, 3, 921, 'Direccion 111'),
-(1315, 1, '29271509', 'RONDON VALDIVIA XAVIER MARCOS', NULL, NULL, NULL, NULL, NULL, 3, 922, 'Direccion 111'),
-(1316, 1, '08688122', 'ALBARRACIN VEGA JEAN PAUL', NULL, NULL, NULL, NULL, NULL, 3, 924, 'Direccion 111'),
-(1317, 1, '06620167', 'SASSARINI OLAZABAL, VICTOR HUGO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 925, 'Direccion 111'),
-(1318, 1, '10272582', 'HIGASHI LUY JULIO ANTONIO', 'DIRECTOR GERENTE', '817*864', NULL, 'jhigashi@gmail.com', NULL, 3, 926, 'Direccion 111'),
-(1319, 1, '07526898', 'JIMENEZ YRUPAILLA HELME RODOLFO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1309, 'Direccion 111'),
-(1320, 1, '40698403', 'ANICETO ARTURO CABRERA', NULL, NULL, NULL, NULL, NULL, 3, 927, 'Direccion 111'),
-(1321, 1, '00000453', 'JOSE RUIZ ESPINOZA', 'SUPERVISOR DE OBRA', NULL, NULL, NULL, NULL, 3, 912, 'Direccion 111'),
-(1322, 1, '00000454', 'Juan Carlos Chavez', 'Residente de Obra', NULL, NULL, 'jchavez@gygperu.com; ingjchavez@hotmail.com', NULL, 3, 429, 'Direccion 111'),
-(1323, 1, '00000466', 'Carlos Vargas', 'Residente de Obra', NULL, NULL, 'jproyecto33@refricorp.com', NULL, 3, 680, 'Direccion 111'),
-(1324, 1, '25527991', 'VARGAS MONROY JOSE LUIS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 928, 'Direccion 111'),
-(1325, 1, '19908617', 'CUNYAS GARCIA GABRIEL', NULL, NULL, NULL, NULL, NULL, 3, 929, 'Direccion 111'),
-(1326, 1, '00000017', 'HECTOR AREVALO', NULL, NULL, NULL, 'hector.arevalo@sigral.com.pe', NULL, 3, 369, 'Direccion 111'),
-(1327, 1, '00000016', 'HENRY YEP', NULL, NULL, NULL, 'henry.yep@sigral.com.pe', NULL, 3, 369, 'Direccion 111'),
-(1328, 1, '08181248', 'PARDO GOMEZ ANA MARIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 931, 'Direccion 111'),
-(1329, 1, '06728231', 'CIPRIANO SALDARRIAGA ROSA JULIA', NULL, NULL, NULL, NULL, NULL, 3, 932, 'Direccion 111'),
-(1330, 1, '31620773', 'CORAL GARCIA DE MALDONADO LUZ CAROLINA', NULL, NULL, NULL, NULL, NULL, 3, 933, 'Direccion 111'),
-(1331, 1, '17867730', 'CASTILLO DE LEON CONSUELO', NULL, NULL, NULL, NULL, NULL, 3, 934, 'Direccion 111'),
-(1332, 1, '17969590', 'BRACAMONTE MANTILLA JUAN JULIO', NULL, NULL, NULL, NULL, NULL, 3, 935, 'Direccion 111'),
-(1333, 1, '18187163', 'ROJAS GALLARDO LEONCIO', NULL, NULL, NULL, NULL, NULL, 3, 936, 'Direccion 111'),
-(1334, 1, '09566338', 'ESPINOZA CHIPANA CARLOS ENRIQUE', NULL, NULL, NULL, NULL, NULL, 3, 937, 'Direccion 111'),
-(1335, 1, '09342360', 'PUYO DE ZAVAL JUAN CARLOS PATRICIO JOFRE', NULL, NULL, NULL, NULL, NULL, 3, 938, 'Direccion 111'),
-(1336, 1, '2153000', 'PEDRO CORTEZ', NULL, NULL, NULL, NULL, NULL, 3, 938, 'Direccion 111'),
-(1337, 1, '00000461', 'CARLO CALDERON', 'SUPERVISOR', NULL, NULL, 'Carlo.Calderon@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(1338, 1, 'CEX76403', 'YI PUEN LAY', NULL, NULL, NULL, NULL, NULL, 3, 939, 'Direccion 111'),
-(1339, 1, '29529165', 'VALDERRAMA WONG', 'GERENTE', NULL, NULL, NULL, NULL, 3, 923, 'Direccion 111'),
-(1340, 1, '43256348', 'DE LA CRUZ SANCHEZ JUAN FRANCISCO', 'SUPERVISOR DE OBRA - GP', NULL, NULL, 'jdelacruz@copracsa.com', NULL, 3, 14, 'Direccion 111'),
-(1341, 1, '06802714', 'OMAR SEMPERTEGUI TORREZ', 'REPRESENTANTE LEGAL', NULL, NULL, 'O_SEMPERTEGUI@HOTMAIL.COM', NULL, 3, 1387, 'Direccion 111'),
-(1342, 1, '29290009', 'FRANCO OBREGON ENRIQUE PERCY', NULL, NULL, NULL, NULL, NULL, 3, 942, 'Direccion 111'),
-(1343, 1, '29325647', 'TORRES MONTES REVILLA SANTIAGO ULISES', NULL, NULL, NULL, NULL, NULL, 3, 943, 'Direccion 111'),
-(1344, 1, '16692517', 'SALVO DAVILA PATRICIA MARGOT', NULL, NULL, NULL, NULL, NULL, 3, 944, 'Direccion 111'),
-(1345, 1, '10243285', 'VANESSA OLIVERA', 'EJECUTIVA DE VENTAS', '4406777', NULL, 'volivera@decorlux.com.pe', NULL, 3, 119, 'Direccion 111'),
-(1346, 1, '16431477', 'JUSTINA G. LISBOA ZUMARAN', NULL, NULL, NULL, NULL, NULL, 3, 945, 'Direccion 111'),
-(1347, 1, '00021476', 'GONZALEZ FERNANDEZ WILLIAM', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 946, 'Direccion 111'),
-(1348, 1, '09701042', 'GERMAN FLORES SOTO', NULL, NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(1349, 1, '98722504', 'JOSE GALINDO APARICIO', NULL, NULL, NULL, NULL, NULL, 3, 133, 'Direccion 111'),
-(1350, 1, '10310345', 'SALAZAR GONZALES WILDER ALEJANDRO', NULL, NULL, NULL, NULL, NULL, 3, 133, 'Direccion 111'),
-(1351, 1, '01562248', 'XAVIER ALARCON', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 949, 'Direccion 111'),
-(1352, 1, '01559235', 'JUAN JOSE OROZCO', 'JEFE COMERCIAL', NULL, NULL, 'j_orozco@provefabrica.com.pe', NULL, 3, 949, 'Direccion 111'),
-(1353, 1, '08960225', 'LUIS ARMANDO GASCO VASQUEZ', NULL, NULL, NULL, NULL, NULL, 3, 950, 'Direccion 111'),
-(1354, 1, '09715972', 'ELLIOT CALLE RODRIGUEZ', NULL, NULL, NULL, NULL, NULL, 3, 951, 'Direccion 111'),
-(1355, 1, '07310000', 'HERNANDEZ FERNANDEZ JAIME JESUS', NULL, NULL, NULL, NULL, NULL, 3, 952, 'Direccion 111'),
-(1356, 1, '1000000', 'PEDRO ENRIQUES GOMEZ', 'ASISTENTE COMERCIAL', NULL, NULL, 'ventas@sego.com.pe', NULL, 3, 953, 'Direccion 111'),
-(1357, 1, '08874720', 'SERGIO DANTE  FRIAS RAMIREZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 954, 'Direccion 111'),
-(1358, 1, '09396220', 'DE LA FUENTE GUEVARA SANDRA GRACIELA', 'GERENTE GENERAL', '226-4435', NULL, NULL, NULL, 3, 956, 'Direccion 111'),
-(1359, 1, '07261671', 'Juan Carlos Kam Chung', 'APODERADO', NULL, NULL, NULL, NULL, 3, 957, 'Direccion 111'),
-(1360, 1, '11111111', 'MÁXIMO FLORES SALAZAR', 'Ingeniero Desarrollo Técnico', NULL, NULL, 'mdfloress@repsol.com', NULL, 3, 957, 'Direccion 111'),
-(1361, 1, '08265008', 'MIYASATO MIYASATO ENRIQUE', 'GERENTE GENERAL', '4339951', NULL, NULL, NULL, 3, 958, 'Direccion 111'),
-(1362, 1, '10251236', 'JAIME PIZARRO GRAU', NULL, '4339951', NULL, 'jpizarro@miyasato.com.pe', 'http://www.miyasato.com.pe/', 3, 958, 'Direccion 111'),
-(1363, 1, '00000532', 'SANDRA LAZARTE', 'ARQUITEACTA', NULL, NULL, NULL, NULL, 3, 12, 'Direccion 111'),
-(1364, 1, '00000531', 'SANDRA LAZARTE', NULL, NULL, NULL, 'sandra.lazarte@oechsle.pe', NULL, 3, 12, 'Direccion 111'),
-(1365, 1, '00000530', 'JUAN CARLOS SAENZ', 'EJECUTIVO DE VENTAS', NULL, NULL, NULL, NULL, 3, 1100, 'Direccion 111'),
-(1366, 1, '45410340', 'YANG JIAN', NULL, NULL, NULL, NULL, NULL, 3, 959, 'Direccion 111'),
-(1367, 1, '23763123', 'PARADA JUAN MANUEL', NULL, NULL, NULL, NULL, NULL, 3, 726, 'Direccion 111'),
-(1368, 1, '07819264', 'CASTANON SEOANE EMILIO ENRIQUE', 'GERENTE GENERAL', NULL, NULL, 'rf21@orion-peru.com', NULL, 3, 962, 'Direccion 111'),
-(1369, 1, '08562671', 'VIRHUEZ ROBLES LURDES DEL PILAR', NULL, NULL, NULL, NULL, NULL, 3, 963, 'Direccion 111'),
-(1370, 1, '00009378', 'HE ZHIMING', 'GERENTE', NULL, NULL, NULL, NULL, 3, 964, 'Direccion 111'),
-(1371, 1, '09617962', 'TITO GUTIERREZ YOLANDA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 965, 'Direccion 111'),
-(1372, 1, '09459256', 'CARDENAS ALIKHAN OSWALDO PERCY', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 966, 'Direccion 111'),
-(1373, 1, '46468671', 'VARA HUARCAYA ROBINSON SALOMON', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 967, 'Direccion 111'),
-(1374, 1, '9892745', 'ELIZABETH HILASACA', NULL, NULL, NULL, 'metricasac@yahoo.com', NULL, 3, 969, 'Direccion 111'),
-(1375, 1, '10620713', 'CONSTANZA JOVANNA GUTIERREZ PACORA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 969, 'Direccion 111'),
-(1376, 1, '29517191', 'LUCIO PABLO CHANI CASTRO', NULL, NULL, NULL, NULL, NULL, 3, 970, 'Direccion 111'),
-(1377, 1, '80280490', 'QUISPE PARI HUGO', NULL, NULL, NULL, NULL, NULL, 3, 971, 'Direccion 111'),
-(1378, 1, '06661935', 'UESU KINA MARIA ESTHER', 'GERENTE', NULL, NULL, NULL, NULL, 3, 972, 'Direccion 111'),
-(1379, 1, '06283559', 'DE LOS RIOS MARTINEZ GUSTAVO WALTER', 'GERENTE', NULL, NULL, NULL, NULL, 3, 973, 'Direccion 111'),
-(1380, 1, '29335737', 'BORJAS SANCHEZ SANTOS', NULL, NULL, NULL, NULL, NULL, 3, 974, 'Direccion 111'),
-(1381, 1, '02129263', 'IRMA DIAZ ARHUIRI', NULL, NULL, NULL, NULL, NULL, 3, 975, 'Direccion 111'),
-(1382, 1, '07751821', 'MARIA LUZ GALINDO', NULL, NULL, NULL, NULL, NULL, 3, 976, 'Direccion 111'),
-(1383, 1, '41788661', 'SOLIS LUDEÑA JUAN REYNALDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 977, 'Direccion 111'),
-(1384, 1, '25682839', 'RANCEL RAZZETO CANEVARO', NULL, NULL, NULL, NULL, NULL, 3, 978, 'Direccion 111'),
-(1385, 1, '26923662', 'VICTOR SOLANO BECERRA', NULL, NULL, NULL, NULL, NULL, 3, 14, 'Direccion 111'),
-(1386, 1, '09897523', 'EDITH LARA MARTINEZ', NULL, NULL, NULL, NULL, NULL, 3, 14, 'Direccion 111'),
-(1387, 1, '09223858', 'SATURNINO MINAYA FLORES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 980, 'Direccion 111'),
-(1388, 1, '40296312', 'GUTIERREZ OSORIO LUCIA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 981, 'Direccion 111'),
-(1389, 1, '40363859', 'TINCO SURCO GENNY DIANNA', NULL, NULL, NULL, NULL, NULL, 3, 982, 'Direccion 111'),
-(1390, 1, '998227183', 'JORGE PRETEL', 'SUPERVISOR DE OBRA', NULL, 'Pretel', 'Jorge.Pretel@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(1391, 1, '42852001', 'URBINA AGUILAR SANDRA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 983, 'Direccion 111'),
-(1392, 1, '09709588', 'SANTIAGO TORRES LAZARO ALBERTO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 984, 'Direccion 111'),
-(1393, 1, '52444594', 'INVERSIONES CRISBEL', NULL, NULL, NULL, NULL, NULL, 3, 985, 'Direccion 111'),
-(1394, 1, '44814665', 'LUZ KATHERINE MARON BARRIENTOS', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1107, 'Direccion 111'),
-(1395, 1, '10784026', 'OFICENTRO', NULL, NULL, NULL, NULL, NULL, 3, 986, 'Direccion 111'),
-(1396, 1, '51234529', 'IMPRENTA SAN LORENZO', NULL, NULL, NULL, NULL, NULL, 3, 987, 'Direccion 111'),
-(1397, 1, '50789705', 'DIGI ANALISIS', NULL, NULL, NULL, NULL, NULL, 3, 988, 'Direccion 111'),
-(1398, 1, '25330409', 'JESUS ADAN HERRERA', NULL, NULL, NULL, NULL, NULL, 3, 989, 'Direccion 111'),
-(1399, 1, '50195791', 'MULTISERVICIOS MARCOS', NULL, NULL, NULL, NULL, NULL, 3, 990, 'Direccion 111'),
-(1400, 1, '51254490', 'INVERSIONES ANAKIN', NULL, NULL, NULL, NULL, NULL, 3, 991, 'Direccion 111'),
-(1401, 1, '00160612', 'LI CHENGXI', 'GERENTA', NULL, NULL, NULL, NULL, 3, 992, 'Direccion 111'),
-(1402, 1, '29664573', 'CANO AROSTEGUI SELMAN AXEL', NULL, NULL, NULL, NULL, NULL, 3, 714, 'Direccion 111'),
-(1403, 1, '16690209', 'NEWEL CHONG JIM PAUL', NULL, NULL, NULL, NULL, NULL, 3, 993, 'Direccion 111'),
-(1404, 1, '09176553', 'GIUSEPPINA MARIA TERESA CANEPA BEUSAN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 995, 'Direccion 111'),
-(1405, 1, '29730270', 'VALDIVIA CARRILLO ADRIANA ESTELA', NULL, NULL, NULL, NULL, NULL, 3, 994, 'Direccion 111'),
-(1406, 1, '10470062', 'JOSE MALLQUI PEÑA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 996, 'Direccion 111'),
-(1407, 1, '99999', 'FERNADO PASTOR', 'EJECUIVO DE VENTAS', NULL, NULL, 'fpastor@promelsa.com.pe', NULL, 3, 996, 'Direccion 111'),
-(1408, 1, '10074775', 'VASQUEZ CARRASCO HILDELBRANDO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 997, 'Direccion 111'),
-(1409, 1, '10168709', 'LUZ ANGELICA APARI BADA', 'GERENTA', NULL, NULL, NULL, NULL, 3, 998, 'Direccion 111'),
-(1410, 1, '29294640', 'ARROSQUIPA SANAVINCHO JORGE FRANCISCO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 999, 'Direccion 111'),
-(1411, 1, '29237842', 'PORTUGAL RICKETTS JOSE ALEJANDRO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1000, 'Direccion 111'),
-(1412, 1, '41583008', 'DE CORDOVA ORIHUELA MARCO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1001, 'Direccion 111'),
-(1413, 1, '29475926', 'VASQUEZ MORON SERGIO HUGO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1002, 'Direccion 111'),
-(1414, 1, '06922917', 'CORDOVA  GARCIA  DE GARCIA DORALISA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1003, 'Direccion 111'),
-(1415, 1, '08762878', 'LUMBRE RODRIGUEZ MARIA ELENA', NULL, NULL, NULL, NULL, NULL, 3, 1004, 'Direccion 111'),
-(1416, 1, '07015285', 'GUARDIAN BAHOMONDE LUIS FREDDY', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1005, 'Direccion 111'),
-(1417, 1, '10612812', 'HUARCAYA ÑAHUINCOPA  ELOGIO', NULL, NULL, NULL, NULL, NULL, 3, 1006, 'Direccion 111'),
-(1418, 1, '08266568', 'RISSO MONTES JOSE ARMANDO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1008, 'Direccion 111'),
-(1419, 1, '00162402', 'RUIZ BENITO MARIA ISABEL', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1009, 'Direccion 111'),
-(1420, 1, '06855370', 'TIMANA SANDOVAL FERNANDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1010, 'Direccion 111'),
-(1421, 1, '08780478', 'ZEGARRA FARFAN GERMAN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1011, 'Direccion 111'),
-(1422, 1, '10116118', 'ZAPANA RODRIGUEZ JAQUET', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1012, 'Direccion 111'),
-(1423, 1, '4152144', 'PAUL NEWELL', 'SUPERVISOR DE CAMPO', NULL, NULL, 'jnewell@copracsa.com', NULL, 3, 14, 'Direccion 111'),
-(1424, 1, '2009598', 'EDUARDO SABA', 'JEFE DE OFICINA TECNICA', NULL, NULL, 'esaba@copracsa.com', NULL, 3, 14, 'Direccion 111'),
-(1425, 1, '07623530', 'MUNOZ RUBIO VICTOR RAUL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1013, 'Direccion 111'),
-(1426, 1, '22512667', 'ROJAS NAJERA JOSE ANTONIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1014, 'Direccion 111'),
-(1427, 1, '40705530', 'CISNEROS TENORIO YSIDORA P.', NULL, NULL, NULL, NULL, NULL, 3, 1015, 'Direccion 111'),
-(1428, 1, '08625939', 'LLAVE FLORES ROSARIO ALDEA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1016, 'Direccion 111'),
-(1429, 1, '10346185', 'YUPANQUI ALFARO SEGUNDO NOE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1017, 'Direccion 111'),
-(1430, 1, '10491592', 'MAGGI PARODI MARIA FERNANDA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1018, 'Direccion 111'),
-(1431, 1, '98127411', 'MARCO A. BARRANTES MEJIA', 'ASESOR COMERCIAL', NULL, NULL, NULL, NULL, 3, 1018, 'Direccion 111'),
-(1432, 1, '11111100', 'INDUSTRIAS EXITO', NULL, NULL, NULL, NULL, NULL, 3, 1019, 'Direccion 111'),
-(1433, 1, '10411912332', 'GAMARRA VALDIVIA CARLOS RICARDO', 'PREVENCIONISTA DE RIESGOA', NULL, NULL, NULL, NULL, 3, 1021, 'Direccion 111'),
-(1434, 1, '00000580', 'SERGIO MONTORO', NULL, NULL, NULL, 'sergiomontoro@gmail.com', NULL, 3, 1, 'Direccion 111'),
-(1435, 1, '43676428', 'ORIHUELA CHAMBILLA LIZETTE CLAUDIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1023, 'Direccion 111'),
-(1436, 1, '29288807', 'JOSE ANTONIO CACERES GUILLEN', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1024, 'Direccion 111'),
-(1437, 1, '10176258', 'LUIS ANTOLIN ESPINOZA ARAUJO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1028, 'Direccion 111'),
-(1438, 1, '10456485117', 'CARRASCO SOLANO RUBEN GERADO', 'ALMACENERO', NULL, NULL, NULL, NULL, 3, 1025, 'Direccion 111'),
-(1439, 1, '08766399', 'RAMOS CALLE DE VILELA ORIETA CARMEN', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1029, 'Direccion 111'),
-(1440, 1, '06627522', 'BARDALES CAMPOS ANDRES', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1030, 'Direccion 111'),
-(1441, 1, '08737029', 'CONDESO CUYA JUAN VALENTIN', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1031, 'Direccion 111'),
-(1442, 1, '08848985', 'RAMOS HUARHUA JAIME', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1032, 'Direccion 111'),
-(1443, 1, '07878451', 'MOSQUEIRA ZAPATER JUAN FRANCISCO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1033, 'Direccion 111'),
-(1444, 1, '25776761', 'CANELO MARRUFFO RICARDO BRAULIO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1034, 'Direccion 111'),
-(1445, 1, '29619454', 'HUARCASI CHANBI GERWER MARIO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1035, 'Direccion 111'),
-(1446, 1, '07954395', 'GAMBOA OBESO ALBERTO GONZALO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1036, 'Direccion 111'),
-(1447, 1, '12378278', 'Marilu Freire', 'Gerente Comercial', NULL, NULL, 'mfreire@essacweb.com', NULL, 3, 542, 'Direccion 111'),
-(1448, 1, 'CEX93246', 'LEE KA SING', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1037, 'Direccion 111'),
-(1449, 1, '23984518', 'PUMA TUNQUE HERNAN', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1038, 'Direccion 111'),
-(1450, 1, '40992438', 'DANITZA PAREDES HELD', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1039, 'Direccion 111'),
-(1451, 1, '29308564', 'ALFARO PINTO AURELIO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1040, 'Direccion 111'),
-(1452, 1, '41364514', 'UGARTE QUEZADA ALBERTO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1041, 'Direccion 111'),
-(1453, 1, '16651886', 'BEATRIZ NEPO DE GASTULO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1042, 'Direccion 111'),
-(1454, 1, 'CE212787', 'BEHRENDT CAROLA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1043, 'Direccion 111'),
-(1455, 1, '09399734', 'ZANNATI REID ALFREDO AGUSTO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1044, 'Direccion 111'),
-(1456, 1, '16736357', 'ECHEVARRIA SALAZAR JULIO CESAR', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1045, 'Direccion 111'),
-(1457, 1, '29275808', 'ESPINOZA GALINDO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1047, 'Direccion 111'),
-(1458, 1, '08763017', 'FAUSTO LUYO YACTAYO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1048, 'Direccion 111'),
-(1459, 1, 'CE001036', 'BING QIANG YU', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1049, 'Direccion 111'),
-(1460, 1, '07446783', 'LUIS ARTEAGA CAYCHO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1050, 'Direccion 111'),
-(1461, 1, '10260599', 'MANUEL REYES SEDANO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1051, 'Direccion 111'),
-(1462, 1, '16525920', 'RODAS DE BUSTAMANTE YOLANDA MARGARITA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1052, 'Direccion 111'),
-(1463, 1, '16493549', 'GRANDA VILLANUEVA MARTHA DORIS', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1053, 'Direccion 111'),
-(1464, 1, '43057649', 'ALBERTO WEINBERG TORRES', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1130, 'Direccion 111'),
-(1465, 1, 'CE206167', 'YON CHIAU TAM', 'GERENTE', NULL, NULL, NULL, NULL, 3, 861, 'Direccion 111'),
-(1466, 1, '29249912', 'MEDINA DEL CARPIO JOSE ANTONIO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1056, 'Direccion 111'),
-(1467, 1, '42216718', 'OYOLA CARBAJAL CESAR OSVALDO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1057, 'Direccion 111'),
-(1468, 1, '40741183', 'DIAZ ORBEGOZO DALIA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1058, 'Direccion 111'),
-(1469, 1, '06634000', 'HINOJOSA COQUIS JOSE RICARDO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1059, 'Direccion 111'),
-(1470, 1, '29722205', 'CAYO DEL CARPIO JOHANA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1060, 'Direccion 111'),
-(1471, 1, '16428672', 'MELENDEZ GASTIABURU GLORIA', NULL, NULL, NULL, NULL, NULL, 3, 1061, 'Direccion 111'),
-(1472, 1, '16636183', 'ESTELA GAMBOA JAVIER', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1062, 'Direccion 111'),
-(1473, 1, '09946904', 'ANGELINO ESPINOZA JOSE CARLOS', NULL, NULL, NULL, NULL, NULL, 3, 14, 'Direccion 111'),
-(1474, 1, '08761088', 'GASPAR ISAAC GAONA DELGADO', NULL, NULL, NULL, NULL, NULL, 3, 1064, 'Direccion 111'),
-(1475, 1, '40384929', 'FAVIO CCOILLO PAQUIYAURI', NULL, NULL, NULL, NULL, NULL, 3, 1065, 'Direccion 111'),
-(1476, 1, '80224615', 'ROXANA FABILOA ROSSELL VALDIVIESO', NULL, NULL, NULL, NULL, NULL, 3, 1066, 'Direccion 111'),
-(1477, 1, '09431746', 'MIGUEL ANGEL ORCOAPAZA PACHECO', NULL, NULL, NULL, NULL, NULL, 3, 1067, 'Direccion 111'),
-(1478, 1, '41445454', 'ANDREA RUIZ DE SOMOCURCIO CRUZADO', 'ARQUITECTA', NULL, NULL, 'ARUIZ@COPRACSA.COM', NULL, 3, 2, 'Direccion 111'),
-(1479, 1, '10548563', 'ALEJANDRA BUSTAMANTE', NULL, '3726578', NULL, 'alebust@telefonica.net.pe', NULL, 3, 1068, 'Direccion 111'),
-(1480, 1, '10193000', 'VARGAS HUAYTALLA ELIZABETH', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1069, 'Direccion 111'),
-(1481, 1, '10600029', 'BALDOCEDA PORRAS JORGE ARTURO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1070, 'Direccion 111'),
-(1482, 1, '16484970', 'ACUÑA PERALTA VIRGILIO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1071, 'Direccion 111'),
-(1483, 1, '40798085', 'EDITH CALIXTO HERRERA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 690, 'Direccion 111'),
-(1484, 1, '40542005', 'ARAUJO OCHOA ENY NARCISA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1073, 'Direccion 111'),
-(1485, 1, '10115897', 'Vicente Espinoza Aranda', 'Representante Legal', NULL, NULL, NULL, NULL, 3, 1074, 'Direccion 111'),
-(1486, 1, '09864668', 'EDUARDO SABA VEGA', NULL, NULL, NULL, NULL, NULL, 3, 1075, 'Direccion 111'),
-(1487, 1, '08228626', 'ROSENBACH ROSENBAUM MOSHE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1076, 'Direccion 111'),
-(1488, 1, '06244968', 'HERNANDEZ ALARCON OSWALDO JOSE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1077, 'Direccion 111'),
-(1489, 1, '07514771', 'MIRANDA CANCHANYA CESAR', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1078, 'Direccion 111'),
-(1490, 1, '04423861', 'SANTIAGO DE TOVAR MARTHA GRACIELA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1080, 'Direccion 111'),
-(1491, 1, '25622792', 'PISCO CHAVEZ VICENTE', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1081, 'Direccion 111'),
-(1492, 1, '27288546', 'DIAZ DELGADO MARIA YSABEL', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1082, 'Direccion 111'),
-(1493, 1, '09453260', 'MIGUEL ANGEL GUERRA VILA', 'GERENTE', NULL, NULL, 'mguerra@myj.com.pe', NULL, 3, 1083, 'Direccion 111'),
-(1494, 1, '09542530', 'REGAZZONI EGUIGUREN JEAN PAUL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1084, 'Direccion 111'),
-(1495, 1, '09440245', 'JULIAN CARLOS VICTORIO CARHUANCOTA', NULL, NULL, NULL, 'cvictorio@elecon.pe', NULL, 3, 1085, 'Direccion 111'),
-(1496, 1, '10671387', 'FREDDY ZAPATA CRUZ', 'JEFE DE OFICINA TECNICA', NULL, NULL, 'FZAPATA@COPRACSA.COM', NULL, 3, 2, 'Direccion 111'),
-(1497, 1, '08250361', 'ALDAVE BUSTAMANTE LUIS JAVIER', 'DIRECTOR GERENTE', NULL, NULL, NULL, NULL, 3, 1086, 'Direccion 111'),
-(1498, 1, '08230590', 'BELMONT CASSINELLI GONZALO JUAN CLAUDIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1320, 'Direccion 111'),
-(1499, 1, '08303864', 'PERCY PERRY ALVAREZ', 'CONSULTON COMERCIAL', NULL, NULL, NULL, NULL, 3, 1087, 'Direccion 111'),
-(1500, 1, '09472191', 'VALDEZ QUISPE MARIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1088, 'Direccion 111'),
-(1501, 1, '43809219', 'GRIMANEZA MARIEL CUEVA ANCCO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1089, 'Direccion 111'),
-(1502, 1, '06700632', 'Federico Cuellar Zanabria', NULL, NULL, NULL, 'callpa2010@hotmail.com', NULL, 3, 44, 'Direccion 111'),
-(1503, 1, '44920211', 'HERNANDEZ BARRIENTOS KIMBERLY MARIA SHIRLEY', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1090, 'Direccion 111'),
-(1504, 1, '10530694', 'Daniel Perez Lozada', 'Gerente General', NULL, NULL, 'estructura_perez1@hotmail.com', NULL, 3, 1091, 'Direccion 111'),
-(1505, 1, '18220602', 'Luisa Elizabeth Varas Alfaro', 'Representante Legal', NULL, NULL, NULL, NULL, 3, 1091, 'Direccion 111'),
-(1506, 1, '10023166', 'CANDELARIO LEON DANIEL', NULL, NULL, NULL, NULL, NULL, 3, 1094, 'Direccion 111'),
-(1507, 1, '1', 'BEATRIZ CASTILLO RAFFO', 'CONSULTORA SENIOR RETAIL', NULL, NULL, 'bcastillo@sensormatic.com.pe', NULL, 3, 236, 'Direccion 111'),
-(1508, 1, '08225867', 'ALBERTO PASCO-FONT QUEVEDO', 'GERENTE GENERAL', NULL, NULL, 'apascofont@enfoca.com.pe', NULL, 3, 1108, 'Direccion 111'),
-(1509, 1, '00001731', 'JUAN CARLOS SAENZ', 'EJECUTIVO DE VENTAS', NULL, NULL, NULL, NULL, 3, 1100, 'Direccion 111'),
-(1510, 1, '45127537', 'JAVIER ALFREDO CARRASCO SOLANO', NULL, NULL, NULL, NULL, NULL, 3, 1109, 'Direccion 111'),
-(1511, 1, '00001635', 'CARMEN POLO Y LA BORDA', 'JEFE DE ADMINISTRACION', NULL, NULL, 'cpoloylaborda@enfoca.com.pe', NULL, 3, 1108, 'Direccion 111'),
-(1512, 1, '00001636', 'ENRIQUE NICEFORO TORRE QUIÑONES.', 'GERENTE GENERAL', NULL, NULL, 'enriqueuni@hotmail.com', NULL, 3, 1110, 'Direccion 111'),
-(1513, 1, '09649969', 'ZAMORA RAMIREZ ALDO RENE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1111, 'Direccion 111'),
-(1514, 1, '10135690', 'ROJAS CAMPOS, MANUELA ZOILA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1112, 'Direccion 111'),
-(1515, 1, '09486663', 'PEÑA FARFAN GILMER', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1113, 'Direccion 111'),
-(1516, 1, '09515840', 'MARTHA SIFUENTES MARTINEZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1114, 'Direccion 111'),
-(1517, 1, '00001641', 'RONALD ESPINOZA', 'EJECUTIVO DE VENTAS', NULL, NULL, NULL, NULL, 3, 1114, 'Direccion 111'),
-(1518, 1, '00001642', 'PABLO CORDOVA', 'RESIDENTE DE OBRA', NULL, NULL, NULL, NULL, 3, 947, 'Direccion 111'),
-(1519, 1, '00001643', 'SANTIAGO SINCHI', 'INGENIERO RESIDENTE', NULL, NULL, NULL, NULL, 3, 947, 'Direccion 111'),
-(1520, 1, '09540690', 'VERONICA FANNY LOPEZ SAENZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1115, 'Direccion 111'),
-(1521, 1, '07852934', 'BELAUNDE CABIESES FRANCISCO JAVIER', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1116, 'Direccion 111'),
-(1522, 1, '07874249', 'MARIA DE LOS ANGELES GALLO REBAZA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1117, 'Direccion 111'),
-(1523, 1, '00001647', 'FABIOLA MARTINEZ', 'VENTAS', NULL, NULL, 'FABIOLA.MARTINEZ@PHILIPS.COM', NULL, 3, 25, 'Direccion 111'),
-(1524, 1, '00039162', 'EDGARDO GABRIEL ARAVENA TORRES', 'APODERADO', NULL, NULL, NULL, NULL, 3, 1118, 'Direccion 111'),
-(1525, 1, '09010160', 'TRUJILLO GARCIA FABIO MAXIMO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1119, 'Direccion 111'),
-(1526, 1, '09344596', 'SOUSA SALAZAR FRANCISCO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1120, 'Direccion 111'),
-(1527, 1, '09302523', 'SALINAS ROJAS CARLOS MIGUEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1121, 'Direccion 111'),
-(1528, 1, '40101380', 'PEDRO ALEXANDER SALAS CANSINO', 'Gerente Comercial', NULL, NULL, 'creart_asociados@hotmail.com', NULL, 3, 1122, 'Direccion 111'),
-(1529, 1, '29672366', 'TELLO HERMOZA JOSE MOISES', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1123, 'Direccion 111'),
-(1530, 1, '10065865', 'SIU LOO ALDO ENRIQUE', 'ASESORIA TECNICA ADMINISTRATIVA', NULL, NULL, NULL, NULL, 3, 1131, 'Direccion 111'),
-(1531, 1, '32926336', 'KELLY VALDIVIA PINEDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1132, 'Direccion 111'),
-(1532, 1, '00001664', 'PATRICIA DIAZ', 'EJECUTIVA DE VENTAS', NULL, NULL, NULL, NULL, 3, 1132, 'Direccion 111'),
-(1533, 1, '44264803', 'ACUÑA NINATANTA ESTHER', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1133, 'Direccion 111'),
-(1534, 1, '09297984', 'NIGHTINGALE VILLA EDUARDO', NULL, NULL, NULL, NULL, NULL, 3, 24, 'Direccion 111'),
-(1535, 1, '06159506', 'RODRIGUEZ NINAQUISPE LUIS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1134, 'Direccion 111'),
-(1536, 1, '07863957', 'BECERRA VILLA HECTOR', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1135, 'Direccion 111'),
-(1537, 1, '07510650', 'PASACHE QUISPE CRISTINA JANNET', 'GERENTE GENERAL', NULL, NULL, 'inversionescrisbel@gmail.com', NULL, 3, 985, 'Direccion 111'),
-(1538, 1, '00001670', 'ROCIO VILLALBA MATAMOROS', 'ING. RESIDENTE DE IGESAPERU', NULL, NULL, 'IGESAPERU@HOTMAIL.COM', NULL, 3, 1069, 'Direccion 111'),
-(1539, 1, '00001671', 'ROCIO VILLALBA MATAMOROS', 'INGENIERA RESIDENTE DE IGESAPÉRU', NULL, NULL, 'IGESAPERU@HOTMAIL.COM', NULL, 3, 10, 'Direccion 111'),
-(1540, 1, '00001672', 'ROCIO VILLALBA', 'INGENIERA RESIDENTE', NULL, NULL, 'IGESAPERU@HOTMAIL.COM', NULL, 3, 10, 'Direccion 111'),
-(1541, 1, '00001673', 'AGUSTO ALBON BERNAL VALDIVIA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1136, 'Direccion 111'),
-(1542, 1, '00001674', 'MATEO REYES', 'INGENIERO RESIDENTE', NULL, NULL, NULL, NULL, 3, 796, 'Direccion 111'),
-(1543, 1, '00001675', 'WILMER SANCHEZ', 'ING. RESIDENTE', NULL, NULL, 'WILBER_SAGO@YAHOO.ES', NULL, 3, 1137, 'Direccion 111'),
-(1544, 1, '29288996', 'GUILLEN MALAGA NORA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1138, 'Direccion 111'),
-(1545, 1, '00001677', 'CESAR PACHECO', 'INGENIERO RESIDENTE', NULL, NULL, 'CAPGCIVIL@HOTMAIL.COM', NULL, 3, 1083, 'Direccion 111'),
-(1546, 1, '00001678', 'CHRISTIAN FLORES', 'ING. PREVENCIONISTAS EN OBRAS CIVILES', NULL, NULL, 'pdr01@copracsa.com', NULL, 3, 14, 'Direccion 111'),
-(1547, 1, '00001679', 'MARISOL RODRIGUEZ', 'SECRETARIA', NULL, NULL, 'mrodriguez@corsepri.com.pe', NULL, 3, 1140, 'Direccion 111'),
-(1548, 1, '07774744', 'CHALCO CHANCO MARIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1140, 'Direccion 111'),
-(1549, 1, '00001681', 'EDWIN LURQUIN QUEVEDO', 'INGENIERO RESIDENTE', NULL, NULL, NULL, NULL, 3, 16, 'Direccion 111'),
-(1550, 1, '29710817', 'LUIS ALBERTO LINARES BELZO', NULL, NULL, NULL, 'llinares@copracsa.com', NULL, 3, 1079, 'Direccion 111'),
-(1551, 1, '00001684', 'SUSANA TUPA WALTER', 'INGENIERO RESIDENTE', NULL, NULL, 'STUPA@HUTECONTRATISTAS.COM', NULL, 3, 86, 'Direccion 111'),
-(1552, 1, '07214078', 'WALTER FEGAN JUSTO', 'SUBGERENTE', NULL, NULL, NULL, NULL, 3, 1142, 'Direccion 111'),
-(1553, 1, '08991940', 'VICTOR PAIPAY SANCHEZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1143, 'Direccion 111'),
-(1554, 1, '20055762', 'Jose Cordova', 'Residente', NULL, NULL, 'jcordovaelectric@gmail.com', NULL, 3, 16, 'Direccion 111'),
-(1555, 1, '00001654', 'Vanesa Olivera', 'Ejecutiva de Ventas', NULL, NULL, NULL, NULL, 3, 995, 'Direccion 111'),
-(1556, 1, '00023161', 'ROCA DIEGA ANDRES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1124, 'Direccion 111'),
-(1557, 1, '09179067', 'DE FERRARI MORELLO ALFREDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1125, 'Direccion 111'),
-(1558, 1, '40649796', 'RAMIREZ JANCACHAGUA ALEX IVAN', NULL, NULL, NULL, NULL, NULL, 3, 1126, 'Direccion 111'),
-(1559, 1, '33945117', 'MANUEL NIÑO MORI', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1127, 'Direccion 111'),
-(1560, 1, '29251102', 'PACHECO CARDENAS MARCOS', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1128, 'Direccion 111'),
-(1561, 1, '00001660', 'LUIS MIGUEL BERRIOS', NULL, NULL, NULL, 'lmberrios@quadrat.us', NULL, 3, 1129, 'Direccion 111'),
-(1562, 1, '00001661', 'PATRICIA SIRANI', NULL, NULL, NULL, 'PSIRANI@QUADRAT.US', NULL, 3, 1129, 'Direccion 111'),
-(1563, 1, '00001687', 'MARCO PAIPAY ZAPATA', 'ARQUITECTO DISEÑADOR', NULL, NULL, 'ardis_peru@hotmail.com', NULL, 3, 1143, 'Direccion 111'),
-(1564, 1, '09297558', 'CHIANG MA EDUARDO ALFREDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1144, 'Direccion 111'),
-(1565, 1, '00001689', 'RICHARD GAVILAN', 'DEPARTAMENTO DE INGENIERIA', NULL, NULL, 'rgavilan@essacweb.com', NULL, 3, 542, 'Direccion 111'),
-(1566, 1, '80420245', 'CHALEM CHOUEKA ALAIN ABRAHAM', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1146, 'Direccion 111'),
-(1567, 1, '06490712', 'VIZCARRA BARTON MANUEL ENRIQUE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1147, 'Direccion 111'),
-(1568, 1, '00001692', 'ROCIO ARROYO', 'ARQUITECTA', NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(1569, 1, '00001693', 'LIZETH VEGA', 'ARQUITECTA', NULL, NULL, NULL, NULL, 3, 1145, 'Direccion 111'),
-(1570, 1, '40088243', 'LLANOS OTINIANO ALVARO ARMANDO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1148, 'Direccion 111'),
-(1571, 1, '08257287', 'GARCIA ROSCELLI VICTOR', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1149, 'Direccion 111'),
-(1572, 1, '08774415', 'VALDEZ SANCHEZ-GUTIERREZ ALVARO', NULL, NULL, NULL, NULL, NULL, 3, 330, 'Direccion 111'),
-(1573, 1, '08224488', 'MARTICORENA ARCINIEGA JOSE ANTONIO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 178, 'Direccion 111'),
-(1574, 1, '30675976', 'JUAN CORNEJO SALAZAR', NULL, NULL, NULL, NULL, NULL, 3, 1141, 'Direccion 111'),
-(1575, 1, '41203228', 'MALDONADO HUAYANEY MILENE CAROL', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1151, 'Direccion 111'),
-(1576, 1, '32939957', 'MORENO RODRIGUEZ SUSANA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1152, 'Direccion 111'),
-(1577, 1, '06208834', 'UVER MARTINEZ DIESTRA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1153, 'Direccion 111'),
-(1578, 1, '06261626', 'JAIME ALCA YAÑEZ', 'GERENTE GENERAL', NULL, NULL, 'jayingenieros@gmail.com', NULL, 3, 1154, 'Direccion 111'),
-(1579, 1, '07052954', 'GONZALES ROJAS VILMA', NULL, NULL, NULL, NULL, NULL, 3, 1155, 'Direccion 111'),
-(1580, 1, '09337972', 'D''ANGELO DAÑINO JOSE ALBERTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1156, 'Direccion 111'),
-(1581, 1, '29603233', 'PALOMINO MEDINA YONY', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1157, 'Direccion 111'),
-(1582, 1, '29261196', 'LAZO INCA IVAN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1546, 'Direccion 111'),
-(1583, 1, '09136432', 'ROSA VIRGINIA NAKAGAWA MORALES', 'GERENTE EJECUTIVO', NULL, NULL, NULL, NULL, 3, 1158, 'Direccion 111'),
-(1584, 1, '10635182', 'SEMPERTEGUI JUSTO GUSTAVO ADOLFO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1159, 'Direccion 111'),
-(1585, 1, '10000903', 'RODRIGUEZ TIO ELENA ROSA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1160, 'Direccion 111'),
-(1586, 1, '22665735', 'BERNAL BRAVO KARO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1161, 'Direccion 111'),
-(1587, 1, '40314916', 'SANDER VIGO NUÑEZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1145, 'Direccion 111'),
-(1588, 1, '80098727', 'CERVANTES MENDOZA JOSE ELBEN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1162, 'Direccion 111'),
-(1589, 1, '31667698', 'JESSICA GISEL DELGADO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1163, 'Direccion 111'),
-(1590, 1, '08106445', 'CHAW ORTEGA RAMON', 'APODERADO', NULL, NULL, 'Monica.Eyzaguirre@carvajal.com', NULL, 3, 1095, 'Direccion 111'),
-(1591, 1, '00001715', 'IRINA NUÑEZ MURGA', 'ASESORA COMERCIAL', NULL, NULL, 'irina.nunez@carvajal.com', NULL, 3, 1095, 'Direccion 111'),
-(1592, 1, '08274164', 'MARIO VENTURA VERME', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1164, 'Direccion 111'),
-(1593, 1, '10523370', 'PALOMINO PEREZ DOMINGO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1165, 'Direccion 111'),
-(1594, 1, '07874305', 'MONICA EYZAGUIRRE HERRERA', 'GERENTE', NULL, NULL, 'monica.eyzaguirre@carvajal.com', NULL, 3, 1095, 'Direccion 111'),
-(1595, 1, '21245123', 'ZAVALA GODOY JIMMY NESTOR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1166, 'Direccion 111'),
-(1596, 1, '10268925', 'KECSKEMETHY DARANYI NICOLAS GEZA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1167, 'Direccion 111'),
-(1597, 1, '00001721', 'CECILIA RUIZ GONZALES', 'DEPARTAMENTO DE PROYECTOS', '4217727', NULL, 'cecilia.ruiz@lumicenter.com.pe', NULL, 3, 1168, 'Direccion 111'),
-(1598, 1, '10012122', 'OROZCO CONTRERAS ROCIO DELIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1169, 'Direccion 111'),
-(1599, 1, '08242957', 'HIRAOKA TORRES CARLOS JORGE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1170, 'Direccion 111'),
-(1600, 1, '09998150', 'NIEVA SEGURA, MOISES', NULL, NULL, NULL, NULL, NULL, 3, 1171, 'Direccion 111'),
-(1601, 1, '08353979', 'COLLANTES COLLANTES HERMELINDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1172, 'Direccion 111'),
-(1602, 1, '42965026', 'ORIHUELA VALLES, DOYBE EDGARDO', NULL, NULL, NULL, NULL, NULL, 3, 1173, 'Direccion 111'),
-(1603, 1, '06793702', 'Jhonny Alberto Pereira Pacífico', 'Gerente General', NULL, NULL, 'grumatsrl@hotmail.com', NULL, 3, 1174, 'Direccion 111'),
-(1604, 1, '00001728', 'MIGUEL GAZZANO ERAZO', NULL, NULL, NULL, NULL, NULL, 3, 1438, 'Direccion 111'),
-(1605, 1, '25762829', 'JORGE WILLIAMS SANTISTEBAN MOGOLLON', 'GERENTE GENERAL', NULL, NULL, 'jorsantisteban@hotmail.com', NULL, 3, 1438, 'Direccion 111'),
-(1606, 1, '45892232', 'Gianmarco Galvez', NULL, NULL, NULL, NULL, NULL, 3, 1176, 'Direccion 111'),
-(1607, 1, '45572232', 'Reynaldo Sipan', NULL, NULL, NULL, NULL, NULL, 3, 1177, 'Direccion 111'),
-(1608, 1, '40682581', 'MARIA BALDEON VARGAS', 'INGENIERO', NULL, NULL, 'mbaldeon@copracsa.com', NULL, 3, 2, 'Direccion 111'),
-(1609, 1, '4640891', 'CARRASCO SOLANO JULIO ARMANDO', NULL, NULL, NULL, NULL, NULL, 3, 1450, 'Direccion 111'),
-(1610, 1, '09635101', 'DANIEL MINAYA BEDON', 'INGENIERO', NULL, NULL, 'dminaya@copracsa.com', NULL, 3, 2, 'Direccion 111'),
-(1611, 1, '10543773', 'ANDRES MONTEZA SAMPEN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1181, 'Direccion 111'),
-(1612, 1, '00001729', 'GISSELLE SCHIAFFINO PACHECO', 'DISEÑADORA', NULL, NULL, 'gschiaffino@arq-studio.com', NULL, 3, 995, 'Direccion 111'),
-(1613, 1, '10184264', 'ROBERTO POLLERA TENA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1182, 'Direccion 111'),
-(1614, 1, '07006144', 'GALINDO BEJAR SAMUEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1183, 'Direccion 111'),
-(1615, 1, '07496765', 'NAVARRO ALVARADO JULIO ELEAZAR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1184, 'Direccion 111'),
-(1616, 1, '09302426', 'BRAZZODURO TABUSCO MARCO MIRKO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1185, 'Direccion 111'),
-(1617, 1, '00001741', 'SAMUEL ORBEZO DEL ROSARIO', 'GERENTE DE ADMINISTRACION Y RECURSOSO HUMANOS', NULL, NULL, NULL, NULL, 3, 17, 'Direccion 111'),
-(1618, 1, '10771058', 'GONZALES FINSETH ADOLFO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1186, 'Direccion 111'),
-(1619, 1, '08778784', 'CONTRERAS GONZALEZ JAVIER ARNALDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1187, 'Direccion 111'),
-(1620, 1, '09310585', 'GOMEZ RAMOS ANGEL PAULINO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1188, 'Direccion 111'),
-(1621, 1, '10760705', 'CARLOS CESPEDES ROLANDO', NULL, NULL, NULL, NULL, NULL, 3, 1189, 'Direccion 111'),
-(1622, 1, '43723374', 'TREVEJO RODRIGUEZ KAREN CINTHYA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1190, 'Direccion 111'),
-(1623, 1, '43633046', 'SUAREZ URCO EVELYN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1191, 'Direccion 111'),
-(1624, 1, '10654128', 'RIOS MENDOZA FRANKLIN', NULL, NULL, NULL, NULL, NULL, 3, 1192, 'Direccion 111'),
-(1625, 1, '09979543', 'VEGA CASTANEDA ELVIRA HERMELINDA', NULL, NULL, NULL, NULL, NULL, 3, 1193, 'Direccion 111'),
-(1626, 1, '10755852', 'AGUIRRE GONGORA JORGE ENRIQUE', NULL, NULL, NULL, NULL, NULL, 3, 1194, 'Direccion 111'),
-(1627, 1, '10470626', 'CARREÑO RAMIREZ MARIA AURELIA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1195, 'Direccion 111'),
-(1628, 1, '29649196', 'CARLOS URQUIZO SILVA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1196, 'Direccion 111'),
-(1629, 1, '06272601', 'HUAMANTUMBA JAUREGUI LUIS ENRIQUE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1197, 'Direccion 111'),
-(1630, 1, '09024325', 'RODRIGUEZ VALVAS ANTONIO FELIX', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1199, 'Direccion 111'),
-(1631, 1, '06886402', 'RAMOS CAMPOS VICTOR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1200, 'Direccion 111'),
-(1632, 1, '09422530', 'Guillermo Augusto Montaño Guerrero', 'Representante Legal', NULL, NULL, NULL, NULL, 3, 1198, 'Direccion 111'),
-(1633, 1, '00001757', 'Hector Alva Duran', NULL, NULL, NULL, 'halva@hotmail.com', NULL, 3, 1198, 'Direccion 111'),
-(1634, 1, '06706039', 'MARTIN FELIPE BARRANTES ALEGRE', 'REPRESENTANTE LEGAL', NULL, NULL, NULL, NULL, 3, 1201, 'Direccion 111'),
-(1635, 1, '40479423', 'Moises Hilario Valdeon', NULL, NULL, NULL, 'moiseshilario@yahoo.es', NULL, 3, 1201, 'Direccion 111'),
-(1636, 1, '10138459', 'SERRUTO PAREDES YONY OSCAR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1403, 'Direccion 111'),
-(1637, 1, '22556789', 'JORGE CHAVARRI', 'ARQUITECTO', NULL, NULL, 'jchavarri@gg.com.pe', NULL, 3, 920, 'Direccion 111'),
-(1638, 1, '08295453', 'GONZALES MENDOZA ODON', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1202, 'Direccion 111'),
-(1639, 1, '08855048', 'ARCE BENITES JULIO HECTOR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1203, 'Direccion 111'),
-(1640, 1, '10497680', 'Freddy Vizcardo Gonzáles', 'GERENTE GENERAL', NULL, NULL, 'vizgonzfredy@yahoo.es', NULL, 3, 1204, 'Direccion 111'),
-(1641, 1, '00483298', 'CARLOS ALBERTO GARCIA PANGO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1205, 'Direccion 111'),
-(1642, 1, '45050068', 'LOO IONG CESAR', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1206, 'Direccion 111'),
-(1643, 1, '40577992', 'OLORTEGUI VARGAS ROBERTO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1207, 'Direccion 111'),
-(1644, 1, '29608928', 'GIOVANA BASURCO YAURI', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1208, 'Direccion 111'),
-(1645, 1, '41186523', 'CHAU YANG CHUI PING', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1209, 'Direccion 111'),
-(1646, 1, '09336333', 'VEGAS MALAGA JORGE', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1210, 'Direccion 111'),
-(1647, 1, '43140008', 'DE LA TORRE TRUJILLO KATIA', 'APODERADO', NULL, NULL, NULL, NULL, 3, 1211, 'Direccion 111'),
-(1648, 1, '09178365', 'BERRY SILVA SANTISTEBAN KENNETH MARTIN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1377, 'Direccion 111'),
-(1649, 1, '09163214', 'LERCARI CARBONE RENZO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1213, 'Direccion 111'),
-(1650, 1, '00004736', 'SOBRINO CUERVO ISABEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1214, 'Direccion 111'),
-(1651, 1, '00001774', 'EDUARDO ARANA', 'GERENTE DE VENTAS Y PROYECTOS', NULL, NULL, 'earanafd@hotmail.com', NULL, 3, 42, 'Direccion 111'),
-(1652, 1, '00001775', 'GUSTAVO LUNA VICTORIA', 'DIRECTOR', NULL, NULL, 'glunavictoria@dtechingenieros.com', NULL, 3, 276, 'Direccion 111'),
-(1653, 1, '00001776', 'JUAN MANUEL BERNUY', 'RESIDENTE DE OBRA', NULL, NULL, 'jmbernui@dtechingenieros.com', NULL, 3, 276, 'Direccion 111'),
-(1654, 1, '00001777', 'LEONIDES SERGIO CORDOVA SALINAS', 'GERENTE GERERAL', NULL, NULL, 'secorsal@hotmail.com', NULL, 3, 948, 'Direccion 111'),
-(1655, 1, '00001778', 'MILENE MALDONADO HUAYANEY', 'ADMINISTRACION', NULL, NULL, NULL, NULL, 3, 1151, 'Direccion 111'),
-(1656, 1, '46747899', 'VEGA ARMAS JOEL GIAN PIERRE', NULL, NULL, NULL, NULL, NULL, 3, 1217, 'Direccion 111'),
-(1657, 1, '43435387', 'JOSE SANTIAGO APESTEGUI VILLAFUERTE', NULL, NULL, NULL, NULL, NULL, 3, 1218, 'Direccion 111'),
-(1658, 1, '52883355', 'JOSE ANTONIO CHAVEZ ANGELES', 'ING ESTRUCTURAL', NULL, NULL, 'jachavezie@gmail.com', NULL, 3, 1, 'Direccion 111'),
-(1659, 1, '08748093', 'ALFARO MOSCOSO VDA DE LOZADA, EMMA MANUELA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1219, 'Direccion 111'),
-(1660, 1, '06964487', 'MAXIMO QUIQUIN HUAMANCUSI', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1220, 'Direccion 111'),
-(1661, 1, '00001784', 'JUAN CARLOS MARTINEZ', 'GERENTE COMERCIAL', NULL, NULL, 'gcomercial@limpiomax.com', NULL, 3, 1220, 'Direccion 111'),
-(1662, 1, '00001785', 'juan garayar', 'Gerencia de operaciones', NULL, NULL, 'juan.garayar@oechsle.pe', NULL, 3, 1069, 'Direccion 111'),
-(1663, 1, '00001786', 'Guillermo Kort', 'Gerente de administrativo9', NULL, NULL, 'guillermo.koort@oechsle.pe', NULL, 3, 1069, 'Direccion 111'),
-(1664, 1, '00001787', 'JUAN GARAYAR', 'GERENTE DE OPERACIONES', NULL, NULL, 'juan.garayar@oechsle.pe', NULL, 3, 12, 'Direccion 111'),
-(1665, 1, '00001788', 'GUILLERMO KOORT', 'GERENTE', NULL, NULL, 'guillermo.koort@oechsle.pe', NULL, 3, 12, 'Direccion 111'),
-(1666, 1, '00001789', 'AUGUSTO REY', 'GERENTE FINANCIERO', NULL, NULL, 'augusto.rey@financierauno.pe', NULL, 3, 12, 'Direccion 111'),
-(1667, 1, '00001790', 'JACKSON MORENO', 'JEFE DE OPERACIONES', NULL, NULL, 'jackson.moreno@oechsle.pe', NULL, 3, 12, 'Direccion 111'),
-(1668, 1, '00001791', 'Guida Quispe Asencios', 'Gerente comercial', NULL, NULL, 'gquispe@losportalesestacionamientos.com', NULL, 3, 1221, 'Direccion 111'),
-(1669, 1, '00001792', 'Guida Quispe Asencios', 'Gerente comercial', NULL, NULL, 'gquispe@losportalesestacionamientos.com', NULL, 3, 1221, 'Direccion 111'),
-(1670, 1, '00001793', 'GIULLIANO NATTERI Q.', 'PROJECT MANAGER', NULL, NULL, 'gnatteri@ledstudio.cl', NULL, 3, 1222, 'Direccion 111'),
-(1671, 1, '42585325', 'ALEX ENRIQUE ROBERTSON DIAZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1222, 'Direccion 111'),
-(1672, 1, '09336847', 'Gonzalo Jose Basadre Brazzini', 'Representante Legal', NULL, NULL, NULL, NULL, 3, 1248, 'Direccion 111'),
-(1673, 1, '12586941', 'URSULA LOPEZ', 'VENDEDORA', NULL, NULL, NULL, NULL, 3, 119, 'Direccion 111'),
-(1674, 1, '00001797', 'Pedro Diaz Correa', NULL, NULL, NULL, 'pdiaz@alpecorp.com', NULL, 3, 1225, 'Direccion 111'),
-(1675, 1, '29566514', 'CASTRO SANCHEZ NIEVES', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1226, 'Direccion 111'),
-(1676, 1, '41588339', 'OBRIEN CASERES DIEGO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1227, 'Direccion 111'),
-(1677, 1, '07219361', 'BICHARA MONGRUT MARIA DE SOCORRO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1228, 'Direccion 111'),
-(1678, 1, '07586188', 'IZQUIERDO GONZALES TEREZA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1229, 'Direccion 111'),
-(1679, 1, '06834183', 'GERMAN FLORENCIO HUAREZ ROMAN', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1230, 'Direccion 111'),
-(1680, 1, '07626184', 'GISSELLA CICCIA ALBUJAR', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1231, 'Direccion 111'),
-(1681, 1, '07776730', 'SHANAAH SHAYBEH ABU', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1232, 'Direccion 111'),
-(1682, 1, '40891522', 'HENG FENG ZENG', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1233, 'Direccion 111'),
-(1683, 1, '40513574', 'YONG AGUILAR VERONICA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1234, 'Direccion 111'),
-(1684, 1, '07912269', 'LUIS MAESHIRO SHIKINA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1235, 'Direccion 111'),
-(1685, 1, '07966762', 'CANO FUERTE CARLOS ALBERTO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1236, 'Direccion 111'),
-(1686, 1, '08186309', 'FERNANDEZ VALLE PEDRO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1238, 'Direccion 111'),
-(1687, 1, '08968960', 'FARFAN PEREZDAVIS MARIA ESTHER', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1239, 'Direccion 111'),
-(1688, 1, '07817272', 'GARCIA BLASQUEZ CARLOS', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1241, 'Direccion 111'),
-(1689, 1, '10824039', 'BUGOSEN CHALUJA ANA MARIA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1242, 'Direccion 111'),
-(1690, 1, '06506090', 'CASANA ZAMORA MERCEDES', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1243, 'Direccion 111'),
-(1691, 1, '09302653', 'KENNETA WONG CHANG', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1244, 'Direccion 111'),
-(1692, 1, '08802007', 'DEGASPERI CAMUSSO ROBERTO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 268, 'Direccion 111'),
-(1693, 1, '08718806', 'FONG DOY LEONARDO ARTURO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1577, 'Direccion 111'),
-(1694, 1, '40728250', 'LIZA ROJAS GROVER', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1237, 'Direccion 111'),
-(1695, 1, '00001820', 'AYBY SABOGAL', 'ASISTENTE DE ADMINISTRACION', NULL, NULL, 'asabogal@decorlux.com.pe', NULL, 3, 119, 'Direccion 111'),
-(1696, 1, '09337154', 'CAROL SU MELENDEZ', 'GERENTE GENERAL', NULL, NULL, 'carolsu@alfombrasframar.com', NULL, 3, 1246, 'Direccion 111'),
-(1697, 1, '00001822', 'AMARILDO GALVEZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1247, 'Direccion 111'),
-(1698, 1, '00001823', 'NADEZHDA FERNANDEZ M', 'VENDEDORA', NULL, NULL, 'ventas@marmotecsac.com', NULL, 3, 1099, 'Direccion 111'),
-(1699, 1, '06586510', 'ALDO ENRIQUE SIU LOO', NULL, NULL, NULL, NULL, NULL, 3, 1, 'Direccion 111'),
-(1700, 1, '29610037', 'ANA MARIA QUEQUEZANA JIMENEZ', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1249, 'Direccion 111'),
-(1701, 1, '07878852', 'LIMO VIDAL JOSE ANTONIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1099, 'Direccion 111'),
-(1702, 1, '00076965', 'RODRIGUEZ ROJAS RUTH GEORGINA', NULL, NULL, NULL, NULL, NULL, 3, 1250, 'Direccion 111'),
-(1703, 1, '09608252', 'PADILLA ALVARADO SONIA ERLITA', NULL, NULL, NULL, NULL, NULL, 3, 1251, 'Direccion 111'),
-(1704, 1, '09128456', 'GALVEZ ESPIZA YAMIS AMARILDO', 'REPRESENTANTE LEGAL', NULL, NULL, 'pisosdemadera_gyb@hotmail.com', NULL, 3, 1247, 'Direccion 111'),
-(1705, 1, '08777352', 'CAMPOS FERREYRA RUBEN DARIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1252, 'Direccion 111'),
-(1706, 1, '00001831', 'ALDO SIU LOO', 'GERENTE DE PROYECTO', NULL, NULL, 'asiu@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(1707, 1, '00001832', 'CESAR CACERES RAMIREZ', 'REPRESENTANTE', NULL, NULL, 'cjdasac@gmail.com', NULL, 3, 1253, 'Direccion 111'),
-(1708, 1, '41011901', 'VICTOR ALVAREZ PONCE', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1254, 'Direccion 111'),
-(1709, 1, '08245724', 'VICTOR MANUEL ALVAREZ RIOS', NULL, NULL, NULL, NULL, NULL, 3, 1254, 'Direccion 111'),
-(1710, 1, '07597155', 'VICTOR ABURTO CABRERA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1255, 'Direccion 111'),
-(1711, 1, '00001836', 'LORENA ALVAREZ', NULL, NULL, NULL, 'asabogal@decorlux.com.pe', NULL, 3, 119, 'Direccion 111'),
-(1712, 1, '40662269', 'BRUCE ALEXANDER CHUQUI LI', 'Gerente General', NULL, NULL, 'brucedi65@hotmail.com', NULL, 3, 1256, 'Direccion 111'),
-(1713, 1, '07883505', 'ERNESTO UZURIAGA CALDERON', NULL, NULL, NULL, NULL, NULL, 3, 1257, 'Direccion 111'),
-(1714, 1, '09609671', 'BUSTAMANTE ALBINAGORTA ALFREDO RAFAEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1258, 'Direccion 111'),
-(1715, 1, '41243008', 'YANYN KATHERIN LEGUIA GUTIERRES', NULL, NULL, NULL, NULL, NULL, 3, 1259, 'Direccion 111'),
-(1716, 1, '00001841', 'GLORIA MALLQUI BRICEÑO', 'GERENTE GENERAL', NULL, NULL, 'vialsa.sac@gmail.com', NULL, 3, 1098, 'Direccion 111'),
-(1717, 1, '00001842', 'CARLOS MAYOL', NULL, NULL, NULL, NULL, NULL, 3, 251, 'Direccion 111'),
-(1718, 1, '00001843', 'GISELLE STUCCHI', 'GERENTE DE TALENTO HUMANO', NULL, NULL, 'gstucchi@divercity.com.pe', NULL, 3, 251, 'Direccion 111'),
-(1719, 1, '00001844', 'PETER VILLARAN', 'EJECUTIVO DE VENTAS SEGURIDAD ELECTRONICA', NULL, NULL, 'peter.villaran@diebold.com', NULL, 3, 954, 'Direccion 111');
-INSERT INTO `tb_personacontacto` (`id`, `tb_empresa_id`, `dni`, `nombre`, `cargo`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_companiacontacto_id`, `direccion`) VALUES
-(1720, 1, '00001845', 'RAFAEL LUCERO', 'PROGRAMADOR', NULL, NULL, NULL, NULL, 3, 954, 'Direccion 111'),
-(1721, 1, '00001846', 'YSRAEL YOPLA', 'RESIDENTE', NULL, NULL, 'israel.yoplasosa@diebold.com', NULL, 3, 954, 'Direccion 111'),
-(1722, 1, '00001847', 'FRANCO PIPOLI VELARDE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1260, 'Direccion 111'),
-(1723, 1, '00001848', 'ALDO ILLACONZ', 'VENDEDOR', NULL, NULL, 'asvensur2@cassinelli.com', NULL, 3, 1087, 'Direccion 111'),
-(1724, 1, '43116170', 'CHAMBI MIRAMIRA MILAGROS', NULL, NULL, NULL, NULL, NULL, 3, 1261, 'Direccion 111'),
-(1725, 1, '00001850', 'FELIX DANIEL GUTIERREZ CASTILLO', 'GERENTE GENERAL', '4358270', NULL, 'gci@terra.com.pe', NULL, 3, 504, 'Direccion 111'),
-(1726, 1, '00001851', 'CESAR GEAN PIERRE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 561, 'Direccion 111'),
-(1727, 1, '00001852', 'Cesar Alvarez', 'gerente general', NULL, NULL, NULL, NULL, 3, 1262, 'Direccion 111'),
-(1728, 1, '00001853', 'CARLOS VILCATOMA', NULL, NULL, NULL, NULL, NULL, 3, 1262, 'Direccion 111'),
-(1729, 1, '00001854', 'CARLOS VILCATOMA', NULL, NULL, NULL, NULL, NULL, 3, 1263, 'Direccion 111'),
-(1730, 1, '00001855', 'ALEJANDRO MORENO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1264, 'Direccion 111'),
-(1731, 1, '06692003', 'CRUZ ALVARADO ANTONIO CARLOS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1265, 'Direccion 111'),
-(1732, 1, '00001857', 'HELGA ORIHUELA ARCE', 'ASESORA COMERCIAL', NULL, NULL, 'asabogal@decorlux.com.pe', NULL, 3, 119, 'Direccion 111'),
-(1733, 1, '40715880', 'CARLOS ALBERTO ZAPATA TORRES', NULL, NULL, NULL, NULL, NULL, 3, 1266, 'Direccion 111'),
-(1734, 1, '00001859', 'RENATO', 'GERENTE GENERAL', NULL, NULL, 'renato@xtrememotorsperu.com', NULL, 3, 1267, 'Direccion 111'),
-(1735, 1, '08944229', 'CIPRIANO LLALLAHUI LOPEZ', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1268, 'Direccion 111'),
-(1736, 1, '00001861', 'EDWIN CONDORI', 'ADMINISTRADOR', NULL, NULL, NULL, NULL, 3, 1269, 'Direccion 111'),
-(1737, 1, '00001862', 'ROSA TERESA MADUEÑO B.', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1270, 'Direccion 111'),
-(1738, 1, '00001863', 'LUIS MALVA', NULL, NULL, NULL, NULL, NULL, 3, 392, 'Direccion 111'),
-(1739, 1, '00001865', 'PER01863', NULL, NULL, NULL, NULL, NULL, 3, 1250, 'Direccion 111'),
-(1740, 1, '00001866', 'PER01859', NULL, NULL, NULL, NULL, NULL, 3, 1272, 'Direccion 111'),
-(1741, 1, '00001867', 'TERESA VALLEJO', 'ASESORA DE PROYECTOS', NULL, NULL, NULL, NULL, 3, 1260, 'Direccion 111'),
-(1742, 1, '00001868', 'PER01866', NULL, NULL, NULL, NULL, NULL, 3, 1273, 'Direccion 111'),
-(1743, 1, '00001869', 'MARTHA RUTH CUTIMANCO PANDURO', NULL, NULL, NULL, NULL, NULL, 3, 1274, 'Direccion 111'),
-(1744, 1, '00001870', 'EMMA MANUELA ALFARO MOSCOSO VDA DE LOZADA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1219, 'Direccion 111'),
-(1745, 1, '00001871', 'PER00237', NULL, NULL, NULL, NULL, NULL, 3, 1275, 'Direccion 111'),
-(1746, 1, '00001872', 'Giselle Buse Gaillour', NULL, NULL, NULL, 'Giselle.Buse@philips.com', NULL, 3, 25, 'Direccion 111'),
-(1747, 1, '09998688', 'WENDORFF VILCHEZ WILHEN', 'GERENTE EJECUTIVO', '2427247', NULL, NULL, NULL, 3, 449, 'Direccion 111'),
-(1748, 1, '09975028', 'JOHNY WILLIAN MORALES ROJAS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1277, 'Direccion 111'),
-(1749, 1, '09553704', 'VASQUEZ LOPEZ LUZ CONSTANTINA', NULL, NULL, NULL, NULL, NULL, 3, 1278, 'Direccion 111'),
-(1750, 1, '00001877', 'HECTOR CHAVEZ', 'JEFE DE PROYECTOS', NULL, NULL, 'hechos@castellanoperu.com', NULL, 3, 1279, 'Direccion 111'),
-(1751, 1, '40947879', 'CASTELLANO URRUTIA ALFONSO FERNANDO', 'GERENTE', NULL, NULL, 'castellanoaym@castellanoperu.com', NULL, 3, 1279, 'Direccion 111'),
-(1752, 1, '08251935', 'URRUTIA LARRABURE DE CASTELLANO ROSA INES', 'GERENTE', NULL, NULL, 'castellanoaym@castellanoperu.com', NULL, 3, 1279, 'Direccion 111'),
-(1753, 1, '09865707', 'BRUNO DARIO DIAZ ABANTO', NULL, NULL, NULL, 'brunodiaz_2003@yahoo.com', NULL, 3, 1280, 'Direccion 111'),
-(1754, 1, '09469323', 'MIGUEL LEANDRO CAMPOS PALOMINO', 'REPRESENTANTE LEGAL', NULL, NULL, NULL, NULL, 3, 1281, 'Direccion 111'),
-(1755, 1, '46471144', 'YAN CARLOS GARCIA RODRIGUEZ', NULL, NULL, NULL, 'yan_constructores@hotmail.com', NULL, 3, 1282, 'Direccion 111'),
-(1756, 1, '00001883', 'PEDRO ESTRADA', 'REPRESENTANTE DE VENTAS AREA CERAMICOS', NULL, NULL, NULL, NULL, 3, 449, 'Direccion 111'),
-(1757, 1, '42333914', 'CYNTHIA NAVARRO LUCHO', NULL, NULL, NULL, NULL, NULL, 3, 1283, 'Direccion 111'),
-(1758, 1, '07826251', 'ROJAS SALAZAR MARIA DEL PILAR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 629, 'Direccion 111'),
-(1759, 1, '09417543', 'FLORES PARIONA NESTOR MATEO', NULL, NULL, NULL, NULL, NULL, 3, 1284, 'Direccion 111'),
-(1760, 1, '06179459', 'HINOSTROZA ALARCON, RAUL DESIDERIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1285, 'Direccion 111'),
-(1761, 1, '09139871', 'UMBERT ALLEN RICARDO ENRIQUE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1286, 'Direccion 111'),
-(1762, 1, '09685514', 'GALLEGOS CHAMBI CARLOS ALBERTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1287, 'Direccion 111'),
-(1763, 1, '07576744', 'ALZAMORA ROMERO MANUEL ANTONIO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1288, 'Direccion 111'),
-(1764, 1, '00303961', 'COSTA ORNANO CARLOS ENRIQUE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1290, 'Direccion 111'),
-(1765, 1, '08274532', 'CALLE GASPARY LUIS FELIPE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1291, 'Direccion 111'),
-(1766, 1, '09344872', 'CASTILLOS VILLEGAS WALTER JAVIER', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1292, 'Direccion 111'),
-(1767, 1, '09168839', 'TEODORO FIGUEROA HERNAN OSWALDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1293, 'Direccion 111'),
-(1768, 1, '09286914', 'HUAMANTTUPA HUAYTA ALEJANDRO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1294, 'Direccion 111'),
-(1769, 1, '45603489', 'LLATAS MONZON SANDRA CORALY', NULL, NULL, NULL, NULL, NULL, 3, 1295, 'Direccion 111'),
-(1770, 1, '43214994', 'MENA MENDIOLAZA JULIO CESAR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1296, 'Direccion 111'),
-(1771, 1, '08862085', 'ROMERO ESCOBEDO ANGEL ALBINO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1297, 'Direccion 111'),
-(1772, 1, '09505567', 'MARQUEZ NUÑEZ JESUS GILBERTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1298, 'Direccion 111'),
-(1773, 1, '40945493', 'HUARCAYA JAVIER NAUN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1299, 'Direccion 111'),
-(1774, 1, '25847856', 'JOSE LUIS HERRERA MOGOLLON', NULL, NULL, NULL, NULL, NULL, 3, 1300, 'Direccion 111'),
-(1775, 1, '44749709', 'PORLES INOCENTE TANIA MILAGROS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1302, 'Direccion 111'),
-(1776, 1, '00001904', 'Maribel Saavadra', NULL, NULL, NULL, NULL, NULL, 3, 1301, 'Direccion 111'),
-(1777, 1, '80098727', 'CERVANTES MENDOZA JOSE ELBEN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1303, 'Direccion 111'),
-(1778, 1, '00003232', 'PATRICIA PAREDES', 'PROYECTISTA', NULL, NULL, 'pparedes@essacweb.com', NULL, 3, 542, 'Direccion 111'),
-(1779, 1, '07358016', 'LAM LEON CARLOS', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1304, 'Direccion 111'),
-(1780, 1, '06256413', 'HIGA HIGA ROBERTO', NULL, NULL, NULL, NULL, NULL, 3, 1305, 'Direccion 111'),
-(1781, 1, '10014465', 'FLORES PALMA ENMA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1306, 'Direccion 111'),
-(1782, 1, '07612727', 'MALDONADO RIOS ROGER', 'GERENTE GENERAL', NULL, NULL, 'roger@auraestilo.com', NULL, 3, 1307, 'Direccion 111'),
-(1783, 1, '42295899', 'DAVID MIRANDA CUBA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1308, 'Direccion 111'),
-(1784, 1, '43101717', 'SEVILLANO AMASIFUEN YANETH', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1310, 'Direccion 111'),
-(1785, 1, '08981872', 'MANCILLA ACEVEDO FAUSTINO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1311, 'Direccion 111'),
-(1786, 1, '07526898', 'JIMENEZ YRUPAILLA HELME RODOLFO', 'GERENTE GENERAL', NULL, NULL, 'h_rodolfojimenez@hotmail.com', NULL, 3, 1309, 'Direccion 111'),
-(1787, 1, '07902596', 'ROBERTO FABIO PAIN PERALTA', 'INGENIERO', NULL, NULL, 'robertopain@gmail.com', NULL, 3, 1312, 'Direccion 111'),
-(1788, 1, '10014267', 'ARONI LOA ALEJANDRO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1313, 'Direccion 111'),
-(1789, 1, '29529649', 'CARLOS ALFREDO MARTINEZ ALATRISTA', 'Representante Legal', NULL, NULL, 'cmartinez@csi.com.pe', NULL, 3, 1314, 'Direccion 111'),
-(1790, 1, '06839911', 'SABAS  ENRIQUE BACILIO LEON', 'Gerente de Operaciones', NULL, NULL, 'sbacilio@csi.com.pe', NULL, 3, 1314, 'Direccion 111'),
-(1791, 1, '07809635', 'OLIVER BROWN JAIME WILLIAMS', 'APODERADO', NULL, NULL, NULL, NULL, 3, 1315, 'Direccion 111'),
-(1792, 1, '09379647', 'BALAREZO BALAREZO WALTER', NULL, NULL, NULL, NULL, NULL, 3, 1316, 'Direccion 111'),
-(1793, 1, '10085403', 'PALOMINO DELGADO CESAR ROLANDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1317, 'Direccion 111'),
-(1794, 1, '09742330', 'CUCCHI AYCHO GLADYS ALICIA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1318, 'Direccion 111'),
-(1795, 1, '00000228', 'MELISSA MENA', 'VENDEDORA', NULL, NULL, 'mmena@decorlux.com.pe', NULL, 3, 119, 'Direccion 111'),
-(1796, 1, '07619034', 'ANTEZANA REYES MILAGRITOS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1319, 'Direccion 111'),
-(1797, 1, '00001923', 'JORGE FLEISHMAN', 'REPRESENTANTE DE VENTAS', NULL, NULL, NULL, NULL, 3, 1319, 'Direccion 111'),
-(1798, 1, '00001924', 'Mónica Vásquez', 'Asesor de Ventas', NULL, NULL, 'mvasquez@cassinelli.com', NULL, 3, 1087, 'Direccion 111'),
-(1799, 1, '00001925', 'JORGE FLEISHMAN', 'REPRESENTANTE DE VENTA', NULL, NULL, NULL, NULL, 3, 1319, 'Direccion 111'),
-(1800, 1, '15399852', 'SANCHEZ FLORES MANOLO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1321, 'Direccion 111'),
-(1801, 1, '1059322', 'RODRIGUEZ GUZMAN, BEATRIZ CATHERINE', NULL, NULL, NULL, NULL, NULL, 3, 1322, 'Direccion 111'),
-(1802, 1, '00001928', 'RUBEN SANCHEZ', 'REPRESENTANTE VENTAS', NULL, NULL, 'ruben.sanchez@controlmatic.com', NULL, 3, 507, 'Direccion 111'),
-(1803, 1, '46931511', 'CCALLO TORCILLAS MANUEL FERNANDO', NULL, NULL, NULL, NULL, NULL, 3, 1323, 'Direccion 111'),
-(1804, 1, '08811832', 'SANCHEZ MASIAS MARCO ANTONIO', 'GERENTE GENERAL', NULL, NULL, 'msanchez@techsol.com.pe', NULL, 3, 1324, 'Direccion 111'),
-(1805, 1, '10003781', 'SAN ROMAN CACERES MAXIMO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1325, 'Direccion 111'),
-(1806, 1, '00001932', 'DELIA OSTOJIC VIDAL', 'CLIENTES EXCLUSIVOS', NULL, NULL, 'delia.ostojic@nova.com.pe', 'www.nova.com.pe', 3, 1325, 'Direccion 111'),
-(1807, 1, '00001933', 'Keli Ramirez', 'EJECUTIVA DE VENTAS', NULL, NULL, 'kelliramirez@nova.com.pe', NULL, 3, 1325, 'Direccion 111'),
-(1808, 1, '00001934', 'KELI RAMIREZ', 'EJECUTIVA DE VENTAS', NULL, NULL, 'keli.ramirez@nova.com.pe', NULL, 3, 1325, 'Direccion 111'),
-(1809, 1, '08765385', 'JAVIER BARRERA LANGUASCO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1326, 'Direccion 111'),
-(1810, 1, '41692741', 'ROXANA PAOLA RIOS TRIGOSO', NULL, NULL, NULL, 'rrios@copracsa.com', NULL, 3, 2, 'Direccion 111'),
-(1811, 1, '10135575', 'AYARZA TASSARA MANUEL JAVIER', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1328, 'Direccion 111'),
-(1812, 1, '00001938', 'MIGUEL CIURLIZZA PALACIOS', 'REPRESENTANTE DE VENTAS', NULL, NULL, NULL, NULL, 3, 324, 'Direccion 111'),
-(1813, 1, '10605600', 'FERNANDEZ MENDOZA CARLOS ALBERTO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1329, 'Direccion 111'),
-(1814, 1, '07809354', 'VOGELMANN BONICELLI GUILLERMO ALFREDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1330, 'Direccion 111'),
-(1815, 1, '00001941', 'DANIEL HERNANDEZ LOPEZ-ARIAS', 'GERENTE GENERAL', NULL, NULL, 'dhernandez@dstudio.com.pe', 'www.dstudio.com.pe', 3, 1333, 'Direccion 111'),
-(1816, 1, '41914082', 'ELAINE ESTELA RIOS  RODRIGUEZ', 'ARQUITECTA RESIDENTE', NULL, NULL, 'elainerios2402@gmail.com', NULL, 3, 1081, 'Direccion 111'),
-(1817, 1, '08121775', 'Hubert Huaraca Flores', 'Residente', NULL, NULL, 'hubert.huaraca@mhf-peru.com', NULL, 3, 156, 'Direccion 111'),
-(1818, 1, '08200627', 'NARANJO CORREA JOSE LUIS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1335, 'Direccion 111'),
-(1819, 1, '25696942', 'ARCE SUAREZ ALEJANDRO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1336, 'Direccion 111'),
-(1820, 1, '120101', 'SCHELLER GELB RONNY ALEJANDRO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 11, 'Direccion 111'),
-(1821, 1, '16778800', 'ALVAREZ MURO VICTOR LUIS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 768, 'Direccion 111'),
-(1822, 1, '42151212', 'DANY CHAVEZ LAZO', 'PROYECTISTA', NULL, NULL, 'dchavez@magnumsac.com', NULL, 3, 1338, 'Direccion 111'),
-(1823, 1, '00001951', 'SILVIA TORRES', 'REPRESENTANTE DE VENTAS', NULL, NULL, 'silvia.torres@kolff.com.pe', NULL, 3, 1339, 'Direccion 111'),
-(1824, 1, '06709368', 'RODRIGUEZ ESCOBEDO ALEJANDRO GONZALO', 'GERENTE GENERAL', NULL, NULL, 'silvia.torres@kolff.com.pe', NULL, 3, 1339, 'Direccion 111'),
-(1825, 1, '00001953', 'GILDA QUINTANA ESCATE', 'COORDEINADORA DE SERVICIOS', NULL, NULL, 'gquintana@diamire.com', NULL, 3, 1080, 'Direccion 111'),
-(1826, 1, '00001954', 'ANA MARIA DELGADILLO', 'REPRESENTANTE DE VENTAS', NULL, NULL, 'adelgadillo@viadesignperu.com', NULL, 3, 1340, 'Direccion 111'),
-(1827, 1, '00001955', 'HUARCAYA JAVIER WILLY', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1340, 'Direccion 111'),
-(1828, 1, '40255714', 'Jorge Luis Samame', 'Residentes', NULL, NULL, 'jsamame@gygperu.com', NULL, 3, 429, 'Direccion 111'),
-(1829, 1, '42524557', 'Miriam Ventura Rivera', 'Residente', NULL, NULL, 'acosta629@hotmail.com', NULL, 3, 1081, 'Direccion 111'),
-(1830, 1, '09616489', 'Janet Zurita Cabrera', 'Residente', NULL, NULL, 'jzurita@myj.com.pe', NULL, 3, 1083, 'Direccion 111'),
-(1831, 1, '42984496', 'David Pareja  Cariagua', 'Residente', NULL, NULL, 'dpareja@ensol.com.pe', NULL, 3, 556, 'Direccion 111'),
-(1832, 1, '00001961', 'RENE QUELOPANA VALLEJOS', 'ASESOR', NULL, NULL, 'rene.quelopana@hotmail.com', NULL, 3, 1341, 'Direccion 111'),
-(1833, 1, '09469258', 'HUAMANI MARCA JUAN ROMUALDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1342, 'Direccion 111'),
-(1834, 1, '10008540', 'Gustavo Alex Avila Arguedas', NULL, NULL, NULL, 'gustavoavila_92@hotmail.com', NULL, 3, 1343, 'Direccion 111'),
-(1835, 1, '40770788', 'PALOMINO RONDON NELIDA SABRINA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1344, 'Direccion 111'),
-(1836, 1, '00001966', 'Walter Paredes Huamani', 'Supervisor IIEE', NULL, NULL, 'walter.paredes@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(1837, 1, '09438317', 'EGUSQUIZA MURGA JUANI JESUS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1345, 'Direccion 111'),
-(1838, 1, '00001968', 'Roxana Rios Trigoso', 'SUPERVISORA DE OBRA', NULL, NULL, 'rrios@copracsa.com', NULL, 3, 2, 'Direccion 111'),
-(1839, 1, '07270380', 'CARLOS ALFREDO CASABONNE STOESSEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1346, 'Direccion 111'),
-(1840, 1, '07476010', 'CARLOS AUGUSTO CHAVEZ TORO LIRA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1347, 'Direccion 111'),
-(1841, 1, '10030439', 'PEREZ CASTILLO EDDY EMERSON', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1348, 'Direccion 111'),
-(1842, 1, '06089694', 'CAPACYACHI ROMERO, ALEXANDER PEDRO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1349, 'Direccion 111'),
-(1843, 1, '09422073', 'PALACIOS ROSALES ROLANDO JAVIER', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1350, 'Direccion 111'),
-(1844, 1, '07832249', 'SAKAGUCHI NISHIZAWA ROBERTO', NULL, NULL, NULL, NULL, NULL, 3, 1351, 'Direccion 111'),
-(1845, 1, '25766263', 'CCAHUANA TELLO CAMILO', 'GERENTE GENERAL', NULL, NULL, 'schaveznino2@hotmail.com', NULL, 3, 1352, 'Direccion 111'),
-(1846, 1, '25680446', 'RICARDO LECCA ARATA', NULL, NULL, NULL, NULL, NULL, 3, 276, 'Direccion 111'),
-(1847, 1, '10370843', 'SEVILLANO DE LA CRUZ JAVIER', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1353, 'Direccion 111'),
-(1848, 1, '09803430', 'Víctor Raúl Rosas Salazar', 'GERENTE GENERAL', NULL, NULL, 'vrosas@espservice.com.pe', NULL, 3, 1357, 'Direccion 111'),
-(1849, 1, '10116265', 'FIDEL HUARI CENTENO', 'INSTALADOR', NULL, NULL, NULL, NULL, 3, 1358, 'Direccion 111'),
-(1850, 1, '06165905', 'FLORES CONISLLA ROSAURO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1359, 'Direccion 111'),
-(1851, 1, '00001981', 'JACK SEGURA', NULL, NULL, NULL, 'atencionalcliente@redmetalco.com', NULL, 3, 1360, 'Direccion 111'),
-(1852, 1, '07386110', 'CASTRILLON GUTIERREZ WILBERT JESUS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1361, 'Direccion 111'),
-(1853, 1, '45899741', 'GUTIERREZ GARRIAZO JHON ANTHONY', NULL, NULL, NULL, NULL, NULL, 3, 1363, 'Direccion 111'),
-(1854, 1, '10243338', 'CHACON PALACIN CESAR AUGUSTO', NULL, NULL, NULL, NULL, NULL, 3, 1364, 'Direccion 111'),
-(1855, 1, '09812528', 'ENRIQUEZ CHAICO ARMONIO', NULL, NULL, NULL, NULL, NULL, 3, 1365, 'Direccion 111'),
-(1856, 1, '07387419', 'YPARRAGUIRRE MEDINA ROBERTO', NULL, NULL, NULL, NULL, NULL, 3, 1362, 'Direccion 111'),
-(1857, 1, '08232378', 'ARROSPIDE ARTADI JAIME ENRIQUE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 16, 'Direccion 111'),
-(1858, 1, '10224366', 'CESAR ALEJANDRO MENDIOLA LARCO', NULL, NULL, NULL, NULL, NULL, 3, 1366, 'Direccion 111'),
-(1859, 1, '00001990', 'RAFFO PIZZONI FRANCO ENRIQUE', 'VENTAS', '477-2905', NULL, NULL, NULL, 3, 1367, 'Direccion 111'),
-(1860, 1, '00001991', 'SANCHEZ FLORES MANOLO', 'VENTAS', '274-6667', NULL, NULL, NULL, 3, 1321, 'Direccion 111'),
-(1861, 1, '10430913951', 'JOSE CARLOS MATEO ALIAGA', 'ARQUITECTO', NULL, NULL, NULL, NULL, 3, 14, 'Direccion 111'),
-(1862, 1, '43191395', 'MATEO ALIAGA JOSE CARLOS', 'ARQUITECTO', NULL, NULL, NULL, NULL, 3, 1178, 'Direccion 111'),
-(1863, 1, '07589514', 'ANGULO TUESTA, RAMIRO ROLDAN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1368, 'Direccion 111'),
-(1864, 1, '10353951', 'SANCHEZ PERALTA CLAUDIA ALEJANDRA', NULL, NULL, NULL, NULL, NULL, 3, 1370, 'Direccion 111'),
-(1865, 1, '00001997', 'CARLOS PISCO', 'REPRESENTANTE', NULL, NULL, 'pisco_17_peru@hotmail.com', NULL, 3, 1371, 'Direccion 111'),
-(1866, 1, '00001998', 'MATTOS SANCHEZ CARLOS', 'REPRESENTANTE LEGAL', NULL, NULL, 'luis_alvaro2000@hotmail.com', NULL, 3, 1371, 'Direccion 111'),
-(1867, 1, '00001999', 'CECILIA CHU', 'ASESORA DE PROYECTOS', NULL, NULL, 'cchu@stansa.com.pe', 'www.stansa.com.pe', 3, 202, 'Direccion 111'),
-(1868, 1, '00499580', 'BACHEBER FASTONI OSCAR LEONARDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 449, 'Direccion 111'),
-(1869, 1, '08884174', 'OLIVARES BRAVO RICARDO ELIAS', NULL, NULL, NULL, NULL, NULL, 3, 1372, 'Direccion 111'),
-(1870, 1, '08833128', 'OLIVARES ORTIZ ELIAS', NULL, NULL, NULL, NULL, NULL, 3, 1373, 'Direccion 111'),
-(1871, 1, '00002003', 'HENRY FERNANDO GAVILAN', 'VENDEDOR', NULL, NULL, NULL, NULL, 3, 1374, 'Direccion 111'),
-(1872, 1, '00002005', 'MORALES GOMEZ DE CHOQUEZ, MERY ROXANA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1375, 'Direccion 111'),
-(1873, 1, '09654506', 'LIDIA ANTAYHUA CUTTE', 'REPRESENTANTE LEGAL', NULL, NULL, 'lidia71_11@hotmail.com', NULL, 3, 1376, 'Direccion 111'),
-(1874, 1, '40000829', 'ERNAN PADILLA BARRETO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1378, 'Direccion 111'),
-(1875, 1, '00002008', 'PER02006', NULL, NULL, NULL, NULL, NULL, 3, 1376, 'Direccion 111'),
-(1876, 1, '29649874', 'VILLANUEVA ESPEJO MILUSKA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1379, 'Direccion 111'),
-(1877, 1, '08624709', 'VALLEGOS SAN MIGUEL ANA ESPERANZA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1341, 'Direccion 111'),
-(1878, 1, '00002011', 'NOEMI SILES', 'VENDEDOR', NULL, NULL, NULL, NULL, 3, 119, 'Direccion 111'),
-(1879, 1, '08216585', 'BLAU WALLACH HENRY', 'APODERADO', NULL, NULL, NULL, NULL, 3, 1381, 'Direccion 111'),
-(1880, 1, '08270209', 'KANASHIRO KAMIYA DE NAKADA MARY', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1382, 'Direccion 111'),
-(1881, 1, '40768532', 'COLAN SEPULVEDA, JUAN MANUEL', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1383, 'Direccion 111'),
-(1882, 1, '10252995', 'RAMIREZ VILLEGAS, JAI SAMUEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1384, 'Direccion 111'),
-(1883, 1, '00445943', 'CHEN MANHAO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1385, 'Direccion 111'),
-(1884, 1, '00002017', 'OMAR SEMPERTEGUI TORREZ', 'REPRESENTANTE LEGAL', NULL, NULL, 'aidproyectos@speedy.com.pe', 'www.aid.com.pe', 3, 1252, 'Direccion 111'),
-(1885, 1, '000', 'JOSE ANTONIO VASQUEZ ALEJOS', NULL, NULL, NULL, 'drywallconstrucciones@yahoo.es', NULL, 3, 1389, 'Direccion 111'),
-(1886, 1, '09296888', 'FIERRO ALVARO JULIO LUIS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1390, 'Direccion 111'),
-(1887, 1, '10464089191', 'CARRASCO SOLANO JULIO ARMANDO', NULL, NULL, NULL, NULL, NULL, 3, 2, 'Direccion 111'),
-(1888, 1, '46408919', 'CARRASCO SOLANO JULIO ARMANDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1180, 'Direccion 111'),
-(1889, 1, '00002022', 'DIANA PEREYRA ALTAMIRANO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1391, 'Direccion 111'),
-(1890, 1, '09948923', 'JAIME CORTEZ, JAVIER', NULL, NULL, NULL, NULL, NULL, 3, 1393, 'Direccion 111'),
-(1891, 1, '07742490', 'QUEROLO TARGARONA SANTIAGO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1394, 'Direccion 111'),
-(1892, 1, '08871030', 'ARAGON CUADROS GLADIS CRISTINA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1395, 'Direccion 111'),
-(1893, 1, '25753691', 'MOGOLLON CONQUERA, JORGE LUIS', NULL, NULL, NULL, 'monica.eyzaguirre@carvajal.com', NULL, 3, 1396, 'Direccion 111'),
-(1894, 1, '00002027', 'Katya Tuesta', 'Vendedora', NULL, NULL, 'ktuesta@decorlux.com.pe', NULL, 3, 119, 'Direccion 111'),
-(1895, 1, '43324784', 'FLORES CORNEJO ZENON JAVIER', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1397, 'Direccion 111'),
-(1896, 1, '41127397', 'LEVANO MIRANDA DENNYS DEL PILAR', NULL, NULL, NULL, NULL, NULL, 3, 1398, 'Direccion 111'),
-(1897, 1, '07977773', 'VELARDE HEIDEMANN HANS RONNY', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1399, 'Direccion 111'),
-(1898, 1, '06128053', 'ALIAGA MANASSEVITZ GUILLERMO ANTONIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1400, 'Direccion 111'),
-(1899, 1, '40301947', 'SALDIVAR GINO ALBERTO', 'GERENTE GENERAL', NULL, NULL, 'grms_25_27@hotmail.com', NULL, 3, 1401, 'Direccion 111'),
-(1900, 1, '07869287', 'DEL CASTILLO VARGAS JULIO CESAR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 8, 'Direccion 111'),
-(1901, 1, '00002034', 'Elizabeth Silva.', 'AREA DE VENTAS', NULL, NULL, 'ventas@fercomec.com', NULL, 3, 1402, 'Direccion 111'),
-(1902, 1, '10176071', 'Edwin Pablo Cotera Lazo', 'REPRESENTANTE LEGAL', NULL, NULL, NULL, NULL, 3, 1402, 'Direccion 111'),
-(1903, 1, '00002038', 'WILDER GARROTE ESPIRITU', 'GERENTE TECNICO', NULL, NULL, 'wg_arteenacero@yahoo.es', NULL, 3, 1404, 'Direccion 111'),
-(1904, 1, '00314954', 'BOBENRIETH GIGLIO EDUARDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1405, 'Direccion 111'),
-(1905, 1, '10004236', 'PODESTA ROSAZZA NORA SAMANTHA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1406, 'Direccion 111'),
-(1906, 1, '07882700', 'AMASIFUEN SANTILLAN FREDDY', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1408, 'Direccion 111'),
-(1907, 1, '20521018322', 'COPY DATA', NULL, NULL, NULL, NULL, NULL, 3, 1409, 'Direccion 111'),
-(1908, 1, '08786749', 'SALVADOR RUJU CAPURRO', 'GERENTE GENERAL', NULL, NULL, 'sruju@ifsperu.pe', NULL, 3, 1410, 'Direccion 111'),
-(1909, 1, '25756683', 'GEREDA ECHEVARRIA ESMERALDA ROSA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1301, 'Direccion 111'),
-(1910, 1, '08147292', 'PITA PEREDO, JESUS ERNESTO', 'Gerente', NULL, NULL, 'acabadodepinturayotros@hotmail.com', NULL, 3, 1413, 'Direccion 111'),
-(1911, 1, '09605716', 'CARDENAS LUJAN NILTON', 'REPRESENTANTE LEGAL', NULL, NULL, 'alarmas-camaras-seguridad@hotmail.com', NULL, 3, 1414, 'Direccion 111'),
-(1912, 1, '06658437', 'ROJAS GARCIA DE LIZA ELSA DORIS', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1415, 'Direccion 111'),
-(1913, 1, '40078742', 'QUIÑONES SOUZA, JOSE MARTIN', NULL, NULL, NULL, NULL, NULL, 3, 1416, 'Direccion 111'),
-(1914, 1, '09720511', 'HUALLA QUISPE, ELIZABETH', NULL, NULL, NULL, NULL, NULL, 3, 1417, 'Direccion 111'),
-(1915, 1, '20494985439', 'CESAR ARTURO YAMASHIRO ORE E.I.R.L', NULL, NULL, NULL, NULL, NULL, 3, 621, 'Direccion 111'),
-(1916, 1, '00002051', 'CESAR ARTURO  YAMASHIRO ORE056-211816', NULL, NULL, NULL, NULL, NULL, 3, 1418, 'Direccion 111'),
-(1917, 1, '00002052', 'Flavio Cancho', NULL, NULL, NULL, 'igesaperu@hotmail.com', NULL, 3, 10, 'Direccion 111'),
-(1918, 1, '00002053', 'HAROLD RIVAS', NULL, NULL, NULL, 'ahrivas@hutecontratistas.com', NULL, 3, 86, 'Direccion 111'),
-(1919, 1, '00002055', 'JOSE ALCANTARA', NULL, NULL, NULL, 'jfalcantara2006@yahoo.es', NULL, 3, 1420, 'Direccion 111'),
-(1920, 1, '00002056', 'CARLOS RAMIREZ', NULL, NULL, NULL, 'cramirez@advantechperu.com', NULL, 3, 167, 'Direccion 111'),
-(1921, 1, '00002057', 'MILAGROS CHIPANA', NULL, NULL, NULL, NULL, NULL, 3, 167, 'Direccion 111'),
-(1922, 1, '00002058', 'SHARIFF RAMIREZ', NULL, NULL, NULL, 'sramirez@essacweb.com', NULL, 3, 542, 'Direccion 111'),
-(1923, 1, '00002059', 'EDDIE CUADRAS', NULL, NULL, NULL, NULL, NULL, 3, 167, 'Direccion 111'),
-(1924, 1, '00002060', 'BEATRIZ ZABALETA', NULL, NULL, NULL, 'bzavaleta_chirinos@yahoo.es, bzavaletac@tp.co', NULL, 3, 1421, 'Direccion 111'),
-(1925, 1, '41634540', 'LLECLLISH PAMPA, GROBER FRANK', 'Gerente', NULL, NULL, 'oberdeco20@hotmail.com', NULL, 3, 1422, 'Direccion 111'),
-(1926, 1, '00002062', 'MANUEL CASTRO MUNANTE', 'GERENTE DE OBRAS', NULL, NULL, 'manuel.castro@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(1927, 1, '00002063', 'FERNANDO PEREZ', 'SUPERVISOR DE OBRA', NULL, NULL, 'fernando.perez@spsa.com.pe', NULL, 3, 46, 'Direccion 111'),
-(1928, 1, '31035635', 'EFRAIN MENA CHAVEZ', NULL, NULL, NULL, NULL, NULL, 3, 1412, 'Direccion 111'),
-(1929, 1, '07863361', 'JAVIER ENRIQUE DEL RIO ARRIETA', 'GERENTE GENERAL', NULL, NULL, 'javier.delrio@activacons.com', 'www.activacons.com', 3, 1423, 'Direccion 111'),
-(1930, 1, '09176324', 'AUGUSTO CUBA GAMARRA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1424, 'Direccion 111'),
-(1931, 1, '00002067', 'AUGUSTO CUBA CABEZAS', 'GERENTE TECNICO', NULL, NULL, 'acubac@ingeco.com.pe', 'www.ingeco.com.pe', 3, 1424, 'Direccion 111'),
-(1932, 1, '00002068', 'JESUS FRANKLIN TALAVERANO PALOMINO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1327, 'Direccion 111'),
-(1933, 1, '00002069', 'GUILLERMO DE BERNARDI', NULL, NULL, NULL, 'GDebernardi@gta.cl', NULL, 3, 1327, 'Direccion 111'),
-(1934, 1, '00002070', 'YOHANA MARTINEZ', NULL, NULL, NULL, 'YMartinez@gta.cl', NULL, 3, 1327, 'Direccion 111'),
-(1935, 1, '00002071', 'JORGE JEREZ', NULL, NULL, NULL, 'Jjerez@gta.cl', NULL, 3, 1327, 'Direccion 111'),
-(1936, 1, '43627249', 'LIZETH ANDREA VEGA MERINO', 'REPRESENTANTE LEGAL', NULL, NULL, 'vgaliz_15@hotmail.com', NULL, 3, 1326, 'Direccion 111'),
-(1937, 1, '10686928', 'CIRO MIGUEL REYES JIMINEZ', 'REPRESENTANTE LEGAL', NULL, NULL, 'ventas@decorluzperu.com', NULL, 3, 1327, 'Direccion 111'),
-(1938, 1, '06189962', 'MONTALVO HINOSTROZA MIGUEL ABENCIO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1328, 'Direccion 111'),
-(1939, 1, '08834080', 'FELIX HERNANDEZ C.', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1429, 'Direccion 111'),
-(1940, 1, '10011125', 'BARDALES AREVALO RICARDO', NULL, NULL, NULL, NULL, NULL, 3, 1063, 'Direccion 111'),
-(1941, 1, '06199265', 'Juan Manuel Castro Lopez', 'Gerente General', NULL, NULL, 'proyectos@colorado10.com', NULL, 3, 1430, 'Direccion 111'),
-(1942, 1, '00002078', 'Pablo Luis Acosta Ninahuamán', 'sub gerente', NULL, NULL, NULL, NULL, 3, 1431, 'Direccion 111'),
-(1943, 1, '00002079', 'JORGE PORTOCARRERO', NULL, NULL, NULL, NULL, NULL, 3, 671, 'Direccion 111'),
-(1944, 1, '40941709', 'DELUVIO ROJAS HUARI', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1358, 'Direccion 111'),
-(1945, 1, '12235642', 'NANCY MESONES', 'ASISTENTE GERENCIA', NULL, NULL, 'nancy@texcope-peru.com', NULL, 3, 1289, 'Direccion 111'),
-(1946, 1, '00002083', 'CUIZANO VARGAS JOSE OMAR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1432, 'Direccion 111'),
-(1947, 1, '10095844', 'MADELEINE OBINA ENRIQUEZ REYES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1433, 'Direccion 111'),
-(1948, 1, '00002085', 'JULIA HUAUYA QUISPE', 'VENTAS', NULL, NULL, NULL, NULL, 3, 1434, 'Direccion 111'),
-(1949, 1, '093491730', 'VALENTINA QUILLA QUILLA', 'ventas', NULL, NULL, NULL, NULL, 3, 1435, 'Direccion 111'),
-(1950, 1, '08840732', 'MIRIAM MARLENE MORA HUAMAN', 'VENTAS', NULL, NULL, NULL, NULL, 3, 1436, 'Direccion 111'),
-(1951, 1, '00002088', 'CROSBY BUSTAMANTE', 'VENTAS', NULL, NULL, NULL, NULL, 3, 1437, 'Direccion 111'),
-(1952, 1, '10788163', 'Emilio Jesús Bahamonde Mendoza', 'GERENTE DE PROYECTO', NULL, NULL, 'ebahamonde@copracsa.com', NULL, 3, 2, 'Direccion 111'),
-(1953, 1, '10222831', 'VAN OORDT MARTINEZ EMILIO JORGE ROMULO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 37, 'Direccion 111'),
-(1954, 1, '41899358', 'ARELLANO GUTIERREZ, CHRISTIAN DUANY', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1439, 'Direccion 111'),
-(1955, 1, '45222222', 'JUAN CHANTA', 'ADMINISTRADOR', NULL, NULL, 'j-chanta@hotmail.com', NULL, 3, 1441, 'Direccion 111'),
-(1956, 1, '09386629', 'QUIROZ CELIS ALFREDO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1440, 'Direccion 111'),
-(1957, 1, '25759705', 'AUQUI AUCCAPIÑA ROBERT', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1409, 'Direccion 111'),
-(1958, 1, '42222222', 'NELLY OSCORIMA', NULL, NULL, NULL, 'noscorima@joequispe.com', NULL, 3, 1442, 'Direccion 111'),
-(1959, 1, '00002096', 'HENRY ESPINOZA HUAYLLAS', 'ANALISTA DE PROYECTOS', NULL, NULL, NULL, NULL, 3, 1223, 'Direccion 111'),
-(1960, 1, '06098097', 'ANCAJIMA MELENDEZ, EDGAR PAUL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1447, 'Direccion 111'),
-(1961, 1, '00002098', 'ROXANA PIZARRO JOLY', 'GERENTE DE ADMINISTRACION Y FINANZAS', NULL, NULL, 'rpizarro@energyperu.com', NULL, 3, 1443, 'Direccion 111'),
-(1962, 1, '09750671', 'Juan José Cardenas Mares', 'Representante Legal', NULL, NULL, 'josecardenas@gmail.com', NULL, 3, 955, 'Direccion 111'),
-(1963, 1, '00002100', 'Pedro Otero', 'Gerente General', NULL, NULL, 'potero@texcope-peru.com', NULL, 3, 1289, 'Direccion 111'),
-(1964, 1, '00002101', 'Hans Wolfinson', 'Encargado de Sistemas', NULL, NULL, 'hwolfinson@texcope-peru.com', NULL, 3, 1289, 'Direccion 111'),
-(1965, 1, '00002102', 'Martin Vargas', 'Jefe de Finanzas', NULL, NULL, 'mvargas@texcope-peru.com', NULL, 3, 1289, 'Direccion 111'),
-(1966, 1, '41584490', 'ALDAVE ZARATE ANDREA ALEXANDRA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1444, 'Direccion 111'),
-(1967, 1, '00002104', 'PER00715', 'rOBERTO BENITEZ', NULL, NULL, NULL, NULL, 3, 414, 'Direccion 111'),
-(1968, 1, '08615738', 'CASTRO ORBEGOSO, ROSA MICAELA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1445, 'Direccion 111'),
-(1969, 1, '43647428', 'QUISPE BOCANEGRA, NEYDI ANABEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1446, 'Direccion 111'),
-(1970, 1, '42014477', 'MALQUICHAGUA CONTRERAS CHRISTIAN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1448, 'Direccion 111'),
-(1971, 1, '09290282', 'OLIVARI MENDEZ DE CALDERON, PATRICIA ELIZABET', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1449, 'Direccion 111'),
-(1972, 1, '44128557', 'AMER YORDAN REGALADO VARGAS', 'SUPERVISOR ELECTROMECANICO', NULL, NULL, 'aregalado@copracsa.com', NULL, 3, 2, 'Direccion 111'),
-(1973, 1, '00002110', 'Jose Calderon Vela', 'Departamento de Presupuesto.', NULL, NULL, 'j,calderon@elmacserv.com', NULL, 3, 1451, 'Direccion 111'),
-(1974, 1, '40342477', 'Nancy Del Castillo Garcia', 'Gerente General', NULL, NULL, NULL, NULL, 3, 1451, 'Direccion 111'),
-(1975, 1, '07480429', 'ROCINA LUISA ABANTO PAREDES', NULL, NULL, NULL, NULL, NULL, 3, 1452, 'Direccion 111'),
-(1976, 1, '09798736', 'PEREZ ESTEBAN SAIDA LILIANA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1453, 'Direccion 111'),
-(1977, 1, '72607905', 'SOLANO VILLAR LUIS ENRIQUE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1454, 'Direccion 111'),
-(1978, 1, '00002115', 'Anabidia Arakaki', 'Ejecutiva de Ventas Corporativas', NULL, NULL, 'aarakaki@decorlux.com.pe', NULL, 3, 119, 'Direccion 111'),
-(1979, 1, '00002116', 'Julia Berrospi', 'Ejecutiva de Ventas Corporativas', NULL, NULL, 'jberrospi@decorlux.com.pe', NULL, 3, 119, 'Direccion 111'),
-(1980, 1, '44402412', 'GUTIERREZ GOMERO EDITH JACKELINE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1455, 'Direccion 111'),
-(1981, 1, '41295752', 'CESINARIO SORIA ANDREA ISABEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1456, 'Direccion 111'),
-(1982, 1, '00002119', 'KARLA MENDOZA F.', 'Asesora Comercial', NULL, NULL, 'showroom@marmotecsac.com', NULL, 3, 1099, 'Direccion 111'),
-(1983, 1, '40072409', 'DANNY VALENZUELA OBLITAS', 'REPRESENTANTE LEGAL', NULL, NULL, NULL, NULL, 3, 1458, 'Direccion 111'),
-(1984, 1, '00002121', 'Gerardo Injoque', 'Gerente Financiero', NULL, NULL, NULL, NULL, 3, 12, 'Direccion 111'),
-(1985, 1, '07456346', 'BARRAGAN GUERRERO MIGUEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1459, 'Direccion 111'),
-(1986, 1, '44139874', 'RODOLFO CARLOS MIGUEL ARBAIZA  MEJIA', 'ASESOR COMERCIAL', NULL, NULL, 'R_ARBAIZA@PROVEFABRICA.COM.PE', NULL, 3, 949, 'Direccion 111'),
-(1987, 1, '09580499', 'ROBERTO ORTIZ', 'CHOFER', NULL, NULL, NULL, NULL, 3, 2, 'Direccion 111'),
-(1988, 1, '10017133', 'HUACHACA PALACIOS JULIANA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1460, 'Direccion 111'),
-(1989, 1, '41390113', 'MENESES LOZANO RAQUEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1461, 'Direccion 111'),
-(1990, 1, '10631958', 'GAMBOA GONZALES, LOURDES YESSICA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1462, 'Direccion 111'),
-(1991, 1, '00002128', 'HENRY ASHCALLAY SANCHEZ', 'JEFE DE PROYECTOS', '7184278', NULL, 'henry.ashcallay@activacons.com', NULL, 3, 1423, 'Direccion 111'),
-(1992, 1, '00002129', 'Jose Tasaico', 'Ingeniero de Campo', NULL, NULL, 'economax2011.chorrillos@gmail.com', NULL, 3, 1423, 'Direccion 111'),
-(1993, 1, '00002130', 'ALBERTO MACHADO MAYURI ARENAS', 'ASISTENTE DEL PROYECTISTA DE ESTRUCTURAS', NULL, NULL, 'amachado@grupolee.pe', 'www.grupolee.pe', 3, 571, 'Direccion 111'),
-(1994, 1, '00002131', 'Julio Gonzales', 'Encargado de Ventas', NULL, NULL, 'asistenteate@cassinelli.com', NULL, 3, 1087, 'Direccion 111'),
-(1995, 1, '00002132', 'CARLOS PASARA', 'SUPERVISOR', NULL, NULL, 'cpasara@gg.com.pe', 'www.gg.com.pe', 3, 920, 'Direccion 111'),
-(1996, 1, '00002133', 'HUGO PAZOS MEDINA', 'GERENTE GENERAL', NULL, NULL, 'hpazos@energyperu.com', NULL, 3, 1463, 'Direccion 111'),
-(1997, 1, '00002134', 'LESLIE TICLLA CAMPAÑA', 'ENCARGADA DE PROYECTOS', NULL, NULL, 'lticlla@rocasac.com', NULL, 3, 1464, 'Direccion 111'),
-(1998, 1, '00002135', 'NESTOR NEVADO', 'ARQUITECTO', NULL, NULL, 'nestornevado@livingaroundart.com', NULL, 3, 1465, 'Direccion 111'),
-(1999, 1, '00002136', 'OSCAR PAHUACHON', 'ARQUITECTO', NULL, NULL, 'oscar@livingaroundart.com', NULL, 3, 1465, 'Direccion 111'),
-(2000, 1, '00002137', 'GIANCARLO URBINA', 'GERENTE FINANCIERO', NULL, NULL, 'pegug@ambev.com.pe', NULL, 3, 1466, 'Direccion 111'),
-(2001, 1, '42022675', 'ARNOLDO BARRANTES BOLAÑOS', 'Representante Legal', NULL, NULL, NULL, NULL, 3, 1467, 'Direccion 111'),
-(2002, 1, '00002139', 'CARLOS BALAREZO POZO', 'ASESOR DE VENTAS HELVEX', NULL, NULL, 'proyectos1.pe@helvexinternacional.com', 'www.helvex.com', 3, 1467, 'Direccion 111'),
-(2003, 1, '07879078', 'CARLOS ENRIQUE SANTA CRUZ BENDEZU', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1468, 'Direccion 111'),
-(2004, 1, '00038903', 'LEWIS WILLIAM TEAL', 'DIRECTOR', NULL, NULL, NULL, NULL, 3, 1468, 'Direccion 111'),
-(2005, 1, '42460024', 'ROSSANA CECILIA NANEZ AGUILAR', 'ARQUITECTA', NULL, NULL, 'cnanez@copracsa.com', NULL, 3, 2, 'Direccion 111'),
-(2006, 1, '00002143', 'Sandro Leith Medina', 'Asesor Comercial', NULL, NULL, 's.leith@mpinstitucional.com', NULL, 3, 1469, 'Direccion 111'),
-(2007, 1, '07885378', 'EDGAR ALEJANDRO CABALLERO ASTE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1469, 'Direccion 111'),
-(2008, 1, '07797344', 'RUIZ RIOS JORGE ALBERTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1470, 'Direccion 111'),
-(2009, 1, '45419162', 'KATTY VANESSA GARGATE SILVA', 'LOGISTICA', NULL, NULL, NULL, NULL, 3, 2, 'Direccion 111'),
-(2010, 1, '00002147', 'VICTOR CASTANEDA', 'PREVENCIONISTA DE RIESGO', NULL, NULL, 'victor_1446@hotmail.com', NULL, 3, 2, 'Direccion 111'),
-(2011, 1, '08076618', 'RAYO AEDO GAVINA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1471, 'Direccion 111'),
-(2012, 1, '00002149', 'FREDDY FLORES', 'VENTAS CORPORATIVAS', NULL, NULL, 'empresarial05@maestro.com.pe', NULL, 3, 449, 'Direccion 111'),
-(2013, 1, '40116958', 'MARIANO MURGUIA VALLE', 'JEFE DE PROYECTOS', NULL, NULL, 'mmurguia@copracsa.com', NULL, 3, 2, 'Direccion 111'),
-(2014, 1, '00002151', 'LESLIE TICLLA CAMPAÑA', 'Ejecutiva de Proyectos', NULL, NULL, 'lticlla@rocasac.com', NULL, 3, 802, 'Direccion 111'),
-(2015, 1, '00002152', 'ROCIO MATOS', 'ASESORA VENTAS CORPORATIVAS', NULL, NULL, 'rmatos@decor-center.com', NULL, 3, 15, 'Direccion 111'),
-(2016, 1, '00002153', 'RENZO COSTA S.A.C.', NULL, NULL, NULL, NULL, NULL, 3, 1472, 'Direccion 111'),
-(2017, 1, '00002154', 'JULIO CESAR BERROCAL ROJAS', NULL, NULL, NULL, NULL, NULL, 3, 1473, 'Direccion 111'),
-(2018, 1, '00002155', 'JONATHAN ALBERTH PALACIOS PILLMAN', NULL, NULL, NULL, NULL, NULL, 3, 1474, 'Direccion 111'),
-(2019, 1, '00002156', 'LUCIS ALDAR SALDAÑA VERA', NULL, NULL, NULL, NULL, NULL, 3, 1475, 'Direccion 111'),
-(2020, 1, '40426799', 'JUAREZ RIOS, MARCELINO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1476, 'Direccion 111'),
-(2021, 1, '10734387', 'VERGARA RUBIN MIGUEL ANGEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1477, 'Direccion 111'),
-(2022, 1, '00002159', 'MARCO NAVARRO ARIZOLA', NULL, NULL, NULL, NULL, NULL, 3, 1478, 'Direccion 111'),
-(2023, 1, '07847019', 'GUERRA ALTAMIRANO ELSA ROCIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1369, 'Direccion 111'),
-(2024, 1, '00002161', 'Esteban Ugaldes', NULL, NULL, NULL, 'eugaldes@coeltaperu.com', NULL, 3, 1479, 'Direccion 111'),
-(2025, 1, '10243750', 'ROJAS ALVARADO DELMY BRIGET', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1480, 'Direccion 111'),
-(2026, 1, '07591798', 'CHOU FLORES JOSE ANTONIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1481, 'Direccion 111'),
-(2027, 1, '25562479', 'SACHUN CASTILLO PATRICIA VIRGINIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1482, 'Direccion 111'),
-(2028, 1, '00002165', 'VERONICA QUEROL', 'GERENTE COMERCIAL', NULL, NULL, 'vquerol@gmail.com', NULL, 3, 1483, 'Direccion 111'),
-(2029, 1, '07868446', 'CRISTOBAL ARMANDO MONTERO CHAVEZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1483, 'Direccion 111'),
-(2030, 1, '02897996', 'SANTOS VILCHERREZ PEDRO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1484, 'Direccion 111'),
-(2031, 1, '09656660', 'PACHECO URBIZAGASTEGUI ANGEL RAUL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1485, 'Direccion 111'),
-(2032, 1, '00002169', 'MARTIN J. ALGAMIS', 'KEY ACCOUNT MANAGER', NULL, NULL, 'malgamis@agpglass.com', NULL, 3, 1486, 'Direccion 111'),
-(2033, 1, '10809897', 'VICTOR EDUARDO FRANCO CASTILLO', 'APODERADO', NULL, NULL, NULL, NULL, 3, 1486, 'Direccion 111'),
-(2034, 1, '09869597', 'JUAN JOSE PISSANI EYZAGUIRRE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1487, 'Direccion 111'),
-(2035, 1, '10789745', 'Jose Francisco Erazo Rodriguez', 'Vendedor', NULL, NULL, NULL, NULL, 3, 1457, 'Direccion 111'),
-(2036, 1, '08842192', 'SALGADO RUITON GUSTAVO GUILLERMO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1488, 'Direccion 111'),
-(2037, 1, '08241688', 'RIQUERO DIAZ GABRIELA SUSANA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1490, 'Direccion 111'),
-(2038, 1, '32042070', 'NORABUENA RAMIREZ CARMEN MERCEDES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1491, 'Direccion 111'),
-(2039, 1, '08146099', 'MARTINEZ VELASQUEZ, RAYDA LUZMILA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1492, 'Direccion 111'),
-(2040, 1, '10275969', 'ZAFORAS GARRIDO DE DIAZ, LIDIA LUZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1493, 'Direccion 111'),
-(2041, 1, '07829242', 'MARIATEGUI CHIAPPE SANDRO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1494, 'Direccion 111'),
-(2042, 1, '06603494', 'BECERRA CALDERON GILBERTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1495, 'Direccion 111'),
-(2043, 1, '09385156', 'JULIO RAFAEL RIVERA FEIJOO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1496, 'Direccion 111'),
-(2044, 1, '08758293', 'WILLIAM BACA ESCOBAR', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1496, 'Direccion 111'),
-(2045, 1, '08943629', 'VICTOR SOLANO', 'MENSAJERO', NULL, NULL, NULL, NULL, 3, 2, 'Direccion 111'),
-(2046, 1, '40627704', 'FARRO RIVADENEIRA DANIEL MOISES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1497, 'Direccion 111'),
-(2047, 1, '10473647', 'MARCIA VANESSA ROJAS SOTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1498, 'Direccion 111'),
-(2048, 1, '00002185', 'CHRISTIAM GAMBOA VERANO', NULL, NULL, NULL, 'cgamboa_corpgdv@hotmail.com', 'www.corpgdv.com', 3, 1498, 'Direccion 111'),
-(2049, 1, '25754291', 'CALLAN CALLAN SHNEIDER HELBER', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1499, 'Direccion 111'),
-(2050, 1, '08184223', 'JUAN LOSSIO HURTADO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 60, 'Direccion 111'),
-(2051, 1, '40017500', 'Francisca Luisa Bravo Zorrila', 'Ejecutiva de ventas', NULL, NULL, 'francis.b@falumsa.com.pe', NULL, 3, 1499, 'Direccion 111'),
-(2052, 1, '10448382', 'ZAMORA TERRONES YSABEL BERNABE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1500, 'Direccion 111'),
-(2053, 1, '09584230', 'ANCHAYHUA DIAZ, ANTONIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1501, 'Direccion 111'),
-(2054, 1, '00002191', 'MIRTHA SANTOS', NULL, NULL, NULL, NULL, NULL, 3, 1502, 'Direccion 111'),
-(2055, 1, '06631996', 'BARANDIARAN PAGADOR RAUL ALBERTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1502, 'Direccion 111'),
-(2056, 1, '00002194', 'JOSE ANTONIO LOPEZ', NULL, NULL, NULL, 'jlopez@proyectaingenieros.pe', NULL, 3, 58, 'Direccion 111'),
-(2057, 1, '00002195', 'CARLOS MARTINEZ', NULL, NULL, NULL, 'cmartinez@proyectaingenieros.pe', NULL, 3, 58, 'Direccion 111'),
-(2058, 1, '00002196', 'YONSHON MUÑOZ', 'Supervisor de Obra', NULL, NULL, 'ymunoz@copracsa.com', NULL, 3, 2, 'Direccion 111'),
-(2059, 1, '08252600', 'MIGUEL ANGEL GUERRERO WATANABE', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1504, 'Direccion 111'),
-(2060, 1, '00002198', 'RUTH FRANCIA', 'RECURSOS HUMANOS', NULL, NULL, 'ruth.francia@sonda.com.pe', NULL, 3, 1504, 'Direccion 111'),
-(2061, 1, '09850120', 'LAYZA HERRERA HUMBERTO TEOFILO', 'PREVENCIONISTA', NULL, NULL, NULL, NULL, 3, 1505, 'Direccion 111'),
-(2062, 1, '07781966', 'BALBUENA HERRERA JORGE EDUARDO', 'ALMECENERO', NULL, NULL, NULL, NULL, 3, 1506, 'Direccion 111'),
-(2063, 1, '07464364', 'CARLOS ALBERTO SSOVERO VILLAROEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1507, 'Direccion 111'),
-(2064, 1, '00002202', 'EDWIN OMAR ALVAREZ PEREZ', 'VENTAS', NULL, NULL, 'ealvarez@priana.com.pe', NULL, 3, 1507, 'Direccion 111'),
-(2065, 1, '09346381', 'RODRIGUEZ MARTELL JORGE RICARDO', NULL, NULL, NULL, NULL, NULL, 3, 1508, 'Direccion 111'),
-(2066, 1, '08099948', 'RICARDO SERGIO CHUQUIMANTARI MARREROS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1509, 'Direccion 111'),
-(2067, 1, '44056695', 'FIGUEROA ESTRADA LUIS ANTONIO', NULL, NULL, NULL, NULL, NULL, 3, 1510, 'Direccion 111'),
-(2068, 1, '41210605', 'HUAMANI COAGUILA IGNACIA MARLENI', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1511, 'Direccion 111'),
-(2069, 1, '00111412', 'SALDAÑA VASQUEZ MIGDALY', NULL, NULL, NULL, NULL, NULL, 3, 1512, 'Direccion 111'),
-(2070, 1, '42597593', 'TOMATEO ALARCON WILBER', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1513, 'Direccion 111'),
-(2071, 1, '10435169', 'JUAN FRANCISCO SARMIENTO BARBOZA', NULL, NULL, NULL, 'halva66@hotmail.com', NULL, 3, 1514, 'Direccion 111'),
-(2072, 1, '07494250', 'JOSE LUIS TAQUIRI RAMOS', 'GERENTE GENERAL', NULL, NULL, 'ventas@dataelectric.pe', NULL, 3, 1515, 'Direccion 111'),
-(2073, 1, '45815538', 'MAYRA GABRIELA SOTO ESPINOZA', 'ASISTENTE', NULL, NULL, 'msoto@edifica.com.pe', NULL, 3, 1516, 'Direccion 111'),
-(2074, 1, '00002212', 'Cesar Guzman Marquina', 'Gerente de operaciones', NULL, NULL, 'cguzman@edifica.com.pe', 'www.edifica.com.pe', 3, 1517, 'Direccion 111'),
-(2075, 1, '09930625', 'DIOGENES GONZALES DE LA CRUZ', 'GERENTE DE PROYECTO', NULL, NULL, 'diogenes@procetradi.com', NULL, 3, 1518, 'Direccion 111'),
-(2076, 1, '07271376', 'WONG LUCK WILLY A.', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1519, 'Direccion 111'),
-(2077, 1, '41558658', 'TRUJILLO PALOMINO, ONECIMO JULIAN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1520, 'Direccion 111'),
-(2078, 1, '06717422', 'HERNANDEZ BUSTAMANTE SEGUNDO A', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1521, 'Direccion 111'),
-(2079, 1, '80629193', 'ALCALDE SILVA, PRESBITERO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1522, 'Direccion 111'),
-(2080, 1, '06575319', 'YACTAYO ALVARADO BETTY', NULL, NULL, NULL, NULL, NULL, 3, 1523, 'Direccion 111'),
-(2081, 1, '08357117', 'JUAN MAYHUA RAMOS', 'SUPERVISOR', NULL, NULL, NULL, NULL, 3, 2, 'Direccion 111'),
-(2082, 1, '09287838', 'MOISES EMILIO LICLA MONTOYA', NULL, NULL, NULL, NULL, NULL, 3, 1524, 'Direccion 111'),
-(2083, 1, '10154915', 'SERAFICO JAVIER DE SOSA DIOMA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1525, 'Direccion 111'),
-(2084, 1, '80625393', 'IVAN CARLOS CANCHARI HUAMAN', 'GERENTE GENERAL', NULL, NULL, 'ivan.carlos@elecsinsac.com', NULL, 3, 1526, 'Direccion 111'),
-(2085, 1, '00002223', 'ALEXANDER CAMPOS', 'OFICINA TECNICA', NULL, NULL, 'alexandercam@hotmail.com', NULL, 3, 58, 'Direccion 111'),
-(2086, 1, '10699226', 'QUISPE ZARATE AIDA BLANCA', NULL, NULL, NULL, NULL, NULL, 3, 1527, 'Direccion 111'),
-(2087, 1, '09282824', 'ALBERCA MARTIN JESUS JUAN', NULL, NULL, NULL, NULL, NULL, 3, 1528, 'Direccion 111'),
-(2088, 1, '40289287', 'OLIVER ATENCIA ESPINOZA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1529, 'Direccion 111'),
-(2089, 1, '40939946', 'IBANEZ TORRES CHRISTIAN ALFREDO', NULL, NULL, NULL, NULL, NULL, 3, 1531, 'Direccion 111'),
-(2090, 1, '08417258', 'SANTIVAÑEZ TUPAC YUPANQUI, ANTONIA ADA', 'gerente', NULL, NULL, NULL, NULL, 3, 1532, 'Direccion 111'),
-(2091, 1, '80520594', 'MAMANI APAZA JOSE ENRIQUE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1533, 'Direccion 111'),
-(2092, 1, '17615991', 'REYES LOPEZ, FLOR EULALIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1534, 'Direccion 111'),
-(2093, 1, '09443565', 'CONTRERAS COLLAVINO RAUL RAMON', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1535, 'Direccion 111'),
-(2094, 1, '10100053', 'LUJAN YARANGA ANTONIO JULIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1536, 'Direccion 111'),
-(2095, 1, '46494333', 'COCHACHIN VALDEZ, ANDREA ELIZABETH', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1537, 'Direccion 111'),
-(2096, 1, '00002234', 'TONY RUBIO', 'Gerente General', NULL, NULL, 'antoniorubioarq@hotmail.com', NULL, 3, 1539, 'Direccion 111'),
-(2097, 1, '40744880', 'PANDURO CALDAS JUAN JOSE', NULL, NULL, NULL, NULL, NULL, 3, 1541, 'Direccion 111'),
-(2098, 1, '08383828', 'CASTRO ESCOBEDO, MANUEL ALBERTO', NULL, NULL, NULL, NULL, NULL, 3, 1542, 'Direccion 111'),
-(2099, 1, '08242140', 'GIUSTI HUNDSKOPF LUIS MARIO', 'GERENTE GENERAL', NULL, NULL, 'luis.g@luvegi.com', NULL, 3, 1543, 'Direccion 111'),
-(2100, 1, '40603044', 'LARA MORENO EDDY ALEX', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1544, 'Direccion 111'),
-(2101, 1, '46346236', 'AMANDA ALATA LAGOS', 'SECRETARIA', NULL, NULL, 'ventas@imagenimport.com', NULL, 3, 1545, 'Direccion 111'),
-(2102, 1, '42527170', 'FELICIANO TUESTA ANGULO', 'ASESOR DE VENTAS', NULL, NULL, 'jevenate1@cassinelli.com', NULL, 3, 1087, 'Direccion 111'),
-(2103, 1, '09878327', 'CARLOS AUGUSTO BEZA CHAVEZ', 'ASESOR DE VENTAS', NULL, NULL, 'especificacion.pe@helvexinternacional.com', NULL, 3, 1467, 'Direccion 111'),
-(2104, 1, '45267757', 'INOCENTE BENITES, WALTER ALEJANDRO', NULL, NULL, NULL, NULL, NULL, 3, 1547, 'Direccion 111'),
-(2105, 1, '00002245', 'AGUSTIN GARCIA QUISPE', 'EJECUTIVO VENTAS', NULL, NULL, 'agarcia@rosello.com.pe', NULL, 3, 1548, 'Direccion 111'),
-(2106, 1, '07020557', 'CASTILLA ATENCIO MIGUEL SAUL', NULL, NULL, NULL, NULL, NULL, 3, 1549, 'Direccion 111'),
-(2107, 1, '10708487', 'RIVERA TUNQUE, FERNANDO AQUILINO', NULL, NULL, NULL, NULL, NULL, 3, 1550, 'Direccion 111'),
-(2108, 1, '41665653', 'ELVIS MARTINEZ CANTARO', 'GERENTE DE PROYECTO', NULL, NULL, 'emartinez@copracsa.com', NULL, 3, 2, 'Direccion 111'),
-(2109, 1, '09314477', 'VILLANUEVA LAZARO MARISOL TATIANA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1552, 'Direccion 111'),
-(2110, 1, '08407108', 'ARIAS DE SERRANO MAURA OBDULIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1553, 'Direccion 111'),
-(2111, 1, '10316207', 'VELA VASQUEZ ERNESTO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1554, 'Direccion 111'),
-(2112, 1, '00091131', 'VALLEJO BLANCO JUAN CARLOS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1555, 'Direccion 111'),
-(2113, 1, '00002253', 'Armando de la Vega Huamani', 'Gerente', NULL, NULL, NULL, NULL, 3, 1556, 'Direccion 111'),
-(2114, 1, '19858433', 'RECUAY CANO GUNTHER FROILAN', NULL, NULL, NULL, NULL, NULL, 3, 1557, 'Direccion 111'),
-(2115, 1, '10325032', 'RIVEROS PALOMINO, DELIA BEATRIZ', NULL, NULL, NULL, NULL, NULL, 3, 1558, 'Direccion 111'),
-(2116, 1, '07610675', 'HUAPAYA PORTOCARRERO CESAR AUGUSTO', NULL, NULL, NULL, NULL, NULL, 3, 1559, 'Direccion 111'),
-(2117, 1, '41517430', 'SAAVEDRA PEREZ, JUAN CARLOS', NULL, NULL, NULL, NULL, NULL, 3, 1560, 'Direccion 111'),
-(2118, 1, '00002258', 'JAIME SAUL TORRES', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1561, 'Direccion 111'),
-(2119, 1, '17810162', 'JORGE LUIS ARANGURI PAREDES', NULL, NULL, NULL, NULL, NULL, 3, 1562, 'Direccion 111'),
-(2120, 1, '08783802', 'ROBERTO MATOS VARGAS', NULL, NULL, NULL, NULL, NULL, 3, 1563, 'Direccion 111'),
-(2121, 1, '27154606', 'ABDON GUILLERMO VARGAS CABANILLAS', NULL, NULL, NULL, NULL, NULL, 3, 1564, 'Direccion 111'),
-(2122, 1, '18167050', 'KAREM EDITH RODRIGUEZ ARMAS', 'SUBGERENTE', NULL, NULL, NULL, NULL, 3, 1565, 'Direccion 111'),
-(2123, 1, '43332821', 'LUIS FERNANDO CABRERA GUTIERREZ', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1566, 'Direccion 111'),
-(2124, 1, '17848621', 'JULIO ENRIQUE MERINO VEREAU', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1567, 'Direccion 111'),
-(2125, 1, '06368261', 'EDUARDO E. HUALLANCA SAMINAS', 'APODERADO', NULL, NULL, NULL, NULL, 3, 1568, 'Direccion 111'),
-(2126, 1, '18071229', 'RAFAEL GUILLERMCHUNGA PAU', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1569, 'Direccion 111'),
-(2127, 1, '32735346', 'CHRISTIAN MARTIN MELENDEZ LINAREZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1570, 'Direccion 111'),
-(2128, 1, '18133561', 'VILLANUEVA CABRERA ERWINGN RAUL', NULL, NULL, NULL, NULL, NULL, 3, 1571, 'Direccion 111');
-INSERT INTO `tb_personacontacto` (`id`, `tb_empresa_id`, `dni`, `nombre`, `cargo`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_companiacontacto_id`, `direccion`) VALUES
-(2129, 1, '18213161', 'MARILYN EVELYN CORCUERA ZAVALETA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1572, 'Direccion 111'),
-(2130, 1, '17914626', 'OLGA ELENA ALFARO CHAVEZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1573, 'Direccion 111'),
-(2131, 1, '40699116', 'SILVIA MARINA MGRACEYARINI', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1574, 'Direccion 111'),
-(2132, 1, '08996932', 'KUBA FELIPE DE YAYA, JULIA', NULL, NULL, NULL, NULL, NULL, 3, 1575, 'Direccion 111'),
-(2133, 1, '09011361', 'HILARIO FLORES, HONORATA', NULL, NULL, NULL, NULL, NULL, 3, 1576, 'Direccion 111'),
-(2134, 1, '09488769', 'SULCA CANCHARI DE VERASTEGUI LUCIA SEVERINA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1578, 'Direccion 111'),
-(2135, 1, '07797319', 'CABERO NAVARRO OCTAVIO JESUS CLAUDIO', NULL, NULL, NULL, NULL, NULL, 3, 1579, 'Direccion 111'),
-(2136, 1, '40963029', 'ESPINOZA MARTINEZ, GUSTAVO ADAN', NULL, NULL, NULL, NULL, NULL, 3, 1580, 'Direccion 111'),
-(2137, 1, '25617905', 'CAMPOS DE GONZALES AIDA HAYDEE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1581, 'Direccion 111'),
-(2138, 1, '00002279', 'BENAVIDES ZAVALETA EDWIN GUILLERMO', NULL, NULL, NULL, NULL, NULL, 3, 1582, 'Direccion 111'),
-(2139, 1, '00002280', 'WU WONG  ARNOLD HENRY', NULL, NULL, NULL, NULL, NULL, 3, 1583, 'Direccion 111'),
-(2140, 1, '00002281', 'SANCHEZ POLLI OSCAR RAUL', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1584, 'Direccion 111'),
-(2141, 1, '17897283', 'ESTHER ROJAS RODRIGUEZ', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1585, 'Direccion 111'),
-(2142, 1, '18984107', 'CORONEL RAMIREZ TOMAS', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1586, 'Direccion 111'),
-(2143, 1, '18071441', 'FLORES FERNANDEZ RICARDO AMADEO', NULL, NULL, NULL, NULL, NULL, 3, 1587, 'Direccion 111'),
-(2144, 1, '00002285', 'CERON EPIDOTTI GIANNI', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1588, 'Direccion 111'),
-(2145, 1, '17969844', 'VASQUEZ VASQUEZ FERNANDO MAXIMO', NULL, NULL, NULL, NULL, NULL, 3, 1589, 'Direccion 111'),
-(2146, 1, '17823651', 'BENAVIDES ZAVALETA EDWIN GUILLERMO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1582, 'Direccion 111'),
-(2147, 1, '10613995', 'CIPRIAN SORIA NERIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1590, 'Direccion 111'),
-(2148, 1, '43077496', 'RAMOS TERRAZOS FREDDY ABRAHAM', NULL, NULL, NULL, NULL, NULL, 3, 1591, 'Direccion 111'),
-(2149, 1, '98989898', 'Maria Alejandra Zavaleta Pisfil', NULL, NULL, NULL, NULL, NULL, 3, 1592, 'Direccion 111'),
-(2150, 1, '99920', 'TANG CHAN TONG', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1593, 'Direccion 111'),
-(2151, 1, '46294443', 'ANABELLA ALFARO MADALENGOITIA', 'ARQUITECTA DE INTERIORES', NULL, NULL, 'aalfaro@copracsa.com', NULL, 3, 6, 'Direccion 111'),
-(2152, 1, '46505045', 'CECILIA VANESA VEGA REYES', 'ASISTENTE DE LOGISTICA', NULL, NULL, NULL, NULL, 3, 2, 'Direccion 111'),
-(2153, 1, '41363326', 'PATRICIA EYZAGUIRRE PETIT', 'ARQUITECTA DE INTERIORES', NULL, NULL, 'peyzaguirre@copracsa.com', NULL, 3, 2, 'Direccion 111'),
-(2154, 1, '43683184', 'JENNY RIOS URBINA', 'ASISTENTE CONTABLE', NULL, NULL, 'jrios.copracsa@gmail.com', NULL, 3, 2, 'Direccion 111'),
-(2155, 1, '09909090', 'DAMIAN ANGELACCIO', 'GERENTE GENERAL', NULL, NULL, 'damian@estudioangelaccio.com.ar', NULL, 3, 1538, 'Direccion 111'),
-(2156, 1, '18040668', 'QUIROZ DE CASTRO BETY ABILIA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1595, 'Direccion 111'),
-(2157, 1, '06421291', 'VEGA AYALA LEONIDAS YURY', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1596, 'Direccion 111'),
-(2158, 1, '18217794', 'ACEVEDO GOMEZ YASELIN AMARANTA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1597, 'Direccion 111'),
-(2159, 1, '06390231', 'RIOS PERALTA, ARTURO PEDRO', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1598, 'Direccion 111'),
-(2160, 1, '42411994', 'FLORES CARRANZA ROSA MARIA CRISTINA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1599, 'Direccion 111'),
-(2161, 1, '17820345', 'MAZA MONTALVAN TIMOTEO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1600, 'Direccion 111'),
-(2162, 1, '0284777', 'ESPINOZA DE LESCANO, TERESA', NULL, NULL, NULL, NULL, NULL, 3, 1601, 'Direccion 111'),
-(2163, 1, '18087099', 'NAKANDAKARI MAESHIRO MIGUEL ANGE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1602, 'Direccion 111'),
-(2164, 1, '105204', 'ALVAREZ FERNANDEZ DE PIRE LIDIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1603, 'Direccion 111'),
-(2165, 1, '00002306', 'Javier Camones', 'Contador', NULL, NULL, 'rubioarq@terra.com.pe', NULL, 3, 1539, 'Direccion 111'),
-(2166, 1, '00002307', 'ALFONSO MARQUEZ', NULL, NULL, NULL, 'alfonso.marquez@spsa.com.pe', NULL, 3, 515, 'Direccion 111'),
-(2167, 1, '00002308', 'DAVID OSTOS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1604, 'Direccion 111'),
-(2168, 1, '00002309', 'MILKO FRANCO DE LA CRUZ ZAVALETA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1605, 'Direccion 111'),
-(2169, 1, '46668972', 'RICHTER LOPEZ ANDRES FEDERICO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1606, 'Direccion 111'),
-(2170, 1, '07257688', 'EDUARDO MARTON HERRERA VASQUEZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1608, 'Direccion 111'),
-(2171, 1, '08746121', 'FARAH BOTE ERIC EDUARDO', 'GERENTE GENERAL', NULL, NULL, 'ericfarah@da-ah.com', NULL, 3, 1610, 'Direccion 111'),
-(2172, 1, '06157500', 'LUIS ALBERTO VENEGAS ASNARAN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1611, 'Direccion 111'),
-(2173, 1, '10435815', 'GUTIERREZ LEON MARTIN MAXIMILIANO', NULL, NULL, NULL, NULL, NULL, 3, 1613, 'Direccion 111'),
-(2174, 1, '06541627', 'SEGUNDO ERASMO TORRES VARGAS', 'MAESTRO DE OBRA', NULL, NULL, NULL, NULL, 3, 1616, 'Direccion 111'),
-(2175, 1, '19948920', 'PABLO RENE LEON CRUZ', 'OPERARIO', NULL, NULL, NULL, NULL, 3, 1617, 'Direccion 111'),
-(2176, 1, '25837701', 'RICARDO ANTON GUERRERO', 'AYUDANTE', NULL, NULL, NULL, NULL, 3, 1618, 'Direccion 111'),
-(2177, 1, '09269934', 'PACHAS TORREBLANCA, EDUARDO', 'NEGOCIANTE', NULL, 'TRABAJOS DE DEMOLICION', 'demolicionesme@hotmail.com', NULL, 3, 1619, 'Direccion 111'),
-(2178, 1, '00002319', 'MEDARDO PACHAS', NULL, NULL, NULL, 'demolicionesme@hotmail.com', NULL, 3, 1619, 'Direccion 111'),
-(2179, 1, '08589060', 'GONZALO ALI ABANTO SANTILLAN', NULL, NULL, NULL, 'gabanto4@gmail.com', NULL, 3, 1620, 'Direccion 111'),
-(2180, 1, '00002232', 'ROY VILLACORTA MALDONADO', NULL, NULL, NULL, 'rvillacorta@iambientales.com', NULL, 3, 1621, 'Direccion 111'),
-(2181, 1, '10212804', 'FEBRES BURGA YOLANDA ESTHER', NULL, NULL, NULL, NULL, NULL, 3, 1622, 'Direccion 111'),
-(2182, 1, '10198579', 'ESTRELLA VILLAFRANCO JAVIER', 'GERENTE GENERAL', NULL, 'INDUSTRIA MADERERA', 'javierestrella11@hotmail.com', NULL, 3, 1629, 'Direccion 111'),
-(2183, 1, '40127902', 'REYES COLONIO ALEJANDRO', NULL, NULL, NULL, NULL, NULL, 3, 1624, 'Direccion 111'),
-(2184, 1, '00002325', 'IRMA VELASQUEZ', 'RESPONSABLE', NULL, NULL, 'ivelasquez@mota-engil.pe', NULL, 3, 1625, 'Direccion 111'),
-(2185, 1, '00002326', 'JORGE LUIS PALACIOS ALAYO', 'PREVENCIONISTA', NULL, NULL, NULL, NULL, 3, 1626, 'Direccion 111'),
-(2186, 1, '25783201', 'MIGUEL DONAIRES MANZANARES', 'RESIDENTE - INGENIERO CIVIL', NULL, NULL, 'mdonaires@copracsa.com', NULL, 3, 2, 'Direccion 111'),
-(2187, 1, '07257190', 'ZARATE GARCIA, PILAR DE LOS MILAGROS', 'GERENTE GENERAL', NULL, NULL, 'multicenterdelfines@gmail.com', NULL, 3, 1627, 'Direccion 111'),
-(2188, 1, '00002329', 'RAQUEL', 'FEJA DE LOGISTICA', NULL, NULL, 'rgrados@copracsa.com', NULL, 3, 2, 'Direccion 111'),
-(2189, 1, '06549185', 'FRANCO PAYANO, SATURNINA LUZMILA', 'independiente', NULL, NULL, NULL, NULL, 3, 1628, 'Direccion 111'),
-(2190, 1, '46113492', 'AGUILAR ACHANCARAY MARICRUZ MANUELA', 'GERENTE GENERAL', NULL, NULL, 'corporaciontransdimmsac@hotmail.com', NULL, 3, 1630, 'Direccion 111'),
-(2191, 1, '09336069', 'SAETTONE WATMOUGH DAVID MARTIN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1631, 'Direccion 111'),
-(2192, 1, '21521150', 'ALTHEMAR FRANCO MENDOZA', 'RESIDENTE', NULL, NULL, 'AFRANCO@COPRACSA.COM', NULL, 3, 6, 'Direccion 111'),
-(2193, 1, '44232191', 'JESUS CRISTOBAL NUÑEZ', 'INGENIERO', NULL, NULL, 'JCRISTOBAL@COPRACSA.COM', NULL, 3, 2, 'Direccion 111'),
-(2194, 1, '12345789', 'fIORELLA CONSTANTINI GALLO', 'ARQUITECTA', NULL, NULL, 'FCONSTANTINI@DERCOPERU.NET', NULL, 3, 1632, 'Direccion 111'),
-(2195, 1, '00002336', 'CARMEN URRA', NULL, NULL, NULL, 'Carmen.Urra@newmont.com', NULL, 3, 1468, 'Direccion 111'),
-(2196, 1, '00002337', 'MERCEDES BARBA', NULL, NULL, NULL, 'Mercedes.Barba@newmont.com', NULL, 3, 1468, 'Direccion 111'),
-(2197, 1, '00002338', 'ROJAS CARL', NULL, NULL, NULL, NULL, NULL, 3, 1633, 'Direccion 111'),
-(2198, 1, '18028020', 'VERONICA REBECA ESCOBAL ORDOÑEZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1635, 'Direccion 111'),
-(2199, 1, '09796486', 'SANTIAGO JULIO TELLO SERNAQUE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1636, 'Direccion 111'),
-(2200, 1, '18014683', 'MARGOT AZABACHE GARCIA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1637, 'Direccion 111'),
-(2201, 1, '00002350', 'RICARDO GUILLERMO LI CADENILLAS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1639, 'Direccion 111'),
-(2202, 1, '17979315', 'GERARDO AMBROCIO ALVARO HUERTA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1641, 'Direccion 111'),
-(2203, 1, '123456789', 'TIAGO SILVA', 'GERENTE DE CONSTRUCCION CIVIL', NULL, NULL, 'tsilva@mota-engil.pe', NULL, 3, 1625, 'Direccion 111'),
-(2204, 1, '000379401', 'NUNO EMANUEL GARRIDO FIGUEIREDO', 'REPRESENTANTE LEGAL 1', NULL, NULL, 'ngarrido@mota-engil.pe', NULL, 3, 1625, 'Direccion 111'),
-(2205, 1, '07276320', 'FRANCISCO RUBEN DARIO LORA MORGAN', 'REPRESENTANTE LEGAL 2', NULL, NULL, 'rlora@mota-engil.pe', NULL, 3, 1625, 'Direccion 111'),
-(2206, 1, '44424040', 'FERNANDO AARON RODRIGUEZ ZUÑIGA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1642, 'Direccion 111'),
-(2207, 1, '09671426', 'PAULO CESAR TSUJA UECHI', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1643, 'Direccion 111'),
-(2208, 1, '17807701', 'VICTOR ADOLFO TANTALEAN CHAVEZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1644, 'Direccion 111'),
-(2209, 1, '09079614', 'MARIA TERESA FUJIY TAKEDA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1645, 'Direccion 111'),
-(2210, 1, '45299669', 'FIORELLA JOHANA ALVARO SEVILLANO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1646, 'Direccion 111'),
-(2211, 1, '18172712', 'ALEXIS SAMUEL CASTILLO LLANOS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1647, 'Direccion 111'),
-(2212, 1, '40921556', 'HEYDI ANGIE MIRIAM OSHIRO CALATAYUD', NULL, NULL, NULL, NULL, NULL, 3, 1648, 'Direccion 111'),
-(2213, 1, '09722889', 'RODRIGUEZ NARVAEZ BEATRIZ DIANA', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1650, 'Direccion 111'),
-(2214, 1, '000119434', 'YONG CHUY ZHEN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1651, 'Direccion 111'),
-(2215, 1, '00002364', 'RAUL PONCE DE LEON TIRADO', 'Superintendente de Logística', NULL, NULL, 'r_ponce@elbrocal.com.pe', NULL, 3, 1653, 'Direccion 111'),
-(2216, 1, '07462968', 'IJU AZAMA MIGUEL', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1654, 'Direccion 111'),
-(2217, 1, '10103681', 'RODRIGUEZ RUIZ SANTOS CELINDA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1655, 'Direccion 111'),
-(2218, 1, '06674088', 'ROSAS RODRIGUEZ MARIA DEL ROSARIO NERIDA', NULL, NULL, NULL, NULL, NULL, 3, 1656, 'Direccion 111'),
-(2219, 1, '08888162', 'MOGROVEJO GUTIERREZ JEANETTE CONSUELO', NULL, NULL, NULL, NULL, NULL, 3, 1659, 'Direccion 111'),
-(2220, 1, '00002369', 'RAUL BUSTAMANTE', 'REPRESENTANTE', NULL, NULL, NULL, NULL, 3, 1659, 'Direccion 111'),
-(2221, 1, '41195513', 'GOMEZ GONZALEZ JORGE LUIS', NULL, NULL, NULL, NULL, NULL, 3, 1661, 'Direccion 111'),
-(2222, 1, '22994659', 'ZARATE GARCIA ROY RUBEN', 'GERENTE GENERAL', NULL, NULL, 'royzarate63@yahoo.es', NULL, 3, 1662, 'Direccion 111'),
-(2223, 1, '02832693', 'APONTE NUÑEZ, MARCIAL', 'PREVENCIONISTA', NULL, NULL, 'marcialapontepdr@hotmail.com', NULL, 3, 2, 'Direccion 111'),
-(2224, 1, '29538133', 'CARPIO MONTOYA HERNANDO DAVID', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1667, 'Direccion 111'),
-(2225, 1, '10490267', 'PEREZ ORMEÑO NELSON RENATO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1668, 'Direccion 111'),
-(2226, 1, '40738463', 'APAZA ROCA RAFAEL GENARO', NULL, NULL, NULL, NULL, NULL, 3, 1669, 'Direccion 111'),
-(2227, 1, '10075730', 'HUAHUACHAMBI NORABUENA PATRICIA ROCIO', 'REPRESENTANTE  LEGAL', NULL, NULL, NULL, NULL, 3, 1671, 'Direccion 111'),
-(2228, 1, '46801644', 'ARTEAGA TUPALAYA RUTH ESTHER', NULL, NULL, NULL, NULL, NULL, 3, 1672, 'Direccion 111'),
-(2229, 1, '25730668', 'FAJARDO LUNA ALEJANDRO', NULL, NULL, NULL, NULL, NULL, 3, 1673, 'Direccion 111'),
-(2230, 1, '25640129', 'LEYVA LUNA JOSE LUIS', NULL, NULL, NULL, NULL, NULL, 3, 1674, 'Direccion 111'),
-(2231, 1, '20663326', 'MATEO RIOS SEVERO LADISLAO', NULL, NULL, NULL, NULL, NULL, 3, 1675, 'Direccion 111'),
-(2232, 1, '41625275', 'CRUZ MARTINEZ, FRANKLIN ROGGER', NULL, NULL, NULL, NULL, NULL, 3, 1676, 'Direccion 111'),
-(2233, 1, '10258073', 'CERVERA NORIEGA LUCINDA', NULL, NULL, NULL, NULL, NULL, 3, 1677, 'Direccion 111'),
-(2234, 1, '16789844', 'CERVERA CRUZ, DENNIS HILDEBRANDO', NULL, NULL, NULL, NULL, NULL, 3, 1678, 'Direccion 111'),
-(2235, 1, '07316850', 'CERVERA NORIEGA ARNALDO RAMON', NULL, NULL, NULL, NULL, NULL, 3, 1679, 'Direccion 111'),
-(2236, 1, '10041263', 'GOMEZ CUYA JOSE', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1680, 'Direccion 111'),
-(2237, 1, '25722095', 'MARTIN SALAZAR PROSPERO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1681, 'Direccion 111'),
-(2238, 1, '00002387', 'ELVIS CONGONA ALVAREZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1682, 'Direccion 111'),
-(2239, 1, '32730323', 'BLANCO PASCO DEMETRIO FIDENCIO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1685, 'Direccion 111'),
-(2240, 1, '00002389', 'HUANUQUEÑO CHUCO ANTONIO', 'REPRESENTANTE', NULL, NULL, NULL, NULL, 3, 1686, 'Direccion 111'),
-(2241, 1, '00002390', 'HUANUQUEÑO CHUCO ANTONIO', 'REPRESENTANTE', NULL, NULL, NULL, NULL, 3, 1686, 'Direccion 111'),
-(2242, 1, '40684458', 'BRUNO CHRISTIAN ROCA MORAN', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1687, 'Direccion 111'),
-(2243, 1, '08612957', 'ROMANO JUAN CAHUAS CAYO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1665, 'Direccion 111'),
-(2244, 1, '08631779', 'MAXIMO ROBERTO AQUINO CAREY', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1688, 'Direccion 111'),
-(2245, 1, '10284799', 'JHON GILBERT VIDAL ELGUERA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1660, 'Direccion 111'),
-(2246, 1, '09336511', 'ALFREDO EDUARDO MATTO CACERES', 'APODERADO', NULL, NULL, NULL, NULL, 3, 1666, 'Direccion 111'),
-(2247, 1, '32920992', 'ANGEL JUAN LA ROSA RAMIREZ', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1657, 'Direccion 111'),
-(2248, 1, '42070875', 'VICTOR ALBERTO SAAVEDRA BAUTISTA', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1663, 'Direccion 111'),
-(2249, 1, '45195101', 'HERNAN SANTIAGO GUEMBES PORTOCARRERO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1658, 'Direccion 111'),
-(2250, 1, '08249782', 'LUIS SALO ZWIEBACH CANTOR', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 437, 'Direccion 111'),
-(2251, 1, '08732590', 'BOCANEGRA MORALES FELIX HUGO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1689, 'Direccion 111'),
-(2252, 1, '10426374', 'ZAMORA RODAS CARLOS LUCAS', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1690, 'Direccion 111'),
-(2253, 1, '00002402', 'FLORES ROJAS ANDRES CARLOS', 'GERENTE', NULL, NULL, NULL, NULL, 3, 1691, 'Direccion 111'),
-(2254, 1, '09368457', 'CHOQUE NADAL, SUSANA', NULL, NULL, NULL, NULL, NULL, 3, 1692, 'Direccion 111'),
-(2255, 1, '09310101', 'TORBISCO MARTINEZ, NICOLAS BRUNO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1695, 'Direccion 111'),
-(2256, 1, '07264135', 'CHAVEZ ARANIBAR, RAFAEL', NULL, NULL, NULL, NULL, NULL, 3, 1696, 'Direccion 111'),
-(2257, 1, '07839748', 'CISNEROS VELARDE FERNANDO JAVIER', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1697, 'Direccion 111'),
-(2258, 1, '41761457', 'MIGUEL ALCANTARA', 'PROGRAMADOR', NULL, NULL, NULL, NULL, 3, 2, 'Direccion 111'),
-(2259, 1, '09728968', 'YANCCE VELARDE ROCIO YOVANA', 'GERENTE GENERAL', NULL, NULL, 'rocioyancce@yahoo.com', NULL, 3, 1699, 'Direccion 111'),
-(2260, 1, '06661056', 'CAMACHO GONZALES BEATRIZ CONSUELO', 'GERENTE GENERAL', NULL, NULL, NULL, NULL, 3, 1700, 'Direccion 111'),
-(2261, 1, '06804469', 'ROBERT TITO VIZCARRA', 'SOCIO DE LA EMPRESA', NULL, NULL, 'demolicioneslopez@hotmail.com', NULL, 3, 1701, 'Direccion 111'),
-(2262, 1, '25631106', 'CABRERA TAPIA HECTOR', NULL, NULL, NULL, NULL, NULL, 3, 1702, 'Direccion 111'),
-(2263, 1, '', 'Barclay M. Shannon', '', '', '', 'luctus.sit.amet@ettristiquepellentesque.org', '', 3, 2, 'Direccion 111'),
-(2264, 1, '', 'Josephine K. Mckenzie', '', '', '', 'accumsan.sed.facilisis@nuncsedlibero.com', '', 3, 2, 'Direccion 111'),
-(2265, 1, '44444', 'miguel angel alcantara ayre', 'qwerty', '563456345', 'NULL', 'miguel.alc@gmail.com', 'http://www.google.com', 1, 1557, 'Direccion 111'),
-(2266, 1, '56765', 'ocnpfr', 'qwerty', '563456345', 'NULL', 'miguel.alc@gmail.com', 'http://www.google.com', 1, 1379, 'Direccion 111'),
-(2267, 1, '4', 'ocnpfr--*', 'qwerty', '563456345', 'NULL', 'miguel.alc@gmail.com', 'http://www.google.com', 1, 1379, 'Direccion 111'),
-(2269, 1, '4', 'miguel angel alcantara ayre', 'qwer', '563456345', 'NULL', 'miguel.alc@gmail.com', 'http://www.google.com', 1, 1069, 'Direccion 111'),
-(2271, 1, '23423', 'miguel angel alcantara ayre', 'qwerty', 'NULL', 'NULL', 'miguel.alc@gmail.com', 'NULL', 1, 1379, 'Direccion 111'),
-(2272, 1, '23423', 'miguel angel alcantara ayre', 'qwerty', '563456345', 'NULL', 'miguel.alc@gmail.com', 'http://www.google.com', 1, 1379, 'Direccion 111'),
-(2273, 1, '23423', 'miguel angel alcantara ayre', 'qwerty', '563456345', 'NULL', 'miguel.alc@gmail.com', 'http://www.google.com', 1, 1557, 'Direccion 111'),
-(2274, 1, '23423', 'miguel', 'qwer', '563456345', 'NULL', 'miguel.alc@gmail.com', 'http://www.google.com', 1, 1331, 'Direccion 111'),
-(2275, 1, '23423', 'miguel angel alcantara ayre', 'qwer', 'NULL', 'NULL', 'malcantara@aliceinchains.com', 'http://www.google.com', 1, 1379, 'Direccion 111');
+INSERT INTO `tb_personacontacto` (`id`, `tb_empresa_id`, `dni`, `nombre`, `cargo`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_companiacontacto_id`, `direccion`, `tb_pais_id`, `tb_departamento_id`, `tb_distrito_id`) VALUES
+(1, 1, '501', 'KARLA PALMA SAVEDRA', 'AGENTE VENDEDOR', '777', 'Testing', 'kpalma@corp2torres.com', 'http://www.yahoo.com', 1, 1741, 'Direccion 111', 177, 3, 1240),
+(2, 1, '648', 'Kike Minauro', NULL, '', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(3, 1, '6605162', 'MINAURO LA TORRE RAFAEL ANTONIO', 'Administrador', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(4, 1, '646', 'Sheyla Rojas', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 33, 'Direccion 111', NULL, NULL, NULL),
+(5, 1, '645', 'Roxana Guitierrez', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 33, 'Direccion 111', NULL, NULL, NULL),
+(6, 1, '655', 'J. Contreras', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 34, 'Direccion 111', NULL, NULL, NULL),
+(7, 1, '643', 'Oscar Perez', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(8, 1, '10256828397', 'RANCEL RAZZETO CANEVARO', 'ASISTENTE ADMINISTRATIVO', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 8, 'Direccion 111', NULL, NULL, NULL),
+(9, 1, '639', 'Dr. Ramirez', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 35, 'Direccion 111', NULL, NULL, NULL),
+(10, 1, '638', 'Carmen Carrera', 'Contabilidad', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 508, 'Direccion 111', NULL, NULL, NULL),
+(11, 1, '623', 'Willian Zuñiga', 'Ctas por pagar', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 508, 'Direccion 111', NULL, NULL, NULL),
+(12, 1, '636', 'Miguel Salazar', 'Ctas por pagar', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 37, 'Direccion 111', NULL, NULL, NULL),
+(13, 1, '649', 'Ana Lourdes Ferreira', 'Ctas por Pagar', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 37, 'Direccion 111', NULL, NULL, NULL),
+(14, 1, '6283975', 'ROBINSON QUINTANA GUTARRA', 'GERENTE DE OPERACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(15, 1, '10223815', 'ALBERTO BOCANEGRA', 'GERENTE GENERAL', '3492617', 'Testing', 'kpalma@corp2torres.com', 'www.masterwall.com.pe', 3, 21, 'Direccion 111', NULL, NULL, NULL),
+(16, 1, '628', 'ANTONIO SEGURA', 'RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 19, 'Direccion 111', NULL, NULL, NULL),
+(17, 1, '627', 'JOSE ARTEAGA', 'MAESTRO OBRA DE PINTURA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 17, 'Direccion 111', NULL, NULL, NULL),
+(18, 1, '626', 'ARTURO ANGELES', 'INGENIERO MECANICO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 20, 'Direccion 111', NULL, NULL, NULL),
+(19, 1, '625', 'CARLOS GARCIA', 'RESIDENTE DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 26, 'Direccion 111', NULL, NULL, NULL),
+(20, 1, '624', 'CESAR CAMARENA', 'RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 16, 'Direccion 111', NULL, NULL, NULL),
+(21, 1, '635', 'FERNANDO SECLEN', 'JEFE DE SISTEMAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(22, 1, '10316834', 'CANCHO ZAMORA FLAVIO ROMERO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1380, 'Direccion 111', NULL, NULL, NULL),
+(23, 1, '660', 'GERALDO GUEVARA', 'RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 13, 'Direccion 111', NULL, NULL, NULL),
+(24, 1, '665', 'GINA RATTO', 'EJECUTIVA DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 25, 'Direccion 111', NULL, NULL, NULL),
+(25, 1, '659', 'GUILLERMO KOORT', 'GERENTE DE OPERACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(26, 1, '6361418', 'HENRICH SPRINCKMÖLLER DE TABOADA', 'GENERAL GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 19, 'Direccion 111', NULL, NULL, NULL),
+(27, 1, '658', 'ISAAC BASALDUA', 'GERENTE DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.intelecperu.com.pe', 3, 45, 'Direccion 111', NULL, NULL, NULL),
+(28, 1, '662', 'ISRAEL CORONEL', 'JEFE DE SEGURIDAD', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(29, 1, '664', 'JAIME DEXTRE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 22, 'Direccion 111', NULL, NULL, NULL),
+(30, 1, '25815446', 'JORGE ALEJOS CALLE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1092, 'Direccion 111', NULL, NULL, NULL),
+(31, 1, '651', 'JORGE CALMET', 'GERENTE DE OPERACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 21, 'Direccion 111', NULL, NULL, NULL),
+(32, 1, '657', 'JOSE LUIS RAMIREZ', 'GERENTE DE OPERACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 13, 'Direccion 111', NULL, NULL, NULL),
+(33, 1, '652', 'JUAN GARAYAR', 'JEFE DE OPERACIONES DE HUANCAYO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(34, 1, '18', 'LEO CARMONA CHAVEZ', 'GERENTE DE STORE PLANNING', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(35, 1, '650', 'LESTER AGUILAR', 'GERENTE DE TIENDA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(36, 1, '656', 'MARZIO DIAZ HURTADO', 'ARQUITECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 20, 'Direccion 111', NULL, NULL, NULL),
+(37, 1, '661', 'MAXIMO ROJAS', 'GERENTE DE OPERACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 16, 'Direccion 111', NULL, NULL, NULL),
+(38, 1, '654', 'ROSA WU', 'SUPERVISORA DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(39, 1, '642', 'VICENTE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 17, 'Direccion 111', NULL, NULL, NULL),
+(40, 1, '587', 'MIGUEL MARTINEZ', 'SUPERVISOR DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(41, 1, '598', 'ANGELA LA TORRE', 'EJECUTIVA DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 51, 'Direccion 111', NULL, NULL, NULL),
+(42, 1, '596', 'JOSE RUFINO', 'RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 51, 'Direccion 111', NULL, NULL, NULL),
+(43, 1, '10316427', 'JAIME CALVO', 'GERENTE DE OPERACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 27, 'Direccion 111', NULL, NULL, NULL),
+(44, 1, '594', 'ROEL VIDAL', 'RESIDENTE DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 52, 'Direccion 111', NULL, NULL, NULL),
+(45, 1, '592', 'FRANCISCO IPARRAGUIRRE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 50, 'Direccion 111', NULL, NULL, NULL),
+(46, 1, '590', 'ALFREDO REYNA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 47, 'Direccion 111', NULL, NULL, NULL),
+(47, 1, '578', 'ROBERTO HUARACHA', 'RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 48, 'Direccion 111', NULL, NULL, NULL),
+(48, 1, '8228912', 'JUAN MANUEL MACCHIAVELLO CORCUERA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 53, 'Direccion 111', NULL, NULL, NULL),
+(49, 1, '588', 'SALVADOR RUJU', 'GERENTE DE OPERACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 53, 'Direccion 111', NULL, NULL, NULL),
+(50, 1, '9304196', 'EMMA GUADALUPE GUERRERO MUNIVE', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 429, 'Direccion 111', NULL, NULL, NULL),
+(51, 1, '599', 'YUDITH GUERRERO', 'GERENTE DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 54, 'Direccion 111', NULL, NULL, NULL),
+(52, 1, '7547564', 'CESAR AUGUSTO PIZARRO ROBLEDO', 'REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 55, 'Direccion 111', NULL, NULL, NULL),
+(53, 1, '586', 'CESAR PIZARRO', 'GERENTE DE PROYECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 55, 'Direccion 111', NULL, NULL, NULL),
+(54, 1, '40593973', 'DAVID WU HERRERA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 56, 'Direccion 111', NULL, NULL, NULL),
+(55, 1, '6885771', 'MELANIO FABIAN QUEZADA SALAZAR', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 57, 'Direccion 111', NULL, NULL, NULL),
+(56, 1, '585', 'MICHAEL SANTOS', 'SUPERVISOR DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 58, 'Direccion 111', NULL, NULL, NULL),
+(57, 1, '584', 'LEONIDAS ZAMALLOA', 'RESIDENTE DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 52, 'Direccion 111', NULL, NULL, NULL),
+(58, 1, '583', 'SERGIO CORDAVA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 43, 'Direccion 111', NULL, NULL, NULL),
+(59, 1, '582', 'PATRICIA SOZA CUMPA', 'SUPERVISORA - ASESORA TECNICA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 59, 'Direccion 111', NULL, NULL, NULL),
+(60, 1, '581', 'DAVID TRELLES GAMIOS', 'ASESOR COMERCIAL', '2710490', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 60, 'Direccion 111', NULL, NULL, NULL),
+(61, 1, '19330170', 'RONALD MICHEL SALDAÑA MENOR', 'ANALISTA DE SISTEMAS', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(62, 1, '10066447', 'ANA TERESA MADRID', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1538, 'Direccion 111', NULL, NULL, NULL),
+(63, 1, '579', 'FABIAN PORTOCARRERO R', 'ASESOR TECNICO COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 61, 'Direccion 111', NULL, NULL, NULL),
+(64, 1, '610', 'JUAN MANUEL BRICEÑO', 'GERENTE TECNICO COMERCIAL', '4525141', 'Testing', 'kpalma@corp2torres.com', 'www.unispan.com.pe', 3, 62, 'Direccion 111', NULL, NULL, NULL),
+(65, 1, '612', 'MIGUEL CASTAÑEDA ALBITES', 'EJECUTIVO DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 63, 'Direccion 111', NULL, NULL, NULL),
+(66, 1, '589', 'ALBERTO CASTAÑEDA', 'EJECUTIVO DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 63, 'Direccion 111', NULL, NULL, NULL),
+(67, 1, '621', 'LUIS E PORRAS VEARGAS', 'TECNICO COMERCIAL DIV PUERTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 64, 'Direccion 111', NULL, NULL, NULL),
+(68, 1, '620', 'RODOLFO GAMARRA OLIVERA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 65, 'Direccion 111', NULL, NULL, NULL),
+(69, 1, '619', 'MIGUEL CASTAÑEDA ALBITES', 'EJECUTIVO DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 66, 'Direccion 111', NULL, NULL, NULL),
+(70, 1, '618', 'JIMMY H PARODI SARABIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 67, 'Direccion 111', NULL, NULL, NULL),
+(71, 1, '617', 'BEATRIZ FLORES FLORES', 'DISEÑADORA DE INTERIORES', '2520159', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 68, 'Direccion 111', NULL, NULL, NULL),
+(72, 1, '616', 'CHRISTIAN VELLETO V', 'DIRECTOR GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 69, 'Direccion 111', NULL, NULL, NULL),
+(73, 1, '615', 'GUSTAVO RODRIGUEZ LA MADRID', 'JEFE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.prodac.com.pe', 3, 70, 'Direccion 111', NULL, NULL, NULL),
+(74, 1, '614', 'JOSE ANTONIO PEREDA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.prodeporperu.com', 3, 71, 'Direccion 111', NULL, NULL, NULL),
+(75, 1, '613', 'JOEL HERNANDEZ OBLITAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 72, 'Direccion 111', NULL, NULL, NULL),
+(76, 1, '600', 'ERIKA DELGADO MANRIQUE', 'ADMINISTRADORA AREA CONSTRUCTORAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 73, 'Direccion 111', NULL, NULL, NULL),
+(77, 1, '611', 'GIANCARLO BORDA LUQUE', 'GERENTE DE AREA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 74, 'Direccion 111', NULL, NULL, NULL),
+(78, 1, '622', 'JAIME CARITG NUÑEZ', 'ADMINISTRADOR TIENDA CHORRILLOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 73, 'Direccion 111', NULL, NULL, NULL),
+(79, 1, '609', 'ALDO CASTELLANO D', 'GERENTE DE MANTENIMIENTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 75, 'Direccion 111', NULL, NULL, NULL),
+(80, 1, '608', 'LUIS MORAN M', 'GERENTE DE OBRAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 75, 'Direccion 111', NULL, NULL, NULL),
+(81, 1, '607', 'CARLOS R GUTIERREZ RAMOS', 'COORDINADOR DE OBRAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 76, 'Direccion 111', NULL, NULL, NULL),
+(82, 1, '606', 'CARLOS GUZMAN QUESADA', 'NO DEFINIDO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 77, 'Direccion 111', NULL, NULL, NULL),
+(83, 1, '605', 'GUILLERMO FREYRE', 'REPRESENTANTE DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 78, 'Direccion 111', NULL, NULL, NULL),
+(84, 1, '45000146', 'CHRISTIAN STEVENS ORTIZ SEGURA', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(85, 1, '604', 'Ing. Anticona', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 102, 'Direccion 111', NULL, NULL, NULL),
+(86, 1, '41465469', 'OSCAR CARBAJAL RONTOL', 'OPERARIO DRYWALL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(87, 1, '9723914', 'JUAN CARLOS DEL CASTILLO', 'OPERARIO DRYWALL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(88, 1, '603', 'MIGUEL CHIEZA', 'amigo (ya no es sectorista)', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 4, 'Direccion 111', NULL, NULL, NULL),
+(89, 1, '602', 'Juan Yauyos', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(90, 1, '511', 'MARCO ANTONIO ROCHA DAVILA', 'GERENTE', '4336054', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 5, 'Direccion 111', NULL, NULL, NULL),
+(91, 1, '514', 'JHONATAN CESAR FLORES VASQUEZ', 'SECTORISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 5, 'Direccion 111', NULL, NULL, NULL),
+(92, 1, '515', 'CHRISTIAN OLIVARES', 'SECTORISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 4, 'Direccion 111', NULL, NULL, NULL),
+(93, 1, '516', 'LESLIE CARRANZA', 'SECTORISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 113, 'Direccion 111', NULL, NULL, NULL),
+(94, 1, '517', 'PAOLO ROSAS MALPARTIDA', 'SECTORISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 113, 'Direccion 111', NULL, NULL, NULL),
+(95, 1, '518', 'CATHERINE CEVALLOS WU', 'SECTORISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 114, 'Direccion 111', NULL, NULL, NULL),
+(96, 1, '519', 'GUSTAVO JIMENEZ SALCEDO', 'ASISTENTE COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 114, 'Direccion 111', NULL, NULL, NULL),
+(97, 1, '520', 'MARIA EUGENIA PARODI', 'SECTORISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 114, 'Direccion 111', NULL, NULL, NULL),
+(98, 1, '521', 'KARINA VILLALVA CACERES', 'SECTORISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 114, 'Direccion 111', NULL, NULL, NULL),
+(99, 1, '522', 'EDISON LINARES PIZARRO', 'SECTORISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 115, 'Direccion 111', NULL, NULL, NULL),
+(100, 1, '523', 'JUAN MANUEL IZAGUIRRE', 'SECTORISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 115, 'Direccion 111', NULL, NULL, NULL),
+(101, 1, '10070892', 'EUSTAQUIO CHAVARRIA QUISPE', 'OPERARIO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(102, 1, '524', 'Luis Vegas', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(103, 1, '540', 'MANUEL GONZALES', 'SECTORISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 4, 'Direccion 111', NULL, NULL, NULL),
+(104, 1, '526', 'Raúl León Placencia', 'Ingeniero Residente', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 116, 'Direccion 111', NULL, NULL, NULL),
+(105, 1, '513', 'Ivan Diaz', 'Ingeniero', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 116, 'Direccion 111', NULL, NULL, NULL),
+(106, 1, '10372972', 'MARCOS RAFAEL DELGADO URQUIAGA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 117, 'Direccion 111', NULL, NULL, NULL),
+(107, 1, '8236685', 'JORGE BENJAMIN GAMBOA SANCHEZ', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 118, 'Direccion 111', NULL, NULL, NULL),
+(108, 1, '7587362', 'ADAN PAULINO CRUZ LAURIANO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 13, 'Direccion 111', NULL, NULL, NULL),
+(109, 1, '7909171', 'ERNESTO PABLO SANGUINETTI REMUSGO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 13, 'Direccion 111', NULL, NULL, NULL),
+(110, 1, '9391705', 'FRANCO ALESSANDRO SATTLER FINAZZI', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 15, 'Direccion 111', NULL, NULL, NULL),
+(111, 1, '10608655', 'MONTEBLANCO RIVERA LUIS JAVIER', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 119, 'Direccion 111', NULL, NULL, NULL),
+(112, 1, '8236919', 'RIVERA DIAZ ANA MARIA', 'SUB GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 119, 'Direccion 111', NULL, NULL, NULL),
+(113, 1, '529', 'MELISSA GANOZA', 'VENDEDORA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 15, 'Direccion 111', NULL, NULL, NULL),
+(114, 1, '7273703', 'JOSE ORREGO HERRERA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 120, 'Direccion 111', NULL, NULL, NULL),
+(115, 1, '7263378', 'RICARDO MARTIN QUINTANA SANZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 121, 'Direccion 111', NULL, NULL, NULL),
+(116, 1, '6363214', 'JOSE LUIS LINO LIZIER BENAVIDES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 122, 'Direccion 111', NULL, NULL, NULL),
+(117, 1, '493735', 'JUAN MANUEL BUSTAMANTE FERNANDEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 123, 'Direccion 111', NULL, NULL, NULL),
+(118, 1, '40461425', 'VANESSA OLCESE SCHWARZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 124, 'Direccion 111', NULL, NULL, NULL),
+(119, 1, '42588939', 'LUIS HIRAOKA TSUCHIKAME', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 125, 'Direccion 111', NULL, NULL, NULL),
+(120, 1, '533', 'CARLOS KOEHNE', 'GERENTE OPERACIONES Y DESARROLLO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 126, 'Direccion 111', NULL, NULL, NULL),
+(121, 1, '8746555', 'DUILIO VARGAS RATTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 127, 'Direccion 111', NULL, NULL, NULL),
+(122, 1, '10277159', 'OSCAR VEGA RODRIGUEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 128, 'Direccion 111', NULL, NULL, NULL),
+(123, 1, '534', 'AZUCENA GUTIERREZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 130, 'Direccion 111', NULL, NULL, NULL),
+(124, 1, '535', 'Juan Blanco Colonio', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(125, 1, '536', 'Juan Blanco Colonio', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(126, 1, '7880672', 'GIOACCHINNO PERROTA VILA GARCIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 131, 'Direccion 111', NULL, NULL, NULL),
+(127, 1, '537', 'JOSE ESPANTOSO', 'SOCIO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 313, 'Direccion 111', NULL, NULL, NULL),
+(128, 1, '538', 'GIOMAR MOYA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 9, 'Direccion 111', NULL, NULL, NULL),
+(129, 1, '424', 'MANUEL BARRENECHEA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 132, 'Direccion 111', NULL, NULL, NULL),
+(130, 1, '465', 'GIOMAR MOYA', 'VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 133, 'Direccion 111', NULL, NULL, NULL),
+(131, 1, '464', 'JUAN CARLOS SILVA', 'ASESOR VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 134, 'Direccion 111', NULL, NULL, NULL),
+(132, 1, '6485541', 'CARLOS DEL SOLAR ZIZOLD', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 135, 'Direccion 111', NULL, NULL, NULL),
+(133, 1, '463', 'PATRICIA HURTADO', 'GERENTE DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 136, 'Direccion 111', NULL, NULL, NULL),
+(134, 1, '462', 'CHRISTIAN UEZU', 'GERENTE COMERCIAL Y MARKETING', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 137, 'Direccion 111', NULL, NULL, NULL),
+(135, 1, '460', 'RICARDO BRACALE', 'GERENTE DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 142, 'Direccion 111', NULL, NULL, NULL),
+(136, 1, '10264999', 'MAURICIO VEGAS MANTERO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 143, 'Direccion 111', NULL, NULL, NULL),
+(137, 1, '10220518', 'FREIRE GANOZA JUAN JOSE MARTIN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 324, 'Direccion 111', NULL, NULL, NULL),
+(138, 1, '8226810', 'RODRIGO PESCHIERA MIFFLIN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 144, 'Direccion 111', NULL, NULL, NULL),
+(139, 1, '459', 'FRANCO DANOVARO SANCHEZ', 'GERENTE COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 145, 'Direccion 111', NULL, NULL, NULL),
+(140, 1, '458', 'GONZALO LANATTA', 'GERENTE DE MARKETING', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 146, 'Direccion 111', NULL, NULL, NULL),
+(141, 1, '447', 'RAFAEL DASSO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 147, 'Direccion 111', NULL, NULL, NULL),
+(142, 1, '6447365', 'JIMENA GARCIA-CALDERON', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 148, 'Direccion 111', NULL, NULL, NULL),
+(143, 1, 'C.E. 466541', 'SERGIO DE ASSUMPCAO VIEGAS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 52, 'Direccion 111', NULL, NULL, NULL),
+(144, 1, '9174417', 'BLANCA VELIZ LA VERA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 149, 'Direccion 111', NULL, NULL, NULL),
+(145, 1, '10544495', 'CLAUDIO ORTIZ TABUSSO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 150, 'Direccion 111', NULL, NULL, NULL),
+(146, 1, '456', 'PIETER CORNELIS BOONE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 151, 'Direccion 111', NULL, NULL, NULL),
+(147, 1, '452', 'LOURDES MONTENEGRO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 153, 'Direccion 111', NULL, NULL, NULL),
+(148, 1, '451', 'CESAR D. VELAZCO PALACIN', 'GERENTE COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 154, 'Direccion 111', NULL, NULL, NULL),
+(149, 1, '8028491', 'FERNANDEZ LOPEZ EINAR MARZAL', 'PRESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 154, 'Direccion 111', NULL, NULL, NULL),
+(150, 1, '8054158', 'CASTRO BARZOLA ENRIQUE', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 154, 'Direccion 111', NULL, NULL, NULL),
+(151, 1, '25493426', 'GOMEZ POLO RUFINO SEGUNDO', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 154, 'Direccion 111', NULL, NULL, NULL),
+(152, 1, '10136744', 'JUAN CARLOS POMA AGUSTIN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 155, 'Direccion 111', NULL, NULL, NULL),
+(153, 1, '476', 'MARIANO ALVAREZ TOROMANYA', 'ALAMACENERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(154, 1, '40694833', 'ALBERTO ZELAYA ATOCHE', 'ING.OFICINA TÉCNICA', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(155, 1, '171991', 'NORBERTO ROSSI', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(156, 1, '457', 'PATRICK', 'RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 79, 'Direccion 111', NULL, NULL, NULL),
+(157, 1, '539', 'ANGEL RAMOS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 49, 'Direccion 111', NULL, NULL, NULL),
+(158, 1, '484', 'CESAR VEGA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 49, 'Direccion 111', NULL, NULL, NULL),
+(159, 1, '483', 'ANTONIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 81, 'Direccion 111', NULL, NULL, NULL),
+(160, 1, '482', 'ANNETTE POLAR', 'ARQUITECTO RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 508, 'Direccion 111', NULL, NULL, NULL),
+(161, 1, '481', 'FRANCISCO', 'ARQUIRECTO RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 20, 'Direccion 111', NULL, NULL, NULL),
+(162, 1, '480', 'JOSE LUNA', 'JEFE AREA - STORE PLANING', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 508, 'Direccion 111', NULL, NULL, NULL),
+(163, 1, '479', 'FAUSTO', 'MANTENIMIENTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 82, 'Direccion 111', NULL, NULL, NULL),
+(164, 1, '467', 'FERNANDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 82, 'Direccion 111', NULL, NULL, NULL),
+(165, 1, '477', 'MARIANA CAHUAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 82, 'Direccion 111', NULL, NULL, NULL),
+(166, 1, '499', 'PEDRO PANDO', 'SISTEMAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 82, 'Direccion 111', NULL, NULL, NULL),
+(167, 1, '475', 'WALTER PALOMINO', 'PROYECTISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 16, 'Direccion 111', NULL, NULL, NULL),
+(168, 1, '474', 'WALTER SILVA', 'RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 16, 'Direccion 111', NULL, NULL, NULL),
+(169, 1, '473', 'LUIS ARONE', 'OPERARIO - DRY', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(170, 1, '472', 'RICARDO BARDALES', 'CONTRATISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(171, 1, '9105472', 'BENJAMIN ASUNCION', 'OPERARIO - DRY', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(172, 1, '12345678', 'JORGE BRITO VEGA', 'JEFE TECNICO SACI', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1594, 'Direccion 111', NULL, NULL, NULL),
+(173, 1, '471', 'LUIS CRUZ', 'OPERARIO - DRY', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(174, 1, '470', 'EDUARDO LLANQUE', 'OPERARIO - DRY', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(175, 1, '469', 'RICARDO AYALA', 'OPERARIO - DRY', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(176, 1, '10653170', 'VICTOR HUAMANI ORE', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(177, 1, '10403049722', 'YUDIN WILDE ESTRADA VELASQUE', 'OPERARIO - DRY', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(178, 1, '10416862139', 'JAVIER MARTINEZ CAMPOS', 'OPERARIO - INST ELECTRICAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(179, 1, '468', 'ANTONIO AMARO', 'OPERARIO  - INST ELECTRICAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(180, 1, '445', 'ALVARO HAROLD RIVAS ARIAS', 'GERENTE OPERACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 86, 'Direccion 111', NULL, NULL, NULL),
+(181, 1, '414', 'BERTA LOPEZ', 'REPRESENTANTE DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 87, 'Direccion 111', NULL, NULL, NULL),
+(182, 1, '455', 'LUIS CABANILLAS', 'TECNICO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 25, 'Direccion 111', NULL, NULL, NULL),
+(183, 1, '422', 'ROSA CHILCON', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 88, 'Direccion 111', NULL, NULL, NULL),
+(184, 1, '421', 'JUAN CARLOS AMBULAY', 'SUPERVISOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 508, 'Direccion 111', NULL, NULL, NULL),
+(185, 1, '420', 'DAVID PECHO', 'SUPERVISOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 508, 'Direccion 111', NULL, NULL, NULL),
+(186, 1, '419', 'CESAR', 'ING RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 48, 'Direccion 111', NULL, NULL, NULL),
+(187, 1, '418', 'JUAN PABLO', 'RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 13, 'Direccion 111', NULL, NULL, NULL),
+(188, 1, '417', 'EDUARDO MARTINEZ', 'SUPERVISOR OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(189, 1, '406', 'EDWIN CHINCHA', 'RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 21, 'Direccion 111', NULL, NULL, NULL),
+(190, 1, '10102755982', 'QUIJANO HURTADO KATHERINA', 'ASESORA DE VENTAS', '440-0158 Ax. 128', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 26, 'Direccion 111', NULL, NULL, NULL),
+(191, 1, '411', 'GILBERTO LEON', 'AUTOR DE CONSTRUCSOFT', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.construcsoft.blogspot.com', 3, 92, 'Direccion 111', NULL, NULL, NULL),
+(192, 1, '10723273', 'ALAN MALAGA DEL AGUILA', 'ALMACENERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(193, 1, '410', 'ANTONIO GERMAN', 'Supervisor Indeci', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 97, 'Direccion 111', NULL, NULL, NULL),
+(194, 1, '409', 'Carlos Hidalgo', 'Ing. Civil', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(195, 1, '408', 'CAROLINE LUYO SMITH', 'ARQ. RESIDENTE EN OBRAS', '274 - 6831', 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(196, 1, '407', 'CECILIA ÑAÑEZ AGUILAR', 'ARQUITECTA', '274 - 6831', 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(197, 1, '435', 'FRIDA COAGUILA', 'JEFE LOGISTICA', '274 - 6831', 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(198, 1, '7802424', 'HECTOR MERCADO SCARNEO', 'GERENTE COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(199, 1, '416', 'HERNAN PAREJA', 'ING. RESIDENTE EN OBRAS', '274 - 6831', 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(200, 1, '9576421', 'ISABEL ROSALES', 'ADMINISTRADORA', '274 - 6831', 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(201, 1, '19336035', 'JAVIER NER COTRINA QUISPE', 'SUPERVISOR DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(202, 1, '443', 'JOSE CARLOS ANGELINO', 'ARQ. RESIDENTE EN OBRA', '274 - 6831', 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(203, 1, '10863277', 'ALEJANDRA MENDOZA MELGAREJO', 'ADMINISTRADORA DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(204, 1, '441', 'MANUEL FONSECA', 'INGENIERO ELECTRICO', '274 - 6831', 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(205, 1, '436', 'MARIANO MURGUIA', 'ARQUITECTO', '274 - 6831', 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(206, 1, '40001106', 'MAURICIO CAMPOS ARBULU', 'GERENTE DE PROYECTO', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(207, 1, '446', 'PAMELA REMAR', 'SUPERVISORA EN OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 94, 'Direccion 111', NULL, NULL, NULL),
+(208, 1, '432', 'LEO CARMONA', 'ARQ. STORE PLANNING', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(209, 1, '431', 'GABRIELA CASTRO', 'ASISTENTE DE DISEÑO STORE PLANNING', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 508, 'Direccion 111', NULL, NULL, NULL),
+(210, 1, '430', 'FERNANDO GRIEBENOW', 'GERENTE DE OPERACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 82, 'Direccion 111', NULL, NULL, NULL),
+(211, 1, '429', 'JUAN CARLOS AMBULAY LOPEZ', 'SUPERVISOR PREVENSION DE RIESGO EN OBRAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 508, 'Direccion 111', NULL, NULL, NULL),
+(212, 1, '525', 'MIGUEL MARTINEZ', 'SUPERVISOR EN OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(213, 1, '487', 'MILLER HUARACA FLORES', 'SUPERVISOR EN OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 508, 'Direccion 111', NULL, NULL, NULL),
+(214, 1, '489', 'ROSA WU', 'ASISTENTE STORE PLANNING', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(215, 1, '490', 'ANA VALERA', 'ASISTENTE DE GERENCIA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 54, 'Direccion 111', NULL, NULL, NULL),
+(216, 1, '491', 'ALFREDO BARDALES', 'ING. CIVIL RESIDENTE EN OBRAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 21, 'Direccion 111', NULL, NULL, NULL),
+(217, 1, '208', 'NESTOR PEREZ', 'AREA TECNICA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 21, 'Direccion 111', NULL, NULL, NULL),
+(218, 1, '281', 'CARLOS INJANTE ALEJOS', 'JEFE DE PRODUCTO GRUPOS ELECTROGENOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 96, 'Direccion 111', NULL, NULL, NULL),
+(219, 1, '282', 'CARLOS NORIEGA', 'ITO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 58, 'Direccion 111', NULL, NULL, NULL),
+(220, 1, '283', 'CARLOS RODRIGUEZ PINILLOS', 'ING. CIVIL RESIDENTE EN OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 53, 'Direccion 111', NULL, NULL, NULL),
+(221, 1, '284', 'PATRICIA BERROCAL', 'ASISTENTE DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 64, 'Direccion 111', NULL, NULL, NULL),
+(222, 1, '285', 'CESAR ALVA', 'AREA TECNICA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 48, 'Direccion 111', NULL, NULL, NULL),
+(223, 1, '286', 'CARLOS CAMARENA FARFAN', 'ING. RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 16, 'Direccion 111', NULL, NULL, NULL),
+(224, 1, '297', 'EDWAR ANTAYHUA SAAVEDRA', 'JEFE DE CUENTA SERVICIO COMERCIO E INDUSTRIA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 96, 'Direccion 111', NULL, NULL, NULL),
+(225, 1, '288', 'SILVIA GUTIERREZ', 'ARQUITECTA DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 25, 'Direccion 111', NULL, NULL, NULL),
+(226, 1, '290', 'ISRAEL BRAVO', 'AREA TECNICA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 49, 'Direccion 111', NULL, NULL, NULL),
+(227, 1, '292', 'JAIME CALVO', 'GERENTE DE OPERACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 27, 'Direccion 111', NULL, NULL, NULL),
+(228, 1, '293', 'JULISSA TUCTO', 'RECEPCION', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 49, 'Direccion 111', NULL, NULL, NULL),
+(229, 1, '294', 'SAUL TEJADA', 'SUPERVISOR DE MONTAJES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 52, 'Direccion 111', NULL, NULL, NULL),
+(230, 1, '7778278', 'ENRIQUE RAMIREZ BECERRA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(231, 1, '295', 'Sonia Valderrama', 'Asesora. Comercial', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 100, 'Direccion 111', NULL, NULL, NULL),
+(232, 1, '296', 'Yenny Piscoya', 'Asesora. Comercial', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 100, 'Direccion 111', NULL, NULL, NULL),
+(233, 1, '271', 'JOSE CARO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 101, 'Direccion 111', NULL, NULL, NULL),
+(234, 1, '269', 'CRIS NAVARRO HORNA', 'Asesora Comercial', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 39, 'Direccion 111', NULL, NULL, NULL),
+(235, 1, '10083709346', 'ROCCA DELGADO ALEJANDRO', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(236, 1, '10651863', 'SANCHEZ ASUNCION, LUIS ALBERTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1530, 'Direccion 111', NULL, NULL, NULL),
+(237, 1, '10640385', 'SANTOS SERAPIO LLAJAMANGO CARRANZA', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(238, 1, '442474418', 'JAIME ERIBERTO ALTEMIRANO ASUNCION', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(239, 1, '41511518', 'MARIANO SANCHEZ ASUNCION', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(240, 1, '43417596', 'PEDRO JESUS LIVISE DURAN', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(241, 1, '45652914', 'RAFAEL FIDENCIO CORPUS CORAL', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(242, 1, '43803482', 'REY AVILA LABRIN', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(243, 1, '1112560', 'BARDALES AREVALO, RICARDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1063, 'Direccion 111', NULL, NULL, NULL),
+(244, 1, '10017547', 'TEOFILO DURAN HUAMAN', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(245, 1, '31668440', 'RICARCO MANUEL TREJO LUGO', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(246, 1, '42822081', 'JOSE SANTOS GALVAN', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(247, 1, '40283780', 'FERNANDO RAUL CHUNCHO ROJAS', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(248, 1, '40803665', 'ISAIES AVALOS QUISPE', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(249, 1, '43968265', 'ALEJANDRO JESUS LOA ROMERO', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(250, 1, '44548461', 'VICTOR JAVIER MONTERO ECHEVARRIA', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(251, 1, '44670373', 'RICARDO RUSVEL HUAMAN HERRERA', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(252, 1, '46678814', 'RICARDO JOSE LUCANO ROJAS', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(253, 1, '42396345', 'JOSUE ISAAC LOA ROMERO', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(254, 1, '70063308', 'CRISTIAN SAMUEL LOA ROMERO', 'DRYWOLERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(255, 1, '8134134', 'MILLER HUARACA FLORES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 156, 'Direccion 111', NULL, NULL, NULL),
+(256, 1, '8134134', 'MILLER HUARACA FLORES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 156, 'Direccion 111', NULL, NULL, NULL),
+(259, 1, '10791333', 'MIGUEL ANGEL MARRUFFO HUAPAYA', 'CONTADOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 25, 'Direccion 111', NULL, NULL, NULL),
+(260, 1, '287', 'MIGUEL MONTOYA', 'VENTAS TECNICAS', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.petroaceros.com.pe', 3, 157, 'Direccion 111', NULL, NULL, NULL),
+(261, 1, '7792563', 'VICTOR HATCHWELL GAVIRIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.petroaceros.com.pe', 3, 157, 'Direccion 111', NULL, NULL, NULL),
+(262, 1, '7971610', 'IRMA ARROYO BOLAÑOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 158, 'Direccion 111', NULL, NULL, NULL),
+(263, 1, '264', 'OMAR MONTES', 'ARQUITECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 158, 'Direccion 111', NULL, NULL, NULL),
+(264, 1, '305106', 'MAUER DETLEF WOLFGANG', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 159, 'Direccion 111', NULL, NULL, NULL),
+(265, 1, '265', 'CINTHYA GARCIA', 'VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 159, 'Direccion 111', NULL, NULL, NULL),
+(266, 1, '266', 'CRISTHIAN ARAKAKI', 'SUPERVISOR DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 159, 'Direccion 111', NULL, NULL, NULL),
+(267, 1, '267', 'Santiago Chau', 'Jefe de Abasteceimientos y Servicios', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(269, 1, '10303492', 'DAPHNE OLGA NARCISO MALDONADO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.arquitotal.com', 3, 160, 'Direccion 111', NULL, NULL, NULL),
+(270, 1, '10303492', 'NARCISO MALDONADO DAPHNE OLGA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 160, 'Direccion 111', NULL, NULL, NULL),
+(271, 1, '279', 'LUCY ESPADÍN RIVERA', 'VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 161, 'Direccion 111', NULL, NULL, NULL),
+(272, 1, '7908606', 'AREVALO RUIZ TEDY GILBERT', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 161, 'Direccion 111', NULL, NULL, NULL),
+(273, 1, '26684498', 'YSIDRO RODRIGUEZ ATALAYA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.larockasac.com', 3, 162, 'Direccion 111', NULL, NULL, NULL),
+(274, 1, '262', 'VLADISLAV REMAR CASTRO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 163, 'Direccion 111', NULL, NULL, NULL),
+(275, 1, '272', 'VLADISLAV REMAR CASTRO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 163, 'Direccion 111', NULL, NULL, NULL),
+(276, 1, '273', 'PETER FALSHAW', 'JEFE DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 163, 'Direccion 111', NULL, NULL, NULL),
+(277, 1, '274', 'YNES BUSTILLOS', 'GERENTE ADMINISTRATIVO Y FINANCIERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 163, 'Direccion 111', NULL, NULL, NULL),
+(278, 1, '276', 'EDISON LINARES PIZARRO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 115, 'Direccion 111', NULL, NULL, NULL),
+(279, 1, '278', 'ELVIA COELLO GUEVARA', 'EJECUTIVO DE NEGOCIOS', '3624330', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 164, 'Direccion 111', NULL, NULL, NULL),
+(280, 1, '9333203', 'JOSE SORIANO BARRANTES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 165, 'Direccion 111', NULL, NULL, NULL),
+(281, 1, '333', 'DAYANA CARHUAYA', 'SUPERVISORA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 156, 'Direccion 111', NULL, NULL, NULL),
+(282, 1, '289', 'MONICA CARO', 'ARQUITECTA DE INTERIORES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(284, 1, '10354721', 'GERONIMO PEREZ COSCCO', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 166, 'Direccion 111', NULL, NULL, NULL),
+(285, 1, '318', 'CARLOS RODRIGUEZ PERALTA', 'ADMINISTRADOR', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.larockasac.com', 3, 162, 'Direccion 111', NULL, NULL, NULL),
+(286, 1, '319', 'ERNESTO HUAYTA GARCIA', 'INGENIERO RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.larockasac.com', 3, 162, 'Direccion 111', NULL, NULL, NULL),
+(287, 1, '40884046', 'CARLOS ALBERTO VARGAS ALVAREZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 167, 'Direccion 111', NULL, NULL, NULL),
+(288, 1, '16012963', 'BRUNO ALEJANDRO GARIBALDI VASQUEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 168, 'Direccion 111', NULL, NULL, NULL),
+(289, 1, '320', 'CARLOS BASADRE MALAGA', 'REPRESENTANTE DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 169, 'Direccion 111', NULL, NULL, NULL),
+(290, 1, '25701349', 'DE LA CRUZ URIOL CARLOS ALBERTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 169, 'Direccion 111', NULL, NULL, NULL),
+(291, 1, '321', 'CESAR SANCHEZ', 'ARQUITECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 170, 'Direccion 111', NULL, NULL, NULL),
+(292, 1, '323', 'NO DEFINIDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 56, 'Direccion 111', NULL, NULL, NULL),
+(293, 1, '7861534', 'RENZO YRIVARREN PADILLA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 171, 'Direccion 111', NULL, NULL, NULL),
+(294, 1, '303', 'ROMY LOAYZA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 171, 'Direccion 111', NULL, NULL, NULL),
+(295, 1, '477748', 'GUELL FLEISCHMANN FELIPE', 'GERENTE GENERAL', '4481530', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 16, 'Direccion 111', NULL, NULL, NULL),
+(296, 1, '298', 'LETICIA DELGADO', NULL, '2416406', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 172, 'Direccion 111', NULL, NULL, NULL),
+(297, 1, '21434359', 'JAVIER RAMOS FELIPA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 172, 'Direccion 111', NULL, NULL, NULL),
+(298, 1, '9340301', 'ALBERTO NAKANO HIGA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 173, 'Direccion 111', NULL, NULL, NULL),
+(299, 1, '310', 'PABLO ARBULU ARBULU', 'GERENTE DE VENTAS', '4518402', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 173, 'Direccion 111', NULL, NULL, NULL),
+(300, 1, '7644206', 'FELIPE LEON RUIZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1392, 'Direccion 111', NULL, NULL, NULL),
+(301, 1, '7644206', 'LEON RUIZ FELIPE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 174, 'Direccion 111', NULL, NULL, NULL),
+(302, 1, '23935224', 'BELLOTA DE MIRANDA ASUNTA ARMIDA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 175, 'Direccion 111', NULL, NULL, NULL),
+(304, 1, '9932684', 'BRAVO VIDAL GUILLERMO WILFREDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 176, 'Direccion 111', NULL, NULL, NULL),
+(305, 1, '7395971', 'AROAPAZA RAMOS GREGORIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 177, 'Direccion 111', NULL, NULL, NULL),
+(306, 1, '8244881', 'MARTICORENA ARCINIEGA JOSE ANTONIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 178, 'Direccion 111', NULL, NULL, NULL),
+(307, 1, '8888828', 'CHILCON SILVA MELVA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 179, 'Direccion 111', NULL, NULL, NULL),
+(308, 1, '7433963', 'HUGO SANTIAGO FERNANDEZ RODRIGUEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 180, 'Direccion 111', NULL, NULL, NULL),
+(309, 1, '7811676', 'MARIO VALDIVIA CHACON', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 181, 'Direccion 111', NULL, NULL, NULL),
+(310, 1, '10491813', 'EDUARDO RAZETTO ARMESTAR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 182, 'Direccion 111', NULL, NULL, NULL),
+(312, 1, '9486083', 'QUINTO ASPILCUETA JOSE R.', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 183, 'Direccion 111', NULL, NULL, NULL),
+(313, 1, '7836616', 'TORRES HIDALGO LUIS ALBERTO', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 184, 'Direccion 111', NULL, NULL, NULL),
+(314, 1, '44116', 'GUZMAN SOZA FERNANDO PEDRO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 185, 'Direccion 111', NULL, NULL, NULL),
+(315, 1, '25815446', 'JORGE LUIS ALEJOS CALLE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 20, 'Direccion 111', NULL, NULL, NULL),
+(316, 1, '17852449', 'JORGE CRUZ SANCHEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 186, 'Direccion 111', NULL, NULL, NULL),
+(317, 1, '8285363', 'DÍAZ ROMERO JUAN PABLO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 187, 'Direccion 111', NULL, NULL, NULL),
+(318, 1, '6032050', 'LUIS ALBERTO D'' BROT TOVAR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 188, 'Direccion 111', NULL, NULL, NULL),
+(319, 1, '10228566', 'LEVA CCUNO NATIVIDAD', 'GERENTE GENERAL', '293-3777', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 189, 'Direccion 111', NULL, NULL, NULL),
+(320, 1, '8225995', 'GUEVARA PASACHE DE LAVALLE DOLORES INES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 190, 'Direccion 111', NULL, NULL, NULL),
+(321, 1, '42313677', 'CALDERON VILLAFUERTE JOSE ALBERTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 191, 'Direccion 111', NULL, NULL, NULL),
+(322, 1, '147', 'JORGE MONSALVE', 'SALES EXECUTIVE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 192, 'Direccion 111', NULL, NULL, NULL),
+(323, 1, '153', 'JORGE MONSALVE', 'SALES EXECUTIVE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 192, 'Direccion 111', NULL, NULL, NULL),
+(324, 1, '162', 'PATRICK MANNING', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', 'www.glasstekstudios.com', 3, 193, 'Direccion 111', NULL, NULL, NULL),
+(325, 1, '125', 'JESSI KLATETZKI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 194, 'Direccion 111', NULL, NULL, NULL),
+(326, 1, '150', 'CINTHIA CANO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 198, 'Direccion 111', NULL, NULL, NULL),
+(327, 1, '8515996', 'COA INFANTE RUTH VICTORIA', 'GERENTE GENERAL', '5342882', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 201, 'Direccion 111', NULL, NULL, NULL),
+(328, 1, '8251880', 'CUNNINGHAM HAMILTON FEDERICO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 202, 'Direccion 111', NULL, NULL, NULL),
+(329, 1, '9338946', 'MAURICIO LUNA DIAZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 203, 'Direccion 111', NULL, NULL, NULL),
+(330, 1, '118', 'KEIKO ZAMORA', 'EJECUTIVA DE CUENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 203, 'Direccion 111', NULL, NULL, NULL),
+(331, 1, '6748773', 'PEREZ RODAS ANGEL ALFONSO', 'DIRECTOR MUNICIPAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 204, 'Direccion 111', NULL, NULL, NULL),
+(332, 1, '7607537', 'FERNANDEZ CARDENAS OSCAR ANIBAL', 'DECANO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 205, 'Direccion 111', NULL, NULL, NULL),
+(333, 1, '8748073', 'BALAREZO ALVAREZ MANUEL GUILLERMO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 206, 'Direccion 111', NULL, NULL, NULL),
+(334, 1, '7786886', 'VALDERRAMA SALAZAR MANUEL ALBERTO', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 207, 'Direccion 111', NULL, NULL, NULL),
+(335, 1, '16168341', 'VARGAS BELON CARLOS ADOLFO', 'ADMINISTRADOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 208, 'Direccion 111', NULL, NULL, NULL);
+INSERT INTO `tb_personacontacto` (`id`, `tb_empresa_id`, `dni`, `nombre`, `cargo`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_companiacontacto_id`, `direccion`, `tb_pais_id`, `tb_departamento_id`, `tb_distrito_id`) VALUES
+(336, 1, '8202201', 'MILOSEVICH CABALLERO DANITZA CLARA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 209, 'Direccion 111', NULL, NULL, NULL),
+(337, 1, '8862527', 'POZO VEGA LUIS DANIEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 210, 'Direccion 111', NULL, NULL, NULL),
+(338, 1, '114', 'WILFREDO HUAMAN', 'INGENIERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 211, 'Direccion 111', NULL, NULL, NULL),
+(339, 1, '129', 'TRINIDAD CONDOR', 'ARQUITECTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 211, 'Direccion 111', NULL, NULL, NULL),
+(340, 1, '131', 'JULIO VALERIANO', 'GERENTE PROYECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 211, 'Direccion 111', NULL, NULL, NULL),
+(341, 1, '152', 'HUGO PILLARCA', 'INGENIERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 211, 'Direccion 111', NULL, NULL, NULL),
+(342, 1, '42449843', 'ERODITA MENDOZA PRADO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 22, 'Direccion 111', NULL, NULL, NULL),
+(344, 1, '6746415', 'PAREDES PAREJA DANTE ASDRUBAL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 212, 'Direccion 111', NULL, NULL, NULL),
+(345, 1, '10722003', 'NINO USQUIANO BANDA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 213, 'Direccion 111', NULL, NULL, NULL),
+(347, 1, '9136297', 'GERMAN LUIS MENDIETA LANDEO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 214, 'Direccion 111', NULL, NULL, NULL),
+(348, 1, '601', 'LUIGI VACCAREZZA B.', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 215, 'Direccion 111', NULL, NULL, NULL),
+(349, 1, '10798890', 'JOAQUIN ALONZO JUAN ALBERTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 216, 'Direccion 111', NULL, NULL, NULL),
+(350, 1, '41627839', 'GUILLEN AGUIRRE VIVIANA MERCEDES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 217, 'Direccion 111', NULL, NULL, NULL),
+(351, 1, '56645', 'FAJARDO ZILLERUELO RODRIGO AGUSTIN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 218, 'Direccion 111', NULL, NULL, NULL),
+(352, 1, '8559975', 'TENOR PALOMINO ANGELICA MARITZA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 219, 'Direccion 111', NULL, NULL, NULL),
+(353, 1, '214', 'Francisco Iparraguirre', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 50, 'Direccion 111', NULL, NULL, NULL),
+(354, 1, '9975582', 'SANDRO RAFAEL HUALLCCA RODRIGUEZ', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 221, 'Direccion 111', NULL, NULL, NULL),
+(355, 1, '191', 'MARIELA SILVA', 'DISEÑO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(356, 1, '25784812', 'ROSA AMELIA SILVA MANRIQUE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 222, 'Direccion 111', NULL, NULL, NULL),
+(357, 1, '192', 'ANDREI GONZALES QUEZADA', 'ARQUITECTO', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.vidrieriahaydi.com', 3, 223, 'Direccion 111', NULL, NULL, NULL),
+(358, 1, '177', 'ANDREI GONZALES QUEZADA', 'ARQUITECTO', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.vidrieriahaydi.com', 3, 223, 'Direccion 111', NULL, NULL, NULL),
+(359, 1, '193', 'ANDREI GONZALES QUEZADA', 'ARQUITECTO', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.vidrieriahaydi.com', 3, 223, 'Direccion 111', NULL, NULL, NULL),
+(360, 1, '8297266', 'NIMER FALCON ENCISO', 'REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 224, 'Direccion 111', NULL, NULL, NULL),
+(361, 1, '174', 'JUAN CARLOS SILVA', 'ASESOR COMERCIAL', '271-6007', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 225, 'Direccion 111', NULL, NULL, NULL),
+(362, 1, '178', 'ALEJANDRO MONROY', 'DPTO TECNICO COMERCIAL', '271-6007', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 225, 'Direccion 111', NULL, NULL, NULL),
+(363, 1, '180', 'VANESSA OLIVERA RODRIGUEZ', 'EJECUTIVA DE VENTAS', '4406777', 'Testing', 'kpalma@corp2torres.com', 'www.decorluxonline.com', 3, 119, 'Direccion 111', NULL, NULL, NULL),
+(364, 1, '9397079', 'CARLOS ARANA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 42, 'Direccion 111', NULL, NULL, NULL),
+(365, 1, '182', 'JUAN CARLOS HUAMANI', 'JEFE TECNICO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 26, 'Direccion 111', NULL, NULL, NULL),
+(366, 1, '92', 'ANDRES BOZA', 'GERENTE COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 26, 'Direccion 111', NULL, NULL, NULL),
+(367, 1, '10152716', 'PAULINO DE LA CRUZ JUAN JACINTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 227, 'Direccion 111', NULL, NULL, NULL),
+(368, 1, '26684498', 'Ysidro Rodriguez Atalaya', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 228, 'Direccion 111', NULL, NULL, NULL),
+(369, 1, '8252563', 'GARCIA CASSADO JUAN ANDRES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 64, 'Direccion 111', NULL, NULL, NULL),
+(370, 1, '7687807', 'UGARTE FLORES DE CRUZ CLORINDA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 229, 'Direccion 111', NULL, NULL, NULL),
+(371, 1, '9272406', 'MOSTAJO RIVERA EDWIN OMAR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 230, 'Direccion 111', NULL, NULL, NULL),
+(373, 1, '8437782', 'SOSA SALINAS, MARCELO CAYETANO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 231, 'Direccion 111', NULL, NULL, NULL),
+(374, 1, '10718752', 'LESTER IVAN CARDOSO MOQUILLAZA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 232, 'Direccion 111', NULL, NULL, NULL),
+(375, 1, '8186738', 'VIVIANA SALMON ILLICH', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 233, 'Direccion 111', NULL, NULL, NULL),
+(376, 1, '6014343', 'CESAR ALBERTO JIMENEZ WONG', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 234, 'Direccion 111', NULL, NULL, NULL),
+(377, 1, '7901235', 'LUIS CARLOS RIOS OLIVERA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 235, 'Direccion 111', NULL, NULL, NULL),
+(378, 1, '8261627', 'JORGE MANUEL VEGA MONTEFERRI', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 236, 'Direccion 111', NULL, NULL, NULL),
+(379, 1, '7744773', 'FERNANDO BENITO LORES KANTO', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 237, 'Direccion 111', NULL, NULL, NULL),
+(380, 1, '8835112', 'LUIS EDUARDO GERONIMO MIRANDA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 238, 'Direccion 111', NULL, NULL, NULL),
+(381, 1, '10805696', 'GINO FRANCESCO TOSO PAREDES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 239, 'Direccion 111', NULL, NULL, NULL),
+(382, 1, '41221562', 'MANUEL RICARDO PARCO FIESTAS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 240, 'Direccion 111', NULL, NULL, NULL),
+(383, 1, '7534884', 'VICTOR RICARDO ESCOBEDO GOMEZ', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 241, 'Direccion 111', NULL, NULL, NULL),
+(384, 1, '8055848', 'JURADO LOPEZ RAUL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 242, 'Direccion 111', NULL, NULL, NULL),
+(385, 1, '8699281', 'LUIS ENRIQUE PADILLA DEL AGUILA', 'GERENTE COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 243, 'Direccion 111', NULL, NULL, NULL),
+(386, 1, '6593329', 'CESAR HUMBERTO VILLACORTA SPINNER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 245, 'Direccion 111', NULL, NULL, NULL),
+(387, 1, '7841744', 'LUIS ELEAZAR ENRIQUE FISCHER LLANOS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 244, 'Direccion 111', NULL, NULL, NULL),
+(388, 1, '10718752', 'CARDOSO MOQUILLAZA LESTER IVAN', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 246, 'Direccion 111', NULL, NULL, NULL),
+(389, 1, '7941222', 'NISHII ASLLA MIGUEL ANTONIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 247, 'Direccion 111', NULL, NULL, NULL),
+(390, 1, '82369193', 'RIVERA DIAZ ANA MARIA', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 248, 'Direccion 111', NULL, NULL, NULL),
+(391, 1, '6086554', 'MONTEBLANCO RIVERA LUIS JAVIER', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 248, 'Direccion 111', NULL, NULL, NULL),
+(392, 1, '98', 'CECILIA ROSADIO', 'ASISTENTE ADMINISTRATIVA', '2515267', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 248, 'Direccion 111', NULL, NULL, NULL),
+(393, 1, '99', 'CARLOS BARREDA ZUMAITA', 'RESIDENTE DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 249, 'Direccion 111', NULL, NULL, NULL),
+(394, 1, '471561', 'ALFONSO MARQUEZ ARENAS', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 249, 'Direccion 111', NULL, NULL, NULL),
+(395, 1, '9342569', 'MISAEL SHIMIZU MITSUMASU', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 250, 'Direccion 111', NULL, NULL, NULL),
+(396, 1, '113', 'AUGUSTO REY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 250, 'Direccion 111', NULL, NULL, NULL),
+(397, 1, '101', 'CARLOS HIDALGO QUIROZ', 'INGENIERO CIVIL', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(398, 1, '106', 'FLAVIO GUTIERREZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(399, 1, '108', 'BERNARDO ROELEVELD', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(400, 1, '109', 'ANGELICA TRIGOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(401, 1, '68', 'CAROLINA HARRIS MORAL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 249, 'Direccion 111', NULL, NULL, NULL),
+(402, 1, '70', 'MIGUEL REAÑO', 'GERENTE DE INFRAESTRUCTURA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(403, 1, '73', 'MICHAEL MCGREGOR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 250, 'Direccion 111', NULL, NULL, NULL),
+(405, 1, '9879002', 'LUIS FERNANDO BOZA LLOSA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 251, 'Direccion 111', NULL, NULL, NULL),
+(406, 1, '85', 'RAMON GORGOY PEREZ', 'GERENTE DE OPERACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 251, 'Direccion 111', NULL, NULL, NULL),
+(407, 1, '216', 'AMER YORDAN REGALADO VARGAS', 'SUPERVISOR DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(408, 1, '10221078', 'Vanessa Garcia-Arata Novoa', 'ARQUITECTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(409, 1, '7846828', 'MUÑOZ RODRIGUEZ JUAN FERNAN', 'DECANO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 252, 'Direccion 111', NULL, NULL, NULL),
+(410, 1, '247', 'EMILIO BAHAMONDE', 'JEFE DE OFICINA TECNICA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(411, 1, '250', 'ROSEMARY VALENCIA VILLA', 'GERENTE DE RR.HH', '2242483', 'Testing', 'kpalma@corp2torres.com', 'www.oncosalud.com.pe', 3, 253, 'Direccion 111', NULL, NULL, NULL),
+(412, 1, '243', 'VICTOR VIGNALE', 'PARTNER', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.executivesearchperu.com', 3, 254, 'Direccion 111', NULL, NULL, NULL),
+(413, 1, '259', 'ELVA CANDIA', 'EJECUTIVA DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 257, 'Direccion 111', NULL, NULL, NULL),
+(414, 1, '7971610', 'ARROYO BOLAÑOS IRMA ROCIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 256, 'Direccion 111', NULL, NULL, NULL),
+(415, 1, '229', 'ELVA CANDIA', 'EJECUTIVA DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 257, 'Direccion 111', NULL, NULL, NULL),
+(416, 1, '9553812', 'LEON ROSALES MARIBEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 257, 'Direccion 111', NULL, NULL, NULL),
+(417, 1, '8197440', 'CARLOS ANTONIO UCCELLI LAVATELLI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 257, 'Direccion 111', NULL, NULL, NULL),
+(418, 1, '230', 'ASIA GRIFOS Y SERVICIOS GENERALES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 258, 'Direccion 111', NULL, NULL, NULL),
+(419, 1, '233', 'ESTACION DE SERVICIO EL PACIFICO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 259, 'Direccion 111', NULL, NULL, NULL),
+(420, 1, '235', 'INVERSIONES ROMAN MUNIVE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 261, 'Direccion 111', NULL, NULL, NULL),
+(421, 1, '237', 'ANA LUZ BURGOS GAVANCHO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 262, 'Direccion 111', NULL, NULL, NULL),
+(422, 1, '238', 'RESTAURANT ANITA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 263, 'Direccion 111', NULL, NULL, NULL),
+(423, 1, '239', 'SERVICIOS GENERALES MULTIPLES WILSON', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 264, 'Direccion 111', NULL, NULL, NULL),
+(424, 1, '240', 'INVERSIONES VILLA MADERO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 265, 'Direccion 111', NULL, NULL, NULL),
+(425, 1, '241', 'SIGDELO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 266, 'Direccion 111', NULL, NULL, NULL),
+(426, 1, '494', 'WARNER LOPEZ', 'INGENIERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 278, 'Direccion 111', NULL, NULL, NULL),
+(427, 1, '496', 'DELOSI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 267, 'Direccion 111', NULL, NULL, NULL),
+(428, 1, '512', 'COVIPERU', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 270, 'Direccion 111', NULL, NULL, NULL),
+(429, 1, '498', 'EMAPE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 271, 'Direccion 111', NULL, NULL, NULL),
+(430, 1, '485', 'SCOTIABANK', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 272, 'Direccion 111', NULL, NULL, NULL),
+(431, 1, '6231939', 'TOBIAS TOMAS AVILA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 273, 'Direccion 111', NULL, NULL, NULL),
+(432, 1, '7999358', 'MANUEL ARNALDO CHAVEZ MARTIN', NULL, '2711138', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 274, 'Direccion 111', NULL, NULL, NULL),
+(433, 1, '500', 'MARCELO TOLEDO ZOLEZZi', 'Coordinador de Proyectos', '4342004', 'Testing', 'kpalma@corp2torres.com', 'www.jockey-plaza.com.pe', 3, 275, 'Direccion 111', NULL, NULL, NULL),
+(434, 1, '503', 'MAVILON CCANTO SALCEDO', 'Supervisor de Desarrollo de Proyectos', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.jockey-plaza.com.pe', 3, 275, 'Direccion 111', NULL, NULL, NULL),
+(435, 1, '507', 'EDITH LARA MARTINEZ', 'ADMINISTRADORA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(436, 1, '509', 'VERONICA DIOSES', 'ASISTENTE DE ADMINISTRACION', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(437, 1, '8230925', 'DANIEL PAREDES GONZALES', 'GERENTE GENERAL', '226-4435', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 276, 'Direccion 111', NULL, NULL, NULL),
+(438, 1, '570', 'AGUSTIN JUAREZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 277, 'Direccion 111', NULL, NULL, NULL),
+(439, 1, '572', 'Yanina Landa', 'GERENTE COMERCIAL Y DE MARKETING', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 275, 'Direccion 111', NULL, NULL, NULL),
+(440, 1, '576', 'YARINA LANDA', 'GERENTE COMERCIAL Y DE MARKETING', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 275, 'Direccion 111', NULL, NULL, NULL),
+(441, 1, '7046165', 'JARA CAMPOS LEONCIO ARMANDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 279, 'Direccion 111', NULL, NULL, NULL),
+(442, 1, '597', 'ANGELA MONTOYA ESTRADA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 251, 'Direccion 111', NULL, NULL, NULL),
+(443, 1, '663', 'Juan Pablo Deustua Infante', NULL, '6286328', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 280, 'Direccion 111', NULL, NULL, NULL),
+(444, 1, '653', 'Edwin Menacho Laurencio', 'Ingeniero Proyectista - Area Ingenieria Mecan', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 280, 'Direccion 111', NULL, NULL, NULL),
+(445, 1, '630', 'Genaro Celedonio Casas', 'Ingeniero Proyectista - Area Ingenieria Elect', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 280, 'Direccion 111', NULL, NULL, NULL),
+(446, 1, '631', 'Alexander Machuca', 'Ingeniero Proyectista - Area Ingenieria Elect', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 280, 'Direccion 111', NULL, NULL, NULL),
+(447, 1, '549', 'Alejandro Silva', 'Ingeniero Proyectista - Area Ingenieria Sanit', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 280, 'Direccion 111', NULL, NULL, NULL),
+(448, 1, '551', 'RIMAC SEGUROS', NULL, '4210555', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 281, 'Direccion 111', NULL, NULL, NULL),
+(449, 1, '552', 'RIMAC EPS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 282, 'Direccion 111', NULL, NULL, NULL),
+(450, 1, '6466077', 'ELIAS CHIPOCO HUGO ALEJANDRO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 283, 'Direccion 111', NULL, NULL, NULL),
+(451, 1, '554', 'CESAR TIVEÑO GARCIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 260, 'Direccion 111', NULL, NULL, NULL),
+(452, 1, '541', 'KENZO INVERSIONES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 329, 'Direccion 111', NULL, NULL, NULL),
+(453, 1, '559', 'PERUANA DE ESTACIONES DE SERVICIOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 330, 'Direccion 111', NULL, NULL, NULL),
+(454, 1, '8222698', 'ENGELHARD ENGELHARD HERMAN', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(455, 1, '8222698', 'ENGELHARD ENGELHARD HERMAN', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 284, 'Direccion 111', NULL, NULL, NULL),
+(456, 1, '9336742', 'VALERGA DE LA FLOR GINO HORACIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 284, 'Direccion 111', NULL, NULL, NULL),
+(457, 1, '6692174', 'VILLALOBOS GAVIDIA LUIS ALBERTO', 'DIRECTOR GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 285, 'Direccion 111', NULL, NULL, NULL),
+(458, 1, '9072632', 'MARTINEZ VARGAS THELMA CECILIA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 285, 'Direccion 111', NULL, NULL, NULL),
+(459, 1, '6651653', 'CARBAJAL PEREZ JAMES JAIME', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 286, 'Direccion 111', NULL, NULL, NULL),
+(460, 1, '7880254', 'CERMAK SCHIMANETZ MIROSLAV', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 287, 'Direccion 111', NULL, NULL, NULL),
+(461, 1, '8262822', 'CAMINO LINARES CARLOS ANTONIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 287, 'Direccion 111', NULL, NULL, NULL),
+(462, 1, '6768328', 'TALLEDO GONZALES GERARDO MARTIN', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 288, 'Direccion 111', NULL, NULL, NULL),
+(463, 1, '7825226', 'SESSAREGO ALAYZA CARLA', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 288, 'Direccion 111', NULL, NULL, NULL),
+(464, 1, '8787958', 'ZUÑIGA FLORES JOSE GONZALO', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 288, 'Direccion 111', NULL, NULL, NULL),
+(465, 1, '8885442', 'MENDOZA GUTIERREZ CARLOS ENRIQUE', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 288, 'Direccion 111', NULL, NULL, NULL),
+(466, 1, '9161150', 'SHERRIT MAGO BERTHA DALIS', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 288, 'Direccion 111', NULL, NULL, NULL),
+(467, 1, '9394805', 'FOX SANCHEZ ROBINSON', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 288, 'Direccion 111', NULL, NULL, NULL),
+(468, 1, '25603969', 'CASTRO RODRIGUEZ JOSE ROBERTO', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 288, 'Direccion 111', NULL, NULL, NULL),
+(469, 1, '29593324', 'POLAR GUITTON EDGARD JOSE', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 288, 'Direccion 111', NULL, NULL, NULL),
+(470, 1, '456244', 'MARCHANT MENENDEZ FRANCISCO', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 288, 'Direccion 111', NULL, NULL, NULL),
+(471, 1, '18021752', 'RAMIREZ LUNA VICTORIA CESAR AUGUSTO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 289, 'Direccion 111', NULL, NULL, NULL),
+(472, 1, '18099907', 'IBAÑEZ VASQUEZ ROBERTO CARLOS', 'SUB GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 289, 'Direccion 111', NULL, NULL, NULL),
+(473, 1, '18100507', 'VAELLA CASTAÑEDA DIOMEDES ELISEO', 'SUB GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 289, 'Direccion 111', NULL, NULL, NULL),
+(474, 1, '18159327', 'INFANTE POLLACK WILMER ENRIQUE', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 289, 'Direccion 111', NULL, NULL, NULL),
+(475, 1, '18853049', 'ALBINEZ PEREZ LUIS ALBERTO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 289, 'Direccion 111', NULL, NULL, NULL),
+(476, 1, '19028062', 'BENITEZ GAMBOA JESUS SIGIFREDO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 289, 'Direccion 111', NULL, NULL, NULL),
+(477, 1, '25617386', 'VALDIVIA MORAN VICTOR ANDRES', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 289, 'Direccion 111', NULL, NULL, NULL),
+(478, 1, '7722170', 'PRIETO CHIRA JAIME', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 290, 'Direccion 111', NULL, NULL, NULL),
+(479, 1, '7798284', 'TUDELA GUBBINS MANUEL EMILIO', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 290, 'Direccion 111', NULL, NULL, NULL),
+(480, 1, '16588374', 'DEL CASTILLO CORNEJO RICARDO ANTONIO JORGE', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 290, 'Direccion 111', NULL, NULL, NULL),
+(481, 1, '8784162', 'ARELLANO MONTERO GEYNER', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 291, 'Direccion 111', NULL, NULL, NULL),
+(482, 1, '8802079', 'CABALLERO MONTERO ALDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 291, 'Direccion 111', NULL, NULL, NULL),
+(483, 1, '9870051', 'ARRELLANO MONTERO LEYDEN', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 291, 'Direccion 111', NULL, NULL, NULL),
+(484, 1, '10336945', 'MONTERO VIERA ALIPIA', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 291, 'Direccion 111', NULL, NULL, NULL),
+(485, 1, '7868221', 'ZEGARRA MULANOVICH FRANCISCO JAVIER ROBERTO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 293, 'Direccion 111', NULL, NULL, NULL),
+(486, 1, '8244928', 'DUBREUIL RODRIGO ALEJANDRO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 293, 'Direccion 111', NULL, NULL, NULL),
+(487, 1, '8459349', 'CORIA VASQUEZ PATRICIA CECILIA', 'CONTADOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 293, 'Direccion 111', NULL, NULL, NULL),
+(488, 1, '7211486', 'CHAVEZ PARRA ANA MARIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 294, 'Direccion 111', NULL, NULL, NULL),
+(489, 1, '8081335', 'NOVOA CACEDA HECTOR GUILLERMO', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 294, 'Direccion 111', NULL, NULL, NULL),
+(490, 1, '8272342', 'ISOLA DE LA PEÑA JUAN BAUTISTA', 'DIRECTOR EJECUTIVO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 294, 'Direccion 111', NULL, NULL, NULL),
+(491, 1, '6039727', 'ANDALUZ MIDEIROS VICTOR', 'GTE FINANCIERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 295, 'Direccion 111', NULL, NULL, NULL),
+(492, 1, '6057892', 'URIBE ROCHA PEDRO', 'GTE GRAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 295, 'Direccion 111', NULL, NULL, NULL),
+(493, 1, '9344371', 'MOREYRA MARROU MIGUEL MARTIN', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 297, 'Direccion 111', NULL, NULL, NULL),
+(494, 1, '41030004', 'SALCEDO ESPINOZA ALEXANDRA', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 297, 'Direccion 111', NULL, NULL, NULL),
+(495, 1, '494189', 'JUAN MANUEL PARADA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 297, 'Direccion 111', NULL, NULL, NULL),
+(496, 1, '510869', 'HOLZAPFEL DE LA FUENTE MATIAS', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 297, 'Direccion 111', NULL, NULL, NULL),
+(497, 1, '7840226', 'NUÑEZ DEVESCOVI ARTURO JUAN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 299, 'Direccion 111', NULL, NULL, NULL),
+(498, 1, '29275561', 'SALAS MORALES EDGARDO', 'SECRETARIO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 300, 'Direccion 111', NULL, NULL, NULL),
+(499, 1, '29521969', 'ZUZUNAGA BRICENO JOSE', 'PRESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 300, 'Direccion 111', NULL, NULL, NULL),
+(500, 1, '9399898', 'CAVERO BELAUNDE ROSARIO ANA MARIA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 301, 'Direccion 111', NULL, NULL, NULL),
+(501, 1, '9506178', 'SALAS CHAVEZ BERARDO WENCESLAO', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 301, 'Direccion 111', NULL, NULL, NULL),
+(502, 1, '9753599', 'CAVERO BELAUNDE LUCIA MARIA MERCEDES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 301, 'Direccion 111', NULL, NULL, NULL),
+(503, 1, '80243419', 'ZAPATA MECHAN JORGE MARTIN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 302, 'Direccion 111', NULL, NULL, NULL),
+(504, 1, '7829683', 'FERRO DELGADO VICTOR', 'MANDATARIO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 303, 'Direccion 111', NULL, NULL, NULL),
+(505, 1, '8243131', 'RIVEROS ECHEGARAY JUAN ANDRES', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 303, 'Direccion 111', NULL, NULL, NULL),
+(506, 1, '8273746', 'TIRADO HART ALFREDO MIGUEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 303, 'Direccion 111', NULL, NULL, NULL),
+(507, 1, '7855802', 'BRACALE DELGADO LUIS R', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 304, 'Direccion 111', NULL, NULL, NULL),
+(508, 1, '9394065', 'BRACALE SILVA RICARDO ALEJANDRO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 304, 'Direccion 111', NULL, NULL, NULL),
+(509, 1, '7724637', 'VIGIL VIDAL PERCY LUIS', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 305, 'Direccion 111', NULL, NULL, NULL),
+(510, 1, '9534328', 'CERDEÑA BARREDA NAPOLEON HERNAN', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 305, 'Direccion 111', NULL, NULL, NULL),
+(511, 1, '29364744', 'RODRIGUEZ BARBACHAN JOSE JAVIER', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 305, 'Direccion 111', NULL, NULL, NULL),
+(512, 1, '10072767875', 'WIESE DE OSMA AUGUSTO FELIPE', 'PDTE.DE DIRECT.', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 305, 'Direccion 111', NULL, NULL, NULL),
+(513, 1, '10082685079', 'DE LA PUENTE Y LAVALLE GONZALO', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 305, 'Direccion 111', NULL, NULL, NULL),
+(514, 1, '20505590849', 'ADMINISTRADORA PANAMERICANA S.A.C.', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 305, 'Direccion 111', NULL, NULL, NULL),
+(515, 1, '7700797', 'VILA BAYO JOSE ANTONIO', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 306, 'Direccion 111', NULL, NULL, NULL),
+(516, 1, '7709805', 'FERNANDEZ CRISTINI SERGIO ORLANDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 306, 'Direccion 111', NULL, NULL, NULL),
+(517, 1, '66313', 'VILA ARSEDA JOSE', 'PRESIDENTE DIRECTORIO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 306, 'Direccion 111', NULL, NULL, NULL),
+(518, 1, '28308300', 'GUTIERREZ ABARCA MARGOT', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 308, 'Direccion 111', NULL, NULL, NULL),
+(519, 1, '6040850', 'GALVEZ FIGUEROA BEATRIZ AMELIA', 'CONTADOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 309, 'Direccion 111', NULL, NULL, NULL),
+(520, 1, '7203892', 'MUÑOZ MARTINEZ YURI BERNARDO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 309, 'Direccion 111', NULL, NULL, NULL),
+(521, 1, '7707549', 'MACARA CHVILI HELGUERO MICHEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 309, 'Direccion 111', NULL, NULL, NULL),
+(522, 1, '7820033', 'PINILLOS GONZALEZ CARLOS JULIO', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 309, 'Direccion 111', NULL, NULL, NULL),
+(523, 1, '10221739', 'CHAVEZ CABELLO CAMPBELL PEDRO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 309, 'Direccion 111', NULL, NULL, NULL),
+(524, 1, '7783565', 'RAYGADA SOMMERKAMP JAIME EUGENIO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 310, 'Direccion 111', NULL, NULL, NULL),
+(525, 1, '7852749', 'DE LA FLOR BELAUNDE FERNANDO MARTIN', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 310, 'Direccion 111', NULL, NULL, NULL),
+(526, 1, '7862583', 'VEGA DE LA FLOR MANUEL GUILLERMO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 310, 'Direccion 111', NULL, NULL, NULL),
+(527, 1, '9335139', 'HOFFMANN ROSAS MARK ERNST', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 310, 'Direccion 111', NULL, NULL, NULL),
+(528, 1, '17915894', 'TORRES MARTINEZ MILAGROS DEL ROSARIO', 'SUB GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 311, 'Direccion 111', NULL, NULL, NULL),
+(529, 1, '18140089', 'TORRES MARTINEZ GUILIANA ELIZABETH', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 311, 'Direccion 111', NULL, NULL, NULL),
+(530, 1, '10058496', 'FIGARI TESTINO EDUARDO CESAR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 313, 'Direccion 111', NULL, NULL, NULL),
+(531, 1, '387', 'Acevedo Ostolaza Pedro Ricardo', 'Apoderado', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 314, 'Direccion 111', NULL, NULL, NULL),
+(532, 1, '386', 'Valerga De La Flor Alberto Horacio', 'Apoderado', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 314, 'Direccion 111', NULL, NULL, NULL),
+(533, 1, '385', 'Valerga De La Flor Aldo Horacio', 'Director', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 314, 'Direccion 111', NULL, NULL, NULL),
+(534, 1, '8208079', 'GOMEZ ÑATO FERNANDO LAWRENCE', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 315, 'Direccion 111', NULL, NULL, NULL),
+(535, 1, '8250296', 'VELAOCHAGA RAFFO GUILLERMO JUAN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 315, 'Direccion 111', NULL, NULL, NULL),
+(536, 1, '384', 'ALBERTO VIDAL MALDONADO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 429, 'Direccion 111', NULL, NULL, NULL),
+(537, 1, '10224968', 'PESCETTO RAFFO ALBERTO ERNESTO', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 315, 'Direccion 111', NULL, NULL, NULL),
+(538, 1, '10272752', 'SALCEDO PACHAS RAUL MARTIN', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 315, 'Direccion 111', NULL, NULL, NULL),
+(539, 1, '10492042', 'BAYLY LETTS ARTURO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 316, 'Direccion 111', NULL, NULL, NULL),
+(540, 1, '6763287', 'TORRES VILCHEZ AUGUSTO LEONARDO', 'TITULAR-GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 317, 'Direccion 111', NULL, NULL, NULL),
+(541, 1, '2849300', 'RAMOS INFANTE ROSA ELENA', 'TITULAR-GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 318, 'Direccion 111', NULL, NULL, NULL),
+(542, 1, '40815866', 'POZO VALCARCEL ETHEL ROCIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 319, 'Direccion 111', NULL, NULL, NULL),
+(543, 1, '41934868', 'ANGULO VASQUEZ JIMMY ROUS', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 319, 'Direccion 111', NULL, NULL, NULL),
+(544, 1, '7260563', 'LIU AREVALO ROCIO VERONICA', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 321, 'Direccion 111', NULL, NULL, NULL),
+(545, 1, '7804563', 'JIMENEZ GARCIA JOSE ALFREDO JULIO', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 321, 'Direccion 111', NULL, NULL, NULL),
+(546, 1, '9390934', 'PALACIOS HATCHWELL TEOBALDO', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 321, 'Direccion 111', NULL, NULL, NULL),
+(547, 1, '10263291', 'DE LA TORRE SALAS MARIELLA GISELA', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 321, 'Direccion 111', NULL, NULL, NULL),
+(548, 1, '10278082', 'LEON VEGAS VERONICA', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 321, 'Direccion 111', NULL, NULL, NULL),
+(549, 1, '10471336', 'JARA CALLE LUIS RICARDO', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 321, 'Direccion 111', NULL, NULL, NULL),
+(550, 1, '383', 'NORMA SANCHEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(551, 1, '382', 'JAVIER CASTRO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(552, 1, '24461388', 'LAYME CARMONA TEOFILA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 322, 'Direccion 111', NULL, NULL, NULL),
+(553, 1, '7855981', 'DEL BUSTO QUIÑONES JAIME RAMON', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 323, 'Direccion 111', NULL, NULL, NULL),
+(554, 1, '6648692', 'VIVANCO VELANDO MANUEL IGNACIO', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 324, 'Direccion 111', NULL, NULL, NULL),
+(555, 1, '10220518', 'FREIRE GANOZA JUAN JOSE MARTIN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 324, 'Direccion 111', NULL, NULL, NULL),
+(556, 1, '10274678', 'VALENCIA ORIHUELA RICARDO ISMAEL', 'GERENTE EJECUTIVO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 324, 'Direccion 111', NULL, NULL, NULL),
+(557, 1, '10307479', 'PARDO FIGUEROA TURNER JOSE ERNESTO', 'GERENTE EJECUTIVO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 324, 'Direccion 111', NULL, NULL, NULL),
+(558, 1, '10264999', 'VEGAS MANTERO MAURICIO ALBERTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 325, 'Direccion 111', NULL, NULL, NULL),
+(559, 1, '18901780', 'AGUILAR ZAVALETA JORGE PABLO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 326, 'Direccion 111', NULL, NULL, NULL),
+(560, 1, '29311995', 'VELASQUEZ SILVA SANDRA VERONICA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 327, 'Direccion 111', NULL, NULL, NULL),
+(561, 1, '29416653', 'SAENZ JIMENEZ GUILLERMO FRANCISCO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 327, 'Direccion 111', NULL, NULL, NULL),
+(562, 1, '29576224', 'CORDOVA ZARAUZ RETH ARMANDO', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 327, 'Direccion 111', NULL, NULL, NULL),
+(563, 1, '381', 'NEGOCIACIACION KIO S.A.C.', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 331, 'Direccion 111', NULL, NULL, NULL),
+(564, 1, '371', 'ADMINISTRADORA Y SERVICIOS SANTIAGO S.A.C.', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 332, 'Direccion 111', NULL, NULL, NULL),
+(565, 1, '379', 'INVERSIONES MALAGA &BENSA SOCIEDAD ANONIMA CE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 333, 'Direccion 111', NULL, NULL, NULL),
+(566, 1, '40662037', 'ADA CAROLIONA MONTOYA CHALCO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 334, 'Direccion 111', NULL, NULL, NULL),
+(567, 1, '388', 'AVICOLA DON BRUNO S.C.R.L.', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 335, 'Direccion 111', NULL, NULL, NULL),
+(568, 1, '377', 'COMPU TOCK', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 336, 'Direccion 111', NULL, NULL, NULL),
+(569, 1, '376', 'EL MIRADOR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 337, 'Direccion 111', NULL, NULL, NULL),
+(570, 1, '375', 'CESAR AUGUSTO TIVEÑO GARCIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 260, 'Direccion 111', NULL, NULL, NULL),
+(571, 1, '374', 'CESAR AUGUSTO TIVEÑO GARCIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 260, 'Direccion 111', NULL, NULL, NULL),
+(572, 1, '373', 'LIDERDATA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 336, 'Direccion 111', NULL, NULL, NULL),
+(573, 1, '372', 'REDM', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 338, 'Direccion 111', NULL, NULL, NULL),
+(574, 1, '9099386', 'KIYAN KIYAN ARMANDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1407, 'Direccion 111', NULL, NULL, NULL),
+(575, 1, '8995797', 'MATILDE GARCIA SALVATIERRA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 341, 'Direccion 111', NULL, NULL, NULL),
+(576, 1, '397', 'JUAN GUERRERA', 'SUPERVISOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(577, 1, '399', 'WILFREDO SEGOVIA', 'INGENIERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 249, 'Direccion 111', NULL, NULL, NULL),
+(578, 1, '380', 'Juan Deustua', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 280, 'Direccion 111', NULL, NULL, NULL),
+(579, 1, '40567938', 'ALCANTARA MESIAS ENRIQUE ERICKSON', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 342, 'Direccion 111', NULL, NULL, NULL),
+(580, 1, '18886006', 'CUEVA DE SANTOS RESURRECCION D', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 343, 'Direccion 111', NULL, NULL, NULL),
+(581, 1, '6015429', 'AREVALO FLORES JORGE GILBERTO', 'GERENTE', '01-6188004', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 344, 'Direccion 111', NULL, NULL, NULL),
+(582, 1, '6015429', 'AREVALO FLORES JORGE GILBERTO', 'GERENTE', '01-6188004', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 344, 'Direccion 111', NULL, NULL, NULL),
+(583, 1, '6449030', 'ALMANDOZ FLORES ENRIQUE', 'GERENTE', '01-6110418', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 345, 'Direccion 111', NULL, NULL, NULL),
+(584, 1, '7046165', 'JARA CAMPOS LEONCIO ARMANDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 346, 'Direccion 111', NULL, NULL, NULL),
+(585, 1, '8768893', 'LI DE CHAU GLORIA DORIS', 'GERENTE GENERAL', '01-2750148', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 347, 'Direccion 111', NULL, NULL, NULL),
+(586, 1, '8995797', 'SALVATIERRA GARCIA MATILDE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 348, 'Direccion 111', NULL, NULL, NULL),
+(587, 1, '32813592', 'FANNY ELIZABETH VELASQUEZ VARAS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 349, 'Direccion 111', NULL, NULL, NULL),
+(588, 1, '32111096', 'ORELLANA GERONIMO, KARIN CARMEN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 350, 'Direccion 111', NULL, NULL, NULL),
+(589, 1, '32854857', 'CHATI ROJAS, ARMANDINA ELEUTERIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 351, 'Direccion 111', NULL, NULL, NULL),
+(590, 1, '10202762', 'RUIZ VILLANUEVA WALTER JOSE', 'TITULAR-GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 352, 'Direccion 111', NULL, NULL, NULL),
+(591, 1, '10204082', 'HUGO ATUSPARIA GONZALES', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1103, 'Direccion 111', NULL, NULL, NULL),
+(592, 1, '32917726', 'CHUQUI ENCARNACION JUAN WALBERTO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 353, 'Direccion 111', NULL, NULL, NULL),
+(593, 1, '32932188', 'MIRANDA LOZANO EDILBERTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 354, 'Direccion 111', NULL, NULL, NULL),
+(594, 1, '32797351', 'VILLAR MARTELL GABRIEL', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 355, 'Direccion 111', NULL, NULL, NULL),
+(595, 1, '42738373', 'TORRES SALDAÑA MILAGROS ELIZABETH', 'TITULAR-GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 356, 'Direccion 111', NULL, NULL, NULL),
+(596, 1, '32841481', 'MENESES BERMUDEZ, RUTH ELENA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 357, 'Direccion 111', NULL, NULL, NULL),
+(597, 1, '43056058', 'MARY FIORELLA  CASAVILCA MOLINA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 337, 'Direccion 111', NULL, NULL, NULL),
+(598, 1, '405', 'IVAN ARRIETA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 347, 'Direccion 111', NULL, NULL, NULL),
+(599, 1, '9890090', 'CARLOS ALBERTO SEGUIL CHOTA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 358, 'Direccion 111', NULL, NULL, NULL),
+(600, 1, '404', 'SIMON MALDONADO', 'JEFE DE OFICINA TECNICA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 249, 'Direccion 111', NULL, NULL, NULL),
+(601, 1, '403', 'JAVIER DEL RIO', 'GERENTE DE PROYECTO', NULL, 'Testing', 'kpalma@corp2torres.com', 'jdelrioa@hvcontratistas.com.pe', 3, 249, 'Direccion 111', NULL, NULL, NULL),
+(602, 1, '402', 'ENRIQUE G. RAMIREZ BECERRA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(603, 1, '40578657', 'GERARDO CASTILLO MESIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 359, 'Direccion 111', NULL, NULL, NULL),
+(604, 1, '401', 'OLTURSA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 89, 'Direccion 111', NULL, NULL, NULL),
+(605, 1, '400', 'GIULIANO FEIJOO', 'CONTADOR GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(606, 1, '398', 'ALERT DEL PERU', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 361, 'Direccion 111', NULL, NULL, NULL),
+(607, 1, '567', 'DULCES TRADICIONALES DEL SUR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 362, 'Direccion 111', NULL, NULL, NULL),
+(608, 1, '396', 'INVERSIONES KENZO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 363, 'Direccion 111', NULL, NULL, NULL),
+(609, 1, '395', 'CARMEN VEGA', 'ANALISTA DE IMPUESTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(610, 1, '394', 'Javier Flores', 'Supervisor', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(611, 1, '393', 'CRUZ DEL SUR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 364, 'Direccion 111', NULL, NULL, NULL),
+(612, 1, '18208681', 'CARRILLO MARTINEZ JOHN TOMAS', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 365, 'Direccion 111', NULL, NULL, NULL),
+(613, 1, '45584034', 'VERTIZ CASTRO ELVA ALEJANDRA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 366, 'Direccion 111', NULL, NULL, NULL),
+(614, 1, '32967803', 'RODRIGUEZ PEREZ NIRIA ZULEIKA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 367, 'Direccion 111', NULL, NULL, NULL),
+(615, 1, '392', 'LA RUEDA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 368, 'Direccion 111', NULL, NULL, NULL),
+(616, 1, '9145806', 'JOSE RAMIREZ BECERRA', 'JEFE DE OFICINA TECNICA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(617, 1, '362', 'MARIA MANSILLA', 'ASEGURAMIENTO DE CALIDAD', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(618, 1, '566', 'JUAN GABRIEL OJEDA', 'ARQUITECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 460, 'Direccion 111', NULL, NULL, NULL),
+(619, 1, '1032250', 'CESAR DE LOS RIOS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1104, 'Direccion 111', NULL, NULL, NULL),
+(620, 1, '378', 'JUAN ACOSTA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(621, 1, '351', 'ROMINA BETETA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(622, 1, '350', 'LUIS RIVERA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 369, 'Direccion 111', NULL, NULL, NULL),
+(623, 1, '349', 'MOISES ROJAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 370, 'Direccion 111', NULL, NULL, NULL),
+(624, 1, '348', 'TODOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(625, 1, '347', 'TODOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 371, 'Direccion 111', NULL, NULL, NULL),
+(626, 1, '10003199', 'CAVALIE FIEDLER ERIK', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1503, 'Direccion 111', NULL, NULL, NULL),
+(627, 1, '10831582', 'CORREA MALACHOWSKI JUAN FERNANDO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 38, 'Direccion 111', NULL, NULL, NULL),
+(628, 1, '346', 'NORKYS ICA MALL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 373, 'Direccion 111', NULL, NULL, NULL),
+(629, 1, '345', 'DIEGO LOPEZ', 'GERENTE DE RELACIONES COMERCIALES', '6111121', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 33, 'Direccion 111', NULL, NULL, NULL),
+(630, 1, '335', 'INVERSIONES TOMAS VALLE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 374, 'Direccion 111', NULL, NULL, NULL),
+(631, 1, '343', 'EL POINT', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 375, 'Direccion 111', NULL, NULL, NULL),
+(632, 1, '352', 'ALCASUR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 376, 'Direccion 111', NULL, NULL, NULL),
+(633, 1, '341', 'TWO CHEFF´S', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 377, 'Direccion 111', NULL, NULL, NULL),
+(634, 1, '340', 'ACCOMP SYSTEM´S', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 378, 'Direccion 111', NULL, NULL, NULL),
+(635, 1, '339', 'GRILL & PUB', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 379, 'Direccion 111', NULL, NULL, NULL),
+(636, 1, '338', 'NITOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 380, 'Direccion 111', NULL, NULL, NULL),
+(637, 1, '337', 'LA SIRENA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 381, 'Direccion 111', NULL, NULL, NULL),
+(638, 1, '360', 'MULTISERVICIOS NELLY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 382, 'Direccion 111', NULL, NULL, NULL),
+(639, 1, '342', 'EL SNACK ECLIPSE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 383, 'Direccion 111', NULL, NULL, NULL),
+(640, 1, '40090128', 'ANDREA HERRERA CACERES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 384, 'Direccion 111', NULL, NULL, NULL),
+(641, 1, '7568485', 'RAMIREZ URETA LUIS ALFREDO', 'GERENTE GENERAL', '01362-3816', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 385, 'Direccion 111', NULL, NULL, NULL),
+(642, 1, '7854873', 'LUIS MIGUEL CICCIA VASQUEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 386, 'Direccion 111', NULL, NULL, NULL),
+(643, 1, '32970293', 'CORDOVA CAMPOS ORLANDO FERNANDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 387, 'Direccion 111', NULL, NULL, NULL),
+(644, 1, '32840256', 'HONORES DE SAUCEDO RAMIRA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 388, 'Direccion 111', NULL, NULL, NULL),
+(645, 1, '32789357', 'VASQUEZ PEREYRA NERIDA OLGA', 'GERENTE GENERAL', '043-350328', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 389, 'Direccion 111', NULL, NULL, NULL),
+(646, 1, '32108108', 'AVILES ZAPATA CARLOS STALIN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 390, 'Direccion 111', NULL, NULL, NULL),
+(647, 1, '8641354', 'ASMAT RAMIRES CARLOS MANUEL', 'DIRECTOR EJECUTIVO', '043-322281', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 391, 'Direccion 111', NULL, NULL, NULL),
+(648, 1, '7939932', 'CARBO CONTE ORLANDO JESUS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 392, 'Direccion 111', NULL, NULL, NULL),
+(649, 1, '344', 'AUGUSTO VILLACORTA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 249, 'Direccion 111', NULL, NULL, NULL),
+(650, 1, '369', 'LUIS SANCHEZ DE LA PUENTE', 'CONTADOR EXTERNO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 251, 'Direccion 111', NULL, NULL, NULL),
+(651, 1, '368', 'INVERSIONES ELMILAND', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 395, 'Direccion 111', NULL, NULL, NULL),
+(652, 1, '367', 'RESTAURANT D´MILY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 396, 'Direccion 111', NULL, NULL, NULL),
+(653, 1, '366', 'RESTAURANT VENEZIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 397, 'Direccion 111', NULL, NULL, NULL),
+(654, 1, '365', 'ROJAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 398, 'Direccion 111', NULL, NULL, NULL),
+(655, 1, '364', 'ESTACION DE SERVICIO EL CHORRILLANO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 399, 'Direccion 111', NULL, NULL, NULL),
+(656, 1, '363', 'SUPER GRIFO CHINCHA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 400, 'Direccion 111', NULL, NULL, NULL),
+(657, 1, '353', 'PIZZA CAR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 401, 'Direccion 111', NULL, NULL, NULL),
+(658, 1, '361', 'MARIELA SILVA', 'DISEÑADORA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 402, 'Direccion 111', NULL, NULL, NULL),
+(659, 1, '370', 'ROMULO TRIVEÑO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 403, 'Direccion 111', NULL, NULL, NULL),
+(660, 1, '359', 'GRIFOS ESPINOZA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 404, 'Direccion 111', NULL, NULL, NULL),
+(661, 1, '358', 'CHIFA EL GRAN LIU', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 405, 'Direccion 111', NULL, NULL, NULL),
+(662, 1, '357', 'LORENA I', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 406, 'Direccion 111', NULL, NULL, NULL),
+(663, 1, '356', 'JOSE FERRARI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(664, 1, '355', 'MARIA TERESA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 406, 'Direccion 111', NULL, NULL, NULL),
+(665, 1, '354', 'LAVANDERIA LAVA EXPRESS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 407, 'Direccion 111', NULL, NULL, NULL),
+(666, 1, '10036343', 'LLALLAHUI SALVATIERRA ATILIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 408, 'Direccion 111', NULL, NULL, NULL);
+INSERT INTO `tb_personacontacto` (`id`, `tb_empresa_id`, `dni`, `nombre`, `cargo`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_companiacontacto_id`, `direccion`, `tb_pais_id`, `tb_departamento_id`, `tb_distrito_id`) VALUES
+(667, 1, '7937469', 'MORI MARIN VICTOR HOMERO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 409, 'Direccion 111', NULL, NULL, NULL),
+(668, 1, '565', 'CARLOS HEREDIA', 'DPTO PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 409, 'Direccion 111', NULL, NULL, NULL),
+(669, 1, '9145806', 'JOSE ERNESTO RAMIREZ BECERRA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 410, 'Direccion 111', NULL, NULL, NULL),
+(670, 1, '564', 'ACOSA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 414, 'Direccion 111', NULL, NULL, NULL),
+(671, 1, '7277564', 'CAPRILE CARBAJAL EDUARDO LUIS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 412, 'Direccion 111', NULL, NULL, NULL),
+(672, 1, '390', 'OPERACIONES Y SERVICIOS GENERALES S A', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 415, 'Direccion 111', NULL, NULL, NULL),
+(673, 1, '563', 'FERNANDO CUBA', 'VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 416, 'Direccion 111', NULL, NULL, NULL),
+(674, 1, '6875616', 'MESAJIL LEON ABEL MARCELO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 411, 'Direccion 111', NULL, NULL, NULL),
+(675, 1, '562', 'CASAVILCA MOLINA, MARY FIORELLA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 418, 'Direccion 111', NULL, NULL, NULL),
+(676, 1, '8214739', 'GONZALES MARTINEZ MARIA', 'S/N FND. TRES ESQUINAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 419, 'Direccion 111', NULL, NULL, NULL),
+(677, 1, '561', 'CLARO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 420, 'Direccion 111', NULL, NULL, NULL),
+(678, 1, '21565870', 'YAMASHIRO ORE GUILLERMO ENRIQUE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 421, 'Direccion 111', NULL, NULL, NULL),
+(679, 1, '9978329', 'MANUEL FONSECA SANCHEZ', 'SUPERVISOR ELECTROMECANICO', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(680, 1, '560', 'LUIS ESPINOLA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(681, 1, '80335290', 'BERNAOLA MERCHAN JULISSA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 423, 'Direccion 111', NULL, NULL, NULL),
+(682, 1, '558', 'MARUCHI RODRÍGUEZ MARIÁTEGUI', 'GERENTE DE MARKETING', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 251, 'Direccion 111', NULL, NULL, NULL),
+(683, 1, '557', 'CAMEN MARIA TOCE OCAMPO', 'GERENTE COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 251, 'Direccion 111', NULL, NULL, NULL),
+(684, 1, '556', 'WILSON VELANDIA TORRES', 'SUPERVISOR DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 251, 'Direccion 111', NULL, NULL, NULL),
+(685, 1, '43318517', 'FRANK MELO AYRE', 'SUPERVISOR DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.copracsa.com', 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(686, 1, '40045132', 'LUIS FERNANDO ALLENDE PUMACAHUA', 'SUPERVISOR ELECTRO MECANICO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(687, 1, '10472837', 'CACIC ENRIQUEZ MILE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 424, 'Direccion 111', NULL, NULL, NULL),
+(688, 1, '568', 'MILAGROS J. BARRON CHAVEZ', 'ASISTENTE ADMINISTRATIVO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 424, 'Direccion 111', NULL, NULL, NULL),
+(689, 1, '9458352', 'YUBANA ESTRADA VELASQUEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 425, 'Direccion 111', NULL, NULL, NULL),
+(690, 1, '43436686', 'SHIRLEY E. HERNANDEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 426, 'Direccion 111', NULL, NULL, NULL),
+(691, 1, '550', 'RESTAURANT CHIFA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 427, 'Direccion 111', NULL, NULL, NULL),
+(692, 1, '21463088', 'CESAR ARTURO YAMASHIRO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 428, 'Direccion 111', NULL, NULL, NULL),
+(693, 1, '548', 'MILTON CASTELLANOS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 160, 'Direccion 111', NULL, NULL, NULL),
+(694, 1, '547', 'MANUEL NORIEGA RISCO', 'GERENTE COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 21, 'Direccion 111', NULL, NULL, NULL),
+(695, 1, '546', 'JESUS IBARCENA', 'GERENTE DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 430, 'Direccion 111', NULL, NULL, NULL),
+(696, 1, '545', 'SEGUNDO VEGA TAFUR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 431, 'Direccion 111', NULL, NULL, NULL),
+(697, 1, '544', 'Martin Vega Tafur', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 432, 'Direccion 111', NULL, NULL, NULL),
+(698, 1, '543', 'CECILIA CHU', 'ASESORA DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 202, 'Direccion 111', NULL, NULL, NULL),
+(699, 1, '647', 'Rafael Alvarez', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 13, 'Direccion 111', NULL, NULL, NULL),
+(700, 1, '553', 'Miguel Salinas', 'Gerente de Proyectos', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 48, 'Direccion 111', NULL, NULL, NULL),
+(701, 1, '555', 'ENRIQUE REVILLA', 'JEFE DE PRODUCCION', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 433, 'Direccion 111', NULL, NULL, NULL),
+(702, 1, '644', 'Henry Trou', 'Jefe de Divicion de Aire Acondicionado', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 436, 'Direccion 111', NULL, NULL, NULL),
+(703, 1, '637', 'ROSA UECHI', 'JEFA DE OFICINA TECNICA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 434, 'Direccion 111', NULL, NULL, NULL),
+(704, 1, '641', 'Rafael Alvarez', 'Gerente de Proyecto', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 13, 'Direccion 111', NULL, NULL, NULL),
+(705, 1, '640', 'Victor Frank Delgado', 'Ejecutivo de Ventas', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 436, 'Direccion 111', NULL, NULL, NULL),
+(706, 1, '634', 'Roberto Rodriguez Torres', 'Jefe de Marketing - Product Manager', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 437, 'Direccion 111', NULL, NULL, NULL),
+(707, 1, '6854965', 'Manuel Antonio Rodriguez Torres', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 438, 'Direccion 111', NULL, NULL, NULL),
+(708, 1, '9879058', 'Jose Antonio Larco Pedraza', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 439, 'Direccion 111', NULL, NULL, NULL),
+(709, 1, '43318517', 'MELO AYRE FRANK', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 440, 'Direccion 111', NULL, NULL, NULL),
+(710, 1, '379270821', 'NANCY HUALLA QUISPE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 441, 'Direccion 111', NULL, NULL, NULL),
+(711, 1, '629', 'D LIZIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 442, 'Direccion 111', NULL, NULL, NULL),
+(712, 1, '29319789', 'JARRIN CACERES HERNAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 443, 'Direccion 111', NULL, NULL, NULL),
+(713, 1, '10221078', 'GARCIA ARATA NOVOA VANESSA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 444, 'Direccion 111', NULL, NULL, NULL),
+(714, 1, '569', 'ALFREDO BARRIG', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 280, 'Direccion 111', NULL, NULL, NULL),
+(715, 1, '666', 'WILSON VELANDIA', 'Supervisor de Obra', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 251, 'Direccion 111', NULL, NULL, NULL),
+(716, 1, '10136744', 'POMA AGUSTIN JUAN CARLOS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 445, 'Direccion 111', NULL, NULL, NULL),
+(717, 1, '9379163', 'URBINA GARCIA ROGER ANDRES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 446, 'Direccion 111', NULL, NULL, NULL),
+(718, 1, '8254409', 'SAMBRA FOCACCI CESAR AUGUSTO MIGUEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 447, 'Direccion 111', NULL, NULL, NULL),
+(719, 1, '8195146', 'BRAZZODURO TABUSSO RENZO ETTORE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 448, 'Direccion 111', NULL, NULL, NULL),
+(720, 1, '9152361', 'SILVA TABUSSO GUILLERMO MARTIN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 450, 'Direccion 111', NULL, NULL, NULL),
+(721, 1, '8262019', 'PINASCO MENCHELLI IRZIO PIETRO BRUNO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 451, 'Direccion 111', NULL, NULL, NULL),
+(722, 1, '10121536', 'ROSALES RIVERA, VICTORIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 452, 'Direccion 111', NULL, NULL, NULL),
+(723, 1, '6546282', 'SANDI RAMIREZ ROSA MARIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 453, 'Direccion 111', NULL, NULL, NULL),
+(724, 1, '595', 'AMADO LOZANO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 16, 'Direccion 111', NULL, NULL, NULL),
+(725, 1, '593', 'ALFONSO MERCADO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 435, 'Direccion 111', NULL, NULL, NULL),
+(726, 1, '591', 'JANIO MORAIS', 'GERENTE COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 435, 'Direccion 111', NULL, NULL, NULL),
+(727, 1, '577', 'Eduardo Martinez', 'Gerente de Obra', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(728, 1, '10060447', 'FORD DEZA WILFRED GRAHAM', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 435, 'Direccion 111', NULL, NULL, NULL),
+(729, 1, '7533428', 'Luis Gutierrez Reyes', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1276, 'Direccion 111', NULL, NULL, NULL),
+(730, 1, '575', 'PERCY HILARIO SOLIS', 'RESPONSABLE DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 454, 'Direccion 111', NULL, NULL, NULL),
+(731, 1, '574', 'NERY MARTINEZ ALBAN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 455, 'Direccion 111', NULL, NULL, NULL),
+(732, 1, '573', 'ARLES LANDEO PACHAS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 456, 'Direccion 111', NULL, NULL, NULL),
+(733, 1, '23840012', 'JOSEFINA Y. CHUQUIMIA MEJIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 457, 'Direccion 111', NULL, NULL, NULL),
+(734, 1, '571', 'ANDREI GONZALES', 'DIRECTOR DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 458, 'Direccion 111', NULL, NULL, NULL),
+(735, 1, '10183854', 'GEOFFREY BRAVO SANTOS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 459, 'Direccion 111', NULL, NULL, NULL),
+(736, 1, '527', 'CONSTANZA DIAZ', 'ARQUITECTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 460, 'Direccion 111', NULL, NULL, NULL),
+(737, 1, '486', 'INVERSIONES PETRO´S', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 461, 'Direccion 111', NULL, NULL, NULL),
+(738, 1, '7979825', 'FERNADO CARMEN CASTRO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 462, 'Direccion 111', NULL, NULL, NULL),
+(739, 1, '43382842', 'REATEGUI PEREYRA CARLOS GABRIEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 464, 'Direccion 111', NULL, NULL, NULL),
+(740, 1, '8256115', 'GARCIA BEJAR HECTOR RAUL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 465, 'Direccion 111', NULL, NULL, NULL),
+(741, 1, '13', 'Andrés Mendoza R.', 'Encargado de Ingenieria', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1074, 'Direccion 111', NULL, NULL, NULL),
+(742, 1, '542', 'MILTON POMA NAVARRO', 'SUPERVISOR ELECTROMECANICO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 249, 'Direccion 111', NULL, NULL, NULL),
+(743, 1, '510', 'Vanessa Garcia Arata', 'SUPERVISOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(744, 1, '41866258', 'Juan Carlos Kuriyama Bonnett', 'Representante Legal', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 466, 'Direccion 111', NULL, NULL, NULL),
+(745, 1, '508', 'Felipe Calle Wille', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 466, 'Direccion 111', NULL, NULL, NULL),
+(746, 1, '25800357', 'GARCIA MENDEZ EDWIN JACK', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 467, 'Direccion 111', NULL, NULL, NULL),
+(747, 1, '506', 'CARLA NOEMI SALAZAR PEREDA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 468, 'Direccion 111', NULL, NULL, NULL),
+(748, 1, '505', 'ALICIA HUALLA QUISPE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 469, 'Direccion 111', NULL, NULL, NULL),
+(749, 1, '504', 'INC', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 470, 'Direccion 111', NULL, NULL, NULL),
+(750, 1, '10160832', 'Manuel Caceres Barreto', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 471, 'Direccion 111', NULL, NULL, NULL),
+(751, 1, '502', 'Juan P. Zúñiga Orellana', 'COMERCIALIZACIÓN', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 471, 'Direccion 111', NULL, NULL, NULL),
+(752, 1, '9399850', 'ZAPATA NEYRA LILIANA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 472, 'Direccion 111', NULL, NULL, NULL),
+(753, 1, '21527050', 'ROBERTO CARDENAS SARMIENTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1105, 'Direccion 111', NULL, NULL, NULL),
+(754, 1, '1730', 'ALFONSO JESUS PANIZO OTERO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 542, 'Direccion 111', NULL, NULL, NULL),
+(755, 1, '8204746', 'TORRES VELARDE GILBERTO LUIS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 473, 'Direccion 111', NULL, NULL, NULL),
+(756, 1, '32840293', 'GUZMAN CEPEDA SEGUNDO ELOY', 'GERENTE GENERAL', '043-353473', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 474, 'Direccion 111', NULL, NULL, NULL),
+(757, 1, '32772951', 'BOCANEGRA CASTRO DE VALERIO TERESA', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 475, 'Direccion 111', NULL, NULL, NULL),
+(758, 1, '32885686', 'GUZMAN VERDE FREDDY RONAL', 'PTE. DEL DIRECTORIO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 476, 'Direccion 111', NULL, NULL, NULL),
+(759, 1, '41035377', 'LECCA TORRES RAFAEL JONATAN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 477, 'Direccion 111', NULL, NULL, NULL),
+(760, 1, '32825656', 'RODRIGUEZ CHICOMA SEGUNDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 478, 'Direccion 111', NULL, NULL, NULL),
+(761, 1, '41228518', 'LUJAN CHATI CESAR OMAR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 479, 'Direccion 111', NULL, NULL, NULL),
+(762, 1, '495', 'PETROCORP', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 480, 'Direccion 111', NULL, NULL, NULL),
+(763, 1, '40709781', 'GAYOSO HARO MARIELA IVETTE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 481, 'Direccion 111', NULL, NULL, NULL),
+(764, 1, '317', 'ESTACION SANTA MARGARITA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 482, 'Direccion 111', NULL, NULL, NULL),
+(765, 1, '18049729', 'CABRERA LEON PAULINO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 483, 'Direccion 111', NULL, NULL, NULL),
+(766, 1, '32116184', 'TORRE PINEDA BENITO SATURNINO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 484, 'Direccion 111', NULL, NULL, NULL),
+(767, 1, '32942655', 'ARTEAGA MONTAÑEZ DE PERICHE MIRIAM DEL PILAR', 'TITULAR GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 485, 'Direccion 111', NULL, NULL, NULL),
+(768, 1, '32835083', 'SUYON CACEDA JOSE ALEX', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 486, 'Direccion 111', NULL, NULL, NULL),
+(769, 1, '32829012', 'VELASQUEZ SOTOMAYOR MARILU GLADYS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 487, 'Direccion 111', NULL, NULL, NULL),
+(770, 1, '44113603', 'CORTEZ VELASQUEZ PERCY ALAN', 'TITULAR - GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 488, 'Direccion 111', NULL, NULL, NULL),
+(771, 1, '8226748', 'PORCARI CARBONE ERNESTO CARLO ALBERTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 489, 'Direccion 111', NULL, NULL, NULL),
+(772, 1, '10385295', 'BLANCO MONTESINOS MARCO ROLO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 490, 'Direccion 111', NULL, NULL, NULL),
+(773, 1, '99429802', 'MARIO ASTETE B.', 'Ventas', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 181, 'Direccion 111', NULL, NULL, NULL),
+(774, 1, '9339911', 'MESARINA SALAZAR JORGE FERNANDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 491, 'Direccion 111', NULL, NULL, NULL),
+(775, 1, '225', 'GLADYS MALAGA', 'ASISTENTE GERENCIA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 491, 'Direccion 111', NULL, NULL, NULL),
+(776, 1, '10215760711', 'TIPACTI HUAMANI, JOSE LUIS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 14, 'Direccion 111', NULL, NULL, NULL),
+(777, 1, '242', 'ALDO MAZZINI CAMAC', 'GERENTE DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 53, 'Direccion 111', NULL, NULL, NULL),
+(778, 1, '231', 'MARCO CADILLO FABIAN', 'GERENTE DE OPERACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 467, 'Direccion 111', NULL, NULL, NULL),
+(779, 1, '10308234', 'JHONNY BOCIAN FORQUERA', 'GERENTE ADMINISTRATIVO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 492, 'Direccion 111', NULL, NULL, NULL),
+(780, 1, '2080', 'Nino Usquiano Banda', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 213, 'Direccion 111', NULL, NULL, NULL),
+(781, 1, '10493471', 'FREDDY ERNESTO BOCIAN FORQUERA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 492, 'Direccion 111', NULL, NULL, NULL),
+(782, 1, '9969239', 'Ricardo Luis  Vilchez Suyón', 'Gerente General/Representante Legal', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 493, 'Direccion 111', NULL, NULL, NULL),
+(783, 1, '831', 'Carlos Roberto Vilchez Suyón', 'Gerente de Operaciones', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 493, 'Direccion 111', NULL, NULL, NULL),
+(784, 1, '10300109', 'MANUEL JOSE MARIA REGALADO REYES', 'GERENTE GENERAL/REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 494, 'Direccion 111', NULL, NULL, NULL),
+(785, 1, '227', 'MIGUEL MOYA SOLORZANO', 'INGENIERO DE VENTAS DE OBRAS Y SERVICIOS', '985091192', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 494, 'Direccion 111', NULL, NULL, NULL),
+(786, 1, '226', 'MARIO RICCI NICOLI', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 495, 'Direccion 111', NULL, NULL, NULL),
+(787, 1, '251', 'WILDER SALAS', 'INGENIERO DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 495, 'Direccion 111', NULL, NULL, NULL),
+(788, 1, '253', 'ROBERTO CONTRERAS', 'INGENIERO DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 495, 'Direccion 111', NULL, NULL, NULL),
+(789, 1, '234', 'ELECTRO FIKADY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 496, 'Direccion 111', NULL, NULL, NULL),
+(790, 1, '12345678', 'ROBERTO SIERRA', 'GERENTE DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 467, 'Direccion 111', NULL, NULL, NULL),
+(791, 1, '8721709', 'Carlos Augusto Mayer Reategui', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 497, 'Direccion 111', NULL, NULL, NULL),
+(792, 1, '258', 'GERARDO DIAZ AGUILAR', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 498, 'Direccion 111', NULL, NULL, NULL),
+(793, 1, '257', 'ALVARO OSTOS AGUILAR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 499, 'Direccion 111', NULL, NULL, NULL),
+(794, 1, '256', 'FERNANDO TAMARIZ CERNA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 500, 'Direccion 111', NULL, NULL, NULL),
+(795, 1, '255', 'DONALD COELLO', 'Supervisor', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 275, 'Direccion 111', NULL, NULL, NULL),
+(796, 1, '254', 'VANESA GARGATE SILVA', 'ASISTENTE ADMINISTRATIVA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(797, 1, '43382842', 'CARLOS GABRIEL REATEGUI PEREYRA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 501, 'Direccion 111', NULL, NULL, NULL),
+(798, 1, '6217515', 'EDUARDO BASALDUA OLIVARES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 45, 'Direccion 111', NULL, NULL, NULL),
+(799, 1, '252', 'EDGAR QUISPE MUNARRIZ', 'INGENIERO DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 45, 'Direccion 111', NULL, NULL, NULL),
+(800, 1, '261', 'JULIO CESAR PARI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 45, 'Direccion 111', NULL, NULL, NULL),
+(801, 1, '26660755', 'CESAR WALTER CONDOR OSORIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 502, 'Direccion 111', NULL, NULL, NULL),
+(802, 1, '249', 'CESAR AYALA RUMUALDO', 'JEFE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 502, 'Direccion 111', NULL, NULL, NULL),
+(803, 1, '248', 'Hugo Castro Barzola', 'DEPARTAMENTO DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 154, 'Direccion 111', NULL, NULL, NULL),
+(804, 1, '40049997', 'MANUEL ANGEL PERCCA ALAMO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 503, 'Direccion 111', NULL, NULL, NULL),
+(805, 1, '8106718', 'DANIEL GUTIERREZ CASTILLO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 504, 'Direccion 111', NULL, NULL, NULL),
+(806, 1, '246', 'JUAN MACCHIAVELLO CORCUERA', 'GERENTE COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 167, 'Direccion 111', NULL, NULL, NULL),
+(807, 1, '245', 'ALDO MAZZINI CAMAC', 'GERENTE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 167, 'Direccion 111', NULL, NULL, NULL),
+(808, 1, '25835522', 'Nilton Dany Martinez Sanchez', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 505, 'Direccion 111', NULL, NULL, NULL),
+(809, 1, '9880376', 'Gino Mori Valenzuela', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 506, 'Direccion 111', NULL, NULL, NULL),
+(810, 1, '7742179', 'MELITON ELIAS ARCE ALVARADO', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 507, 'Direccion 111', NULL, NULL, NULL),
+(811, 1, '222928', 'ROCA MENDENHALL JUAN XAVIER', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 508, 'Direccion 111', NULL, NULL, NULL),
+(812, 1, '260', 'ANA MILENA CASTRO', 'ARQUITECTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 460, 'Direccion 111', NULL, NULL, NULL),
+(813, 1, '232', 'LA COMPUERTA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 509, 'Direccion 111', NULL, NULL, NULL),
+(814, 1, '205', 'ICA MARKET', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 510, 'Direccion 111', NULL, NULL, NULL),
+(815, 1, '204', 'MARISQUERIA MANCORA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 511, 'Direccion 111', NULL, NULL, NULL),
+(816, 1, '203', 'LA CANDELA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 512, 'Direccion 111', NULL, NULL, NULL),
+(817, 1, '202', 'SHALOM', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 513, 'Direccion 111', NULL, NULL, NULL),
+(818, 1, '201', 'MULTISERVICIOS CAROLINA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 514, 'Direccion 111', NULL, NULL, NULL),
+(819, 1, '200', 'PLAZA VEA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(820, 1, '199', 'Ing. Abdul Carrillo Segura', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 516, 'Direccion 111', NULL, NULL, NULL),
+(821, 1, '189', 'CESAR AUGUSTO PIZARRO ROBLEDO', 'GERENTE GENERAL/ REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 55, 'Direccion 111', NULL, NULL, NULL),
+(822, 1, '197', 'Yuri Perales', 'Gerente de Proyectos', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 518, 'Direccion 111', NULL, NULL, NULL),
+(823, 1, '187', 'SAMUEL LAURA RAMON', 'GERENTE DE OPERACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 519, 'Direccion 111', NULL, NULL, NULL),
+(824, 1, '7780055', 'GARCIA DIENSTMAIER JORGE ERNESTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 436, 'Direccion 111', NULL, NULL, NULL),
+(825, 1, '206', 'LA RUEDA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 520, 'Direccion 111', NULL, NULL, NULL),
+(826, 1, '195', 'FARMA NATURA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 521, 'Direccion 111', NULL, NULL, NULL),
+(827, 1, '90', 'INVERSIONES SUR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 522, 'Direccion 111', NULL, NULL, NULL),
+(828, 1, '87', 'FRUTICA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 523, 'Direccion 111', NULL, NULL, NULL),
+(829, 1, '86', 'PARQUE GOURMET', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 524, 'Direccion 111', NULL, NULL, NULL),
+(830, 1, '10108823', 'ANGULO ACEVEDO PEDRO DOLORES', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 525, 'Direccion 111', NULL, NULL, NULL),
+(831, 1, '84', 'HUAMANI ROMERO TORIBIO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 526, 'Direccion 111', NULL, NULL, NULL),
+(832, 1, '9537156', 'ALEJANDRO HUMBERTO FUENTES CARDENAS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 527, 'Direccion 111', NULL, NULL, NULL),
+(833, 1, '82', 'RESTAURANTE LA ESTACION', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 529, 'Direccion 111', NULL, NULL, NULL),
+(834, 1, '81', 'EL CRUCE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 530, 'Direccion 111', NULL, NULL, NULL),
+(835, 1, '9343334', 'JUAN JOSE FELIPE CALLE QUIROS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 528, 'Direccion 111', NULL, NULL, NULL),
+(836, 1, '80', 'AZHAR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 531, 'Direccion 111', NULL, NULL, NULL),
+(837, 1, '79', 'KARINA RUTH OLIVA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 532, 'Direccion 111', NULL, NULL, NULL),
+(838, 1, '9166676', 'Abelardo Carlos Eyzaguirre Talledo', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 533, 'Direccion 111', NULL, NULL, NULL),
+(839, 1, '78', 'Alejandro Ruiz Reynaga', 'Encargado de Desarrollo de Negocios', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 533, 'Direccion 111', NULL, NULL, NULL),
+(840, 1, '65', 'Alexander Coronel', 'Administrador', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 533, 'Direccion 111', NULL, NULL, NULL),
+(841, 1, '569367', 'MATIAS FRANCISCO STAMM MORENO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 249, 'Direccion 111', NULL, NULL, NULL),
+(842, 1, '76', 'EPS. EMAPICA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 534, 'Direccion 111', NULL, NULL, NULL),
+(843, 1, '88', 'MARIA TERESA RAMIREZ RABASA', 'Gerente de Cuentas Corporativas', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.cosapidata.com.pe', 3, 535, 'Direccion 111', NULL, NULL, NULL),
+(844, 1, '74', 'EL OTRO PEÑONCITO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 536, 'Direccion 111', NULL, NULL, NULL),
+(845, 1, '43382842', 'IMPRESIONES ARIES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 501, 'Direccion 111', NULL, NULL, NULL),
+(846, 1, '7244357', 'LUIS HEREDIA', 'Director Gerente', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 931, 'Direccion 111', NULL, NULL, NULL),
+(847, 1, '72', 'JAIME RIVERA', 'Gerente Comercial', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 538, 'Direccion 111', NULL, NULL, NULL),
+(848, 1, '71', 'DANIEL GUTIERREZ CASTILLO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 539, 'Direccion 111', NULL, NULL, NULL),
+(849, 1, '7730978', 'LIBRERIA EL SABER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 540, 'Direccion 111', NULL, NULL, NULL),
+(850, 1, '41589516', 'JACK RONALD GONZALES MARQUEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 541, 'Direccion 111', NULL, NULL, NULL),
+(851, 1, '69', 'ROBERTO IPINCE HAAKER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', 'www.essacweb.com', 3, 542, 'Direccion 111', NULL, NULL, NULL),
+(852, 1, '9537150', 'LUIS FERNANDO MEDINA ZAMBRANO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 543, 'Direccion 111', NULL, NULL, NULL),
+(853, 1, '67', 'SILVI MORON ALMEYDA', 'GERENTE PLANEAMIENTO DE PROY. TERCEROS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(854, 1, '66', 'CYNTHIA ZEGARRA BERNAL', 'AREA DE DISEÑO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(855, 1, '100', 'HUMBERTO HUAPAYA PEREZ', 'JEFE DE DISEÑO - GERENCIA DE INFRAESTRUCTURA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(856, 1, '8817641', 'ALEJANDRO TEODORO OBREGON RIMAC', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 544, 'Direccion 111', NULL, NULL, NULL),
+(857, 1, '102', 'LA PONDEROSA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 545, 'Direccion 111', NULL, NULL, NULL),
+(858, 1, '77', 'CHIFA CENTRAL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 546, 'Direccion 111', NULL, NULL, NULL),
+(859, 1, '111', 'CAROLA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 547, 'Direccion 111', NULL, NULL, NULL),
+(860, 1, '110', 'BOTICAS FASA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 548, 'Direccion 111', NULL, NULL, NULL),
+(861, 1, '32783485', 'ROMERO CHAVEZ LUIS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 549, 'Direccion 111', NULL, NULL, NULL),
+(862, 1, '32789357', 'VASQUEZ PEREYRA NERIDA OLGA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 550, 'Direccion 111', NULL, NULL, NULL),
+(863, 1, '107', 'Maria Teresa Vega Rabasa', 'Gerente de Cuentas', NULL, 'Testing', 'kpalma@corp2torres.com', 'cosapidata.com.pe', 3, 531, 'Direccion 111', NULL, NULL, NULL),
+(864, 1, '32967716', 'AGUILAR ROJAS HEBER LEVI', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 551, 'Direccion 111', NULL, NULL, NULL),
+(865, 1, '105', 'KAREN RAMIREZ-GASTON', 'ARQUITECTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 543, 'Direccion 111', NULL, NULL, NULL),
+(866, 1, '104', 'abdul Carrillo', 'Gerente general', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.gescel.com.pe', 3, 517, 'Direccion 111', NULL, NULL, NULL),
+(867, 1, '103', 'JOSE FERRARI', 'JEFE DE INGENIERIA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(868, 1, '89', 'Ricardo ochoa', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.coeltaperu.com', 3, 553, 'Direccion 111', NULL, NULL, NULL),
+(869, 1, '25800357', 'Edwin Jack Garcia Mendez', 'Gerente  General', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.ensol.com.pe', 3, 554, 'Direccion 111', NULL, NULL, NULL),
+(870, 1, '7738981', 'KAUFMAN BETTERMAN HARRY', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 557, 'Direccion 111', NULL, NULL, NULL),
+(871, 1, '21565870', 'YAMASHIRO ORE GUILLERMO ENRIQUE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 558, 'Direccion 111', NULL, NULL, NULL),
+(872, 1, '21463088', 'YAMASHIRO ORE CESAR ARTURO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 559, 'Direccion 111', NULL, NULL, NULL),
+(873, 1, '43436686', 'HERNANDEZ MARTHANS SRIRLEY ELIZABETH', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 560, 'Direccion 111', NULL, NULL, NULL),
+(874, 1, '10223232', 'TREISTMAN MALAMUD RAFAEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 561, 'Direccion 111', NULL, NULL, NULL),
+(875, 1, '21562772', 'GALARZA OSCANOA VILMA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 562, 'Direccion 111', NULL, NULL, NULL),
+(876, 1, '21567567', 'DEL CASTILLO SALGUERO ARMANDI DONATO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 563, 'Direccion 111', NULL, NULL, NULL),
+(877, 1, '24414759', 'SAYRITUPAC SANCHEZ DEMETRIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 564, 'Direccion 111', NULL, NULL, NULL),
+(878, 1, '21532705', 'MEDINA VDA DE SPANO REBECA LILIAN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 565, 'Direccion 111', NULL, NULL, NULL),
+(879, 1, '21544115', 'HIDALGO RAMIREZ GERBERT RAMIRO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 566, 'Direccion 111', NULL, NULL, NULL),
+(880, 1, '32933856', 'GIL CAPURRO KELLY YVETTS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 567, 'Direccion 111', NULL, NULL, NULL),
+(881, 1, '9736498', 'FLORES FERNANDEZ LUIS ENRIQUE', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 568, 'Direccion 111', NULL, NULL, NULL),
+(882, 1, '426915', 'FLORES CHAVEZ PASTOR TIMOTEO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 569, 'Direccion 111', NULL, NULL, NULL),
+(883, 1, '42422625', 'GALVEZ SANCHEZ CRISTIAN JORGE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 570, 'Direccion 111', NULL, NULL, NULL),
+(884, 1, '97', 'ENRIQUE SAMANEZ', 'JEFE OBRAS GENERALES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1428, 'Direccion 111', NULL, NULL, NULL),
+(885, 1, '6248356', 'AÑANCA QUISPE TEODOR CIPRIAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 339, 'Direccion 111', NULL, NULL, NULL),
+(886, 1, '96', 'CAROLINA MURGA', 'ASESORA DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 15, 'Direccion 111', NULL, NULL, NULL),
+(887, 1, '95', 'MAURICIO MENA', 'GERENTE TIENDA IZAGUIRRE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 515, 'Direccion 111', NULL, NULL, NULL),
+(888, 1, '94', 'JOEL FERNANDEZ', 'SUB GERENTE TIENDA PLAZA VEA IZAGUIRRE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 515, 'Direccion 111', NULL, NULL, NULL),
+(889, 1, '93', 'CRISTHIAN EGUSQUIZA SUAREZ', 'JEFE MANTENIMIENTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 515, 'Direccion 111', NULL, NULL, NULL),
+(890, 1, '62', 'ELVYS FLORIAN', 'SEGURIDAD IZAGUIRRE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 515, 'Direccion 111', NULL, NULL, NULL),
+(891, 1, '91', 'OSCAR MARREROS RUIZ', 'ASISTENTE OB GENERALES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 515, 'Direccion 111', NULL, NULL, NULL),
+(892, 1, '75', 'JOSEDUARDO CHINCHAY', 'ASISTENTE OB GENERALES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 515, 'Direccion 111', NULL, NULL, NULL),
+(893, 1, '112', 'RONALD ESPINOZA ALANYA', 'ASISTENTE BACK OFFICE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 515, 'Direccion 111', NULL, NULL, NULL),
+(894, 1, '53', 'MARKO ILIZARBE', 'JEFE DE COMPRAS & MANTENIMIENTO', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.lge.com.pe', 3, 538, 'Direccion 111', NULL, NULL, NULL),
+(895, 1, '38', 'TATIANA PAICO', 'ASISTENTE VISUAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 515, 'Direccion 111', NULL, NULL, NULL),
+(896, 1, '37', 'PAOLO PITA', 'GERENTE DE LOCATARIOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 515, 'Direccion 111', NULL, NULL, NULL),
+(897, 1, '36', 'LEONARDO BERNEDO', 'SAFETY', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(898, 1, '35', 'JAIME SEGOVIA', 'SECURITY', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 515, 'Direccion 111', NULL, NULL, NULL),
+(899, 1, '34', 'MATILDE VASQUEZ', 'SUB GERENTE PLAZA VEA IZAGUIRRE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 515, 'Direccion 111', NULL, NULL, NULL),
+(900, 1, '9644367', 'LUDWIG ECHEVARRIA', 'ING. ESTRUCTURAL - GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 571, 'Direccion 111', NULL, NULL, NULL),
+(901, 1, '7817702', 'PANIZO OTERO ALFONSO JESUS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 542, 'Direccion 111', NULL, NULL, NULL),
+(902, 1, '33', 'FAMA FUENTE DE SODA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 572, 'Direccion 111', NULL, NULL, NULL),
+(903, 1, '32', 'CESAR CASTILLO RAFAEL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1607, 'Direccion 111', NULL, NULL, NULL),
+(904, 1, '31', 'ABRAHAM POBLETE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1504, 'Direccion 111', NULL, NULL, NULL),
+(905, 1, '30', 'LA CABAÑA DEL CHALAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 575, 'Direccion 111', NULL, NULL, NULL),
+(906, 1, '29', 'VALEXNET', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 576, 'Direccion 111', NULL, NULL, NULL),
+(907, 1, '19', 'BOTICAS ARCANGEL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 578, 'Direccion 111', NULL, NULL, NULL),
+(908, 1, '46043269', 'DUEÑAS VELASQUEZ, LISSETT LIDIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 580, 'Direccion 111', NULL, NULL, NULL),
+(909, 1, '27', 'HOTEL ARAMELI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 581, 'Direccion 111', NULL, NULL, NULL),
+(910, 1, '7641609', 'VERA BARANDIARAN LUIS', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 582, 'Direccion 111', NULL, NULL, NULL),
+(911, 1, '7909895', 'VIVAR ROMERO GERMAN E.', 'TITULAR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 583, 'Direccion 111', NULL, NULL, NULL),
+(912, 1, '39', 'KIMO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 584, 'Direccion 111', NULL, NULL, NULL),
+(913, 1, '25', 'NAPOLITANA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 585, 'Direccion 111', NULL, NULL, NULL),
+(914, 1, '24', 'RESTAURANTE SAN ISIDRO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 586, 'Direccion 111', NULL, NULL, NULL),
+(915, 1, '23', 'ALBERTO BONOMINI M', 'GERENTE GENERAL', '421-9448', 'Testing', 'kpalma@corp2torres.com', 'www.tribecasac.com', 3, 1489, 'Direccion 111', NULL, NULL, NULL),
+(916, 1, '22', 'TIPEOS JOSELY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 588, 'Direccion 111', NULL, NULL, NULL),
+(917, 1, '1', 'ANTERO RODRIGUEZ PADROS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1634, 'Direccion 111', NULL, NULL, NULL),
+(918, 1, '14', 'HOTEL PREMIER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 590, 'Direccion 111', NULL, NULL, NULL),
+(919, 1, '21', 'ROBERTO LEVI PEREZ CHAMORRO', 'EJECUTIVO DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1332, 'Direccion 111', NULL, NULL, NULL),
+(920, 1, '11', 'LA CALETA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 592, 'Direccion 111', NULL, NULL, NULL),
+(921, 1, '496271', 'PALMA PENALOZA LUIS DANIEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 593, 'Direccion 111', NULL, NULL, NULL),
+(922, 1, '10', 'LUCY ESPADÍN RIVERA', 'VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 593, 'Direccion 111', NULL, NULL, NULL),
+(923, 1, '9', 'EDUARDO MARTINEZ', 'Gerente de Obra', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 515, 'Direccion 111', NULL, NULL, NULL),
+(924, 1, '8', 'HONGYING ZHOU', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1652, 'Direccion 111', NULL, NULL, NULL),
+(925, 1, '7', 'OMAR CHUNG', 'Supervisor de Obra', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 594, 'Direccion 111', NULL, NULL, NULL),
+(926, 1, '6772282', 'ROXANA VELASQUEZ VILADEGUT', 'INGENIERA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(927, 1, '10059085', 'YAÑEZ OLARDE EDMUNDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 595, 'Direccion 111', NULL, NULL, NULL),
+(928, 1, '6', 'CARLOS LOO YEP', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1649, 'Direccion 111', NULL, NULL, NULL),
+(929, 1, '5', 'OSCAR RAUL SANCHEZ POLLI', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1584, 'Direccion 111', NULL, NULL, NULL),
+(930, 1, '4', 'MARTHA INES RABANAL DE LA PUENTE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1640, 'Direccion 111', NULL, NULL, NULL),
+(931, 1, '20', 'FREDDY ANDRES HUAYHUAPUMA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 600, 'Direccion 111', NULL, NULL, NULL),
+(932, 1, '12', 'ENRIQUEZ LOPE CARLOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 601, 'Direccion 111', NULL, NULL, NULL),
+(933, 1, '26', 'ENRIQUEZ LOPE CARLOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 601, 'Direccion 111', NULL, NULL, NULL),
+(934, 1, '51', 'JOSE ENRIQUE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 603, 'Direccion 111', NULL, NULL, NULL),
+(935, 1, '63', 'SANIGLO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 604, 'Direccion 111', NULL, NULL, NULL),
+(936, 1, '292313450', 'GERMAN JAVIER OCHOA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 605, 'Direccion 111', NULL, NULL, NULL),
+(937, 1, '28', 'KAREN MELIZA CARBAJAL VALDIVIA', 'COORDINADORA DE INFRAESTRUCTURA', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.crediscotia.com.pe', 3, 602, 'Direccion 111', NULL, NULL, NULL),
+(938, 1, '61', 'PEDRO SALDIAS', 'ARQUITECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 602, 'Direccion 111', NULL, NULL, NULL),
+(939, 1, '60', 'CARLOS GONZALES TABOADA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 602, 'Direccion 111', NULL, NULL, NULL),
+(940, 1, '29524610', 'HUERTA ALPACA MONICA PASTORA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 606, 'Direccion 111', NULL, NULL, NULL),
+(941, 1, '59', 'LAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 607, 'Direccion 111', NULL, NULL, NULL),
+(942, 1, '58', 'FUNDACION IGNACIA R. VDA DE CANEVARO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 608, 'Direccion 111', NULL, NULL, NULL),
+(943, 1, '57', 'MARIA PIA CALDERON', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 609, 'Direccion 111', NULL, NULL, NULL),
+(944, 1, '56', 'CESAR ARTURO YAMASHIRO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 621, 'Direccion 111', NULL, NULL, NULL),
+(945, 1, '55', 'ZELADA SILVA ANIBAL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 610, 'Direccion 111', NULL, NULL, NULL),
+(946, 1, '54', 'ALFREDO VIZCARRA CHIRINOS', 'HB & LEGAL MANAGER', '4150084', 'Testing', 'kpalma@corp2torres.com', 'www.lge.com.pe', 3, 538, 'Direccion 111', NULL, NULL, NULL),
+(947, 1, '19863989', 'MARUJA AMANDA SOLIS HUAMAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 612, 'Direccion 111', NULL, NULL, NULL),
+(948, 1, '7207982', 'CHINEN HIGA MANUEL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 613, 'Direccion 111', NULL, NULL, NULL),
+(949, 1, '40', 'LUIS ORTIZ IBERICO', 'GERENTE FINANCIERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 614, 'Direccion 111', NULL, NULL, NULL),
+(950, 1, '52', 'BASILIO GUTIERREZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 615, 'Direccion 111', NULL, NULL, NULL),
+(951, 1, '64', 'MORINI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 616, 'Direccion 111', NULL, NULL, NULL),
+(952, 1, '50', 'DORA MARIA SIMEON', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 617, 'Direccion 111', NULL, NULL, NULL),
+(953, 1, '49', 'LINDO PERU', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 618, 'Direccion 111', NULL, NULL, NULL),
+(954, 1, '48', 'BERYL KATHERINE ZARATE HIDALGO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 619, 'Direccion 111', NULL, NULL, NULL),
+(955, 1, '47', 'JANNINA LIZARBE MARQUEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 620, 'Direccion 111', NULL, NULL, NULL),
+(956, 1, '46', 'SANTA LEONARDA HUAYTA VENTURA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 621, 'Direccion 111', NULL, NULL, NULL),
+(957, 1, '51782470', 'ZENG WENCHENG', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 622, 'Direccion 111', NULL, NULL, NULL),
+(958, 1, '45', 'RAMIREZ PALOMINO VICENTE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 623, 'Direccion 111', NULL, NULL, NULL),
+(959, 1, '9139811', 'RIVAS SANCHEZ HUGO ALVARO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 86, 'Direccion 111', NULL, NULL, NULL),
+(960, 1, '6248356', 'AÑANCA QUISPE TEODOR CIPRIAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 624, 'Direccion 111', NULL, NULL, NULL),
+(961, 1, '44', 'E&M GROUP', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 625, 'Direccion 111', NULL, NULL, NULL),
+(962, 1, '43', 'VENI S.A.C.', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 626, 'Direccion 111', NULL, NULL, NULL),
+(963, 1, '40061885', 'ALVARO HAROLD RIVAS ARIAS', 'GERENTE DE PROYECTOS Y OBRAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 627, 'Direccion 111', NULL, NULL, NULL),
+(964, 1, '9139811', 'RIVAS SANCHEZ HUGO ALVARO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 627, 'Direccion 111', NULL, NULL, NULL),
+(965, 1, '8193531', 'Pablo Zimmermann Mujica', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(966, 1, '40125801', 'ALCORTA DULANTO MARIA DEL ROSARIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 628, 'Direccion 111', NULL, NULL, NULL),
+(967, 1, '8250419', 'ODRIA ARMESTAR CESAR MANUEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 79, 'Direccion 111', NULL, NULL, NULL),
+(968, 1, '42', 'YANINA RUEDA M.', 'JEFA DE SERVICIOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 79, 'Direccion 111', NULL, NULL, NULL),
+(969, 1, '2', 'ROSALIA AMPUERO SANDOVAL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1638, 'Direccion 111', NULL, NULL, NULL),
+(970, 1, '137', 'SALUD PHARMA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 630, 'Direccion 111', NULL, NULL, NULL),
+(971, 1, '194', 'GRUPO PANA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 631, 'Direccion 111', NULL, NULL, NULL),
+(972, 1, '10027272', 'CASTRO RAMIREZ JUAN CARLOS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 632, 'Direccion 111', NULL, NULL, NULL),
+(973, 1, '8145547', 'WALTER  CHUQUIANO HINOSTROZA', 'ASISTENTE ADMINISTRATIVO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(974, 1, '41447169', 'JOSE BRUNO SIPION', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 633, 'Direccion 111', NULL, NULL, NULL),
+(975, 1, '6248356', 'AÑANCA QUISPE TEODOR CIPRIAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 339, 'Direccion 111', NULL, NULL, NULL),
+(976, 1, '186', 'Julian Ramirez', 'Encargado de Mantenimiento', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 251, 'Direccion 111', NULL, NULL, NULL),
+(977, 1, '7705885', 'HERRERA TAVARA JUAN JOSE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 634, 'Direccion 111', NULL, NULL, NULL),
+(978, 1, '185', 'JOSE ESTELA RAMIREZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 634, 'Direccion 111', NULL, NULL, NULL),
+(979, 1, '184', 'ALIM FERNANDEZ', 'ASESOR TECNICO COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 157, 'Direccion 111', NULL, NULL, NULL),
+(980, 1, '183', 'ANNELISE BLACK FERRARI', 'VENDEDORA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 15, 'Direccion 111', NULL, NULL, NULL),
+(981, 1, '29409248', 'BELLIDO ALEMAN JUAN HERNAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 635, 'Direccion 111', NULL, NULL, NULL),
+(982, 1, '29703281', 'CORRALES RAMOS DIANA PAOLA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 636, 'Direccion 111', NULL, NULL, NULL),
+(983, 1, '181', 'ALEJANDRO CORRALES ZEA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 636, 'Direccion 111', NULL, NULL, NULL),
+(984, 1, '40294463', 'CRUZ SARAZA GERMAN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 637, 'Direccion 111', NULL, NULL, NULL),
+(985, 1, '179', 'FELICIANO TUESTA', 'VENDEDOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 638, 'Direccion 111', NULL, NULL, NULL),
+(986, 1, '10171940', 'SALOMON SANSUR MUNIR EDUARDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 638, 'Direccion 111', NULL, NULL, NULL),
+(987, 1, '164', 'GERMAN JAVIER OCHOA VELASCC', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 640, 'Direccion 111', NULL, NULL, NULL),
+(988, 1, '176', 'LUZA DE COQUE NATIVIDAD', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 641, 'Direccion 111', NULL, NULL, NULL),
+(989, 1, '188', 'ROXANA HUANCA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 642, 'Direccion 111', NULL, NULL, NULL),
+(990, 1, '41205534', 'JORGE CALINI CHOQUE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 643, 'Direccion 111', NULL, NULL, NULL),
+(991, 1, '173', 'IRMA MENDOZA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 644, 'Direccion 111', NULL, NULL, NULL),
+(992, 1, '10282044', 'FLORES GORRITTI FELIPE OSCAR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 646, 'Direccion 111', NULL, NULL, NULL),
+(993, 1, '172', 'ALIZON HONELIA CHIRE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 648, 'Direccion 111', NULL, NULL, NULL),
+(994, 1, '171', 'JUAN FRANCISCO TERAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 649, 'Direccion 111', NULL, NULL, NULL),
+(995, 1, '170', 'CONSUELO MARISOL YUCRA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 650, 'Direccion 111', NULL, NULL, NULL),
+(996, 1, '169', 'OSWALDO CHACON CARPIO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 651, 'Direccion 111', NULL, NULL, NULL),
+(997, 1, '168', 'JOSE ANTONIO DE LA BORDA DURAND', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 652, 'Direccion 111', NULL, NULL, NULL),
+(998, 1, '167', 'VILMA REYMER NIETO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 653, 'Direccion 111', NULL, NULL, NULL),
+(999, 1, '166', 'PAOLA MARGOT FARFAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 654, 'Direccion 111', NULL, NULL, NULL);
+INSERT INTO `tb_personacontacto` (`id`, `tb_empresa_id`, `dni`, `nombre`, `cargo`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_companiacontacto_id`, `direccion`, `tb_pais_id`, `tb_departamento_id`, `tb_distrito_id`) VALUES
+(1000, 1, '29318158', 'DIAZ HUERTAS JOSE ALFONSO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 656, 'Direccion 111', NULL, NULL, NULL),
+(1001, 1, '175', 'EL HERRAJE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 657, 'Direccion 111', NULL, NULL, NULL),
+(1002, 1, '41129853', 'BERNANDINO PALOMINO QUISPE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 770, 'Direccion 111', NULL, NULL, NULL),
+(1003, 1, '10223232', 'TREISTMAN MALAMUD RAFAEL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 647, 'Direccion 111', NULL, NULL, NULL),
+(1004, 1, '29324968', 'ORDOÑEZ CAMARGO RAMIRO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 645, 'Direccion 111', NULL, NULL, NULL),
+(1005, 1, '30676027', 'REMIS HUMBERTO ZEGARRA MALDONADO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 794, 'Direccion 111', NULL, NULL, NULL),
+(1006, 1, '998130521', 'LUIS BAYONA', 'SUB GERENTE DE INSTALACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 436, 'Direccion 111', NULL, NULL, NULL),
+(1007, 1, '196', 'EL TABLON FOOD CENTER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 658, 'Direccion 111', NULL, NULL, NULL),
+(1008, 1, '292499120', 'JOSE ANTONIO ENRIQUE MEDINA DEL CARPIO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 659, 'Direccion 111', NULL, NULL, NULL),
+(1009, 1, '198', 'CORFEMIEL SAC', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 660, 'Direccion 111', NULL, NULL, NULL),
+(1010, 1, '223', 'TOMASA VILCA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 662, 'Direccion 111', NULL, NULL, NULL),
+(1011, 1, '222', 'ENRIQUEZ LOPE CARLOS RENE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 663, 'Direccion 111', NULL, NULL, NULL),
+(1012, 1, '6480269', 'DALY ARBURU JAIME LUIS GONZALO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 664, 'Direccion 111', NULL, NULL, NULL),
+(1013, 1, '7844781', 'VALLEJO LEIGH LUIS FELIPE', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 665, 'Direccion 111', NULL, NULL, NULL),
+(1014, 1, '221', 'HUAMANI HERNANDEZ MASSIEL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 666, 'Direccion 111', NULL, NULL, NULL),
+(1015, 1, '220', 'A&C INVERSIONES EMPRESARIALES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 667, 'Direccion 111', NULL, NULL, NULL),
+(1016, 1, '219', 'VLADIMIR CUBA ASTORAY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 668, 'Direccion 111', NULL, NULL, NULL),
+(1017, 1, '9298936', 'VIDAL MALDONADO, ALBERTO MARTIN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 669, 'Direccion 111', NULL, NULL, NULL),
+(1018, 1, '492', 'JANNINA ZLOCZOVER', 'VENDEDORA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 15, 'Direccion 111', NULL, NULL, NULL),
+(1019, 1, '218', 'ARIANE CARRILLO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 670, 'Direccion 111', NULL, NULL, NULL),
+(1020, 1, '10082746345', 'STISIN WALLACH ARIE FELIPE', 'DIR.GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 670, 'Direccion 111', NULL, NULL, NULL),
+(1021, 1, '9753173', 'FORD DEZA MALCOLM SPENCER JUNIOR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 435, 'Direccion 111', NULL, NULL, NULL),
+(1022, 1, '217', 'ROSARIO HUERTA', 'VENDEDORA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 435, 'Direccion 111', NULL, NULL, NULL),
+(1023, 1, '207', 'JUAN PEDRO RIVERA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 671, 'Direccion 111', NULL, NULL, NULL),
+(1024, 1, '7884484', 'POLLAROLO GARCIA DE RIVERA EDDA MAGDALENA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 671, 'Direccion 111', NULL, NULL, NULL),
+(1025, 1, '9868461', 'IVAN FRANCIS FALCON HURTADO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 672, 'Direccion 111', NULL, NULL, NULL),
+(1026, 1, '8826326', 'CHAMORRO CONCHA JORGE BENITO', 'GERENTE GENERAL', '8671041', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 673, 'Direccion 111', NULL, NULL, NULL),
+(1027, 1, '224', 'LUCAS OSTOS FLORES', 'PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 673, 'Direccion 111', NULL, NULL, NULL),
+(1028, 1, '9340301', 'NAKANO HIGA ALBERTO MITSUO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 674, 'Direccion 111', NULL, NULL, NULL),
+(1029, 1, '213', 'PABLO ARBULO', 'GERENTE DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 674, 'Direccion 111', NULL, NULL, NULL),
+(1030, 1, '212', 'ESTEBAN NAKANO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 674, 'Direccion 111', NULL, NULL, NULL),
+(1031, 1, '7865136', 'SARMIENTO NOYA LEONCIO ARTURO', 'GERENTE GRAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 675, 'Direccion 111', NULL, NULL, NULL),
+(1032, 1, '211', 'FELIPE VARGAS', 'DIRECTOR DE PROYECTOS PROFESIONALES', '242-9301', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 675, 'Direccion 111', NULL, NULL, NULL),
+(1033, 1, '25535125', 'TORRES BELTRAN EDUARDO DANIEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 912, 'Direccion 111', NULL, NULL, NULL),
+(1034, 1, '29571687', 'ELIZABETH D. GONZALES ESPINOZA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 676, 'Direccion 111', NULL, NULL, NULL),
+(1035, 1, '9912123', 'FLORES MEDINA CHRISTIAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 677, 'Direccion 111', NULL, NULL, NULL),
+(1036, 1, '263', 'MULTIDATA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 678, 'Direccion 111', NULL, NULL, NULL),
+(1037, 1, '295653936', 'GABINO GABRIEL APAZA APAZA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 679, 'Direccion 111', NULL, NULL, NULL),
+(1038, 1, '40593973', 'DAVID WU HERRERA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 681, 'Direccion 111', NULL, NULL, NULL),
+(1039, 1, '190', 'FABIOLA ALVAREZ OCOLA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 682, 'Direccion 111', NULL, NULL, NULL),
+(1040, 1, '244', 'COMERCIAL SERGIOSS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 683, 'Direccion 111', NULL, NULL, NULL),
+(1041, 1, '29561807', 'JUAN CARLOS SARCCO QUISPE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 684, 'Direccion 111', NULL, NULL, NULL),
+(1042, 1, '115', 'JOSE MANUEL LONCONE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 685, 'Direccion 111', NULL, NULL, NULL),
+(1043, 1, '165', 'IMPRENTA MARITE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 686, 'Direccion 111', NULL, NULL, NULL),
+(1044, 1, '136', 'EL HUEQUITO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 687, 'Direccion 111', NULL, NULL, NULL),
+(1045, 1, '135', 'FARMACIA FASUR PERU', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 688, 'Direccion 111', NULL, NULL, NULL),
+(1046, 1, '134', 'MAINSA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 689, 'Direccion 111', NULL, NULL, NULL),
+(1047, 1, '133', 'BAZAR NELLY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 691, 'Direccion 111', NULL, NULL, NULL),
+(1048, 1, '132', 'SEGURIDAD Y FERRETERIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 692, 'Direccion 111', NULL, NULL, NULL),
+(1049, 1, '23763123', 'PARADA JUAN MANUEL', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 360, 'Direccion 111', NULL, NULL, NULL),
+(1050, 1, '130', 'LA ESPIGA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 693, 'Direccion 111', NULL, NULL, NULL),
+(1051, 1, '43967154', 'VEYSSAL IBRIAN KASSIN', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 694, 'Direccion 111', NULL, NULL, NULL),
+(1052, 1, '128', 'LA CASA DE MARGOTT', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 695, 'Direccion 111', NULL, NULL, NULL),
+(1053, 1, '29467558', 'BATTI GAMBOA MAURICIO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 696, 'Direccion 111', NULL, NULL, NULL),
+(1054, 1, '126', 'MARTHA ELENA MORALES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 697, 'Direccion 111', NULL, NULL, NULL),
+(1055, 1, '138', 'INVERSIONES FIGUEROA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 698, 'Direccion 111', NULL, NULL, NULL),
+(1056, 1, '124', 'GRIFO VALCARO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 699, 'Direccion 111', NULL, NULL, NULL),
+(1057, 1, '123', 'JIJAED GOURMET', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 700, 'Direccion 111', NULL, NULL, NULL),
+(1058, 1, '29227942', 'NANCY ESCOBAR MEDINA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 702, 'Direccion 111', NULL, NULL, NULL),
+(1059, 1, '122', 'GRIFOS VITO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 703, 'Direccion 111', NULL, NULL, NULL),
+(1060, 1, '29250579', 'TERRUÑO DE YARABAYA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 706, 'Direccion 111', NULL, NULL, NULL),
+(1061, 1, '121', 'PARRILLADAS AREQUIPEÑA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 707, 'Direccion 111', NULL, NULL, NULL),
+(1062, 1, '120', 'MASSIEL SOTELO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 709, 'Direccion 111', NULL, NULL, NULL),
+(1063, 1, '119', 'HELENA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 710, 'Direccion 111', NULL, NULL, NULL),
+(1064, 1, '29560860', 'CORRALES JARA BRENER MARTIN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 711, 'Direccion 111', NULL, NULL, NULL),
+(1065, 1, '292549674', 'CANDELARIA RAMOS DE RODRIGUEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 712, 'Direccion 111', NULL, NULL, NULL),
+(1066, 1, '29271635', 'DAVID SALINAS DE LA OLIVA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 708, 'Direccion 111', NULL, NULL, NULL),
+(1067, 1, '29731342', 'REYNA MARIVEL GUERREROS HINOJOSA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 816, 'Direccion 111', NULL, NULL, NULL),
+(1068, 1, '9974480', 'JOSE LUIS CUIPAL VASQUEZ', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1072, 'Direccion 111', NULL, NULL, NULL),
+(1069, 1, '117', 'Milda Canales', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 672, 'Direccion 111', NULL, NULL, NULL),
+(1070, 1, '116', 'MANOLO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 713, 'Direccion 111', NULL, NULL, NULL),
+(1071, 1, '29271991', 'CATELLIN DE DIBAN YRMA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 715, 'Direccion 111', NULL, NULL, NULL),
+(1072, 1, '29211116', 'NELIDA RAMIREZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 716, 'Direccion 111', NULL, NULL, NULL),
+(1073, 1, '29721280', 'LAURO VARGAS PAOLA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 717, 'Direccion 111', NULL, NULL, NULL),
+(1074, 1, '29239755', 'CONCHA FERNANDEZ CASTILLO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 718, 'Direccion 111', NULL, NULL, NULL),
+(1075, 1, '29373744', 'RODRIGUEZ CARPIO LURDES SOLEDAD', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 719, 'Direccion 111', NULL, NULL, NULL),
+(1076, 1, '127', 'EDUARDO JUAN INDACOCHEA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 720, 'Direccion 111', NULL, NULL, NULL),
+(1077, 1, '29335732', 'RAMOS DE AGUILAR MARUJA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 722, 'Direccion 111', NULL, NULL, NULL),
+(1078, 1, '161', 'LA COVACHA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 723, 'Direccion 111', NULL, NULL, NULL),
+(1079, 1, '160', 'FOTOCHECK DIGITAL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 724, 'Direccion 111', NULL, NULL, NULL),
+(1080, 1, '159', 'DIANA CANCHO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 725, 'Direccion 111', NULL, NULL, NULL),
+(1081, 1, '158', 'MULTISERVICIOS AREQUIPA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 727, 'Direccion 111', NULL, NULL, NULL),
+(1082, 1, '157', 'SILLAR WASSI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 728, 'Direccion 111', NULL, NULL, NULL),
+(1083, 1, '156', 'VIDRIERIA Y FERRETERIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 729, 'Direccion 111', NULL, NULL, NULL),
+(1084, 1, '155', 'AMALIA SOLEDAD TINTAYA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 730, 'Direccion 111', NULL, NULL, NULL),
+(1085, 1, '154', 'EXSUR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 731, 'Direccion 111', NULL, NULL, NULL),
+(1086, 1, '29326793', 'GOTH KIRPAL STEFAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 733, 'Direccion 111', NULL, NULL, NULL),
+(1087, 1, '139', 'ESTRUCTURAS METAL MADERA FORTEX', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 734, 'Direccion 111', NULL, NULL, NULL),
+(1088, 1, '151', 'PAPELES Y CARTULINAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 735, 'Direccion 111', NULL, NULL, NULL),
+(1089, 1, '163', 'LIBRERIA Y TOPOGRAFIA ORDONEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 736, 'Direccion 111', NULL, NULL, NULL),
+(1090, 1, '149', 'CARLOS ABAD ALCEDO', 'Jefatura de Proyectos & Ventas', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.rollsteelsrt.com', 3, 737, 'Direccion 111', NULL, NULL, NULL),
+(1091, 1, '6625799', 'MASSA PALACIOS CARLOS ANTONIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 737, 'Direccion 111', NULL, NULL, NULL),
+(1092, 1, '148', 'SOCIEDAD ELECTRICA DEL SUR OESTE S.A.', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 739, 'Direccion 111', NULL, NULL, NULL),
+(1093, 1, '42767248', 'RAMOS CRUZ MANUEL ARTURO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 741, 'Direccion 111', NULL, NULL, NULL),
+(1094, 1, '29291764', 'MARIN SUAREZ HERNAN MAXIMILIANO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 740, 'Direccion 111', NULL, NULL, NULL),
+(1095, 1, '146', 'REDM', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 742, 'Direccion 111', NULL, NULL, NULL),
+(1096, 1, '145', 'EXCEL COMPUTER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 743, 'Direccion 111', NULL, NULL, NULL),
+(1097, 1, '29565393', 'GABINO GABRIEL APAZA APAZA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 679, 'Direccion 111', NULL, NULL, NULL),
+(1098, 1, '41205534', 'CALINI CHOQUE JORGE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 639, 'Direccion 111', NULL, NULL, NULL),
+(1099, 1, '29376855', 'LLERENA TOLEDO JULIA ELNA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 930, 'Direccion 111', NULL, NULL, NULL),
+(1100, 1, '144', 'Omar Sempertegui', 'Supervisor de Obra', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(1101, 1, '10783319', 'Janet Manrique Carrasco', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 961, 'Direccion 111', NULL, NULL, NULL),
+(1102, 1, '143', 'Victor Algonier Madueño', 'Encargado de PDR de Obra', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(1103, 1, '142', 'ELECTRONCA GONZALES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 744, 'Direccion 111', NULL, NULL, NULL),
+(1104, 1, '141', 'SEAL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 746, 'Direccion 111', NULL, NULL, NULL),
+(1105, 1, '9627268', 'CUTISACA PONCE CARLOS SEBASTIAN', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 748, 'Direccion 111', NULL, NULL, NULL),
+(1106, 1, '30423374', 'CECILIA ANGELINA  DEL ROSARIO CAMPOS QUIPUZCO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 749, 'Direccion 111', NULL, NULL, NULL),
+(1107, 1, '140', 'STEVE ANDERSON WONG WONG', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 750, 'Direccion 111', NULL, NULL, NULL),
+(1108, 1, '314', 'AZNARAN NUÑEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 751, 'Direccion 111', NULL, NULL, NULL),
+(1109, 1, '29272233', 'ROMERO TAPIA JESUS ATILIO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 752, 'Direccion 111', NULL, NULL, NULL),
+(1110, 1, '29298321', 'ROSA MARTHA LAZO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 754, 'Direccion 111', NULL, NULL, NULL),
+(1111, 1, '313', 'EL TABLON - PIZZERIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 755, 'Direccion 111', NULL, NULL, NULL),
+(1112, 1, '29479521', 'VILLANUEVA SALAS FELICITAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 756, 'Direccion 111', NULL, NULL, NULL),
+(1113, 1, '29671908', 'POSTIGO CERPA DANIEL MARCELINO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 757, 'Direccion 111', NULL, NULL, NULL),
+(1114, 1, '312', 'OLAF TAFUR', 'JEFE DE VENTAS - EQUIPOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 759, 'Direccion 111', NULL, NULL, NULL),
+(1115, 1, '903442705', 'GINATTA CORONADO ANTONIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 759, 'Direccion 111', NULL, NULL, NULL),
+(1116, 1, '311', 'ASOCIACION COMITE DE TAXIS Nº 24', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 760, 'Direccion 111', NULL, NULL, NULL),
+(1117, 1, '29539413', 'JAVIER ERNESTOR CARPIO FLORES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 761, 'Direccion 111', NULL, NULL, NULL),
+(1118, 1, '29600288', 'MONICA ELANA ORTIZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 762, 'Direccion 111', NULL, NULL, NULL),
+(1119, 1, '309', 'LA SANGUCHERIA MERCADERES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 763, 'Direccion 111', NULL, NULL, NULL),
+(1120, 1, '308', 'SURGOURMET', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 764, 'Direccion 111', NULL, NULL, NULL),
+(1121, 1, '29542211', 'RODRIGUEZ CARPIO ZOILA ROSSANA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 765, 'Direccion 111', NULL, NULL, NULL),
+(1122, 1, '46725626', 'APAZA CANDIA MIGUEL ANGEL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 766, 'Direccion 111', NULL, NULL, NULL),
+(1123, 1, '306', 'ASTORGA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 767, 'Direccion 111', NULL, NULL, NULL),
+(1124, 1, '315', 'COESTI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 768, 'Direccion 111', NULL, NULL, NULL),
+(1125, 1, '304', 'GRIFO EL AVENTURERO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 769, 'Direccion 111', NULL, NULL, NULL),
+(1126, 1, '45992232', 'MARGARITA TAY MAURTUA', 'DISEÑADORA DE INTERIORES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(1127, 1, '6844070', 'MEJIA ROSALES VICTOR GUSTAVO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 772, 'Direccion 111', NULL, NULL, NULL),
+(1128, 1, '40033360', 'LLERENA ZAVALAGA CONNIE MARIAM', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 776, 'Direccion 111', NULL, NULL, NULL),
+(1129, 1, '302', 'HOTEL PAITITI AQP S.A.C.', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 777, 'Direccion 111', NULL, NULL, NULL),
+(1130, 1, '301', 'SAN FELIPE SUITES S.A.C.', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 778, 'Direccion 111', NULL, NULL, NULL),
+(1131, 1, '300', 'HONG KOMG - CHIFA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 779, 'Direccion 111', NULL, NULL, NULL),
+(1132, 1, '299', 'NEXTEL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 780, 'Direccion 111', NULL, NULL, NULL),
+(1133, 1, '324', 'BOTICAS FASA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 781, 'Direccion 111', NULL, NULL, NULL),
+(1134, 1, '326', 'LOS PORTALES ESTACIONAMIENTO S.A.C.', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 783, 'Direccion 111', NULL, NULL, NULL),
+(1135, 1, '7276734', 'RODRIGUEZ LARRAIN SALINAS', 'MANDATARIO NACIONAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 784, 'Direccion 111', NULL, NULL, NULL),
+(1136, 1, '307', 'LA COMPAÑIA SRL.', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 785, 'Direccion 111', NULL, NULL, NULL),
+(1137, 1, '332', 'SOL DE ICA NICE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 786, 'Direccion 111', NULL, NULL, NULL),
+(1138, 1, '331', 'LA OLLA DE JUANITA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 787, 'Direccion 111', NULL, NULL, NULL),
+(1139, 1, '330', 'SHIRLEY ELIZABETH HERNANDEZ MARTHANS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 788, 'Direccion 111', NULL, NULL, NULL),
+(1140, 1, '329', 'HUARANGO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 789, 'Direccion 111', NULL, NULL, NULL),
+(1141, 1, '328', 'ZINHA DEL PILAR URRUNAGA CONDE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 790, 'Direccion 111', NULL, NULL, NULL),
+(1142, 1, '327', 'NINACEVINCHA MARIA JESUS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 791, 'Direccion 111', NULL, NULL, NULL),
+(1143, 1, '316', 'JOSE ANTONIO MINAYA ZEA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 792, 'Direccion 111', NULL, NULL, NULL),
+(1144, 1, '325', 'FLORES HNOS.', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 569, 'Direccion 111', NULL, NULL, NULL),
+(1145, 1, '334', 'SEDAPAR S.A.', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 795, 'Direccion 111', NULL, NULL, NULL),
+(1146, 1, '43759818', 'Victor Andres Algonier Madueño', 'ENCARGADO DE PREVENCION DE RIESGOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(1147, 1, '9979263', 'BLANCO COLONIO JUAN FORTUNATO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 796, 'Direccion 111', NULL, NULL, NULL),
+(1148, 1, '8222954', 'MANRIQUE MORALES MIGUEL FELIPE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 797, 'Direccion 111', NULL, NULL, NULL),
+(1149, 1, '322', 'ALVARO FERRO CHAVEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 593, 'Direccion 111', NULL, NULL, NULL),
+(1150, 1, '40593973', 'WU HERRERA DAVID', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 799, 'Direccion 111', NULL, NULL, NULL),
+(1151, 1, '29659924', 'HERRERA VERGARA FERNANDO ARTURO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.grupotcmsac.com', 3, 800, 'Direccion 111', NULL, NULL, NULL),
+(1152, 1, '7561550', 'SALDAÑA ESTRADA JORGE LUIS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 802, 'Direccion 111', NULL, NULL, NULL),
+(1153, 1, '29470673', 'TEJADA MANSILLA CARMEN GUADALUPE', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 803, 'Direccion 111', NULL, NULL, NULL),
+(1154, 1, '7870657', 'CHIONG YED SILVIA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 804, 'Direccion 111', NULL, NULL, NULL),
+(1155, 1, '29622921', 'LIMA MAMANI MELCHOR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 805, 'Direccion 111', NULL, NULL, NULL),
+(1156, 1, '49838069', 'SU ZONGZHI', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 806, 'Direccion 111', NULL, NULL, NULL),
+(1157, 1, '29638372', 'FERRES ROMERO DE MUÑOZ DURDANE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 782, 'Direccion 111', NULL, NULL, NULL),
+(1158, 1, '29467558', 'BATTI GAMBOA MAURIZIO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 880, 'Direccion 111', NULL, NULL, NULL),
+(1159, 1, '305', 'VILCHES MARTINEZ JORGE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 95, 'Direccion 111', NULL, NULL, NULL),
+(1160, 1, '29215385', 'MELLO ALVAREZ DARIO LARO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 713, 'Direccion 111', NULL, NULL, NULL),
+(1161, 1, '277', 'LEE CA SING', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 779, 'Direccion 111', NULL, NULL, NULL),
+(1162, 1, '29289541', 'VALDIA VARGAS JESUS VENECIA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 728, 'Direccion 111', NULL, NULL, NULL),
+(1163, 1, '275', 'LEE KA SING', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 779, 'Direccion 111', NULL, NULL, NULL),
+(1164, 1, '40808499', 'STHEFANY MUÑOZ MUÑOZ', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 807, 'Direccion 111', NULL, NULL, NULL),
+(1165, 1, '49851065', 'LIN MEIZHEN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 808, 'Direccion 111', NULL, NULL, NULL),
+(1166, 1, '29685618', 'FERNANDEZ ORTEGA DANNY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 809, 'Direccion 111', NULL, NULL, NULL),
+(1167, 1, '29400079', 'EMILIANA RAMOS CUYA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 810, 'Direccion 111', NULL, NULL, NULL),
+(1168, 1, '270', 'JHONATAN MICHAEL SANCHEZ ARANDA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 811, 'Direccion 111', NULL, NULL, NULL),
+(1169, 1, '7780006', 'LUQUE MADENES MARIA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 812, 'Direccion 111', NULL, NULL, NULL),
+(1170, 1, '7780006', 'LUQUE BADENES MARIA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 813, 'Direccion 111', NULL, NULL, NULL),
+(1171, 1, '46105482', 'ANGEL JONATHAN MENDIZABAL VILCA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 814, 'Direccion 111', NULL, NULL, NULL),
+(1172, 1, '29251659', 'GERENDO CAYRO CONTRERAS', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 815, 'Direccion 111', NULL, NULL, NULL),
+(1173, 1, '29324755', 'EVANGELIO GUERREROS FLORES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 816, 'Direccion 111', NULL, NULL, NULL),
+(1174, 1, '29257418', 'GROVAS FERNANDEZ ANTONIO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 747, 'Direccion 111', NULL, NULL, NULL),
+(1175, 1, '29257418', 'GROVAS FERNANDEZ ANTONIO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 658, 'Direccion 111', NULL, NULL, NULL),
+(1176, 1, '30849812', 'ORTIS ZEGARRA JUAN LUIS', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 817, 'Direccion 111', NULL, NULL, NULL),
+(1177, 1, '29565393', 'APAZA APAZA GABINO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 818, 'Direccion 111', NULL, NULL, NULL),
+(1178, 1, '52137411', 'GUO HONGREN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 820, 'Direccion 111', NULL, NULL, NULL),
+(1179, 1, '8132354', 'CIEZA BARAZORDA AVELINO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 821, 'Direccion 111', NULL, NULL, NULL),
+(1180, 1, '29326793', 'GOCHT KIRPAL STEFAN', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 579, 'Direccion 111', NULL, NULL, NULL),
+(1181, 1, '29326793', 'GOTCHT KIRPAL STEFAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 578, 'Direccion 111', NULL, NULL, NULL),
+(1182, 1, '10059085', 'YAÑEZ OLARTE EDMUNDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 595, 'Direccion 111', NULL, NULL, NULL),
+(1183, 1, '7207284', 'JHONSON ALFARO KOENING MIGUEL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 822, 'Direccion 111', NULL, NULL, NULL),
+(1184, 1, '10224118', 'BAZAN ALVAREZ HECTOR MARCELO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 269, 'Direccion 111', NULL, NULL, NULL),
+(1185, 1, '7829514', 'JAVIER DESMAISON FERNANDINI', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1240, 'Direccion 111', NULL, NULL, NULL),
+(1186, 1, '7819514', 'DESMAISON FERNANDINI JAVIER ALEJANDRO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 758, 'Direccion 111', NULL, NULL, NULL),
+(1187, 1, '7829514', 'DESMAISON FERNADINI JAVIER ALEJANDRO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 267, 'Direccion 111', NULL, NULL, NULL),
+(1188, 1, '13002878', 'WAGNER HANS JURGEN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 771, 'Direccion 111', NULL, NULL, NULL),
+(1189, 1, '29289541', 'VALDIVIA VARGAS JESUS VENECIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 825, 'Direccion 111', NULL, NULL, NULL),
+(1190, 1, '6117223', 'SEGOVIA LUIS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 960, 'Direccion 111', NULL, NULL, NULL),
+(1191, 1, '29222890', 'CATALINA ROXANA CHAVEZ ASTORGA DE LLERENA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 826, 'Direccion 111', NULL, NULL, NULL),
+(1192, 1, '16659576', 'PERALTA TAPIA WILSON', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 827, 'Direccion 111', NULL, NULL, NULL),
+(1193, 1, '29461584', 'NAVARRO ANDRADE MANUEL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 760, 'Direccion 111', NULL, NULL, NULL),
+(1194, 1, '7829514', 'DESMAISON FERNANDINI JAVIER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 829, 'Direccion 111', NULL, NULL, NULL),
+(1195, 1, '16639819', 'AVILA GARCIA HUGO HENRY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 830, 'Direccion 111', NULL, NULL, NULL),
+(1196, 1, '9139352', 'BLEST GARCIA JUAN JILBERTO', 'DIRECTOR GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 831, 'Direccion 111', NULL, NULL, NULL),
+(1197, 1, '40230180', 'CASTILLO HUERTA BENITO GENARO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 833, 'Direccion 111', NULL, NULL, NULL),
+(1198, 1, '10685043', 'MERCADO MORON MIGUEL ANGEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 834, 'Direccion 111', NULL, NULL, NULL),
+(1199, 1, '8859087', 'TELLO MACAZANA, CELSO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1337, 'Direccion 111', NULL, NULL, NULL),
+(1200, 1, '9997821', 'CASTILLO ARANDA, JEAN PAUL AMADOR', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 835, 'Direccion 111', NULL, NULL, NULL),
+(1201, 1, '10778408', 'GAMBOA ALARCON, YONY AUGUSTO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 836, 'Direccion 111', NULL, NULL, NULL),
+(1202, 1, '29478895', 'BALLON SALAS BENITA NOEMI', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 837, 'Direccion 111', NULL, NULL, NULL),
+(1203, 1, '29477588', 'CHAVEZ ARANIBAL SABINO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 838, 'Direccion 111', NULL, NULL, NULL),
+(1204, 1, '291', 'SUSANA AMPARO MECEDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 839, 'Direccion 111', NULL, NULL, NULL),
+(1205, 1, '45062355', 'OSTOS AGUILAR CONRADO ALVARO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 840, 'Direccion 111', NULL, NULL, NULL),
+(1206, 1, '280', 'GILBERTO HUANCA MAMANI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 841, 'Direccion 111', NULL, NULL, NULL),
+(1207, 1, '401113962', 'GILBERTO HUANCA HUAMANI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 841, 'Direccion 111', NULL, NULL, NULL),
+(1208, 1, '44481518', 'JIMENEZ YRUPAILLA, FIORELLA VANESSA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 843, 'Direccion 111', NULL, NULL, NULL),
+(1209, 1, '2446726', 'SARDON ROSSEL OLGA JAMILETH', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 844, 'Direccion 111', NULL, NULL, NULL),
+(1210, 1, '43351504', 'VARGAS CRUZ PEDRO ROLANDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 845, 'Direccion 111', NULL, NULL, NULL),
+(1211, 1, '45116770', 'YHENNI MARISOL ROCA SANCA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 846, 'Direccion 111', NULL, NULL, NULL),
+(1212, 1, '40904869', 'NOBOA CHIRINOS FERNANDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 847, 'Direccion 111', NULL, NULL, NULL),
+(1213, 1, '12506350', 'VALDEZ JAEN ENRIQUE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 848, 'Direccion 111', NULL, NULL, NULL),
+(1214, 1, '30858784', 'GAMARRA ANDREU ATAHUALPA GUAZU', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 721, 'Direccion 111', NULL, NULL, NULL),
+(1215, 1, '31041772', 'PAZ GUILLEN JAIME SANTIAGO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 849, 'Direccion 111', NULL, NULL, NULL),
+(1216, 1, '29631851', 'MARLENE BEATRIZ TORRES ALVAREZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 655, 'Direccion 111', NULL, NULL, NULL),
+(1217, 1, '44030710', 'ADOLFO PARILLO LAZARINOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 850, 'Direccion 111', NULL, NULL, NULL),
+(1218, 1, '456610965', 'MOREYRA RAMOS PATRICK', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 851, 'Direccion 111', NULL, NULL, NULL),
+(1219, 1, '8254606', 'SALINAS SALAS PATRICIA ZENOBIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 852, 'Direccion 111', NULL, NULL, NULL),
+(1220, 1, '292011411', 'SALEM HUDSON MONTOYA NEYRA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 853, 'Direccion 111', NULL, NULL, NULL),
+(1221, 1, '488', 'JIMENEZ BENGOA MILTON ELISEO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 854, 'Direccion 111', NULL, NULL, NULL),
+(1222, 1, '6833469', 'CHAVARRIA  ESTRADA DALILA HILARIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 774, 'Direccion 111', NULL, NULL, NULL),
+(1223, 1, '29585587', 'FLORENTINO MARCIAL CAHUANA USCAMAYTA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 773, 'Direccion 111', NULL, NULL, NULL),
+(1224, 1, '30850169', 'VIDAURRAZAGA LOPEZ DE ROMAÑA JAVIER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 855, 'Direccion 111', NULL, NULL, NULL),
+(1225, 1, '497', 'CIAL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 856, 'Direccion 111', NULL, NULL, NULL),
+(1226, 1, '427', 'MAMA LUZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 857, 'Direccion 111', NULL, NULL, NULL),
+(1227, 1, '428', 'PIZZA AL PASO 1', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 858, 'Direccion 111', NULL, NULL, NULL),
+(1228, 1, '15750596', 'FLORES ESPINOZA VICTOR RAUL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 859, 'Direccion 111', NULL, NULL, NULL),
+(1229, 1, '9378658', 'GARCIA RAGGIO LEANDRO LUIS MARTIN', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 732, 'Direccion 111', NULL, NULL, NULL),
+(1230, 1, '29218688', 'DEL CARPIO MARQUEZ RULO RODOLFO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 753, 'Direccion 111', NULL, NULL, NULL),
+(1231, 1, '10060630', 'SALAZAR YAMIS EDUARDO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 705, 'Direccion 111', NULL, NULL, NULL),
+(1232, 1, '30674940', 'JULIANA SULLA YUPANQUI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 860, 'Direccion 111', NULL, NULL, NULL),
+(1233, 1, '433', 'INVERSIONES SAN ROQUE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 862, 'Direccion 111', NULL, NULL, NULL),
+(1234, 1, '7912139', 'HIGA HIGA AGUSTIN', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 863, 'Direccion 111', NULL, NULL, NULL),
+(1235, 1, '434', 'SERV. PIZARRO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 864, 'Direccion 111', NULL, NULL, NULL),
+(1236, 1, '369815', 'HERMELINDA MARIÑO QUINTANILLA DE VELARDE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 865, 'Direccion 111', NULL, NULL, NULL),
+(1237, 1, '29517519', 'PASTOR PORTOCARRERO JOVAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 872, 'Direccion 111', NULL, NULL, NULL),
+(1238, 1, '29322533', 'MARY LUZ LLERENA MEZA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 867, 'Direccion 111', NULL, NULL, NULL),
+(1239, 1, '426', 'COMPU OFERTAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 868, 'Direccion 111', NULL, NULL, NULL),
+(1240, 1, '438', 'AMP COMPUTER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 869, 'Direccion 111', NULL, NULL, NULL),
+(1241, 1, '439', 'SERVICIOS LUNA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 870, 'Direccion 111', NULL, NULL, NULL),
+(1242, 1, '440', 'SERVI LLAVES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 871, 'Direccion 111', NULL, NULL, NULL),
+(1243, 1, '29517519', 'PASTOR PORTOCARRERO JOVAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 872, 'Direccion 111', NULL, NULL, NULL),
+(1244, 1, '442', 'CHUNG ZHI CHOY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 873, 'Direccion 111', NULL, NULL, NULL),
+(1245, 1, '29208087', 'ABUAPARA CHAMI NABIH', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 874, 'Direccion 111', NULL, NULL, NULL),
+(1246, 1, '30849742', 'VIDAURRAZAGA ZIMMERMANN JUAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 875, 'Direccion 111', NULL, NULL, NULL),
+(1247, 1, '292129225', 'SUSANA QUISPE DE SARCO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 876, 'Direccion 111', NULL, NULL, NULL),
+(1248, 1, '437', 'CEVICHERIA ZORY MAR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 877, 'Direccion 111', NULL, NULL, NULL),
+(1249, 1, '29324641', 'ZENTENO DE CHECO MARIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 878, 'Direccion 111', NULL, NULL, NULL),
+(1250, 1, '7568485', 'RAMIREZ URUETA LUIS ALFREDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 83, 'Direccion 111', NULL, NULL, NULL),
+(1251, 1, '7568485', 'RAMIREZ URUETA LUIS ALFREDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 738, 'Direccion 111', NULL, NULL, NULL),
+(1252, 1, '41383342', 'CORNEJO BALLON RICARDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 879, 'Direccion 111', NULL, NULL, NULL),
+(1253, 1, '9484530', 'ALCCA AZURIN GRACIELA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1055, 'Direccion 111', NULL, NULL, NULL),
+(1254, 1, '21400955', 'FIERRO MOQUIZALLA AMADOR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 881, 'Direccion 111', NULL, NULL, NULL),
+(1255, 1, '29306630', 'VALDIVIA DE GUTIERREZ ISABEL PEREGRINA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 882, 'Direccion 111', NULL, NULL, NULL),
+(1256, 1, '29673413', 'FAURA DE MONTANCHEZ, LUCIA BEATRIZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 883, 'Direccion 111', NULL, NULL, NULL),
+(1257, 1, '29289541', 'VALDIVIA VARGAS JESUS VENECIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 728, 'Direccion 111', NULL, NULL, NULL),
+(1258, 1, '7876863', 'PEREZ PRIETO BOULLON RAMON RAMON', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 884, 'Direccion 111', NULL, NULL, NULL),
+(1259, 1, '412', 'TELEFONICA DEL PERU', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 885, 'Direccion 111', NULL, NULL, NULL),
+(1260, 1, '7487952', 'LOZADA BAUMANN, ARCEDA RACHEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 886, 'Direccion 111', NULL, NULL, NULL),
+(1261, 1, '413', 'Melissa Venegas', 'Residente', NULL, 'Testing', 'kpalma@corp2torres.com', 'arquitotal.com', 3, 160, 'Direccion 111', NULL, NULL, NULL),
+(1263, 1, '415', 'JOSE BRUNO SIPION ASTO', 'ARQUITECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 14, 'Direccion 111', NULL, NULL, NULL),
+(1264, 1, '8966650', 'CACERES RECAVARREN BEATRIZ SOFIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 887, 'Direccion 111', NULL, NULL, NULL),
+(1265, 1, '45441369', 'CAI XIUFANG', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 888, 'Direccion 111', NULL, NULL, NULL),
+(1266, 1, '29314209', 'LILIAN EMPERATRIZ MALAGA QUEVEDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 889, 'Direccion 111', NULL, NULL, NULL),
+(1267, 1, '44024641', 'SANDRA SANTANDER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 890, 'Direccion 111', NULL, NULL, NULL),
+(1268, 1, '29262816', 'LOPEZ VALENCIA YENNY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 891, 'Direccion 111', NULL, NULL, NULL),
+(1269, 1, '9979263', 'JUAN FORTUNATO BLANCO COLONIO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 796, 'Direccion 111', NULL, NULL, NULL),
+(1270, 1, '7780006', 'LUQUE BADENES MARIA VERONICA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 893, 'Direccion 111', NULL, NULL, NULL),
+(1271, 1, '29578086', 'HUANCA BARRIONUEVO MARISOL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 894, 'Direccion 111', NULL, NULL, NULL),
+(1272, 1, '10292499120', 'JOSE ANTONIO ENRIQUE MEDINA DEL CARPIO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 763, 'Direccion 111', NULL, NULL, NULL),
+(1273, 1, '423', 'Raul Garcia Ramos', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 892, 'Direccion 111', NULL, NULL, NULL),
+(1274, 1, '25330501', 'GARCIA RAMOS RAUL ENRIQUE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 892, 'Direccion 111', NULL, NULL, NULL),
+(1275, 1, '40560649', 'Vanessa Villar Castrillón', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 895, 'Direccion 111', NULL, NULL, NULL),
+(1276, 1, '7568485', 'RAMIREZ URUETA LUIS ALFREDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 364, 'Direccion 111', NULL, NULL, NULL),
+(1277, 1, '29396963', 'MARIA CECILIA TOLEDO DE GARCIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 979, 'Direccion 111', NULL, NULL, NULL),
+(1278, 1, '29470684', 'ZAGACETA MALDONADO XAVIER ARNULFO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 795, 'Direccion 111', NULL, NULL, NULL),
+(1279, 1, '29560486', 'RODRIGUEZ GONZALES JORGE ALBERTO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 897, 'Direccion 111', NULL, NULL, NULL),
+(1280, 1, '29594957', 'TEJADO AMADO SHEYNA CANDY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 739, 'Direccion 111', NULL, NULL, NULL),
+(1281, 1, '9138316', 'PRIVAT ZIMMERMANN HUGO ALBERTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 898, 'Direccion 111', NULL, NULL, NULL),
+(1282, 1, '294803730', 'TALAVERA MEDINA DE LA MAR MARTHA LEONIDAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 899, 'Direccion 111', NULL, NULL, NULL),
+(1283, 1, '29309592', 'CHOQUE PILCO ROBERTO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 777, 'Direccion 111', NULL, NULL, NULL),
+(1284, 1, '8507165', 'CUBA VALDERRAMA AMADO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 900, 'Direccion 111', NULL, NULL, NULL),
+(1285, 1, '9304196', 'EMMA GUADALUPE GUERRERO MUNIVE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 429, 'Direccion 111', NULL, NULL, NULL),
+(1286, 1, '29524610', 'HUERTA ALPACA MONICA PASTORA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 901, 'Direccion 111', NULL, NULL, NULL),
+(1287, 1, '29474216', 'JUAN GERMAN CUTIPA CASTILLO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 902, 'Direccion 111', NULL, NULL, NULL),
+(1288, 1, '7780006', 'LUQUE BADENES MARIA VERONICA ESPERANZA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 903, 'Direccion 111', NULL, NULL, NULL),
+(1289, 1, '17900480', 'GARCIA DE LA CRUZ JUAN HELMER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 904, 'Direccion 111', NULL, NULL, NULL),
+(1290, 1, '295344887', 'JUAN FERNANDO FUENTES VALENCIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 905, 'Direccion 111', NULL, NULL, NULL),
+(1291, 1, '408931741', 'SALINAS ALVARAO FRANCO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 906, 'Direccion 111', NULL, NULL, NULL),
+(1292, 1, '29244773', 'MUÑOZ DEL RIO GUSTAVO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 907, 'Direccion 111', NULL, NULL, NULL),
+(1293, 1, '29230006', 'VILMA CELINA DAVILA DE BALLON', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 908, 'Direccion 111', NULL, NULL, NULL),
+(1294, 1, '70681585', 'JAIME FELIPE VELA MOSCOSO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 909, 'Direccion 111', NULL, NULL, NULL),
+(1295, 1, '8272540', 'ATUN LEON JAIME VICTOR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1168, 'Direccion 111', NULL, NULL, NULL),
+(1296, 1, '40132619', 'LOPEZ RIVERA DANIEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 911, 'Direccion 111', NULL, NULL, NULL),
+(1297, 1, '10326020', 'RUIZ CRUZ LUIS ALBERTO', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 912, 'Direccion 111', NULL, NULL, NULL),
+(1298, 1, '31880001', 'MENDOZA ABARCA FASCIANO RAMIRO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 913, 'Direccion 111', NULL, NULL, NULL),
+(1299, 1, '29414801', 'PACCARA HUANCCO FELIX', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 914, 'Direccion 111', NULL, NULL, NULL),
+(1300, 1, '10231279', 'JUAN RAMON PIZARRO QUISPE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.goodpools.com.pe', 3, 915, 'Direccion 111', NULL, NULL, NULL),
+(1301, 1, '6635768', 'HANZA SANCHEZ CONCHA DE RAFO MARIA DEL CARMEN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 916, 'Direccion 111', NULL, NULL, NULL),
+(1302, 1, '9938603', 'SUI WU SEY CHUNG', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 917, 'Direccion 111', NULL, NULL, NULL),
+(1303, 1, '41639528', 'CANCHO MAURIZ LUIS EDUARDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 918, 'Direccion 111', NULL, NULL, NULL),
+(1304, 1, '9272861', 'Astete Palma Celso Victor', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 96, 'Direccion 111', NULL, NULL, NULL),
+(1305, 1, '1054048', 'Ronald Edwing Orrego Carrillo', 'Gerente Comercial de Energia', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 96, 'Direccion 111', NULL, NULL, NULL),
+(1306, 1, '478', 'GUSTAVO DAVILA', 'SUPERVISOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(1307, 1, '7844781', 'VALLEJO LEIGH LUIS FELIPE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 607, 'Direccion 111', NULL, NULL, NULL),
+(1308, 1, '294786452', 'WILBER SALINAS PORTUGAL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 919, 'Direccion 111', NULL, NULL, NULL),
+(1309, 1, '10100231668', 'CARMEN', 'ASISTENTE DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1094, 'Direccion 111', NULL, NULL, NULL),
+(1310, 1, '6040685', 'VASQUEZ  VELA ANDERSON', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 979, 'Direccion 111', NULL, NULL, NULL),
+(1311, 1, '448', 'CRISTIAM URRACA COA', 'Ing. de Proyectos', '105*6900', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 201, 'Direccion 111', NULL, NULL, NULL),
+(1312, 1, '449', 'AUGUSTO WILFREDO GUTIERREZ ZUZUNAGA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 920, 'Direccion 111', NULL, NULL, NULL),
+(1313, 1, '450', 'KAREN GUGLIELMINO', 'APODERADA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 920, 'Direccion 111', NULL, NULL, NULL),
+(1314, 1, '73199892', 'BERTHA EMESTINA VALENCIA ORELLANA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 921, 'Direccion 111', NULL, NULL, NULL),
+(1315, 1, '29271509', 'RONDON VALDIVIA XAVIER MARCOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 922, 'Direccion 111', NULL, NULL, NULL),
+(1316, 1, '8688122', 'ALBARRACIN VEGA JEAN PAUL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 924, 'Direccion 111', NULL, NULL, NULL),
+(1317, 1, '6620167', 'SASSARINI OLAZABAL, VICTOR HUGO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 925, 'Direccion 111', NULL, NULL, NULL),
+(1318, 1, '10272582', 'HIGASHI LUY JULIO ANTONIO', 'DIRECTOR GERENTE', '817*864', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 926, 'Direccion 111', NULL, NULL, NULL),
+(1319, 1, '7526898', 'JIMENEZ YRUPAILLA HELME RODOLFO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1309, 'Direccion 111', NULL, NULL, NULL),
+(1320, 1, '40698403', 'ANICETO ARTURO CABRERA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 927, 'Direccion 111', NULL, NULL, NULL),
+(1321, 1, '453', 'JOSE RUIZ ESPINOZA', 'SUPERVISOR DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 912, 'Direccion 111', NULL, NULL, NULL),
+(1322, 1, '454', 'Juan Carlos Chavez', 'Residente de Obra', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 429, 'Direccion 111', NULL, NULL, NULL),
+(1323, 1, '466', 'Carlos Vargas', 'Residente de Obra', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 680, 'Direccion 111', NULL, NULL, NULL),
+(1324, 1, '25527991', 'VARGAS MONROY JOSE LUIS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 928, 'Direccion 111', NULL, NULL, NULL),
+(1325, 1, '19908617', 'CUNYAS GARCIA GABRIEL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 929, 'Direccion 111', NULL, NULL, NULL),
+(1326, 1, '17', 'HECTOR AREVALO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 369, 'Direccion 111', NULL, NULL, NULL),
+(1327, 1, '16', 'HENRY YEP', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 369, 'Direccion 111', NULL, NULL, NULL),
+(1328, 1, '8181248', 'PARDO GOMEZ ANA MARIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 931, 'Direccion 111', NULL, NULL, NULL),
+(1329, 1, '6728231', 'CIPRIANO SALDARRIAGA ROSA JULIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 932, 'Direccion 111', NULL, NULL, NULL),
+(1330, 1, '31620773', 'CORAL GARCIA DE MALDONADO LUZ CAROLINA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 933, 'Direccion 111', NULL, NULL, NULL),
+(1331, 1, '17867730', 'CASTILLO DE LEON CONSUELO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 934, 'Direccion 111', NULL, NULL, NULL),
+(1332, 1, '17969590', 'BRACAMONTE MANTILLA JUAN JULIO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 935, 'Direccion 111', NULL, NULL, NULL),
+(1333, 1, '18187163', 'ROJAS GALLARDO LEONCIO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 936, 'Direccion 111', NULL, NULL, NULL),
+(1334, 1, '9566338', 'ESPINOZA CHIPANA CARLOS ENRIQUE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 937, 'Direccion 111', NULL, NULL, NULL),
+(1335, 1, '9342360', 'PUYO DE ZAVAL JUAN CARLOS PATRICIO JOFRE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 938, 'Direccion 111', NULL, NULL, NULL),
+(1336, 1, '2153000', 'PEDRO CORTEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 938, 'Direccion 111', NULL, NULL, NULL);
+INSERT INTO `tb_personacontacto` (`id`, `tb_empresa_id`, `dni`, `nombre`, `cargo`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_companiacontacto_id`, `direccion`, `tb_pais_id`, `tb_departamento_id`, `tb_distrito_id`) VALUES
+(1337, 1, '461', 'CARLO CALDERON', 'SUPERVISOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(1338, 1, 'CEX76403', 'YI PUEN LAY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 939, 'Direccion 111', NULL, NULL, NULL),
+(1339, 1, '29529165', 'VALDERRAMA WONG', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 923, 'Direccion 111', NULL, NULL, NULL),
+(1340, 1, '43256348', 'DE LA CRUZ SANCHEZ JUAN FRANCISCO', 'SUPERVISOR DE OBRA - GP', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 14, 'Direccion 111', NULL, NULL, NULL),
+(1341, 1, '6802714', 'OMAR SEMPERTEGUI TORREZ', 'REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1387, 'Direccion 111', NULL, NULL, NULL),
+(1342, 1, '29290009', 'FRANCO OBREGON ENRIQUE PERCY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 942, 'Direccion 111', NULL, NULL, NULL),
+(1343, 1, '29325647', 'TORRES MONTES REVILLA SANTIAGO ULISES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 943, 'Direccion 111', NULL, NULL, NULL),
+(1344, 1, '16692517', 'SALVO DAVILA PATRICIA MARGOT', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 944, 'Direccion 111', NULL, NULL, NULL),
+(1345, 1, '10243285', 'VANESSA OLIVERA', 'EJECUTIVA DE VENTAS', '4406777', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 119, 'Direccion 111', NULL, NULL, NULL),
+(1346, 1, '16431477', 'JUSTINA G. LISBOA ZUMARAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 945, 'Direccion 111', NULL, NULL, NULL),
+(1347, 1, '21476', 'GONZALEZ FERNANDEZ WILLIAM', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 946, 'Direccion 111', NULL, NULL, NULL),
+(1348, 1, '9701042', 'GERMAN FLORES SOTO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(1349, 1, '98722504', 'JOSE GALINDO APARICIO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 133, 'Direccion 111', NULL, NULL, NULL),
+(1350, 1, '10310345', 'SALAZAR GONZALES WILDER ALEJANDRO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 133, 'Direccion 111', NULL, NULL, NULL),
+(1351, 1, '1562248', 'XAVIER ALARCON', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 949, 'Direccion 111', NULL, NULL, NULL),
+(1352, 1, '1559235', 'JUAN JOSE OROZCO', 'JEFE COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 949, 'Direccion 111', NULL, NULL, NULL),
+(1353, 1, '8960225', 'LUIS ARMANDO GASCO VASQUEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 950, 'Direccion 111', NULL, NULL, NULL),
+(1354, 1, '9715972', 'ELLIOT CALLE RODRIGUEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 951, 'Direccion 111', NULL, NULL, NULL),
+(1355, 1, '7310000', 'HERNANDEZ FERNANDEZ JAIME JESUS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 952, 'Direccion 111', NULL, NULL, NULL),
+(1356, 1, '1000000', 'PEDRO ENRIQUES GOMEZ', 'ASISTENTE COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 953, 'Direccion 111', NULL, NULL, NULL),
+(1357, 1, '8874720', 'SERGIO DANTE  FRIAS RAMIREZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 954, 'Direccion 111', NULL, NULL, NULL),
+(1358, 1, '9396220', 'DE LA FUENTE GUEVARA SANDRA GRACIELA', 'GERENTE GENERAL', '226-4435', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 956, 'Direccion 111', NULL, NULL, NULL),
+(1359, 1, '7261671', 'Juan Carlos Kam Chung', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 957, 'Direccion 111', NULL, NULL, NULL),
+(1360, 1, '11111111', 'MÁXIMO FLORES SALAZAR', 'Ingeniero Desarrollo Técnico', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 957, 'Direccion 111', NULL, NULL, NULL),
+(1361, 1, '8265008', 'MIYASATO MIYASATO ENRIQUE', 'GERENTE GENERAL', '4339951', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 958, 'Direccion 111', NULL, NULL, NULL),
+(1362, 1, '10251236', 'JAIME PIZARRO GRAU', NULL, '4339951', 'Testing', 'kpalma@corp2torres.com', 'http://www.miyasato.com.pe/', 3, 958, 'Direccion 111', NULL, NULL, NULL),
+(1363, 1, '532', 'SANDRA LAZARTE', 'ARQUITEACTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(1364, 1, '531', 'SANDRA LAZARTE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(1365, 1, '530', 'JUAN CARLOS SAENZ', 'EJECUTIVO DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1100, 'Direccion 111', NULL, NULL, NULL),
+(1366, 1, '45410340', 'YANG JIAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 959, 'Direccion 111', NULL, NULL, NULL),
+(1367, 1, '23763123', 'PARADA JUAN MANUEL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 726, 'Direccion 111', NULL, NULL, NULL),
+(1368, 1, '7819264', 'CASTANON SEOANE EMILIO ENRIQUE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 962, 'Direccion 111', NULL, NULL, NULL),
+(1369, 1, '8562671', 'VIRHUEZ ROBLES LURDES DEL PILAR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 963, 'Direccion 111', NULL, NULL, NULL),
+(1370, 1, '9378', 'HE ZHIMING', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 964, 'Direccion 111', NULL, NULL, NULL),
+(1371, 1, '9617962', 'TITO GUTIERREZ YOLANDA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 965, 'Direccion 111', NULL, NULL, NULL),
+(1372, 1, '9459256', 'CARDENAS ALIKHAN OSWALDO PERCY', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 966, 'Direccion 111', NULL, NULL, NULL),
+(1373, 1, '46468671', 'VARA HUARCAYA ROBINSON SALOMON', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 967, 'Direccion 111', NULL, NULL, NULL),
+(1374, 1, '9892745', 'ELIZABETH HILASACA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 969, 'Direccion 111', NULL, NULL, NULL),
+(1375, 1, '10620713', 'CONSTANZA JOVANNA GUTIERREZ PACORA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 969, 'Direccion 111', NULL, NULL, NULL),
+(1376, 1, '29517191', 'LUCIO PABLO CHANI CASTRO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 970, 'Direccion 111', NULL, NULL, NULL),
+(1377, 1, '80280490', 'QUISPE PARI HUGO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 971, 'Direccion 111', NULL, NULL, NULL),
+(1378, 1, '6661935', 'UESU KINA MARIA ESTHER', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 972, 'Direccion 111', NULL, NULL, NULL),
+(1379, 1, '6283559', 'DE LOS RIOS MARTINEZ GUSTAVO WALTER', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 973, 'Direccion 111', NULL, NULL, NULL),
+(1380, 1, '29335737', 'BORJAS SANCHEZ SANTOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 974, 'Direccion 111', NULL, NULL, NULL),
+(1381, 1, '2129263', 'IRMA DIAZ ARHUIRI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 975, 'Direccion 111', NULL, NULL, NULL),
+(1382, 1, '7751821', 'MARIA LUZ GALINDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 976, 'Direccion 111', NULL, NULL, NULL),
+(1383, 1, '41788661', 'SOLIS LUDEÑA JUAN REYNALDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 977, 'Direccion 111', NULL, NULL, NULL),
+(1384, 1, '25682839', 'RANCEL RAZZETO CANEVARO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 978, 'Direccion 111', NULL, NULL, NULL),
+(1385, 1, '26923662', 'VICTOR SOLANO BECERRA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 14, 'Direccion 111', NULL, NULL, NULL),
+(1386, 1, '9897523', 'EDITH LARA MARTINEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 14, 'Direccion 111', NULL, NULL, NULL),
+(1387, 1, '9223858', 'SATURNINO MINAYA FLORES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 980, 'Direccion 111', NULL, NULL, NULL),
+(1388, 1, '40296312', 'GUTIERREZ OSORIO LUCIA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 981, 'Direccion 111', NULL, NULL, NULL),
+(1389, 1, '40363859', 'TINCO SURCO GENNY DIANNA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 982, 'Direccion 111', NULL, NULL, NULL),
+(1390, 1, '998227183', 'JORGE PRETEL', 'SUPERVISOR DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(1391, 1, '42852001', 'URBINA AGUILAR SANDRA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 983, 'Direccion 111', NULL, NULL, NULL),
+(1392, 1, '9709588', 'SANTIAGO TORRES LAZARO ALBERTO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 984, 'Direccion 111', NULL, NULL, NULL),
+(1393, 1, '52444594', 'INVERSIONES CRISBEL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 985, 'Direccion 111', NULL, NULL, NULL),
+(1394, 1, '44814665', 'LUZ KATHERINE MARON BARRIENTOS', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1107, 'Direccion 111', NULL, NULL, NULL),
+(1395, 1, '10784026', 'OFICENTRO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 986, 'Direccion 111', NULL, NULL, NULL),
+(1396, 1, '51234529', 'IMPRENTA SAN LORENZO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 987, 'Direccion 111', NULL, NULL, NULL),
+(1397, 1, '50789705', 'DIGI ANALISIS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 988, 'Direccion 111', NULL, NULL, NULL),
+(1398, 1, '25330409', 'JESUS ADAN HERRERA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 989, 'Direccion 111', NULL, NULL, NULL),
+(1399, 1, '50195791', 'MULTISERVICIOS MARCOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 990, 'Direccion 111', NULL, NULL, NULL),
+(1400, 1, '51254490', 'INVERSIONES ANAKIN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 991, 'Direccion 111', NULL, NULL, NULL),
+(1401, 1, '160612', 'LI CHENGXI', 'GERENTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 992, 'Direccion 111', NULL, NULL, NULL),
+(1402, 1, '29664573', 'CANO AROSTEGUI SELMAN AXEL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 714, 'Direccion 111', NULL, NULL, NULL),
+(1403, 1, '16690209', 'NEWEL CHONG JIM PAUL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 993, 'Direccion 111', NULL, NULL, NULL),
+(1404, 1, '9176553', 'GIUSEPPINA MARIA TERESA CANEPA BEUSAN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 995, 'Direccion 111', NULL, NULL, NULL),
+(1405, 1, '29730270', 'VALDIVIA CARRILLO ADRIANA ESTELA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 994, 'Direccion 111', NULL, NULL, NULL),
+(1406, 1, '10470062', 'JOSE MALLQUI PEÑA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 996, 'Direccion 111', NULL, NULL, NULL),
+(1407, 1, '99999', 'FERNADO PASTOR', 'EJECUIVO DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 996, 'Direccion 111', NULL, NULL, NULL),
+(1408, 1, '10074775', 'VASQUEZ CARRASCO HILDELBRANDO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 997, 'Direccion 111', NULL, NULL, NULL),
+(1409, 1, '10168709', 'LUZ ANGELICA APARI BADA', 'GERENTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 998, 'Direccion 111', NULL, NULL, NULL),
+(1410, 1, '29294640', 'ARROSQUIPA SANAVINCHO JORGE FRANCISCO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 999, 'Direccion 111', NULL, NULL, NULL),
+(1411, 1, '29237842', 'PORTUGAL RICKETTS JOSE ALEJANDRO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1000, 'Direccion 111', NULL, NULL, NULL),
+(1412, 1, '41583008', 'DE CORDOVA ORIHUELA MARCO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1001, 'Direccion 111', NULL, NULL, NULL),
+(1413, 1, '29475926', 'VASQUEZ MORON SERGIO HUGO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1002, 'Direccion 111', NULL, NULL, NULL),
+(1414, 1, '6922917', 'CORDOVA  GARCIA  DE GARCIA DORALISA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1003, 'Direccion 111', NULL, NULL, NULL),
+(1415, 1, '8762878', 'LUMBRE RODRIGUEZ MARIA ELENA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1004, 'Direccion 111', NULL, NULL, NULL),
+(1416, 1, '7015285', 'GUARDIAN BAHOMONDE LUIS FREDDY', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1005, 'Direccion 111', NULL, NULL, NULL),
+(1417, 1, '10612812', 'HUARCAYA ÑAHUINCOPA  ELOGIO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1006, 'Direccion 111', NULL, NULL, NULL),
+(1418, 1, '8266568', 'RISSO MONTES JOSE ARMANDO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1008, 'Direccion 111', NULL, NULL, NULL),
+(1419, 1, '162402', 'RUIZ BENITO MARIA ISABEL', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1009, 'Direccion 111', NULL, NULL, NULL),
+(1420, 1, '6855370', 'TIMANA SANDOVAL FERNANDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1010, 'Direccion 111', NULL, NULL, NULL),
+(1421, 1, '8780478', 'ZEGARRA FARFAN GERMAN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1011, 'Direccion 111', NULL, NULL, NULL),
+(1422, 1, '10116118', 'ZAPANA RODRIGUEZ JAQUET', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1012, 'Direccion 111', NULL, NULL, NULL),
+(1423, 1, '4152144', 'PAUL NEWELL', 'SUPERVISOR DE CAMPO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 14, 'Direccion 111', NULL, NULL, NULL),
+(1424, 1, '2009598', 'EDUARDO SABA', 'JEFE DE OFICINA TECNICA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 14, 'Direccion 111', NULL, NULL, NULL),
+(1425, 1, '7623530', 'MUNOZ RUBIO VICTOR RAUL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1013, 'Direccion 111', NULL, NULL, NULL),
+(1426, 1, '22512667', 'ROJAS NAJERA JOSE ANTONIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1014, 'Direccion 111', NULL, NULL, NULL),
+(1427, 1, '40705530', 'CISNEROS TENORIO YSIDORA P.', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1015, 'Direccion 111', NULL, NULL, NULL),
+(1428, 1, '8625939', 'LLAVE FLORES ROSARIO ALDEA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1016, 'Direccion 111', NULL, NULL, NULL),
+(1429, 1, '10346185', 'YUPANQUI ALFARO SEGUNDO NOE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1017, 'Direccion 111', NULL, NULL, NULL),
+(1430, 1, '10491592', 'MAGGI PARODI MARIA FERNANDA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1018, 'Direccion 111', NULL, NULL, NULL),
+(1431, 1, '98127411', 'MARCO A. BARRANTES MEJIA', 'ASESOR COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1018, 'Direccion 111', NULL, NULL, NULL),
+(1432, 1, '11111100', 'INDUSTRIAS EXITO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1019, 'Direccion 111', NULL, NULL, NULL),
+(1433, 1, '10411912332', 'GAMARRA VALDIVIA CARLOS RICARDO', 'PREVENCIONISTA DE RIESGOA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1021, 'Direccion 111', NULL, NULL, NULL),
+(1434, 1, '580', 'SERGIO MONTORO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(1435, 1, '43676428', 'ORIHUELA CHAMBILLA LIZETTE CLAUDIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1023, 'Direccion 111', NULL, NULL, NULL),
+(1436, 1, '29288807', 'JOSE ANTONIO CACERES GUILLEN', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1024, 'Direccion 111', NULL, NULL, NULL),
+(1437, 1, '10176258', 'LUIS ANTOLIN ESPINOZA ARAUJO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1028, 'Direccion 111', NULL, NULL, NULL),
+(1438, 1, '10456485117', 'CARRASCO SOLANO RUBEN GERADO', 'ALMACENERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1025, 'Direccion 111', NULL, NULL, NULL),
+(1439, 1, '8766399', 'RAMOS CALLE DE VILELA ORIETA CARMEN', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1029, 'Direccion 111', NULL, NULL, NULL),
+(1440, 1, '6627522', 'BARDALES CAMPOS ANDRES', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1030, 'Direccion 111', NULL, NULL, NULL),
+(1441, 1, '8737029', 'CONDESO CUYA JUAN VALENTIN', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1031, 'Direccion 111', NULL, NULL, NULL),
+(1442, 1, '8848985', 'RAMOS HUARHUA JAIME', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1032, 'Direccion 111', NULL, NULL, NULL),
+(1443, 1, '7878451', 'MOSQUEIRA ZAPATER JUAN FRANCISCO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1033, 'Direccion 111', NULL, NULL, NULL),
+(1444, 1, '25776761', 'CANELO MARRUFFO RICARDO BRAULIO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1034, 'Direccion 111', NULL, NULL, NULL),
+(1445, 1, '29619454', 'HUARCASI CHANBI GERWER MARIO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1035, 'Direccion 111', NULL, NULL, NULL),
+(1446, 1, '7954395', 'GAMBOA OBESO ALBERTO GONZALO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1036, 'Direccion 111', NULL, NULL, NULL),
+(1447, 1, '12378278', 'Marilu Freire', 'Gerente Comercial', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 542, 'Direccion 111', NULL, NULL, NULL),
+(1448, 1, 'CEX93246', 'LEE KA SING', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1037, 'Direccion 111', NULL, NULL, NULL),
+(1449, 1, '23984518', 'PUMA TUNQUE HERNAN', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1038, 'Direccion 111', NULL, NULL, NULL),
+(1450, 1, '40992438', 'DANITZA PAREDES HELD', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1039, 'Direccion 111', NULL, NULL, NULL),
+(1451, 1, '29308564', 'ALFARO PINTO AURELIO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1040, 'Direccion 111', NULL, NULL, NULL),
+(1452, 1, '41364514', 'UGARTE QUEZADA ALBERTO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1041, 'Direccion 111', NULL, NULL, NULL),
+(1453, 1, '16651886', 'BEATRIZ NEPO DE GASTULO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1042, 'Direccion 111', NULL, NULL, NULL),
+(1454, 1, 'CE212787', 'BEHRENDT CAROLA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1043, 'Direccion 111', NULL, NULL, NULL),
+(1455, 1, '9399734', 'ZANNATI REID ALFREDO AGUSTO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1044, 'Direccion 111', NULL, NULL, NULL),
+(1456, 1, '16736357', 'ECHEVARRIA SALAZAR JULIO CESAR', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1045, 'Direccion 111', NULL, NULL, NULL),
+(1457, 1, '29275808', 'ESPINOZA GALINDO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1047, 'Direccion 111', NULL, NULL, NULL),
+(1458, 1, '8763017', 'FAUSTO LUYO YACTAYO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1048, 'Direccion 111', NULL, NULL, NULL),
+(1459, 1, 'CE001036', 'BING QIANG YU', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1049, 'Direccion 111', NULL, NULL, NULL),
+(1460, 1, '7446783', 'LUIS ARTEAGA CAYCHO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1050, 'Direccion 111', NULL, NULL, NULL),
+(1461, 1, '10260599', 'MANUEL REYES SEDANO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1051, 'Direccion 111', NULL, NULL, NULL),
+(1462, 1, '16525920', 'RODAS DE BUSTAMANTE YOLANDA MARGARITA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1052, 'Direccion 111', NULL, NULL, NULL),
+(1463, 1, '16493549', 'GRANDA VILLANUEVA MARTHA DORIS', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1053, 'Direccion 111', NULL, NULL, NULL),
+(1464, 1, '43057649', 'ALBERTO WEINBERG TORRES', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1130, 'Direccion 111', NULL, NULL, NULL),
+(1465, 1, 'CE206167', 'YON CHIAU TAM', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 861, 'Direccion 111', NULL, NULL, NULL),
+(1466, 1, '29249912', 'MEDINA DEL CARPIO JOSE ANTONIO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1056, 'Direccion 111', NULL, NULL, NULL),
+(1467, 1, '42216718', 'OYOLA CARBAJAL CESAR OSVALDO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1057, 'Direccion 111', NULL, NULL, NULL),
+(1468, 1, '40741183', 'DIAZ ORBEGOZO DALIA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1058, 'Direccion 111', NULL, NULL, NULL),
+(1469, 1, '6634000', 'HINOJOSA COQUIS JOSE RICARDO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1059, 'Direccion 111', NULL, NULL, NULL),
+(1470, 1, '29722205', 'CAYO DEL CARPIO JOHANA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1060, 'Direccion 111', NULL, NULL, NULL),
+(1471, 1, '16428672', 'MELENDEZ GASTIABURU GLORIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1061, 'Direccion 111', NULL, NULL, NULL),
+(1472, 1, '16636183', 'ESTELA GAMBOA JAVIER', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1062, 'Direccion 111', NULL, NULL, NULL),
+(1473, 1, '9946904', 'ANGELINO ESPINOZA JOSE CARLOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 14, 'Direccion 111', NULL, NULL, NULL),
+(1474, 1, '8761088', 'GASPAR ISAAC GAONA DELGADO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1064, 'Direccion 111', NULL, NULL, NULL),
+(1475, 1, '40384929', 'FAVIO CCOILLO PAQUIYAURI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1065, 'Direccion 111', NULL, NULL, NULL),
+(1476, 1, '80224615', 'ROXANA FABILOA ROSSELL VALDIVIESO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1066, 'Direccion 111', NULL, NULL, NULL),
+(1477, 1, '9431746', 'MIGUEL ANGEL ORCOAPAZA PACHECO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1067, 'Direccion 111', NULL, NULL, NULL),
+(1478, 1, '41445454', 'ANDREA RUIZ DE SOMOCURCIO CRUZADO', 'ARQUITECTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(1479, 1, '10548563', 'ALEJANDRA BUSTAMANTE', NULL, '3726578', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1068, 'Direccion 111', NULL, NULL, NULL),
+(1480, 1, '10193000', 'VARGAS HUAYTALLA ELIZABETH', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1069, 'Direccion 111', NULL, NULL, NULL),
+(1481, 1, '10600029', 'BALDOCEDA PORRAS JORGE ARTURO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1070, 'Direccion 111', NULL, NULL, NULL),
+(1482, 1, '16484970', 'ACUÑA PERALTA VIRGILIO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1071, 'Direccion 111', NULL, NULL, NULL),
+(1483, 1, '40798085', 'EDITH CALIXTO HERRERA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 690, 'Direccion 111', NULL, NULL, NULL),
+(1484, 1, '40542005', 'ARAUJO OCHOA ENY NARCISA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1073, 'Direccion 111', NULL, NULL, NULL),
+(1485, 1, '10115897', 'Vicente Espinoza Aranda', 'Representante Legal', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1074, 'Direccion 111', NULL, NULL, NULL),
+(1486, 1, '9864668', 'EDUARDO SABA VEGA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1075, 'Direccion 111', NULL, NULL, NULL),
+(1487, 1, '8228626', 'ROSENBACH ROSENBAUM MOSHE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1076, 'Direccion 111', NULL, NULL, NULL),
+(1488, 1, '6244968', 'HERNANDEZ ALARCON OSWALDO JOSE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1077, 'Direccion 111', NULL, NULL, NULL),
+(1489, 1, '7514771', 'MIRANDA CANCHANYA CESAR', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1078, 'Direccion 111', NULL, NULL, NULL),
+(1490, 1, '4423861', 'SANTIAGO DE TOVAR MARTHA GRACIELA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1080, 'Direccion 111', NULL, NULL, NULL),
+(1491, 1, '25622792', 'PISCO CHAVEZ VICENTE', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1081, 'Direccion 111', NULL, NULL, NULL),
+(1492, 1, '27288546', 'DIAZ DELGADO MARIA YSABEL', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1082, 'Direccion 111', NULL, NULL, NULL),
+(1493, 1, '9453260', 'MIGUEL ANGEL GUERRA VILA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1083, 'Direccion 111', NULL, NULL, NULL),
+(1494, 1, '9542530', 'REGAZZONI EGUIGUREN JEAN PAUL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1084, 'Direccion 111', NULL, NULL, NULL),
+(1495, 1, '9440245', 'JULIAN CARLOS VICTORIO CARHUANCOTA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1085, 'Direccion 111', NULL, NULL, NULL),
+(1496, 1, '10671387', 'FREDDY ZAPATA CRUZ', 'JEFE DE OFICINA TECNICA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(1497, 1, '8250361', 'ALDAVE BUSTAMANTE LUIS JAVIER', 'DIRECTOR GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1086, 'Direccion 111', NULL, NULL, NULL),
+(1498, 1, '8230590', 'BELMONT CASSINELLI GONZALO JUAN CLAUDIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1320, 'Direccion 111', NULL, NULL, NULL),
+(1499, 1, '8303864', 'PERCY PERRY ALVAREZ', 'CONSULTON COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1087, 'Direccion 111', NULL, NULL, NULL),
+(1500, 1, '9472191', 'VALDEZ QUISPE MARIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1088, 'Direccion 111', NULL, NULL, NULL),
+(1501, 1, '43809219', 'GRIMANEZA MARIEL CUEVA ANCCO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1089, 'Direccion 111', NULL, NULL, NULL),
+(1502, 1, '6700632', 'Federico Cuellar Zanabria', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 44, 'Direccion 111', NULL, NULL, NULL),
+(1503, 1, '44920211', 'HERNANDEZ BARRIENTOS KIMBERLY MARIA SHIRLEY', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1090, 'Direccion 111', NULL, NULL, NULL),
+(1504, 1, '10530694', 'Daniel Perez Lozada', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1091, 'Direccion 111', NULL, NULL, NULL),
+(1505, 1, '18220602', 'Luisa Elizabeth Varas Alfaro', 'Representante Legal', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1091, 'Direccion 111', NULL, NULL, NULL),
+(1506, 1, '10023166', 'CANDELARIO LEON DANIEL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1094, 'Direccion 111', NULL, NULL, NULL),
+(1507, 1, '1', 'BEATRIZ CASTILLO RAFFO', 'CONSULTORA SENIOR RETAIL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 236, 'Direccion 111', NULL, NULL, NULL),
+(1508, 1, '8225867', 'ALBERTO PASCO-FONT QUEVEDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1108, 'Direccion 111', NULL, NULL, NULL),
+(1509, 1, '1731', 'JUAN CARLOS SAENZ', 'EJECUTIVO DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1100, 'Direccion 111', NULL, NULL, NULL),
+(1510, 1, '45127537', 'JAVIER ALFREDO CARRASCO SOLANO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1109, 'Direccion 111', NULL, NULL, NULL),
+(1511, 1, '1635', 'CARMEN POLO Y LA BORDA', 'JEFE DE ADMINISTRACION', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1108, 'Direccion 111', NULL, NULL, NULL),
+(1512, 1, '1636', 'ENRIQUE NICEFORO TORRE QUIÑONES.', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1110, 'Direccion 111', NULL, NULL, NULL),
+(1513, 1, '9649969', 'ZAMORA RAMIREZ ALDO RENE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1111, 'Direccion 111', NULL, NULL, NULL),
+(1514, 1, '10135690', 'ROJAS CAMPOS, MANUELA ZOILA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1112, 'Direccion 111', NULL, NULL, NULL),
+(1515, 1, '9486663', 'PEÑA FARFAN GILMER', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1113, 'Direccion 111', NULL, NULL, NULL),
+(1516, 1, '9515840', 'MARTHA SIFUENTES MARTINEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1114, 'Direccion 111', NULL, NULL, NULL),
+(1517, 1, '1641', 'RONALD ESPINOZA', 'EJECUTIVO DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1114, 'Direccion 111', NULL, NULL, NULL),
+(1518, 1, '1642', 'PABLO CORDOVA', 'RESIDENTE DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 947, 'Direccion 111', NULL, NULL, NULL),
+(1519, 1, '1643', 'SANTIAGO SINCHI', 'INGENIERO RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 947, 'Direccion 111', NULL, NULL, NULL),
+(1520, 1, '9540690', 'VERONICA FANNY LOPEZ SAENZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1115, 'Direccion 111', NULL, NULL, NULL),
+(1521, 1, '7852934', 'BELAUNDE CABIESES FRANCISCO JAVIER', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1116, 'Direccion 111', NULL, NULL, NULL),
+(1522, 1, '7874249', 'MARIA DE LOS ANGELES GALLO REBAZA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1117, 'Direccion 111', NULL, NULL, NULL),
+(1523, 1, '1647', 'FABIOLA MARTINEZ', 'VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 25, 'Direccion 111', NULL, NULL, NULL),
+(1524, 1, '39162', 'EDGARDO GABRIEL ARAVENA TORRES', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1118, 'Direccion 111', NULL, NULL, NULL),
+(1525, 1, '9010160', 'TRUJILLO GARCIA FABIO MAXIMO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1119, 'Direccion 111', NULL, NULL, NULL),
+(1526, 1, '9344596', 'SOUSA SALAZAR FRANCISCO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1120, 'Direccion 111', NULL, NULL, NULL),
+(1527, 1, '9302523', 'SALINAS ROJAS CARLOS MIGUEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1121, 'Direccion 111', NULL, NULL, NULL),
+(1528, 1, '40101380', 'PEDRO ALEXANDER SALAS CANSINO', 'Gerente Comercial', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1122, 'Direccion 111', NULL, NULL, NULL),
+(1529, 1, '29672366', 'TELLO HERMOZA JOSE MOISES', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1123, 'Direccion 111', NULL, NULL, NULL),
+(1530, 1, '10065865', 'SIU LOO ALDO ENRIQUE', 'ASESORIA TECNICA ADMINISTRATIVA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1131, 'Direccion 111', NULL, NULL, NULL),
+(1531, 1, '32926336', 'KELLY VALDIVIA PINEDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1132, 'Direccion 111', NULL, NULL, NULL),
+(1532, 1, '1664', 'PATRICIA DIAZ', 'EJECUTIVA DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1132, 'Direccion 111', NULL, NULL, NULL),
+(1533, 1, '44264803', 'ACUÑA NINATANTA ESTHER', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1133, 'Direccion 111', NULL, NULL, NULL),
+(1534, 1, '9297984', 'NIGHTINGALE VILLA EDUARDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 24, 'Direccion 111', NULL, NULL, NULL),
+(1535, 1, '6159506', 'RODRIGUEZ NINAQUISPE LUIS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1134, 'Direccion 111', NULL, NULL, NULL),
+(1536, 1, '7863957', 'BECERRA VILLA HECTOR', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1135, 'Direccion 111', NULL, NULL, NULL),
+(1537, 1, '7510650', 'PASACHE QUISPE CRISTINA JANNET', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 985, 'Direccion 111', NULL, NULL, NULL),
+(1538, 1, '1670', 'ROCIO VILLALBA MATAMOROS', 'ING. RESIDENTE DE IGESAPERU', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1069, 'Direccion 111', NULL, NULL, NULL),
+(1539, 1, '1671', 'ROCIO VILLALBA MATAMOROS', 'INGENIERA RESIDENTE DE IGESAPÉRU', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 10, 'Direccion 111', NULL, NULL, NULL),
+(1540, 1, '1672', 'ROCIO VILLALBA', 'INGENIERA RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 10, 'Direccion 111', NULL, NULL, NULL),
+(1541, 1, '1673', 'AGUSTO ALBON BERNAL VALDIVIA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1136, 'Direccion 111', NULL, NULL, NULL),
+(1542, 1, '1674', 'MATEO REYES', 'INGENIERO RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 796, 'Direccion 111', NULL, NULL, NULL),
+(1543, 1, '1675', 'WILMER SANCHEZ', 'ING. RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1137, 'Direccion 111', NULL, NULL, NULL),
+(1544, 1, '29288996', 'GUILLEN MALAGA NORA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1138, 'Direccion 111', NULL, NULL, NULL),
+(1545, 1, '1677', 'CESAR PACHECO', 'INGENIERO RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1083, 'Direccion 111', NULL, NULL, NULL),
+(1546, 1, '1678', 'CHRISTIAN FLORES', 'ING. PREVENCIONISTAS EN OBRAS CIVILES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 14, 'Direccion 111', NULL, NULL, NULL),
+(1547, 1, '1679', 'MARISOL RODRIGUEZ', 'SECRETARIA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1140, 'Direccion 111', NULL, NULL, NULL),
+(1548, 1, '7774744', 'CHALCO CHANCO MARIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1140, 'Direccion 111', NULL, NULL, NULL),
+(1549, 1, '1681', 'EDWIN LURQUIN QUEVEDO', 'INGENIERO RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 16, 'Direccion 111', NULL, NULL, NULL),
+(1550, 1, '29710817', 'LUIS ALBERTO LINARES BELZO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1079, 'Direccion 111', NULL, NULL, NULL),
+(1551, 1, '1684', 'SUSANA TUPA WALTER', 'INGENIERO RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 86, 'Direccion 111', NULL, NULL, NULL),
+(1552, 1, '7214078', 'WALTER FEGAN JUSTO', 'SUBGERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1142, 'Direccion 111', NULL, NULL, NULL),
+(1553, 1, '8991940', 'VICTOR PAIPAY SANCHEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1143, 'Direccion 111', NULL, NULL, NULL),
+(1554, 1, '20055762', 'Jose Cordova', 'Residente', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 16, 'Direccion 111', NULL, NULL, NULL),
+(1555, 1, '1654', 'Vanesa Olivera', 'Ejecutiva de Ventas', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 995, 'Direccion 111', NULL, NULL, NULL),
+(1556, 1, '23161', 'ROCA DIEGA ANDRES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1124, 'Direccion 111', NULL, NULL, NULL),
+(1557, 1, '9179067', 'DE FERRARI MORELLO ALFREDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1125, 'Direccion 111', NULL, NULL, NULL),
+(1558, 1, '40649796', 'RAMIREZ JANCACHAGUA ALEX IVAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1126, 'Direccion 111', NULL, NULL, NULL),
+(1559, 1, '33945117', 'MANUEL NIÑO MORI', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1127, 'Direccion 111', NULL, NULL, NULL),
+(1560, 1, '29251102', 'PACHECO CARDENAS MARCOS', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1128, 'Direccion 111', NULL, NULL, NULL),
+(1561, 1, '1660', 'LUIS MIGUEL BERRIOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1129, 'Direccion 111', NULL, NULL, NULL),
+(1562, 1, '1661', 'PATRICIA SIRANI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1129, 'Direccion 111', NULL, NULL, NULL),
+(1563, 1, '1687', 'MARCO PAIPAY ZAPATA', 'ARQUITECTO DISEÑADOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1143, 'Direccion 111', NULL, NULL, NULL),
+(1564, 1, '9297558', 'CHIANG MA EDUARDO ALFREDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1144, 'Direccion 111', NULL, NULL, NULL),
+(1565, 1, '1689', 'RICHARD GAVILAN', 'DEPARTAMENTO DE INGENIERIA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 542, 'Direccion 111', NULL, NULL, NULL),
+(1566, 1, '80420245', 'CHALEM CHOUEKA ALAIN ABRAHAM', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1146, 'Direccion 111', NULL, NULL, NULL),
+(1567, 1, '6490712', 'VIZCARRA BARTON MANUEL ENRIQUE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1147, 'Direccion 111', NULL, NULL, NULL),
+(1568, 1, '1692', 'ROCIO ARROYO', 'ARQUITECTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(1569, 1, '1693', 'LIZETH VEGA', 'ARQUITECTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1145, 'Direccion 111', NULL, NULL, NULL),
+(1570, 1, '40088243', 'LLANOS OTINIANO ALVARO ARMANDO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1148, 'Direccion 111', NULL, NULL, NULL),
+(1571, 1, '8257287', 'GARCIA ROSCELLI VICTOR', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1149, 'Direccion 111', NULL, NULL, NULL),
+(1572, 1, '8774415', 'VALDEZ SANCHEZ-GUTIERREZ ALVARO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 330, 'Direccion 111', NULL, NULL, NULL),
+(1573, 1, '8224488', 'MARTICORENA ARCINIEGA JOSE ANTONIO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 178, 'Direccion 111', NULL, NULL, NULL),
+(1574, 1, '30675976', 'JUAN CORNEJO SALAZAR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1141, 'Direccion 111', NULL, NULL, NULL),
+(1575, 1, '41203228', 'MALDONADO HUAYANEY MILENE CAROL', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1151, 'Direccion 111', NULL, NULL, NULL),
+(1576, 1, '32939957', 'MORENO RODRIGUEZ SUSANA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1152, 'Direccion 111', NULL, NULL, NULL),
+(1577, 1, '6208834', 'UVER MARTINEZ DIESTRA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1153, 'Direccion 111', NULL, NULL, NULL),
+(1578, 1, '6261626', 'JAIME ALCA YAÑEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1154, 'Direccion 111', NULL, NULL, NULL),
+(1579, 1, '7052954', 'GONZALES ROJAS VILMA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1155, 'Direccion 111', NULL, NULL, NULL),
+(1580, 1, '9337972', 'D''ANGELO DAÑINO JOSE ALBERTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1156, 'Direccion 111', NULL, NULL, NULL),
+(1581, 1, '29603233', 'PALOMINO MEDINA YONY', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1157, 'Direccion 111', NULL, NULL, NULL),
+(1582, 1, '29261196', 'LAZO INCA IVAN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1546, 'Direccion 111', NULL, NULL, NULL),
+(1583, 1, '9136432', 'ROSA VIRGINIA NAKAGAWA MORALES', 'GERENTE EJECUTIVO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1158, 'Direccion 111', NULL, NULL, NULL),
+(1584, 1, '10635182', 'SEMPERTEGUI JUSTO GUSTAVO ADOLFO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1159, 'Direccion 111', NULL, NULL, NULL),
+(1585, 1, '10000903', 'RODRIGUEZ TIO ELENA ROSA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1160, 'Direccion 111', NULL, NULL, NULL),
+(1586, 1, '22665735', 'BERNAL BRAVO KARO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1161, 'Direccion 111', NULL, NULL, NULL),
+(1587, 1, '40314916', 'SANDER VIGO NUÑEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1145, 'Direccion 111', NULL, NULL, NULL),
+(1588, 1, '80098727', 'CERVANTES MENDOZA JOSE ELBEN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1162, 'Direccion 111', NULL, NULL, NULL),
+(1589, 1, '31667698', 'JESSICA GISEL DELGADO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1163, 'Direccion 111', NULL, NULL, NULL),
+(1590, 1, '8106445', 'CHAW ORTEGA RAMON', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1095, 'Direccion 111', NULL, NULL, NULL),
+(1591, 1, '1715', 'IRINA NUÑEZ MURGA', 'ASESORA COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1095, 'Direccion 111', NULL, NULL, NULL),
+(1592, 1, '8274164', 'MARIO VENTURA VERME', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1164, 'Direccion 111', NULL, NULL, NULL),
+(1593, 1, '10523370', 'PALOMINO PEREZ DOMINGO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1165, 'Direccion 111', NULL, NULL, NULL),
+(1594, 1, '7874305', 'MONICA EYZAGUIRRE HERRERA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1095, 'Direccion 111', NULL, NULL, NULL),
+(1595, 1, '21245123', 'ZAVALA GODOY JIMMY NESTOR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1166, 'Direccion 111', NULL, NULL, NULL),
+(1596, 1, '10268925', 'KECSKEMETHY DARANYI NICOLAS GEZA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1167, 'Direccion 111', NULL, NULL, NULL),
+(1597, 1, '1721', 'CECILIA RUIZ GONZALES', 'DEPARTAMENTO DE PROYECTOS', '4217727', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1168, 'Direccion 111', NULL, NULL, NULL),
+(1598, 1, '10012122', 'OROZCO CONTRERAS ROCIO DELIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1169, 'Direccion 111', NULL, NULL, NULL),
+(1599, 1, '8242957', 'HIRAOKA TORRES CARLOS JORGE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1170, 'Direccion 111', NULL, NULL, NULL),
+(1600, 1, '9998150', 'NIEVA SEGURA, MOISES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1171, 'Direccion 111', NULL, NULL, NULL),
+(1601, 1, '8353979', 'COLLANTES COLLANTES HERMELINDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1172, 'Direccion 111', NULL, NULL, NULL),
+(1602, 1, '42965026', 'ORIHUELA VALLES, DOYBE EDGARDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1173, 'Direccion 111', NULL, NULL, NULL),
+(1603, 1, '6793702', 'Jhonny Alberto Pereira Pacífico', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1174, 'Direccion 111', NULL, NULL, NULL),
+(1604, 1, '1728', 'MIGUEL GAZZANO ERAZO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1438, 'Direccion 111', NULL, NULL, NULL),
+(1605, 1, '25762829', 'JORGE WILLIAMS SANTISTEBAN MOGOLLON', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1438, 'Direccion 111', NULL, NULL, NULL),
+(1606, 1, '45892232', 'Gianmarco Galvez', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1176, 'Direccion 111', NULL, NULL, NULL),
+(1607, 1, '45572232', 'Reynaldo Sipan', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1177, 'Direccion 111', NULL, NULL, NULL),
+(1608, 1, '40682581', 'MARIA BALDEON VARGAS', 'INGENIERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(1609, 1, '4640891', 'CARRASCO SOLANO JULIO ARMANDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1450, 'Direccion 111', NULL, NULL, NULL),
+(1610, 1, '9635101', 'DANIEL MINAYA BEDON', 'INGENIERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(1611, 1, '10543773', 'ANDRES MONTEZA SAMPEN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1181, 'Direccion 111', NULL, NULL, NULL),
+(1612, 1, '1729', 'GISSELLE SCHIAFFINO PACHECO', 'DISEÑADORA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 995, 'Direccion 111', NULL, NULL, NULL),
+(1613, 1, '10184264', 'ROBERTO POLLERA TENA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1182, 'Direccion 111', NULL, NULL, NULL),
+(1614, 1, '7006144', 'GALINDO BEJAR SAMUEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1183, 'Direccion 111', NULL, NULL, NULL),
+(1615, 1, '7496765', 'NAVARRO ALVARADO JULIO ELEAZAR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1184, 'Direccion 111', NULL, NULL, NULL),
+(1616, 1, '9302426', 'BRAZZODURO TABUSCO MARCO MIRKO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1185, 'Direccion 111', NULL, NULL, NULL),
+(1617, 1, '1741', 'SAMUEL ORBEZO DEL ROSARIO', 'GERENTE DE ADMINISTRACION Y RECURSOSO HUMANOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 17, 'Direccion 111', NULL, NULL, NULL),
+(1618, 1, '10771058', 'GONZALES FINSETH ADOLFO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1186, 'Direccion 111', NULL, NULL, NULL),
+(1619, 1, '8778784', 'CONTRERAS GONZALEZ JAVIER ARNALDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1187, 'Direccion 111', NULL, NULL, NULL),
+(1620, 1, '9310585', 'GOMEZ RAMOS ANGEL PAULINO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1188, 'Direccion 111', NULL, NULL, NULL),
+(1621, 1, '10760705', 'CARLOS CESPEDES ROLANDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1189, 'Direccion 111', NULL, NULL, NULL),
+(1622, 1, '43723374', 'TREVEJO RODRIGUEZ KAREN CINTHYA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1190, 'Direccion 111', NULL, NULL, NULL),
+(1623, 1, '43633046', 'SUAREZ URCO EVELYN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1191, 'Direccion 111', NULL, NULL, NULL),
+(1624, 1, '10654128', 'RIOS MENDOZA FRANKLIN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1192, 'Direccion 111', NULL, NULL, NULL),
+(1625, 1, '9979543', 'VEGA CASTANEDA ELVIRA HERMELINDA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1193, 'Direccion 111', NULL, NULL, NULL),
+(1626, 1, '10755852', 'AGUIRRE GONGORA JORGE ENRIQUE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1194, 'Direccion 111', NULL, NULL, NULL),
+(1627, 1, '10470626', 'CARREÑO RAMIREZ MARIA AURELIA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1195, 'Direccion 111', NULL, NULL, NULL),
+(1628, 1, '29649196', 'CARLOS URQUIZO SILVA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1196, 'Direccion 111', NULL, NULL, NULL),
+(1629, 1, '6272601', 'HUAMANTUMBA JAUREGUI LUIS ENRIQUE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1197, 'Direccion 111', NULL, NULL, NULL),
+(1630, 1, '9024325', 'RODRIGUEZ VALVAS ANTONIO FELIX', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1199, 'Direccion 111', NULL, NULL, NULL),
+(1631, 1, '6886402', 'RAMOS CAMPOS VICTOR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1200, 'Direccion 111', NULL, NULL, NULL),
+(1632, 1, '9422530', 'Guillermo Augusto Montaño Guerrero', 'Representante Legal', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1198, 'Direccion 111', NULL, NULL, NULL),
+(1633, 1, '1757', 'Hector Alva Duran', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1198, 'Direccion 111', NULL, NULL, NULL),
+(1634, 1, '6706039', 'MARTIN FELIPE BARRANTES ALEGRE', 'REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1201, 'Direccion 111', NULL, NULL, NULL),
+(1635, 1, '40479423', 'Moises Hilario Valdeon', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1201, 'Direccion 111', NULL, NULL, NULL),
+(1636, 1, '10138459', 'SERRUTO PAREDES YONY OSCAR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1403, 'Direccion 111', NULL, NULL, NULL),
+(1637, 1, '22556789', 'JORGE CHAVARRI', 'ARQUITECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 920, 'Direccion 111', NULL, NULL, NULL),
+(1638, 1, '8295453', 'GONZALES MENDOZA ODON', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1202, 'Direccion 111', NULL, NULL, NULL),
+(1639, 1, '8855048', 'ARCE BENITES JULIO HECTOR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1203, 'Direccion 111', NULL, NULL, NULL),
+(1640, 1, '10497680', 'Freddy Vizcardo Gonzáles', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1204, 'Direccion 111', NULL, NULL, NULL),
+(1641, 1, '483298', 'CARLOS ALBERTO GARCIA PANGO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1205, 'Direccion 111', NULL, NULL, NULL),
+(1642, 1, '45050068', 'LOO IONG CESAR', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1206, 'Direccion 111', NULL, NULL, NULL),
+(1643, 1, '40577992', 'OLORTEGUI VARGAS ROBERTO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1207, 'Direccion 111', NULL, NULL, NULL),
+(1644, 1, '29608928', 'GIOVANA BASURCO YAURI', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1208, 'Direccion 111', NULL, NULL, NULL),
+(1645, 1, '41186523', 'CHAU YANG CHUI PING', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1209, 'Direccion 111', NULL, NULL, NULL),
+(1646, 1, '9336333', 'VEGAS MALAGA JORGE', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1210, 'Direccion 111', NULL, NULL, NULL),
+(1647, 1, '43140008', 'DE LA TORRE TRUJILLO KATIA', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1211, 'Direccion 111', NULL, NULL, NULL),
+(1648, 1, '9178365', 'BERRY SILVA SANTISTEBAN KENNETH MARTIN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1377, 'Direccion 111', NULL, NULL, NULL),
+(1649, 1, '9163214', 'LERCARI CARBONE RENZO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1213, 'Direccion 111', NULL, NULL, NULL),
+(1650, 1, '4736', 'SOBRINO CUERVO ISABEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1214, 'Direccion 111', NULL, NULL, NULL),
+(1651, 1, '1774', 'EDUARDO ARANA', 'GERENTE DE VENTAS Y PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 42, 'Direccion 111', NULL, NULL, NULL),
+(1652, 1, '1775', 'GUSTAVO LUNA VICTORIA', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 276, 'Direccion 111', NULL, NULL, NULL),
+(1653, 1, '1776', 'JUAN MANUEL BERNUY', 'RESIDENTE DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 276, 'Direccion 111', NULL, NULL, NULL),
+(1654, 1, '1777', 'LEONIDES SERGIO CORDOVA SALINAS', 'GERENTE GERERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 948, 'Direccion 111', NULL, NULL, NULL),
+(1655, 1, '1778', 'MILENE MALDONADO HUAYANEY', 'ADMINISTRACION', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1151, 'Direccion 111', NULL, NULL, NULL),
+(1656, 1, '46747899', 'VEGA ARMAS JOEL GIAN PIERRE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1217, 'Direccion 111', NULL, NULL, NULL),
+(1657, 1, '43435387', 'JOSE SANTIAGO APESTEGUI VILLAFUERTE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1218, 'Direccion 111', NULL, NULL, NULL);
+INSERT INTO `tb_personacontacto` (`id`, `tb_empresa_id`, `dni`, `nombre`, `cargo`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_companiacontacto_id`, `direccion`, `tb_pais_id`, `tb_departamento_id`, `tb_distrito_id`) VALUES
+(1658, 1, '52883355', 'JOSE ANTONIO CHAVEZ ANGELES', 'ING ESTRUCTURAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(1659, 1, '8748093', 'ALFARO MOSCOSO VDA DE LOZADA, EMMA MANUELA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1219, 'Direccion 111', NULL, NULL, NULL),
+(1660, 1, '6964487', 'MAXIMO QUIQUIN HUAMANCUSI', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1220, 'Direccion 111', NULL, NULL, NULL),
+(1661, 1, '1784', 'JUAN CARLOS MARTINEZ', 'GERENTE COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1220, 'Direccion 111', NULL, NULL, NULL),
+(1662, 1, '1785', 'juan garayar', 'Gerencia de operaciones', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1069, 'Direccion 111', NULL, NULL, NULL),
+(1663, 1, '1786', 'Guillermo Kort', 'Gerente de administrativo9', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1069, 'Direccion 111', NULL, NULL, NULL),
+(1664, 1, '1787', 'JUAN GARAYAR', 'GERENTE DE OPERACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(1665, 1, '1788', 'GUILLERMO KOORT', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(1666, 1, '1789', 'AUGUSTO REY', 'GERENTE FINANCIERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(1667, 1, '1790', 'JACKSON MORENO', 'JEFE DE OPERACIONES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(1668, 1, '1791', 'Guida Quispe Asencios', 'Gerente comercial', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1221, 'Direccion 111', NULL, NULL, NULL),
+(1669, 1, '1792', 'Guida Quispe Asencios', 'Gerente comercial', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1221, 'Direccion 111', NULL, NULL, NULL),
+(1670, 1, '1793', 'GIULLIANO NATTERI Q.', 'PROJECT MANAGER', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1222, 'Direccion 111', NULL, NULL, NULL),
+(1671, 1, '42585325', 'ALEX ENRIQUE ROBERTSON DIAZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1222, 'Direccion 111', NULL, NULL, NULL),
+(1672, 1, '9336847', 'Gonzalo Jose Basadre Brazzini', 'Representante Legal', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1248, 'Direccion 111', NULL, NULL, NULL),
+(1673, 1, '12586941', 'URSULA LOPEZ', 'VENDEDORA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 119, 'Direccion 111', NULL, NULL, NULL),
+(1674, 1, '1797', 'Pedro Diaz Correa', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1225, 'Direccion 111', NULL, NULL, NULL),
+(1675, 1, '29566514', 'CASTRO SANCHEZ NIEVES', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1226, 'Direccion 111', NULL, NULL, NULL),
+(1676, 1, '41588339', 'OBRIEN CASERES DIEGO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1227, 'Direccion 111', NULL, NULL, NULL),
+(1677, 1, '7219361', 'BICHARA MONGRUT MARIA DE SOCORRO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1228, 'Direccion 111', NULL, NULL, NULL),
+(1678, 1, '7586188', 'IZQUIERDO GONZALES TEREZA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1229, 'Direccion 111', NULL, NULL, NULL),
+(1679, 1, '6834183', 'GERMAN FLORENCIO HUAREZ ROMAN', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1230, 'Direccion 111', NULL, NULL, NULL),
+(1680, 1, '7626184', 'GISSELLA CICCIA ALBUJAR', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1231, 'Direccion 111', NULL, NULL, NULL),
+(1681, 1, '7776730', 'SHANAAH SHAYBEH ABU', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1232, 'Direccion 111', NULL, NULL, NULL),
+(1682, 1, '40891522', 'HENG FENG ZENG', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1233, 'Direccion 111', NULL, NULL, NULL),
+(1683, 1, '40513574', 'YONG AGUILAR VERONICA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1234, 'Direccion 111', NULL, NULL, NULL),
+(1684, 1, '7912269', 'LUIS MAESHIRO SHIKINA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1235, 'Direccion 111', NULL, NULL, NULL),
+(1685, 1, '7966762', 'CANO FUERTE CARLOS ALBERTO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1236, 'Direccion 111', NULL, NULL, NULL),
+(1686, 1, '8186309', 'FERNANDEZ VALLE PEDRO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1238, 'Direccion 111', NULL, NULL, NULL),
+(1687, 1, '8968960', 'FARFAN PEREZDAVIS MARIA ESTHER', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1239, 'Direccion 111', NULL, NULL, NULL),
+(1688, 1, '7817272', 'GARCIA BLASQUEZ CARLOS', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1241, 'Direccion 111', NULL, NULL, NULL),
+(1689, 1, '10824039', 'BUGOSEN CHALUJA ANA MARIA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1242, 'Direccion 111', NULL, NULL, NULL),
+(1690, 1, '6506090', 'CASANA ZAMORA MERCEDES', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1243, 'Direccion 111', NULL, NULL, NULL),
+(1691, 1, '9302653', 'KENNETA WONG CHANG', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1244, 'Direccion 111', NULL, NULL, NULL),
+(1692, 1, '8802007', 'DEGASPERI CAMUSSO ROBERTO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 268, 'Direccion 111', NULL, NULL, NULL),
+(1693, 1, '8718806', 'FONG DOY LEONARDO ARTURO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1577, 'Direccion 111', NULL, NULL, NULL),
+(1694, 1, '40728250', 'LIZA ROJAS GROVER', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1237, 'Direccion 111', NULL, NULL, NULL),
+(1695, 1, '1820', 'AYBY SABOGAL', 'ASISTENTE DE ADMINISTRACION', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 119, 'Direccion 111', NULL, NULL, NULL),
+(1696, 1, '9337154', 'CAROL SU MELENDEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1246, 'Direccion 111', NULL, NULL, NULL),
+(1697, 1, '1822', 'AMARILDO GALVEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1247, 'Direccion 111', NULL, NULL, NULL),
+(1698, 1, '1823', 'NADEZHDA FERNANDEZ M', 'VENDEDORA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1099, 'Direccion 111', NULL, NULL, NULL),
+(1699, 1, '6586510', 'ALDO ENRIQUE SIU LOO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1, 'Direccion 111', NULL, NULL, NULL),
+(1700, 1, '29610037', 'ANA MARIA QUEQUEZANA JIMENEZ', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1249, 'Direccion 111', NULL, NULL, NULL),
+(1701, 1, '7878852', 'LIMO VIDAL JOSE ANTONIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1099, 'Direccion 111', NULL, NULL, NULL),
+(1702, 1, '76965', 'RODRIGUEZ ROJAS RUTH GEORGINA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1250, 'Direccion 111', NULL, NULL, NULL),
+(1703, 1, '9608252', 'PADILLA ALVARADO SONIA ERLITA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1251, 'Direccion 111', NULL, NULL, NULL),
+(1704, 1, '9128456', 'GALVEZ ESPIZA YAMIS AMARILDO', 'REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1247, 'Direccion 111', NULL, NULL, NULL),
+(1705, 1, '8777352', 'CAMPOS FERREYRA RUBEN DARIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1252, 'Direccion 111', NULL, NULL, NULL),
+(1706, 1, '1831', 'ALDO SIU LOO', 'GERENTE DE PROYECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(1707, 1, '1832', 'CESAR CACERES RAMIREZ', 'REPRESENTANTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1253, 'Direccion 111', NULL, NULL, NULL),
+(1708, 1, '41011901', 'VICTOR ALVAREZ PONCE', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1254, 'Direccion 111', NULL, NULL, NULL),
+(1709, 1, '8245724', 'VICTOR MANUEL ALVAREZ RIOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1254, 'Direccion 111', NULL, NULL, NULL),
+(1710, 1, '7597155', 'VICTOR ABURTO CABRERA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1255, 'Direccion 111', NULL, NULL, NULL),
+(1711, 1, '1836', 'LORENA ALVAREZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 119, 'Direccion 111', NULL, NULL, NULL),
+(1712, 1, '40662269', 'BRUCE ALEXANDER CHUQUI LI', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1256, 'Direccion 111', NULL, NULL, NULL),
+(1713, 1, '7883505', 'ERNESTO UZURIAGA CALDERON', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1257, 'Direccion 111', NULL, NULL, NULL),
+(1714, 1, '9609671', 'BUSTAMANTE ALBINAGORTA ALFREDO RAFAEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1258, 'Direccion 111', NULL, NULL, NULL),
+(1715, 1, '41243008', 'YANYN KATHERIN LEGUIA GUTIERRES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1259, 'Direccion 111', NULL, NULL, NULL),
+(1716, 1, '1841', 'GLORIA MALLQUI BRICEÑO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1098, 'Direccion 111', NULL, NULL, NULL),
+(1717, 1, '1842', 'CARLOS MAYOL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 251, 'Direccion 111', NULL, NULL, NULL),
+(1718, 1, '1843', 'GISELLE STUCCHI', 'GERENTE DE TALENTO HUMANO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 251, 'Direccion 111', NULL, NULL, NULL),
+(1719, 1, '1844', 'PETER VILLARAN', 'EJECUTIVO DE VENTAS SEGURIDAD ELECTRONICA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 954, 'Direccion 111', NULL, NULL, NULL),
+(1720, 1, '1845', 'RAFAEL LUCERO', 'PROGRAMADOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 954, 'Direccion 111', NULL, NULL, NULL),
+(1721, 1, '1846', 'YSRAEL YOPLA', 'RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 954, 'Direccion 111', NULL, NULL, NULL),
+(1722, 1, '1847', 'FRANCO PIPOLI VELARDE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1260, 'Direccion 111', NULL, NULL, NULL),
+(1723, 1, '1848', 'ALDO ILLACONZ', 'VENDEDOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1087, 'Direccion 111', NULL, NULL, NULL),
+(1724, 1, '43116170', 'CHAMBI MIRAMIRA MILAGROS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1261, 'Direccion 111', NULL, NULL, NULL),
+(1725, 1, '1850', 'FELIX DANIEL GUTIERREZ CASTILLO', 'GERENTE GENERAL', '4358270', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 504, 'Direccion 111', NULL, NULL, NULL),
+(1726, 1, '1851', 'CESAR GEAN PIERRE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 561, 'Direccion 111', NULL, NULL, NULL),
+(1727, 1, '1852', 'Cesar Alvarez', 'gerente general', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1262, 'Direccion 111', NULL, NULL, NULL),
+(1728, 1, '1853', 'CARLOS VILCATOMA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1262, 'Direccion 111', NULL, NULL, NULL),
+(1729, 1, '1854', 'CARLOS VILCATOMA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1263, 'Direccion 111', NULL, NULL, NULL),
+(1730, 1, '1855', 'ALEJANDRO MORENO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1264, 'Direccion 111', NULL, NULL, NULL),
+(1731, 1, '6692003', 'CRUZ ALVARADO ANTONIO CARLOS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1265, 'Direccion 111', NULL, NULL, NULL),
+(1732, 1, '1857', 'HELGA ORIHUELA ARCE', 'ASESORA COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 119, 'Direccion 111', NULL, NULL, NULL),
+(1733, 1, '40715880', 'CARLOS ALBERTO ZAPATA TORRES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1266, 'Direccion 111', NULL, NULL, NULL),
+(1734, 1, '1859', 'RENATO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1267, 'Direccion 111', NULL, NULL, NULL),
+(1735, 1, '8944229', 'CIPRIANO LLALLAHUI LOPEZ', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1268, 'Direccion 111', NULL, NULL, NULL),
+(1736, 1, '1861', 'EDWIN CONDORI', 'ADMINISTRADOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1269, 'Direccion 111', NULL, NULL, NULL),
+(1737, 1, '1862', 'ROSA TERESA MADUEÑO B.', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1270, 'Direccion 111', NULL, NULL, NULL),
+(1738, 1, '1863', 'LUIS MALVA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 392, 'Direccion 111', NULL, NULL, NULL),
+(1739, 1, '1865', 'PER01863', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1250, 'Direccion 111', NULL, NULL, NULL),
+(1740, 1, '1866', 'PER01859', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1272, 'Direccion 111', NULL, NULL, NULL),
+(1741, 1, '1867', 'TERESA VALLEJO', 'ASESORA DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1260, 'Direccion 111', NULL, NULL, NULL),
+(1742, 1, '1868', 'PER01866', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1273, 'Direccion 111', NULL, NULL, NULL),
+(1743, 1, '1869', 'MARTHA RUTH CUTIMANCO PANDURO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1274, 'Direccion 111', NULL, NULL, NULL),
+(1744, 1, '1870', 'EMMA MANUELA ALFARO MOSCOSO VDA DE LOZADA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1219, 'Direccion 111', NULL, NULL, NULL),
+(1745, 1, '1871', 'PER00237', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1275, 'Direccion 111', NULL, NULL, NULL),
+(1746, 1, '1872', 'Giselle Buse Gaillour', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 25, 'Direccion 111', NULL, NULL, NULL),
+(1747, 1, '9998688', 'WENDORFF VILCHEZ WILHEN', 'GERENTE EJECUTIVO', '2427247', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 449, 'Direccion 111', NULL, NULL, NULL),
+(1748, 1, '9975028', 'JOHNY WILLIAN MORALES ROJAS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1277, 'Direccion 111', NULL, NULL, NULL),
+(1749, 1, '9553704', 'VASQUEZ LOPEZ LUZ CONSTANTINA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1278, 'Direccion 111', NULL, NULL, NULL),
+(1750, 1, '1877', 'HECTOR CHAVEZ', 'JEFE DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1279, 'Direccion 111', NULL, NULL, NULL),
+(1751, 1, '40947879', 'CASTELLANO URRUTIA ALFONSO FERNANDO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1279, 'Direccion 111', NULL, NULL, NULL),
+(1752, 1, '8251935', 'URRUTIA LARRABURE DE CASTELLANO ROSA INES', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1279, 'Direccion 111', NULL, NULL, NULL),
+(1753, 1, '9865707', 'BRUNO DARIO DIAZ ABANTO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1280, 'Direccion 111', NULL, NULL, NULL),
+(1754, 1, '9469323', 'MIGUEL LEANDRO CAMPOS PALOMINO', 'REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1281, 'Direccion 111', NULL, NULL, NULL),
+(1755, 1, '46471144', 'YAN CARLOS GARCIA RODRIGUEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1282, 'Direccion 111', NULL, NULL, NULL),
+(1756, 1, '1883', 'PEDRO ESTRADA', 'REPRESENTANTE DE VENTAS AREA CERAMICOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 449, 'Direccion 111', NULL, NULL, NULL),
+(1757, 1, '42333914', 'CYNTHIA NAVARRO LUCHO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1283, 'Direccion 111', NULL, NULL, NULL),
+(1758, 1, '7826251', 'ROJAS SALAZAR MARIA DEL PILAR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 629, 'Direccion 111', NULL, NULL, NULL),
+(1759, 1, '9417543', 'FLORES PARIONA NESTOR MATEO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1284, 'Direccion 111', NULL, NULL, NULL),
+(1760, 1, '6179459', 'HINOSTROZA ALARCON, RAUL DESIDERIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1285, 'Direccion 111', NULL, NULL, NULL),
+(1761, 1, '9139871', 'UMBERT ALLEN RICARDO ENRIQUE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1286, 'Direccion 111', NULL, NULL, NULL),
+(1762, 1, '9685514', 'GALLEGOS CHAMBI CARLOS ALBERTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1287, 'Direccion 111', NULL, NULL, NULL),
+(1763, 1, '7576744', 'ALZAMORA ROMERO MANUEL ANTONIO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1288, 'Direccion 111', NULL, NULL, NULL),
+(1764, 1, '303961', 'COSTA ORNANO CARLOS ENRIQUE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1290, 'Direccion 111', NULL, NULL, NULL),
+(1765, 1, '8274532', 'CALLE GASPARY LUIS FELIPE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1291, 'Direccion 111', NULL, NULL, NULL),
+(1766, 1, '9344872', 'CASTILLOS VILLEGAS WALTER JAVIER', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1292, 'Direccion 111', NULL, NULL, NULL),
+(1767, 1, '9168839', 'TEODORO FIGUEROA HERNAN OSWALDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1293, 'Direccion 111', NULL, NULL, NULL),
+(1768, 1, '9286914', 'HUAMANTTUPA HUAYTA ALEJANDRO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1294, 'Direccion 111', NULL, NULL, NULL),
+(1769, 1, '45603489', 'LLATAS MONZON SANDRA CORALY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1295, 'Direccion 111', NULL, NULL, NULL),
+(1770, 1, '43214994', 'MENA MENDIOLAZA JULIO CESAR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1296, 'Direccion 111', NULL, NULL, NULL),
+(1771, 1, '8862085', 'ROMERO ESCOBEDO ANGEL ALBINO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1297, 'Direccion 111', NULL, NULL, NULL),
+(1772, 1, '9505567', 'MARQUEZ NUÑEZ JESUS GILBERTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1298, 'Direccion 111', NULL, NULL, NULL),
+(1773, 1, '40945493', 'HUARCAYA JAVIER NAUN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1299, 'Direccion 111', NULL, NULL, NULL),
+(1774, 1, '25847856', 'JOSE LUIS HERRERA MOGOLLON', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1300, 'Direccion 111', NULL, NULL, NULL),
+(1775, 1, '44749709', 'PORLES INOCENTE TANIA MILAGROS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1302, 'Direccion 111', NULL, NULL, NULL),
+(1776, 1, '1904', 'Maribel Saavadra', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1301, 'Direccion 111', NULL, NULL, NULL),
+(1777, 1, '80098727', 'CERVANTES MENDOZA JOSE ELBEN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1303, 'Direccion 111', NULL, NULL, NULL),
+(1778, 1, '3232', 'PATRICIA PAREDES', 'PROYECTISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 542, 'Direccion 111', NULL, NULL, NULL),
+(1779, 1, '7358016', 'LAM LEON CARLOS', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1304, 'Direccion 111', NULL, NULL, NULL),
+(1780, 1, '6256413', 'HIGA HIGA ROBERTO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1305, 'Direccion 111', NULL, NULL, NULL),
+(1781, 1, '10014465', 'FLORES PALMA ENMA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1306, 'Direccion 111', NULL, NULL, NULL),
+(1782, 1, '7612727', 'MALDONADO RIOS ROGER', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1307, 'Direccion 111', NULL, NULL, NULL),
+(1783, 1, '42295899', 'DAVID MIRANDA CUBA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1308, 'Direccion 111', NULL, NULL, NULL),
+(1784, 1, '43101717', 'SEVILLANO AMASIFUEN YANETH', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1310, 'Direccion 111', NULL, NULL, NULL),
+(1785, 1, '8981872', 'MANCILLA ACEVEDO FAUSTINO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1311, 'Direccion 111', NULL, NULL, NULL),
+(1786, 1, '7526898', 'JIMENEZ YRUPAILLA HELME RODOLFO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1309, 'Direccion 111', NULL, NULL, NULL),
+(1787, 1, '7902596', 'ROBERTO FABIO PAIN PERALTA', 'INGENIERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1312, 'Direccion 111', NULL, NULL, NULL),
+(1788, 1, '10014267', 'ARONI LOA ALEJANDRO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1313, 'Direccion 111', NULL, NULL, NULL),
+(1789, 1, '29529649', 'CARLOS ALFREDO MARTINEZ ALATRISTA', 'Representante Legal', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1314, 'Direccion 111', NULL, NULL, NULL),
+(1790, 1, '6839911', 'SABAS  ENRIQUE BACILIO LEON', 'Gerente de Operaciones', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1314, 'Direccion 111', NULL, NULL, NULL),
+(1791, 1, '7809635', 'OLIVER BROWN JAIME WILLIAMS', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1315, 'Direccion 111', NULL, NULL, NULL),
+(1792, 1, '9379647', 'BALAREZO BALAREZO WALTER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1316, 'Direccion 111', NULL, NULL, NULL),
+(1793, 1, '10085403', 'PALOMINO DELGADO CESAR ROLANDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1317, 'Direccion 111', NULL, NULL, NULL),
+(1794, 1, '9742330', 'CUCCHI AYCHO GLADYS ALICIA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1318, 'Direccion 111', NULL, NULL, NULL),
+(1795, 1, '228', 'MELISSA MENA', 'VENDEDORA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 119, 'Direccion 111', NULL, NULL, NULL),
+(1796, 1, '7619034', 'ANTEZANA REYES MILAGRITOS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1319, 'Direccion 111', NULL, NULL, NULL),
+(1797, 1, '1923', 'JORGE FLEISHMAN', 'REPRESENTANTE DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1319, 'Direccion 111', NULL, NULL, NULL),
+(1798, 1, '1924', 'Mónica Vásquez', 'Asesor de Ventas', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1087, 'Direccion 111', NULL, NULL, NULL),
+(1799, 1, '1925', 'JORGE FLEISHMAN', 'REPRESENTANTE DE VENTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1319, 'Direccion 111', NULL, NULL, NULL),
+(1800, 1, '15399852', 'SANCHEZ FLORES MANOLO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1321, 'Direccion 111', NULL, NULL, NULL),
+(1801, 1, '1059322', 'RODRIGUEZ GUZMAN, BEATRIZ CATHERINE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1322, 'Direccion 111', NULL, NULL, NULL),
+(1802, 1, '1928', 'RUBEN SANCHEZ', 'REPRESENTANTE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 507, 'Direccion 111', NULL, NULL, NULL),
+(1803, 1, '46931511', 'CCALLO TORCILLAS MANUEL FERNANDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1323, 'Direccion 111', NULL, NULL, NULL),
+(1804, 1, '8811832', 'SANCHEZ MASIAS MARCO ANTONIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1324, 'Direccion 111', NULL, NULL, NULL),
+(1805, 1, '10003781', 'SAN ROMAN CACERES MAXIMO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1325, 'Direccion 111', NULL, NULL, NULL),
+(1806, 1, '1932', 'DELIA OSTOJIC VIDAL', 'CLIENTES EXCLUSIVOS', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.nova.com.pe', 3, 1325, 'Direccion 111', NULL, NULL, NULL),
+(1807, 1, '1933', 'Keli Ramirez', 'EJECUTIVA DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1325, 'Direccion 111', NULL, NULL, NULL),
+(1808, 1, '1934', 'KELI RAMIREZ', 'EJECUTIVA DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1325, 'Direccion 111', NULL, NULL, NULL),
+(1809, 1, '8765385', 'JAVIER BARRERA LANGUASCO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1326, 'Direccion 111', NULL, NULL, NULL),
+(1810, 1, '41692741', 'ROXANA PAOLA RIOS TRIGOSO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(1811, 1, '10135575', 'AYARZA TASSARA MANUEL JAVIER', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1328, 'Direccion 111', NULL, NULL, NULL),
+(1812, 1, '1938', 'MIGUEL CIURLIZZA PALACIOS', 'REPRESENTANTE DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 324, 'Direccion 111', NULL, NULL, NULL),
+(1813, 1, '10605600', 'FERNANDEZ MENDOZA CARLOS ALBERTO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1329, 'Direccion 111', NULL, NULL, NULL),
+(1814, 1, '7809354', 'VOGELMANN BONICELLI GUILLERMO ALFREDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1330, 'Direccion 111', NULL, NULL, NULL),
+(1815, 1, '1941', 'DANIEL HERNANDEZ LOPEZ-ARIAS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.dstudio.com.pe', 3, 1333, 'Direccion 111', NULL, NULL, NULL),
+(1816, 1, '41914082', 'ELAINE ESTELA RIOS  RODRIGUEZ', 'ARQUITECTA RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1081, 'Direccion 111', NULL, NULL, NULL),
+(1817, 1, '8121775', 'Hubert Huaraca Flores', 'Residente', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 156, 'Direccion 111', NULL, NULL, NULL),
+(1818, 1, '8200627', 'NARANJO CORREA JOSE LUIS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1335, 'Direccion 111', NULL, NULL, NULL),
+(1819, 1, '25696942', 'ARCE SUAREZ ALEJANDRO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1336, 'Direccion 111', NULL, NULL, NULL),
+(1820, 1, '120101', 'SCHELLER GELB RONNY ALEJANDRO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 11, 'Direccion 111', NULL, NULL, NULL),
+(1821, 1, '16778800', 'ALVAREZ MURO VICTOR LUIS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 768, 'Direccion 111', NULL, NULL, NULL),
+(1822, 1, '42151212', 'DANY CHAVEZ LAZO', 'PROYECTISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1338, 'Direccion 111', NULL, NULL, NULL),
+(1823, 1, '1951', 'SILVIA TORRES', 'REPRESENTANTE DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1339, 'Direccion 111', NULL, NULL, NULL),
+(1824, 1, '6709368', 'RODRIGUEZ ESCOBEDO ALEJANDRO GONZALO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1339, 'Direccion 111', NULL, NULL, NULL),
+(1825, 1, '1953', 'GILDA QUINTANA ESCATE', 'COORDEINADORA DE SERVICIOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1080, 'Direccion 111', NULL, NULL, NULL),
+(1826, 1, '1954', 'ANA MARIA DELGADILLO', 'REPRESENTANTE DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1340, 'Direccion 111', NULL, NULL, NULL),
+(1827, 1, '1955', 'HUARCAYA JAVIER WILLY', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1340, 'Direccion 111', NULL, NULL, NULL),
+(1828, 1, '40255714', 'Jorge Luis Samame', 'Residentes', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 429, 'Direccion 111', NULL, NULL, NULL),
+(1829, 1, '42524557', 'Miriam Ventura Rivera', 'Residente', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1081, 'Direccion 111', NULL, NULL, NULL),
+(1830, 1, '9616489', 'Janet Zurita Cabrera', 'Residente', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1083, 'Direccion 111', NULL, NULL, NULL),
+(1831, 1, '42984496', 'David Pareja  Cariagua', 'Residente', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 556, 'Direccion 111', NULL, NULL, NULL),
+(1832, 1, '1961', 'RENE QUELOPANA VALLEJOS', 'ASESOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1341, 'Direccion 111', NULL, NULL, NULL),
+(1833, 1, '9469258', 'HUAMANI MARCA JUAN ROMUALDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1342, 'Direccion 111', NULL, NULL, NULL),
+(1834, 1, '10008540', 'Gustavo Alex Avila Arguedas', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1343, 'Direccion 111', NULL, NULL, NULL),
+(1835, 1, '40770788', 'PALOMINO RONDON NELIDA SABRINA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1344, 'Direccion 111', NULL, NULL, NULL),
+(1836, 1, '1966', 'Walter Paredes Huamani', 'Supervisor IIEE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(1837, 1, '9438317', 'EGUSQUIZA MURGA JUANI JESUS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1345, 'Direccion 111', NULL, NULL, NULL),
+(1838, 1, '1968', 'Roxana Rios Trigoso', 'SUPERVISORA DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(1839, 1, '7270380', 'CARLOS ALFREDO CASABONNE STOESSEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1346, 'Direccion 111', NULL, NULL, NULL),
+(1840, 1, '7476010', 'CARLOS AUGUSTO CHAVEZ TORO LIRA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1347, 'Direccion 111', NULL, NULL, NULL),
+(1841, 1, '10030439', 'PEREZ CASTILLO EDDY EMERSON', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1348, 'Direccion 111', NULL, NULL, NULL),
+(1842, 1, '6089694', 'CAPACYACHI ROMERO, ALEXANDER PEDRO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1349, 'Direccion 111', NULL, NULL, NULL),
+(1843, 1, '9422073', 'PALACIOS ROSALES ROLANDO JAVIER', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1350, 'Direccion 111', NULL, NULL, NULL),
+(1844, 1, '7832249', 'SAKAGUCHI NISHIZAWA ROBERTO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1351, 'Direccion 111', NULL, NULL, NULL),
+(1845, 1, '25766263', 'CCAHUANA TELLO CAMILO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1352, 'Direccion 111', NULL, NULL, NULL),
+(1846, 1, '25680446', 'RICARDO LECCA ARATA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 276, 'Direccion 111', NULL, NULL, NULL),
+(1847, 1, '10370843', 'SEVILLANO DE LA CRUZ JAVIER', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1353, 'Direccion 111', NULL, NULL, NULL),
+(1848, 1, '9803430', 'Víctor Raúl Rosas Salazar', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1357, 'Direccion 111', NULL, NULL, NULL),
+(1849, 1, '10116265', 'FIDEL HUARI CENTENO', 'INSTALADOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1358, 'Direccion 111', NULL, NULL, NULL),
+(1850, 1, '6165905', 'FLORES CONISLLA ROSAURO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1359, 'Direccion 111', NULL, NULL, NULL),
+(1851, 1, '1981', 'JACK SEGURA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1360, 'Direccion 111', NULL, NULL, NULL),
+(1852, 1, '7386110', 'CASTRILLON GUTIERREZ WILBERT JESUS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1361, 'Direccion 111', NULL, NULL, NULL),
+(1853, 1, '45899741', 'GUTIERREZ GARRIAZO JHON ANTHONY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1363, 'Direccion 111', NULL, NULL, NULL),
+(1854, 1, '10243338', 'CHACON PALACIN CESAR AUGUSTO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1364, 'Direccion 111', NULL, NULL, NULL),
+(1855, 1, '9812528', 'ENRIQUEZ CHAICO ARMONIO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1365, 'Direccion 111', NULL, NULL, NULL),
+(1856, 1, '7387419', 'YPARRAGUIRRE MEDINA ROBERTO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1362, 'Direccion 111', NULL, NULL, NULL),
+(1857, 1, '8232378', 'ARROSPIDE ARTADI JAIME ENRIQUE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 16, 'Direccion 111', NULL, NULL, NULL),
+(1858, 1, '10224366', 'CESAR ALEJANDRO MENDIOLA LARCO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1366, 'Direccion 111', NULL, NULL, NULL),
+(1859, 1, '1990', 'RAFFO PIZZONI FRANCO ENRIQUE', 'VENTAS', '477-2905', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1367, 'Direccion 111', NULL, NULL, NULL),
+(1860, 1, '1991', 'SANCHEZ FLORES MANOLO', 'VENTAS', '274-6667', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1321, 'Direccion 111', NULL, NULL, NULL),
+(1861, 1, '10430913951', 'JOSE CARLOS MATEO ALIAGA', 'ARQUITECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 14, 'Direccion 111', NULL, NULL, NULL),
+(1862, 1, '43191395', 'MATEO ALIAGA JOSE CARLOS', 'ARQUITECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1178, 'Direccion 111', NULL, NULL, NULL),
+(1863, 1, '7589514', 'ANGULO TUESTA, RAMIRO ROLDAN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1368, 'Direccion 111', NULL, NULL, NULL),
+(1864, 1, '10353951', 'SANCHEZ PERALTA CLAUDIA ALEJANDRA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1370, 'Direccion 111', NULL, NULL, NULL),
+(1865, 1, '1997', 'CARLOS PISCO', 'REPRESENTANTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1371, 'Direccion 111', NULL, NULL, NULL),
+(1866, 1, '1998', 'MATTOS SANCHEZ CARLOS', 'REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1371, 'Direccion 111', NULL, NULL, NULL),
+(1867, 1, '1999', 'CECILIA CHU', 'ASESORA DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.stansa.com.pe', 3, 202, 'Direccion 111', NULL, NULL, NULL),
+(1868, 1, '499580', 'BACHEBER FASTONI OSCAR LEONARDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 449, 'Direccion 111', NULL, NULL, NULL),
+(1869, 1, '8884174', 'OLIVARES BRAVO RICARDO ELIAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1372, 'Direccion 111', NULL, NULL, NULL),
+(1870, 1, '8833128', 'OLIVARES ORTIZ ELIAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1373, 'Direccion 111', NULL, NULL, NULL),
+(1871, 1, '2003', 'HENRY FERNANDO GAVILAN', 'VENDEDOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1374, 'Direccion 111', NULL, NULL, NULL),
+(1872, 1, '2005', 'MORALES GOMEZ DE CHOQUEZ, MERY ROXANA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1375, 'Direccion 111', NULL, NULL, NULL),
+(1873, 1, '9654506', 'LIDIA ANTAYHUA CUTTE', 'REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1376, 'Direccion 111', NULL, NULL, NULL),
+(1874, 1, '40000829', 'ERNAN PADILLA BARRETO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1378, 'Direccion 111', NULL, NULL, NULL),
+(1875, 1, '2008', 'PER02006', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1376, 'Direccion 111', NULL, NULL, NULL),
+(1876, 1, '29649874', 'VILLANUEVA ESPEJO MILUSKA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1379, 'Direccion 111', NULL, NULL, NULL),
+(1877, 1, '8624709', 'VALLEGOS SAN MIGUEL ANA ESPERANZA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1341, 'Direccion 111', NULL, NULL, NULL),
+(1878, 1, '2011', 'NOEMI SILES', 'VENDEDOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 119, 'Direccion 111', NULL, NULL, NULL),
+(1879, 1, '8216585', 'BLAU WALLACH HENRY', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1381, 'Direccion 111', NULL, NULL, NULL),
+(1880, 1, '8270209', 'KANASHIRO KAMIYA DE NAKADA MARY', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1382, 'Direccion 111', NULL, NULL, NULL),
+(1881, 1, '40768532', 'COLAN SEPULVEDA, JUAN MANUEL', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1383, 'Direccion 111', NULL, NULL, NULL),
+(1882, 1, '10252995', 'RAMIREZ VILLEGAS, JAI SAMUEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1384, 'Direccion 111', NULL, NULL, NULL),
+(1883, 1, '445943', 'CHEN MANHAO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1385, 'Direccion 111', NULL, NULL, NULL),
+(1884, 1, '2017', 'OMAR SEMPERTEGUI TORREZ', 'REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.aid.com.pe', 3, 1252, 'Direccion 111', NULL, NULL, NULL),
+(1885, 1, '', 'JOSE ANTONIO VASQUEZ ALEJOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1389, 'Direccion 111', NULL, NULL, NULL),
+(1886, 1, '9296888', 'FIERRO ALVARO JULIO LUIS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1390, 'Direccion 111', NULL, NULL, NULL),
+(1887, 1, '10464089191', 'CARRASCO SOLANO JULIO ARMANDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(1888, 1, '46408919', 'CARRASCO SOLANO JULIO ARMANDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1180, 'Direccion 111', NULL, NULL, NULL),
+(1889, 1, '2022', 'DIANA PEREYRA ALTAMIRANO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1391, 'Direccion 111', NULL, NULL, NULL),
+(1890, 1, '9948923', 'JAIME CORTEZ, JAVIER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1393, 'Direccion 111', NULL, NULL, NULL),
+(1891, 1, '7742490', 'QUEROLO TARGARONA SANTIAGO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1394, 'Direccion 111', NULL, NULL, NULL),
+(1892, 1, '8871030', 'ARAGON CUADROS GLADIS CRISTINA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1395, 'Direccion 111', NULL, NULL, NULL),
+(1893, 1, '25753691', 'MOGOLLON CONQUERA, JORGE LUIS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1396, 'Direccion 111', NULL, NULL, NULL),
+(1894, 1, '2027', 'Katya Tuesta', 'Vendedora', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 119, 'Direccion 111', NULL, NULL, NULL),
+(1895, 1, '43324784', 'FLORES CORNEJO ZENON JAVIER', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1397, 'Direccion 111', NULL, NULL, NULL),
+(1896, 1, '41127397', 'LEVANO MIRANDA DENNYS DEL PILAR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1398, 'Direccion 111', NULL, NULL, NULL),
+(1897, 1, '7977773', 'VELARDE HEIDEMANN HANS RONNY', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1399, 'Direccion 111', NULL, NULL, NULL),
+(1898, 1, '6128053', 'ALIAGA MANASSEVITZ GUILLERMO ANTONIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1400, 'Direccion 111', NULL, NULL, NULL),
+(1899, 1, '40301947', 'SALDIVAR GINO ALBERTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1401, 'Direccion 111', NULL, NULL, NULL),
+(1900, 1, '7869287', 'DEL CASTILLO VARGAS JULIO CESAR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 8, 'Direccion 111', NULL, NULL, NULL),
+(1901, 1, '2034', 'Elizabeth Silva.', 'AREA DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1402, 'Direccion 111', NULL, NULL, NULL),
+(1902, 1, '10176071', 'Edwin Pablo Cotera Lazo', 'REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1402, 'Direccion 111', NULL, NULL, NULL),
+(1903, 1, '2038', 'WILDER GARROTE ESPIRITU', 'GERENTE TECNICO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1404, 'Direccion 111', NULL, NULL, NULL),
+(1904, 1, '314954', 'BOBENRIETH GIGLIO EDUARDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1405, 'Direccion 111', NULL, NULL, NULL),
+(1905, 1, '10004236', 'PODESTA ROSAZZA NORA SAMANTHA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1406, 'Direccion 111', NULL, NULL, NULL),
+(1906, 1, '7882700', 'AMASIFUEN SANTILLAN FREDDY', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1408, 'Direccion 111', NULL, NULL, NULL),
+(1907, 1, '20521018322', 'COPY DATA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1409, 'Direccion 111', NULL, NULL, NULL),
+(1908, 1, '8786749', 'SALVADOR RUJU CAPURRO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1410, 'Direccion 111', NULL, NULL, NULL),
+(1909, 1, '25756683', 'GEREDA ECHEVARRIA ESMERALDA ROSA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1301, 'Direccion 111', NULL, NULL, NULL),
+(1910, 1, '8147292', 'PITA PEREDO, JESUS ERNESTO', 'Gerente', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1413, 'Direccion 111', NULL, NULL, NULL),
+(1911, 1, '9605716', 'CARDENAS LUJAN NILTON', 'REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1414, 'Direccion 111', NULL, NULL, NULL),
+(1912, 1, '6658437', 'ROJAS GARCIA DE LIZA ELSA DORIS', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1415, 'Direccion 111', NULL, NULL, NULL),
+(1913, 1, '40078742', 'QUIÑONES SOUZA, JOSE MARTIN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1416, 'Direccion 111', NULL, NULL, NULL),
+(1914, 1, '9720511', 'HUALLA QUISPE, ELIZABETH', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1417, 'Direccion 111', NULL, NULL, NULL),
+(1915, 1, '20494985439', 'CESAR ARTURO YAMASHIRO ORE E.I.R.L', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 621, 'Direccion 111', NULL, NULL, NULL),
+(1916, 1, '2051', 'CESAR ARTURO  YAMASHIRO ORE056-211816', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1418, 'Direccion 111', NULL, NULL, NULL),
+(1917, 1, '2052', 'Flavio Cancho', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 10, 'Direccion 111', NULL, NULL, NULL),
+(1918, 1, '2053', 'HAROLD RIVAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 86, 'Direccion 111', NULL, NULL, NULL),
+(1919, 1, '2055', 'JOSE ALCANTARA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1420, 'Direccion 111', NULL, NULL, NULL),
+(1920, 1, '2056', 'CARLOS RAMIREZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 167, 'Direccion 111', NULL, NULL, NULL),
+(1921, 1, '2057', 'MILAGROS CHIPANA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 167, 'Direccion 111', NULL, NULL, NULL),
+(1922, 1, '2058', 'SHARIFF RAMIREZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 542, 'Direccion 111', NULL, NULL, NULL),
+(1923, 1, '2059', 'EDDIE CUADRAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 167, 'Direccion 111', NULL, NULL, NULL),
+(1924, 1, '2060', 'BEATRIZ ZABALETA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1421, 'Direccion 111', NULL, NULL, NULL),
+(1925, 1, '41634540', 'LLECLLISH PAMPA, GROBER FRANK', 'Gerente', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1422, 'Direccion 111', NULL, NULL, NULL),
+(1926, 1, '2062', 'MANUEL CASTRO MUNANTE', 'GERENTE DE OBRAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(1927, 1, '2063', 'FERNANDO PEREZ', 'SUPERVISOR DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 46, 'Direccion 111', NULL, NULL, NULL),
+(1928, 1, '31035635', 'EFRAIN MENA CHAVEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1412, 'Direccion 111', NULL, NULL, NULL),
+(1929, 1, '7863361', 'JAVIER ENRIQUE DEL RIO ARRIETA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.activacons.com', 3, 1423, 'Direccion 111', NULL, NULL, NULL),
+(1930, 1, '9176324', 'AUGUSTO CUBA GAMARRA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1424, 'Direccion 111', NULL, NULL, NULL),
+(1931, 1, '2067', 'AUGUSTO CUBA CABEZAS', 'GERENTE TECNICO', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.ingeco.com.pe', 3, 1424, 'Direccion 111', NULL, NULL, NULL),
+(1932, 1, '2068', 'JESUS FRANKLIN TALAVERANO PALOMINO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1327, 'Direccion 111', NULL, NULL, NULL),
+(1933, 1, '2069', 'GUILLERMO DE BERNARDI', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1327, 'Direccion 111', NULL, NULL, NULL),
+(1934, 1, '2070', 'YOHANA MARTINEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1327, 'Direccion 111', NULL, NULL, NULL),
+(1935, 1, '2071', 'JORGE JEREZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1327, 'Direccion 111', NULL, NULL, NULL),
+(1936, 1, '43627249', 'LIZETH ANDREA VEGA MERINO', 'REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1326, 'Direccion 111', NULL, NULL, NULL),
+(1937, 1, '10686928', 'CIRO MIGUEL REYES JIMINEZ', 'REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1327, 'Direccion 111', NULL, NULL, NULL),
+(1938, 1, '6189962', 'MONTALVO HINOSTROZA MIGUEL ABENCIO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1328, 'Direccion 111', NULL, NULL, NULL),
+(1939, 1, '8834080', 'FELIX HERNANDEZ C.', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1429, 'Direccion 111', NULL, NULL, NULL),
+(1940, 1, '10011125', 'BARDALES AREVALO RICARDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1063, 'Direccion 111', NULL, NULL, NULL),
+(1941, 1, '6199265', 'Juan Manuel Castro Lopez', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1430, 'Direccion 111', NULL, NULL, NULL),
+(1942, 1, '2078', 'Pablo Luis Acosta Ninahuamán', 'sub gerente', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1431, 'Direccion 111', NULL, NULL, NULL),
+(1943, 1, '2079', 'JORGE PORTOCARRERO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 671, 'Direccion 111', NULL, NULL, NULL),
+(1944, 1, '40941709', 'DELUVIO ROJAS HUARI', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1358, 'Direccion 111', NULL, NULL, NULL),
+(1945, 1, '12235642', 'NANCY MESONES', 'ASISTENTE GERENCIA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1289, 'Direccion 111', NULL, NULL, NULL),
+(1946, 1, '2083', 'CUIZANO VARGAS JOSE OMAR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1432, 'Direccion 111', NULL, NULL, NULL),
+(1947, 1, '10095844', 'MADELEINE OBINA ENRIQUEZ REYES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1433, 'Direccion 111', NULL, NULL, NULL),
+(1948, 1, '2085', 'JULIA HUAUYA QUISPE', 'VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1434, 'Direccion 111', NULL, NULL, NULL),
+(1949, 1, '93491730', 'VALENTINA QUILLA QUILLA', 'ventas', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1435, 'Direccion 111', NULL, NULL, NULL),
+(1950, 1, '8840732', 'MIRIAM MARLENE MORA HUAMAN', 'VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1436, 'Direccion 111', NULL, NULL, NULL),
+(1951, 1, '2088', 'CROSBY BUSTAMANTE', 'VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1437, 'Direccion 111', NULL, NULL, NULL),
+(1952, 1, '10788163', 'Emilio Jesús Bahamonde Mendoza', 'GERENTE DE PROYECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(1953, 1, '10222831', 'VAN OORDT MARTINEZ EMILIO JORGE ROMULO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 37, 'Direccion 111', NULL, NULL, NULL),
+(1954, 1, '41899358', 'ARELLANO GUTIERREZ, CHRISTIAN DUANY', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1439, 'Direccion 111', NULL, NULL, NULL),
+(1955, 1, '45222222', 'JUAN CHANTA', 'ADMINISTRADOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1441, 'Direccion 111', NULL, NULL, NULL),
+(1956, 1, '9386629', 'QUIROZ CELIS ALFREDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1440, 'Direccion 111', NULL, NULL, NULL),
+(1957, 1, '25759705', 'AUQUI AUCCAPIÑA ROBERT', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1409, 'Direccion 111', NULL, NULL, NULL),
+(1958, 1, '42222222', 'NELLY OSCORIMA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1442, 'Direccion 111', NULL, NULL, NULL),
+(1959, 1, '2096', 'HENRY ESPINOZA HUAYLLAS', 'ANALISTA DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1223, 'Direccion 111', NULL, NULL, NULL),
+(1960, 1, '6098097', 'ANCAJIMA MELENDEZ, EDGAR PAUL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1447, 'Direccion 111', NULL, NULL, NULL),
+(1961, 1, '2098', 'ROXANA PIZARRO JOLY', 'GERENTE DE ADMINISTRACION Y FINANZAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1443, 'Direccion 111', NULL, NULL, NULL),
+(1962, 1, '9750671', 'Juan José Cardenas Mares', 'Representante Legal', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 955, 'Direccion 111', NULL, NULL, NULL),
+(1963, 1, '2100', 'Pedro Otero', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1289, 'Direccion 111', NULL, NULL, NULL),
+(1964, 1, '2101', 'Hans Wolfinson', 'Encargado de Sistemas', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1289, 'Direccion 111', NULL, NULL, NULL),
+(1965, 1, '2102', 'Martin Vargas', 'Jefe de Finanzas', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1289, 'Direccion 111', NULL, NULL, NULL),
+(1966, 1, '41584490', 'ALDAVE ZARATE ANDREA ALEXANDRA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1444, 'Direccion 111', NULL, NULL, NULL),
+(1967, 1, '2104', 'PER00715', 'rOBERTO BENITEZ', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 414, 'Direccion 111', NULL, NULL, NULL),
+(1968, 1, '8615738', 'CASTRO ORBEGOSO, ROSA MICAELA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1445, 'Direccion 111', NULL, NULL, NULL),
+(1969, 1, '43647428', 'QUISPE BOCANEGRA, NEYDI ANABEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1446, 'Direccion 111', NULL, NULL, NULL),
+(1970, 1, '42014477', 'MALQUICHAGUA CONTRERAS CHRISTIAN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1448, 'Direccion 111', NULL, NULL, NULL),
+(1971, 1, '9290282', 'OLIVARI MENDEZ DE CALDERON, PATRICIA ELIZABET', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1449, 'Direccion 111', NULL, NULL, NULL),
+(1972, 1, '44128557', 'AMER YORDAN REGALADO VARGAS', 'SUPERVISOR ELECTROMECANICO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(1973, 1, '2110', 'Jose Calderon Vela', 'Departamento de Presupuesto.', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1451, 'Direccion 111', NULL, NULL, NULL),
+(1974, 1, '40342477', 'Nancy Del Castillo Garcia', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1451, 'Direccion 111', NULL, NULL, NULL),
+(1975, 1, '7480429', 'ROCINA LUISA ABANTO PAREDES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1452, 'Direccion 111', NULL, NULL, NULL),
+(1976, 1, '9798736', 'PEREZ ESTEBAN SAIDA LILIANA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1453, 'Direccion 111', NULL, NULL, NULL),
+(1977, 1, '72607905', 'SOLANO VILLAR LUIS ENRIQUE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1454, 'Direccion 111', NULL, NULL, NULL),
+(1978, 1, '2115', 'Anabidia Arakaki', 'Ejecutiva de Ventas Corporativas', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 119, 'Direccion 111', NULL, NULL, NULL),
+(1979, 1, '2116', 'Julia Berrospi', 'Ejecutiva de Ventas Corporativas', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 119, 'Direccion 111', NULL, NULL, NULL);
+INSERT INTO `tb_personacontacto` (`id`, `tb_empresa_id`, `dni`, `nombre`, `cargo`, `fax`, `observacion`, `email`, `web`, `tb_viaenvio_id`, `tb_companiacontacto_id`, `direccion`, `tb_pais_id`, `tb_departamento_id`, `tb_distrito_id`) VALUES
+(1980, 1, '44402412', 'GUTIERREZ GOMERO EDITH JACKELINE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1455, 'Direccion 111', NULL, NULL, NULL),
+(1981, 1, '41295752', 'CESINARIO SORIA ANDREA ISABEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1456, 'Direccion 111', NULL, NULL, NULL),
+(1982, 1, '2119', 'KARLA MENDOZA F.', 'Asesora Comercial', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1099, 'Direccion 111', NULL, NULL, NULL),
+(1983, 1, '40072409', 'DANNY VALENZUELA OBLITAS', 'REPRESENTANTE LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1458, 'Direccion 111', NULL, NULL, NULL),
+(1984, 1, '2121', 'Gerardo Injoque', 'Gerente Financiero', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 12, 'Direccion 111', NULL, NULL, NULL),
+(1985, 1, '7456346', 'BARRAGAN GUERRERO MIGUEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1459, 'Direccion 111', NULL, NULL, NULL),
+(1986, 1, '44139874', 'RODOLFO CARLOS MIGUEL ARBAIZA  MEJIA', 'ASESOR COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 949, 'Direccion 111', NULL, NULL, NULL),
+(1987, 1, '9580499', 'ROBERTO ORTIZ', 'CHOFER', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(1988, 1, '10017133', 'HUACHACA PALACIOS JULIANA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1460, 'Direccion 111', NULL, NULL, NULL),
+(1989, 1, '41390113', 'MENESES LOZANO RAQUEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1461, 'Direccion 111', NULL, NULL, NULL),
+(1990, 1, '10631958', 'GAMBOA GONZALES, LOURDES YESSICA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1462, 'Direccion 111', NULL, NULL, NULL),
+(1991, 1, '2128', 'HENRY ASHCALLAY SANCHEZ', 'JEFE DE PROYECTOS', '7184278', 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1423, 'Direccion 111', NULL, NULL, NULL),
+(1992, 1, '2129', 'Jose Tasaico', 'Ingeniero de Campo', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1423, 'Direccion 111', NULL, NULL, NULL),
+(1993, 1, '2130', 'ALBERTO MACHADO MAYURI ARENAS', 'ASISTENTE DEL PROYECTISTA DE ESTRUCTURAS', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.grupolee.pe', 3, 571, 'Direccion 111', NULL, NULL, NULL),
+(1994, 1, '2131', 'Julio Gonzales', 'Encargado de Ventas', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1087, 'Direccion 111', NULL, NULL, NULL),
+(1995, 1, '2132', 'CARLOS PASARA', 'SUPERVISOR', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.gg.com.pe', 3, 920, 'Direccion 111', NULL, NULL, NULL),
+(1996, 1, '2133', 'HUGO PAZOS MEDINA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1463, 'Direccion 111', NULL, NULL, NULL),
+(1997, 1, '2134', 'LESLIE TICLLA CAMPAÑA', 'ENCARGADA DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1464, 'Direccion 111', NULL, NULL, NULL),
+(1998, 1, '2135', 'NESTOR NEVADO', 'ARQUITECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1465, 'Direccion 111', NULL, NULL, NULL),
+(1999, 1, '2136', 'OSCAR PAHUACHON', 'ARQUITECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1465, 'Direccion 111', NULL, NULL, NULL),
+(2000, 1, '2137', 'GIANCARLO URBINA', 'GERENTE FINANCIERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1466, 'Direccion 111', NULL, NULL, NULL),
+(2001, 1, '42022675', 'ARNOLDO BARRANTES BOLAÑOS', 'Representante Legal', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1467, 'Direccion 111', NULL, NULL, NULL),
+(2002, 1, '2139', 'CARLOS BALAREZO POZO', 'ASESOR DE VENTAS HELVEX', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.helvex.com', 3, 1467, 'Direccion 111', NULL, NULL, NULL),
+(2003, 1, '7879078', 'CARLOS ENRIQUE SANTA CRUZ BENDEZU', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1468, 'Direccion 111', NULL, NULL, NULL),
+(2004, 1, '38903', 'LEWIS WILLIAM TEAL', 'DIRECTOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1468, 'Direccion 111', NULL, NULL, NULL),
+(2005, 1, '42460024', 'ROSSANA CECILIA NANEZ AGUILAR', 'ARQUITECTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2006, 1, '2143', 'Sandro Leith Medina', 'Asesor Comercial', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1469, 'Direccion 111', NULL, NULL, NULL),
+(2007, 1, '7885378', 'EDGAR ALEJANDRO CABALLERO ASTE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1469, 'Direccion 111', NULL, NULL, NULL),
+(2008, 1, '7797344', 'RUIZ RIOS JORGE ALBERTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1470, 'Direccion 111', NULL, NULL, NULL),
+(2009, 1, '45419162', 'KATTY VANESSA GARGATE SILVA', 'LOGISTICA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2010, 1, '2147', 'VICTOR CASTANEDA', 'PREVENCIONISTA DE RIESGO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2011, 1, '8076618', 'RAYO AEDO GAVINA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1471, 'Direccion 111', NULL, NULL, NULL),
+(2012, 1, '2149', 'FREDDY FLORES', 'VENTAS CORPORATIVAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 449, 'Direccion 111', NULL, NULL, NULL),
+(2013, 1, '40116958', 'MARIANO MURGUIA VALLE', 'JEFE DE PROYECTOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2014, 1, '2151', 'LESLIE TICLLA CAMPAÑA', 'Ejecutiva de Proyectos', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 802, 'Direccion 111', NULL, NULL, NULL),
+(2015, 1, '2152', 'ROCIO MATOS', 'ASESORA VENTAS CORPORATIVAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 15, 'Direccion 111', NULL, NULL, NULL),
+(2016, 1, '2153', 'RENZO COSTA S.A.C.', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1472, 'Direccion 111', NULL, NULL, NULL),
+(2017, 1, '2154', 'JULIO CESAR BERROCAL ROJAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1473, 'Direccion 111', NULL, NULL, NULL),
+(2018, 1, '2155', 'JONATHAN ALBERTH PALACIOS PILLMAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1474, 'Direccion 111', NULL, NULL, NULL),
+(2019, 1, '2156', 'LUCIS ALDAR SALDAÑA VERA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1475, 'Direccion 111', NULL, NULL, NULL),
+(2020, 1, '40426799', 'JUAREZ RIOS, MARCELINO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1476, 'Direccion 111', NULL, NULL, NULL),
+(2021, 1, '10734387', 'VERGARA RUBIN MIGUEL ANGEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1477, 'Direccion 111', NULL, NULL, NULL),
+(2022, 1, '2159', 'MARCO NAVARRO ARIZOLA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1478, 'Direccion 111', NULL, NULL, NULL),
+(2023, 1, '7847019', 'GUERRA ALTAMIRANO ELSA ROCIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1369, 'Direccion 111', NULL, NULL, NULL),
+(2024, 1, '2161', 'Esteban Ugaldes', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1479, 'Direccion 111', NULL, NULL, NULL),
+(2025, 1, '10243750', 'ROJAS ALVARADO DELMY BRIGET', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1480, 'Direccion 111', NULL, NULL, NULL),
+(2026, 1, '7591798', 'CHOU FLORES JOSE ANTONIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1481, 'Direccion 111', NULL, NULL, NULL),
+(2027, 1, '25562479', 'SACHUN CASTILLO PATRICIA VIRGINIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1482, 'Direccion 111', NULL, NULL, NULL),
+(2028, 1, '2165', 'VERONICA QUEROL', 'GERENTE COMERCIAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1483, 'Direccion 111', NULL, NULL, NULL),
+(2029, 1, '7868446', 'CRISTOBAL ARMANDO MONTERO CHAVEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1483, 'Direccion 111', NULL, NULL, NULL),
+(2030, 1, '2897996', 'SANTOS VILCHERREZ PEDRO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1484, 'Direccion 111', NULL, NULL, NULL),
+(2031, 1, '9656660', 'PACHECO URBIZAGASTEGUI ANGEL RAUL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1485, 'Direccion 111', NULL, NULL, NULL),
+(2032, 1, '2169', 'MARTIN J. ALGAMIS', 'KEY ACCOUNT MANAGER', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1486, 'Direccion 111', NULL, NULL, NULL),
+(2033, 1, '10809897', 'VICTOR EDUARDO FRANCO CASTILLO', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1486, 'Direccion 111', NULL, NULL, NULL),
+(2034, 1, '9869597', 'JUAN JOSE PISSANI EYZAGUIRRE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1487, 'Direccion 111', NULL, NULL, NULL),
+(2035, 1, '10789745', 'Jose Francisco Erazo Rodriguez', 'Vendedor', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1457, 'Direccion 111', NULL, NULL, NULL),
+(2036, 1, '8842192', 'SALGADO RUITON GUSTAVO GUILLERMO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1488, 'Direccion 111', NULL, NULL, NULL),
+(2037, 1, '8241688', 'RIQUERO DIAZ GABRIELA SUSANA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1490, 'Direccion 111', NULL, NULL, NULL),
+(2038, 1, '32042070', 'NORABUENA RAMIREZ CARMEN MERCEDES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1491, 'Direccion 111', NULL, NULL, NULL),
+(2039, 1, '8146099', 'MARTINEZ VELASQUEZ, RAYDA LUZMILA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1492, 'Direccion 111', NULL, NULL, NULL),
+(2040, 1, '10275969', 'ZAFORAS GARRIDO DE DIAZ, LIDIA LUZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1493, 'Direccion 111', NULL, NULL, NULL),
+(2041, 1, '7829242', 'MARIATEGUI CHIAPPE SANDRO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1494, 'Direccion 111', NULL, NULL, NULL),
+(2042, 1, '6603494', 'BECERRA CALDERON GILBERTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1495, 'Direccion 111', NULL, NULL, NULL),
+(2043, 1, '9385156', 'JULIO RAFAEL RIVERA FEIJOO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1496, 'Direccion 111', NULL, NULL, NULL),
+(2044, 1, '8758293', 'WILLIAM BACA ESCOBAR', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1496, 'Direccion 111', NULL, NULL, NULL),
+(2045, 1, '8943629', 'VICTOR SOLANO', 'MENSAJERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2046, 1, '40627704', 'FARRO RIVADENEIRA DANIEL MOISES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1497, 'Direccion 111', NULL, NULL, NULL),
+(2047, 1, '10473647', 'MARCIA VANESSA ROJAS SOTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1498, 'Direccion 111', NULL, NULL, NULL),
+(2048, 1, '2185', 'CHRISTIAM GAMBOA VERANO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', 'www.corpgdv.com', 3, 1498, 'Direccion 111', NULL, NULL, NULL),
+(2049, 1, '25754291', 'CALLAN CALLAN SHNEIDER HELBER', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1499, 'Direccion 111', NULL, NULL, NULL),
+(2050, 1, '8184223', 'JUAN LOSSIO HURTADO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 60, 'Direccion 111', NULL, NULL, NULL),
+(2051, 1, '40017500', 'Francisca Luisa Bravo Zorrila', 'Ejecutiva de ventas', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1499, 'Direccion 111', NULL, NULL, NULL),
+(2052, 1, '10448382', 'ZAMORA TERRONES YSABEL BERNABE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1500, 'Direccion 111', NULL, NULL, NULL),
+(2053, 1, '9584230', 'ANCHAYHUA DIAZ, ANTONIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1501, 'Direccion 111', NULL, NULL, NULL),
+(2054, 1, '2191', 'MIRTHA SANTOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1502, 'Direccion 111', NULL, NULL, NULL),
+(2055, 1, '6631996', 'BARANDIARAN PAGADOR RAUL ALBERTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1502, 'Direccion 111', NULL, NULL, NULL),
+(2056, 1, '2194', 'JOSE ANTONIO LOPEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 58, 'Direccion 111', NULL, NULL, NULL),
+(2057, 1, '2195', 'CARLOS MARTINEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 58, 'Direccion 111', NULL, NULL, NULL),
+(2058, 1, '2196', 'YONSHON MUÑOZ', 'Supervisor de Obra', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2059, 1, '8252600', 'MIGUEL ANGEL GUERRERO WATANABE', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1504, 'Direccion 111', NULL, NULL, NULL),
+(2060, 1, '2198', 'RUTH FRANCIA', 'RECURSOS HUMANOS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1504, 'Direccion 111', NULL, NULL, NULL),
+(2061, 1, '9850120', 'LAYZA HERRERA HUMBERTO TEOFILO', 'PREVENCIONISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1505, 'Direccion 111', NULL, NULL, NULL),
+(2062, 1, '7781966', 'BALBUENA HERRERA JORGE EDUARDO', 'ALMECENERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1506, 'Direccion 111', NULL, NULL, NULL),
+(2063, 1, '7464364', 'CARLOS ALBERTO SSOVERO VILLAROEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1507, 'Direccion 111', NULL, NULL, NULL),
+(2064, 1, '2202', 'EDWIN OMAR ALVAREZ PEREZ', 'VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1507, 'Direccion 111', NULL, NULL, NULL),
+(2065, 1, '9346381', 'RODRIGUEZ MARTELL JORGE RICARDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1508, 'Direccion 111', NULL, NULL, NULL),
+(2066, 1, '8099948', 'RICARDO SERGIO CHUQUIMANTARI MARREROS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1509, 'Direccion 111', NULL, NULL, NULL),
+(2067, 1, '44056695', 'FIGUEROA ESTRADA LUIS ANTONIO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1510, 'Direccion 111', NULL, NULL, NULL),
+(2068, 1, '41210605', 'HUAMANI COAGUILA IGNACIA MARLENI', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1511, 'Direccion 111', NULL, NULL, NULL),
+(2069, 1, '111412', 'SALDAÑA VASQUEZ MIGDALY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1512, 'Direccion 111', NULL, NULL, NULL),
+(2070, 1, '42597593', 'TOMATEO ALARCON WILBER', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1513, 'Direccion 111', NULL, NULL, NULL),
+(2071, 1, '10435169', 'JUAN FRANCISCO SARMIENTO BARBOZA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1514, 'Direccion 111', NULL, NULL, NULL),
+(2072, 1, '7494250', 'JOSE LUIS TAQUIRI RAMOS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1515, 'Direccion 111', NULL, NULL, NULL),
+(2073, 1, '45815538', 'MAYRA GABRIELA SOTO ESPINOZA', 'ASISTENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1516, 'Direccion 111', NULL, NULL, NULL),
+(2074, 1, '2212', 'Cesar Guzman Marquina', 'Gerente de operaciones', NULL, 'Testing', 'kpalma@corp2torres.com', 'www.edifica.com.pe', 3, 1517, 'Direccion 111', NULL, NULL, NULL),
+(2075, 1, '9930625', 'DIOGENES GONZALES DE LA CRUZ', 'GERENTE DE PROYECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1518, 'Direccion 111', NULL, NULL, NULL),
+(2076, 1, '7271376', 'WONG LUCK WILLY A.', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1519, 'Direccion 111', NULL, NULL, NULL),
+(2077, 1, '41558658', 'TRUJILLO PALOMINO, ONECIMO JULIAN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1520, 'Direccion 111', NULL, NULL, NULL),
+(2078, 1, '6717422', 'HERNANDEZ BUSTAMANTE SEGUNDO A', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1521, 'Direccion 111', NULL, NULL, NULL),
+(2079, 1, '80629193', 'ALCALDE SILVA, PRESBITERO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1522, 'Direccion 111', NULL, NULL, NULL),
+(2080, 1, '6575319', 'YACTAYO ALVARADO BETTY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1523, 'Direccion 111', NULL, NULL, NULL),
+(2081, 1, '8357117', 'JUAN MAYHUA RAMOS', 'SUPERVISOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2082, 1, '9287838', 'MOISES EMILIO LICLA MONTOYA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1524, 'Direccion 111', NULL, NULL, NULL),
+(2083, 1, '10154915', 'SERAFICO JAVIER DE SOSA DIOMA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1525, 'Direccion 111', NULL, NULL, NULL),
+(2084, 1, '80625393', 'IVAN CARLOS CANCHARI HUAMAN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1526, 'Direccion 111', NULL, NULL, NULL),
+(2085, 1, '2223', 'ALEXANDER CAMPOS', 'OFICINA TECNICA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 58, 'Direccion 111', NULL, NULL, NULL),
+(2086, 1, '10699226', 'QUISPE ZARATE AIDA BLANCA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1527, 'Direccion 111', NULL, NULL, NULL),
+(2087, 1, '9282824', 'ALBERCA MARTIN JESUS JUAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1528, 'Direccion 111', NULL, NULL, NULL),
+(2088, 1, '40289287', 'OLIVER ATENCIA ESPINOZA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1529, 'Direccion 111', NULL, NULL, NULL),
+(2089, 1, '40939946', 'IBANEZ TORRES CHRISTIAN ALFREDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1531, 'Direccion 111', NULL, NULL, NULL),
+(2090, 1, '8417258', 'SANTIVAÑEZ TUPAC YUPANQUI, ANTONIA ADA', 'gerente', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1532, 'Direccion 111', NULL, NULL, NULL),
+(2091, 1, '80520594', 'MAMANI APAZA JOSE ENRIQUE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1533, 'Direccion 111', NULL, NULL, NULL),
+(2092, 1, '17615991', 'REYES LOPEZ, FLOR EULALIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1534, 'Direccion 111', NULL, NULL, NULL),
+(2093, 1, '9443565', 'CONTRERAS COLLAVINO RAUL RAMON', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1535, 'Direccion 111', NULL, NULL, NULL),
+(2094, 1, '10100053', 'LUJAN YARANGA ANTONIO JULIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1536, 'Direccion 111', NULL, NULL, NULL),
+(2095, 1, '46494333', 'COCHACHIN VALDEZ, ANDREA ELIZABETH', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1537, 'Direccion 111', NULL, NULL, NULL),
+(2096, 1, '2234', 'TONY RUBIO', 'Gerente General', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1539, 'Direccion 111', NULL, NULL, NULL),
+(2097, 1, '40744880', 'PANDURO CALDAS JUAN JOSE', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1541, 'Direccion 111', NULL, NULL, NULL),
+(2098, 1, '8383828', 'CASTRO ESCOBEDO, MANUEL ALBERTO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1542, 'Direccion 111', NULL, NULL, NULL),
+(2099, 1, '8242140', 'GIUSTI HUNDSKOPF LUIS MARIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1543, 'Direccion 111', NULL, NULL, NULL),
+(2100, 1, '40603044', 'LARA MORENO EDDY ALEX', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1544, 'Direccion 111', NULL, NULL, NULL),
+(2101, 1, '46346236', 'AMANDA ALATA LAGOS', 'SECRETARIA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1545, 'Direccion 111', NULL, NULL, NULL),
+(2102, 1, '42527170', 'FELICIANO TUESTA ANGULO', 'ASESOR DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1087, 'Direccion 111', NULL, NULL, NULL),
+(2103, 1, '9878327', 'CARLOS AUGUSTO BEZA CHAVEZ', 'ASESOR DE VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1467, 'Direccion 111', NULL, NULL, NULL),
+(2104, 1, '45267757', 'INOCENTE BENITES, WALTER ALEJANDRO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1547, 'Direccion 111', NULL, NULL, NULL),
+(2105, 1, '2245', 'AGUSTIN GARCIA QUISPE', 'EJECUTIVO VENTAS', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1548, 'Direccion 111', NULL, NULL, NULL),
+(2106, 1, '7020557', 'CASTILLA ATENCIO MIGUEL SAUL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1549, 'Direccion 111', NULL, NULL, NULL),
+(2107, 1, '10708487', 'RIVERA TUNQUE, FERNANDO AQUILINO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1550, 'Direccion 111', NULL, NULL, NULL),
+(2108, 1, '41665653', 'ELVIS MARTINEZ CANTARO', 'GERENTE DE PROYECTO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2109, 1, '9314477', 'VILLANUEVA LAZARO MARISOL TATIANA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1552, 'Direccion 111', NULL, NULL, NULL),
+(2110, 1, '8407108', 'ARIAS DE SERRANO MAURA OBDULIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1553, 'Direccion 111', NULL, NULL, NULL),
+(2111, 1, '10316207', 'VELA VASQUEZ ERNESTO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1554, 'Direccion 111', NULL, NULL, NULL),
+(2112, 1, '91131', 'VALLEJO BLANCO JUAN CARLOS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1555, 'Direccion 111', NULL, NULL, NULL),
+(2113, 1, '2253', 'Armando de la Vega Huamani', 'Gerente', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1556, 'Direccion 111', NULL, NULL, NULL),
+(2114, 1, '19858433', 'RECUAY CANO GUNTHER FROILAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1557, 'Direccion 111', NULL, NULL, NULL),
+(2115, 1, '10325032', 'RIVEROS PALOMINO, DELIA BEATRIZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1558, 'Direccion 111', NULL, NULL, NULL),
+(2116, 1, '7610675', 'HUAPAYA PORTOCARRERO CESAR AUGUSTO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1559, 'Direccion 111', NULL, NULL, NULL),
+(2117, 1, '41517430', 'SAAVEDRA PEREZ, JUAN CARLOS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1560, 'Direccion 111', NULL, NULL, NULL),
+(2118, 1, '2258', 'JAIME SAUL TORRES', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1561, 'Direccion 111', NULL, NULL, NULL),
+(2119, 1, '17810162', 'JORGE LUIS ARANGURI PAREDES', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1562, 'Direccion 111', NULL, NULL, NULL),
+(2120, 1, '8783802', 'ROBERTO MATOS VARGAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1563, 'Direccion 111', NULL, NULL, NULL),
+(2121, 1, '27154606', 'ABDON GUILLERMO VARGAS CABANILLAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1564, 'Direccion 111', NULL, NULL, NULL),
+(2122, 1, '18167050', 'KAREM EDITH RODRIGUEZ ARMAS', 'SUBGERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1565, 'Direccion 111', NULL, NULL, NULL),
+(2123, 1, '43332821', 'LUIS FERNANDO CABRERA GUTIERREZ', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1566, 'Direccion 111', NULL, NULL, NULL),
+(2124, 1, '17848621', 'JULIO ENRIQUE MERINO VEREAU', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1567, 'Direccion 111', NULL, NULL, NULL),
+(2125, 1, '6368261', 'EDUARDO E. HUALLANCA SAMINAS', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1568, 'Direccion 111', NULL, NULL, NULL),
+(2126, 1, '18071229', 'RAFAEL GUILLERMCHUNGA PAU', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1569, 'Direccion 111', NULL, NULL, NULL),
+(2127, 1, '32735346', 'CHRISTIAN MARTIN MELENDEZ LINAREZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1570, 'Direccion 111', NULL, NULL, NULL),
+(2128, 1, '18133561', 'VILLANUEVA CABRERA ERWINGN RAUL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1571, 'Direccion 111', NULL, NULL, NULL),
+(2129, 1, '18213161', 'MARILYN EVELYN CORCUERA ZAVALETA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1572, 'Direccion 111', NULL, NULL, NULL),
+(2130, 1, '17914626', 'OLGA ELENA ALFARO CHAVEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1573, 'Direccion 111', NULL, NULL, NULL),
+(2131, 1, '40699116', 'SILVIA MARINA MGRACEYARINI', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1574, 'Direccion 111', NULL, NULL, NULL),
+(2132, 1, '8996932', 'KUBA FELIPE DE YAYA, JULIA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1575, 'Direccion 111', NULL, NULL, NULL),
+(2133, 1, '9011361', 'HILARIO FLORES, HONORATA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1576, 'Direccion 111', NULL, NULL, NULL),
+(2134, 1, '9488769', 'SULCA CANCHARI DE VERASTEGUI LUCIA SEVERINA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1578, 'Direccion 111', NULL, NULL, NULL),
+(2135, 1, '7797319', 'CABERO NAVARRO OCTAVIO JESUS CLAUDIO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1579, 'Direccion 111', NULL, NULL, NULL),
+(2136, 1, '40963029', 'ESPINOZA MARTINEZ, GUSTAVO ADAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1580, 'Direccion 111', NULL, NULL, NULL),
+(2137, 1, '25617905', 'CAMPOS DE GONZALES AIDA HAYDEE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1581, 'Direccion 111', NULL, NULL, NULL),
+(2138, 1, '2279', 'BENAVIDES ZAVALETA EDWIN GUILLERMO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1582, 'Direccion 111', NULL, NULL, NULL),
+(2139, 1, '2280', 'WU WONG  ARNOLD HENRY', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1583, 'Direccion 111', NULL, NULL, NULL),
+(2140, 1, '2281', 'SANCHEZ POLLI OSCAR RAUL', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1584, 'Direccion 111', NULL, NULL, NULL),
+(2141, 1, '17897283', 'ESTHER ROJAS RODRIGUEZ', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1585, 'Direccion 111', NULL, NULL, NULL),
+(2142, 1, '18984107', 'CORONEL RAMIREZ TOMAS', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1586, 'Direccion 111', NULL, NULL, NULL),
+(2143, 1, '18071441', 'FLORES FERNANDEZ RICARDO AMADEO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1587, 'Direccion 111', NULL, NULL, NULL),
+(2144, 1, '2285', 'CERON EPIDOTTI GIANNI', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1588, 'Direccion 111', NULL, NULL, NULL),
+(2145, 1, '17969844', 'VASQUEZ VASQUEZ FERNANDO MAXIMO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1589, 'Direccion 111', NULL, NULL, NULL),
+(2146, 1, '17823651', 'BENAVIDES ZAVALETA EDWIN GUILLERMO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1582, 'Direccion 111', NULL, NULL, NULL),
+(2147, 1, '10613995', 'CIPRIAN SORIA NERIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1590, 'Direccion 111', NULL, NULL, NULL),
+(2148, 1, '43077496', 'RAMOS TERRAZOS FREDDY ABRAHAM', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1591, 'Direccion 111', NULL, NULL, NULL),
+(2149, 1, '98989898', 'Maria Alejandra Zavaleta Pisfil', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1592, 'Direccion 111', NULL, NULL, NULL),
+(2150, 1, '99920', 'TANG CHAN TONG', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1593, 'Direccion 111', NULL, NULL, NULL),
+(2151, 1, '46294443', 'ANABELLA ALFARO MADALENGOITIA', 'ARQUITECTA DE INTERIORES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(2152, 1, '46505045', 'CECILIA VANESA VEGA REYES', 'ASISTENTE DE LOGISTICA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2153, 1, '41363326', 'PATRICIA EYZAGUIRRE PETIT', 'ARQUITECTA DE INTERIORES', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2154, 1, '43683184', 'JENNY RIOS URBINA', 'ASISTENTE CONTABLE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2155, 1, '9909090', 'DAMIAN ANGELACCIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1538, 'Direccion 111', NULL, NULL, NULL),
+(2156, 1, '18040668', 'QUIROZ DE CASTRO BETY ABILIA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1595, 'Direccion 111', NULL, NULL, NULL),
+(2157, 1, '6421291', 'VEGA AYALA LEONIDAS YURY', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1596, 'Direccion 111', NULL, NULL, NULL),
+(2158, 1, '18217794', 'ACEVEDO GOMEZ YASELIN AMARANTA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1597, 'Direccion 111', NULL, NULL, NULL),
+(2159, 1, '6390231', 'RIOS PERALTA, ARTURO PEDRO', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1598, 'Direccion 111', NULL, NULL, NULL),
+(2160, 1, '42411994', 'FLORES CARRANZA ROSA MARIA CRISTINA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1599, 'Direccion 111', NULL, NULL, NULL),
+(2161, 1, '17820345', 'MAZA MONTALVAN TIMOTEO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1600, 'Direccion 111', NULL, NULL, NULL),
+(2162, 1, '284777', 'ESPINOZA DE LESCANO, TERESA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1601, 'Direccion 111', NULL, NULL, NULL),
+(2163, 1, '18087099', 'NAKANDAKARI MAESHIRO MIGUEL ANGE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1602, 'Direccion 111', NULL, NULL, NULL),
+(2164, 1, '105204', 'ALVAREZ FERNANDEZ DE PIRE LIDIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1603, 'Direccion 111', NULL, NULL, NULL),
+(2165, 1, '2306', 'Javier Camones', 'Contador', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1539, 'Direccion 111', NULL, NULL, NULL),
+(2166, 1, '2307', 'ALFONSO MARQUEZ', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 515, 'Direccion 111', NULL, NULL, NULL),
+(2167, 1, '2308', 'DAVID OSTOS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1604, 'Direccion 111', NULL, NULL, NULL),
+(2168, 1, '2309', 'MILKO FRANCO DE LA CRUZ ZAVALETA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1605, 'Direccion 111', NULL, NULL, NULL),
+(2169, 1, '46668972', 'RICHTER LOPEZ ANDRES FEDERICO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1606, 'Direccion 111', NULL, NULL, NULL),
+(2170, 1, '7257688', 'EDUARDO MARTON HERRERA VASQUEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1608, 'Direccion 111', NULL, NULL, NULL),
+(2171, 1, '8746121', 'FARAH BOTE ERIC EDUARDO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1610, 'Direccion 111', NULL, NULL, NULL),
+(2172, 1, '6157500', 'LUIS ALBERTO VENEGAS ASNARAN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1611, 'Direccion 111', NULL, NULL, NULL),
+(2173, 1, '10435815', 'GUTIERREZ LEON MARTIN MAXIMILIANO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1613, 'Direccion 111', NULL, NULL, NULL),
+(2174, 1, '6541627', 'SEGUNDO ERASMO TORRES VARGAS', 'MAESTRO DE OBRA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1616, 'Direccion 111', NULL, NULL, NULL),
+(2175, 1, '19948920', 'PABLO RENE LEON CRUZ', 'OPERARIO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1617, 'Direccion 111', NULL, NULL, NULL),
+(2176, 1, '25837701', 'RICARDO ANTON GUERRERO', 'AYUDANTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1618, 'Direccion 111', NULL, NULL, NULL),
+(2177, 1, '9269934', 'PACHAS TORREBLANCA, EDUARDO', 'NEGOCIANTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1619, 'Direccion 111', NULL, NULL, NULL),
+(2178, 1, '2319', 'MEDARDO PACHAS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1619, 'Direccion 111', NULL, NULL, NULL),
+(2179, 1, '8589060', 'GONZALO ALI ABANTO SANTILLAN', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1620, 'Direccion 111', NULL, NULL, NULL),
+(2180, 1, '2232', 'ROY VILLACORTA MALDONADO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1621, 'Direccion 111', NULL, NULL, NULL),
+(2181, 1, '10212804', 'FEBRES BURGA YOLANDA ESTHER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1622, 'Direccion 111', NULL, NULL, NULL),
+(2182, 1, '10198579', 'ESTRELLA VILLAFRANCO JAVIER', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1629, 'Direccion 111', NULL, NULL, NULL),
+(2183, 1, '40127902', 'REYES COLONIO ALEJANDRO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1624, 'Direccion 111', NULL, NULL, NULL),
+(2184, 1, '2325', 'IRMA VELASQUEZ', 'RESPONSABLE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1625, 'Direccion 111', NULL, NULL, NULL),
+(2185, 1, '2326', 'JORGE LUIS PALACIOS ALAYO', 'PREVENCIONISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1626, 'Direccion 111', NULL, NULL, NULL),
+(2186, 1, '25783201', 'MIGUEL DONAIRES MANZANARES', 'RESIDENTE - INGENIERO CIVIL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2187, 1, '7257190', 'ZARATE GARCIA, PILAR DE LOS MILAGROS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1627, 'Direccion 111', NULL, NULL, NULL),
+(2188, 1, '2329', 'RAQUEL', 'FEJA DE LOGISTICA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2189, 1, '6549185', 'FRANCO PAYANO, SATURNINA LUZMILA', 'independiente', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1628, 'Direccion 111', NULL, NULL, NULL),
+(2190, 1, '46113492', 'AGUILAR ACHANCARAY MARICRUZ MANUELA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1630, 'Direccion 111', NULL, NULL, NULL),
+(2191, 1, '9336069', 'SAETTONE WATMOUGH DAVID MARTIN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1631, 'Direccion 111', NULL, NULL, NULL),
+(2192, 1, '21521150', 'ALTHEMAR FRANCO MENDOZA', 'RESIDENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 6, 'Direccion 111', NULL, NULL, NULL),
+(2193, 1, '44232191', 'JESUS CRISTOBAL NUÑEZ', 'INGENIERO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2194, 1, '12345789', 'fIORELLA CONSTANTINI GALLO', 'ARQUITECTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1632, 'Direccion 111', NULL, NULL, NULL),
+(2195, 1, '2336', 'CARMEN URRA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1468, 'Direccion 111', NULL, NULL, NULL),
+(2196, 1, '2337', 'MERCEDES BARBA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1468, 'Direccion 111', NULL, NULL, NULL),
+(2197, 1, '2338', 'ROJAS CARL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1633, 'Direccion 111', NULL, NULL, NULL),
+(2198, 1, '18028020', 'VERONICA REBECA ESCOBAL ORDOÑEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1635, 'Direccion 111', NULL, NULL, NULL),
+(2199, 1, '9796486', 'SANTIAGO JULIO TELLO SERNAQUE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1636, 'Direccion 111', NULL, NULL, NULL),
+(2200, 1, '18014683', 'MARGOT AZABACHE GARCIA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1637, 'Direccion 111', NULL, NULL, NULL),
+(2201, 1, '2350', 'RICARDO GUILLERMO LI CADENILLAS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1639, 'Direccion 111', NULL, NULL, NULL),
+(2202, 1, '17979315', 'GERARDO AMBROCIO ALVARO HUERTA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1641, 'Direccion 111', NULL, NULL, NULL),
+(2203, 1, '123456789', 'TIAGO SILVA', 'GERENTE DE CONSTRUCCION CIVIL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1625, 'Direccion 111', NULL, NULL, NULL),
+(2204, 1, '379401', 'NUNO EMANUEL GARRIDO FIGUEIREDO', 'REPRESENTANTE LEGAL 1', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1625, 'Direccion 111', NULL, NULL, NULL),
+(2205, 1, '7276320', 'FRANCISCO RUBEN DARIO LORA MORGAN', 'REPRESENTANTE LEGAL 2', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1625, 'Direccion 111', NULL, NULL, NULL),
+(2206, 1, '44424040', 'FERNANDO AARON RODRIGUEZ ZUÑIGA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1642, 'Direccion 111', NULL, NULL, NULL),
+(2207, 1, '9671426', 'PAULO CESAR TSUJA UECHI', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1643, 'Direccion 111', NULL, NULL, NULL),
+(2208, 1, '17807701', 'VICTOR ADOLFO TANTALEAN CHAVEZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1644, 'Direccion 111', NULL, NULL, NULL),
+(2209, 1, '9079614', 'MARIA TERESA FUJIY TAKEDA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1645, 'Direccion 111', NULL, NULL, NULL),
+(2210, 1, '45299669', 'FIORELLA JOHANA ALVARO SEVILLANO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1646, 'Direccion 111', NULL, NULL, NULL),
+(2211, 1, '18172712', 'ALEXIS SAMUEL CASTILLO LLANOS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1647, 'Direccion 111', NULL, NULL, NULL),
+(2212, 1, '40921556', 'HEYDI ANGIE MIRIAM OSHIRO CALATAYUD', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1648, 'Direccion 111', NULL, NULL, NULL),
+(2213, 1, '9722889', 'RODRIGUEZ NARVAEZ BEATRIZ DIANA', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1650, 'Direccion 111', NULL, NULL, NULL),
+(2214, 1, '119434', 'YONG CHUY ZHEN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1651, 'Direccion 111', NULL, NULL, NULL),
+(2215, 1, '2364', 'RAUL PONCE DE LEON TIRADO', 'Superintendente de Logística', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1653, 'Direccion 111', NULL, NULL, NULL),
+(2216, 1, '7462968', 'IJU AZAMA MIGUEL', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1654, 'Direccion 111', NULL, NULL, NULL),
+(2217, 1, '10103681', 'RODRIGUEZ RUIZ SANTOS CELINDA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1655, 'Direccion 111', NULL, NULL, NULL),
+(2218, 1, '6674088', 'ROSAS RODRIGUEZ MARIA DEL ROSARIO NERIDA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1656, 'Direccion 111', NULL, NULL, NULL),
+(2219, 1, '8888162', 'MOGROVEJO GUTIERREZ JEANETTE CONSUELO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1659, 'Direccion 111', NULL, NULL, NULL),
+(2220, 1, '2369', 'RAUL BUSTAMANTE', 'REPRESENTANTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1659, 'Direccion 111', NULL, NULL, NULL),
+(2221, 1, '41195513', 'GOMEZ GONZALEZ JORGE LUIS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1661, 'Direccion 111', NULL, NULL, NULL),
+(2222, 1, '22994659', 'ZARATE GARCIA ROY RUBEN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1662, 'Direccion 111', NULL, NULL, NULL),
+(2223, 1, '2832693', 'APONTE NUÑEZ, MARCIAL', 'PREVENCIONISTA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2224, 1, '29538133', 'CARPIO MONTOYA HERNANDO DAVID', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1667, 'Direccion 111', NULL, NULL, NULL),
+(2225, 1, '10490267', 'PEREZ ORMEÑO NELSON RENATO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1668, 'Direccion 111', NULL, NULL, NULL),
+(2226, 1, '40738463', 'APAZA ROCA RAFAEL GENARO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1669, 'Direccion 111', NULL, NULL, NULL),
+(2227, 1, '10075730', 'HUAHUACHAMBI NORABUENA PATRICIA ROCIO', 'REPRESENTANTE  LEGAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1671, 'Direccion 111', NULL, NULL, NULL),
+(2228, 1, '46801644', 'ARTEAGA TUPALAYA RUTH ESTHER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1672, 'Direccion 111', NULL, NULL, NULL),
+(2229, 1, '25730668', 'FAJARDO LUNA ALEJANDRO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1673, 'Direccion 111', NULL, NULL, NULL),
+(2230, 1, '25640129', 'LEYVA LUNA JOSE LUIS', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1674, 'Direccion 111', NULL, NULL, NULL),
+(2231, 1, '20663326', 'MATEO RIOS SEVERO LADISLAO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1675, 'Direccion 111', NULL, NULL, NULL),
+(2232, 1, '41625275', 'CRUZ MARTINEZ, FRANKLIN ROGGER', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1676, 'Direccion 111', NULL, NULL, NULL),
+(2233, 1, '10258073', 'CERVERA NORIEGA LUCINDA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1677, 'Direccion 111', NULL, NULL, NULL),
+(2234, 1, '16789844', 'CERVERA CRUZ, DENNIS HILDEBRANDO', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1678, 'Direccion 111', NULL, NULL, NULL),
+(2235, 1, '7316850', 'CERVERA NORIEGA ARNALDO RAMON', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1679, 'Direccion 111', NULL, NULL, NULL),
+(2236, 1, '10041263', 'GOMEZ CUYA JOSE', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1680, 'Direccion 111', NULL, NULL, NULL),
+(2237, 1, '25722095', 'MARTIN SALAZAR PROSPERO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1681, 'Direccion 111', NULL, NULL, NULL),
+(2238, 1, '2387', 'ELVIS CONGONA ALVAREZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1682, 'Direccion 111', NULL, NULL, NULL),
+(2239, 1, '32730323', 'BLANCO PASCO DEMETRIO FIDENCIO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1685, 'Direccion 111', NULL, NULL, NULL),
+(2240, 1, '2389', 'HUANUQUEÑO CHUCO ANTONIO', 'REPRESENTANTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1686, 'Direccion 111', NULL, NULL, NULL),
+(2241, 1, '2390', 'HUANUQUEÑO CHUCO ANTONIO', 'REPRESENTANTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1686, 'Direccion 111', NULL, NULL, NULL),
+(2242, 1, '40684458', 'BRUNO CHRISTIAN ROCA MORAN', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1687, 'Direccion 111', NULL, NULL, NULL),
+(2243, 1, '8612957', 'ROMANO JUAN CAHUAS CAYO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1665, 'Direccion 111', NULL, NULL, NULL),
+(2244, 1, '8631779', 'MAXIMO ROBERTO AQUINO CAREY', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1688, 'Direccion 111', NULL, NULL, NULL),
+(2245, 1, '10284799', 'JHON GILBERT VIDAL ELGUERA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1660, 'Direccion 111', NULL, NULL, NULL),
+(2246, 1, '9336511', 'ALFREDO EDUARDO MATTO CACERES', 'APODERADO', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1666, 'Direccion 111', NULL, NULL, NULL),
+(2247, 1, '32920992', 'ANGEL JUAN LA ROSA RAMIREZ', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1657, 'Direccion 111', NULL, NULL, NULL),
+(2248, 1, '42070875', 'VICTOR ALBERTO SAAVEDRA BAUTISTA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1663, 'Direccion 111', NULL, NULL, NULL),
+(2249, 1, '45195101', 'HERNAN SANTIAGO GUEMBES PORTOCARRERO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1658, 'Direccion 111', NULL, NULL, NULL),
+(2250, 1, '8249782', 'LUIS SALO ZWIEBACH CANTOR', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 437, 'Direccion 111', NULL, NULL, NULL),
+(2251, 1, '8732590', 'BOCANEGRA MORALES FELIX HUGO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1689, 'Direccion 111', NULL, NULL, NULL),
+(2252, 1, '10426374', 'ZAMORA RODAS CARLOS LUCAS', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1690, 'Direccion 111', NULL, NULL, NULL),
+(2253, 1, '2402', 'FLORES ROJAS ANDRES CARLOS', 'GERENTE', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1691, 'Direccion 111', NULL, NULL, NULL),
+(2254, 1, '9368457', 'CHOQUE NADAL, SUSANA', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1692, 'Direccion 111', NULL, NULL, NULL),
+(2255, 1, '9310101', 'TORBISCO MARTINEZ, NICOLAS BRUNO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1695, 'Direccion 111', NULL, NULL, NULL),
+(2256, 1, '7264135', 'CHAVEZ ARANIBAR, RAFAEL', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1696, 'Direccion 111', NULL, NULL, NULL),
+(2257, 1, '7839748', 'CISNEROS VELARDE FERNANDO JAVIER', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1697, 'Direccion 111', NULL, NULL, NULL),
+(2258, 1, '41761457', 'MIGUEL ALCANTARA', 'PROGRAMADOR', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2259, 1, '9728968', 'YANCCE VELARDE ROCIO YOVANA', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1699, 'Direccion 111', NULL, NULL, NULL),
+(2260, 1, '6661056', 'CAMACHO GONZALES BEATRIZ CONSUELO', 'GERENTE GENERAL', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1700, 'Direccion 111', NULL, NULL, NULL),
+(2261, 1, '6804469', 'ROBERT TITO VIZCARRA', 'SOCIO DE LA EMPRESA', NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1701, 'Direccion 111', NULL, NULL, NULL),
+(2262, 1, '25631106', 'CABRERA TAPIA HECTOR', NULL, NULL, 'Testing', 'kpalma@corp2torres.com', NULL, 3, 1702, 'Direccion 111', NULL, NULL, NULL),
+(2263, 1, '', 'Barclay M. Shannon', '', '', 'Testing', 'kpalma@corp2torres.com', '', 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2264, 1, '', 'Josephine K. Mckenzie', '', '', 'Testing', 'kpalma@corp2torres.com', '', 3, 2, 'Direccion 111', NULL, NULL, NULL),
+(2265, 1, '44444', 'miguel angel alcantara ayre', 'qwerty', '563456345', 'Testing', 'kpalma@corp2torres.com', 'http://www.google.com', 1, 1557, 'Direccion 111', NULL, NULL, NULL),
+(2266, 1, '56765', 'ocnpfr', 'qwerty', '563456345', 'Testing', 'kpalma@corp2torres.com', 'http://www.google.com', 1, 1379, 'Direccion 111', NULL, NULL, NULL),
+(2267, 1, '4', 'ocnpfr--*', 'qwerty', '563456345', 'Testing', 'kpalma@corp2torres.com', 'http://www.google.com', 1, 1379, 'Direccion 111', NULL, NULL, NULL),
+(2269, 1, '4', 'miguel angel alcantara ayre', 'qwer', '563456345', 'Testing', 'kpalma@corp2torres.com', 'http://www.google.com', 1, 1069, 'Direccion 111', NULL, NULL, NULL),
+(2271, 1, '23423', 'miguel angel alcantara ayre', 'qwerty', 'NULL', 'Testing', 'kpalma@corp2torres.com', 'NULL', 1, 1379, 'Direccion 111', NULL, NULL, NULL),
+(2272, 1, '23423', 'miguel angel alcantara ayre', 'qwerty', '563456345', 'Testing', 'kpalma@corp2torres.com', 'http://www.google.com', 1, 1379, 'Direccion 111', NULL, NULL, NULL),
+(2273, 1, '23423', 'miguel angel alcantara ayre', 'qwerty', '563456345', 'Testing', 'kpalma@corp2torres.com', 'http://www.google.com', 1, 1557, 'Direccion 111', NULL, NULL, NULL),
+(2274, 1, '23423', 'miguel', 'qwer', '563456345', 'Testing', 'kpalma@corp2torres.com', 'http://www.google.com', 1, 1331, 'Direccion 111', NULL, NULL, NULL),
+(2275, 1, '23423', 'miguel angel alcantara ayre', 'qwer', 'NULL', 'Testing', 'kpalma@corp2torres.com', 'http://www.google.com', 1, 1379, 'Direccion 111', NULL, NULL, NULL),
+(2276, 1, '666999', 'qwert', 'gerente', '111', 'qwe', 'qqq@qqq.com', 'qqq.com', 1, 79, 'lo', 177, 2911, 1240),
+(2277, 1, '906090', 'qwertyuiop', 'go', '221', 'NULL', 'qqq@qqq.com', 'qqq.com', 2, 28, 'jo', 181, 3, 4),
+(2279, 1, '333777', 'cielo', 'gerente', '1111', 'sin obs.', 'miguel.alc@gmail.com', 'google.com', 2, 1741, 'qwerty', 177, 2911, 1240),
+(2280, 1, '123100', 'screen', 'manager', 'NULL', 'NULL', 'miguel.alc@gmail.com', 'NULL', 1, 1741, 'some', 177, 2911, 1240);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_personacontactocomun`
+-- Estructura de tabla para la tabla `tb_personacontactocomun`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_personacontactocomun` (
+CREATE TABLE `tb_personacontactocomun` (
   `id` int(11) NOT NULL,
   `nombres` varchar(250) DEFAULT NULL,
   `correo` varchar(100) DEFAULT NULL,
@@ -12023,7 +12137,7 @@ CREATE TABLE IF NOT EXISTS `tb_personacontactocomun` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='No tiene:  tb_empresa_id tb_viaenvio';
 
 --
--- Dumping data for table `tb_personacontactocomun`
+-- Volcado de datos para la tabla `tb_personacontactocomun`
 --
 
 INSERT INTO `tb_personacontactocomun` (`id`, `nombres`, `correo`, `tb_contactocomun_id`, `dni`, `cargo`, `fax`, `observacion`, `web`) VALUES
@@ -12041,10 +12155,10 @@ INSERT INTO `tb_personacontactocomun` (`id`, `nombres`, `correo`, `tb_contactoco
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_ppfijo`
+-- Estructura de tabla para la tabla `tb_ppfijo`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_ppfijo` (
+CREATE TABLE `tb_ppfijo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(15) DEFAULT NULL,
   `tb_proveedor_id` int(11) DEFAULT NULL,
@@ -12055,10 +12169,10 @@ CREATE TABLE IF NOT EXISTS `tb_ppfijo` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_ppmobile`
+-- Estructura de tabla para la tabla `tb_ppmobile`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_ppmobile` (
+CREATE TABLE `tb_ppmobile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(15) DEFAULT NULL,
   `tb_proveedor_id` int(11) DEFAULT NULL,
@@ -12069,10 +12183,10 @@ CREATE TABLE IF NOT EXISTS `tb_ppmobile` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_ppnextel`
+-- Estructura de tabla para la tabla `tb_ppnextel`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_ppnextel` (
+CREATE TABLE `tb_ppnextel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(15) DEFAULT NULL,
   `tb_proveedor_id` int(11) DEFAULT NULL,
@@ -12083,10 +12197,10 @@ CREATE TABLE IF NOT EXISTS `tb_ppnextel` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_profesion`
+-- Estructura de tabla para la tabla `tb_profesion`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_profesion` (
+CREATE TABLE `tb_profesion` (
   `tb_personacontacto_id` int(11) NOT NULL,
   `tb_especialidadpersona_id` int(11) NOT NULL,
   KEY `fk_tb_profesion_tb_personacontacto1` (`tb_personacontacto_id`),
@@ -12094,7 +12208,7 @@ CREATE TABLE IF NOT EXISTS `tb_profesion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_profesion`
+-- Volcado de datos para la tabla `tb_profesion`
 --
 
 INSERT INTO `tb_profesion` (`tb_personacontacto_id`, `tb_especialidadpersona_id`) VALUES
@@ -12104,15 +12218,28 @@ INSERT INTO `tb_profesion` (`tb_personacontacto_id`, `tb_especialidadpersona_id`
 (2273, 3),
 (2273, 6),
 (2274, 3),
-(2275, 6);
+(2275, 6),
+(1, 1),
+(1, 8),
+(1, 5),
+(1, 6),
+(2276, 1),
+(2276, 2),
+(2277, 1),
+(2277, 2),
+(2277, 3),
+(2279, 1),
+(2279, 2),
+(2280, 1),
+(2280, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_proveedorpublico`
+-- Estructura de tabla para la tabla `tb_proveedorpublico`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_proveedorpublico` (
+CREATE TABLE `tb_proveedorpublico` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(250) NOT NULL,
   `ruc` varchar(11) DEFAULT NULL,
@@ -12127,10 +12254,10 @@ CREATE TABLE IF NOT EXISTS `tb_proveedorpublico` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_reporteporpersona`
+-- Estructura de tabla para la tabla `tb_reporteporpersona`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_reporteporpersona` (
+CREATE TABLE `tb_reporteporpersona` (
   `tb_reporte_id` int(11) DEFAULT NULL,
   `tb_personacontacto_id` int(11) DEFAULT NULL,
   `id_aleatorio` int(11) DEFAULT NULL,
@@ -12141,17 +12268,17 @@ CREATE TABLE IF NOT EXISTS `tb_reporteporpersona` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_reportes`
+-- Estructura de tabla para la tabla `tb_reportes`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_reportes` (
+CREATE TABLE `tb_reportes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
--- Dumping data for table `tb_reportes`
+-- Volcado de datos para la tabla `tb_reportes`
 --
 
 INSERT INTO `tb_reportes` (`id`, `descripcion`) VALUES
@@ -12175,10 +12302,10 @@ INSERT INTO `tb_reportes` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_representante`
+-- Estructura de tabla para la tabla `tb_representante`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_representante` (
+CREATE TABLE `tb_representante` (
   `tb_companiacontacto_id` int(11) NOT NULL,
   `tb_personacontacto_id` int(11) NOT NULL,
   KEY `fk_tb_representante_tb_companiacontacto1` (`tb_companiacontacto_id`),
@@ -12186,7 +12313,7 @@ CREATE TABLE IF NOT EXISTS `tb_representante` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_representante`
+-- Volcado de datos para la tabla `tb_representante`
 --
 
 INSERT INTO `tb_representante` (`tb_companiacontacto_id`, `tb_personacontacto_id`) VALUES
@@ -12195,15 +12322,22 @@ INSERT INTO `tb_representante` (`tb_companiacontacto_id`, `tb_personacontacto_id
 (1733, 1381),
 (1733, 970),
 (1734, 634),
-(6, 634);
+(6, 531),
+(6, 1245),
+(6, 16),
+(1740, 1015),
+(1740, 866),
+(1741, 1),
+(1741, 2279),
+(1741, 2280);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_rubro`
+-- Estructura de tabla para la tabla `tb_rubro`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_rubro` (
+CREATE TABLE `tb_rubro` (
   `tb_companiacontacto_id` int(11) NOT NULL,
   `tb_especialidadcompania_id` int(11) NOT NULL,
   KEY `fk_tb_rubro_tb_companiacontacto1` (`tb_companiacontacto_id`),
@@ -12211,7 +12345,7 @@ CREATE TABLE IF NOT EXISTS `tb_rubro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla que indica la especialidad o especialidades de una emp';
 
 --
--- Dumping data for table `tb_rubro`
+-- Volcado de datos para la tabla `tb_rubro`
 --
 
 INSERT INTO `tb_rubro` (`tb_companiacontacto_id`, `tb_especialidadcompania_id`) VALUES
@@ -12340,8 +12474,6 @@ INSERT INTO `tb_rubro` (`tb_companiacontacto_id`, `tb_especialidadcompania_id`) 
 (322, 207),
 (334, 207),
 (340, 207),
-(6, 153),
-(6, 6),
 (8, 36),
 (10, 80),
 (10, 126),
@@ -13119,15 +13251,21 @@ INSERT INTO `tb_rubro` (`tb_companiacontacto_id`, `tb_especialidadcompania_id`) 
 (1731, 10),
 (1731, 19),
 (1733, 6),
-(1734, 3);
+(1734, 3),
+(6, 13),
+(6, 39),
+(1740, 1),
+(1740, 2),
+(1741, 1),
+(1741, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_rubrocomun`
+-- Estructura de tabla para la tabla `tb_rubrocomun`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_rubrocomun` (
+CREATE TABLE `tb_rubrocomun` (
   `tb_contactocomun_id` int(11) NOT NULL,
   `tb_especialidadComun_id` int(11) NOT NULL,
   KEY `fk_tb_rubrocomun_tb_contactocomun1` (`tb_contactocomun_id`),
@@ -13135,7 +13273,7 @@ CREATE TABLE IF NOT EXISTS `tb_rubrocomun` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_rubrocomun`
+-- Volcado de datos para la tabla `tb_rubrocomun`
 --
 
 INSERT INTO `tb_rubrocomun` (`tb_contactocomun_id`, `tb_especialidadComun_id`) VALUES
@@ -13163,10 +13301,10 @@ INSERT INTO `tb_rubrocomun` (`tb_contactocomun_id`, `tb_especialidadComun_id`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_seccioncosto`
+-- Estructura de tabla para la tabla `tb_seccioncosto`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_seccioncosto` (
+CREATE TABLE `tb_seccioncosto` (
   `id` int(11) NOT NULL,
   `codificacion` int(11) DEFAULT NULL,
   `descripcion` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -13178,10 +13316,10 @@ CREATE TABLE IF NOT EXISTS `tb_seccioncosto` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_seccionventa`
+-- Estructura de tabla para la tabla `tb_seccionventa`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_seccionventa` (
+CREATE TABLE `tb_seccionventa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codificacion` varchar(15) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `descripcion` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -13194,10 +13332,10 @@ CREATE TABLE IF NOT EXISTS `tb_seccionventa` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_session`
+-- Estructura de tabla para la tabla `tb_session`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_session` (
+CREATE TABLE `tb_session` (
   `id_empresa` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `fecha` datetime DEFAULT NULL,
@@ -13206,29 +13344,124 @@ CREATE TABLE IF NOT EXISTS `tb_session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Dumping data for table `tb_session`
+-- Volcado de datos para la tabla `tb_session`
 --
 
 INSERT INTO `tb_session` (`id_empresa`, `id_usuario`, `fecha`, `directorio`, `obra`) VALUES
 (1, 1, '2012-08-16 11:54:08', 1, 2),
-(1, 1, '2012-08-27 09:15:24', 8, 13);
+(1, 1, '2012-08-27 09:15:24', 8, 13),
+(1, 1, '2012-08-28 23:41:48', 8, 13),
+(1, 1, '2012-08-30 22:27:16', 8, 13),
+(1, 1, '2012-08-31 15:53:33', 8, 13),
+(1, 1, '2012-08-31 17:53:22', 8, 13),
+(1, 1, '2012-09-01 09:50:02', 8, 13),
+(1, 1, '2012-09-02 11:02:42', 8, 13),
+(1, 1, '2012-09-02 13:23:18', 8, 13),
+(1, 1, '2012-09-02 13:24:27', 8, 13),
+(1, 1, '2012-09-02 14:12:38', 8, 13),
+(1, 1, '2012-09-02 15:03:46', 8, 13),
+(1, 1, '2012-09-02 15:27:07', 8, 13),
+(1, 1, '2012-09-02 15:50:21', 8, 13),
+(1, 1, '2012-09-02 16:23:24', 8, 13),
+(1, 1, '2012-09-02 16:25:46', 8, 13),
+(1, 1, '2012-09-02 21:17:16', 8, 13),
+(1, 1, '2012-09-02 22:27:28', 8, 13),
+(1, 1, '2012-09-03 09:23:21', 8, 13),
+(1, 1, '2012-09-03 13:12:35', 8, 13),
+(1, 1, '2012-09-04 10:14:34', 8, 13),
+(1, 1, '2012-09-04 12:00:19', 8, 13),
+(1, 1, '2012-09-04 12:51:43', 8, 13),
+(1, 1, '2012-09-04 21:15:00', 8, 13),
+(1, 1, '2012-09-05 10:32:56', 8, 13),
+(1, 1, '2012-09-05 12:04:59', 8, 13),
+(1, 1, '2012-09-05 13:15:05', 8, 13),
+(1, 1, '2012-09-05 14:46:17', 8, 13),
+(1, 1, '2012-09-05 14:57:35', 8, 13),
+(1, 1, '2012-09-05 15:07:14', 8, 13),
+(1, 1, '2012-09-05 15:10:27', 8, 13),
+(1, 1, '2012-09-05 15:16:59', 8, 13),
+(1, 1, '2012-09-05 15:18:42', 8, 13),
+(1, 1, '2012-09-05 16:56:46', 8, 13),
+(1, 1, '2012-09-05 17:40:47', 8, 13),
+(1, 1, '2012-09-05 17:49:54', 8, 13),
+(1, 1, '2012-09-06 00:19:06', 8, 13),
+(1, 1, '2012-09-06 08:53:43', 8, 13),
+(1, 1, '2012-09-06 09:02:09', 8, 13),
+(1, 1, '2012-09-06 10:28:29', 8, 13),
+(1, 1, '2012-09-06 10:57:10', 8, 13),
+(1, 1, '2012-09-06 11:16:53', 8, 13),
+(1, 1, '2012-09-06 11:29:39', 8, 13),
+(1, 1, '2012-09-06 11:44:03', 8, 13),
+(1, 1, '2012-09-06 11:45:53', 8, 13),
+(1, 1, '2012-09-06 11:54:29', 8, 13),
+(1, 1, '2012-09-06 12:19:50', 8, 13),
+(1, 1, '2012-09-06 12:29:04', 8, 13),
+(1, 1, '2012-09-06 12:57:45', 8, 13),
+(1, 1, '2012-09-06 13:07:10', 8, 13),
+(1, 1, '2012-09-06 13:11:56', 8, 13),
+(1, 1, '2012-09-06 13:13:55', 8, 13),
+(1, 1, '2012-09-06 13:28:36', 8, 13),
+(1, 1, '2012-09-06 13:31:40', 8, 13),
+(1, 1, '2012-09-06 15:12:42', 8, 13),
+(1, 1, '2012-09-06 15:38:23', 8, 13),
+(1, 1, '2012-09-06 16:01:01', 8, 13),
+(1, 1, '2012-09-06 16:35:37', 8, 13),
+(1, 1, '2012-09-06 21:54:05', 8, 13),
+(1, 1, '2012-09-06 23:24:30', 8, 13),
+(1, 1, '2012-09-07 09:33:36', 8, 13),
+(1, 1, '2012-09-07 09:36:56', 8, 13),
+(1, 1, '2012-09-07 18:32:11', 9, 8),
+(1, 1, '2012-09-08 11:10:45', 9, 8),
+(1, 1, '2012-09-08 11:49:08', 8, 13),
+(1, 1, '2012-09-08 13:45:09', 8, 13),
+(1, 1, '2012-09-08 15:52:29', 8, 7),
+(1, 1, '2012-09-08 16:28:24', 9, 8),
+(1, 1, '2012-09-08 21:32:30', 9, 8),
+(1, 1, '2012-09-09 09:59:15', 8, 13),
+(1, 1, '2012-09-10 14:32:11', 8, 13),
+(1, 1, '2012-09-10 14:44:16', 8, 13),
+(1, 1, '2012-09-10 14:48:14', 8, 13),
+(1, 1, '2012-09-10 14:50:26', 8, 13),
+(1, 1, '2012-09-10 14:54:41', 8, 13),
+(1, 1, '2012-09-10 14:55:36', 8, 13),
+(1, 1, '2012-09-10 15:12:38', 8, 13),
+(1, 1, '2012-09-10 15:45:31', 8, 13),
+(1, 1, '2012-09-10 15:47:59', 8, 13),
+(1, 1, '2012-09-10 15:48:42', 8, 13),
+(1, 1, '2012-09-10 15:51:04', 8, 13),
+(1, 1, '2012-09-10 15:57:01', 8, 13),
+(1, 1, '2012-09-10 16:01:07', 8, 13),
+(1, 1, '2012-09-10 16:02:16', 8, 13),
+(1, 1, '2012-09-10 22:12:18', 8, 13),
+(1, 1, '2012-09-11 09:36:08', 8, 13),
+(1, 1, '2012-09-11 09:54:25', 8, 13),
+(1, 1, '2012-09-11 12:45:50', 8, 13),
+(1, 1, '2012-09-11 12:46:27', 8, 13),
+(1, 1, '2012-09-11 13:12:11', 8, 13),
+(1, 1, '2012-09-11 14:54:23', 8, 13),
+(1, 1, '2012-09-11 15:17:26', 8, 13),
+(1, 1, '2012-09-11 18:34:20', 8, 13),
+(1, 1, '2012-09-12 09:18:17', 8, 13),
+(1, 1, '2012-09-12 17:57:15', 8, 13),
+(1, 1, '2012-09-13 10:55:02', 8, 13),
+(1, 1, '2012-09-13 20:54:02', 8, 13);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_telefonofijocompania`
+-- Estructura de tabla para la tabla `tb_telefonofijocompania`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_telefonofijocompania` (
+CREATE TABLE `tb_telefonofijocompania` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(45) DEFAULT NULL,
   `tb_companiacontacto_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_telefonofijocompania_tb_companiacontacto1` (`tb_companiacontacto_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
--- Dumping data for table `tb_telefonofijocompania`
+-- Volcado de datos para la tabla `tb_telefonofijocompania`
 --
 
 INSERT INTO `tb_telefonofijocompania` (`id`, `numero`, `tb_companiacontacto_id`) VALUES
@@ -13240,28 +13473,31 @@ INSERT INTO `tb_telefonofijocompania` (`id`, `numero`, `tb_companiacontacto_id`)
 (6, '111', 1731),
 (7, '111', 1733),
 (8, '111', 1734),
-(9, '777', 6);
+(9, '1112', 6),
+(10, '1', 1740),
+(11, '2', 1740),
+(12, '21500687', 1741),
+(13, '3', 6);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_telefonofijopersona`
+-- Estructura de tabla para la tabla `tb_telefonofijopersona`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_telefonofijopersona` (
+CREATE TABLE `tb_telefonofijopersona` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(30) DEFAULT NULL,
   `tb_personacontacto_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_telefonofijopersona_tb_personacontacto1` (`tb_personacontacto_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=777 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=784 ;
 
 --
--- Dumping data for table `tb_telefonofijopersona`
+-- Volcado de datos para la tabla `tb_telefonofijopersona`
 --
 
 INSERT INTO `tb_telefonofijopersona` (`id`, `numero`, `tb_personacontacto_id`) VALUES
-(1, '411 2500 – 204', 1),
 (2, '2192000-2339', 2),
 (3, '4727396', 6),
 (4, '4273440', 9),
@@ -14034,24 +14270,29 @@ INSERT INTO `tb_telefonofijopersona` (`id`, `numero`, `tb_personacontacto_id`) V
 (772, '111', 2267),
 (773, '111', 2269),
 (775, '111', 2273),
-(776, '111', 2274);
+(776, '111', 2274),
+(779, '222', 1),
+(780, '555', 1),
+(781, '123', 2277),
+(782, '111', 2279),
+(783, '1', 2280);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_telefonomovilcompania`
+-- Estructura de tabla para la tabla `tb_telefonomovilcompania`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_telefonomovilcompania` (
+CREATE TABLE `tb_telefonomovilcompania` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(45) DEFAULT NULL,
   `tb_companiacontacto_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_telefonomovilcompania_tb_companiacontacto1` (`tb_companiacontacto_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
--- Dumping data for table `tb_telefonomovilcompania`
+-- Volcado de datos para la tabla `tb_telefonomovilcompania`
 --
 
 INSERT INTO `tb_telefonomovilcompania` (`id`, `numero`, `tb_companiacontacto_id`) VALUES
@@ -14063,24 +14304,27 @@ INSERT INTO `tb_telefonomovilcompania` (`id`, `numero`, `tb_companiacontacto_id`
 (6, '5563', 1731),
 (7, '4536453', 1731),
 (8, '5563', 1733),
-(10, '9658', 6);
+(9, '11123', 6),
+(10, '3', 1740),
+(11, '4', 1740),
+(12, '44446', 6);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_telefonomovilpersona`
+-- Estructura de tabla para la tabla `tb_telefonomovilpersona`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_telefonomovilpersona` (
+CREATE TABLE `tb_telefonomovilpersona` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(30) DEFAULT NULL,
   `tb_personacontacto_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_telefonomovilpersona_tb_personacontacto1` (`tb_personacontacto_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=355 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=360 ;
 
 --
--- Dumping data for table `tb_telefonomovilpersona`
+-- Volcado de datos para la tabla `tb_telefonomovilpersona`
 --
 
 INSERT INTO `tb_telefonomovilpersona` (`id`, `numero`, `tb_personacontacto_id`) VALUES
@@ -14415,7 +14659,6 @@ INSERT INTO `tb_telefonomovilpersona` (`id`, `numero`, `tb_personacontacto_id`) 
 (330, '998330318', 2153),
 (331, '998336135', 2153),
 (332, '992480078', 2154),
-(333, '949205081', 2173),
 (334, '993-898667', 2182),
 (335, '985-646675', 2182),
 (336, '996980300', 2187),
@@ -14435,24 +14678,28 @@ INSERT INTO `tb_telefonomovilpersona` (`id`, `numero`, `tb_personacontacto_id`) 
 (350, '5563', 2267),
 (351, '5563', 2269),
 (353, '5563', 2273),
-(354, '5563', 2274);
+(354, '5563', 2274),
+(356, '222', 1),
+(357, '212', 1),
+(358, '111', 2277),
+(359, '2', 2280);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_telefononextelcompania`
+-- Estructura de tabla para la tabla `tb_telefononextelcompania`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_telefononextelcompania` (
+CREATE TABLE `tb_telefononextelcompania` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(45) DEFAULT NULL,
   `tb_companiacontacto_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_telefononextelcompania_tb_companiacontacto1` (`tb_companiacontacto_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
--- Dumping data for table `tb_telefononextelcompania`
+-- Volcado de datos para la tabla `tb_telefononextelcompania`
 --
 
 INSERT INTO `tb_telefononextelcompania` (`id`, `numero`, `tb_companiacontacto_id`) VALUES
@@ -14468,28 +14715,33 @@ INSERT INTO `tb_telefononextelcompania` (`id`, `numero`, `tb_companiacontacto_id
 (10, '1211*777', 1731),
 (11, '789*456', 1733),
 (12, '1211*777', 1733),
-(13, '123*9877', 6);
+(15, '988*888', 14),
+(16, '334', 14),
+(17, '12*89', 6),
+(18, '5', 1740),
+(19, '6', 1740),
+(20, '111*888', 1741),
+(21, '123*32', 6);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_telefononextelpersona`
+-- Estructura de tabla para la tabla `tb_telefononextelpersona`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_telefononextelpersona` (
+CREATE TABLE `tb_telefononextelpersona` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(30) DEFAULT NULL,
   `tb_personacontacto_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_telefononextelpersona_tb_personacontacto1` (`tb_personacontacto_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=377 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=381 ;
 
 --
--- Dumping data for table `tb_telefononextelpersona`
+-- Volcado de datos para la tabla `tb_telefononextelpersona`
 --
 
 INSERT INTO `tb_telefononextelpersona` (`id`, `numero`, `tb_personacontacto_id`) VALUES
-(1, '831*7156', 1),
 (2, '415*8413', 5),
 (3, '836*6322', 8),
 (4, '833*4090', 14),
@@ -14861,22 +15113,26 @@ INSERT INTO `tb_telefononextelpersona` (`id`, `numero`, `tb_personacontacto_id`)
 (372, '1211*777', 2267),
 (373, '789*456', 2269),
 (374, '1211*777', 2269),
-(376, '789*456', 2273);
+(376, '789*456', 2273),
+(377, '111*333', 1),
+(378, '222*888', 1),
+(379, '31', 2280),
+(380, '32', 2280);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_tipocompania`
+-- Estructura de tabla para la tabla `tb_tipocompania`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_tipocompania` (
+CREATE TABLE `tb_tipocompania` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `tb_tipocompania`
+-- Volcado de datos para la tabla `tb_tipocompania`
 --
 
 INSERT INTO `tb_tipocompania` (`id`, `descripcion`) VALUES
@@ -14886,10 +15142,10 @@ INSERT INTO `tb_tipocompania` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_tipodecambio`
+-- Estructura de tabla para la tabla `tb_tipodecambio`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_tipodecambio` (
+CREATE TABLE `tb_tipodecambio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fecha` date NOT NULL,
   `sunatventa` decimal(4,3) NOT NULL,
@@ -14900,10 +15156,10 @@ CREATE TABLE IF NOT EXISTS `tb_tipodecambio` (
   PRIMARY KEY (`id`),
   KEY `fk_tb_tipodecambio_tb_moneda1` (`tb_moneda_id`),
   KEY `fk_tb_tipodecambio_tb_empresa1` (`tb_empresa_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
 
 --
--- Dumping data for table `tb_tipodecambio`
+-- Volcado de datos para la tabla `tb_tipodecambio`
 --
 
 INSERT INTO `tb_tipodecambio` (`id`, `fecha`, `sunatventa`, `sunatcompra`, `tb_moneda_id`, `bancoventa`, `tb_empresa_id`) VALUES
@@ -14918,22 +15174,37 @@ INSERT INTO `tb_tipodecambio` (`id`, `fecha`, `sunatventa`, `sunatcompra`, `tb_m
 (23, '2012-08-23', 2.613, 2.613, 1, NULL, 1),
 (24, '2012-08-24', 2.615, 2.614, 1, NULL, 1),
 (25, '2012-08-27', 2.614, 2.613, 1, NULL, 1),
-(26, '2012-08-28', 2.613, 2.611, 1, NULL, 1);
+(26, '2012-08-28', 2.613, 2.611, 1, NULL, 1),
+(27, '2012-08-30', 2.612, 2.610, 1, NULL, 1),
+(28, '2012-08-31', 2.610, 2.609, 1, NULL, 1),
+(29, '2012-09-01', 2.614, 2.609, 1, NULL, 1),
+(30, '2012-09-02', 2.600, 2.630, 1, NULL, 1),
+(31, '2012-09-03', 2.610, 2.609, 1, NULL, 1),
+(32, '2012-09-04', 2.608, 2.607, 1, NULL, 1),
+(33, '2012-09-05', 2.608, 2.608, 1, NULL, 1),
+(34, '2012-09-06', 2.608, 2.608, 1, NULL, 1),
+(35, '2012-09-07', 2.611, 2.610, 1, NULL, 1),
+(36, '2012-09-08', 2.611, 2.610, 1, NULL, 1),
+(37, '2012-09-09', 2.611, 2.610, 1, NULL, 1),
+(38, '2012-09-10', 2.610, 2.609, 1, NULL, 1),
+(39, '2012-09-11', 2.609, 2.608, 1, NULL, 1),
+(40, '2012-09-12', 2.608, 2.607, 1, NULL, 1),
+(41, '2012-09-13', 2.606, 2.605, 1, NULL, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_tipodireccion`
+-- Estructura de tabla para la tabla `tb_tipodireccion`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_tipodireccion` (
+CREATE TABLE `tb_tipodireccion` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `tb_tipodireccion`
+-- Volcado de datos para la tabla `tb_tipodireccion`
 --
 
 INSERT INTO `tb_tipodireccion` (`id`, `descripcion`) VALUES
@@ -14947,17 +15218,17 @@ INSERT INTO `tb_tipodireccion` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_tipodocumento`
+-- Estructura de tabla para la tabla `tb_tipodocumento`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_tipodocumento` (
+CREATE TABLE `tb_tipodocumento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `tb_tipodocumento`
+-- Volcado de datos para la tabla `tb_tipodocumento`
 --
 
 INSERT INTO `tb_tipodocumento` (`id`, `descripcion`) VALUES
@@ -14967,10 +15238,10 @@ INSERT INTO `tb_tipodocumento` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_tiposaldo`
+-- Estructura de tabla para la tabla `tb_tiposaldo`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_tiposaldo` (
+CREATE TABLE `tb_tiposaldo` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '	',
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -14979,17 +15250,17 @@ CREATE TABLE IF NOT EXISTS `tb_tiposaldo` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_tipovalorizacion`
+-- Estructura de tabla para la tabla `tb_tipovalorizacion`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_tipovalorizacion` (
+CREATE TABLE `tb_tipovalorizacion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `tb_tipovalorizacion`
+-- Volcado de datos para la tabla `tb_tipovalorizacion`
 --
 
 INSERT INTO `tb_tipovalorizacion` (`id`, `descripcion`) VALUES
@@ -14999,10 +15270,10 @@ INSERT INTO `tb_tipovalorizacion` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_usuario`
+-- Estructura de tabla para la tabla `tb_usuario`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_usuario` (
+CREATE TABLE `tb_usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tb_empresa_id` int(11) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
@@ -15017,7 +15288,7 @@ CREATE TABLE IF NOT EXISTS `tb_usuario` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Tabla de la empresa que alquila el sistema. ADMINISTRADOR,PA' AUTO_INCREMENT=11 ;
 
 --
--- Dumping data for table `tb_usuario`
+-- Volcado de datos para la tabla `tb_usuario`
 --
 
 INSERT INTO `tb_usuario` (`id`, `tb_empresa_id`, `nombre`, `nombreusuario`, `password`, `rol`, `email`) VALUES
@@ -15035,32 +15306,22 @@ INSERT INTO `tb_usuario` (`id`, `tb_empresa_id`, `nombre`, `nombreusuario`, `pas
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_usuariosaprobaciontemporal`
+-- Estructura de tabla para la tabla `tb_usuariosaprobaciontemporal`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_usuariosaprobaciontemporal` (
+CREATE TABLE `tb_usuariosaprobaciontemporal` (
   `tb_usuario_id` int(11) DEFAULT NULL,
   `aleatorio` int(11) DEFAULT NULL,
   `tb_opcion_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla que almacena temporalmente quienes podran aprobar acci';
 
---
--- Dumping data for table `tb_usuariosaprobaciontemporal`
---
-
-INSERT INTO `tb_usuariosaprobaciontemporal` (`tb_usuario_id`, `aleatorio`, `tb_opcion_id`) VALUES
-(3, 189, NULL),
-(5, 189, NULL),
-(3, 33, NULL),
-(5, 33, NULL);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_usuarioscpms`
+-- Estructura de tabla para la tabla `tb_usuarioscpms`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_usuarioscpms` (
+CREATE TABLE `tb_usuarioscpms` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombres` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
   `apellidos` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -15074,7 +15335,7 @@ CREATE TABLE IF NOT EXISTS `tb_usuarioscpms` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci COMMENT='Usuarios PMS (administrador y gerentes owners cpm)' AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `tb_usuarioscpms`
+-- Volcado de datos para la tabla `tb_usuarioscpms`
 --
 
 INSERT INTO `tb_usuarioscpms` (`id`, `nombres`, `apellidos`, `nombre_usuario`, `password`, `estado`, `rol`, `email`) VALUES
@@ -15084,31 +15345,22 @@ INSERT INTO `tb_usuarioscpms` (`id`, `nombres`, `apellidos`, `nombre_usuario`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_usuariosopciontemporal`
+-- Estructura de tabla para la tabla `tb_usuariosopciontemporal`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_usuariosopciontemporal` (
+CREATE TABLE `tb_usuariosopciontemporal` (
   `id_opcion` int(11) DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL,
   `aleatorio` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tb_usuariosopciontemporal`
---
-
-INSERT INTO `tb_usuariosopciontemporal` (`id_opcion`, `id_usuario`, `aleatorio`) VALUES
-(1, 3, 189),
-(1, 5, 189),
-(4, 3, 189);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_usuariostop`
+-- Estructura de tabla para la tabla `tb_usuariostop`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_usuariostop` (
+CREATE TABLE `tb_usuariostop` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) DEFAULT NULL,
   `usuario` varchar(15) DEFAULT NULL,
@@ -15121,10 +15373,10 @@ CREATE TABLE IF NOT EXISTS `tb_usuariostop` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_usuariovisor`
+-- Estructura de tabla para la tabla `tb_usuariovisor`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_usuariovisor` (
+CREATE TABLE `tb_usuariovisor` (
   `id` int(11) NOT NULL,
   `nombres` varchar(150) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `apellidos` varchar(150) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -15138,10 +15390,10 @@ CREATE TABLE IF NOT EXISTS `tb_usuariovisor` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_valorizacioncompra`
+-- Estructura de tabla para la tabla `tb_valorizacioncompra`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_valorizacioncompra` (
+CREATE TABLE `tb_valorizacioncompra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numeracion` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
@@ -15161,10 +15413,10 @@ CREATE TABLE IF NOT EXISTS `tb_valorizacioncompra` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_valorizaciontrabajo`
+-- Estructura de tabla para la tabla `tb_valorizaciontrabajo`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_valorizaciontrabajo` (
+CREATE TABLE `tb_valorizaciontrabajo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numeracion` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
@@ -15184,17 +15436,17 @@ CREATE TABLE IF NOT EXISTS `tb_valorizaciontrabajo` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_viaenvio`
+-- Estructura de tabla para la tabla `tb_viaenvio`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_viaenvio` (
+CREATE TABLE `tb_viaenvio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `tb_viaenvio`
+-- Volcado de datos para la tabla `tb_viaenvio`
 --
 
 INSERT INTO `tb_viaenvio` (`id`, `descripcion`) VALUES
@@ -15205,66 +15457,74 @@ INSERT INTO `tb_viaenvio` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `temporal`
+-- Estructura de tabla para la tabla `temporal`
 --
 
-CREATE TABLE IF NOT EXISTS `temporal` (
+CREATE TABLE `temporal` (
   `id_contacto` int(11) DEFAULT NULL,
   `id_obra` int(11) DEFAULT NULL,
   `random_code` char(25) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `temporal`
+-- Volcado de datos para la tabla `temporal`
 --
 
 INSERT INTO `temporal` (`id_contacto`, `id_obra`, `random_code`) VALUES
-(1015, 1015, '243'),
-(1015, 1015, '243'),
-(1015, 1015, '44');
+(2121, 13, '145'),
+(1015, 13, '145'),
+(2121, 13, '178'),
+(1015, 13, '178'),
+(866, 13, '145'),
+(1015, 13, '144'),
+(1015, 13, '165'),
+(1015, 13, '10'),
+(2121, 13, '144'),
+(1015, 13, '50'),
+(2121, 13, '50');
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `tb_actadefinitivaoc`
+-- Filtros para la tabla `tb_actadefinitivaoc`
 --
 ALTER TABLE `tb_actadefinitivaoc`
   ADD CONSTRAINT `fk_tb_actadefinitivaoc_tb_ordencompra1` FOREIGN KEY (`tb_ordencompra_id`) REFERENCES `tb_ordencompra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_actadefinitivaot`
+-- Filtros para la tabla `tb_actadefinitivaot`
 --
 ALTER TABLE `tb_actadefinitivaot`
   ADD CONSTRAINT `fk_tb_actadefinitivaot_tb_ordentrabajo1` FOREIGN KEY (`tb_ordentrabajo_id`) REFERENCES `tb_ordentrabajo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_actaprovisionaloc`
+-- Filtros para la tabla `tb_actaprovisionaloc`
 --
 ALTER TABLE `tb_actaprovisionaloc`
   ADD CONSTRAINT `fk_tb_actaprovisionaloc_tb_ordencompra1` FOREIGN KEY (`tb_ordencompra_id`) REFERENCES `tb_ordencompra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_actaprovisionalot`
+-- Filtros para la tabla `tb_actaprovisionalot`
 --
 ALTER TABLE `tb_actaprovisionalot`
   ADD CONSTRAINT `fk_tb_actaprovisionalot_tb_ordentrabajo1` FOREIGN KEY (`tb_ordentrabajo_id`) REFERENCES `tb_ordentrabajo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_administradorcliente`
+-- Filtros para la tabla `tb_administradorcliente`
 --
 ALTER TABLE `tb_administradorcliente`
   ADD CONSTRAINT `fk_tb_administradorcliente_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_alquiler`
+-- Filtros para la tabla `tb_alquiler`
 --
 ALTER TABLE `tb_alquiler`
   ADD CONSTRAINT `fk_tb_alquiler_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_companiacontacto`
+-- Filtros para la tabla `tb_companiacontacto`
 --
 ALTER TABLE `tb_companiacontacto`
   ADD CONSTRAINT `fk_tb_companiacontacto_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -15272,65 +15532,73 @@ ALTER TABLE `tb_companiacontacto`
   ADD CONSTRAINT `fk_tb_companiacontacto_tb_viaenvio1` FOREIGN KEY (`tb_viaenvio_id`) REFERENCES `tb_viaenvio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_comuntfijo`
+-- Filtros para la tabla `tb_comuntfijo`
 --
 ALTER TABLE `tb_comuntfijo`
   ADD CONSTRAINT `fk_tb_comuntfijo_tb_personacontactocomun1` FOREIGN KEY (`tb_personacontactocomun_id`) REFERENCES `tb_personacontactocomun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_comuntmobile`
+-- Filtros para la tabla `tb_comuntmobile`
 --
 ALTER TABLE `tb_comuntmobile`
   ADD CONSTRAINT `fk_tb_comuntmobile_tb_personacontactocomun1` FOREIGN KEY (`tb_personacontactocomun_id`) REFERENCES `tb_personacontactocomun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_comuntnextel`
+-- Filtros para la tabla `tb_comuntnextel`
 --
 ALTER TABLE `tb_comuntnextel`
   ADD CONSTRAINT `fk_tb_comuntnextel_tb_personacontactocomun1` FOREIGN KEY (`tb_personacontactocomun_id`) REFERENCES `tb_personacontactocomun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_contacto`
+-- Filtros para la tabla `tb_contacto`
 --
 ALTER TABLE `tb_contacto`
   ADD CONSTRAINT `fk_tb_contacto_tb_obra1` FOREIGN KEY (`tb_obra_id`) REFERENCES `tb_obra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_contacto_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_contactodelista`
+-- Filtros para la tabla `tb_contactodelista`
 --
 ALTER TABLE `tb_contactodelista`
   ADD CONSTRAINT `fk_tb_contactodelista_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_contactodelista_tb_listadistribucioncontacto1` FOREIGN KEY (`tb_listadistribucioncontacto_id`) REFERENCES `tb_listadistribucioncontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_contactoenactadefinitivaoc`
+-- Filtros para la tabla `tb_contactoenactadefinitivaoc`
 --
 ALTER TABLE `tb_contactoenactadefinitivaoc`
   ADD CONSTRAINT `fk_tb_contactoenactadefinitivaoc_tb_actadefinitivaoc1` FOREIGN KEY (`tb_actadefinitivaoc_id`) REFERENCES `tb_actadefinitivaoc` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_contactoenacta_tb_contacto1` FOREIGN KEY (`tb_contacto_id`) REFERENCES `tb_contacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_contactoenactadefinitivaot`
+-- Filtros para la tabla `tb_contactoenactadefinitivaot`
 --
 ALTER TABLE `tb_contactoenactadefinitivaot`
   ADD CONSTRAINT `fk_tb_contactoenactadefinitivaot_tb_actadefinitivaot1` FOREIGN KEY (`tb_actadefinitivaot_id`) REFERENCES `tb_actadefinitivaot` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_contactoenacta_tb_contacto10` FOREIGN KEY (`tb_contacto_id`) REFERENCES `tb_contacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_correosecundarios`
+-- Filtros para la tabla `tb_contactoreporte`
+--
+ALTER TABLE `tb_contactoreporte`
+  ADD CONSTRAINT `tb_contactoreporte_ibfk_1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`),
+  ADD CONSTRAINT `tb_contactoreporte_ibfk_2` FOREIGN KEY (`tb_reporte_id`) REFERENCES `tb_reportes` (`id`),
+  ADD CONSTRAINT `tb_contactoreporte_ibfk_3` FOREIGN KEY (`tb_obra_id`) REFERENCES `tb_obra` (`id`);
+
+--
+-- Filtros para la tabla `tb_correosecundarios`
 --
 ALTER TABLE `tb_correosecundarios`
   ADD CONSTRAINT `fk_tb_correosecundarios_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_departamento`
+-- Filtros para la tabla `tb_departamento`
 --
 ALTER TABLE `tb_departamento`
   ADD CONSTRAINT `tb_departamento_ibfk_1` FOREIGN KEY (`tb_pais_id`) REFERENCES `tb_pais` (`id`);
 
 --
--- Constraints for table `tb_direccioncompaniacontacto`
+-- Filtros para la tabla `tb_direccioncompaniacontacto`
 --
 ALTER TABLE `tb_direccioncompaniacontacto`
   ADD CONSTRAINT `tb_direccioncompaniacontacto_ibfk_1` FOREIGN KEY (`tb_pais_id`) REFERENCES `tb_pais` (`id`),
@@ -15340,69 +15608,77 @@ ALTER TABLE `tb_direccioncompaniacontacto`
   ADD CONSTRAINT `tb_direccioncompaniacontacto_ibfk_5` FOREIGN KEY (`tb_tipodireccion_id`) REFERENCES `tb_tipodireccion` (`id`);
 
 --
--- Constraints for table `tb_directorio`
+-- Filtros para la tabla `tb_directorio`
 --
 ALTER TABLE `tb_directorio`
   ADD CONSTRAINT `fk_tb_directorio_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_distrito`
+-- Filtros para la tabla `tb_distrito`
 --
 ALTER TABLE `tb_distrito`
   ADD CONSTRAINT `tb_distrito_ibfk_1` FOREIGN KEY (`tb_departamento_id`) REFERENCES `tb_departamento` (`id`);
 
 --
--- Constraints for table `tb_facturalicencia`
+-- Filtros para la tabla `tb_facturalicencia`
 --
 ALTER TABLE `tb_facturalicencia`
   ADD CONSTRAINT `fk_table1_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_table1_tb_licencia1` FOREIGN KEY (`tb_licencia_id`) REFERENCES `tb_licencia` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_fasecosto`
+-- Filtros para la tabla `tb_fasecosto`
 --
 ALTER TABLE `tb_fasecosto`
   ADD CONSTRAINT `fk_tb_fasecosto_tb_seccioncosto1` FOREIGN KEY (`tb_seccioncosto_id`) REFERENCES `tb_seccioncosto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_faseventa`
+-- Filtros para la tabla `tb_faseventa`
 --
 ALTER TABLE `tb_faseventa`
   ADD CONSTRAINT `fk_tb_faseventa_tb_seccionventa1` FOREIGN KEY (`tb_seccionventa_id`) REFERENCES `tb_seccionventa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_giro`
+-- Filtros para la tabla `tb_firma`
+--
+ALTER TABLE `tb_firma`
+  ADD CONSTRAINT `tb_firma_ibfk_1` FOREIGN KEY (`idcontacto`) REFERENCES `tb_personacontacto` (`id`),
+  ADD CONSTRAINT `tb_firma_ibfk_2` FOREIGN KEY (`idobra`) REFERENCES `tb_obra` (`id`);
+
+--
+-- Filtros para la tabla `tb_giro`
 --
 ALTER TABLE `tb_giro`
   ADD CONSTRAINT `tb_giro_ibfk_1` FOREIGN KEY (`tb_compania_id`) REFERENCES `tb_companiacontacto` (`id`);
 
 --
--- Constraints for table `tb_listadistribucioncontacto`
+-- Filtros para la tabla `tb_listadistribucioncontacto`
 --
 ALTER TABLE `tb_listadistribucioncontacto`
-  ADD CONSTRAINT `fk_tb_listadistribucioncontacto_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tb_listadistribucioncontacto_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tb_listadistribucioncontacto_ibfk_1` FOREIGN KEY (`tb_obra_id`) REFERENCES `tb_obra` (`id`);
 
 --
--- Constraints for table `tb_listadistribucionpersonacontacto`
+-- Filtros para la tabla `tb_listadistribucionpersonacontacto`
 --
 ALTER TABLE `tb_listadistribucionpersonacontacto`
   ADD CONSTRAINT `fk_tb_listadistribucionpersonacontacto_tb_listadistribucionco1` FOREIGN KEY (`tb_listadistribucioncontacto_id`) REFERENCES `tb_listadistribucioncontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_listadistribucionpersonacontacto_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_modelocartapropia`
+-- Filtros para la tabla `tb_modelocartapropia`
 --
 ALTER TABLE `tb_modelocartapropia`
   ADD CONSTRAINT `fk_tb_modelocartapropia_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_modelocontratopropio`
+-- Filtros para la tabla `tb_modelocontratopropio`
 --
 ALTER TABLE `tb_modelocontratopropio`
   ADD CONSTRAINT `fk_tb_modelocontratopropio_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_obra`
+-- Filtros para la tabla `tb_obra`
 --
 ALTER TABLE `tb_obra`
   ADD CONSTRAINT `fk_tb_obra_tb_companiacontacto1` FOREIGN KEY (`cliente_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -15418,40 +15694,40 @@ ALTER TABLE `tb_obra`
   ADD CONSTRAINT `fk_tb_obra_tb_tipovalorizacion1` FOREIGN KEY (`tb_tipovalorizacion_id`) REFERENCES `tb_tipovalorizacion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_obra_has_tb_usuario`
+-- Filtros para la tabla `tb_obra_has_tb_usuario`
 --
 ALTER TABLE `tb_obra_has_tb_usuario`
   ADD CONSTRAINT `fk_tb_obra_has_tb_usuario_tb_obra1` FOREIGN KEY (`tb_obra_id`) REFERENCES `tb_obra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_obra_has_tb_usuario_tb_usuario1` FOREIGN KEY (`tb_usuario_id`) REFERENCES `tb_usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_obra_has_tb_usuario_has_tb_opcionestop`
+-- Filtros para la tabla `tb_obra_has_tb_usuario_has_tb_opcionestop`
 --
 ALTER TABLE `tb_obra_has_tb_usuario_has_tb_opcionestop`
   ADD CONSTRAINT `fk_tb_obra_has_tb_usuario_has_tb_opcionestop_tb_obra_has_tb_u1` FOREIGN KEY (`tb_obra_has_tb_usuario_tb_obra_id`, `tb_obra_has_tb_usuario_tb_usuario_id`) REFERENCES `tb_obra_has_tb_usuario` (`tb_obra_id`, `tb_usuario_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_obra_has_tb_usuario_has_tb_opcionestop_tb_opcionestop1` FOREIGN KEY (`tb_opcionestop_id`) REFERENCES `tb_opcionestop` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_opcionestopusuariostop`
+-- Filtros para la tabla `tb_opcionestopusuariostop`
 --
 ALTER TABLE `tb_opcionestopusuariostop`
   ADD CONSTRAINT `fk_tb_opcionestopusuariostop_tb_opcionestop1` FOREIGN KEY (`tb_opcionestop_id`) REFERENCES `tb_opcionestop` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_opcionestopusuariostop_tb_usuariostop1` FOREIGN KEY (`tb_usuariostop_id`) REFERENCES `tb_usuariostop` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_ordencambiocompra`
+-- Filtros para la tabla `tb_ordencambiocompra`
 --
 ALTER TABLE `tb_ordencambiocompra`
   ADD CONSTRAINT `fk_tb_ordencambiocompra_tb_ordencompra1` FOREIGN KEY (`tb_ordencompra_id`) REFERENCES `tb_ordencompra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_ordencambiotrabajo`
+-- Filtros para la tabla `tb_ordencambiotrabajo`
 --
 ALTER TABLE `tb_ordencambiotrabajo`
   ADD CONSTRAINT `fk_tb_ordencambiotrabajo_tb_ordentrabajo1` FOREIGN KEY (`tb_ordentrabajo_id`) REFERENCES `tb_ordentrabajo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_ordencompra`
+-- Filtros para la tabla `tb_ordencompra`
 --
 ALTER TABLE `tb_ordencompra`
   ADD CONSTRAINT `fk_tb_ordencompra_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -15464,7 +15740,7 @@ ALTER TABLE `tb_ordencompra`
   ADD CONSTRAINT `fk_tb_ordencompra_tb_tiposaldo1` FOREIGN KEY (`tb_tiposaldo_id`) REFERENCES `tb_tiposaldo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_ordentrabajo`
+-- Filtros para la tabla `tb_ordentrabajo`
 --
 ALTER TABLE `tb_ordentrabajo`
   ADD CONSTRAINT `fk_tb_ordentrabajo_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -15477,195 +15753,198 @@ ALTER TABLE `tb_ordentrabajo`
   ADD CONSTRAINT `fk_tb_ordentrabajo_tb_tiposaldo1` FOREIGN KEY (`tb_tiposaldo_id`) REFERENCES `tb_tiposaldo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_partidacontractualoc`
+-- Filtros para la tabla `tb_partidacontractualoc`
 --
 ALTER TABLE `tb_partidacontractualoc`
   ADD CONSTRAINT `fk_tb_partidacontractual_tb_ordencompra1` FOREIGN KEY (`tb_ordencompra_id`) REFERENCES `tb_ordencompra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_partidacontractualot`
+-- Filtros para la tabla `tb_partidacontractualot`
 --
 ALTER TABLE `tb_partidacontractualot`
   ADD CONSTRAINT `fk_tb_partidacontractualoc_copy1_tb_ordentrabajo1` FOREIGN KEY (`tb_ordentrabajo_id`) REFERENCES `tb_ordentrabajo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_partidacosto`
+-- Filtros para la tabla `tb_partidacosto`
 --
 ALTER TABLE `tb_partidacosto`
   ADD CONSTRAINT `fk_tb_partidacosto_tb_fasecosto1` FOREIGN KEY (`tb_fasecosto_id`) REFERENCES `tb_fasecosto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_partidaordencambiooc`
+-- Filtros para la tabla `tb_partidaordencambiooc`
 --
 ALTER TABLE `tb_partidaordencambiooc`
   ADD CONSTRAINT `fk_tb_partidaordencambiooc_tb_ordencambiocompra1` FOREIGN KEY (`tb_ordencambiocompra_id`) REFERENCES `tb_ordencambiocompra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_partidaordencambioot`
+-- Filtros para la tabla `tb_partidaordencambioot`
 --
 ALTER TABLE `tb_partidaordencambioot`
   ADD CONSTRAINT `fk_tb_partidaordencambioot_tb_ordencambiotrabajo1` FOREIGN KEY (`tb_ordencambiotrabajo_id`) REFERENCES `tb_ordencambiotrabajo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_partidaventa`
+-- Filtros para la tabla `tb_partidaventa`
 --
 ALTER TABLE `tb_partidaventa`
   ADD CONSTRAINT `fk_tb_partidaventa_tb_faseventa1` FOREIGN KEY (`tb_faseventa_id`) REFERENCES `tb_faseventa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_personacontacto`
+-- Filtros para la tabla `tb_personacontacto`
 --
 ALTER TABLE `tb_personacontacto`
   ADD CONSTRAINT `fk_tb_personacontacto_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_personacontacto_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tb_personacontacto_tb_viaenvio1` FOREIGN KEY (`tb_viaenvio_id`) REFERENCES `tb_viaenvio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tb_personacontacto_tb_viaenvio1` FOREIGN KEY (`tb_viaenvio_id`) REFERENCES `tb_viaenvio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tb_personacontacto_ibfk_1` FOREIGN KEY (`tb_pais_id`) REFERENCES `tb_pais` (`id`),
+  ADD CONSTRAINT `tb_personacontacto_ibfk_2` FOREIGN KEY (`tb_departamento_id`) REFERENCES `tb_departamento` (`id`),
+  ADD CONSTRAINT `tb_personacontacto_ibfk_3` FOREIGN KEY (`tb_distrito_id`) REFERENCES `tb_distrito` (`id`);
 
 --
--- Constraints for table `tb_personacontactocomun`
+-- Filtros para la tabla `tb_personacontactocomun`
 --
 ALTER TABLE `tb_personacontactocomun`
   ADD CONSTRAINT `fk_tb_personacontactocomun_tb_contactocomun1` FOREIGN KEY (`tb_contactocomun_id`) REFERENCES `tb_contactocomun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_ppfijo`
+-- Filtros para la tabla `tb_ppfijo`
 --
 ALTER TABLE `tb_ppfijo`
   ADD CONSTRAINT `tb_ppfijo_ibfk_1` FOREIGN KEY (`tb_proveedor_id`) REFERENCES `tb_proveedorpublico` (`id`);
 
 --
--- Constraints for table `tb_ppmobile`
+-- Filtros para la tabla `tb_ppmobile`
 --
 ALTER TABLE `tb_ppmobile`
   ADD CONSTRAINT `tb_ppmobile_ibfk_1` FOREIGN KEY (`tb_proveedor_id`) REFERENCES `tb_proveedorpublico` (`id`);
 
 --
--- Constraints for table `tb_ppnextel`
+-- Filtros para la tabla `tb_ppnextel`
 --
 ALTER TABLE `tb_ppnextel`
   ADD CONSTRAINT `tb_ppnextel_ibfk_1` FOREIGN KEY (`tb_proveedor_id`) REFERENCES `tb_proveedorpublico` (`id`);
 
 --
--- Constraints for table `tb_profesion`
+-- Filtros para la tabla `tb_profesion`
 --
 ALTER TABLE `tb_profesion`
   ADD CONSTRAINT `fk_tb_profesion_tb_especialidadpersona1` FOREIGN KEY (`tb_especialidadpersona_id`) REFERENCES `tb_especialidadpersona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_profesion_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_proveedorpublico`
+-- Filtros para la tabla `tb_proveedorpublico`
 --
 ALTER TABLE `tb_proveedorpublico`
   ADD CONSTRAINT `tb_proveedorpublico_ibfk_1` FOREIGN KEY (`tb_pais_id`) REFERENCES `tb_pais` (`id`);
 
 --
--- Constraints for table `tb_reporteporpersona`
+-- Filtros para la tabla `tb_reporteporpersona`
 --
 ALTER TABLE `tb_reporteporpersona`
   ADD CONSTRAINT `tb_reporteporpersona_ibfk_1` FOREIGN KEY (`tb_reporte_id`) REFERENCES `tb_reportes` (`id`),
   ADD CONSTRAINT `tb_reporteporpersona_ibfk_2` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`);
 
 --
--- Constraints for table `tb_representante`
+-- Filtros para la tabla `tb_representante`
 --
 ALTER TABLE `tb_representante`
   ADD CONSTRAINT `fk_tb_representante_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_representante_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_rubro`
+-- Filtros para la tabla `tb_rubro`
 --
 ALTER TABLE `tb_rubro`
   ADD CONSTRAINT `fk_tb_rubro_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_rubro_tb_especialidadcompania1` FOREIGN KEY (`tb_especialidadcompania_id`) REFERENCES `tb_especialidadcompania` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_rubrocomun`
+-- Filtros para la tabla `tb_rubrocomun`
 --
 ALTER TABLE `tb_rubrocomun`
   ADD CONSTRAINT `fk_tb_rubrocomun_tb_contactocomun1` FOREIGN KEY (`tb_contactocomun_id`) REFERENCES `tb_contactocomun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_rubrocomun_tb_especialidadComun1` FOREIGN KEY (`tb_especialidadComun_id`) REFERENCES `tb_especialidadcomun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_seccioncosto`
+-- Filtros para la tabla `tb_seccioncosto`
 --
 ALTER TABLE `tb_seccioncosto`
   ADD CONSTRAINT `fk_tb_seccioncosto_tb_obra1` FOREIGN KEY (`tb_obra_id`) REFERENCES `tb_obra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_seccionventa`
+-- Filtros para la tabla `tb_seccionventa`
 --
 ALTER TABLE `tb_seccionventa`
   ADD CONSTRAINT `fk_tb_seccionventa_tb_obra1` FOREIGN KEY (`tb_obra_id`) REFERENCES `tb_obra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_telefonofijocompania`
+-- Filtros para la tabla `tb_telefonofijocompania`
 --
 ALTER TABLE `tb_telefonofijocompania`
   ADD CONSTRAINT `fk_tb_telefonofijocompania_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_telefonofijopersona`
+-- Filtros para la tabla `tb_telefonofijopersona`
 --
 ALTER TABLE `tb_telefonofijopersona`
   ADD CONSTRAINT `fk_tb_telefonofijopersona_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_telefonomovilcompania`
+-- Filtros para la tabla `tb_telefonomovilcompania`
 --
 ALTER TABLE `tb_telefonomovilcompania`
   ADD CONSTRAINT `fk_tb_telefonomovilcompania_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_telefonomovilpersona`
+-- Filtros para la tabla `tb_telefonomovilpersona`
 --
 ALTER TABLE `tb_telefonomovilpersona`
   ADD CONSTRAINT `fk_tb_telefonomovilpersona_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_telefononextelcompania`
+-- Filtros para la tabla `tb_telefononextelcompania`
 --
 ALTER TABLE `tb_telefononextelcompania`
   ADD CONSTRAINT `fk_tb_telefononextelcompania_tb_companiacontacto1` FOREIGN KEY (`tb_companiacontacto_id`) REFERENCES `tb_companiacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_telefononextelpersona`
+-- Filtros para la tabla `tb_telefononextelpersona`
 --
 ALTER TABLE `tb_telefononextelpersona`
   ADD CONSTRAINT `fk_tb_telefononextelpersona_tb_personacontacto1` FOREIGN KEY (`tb_personacontacto_id`) REFERENCES `tb_personacontacto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_tipodecambio`
+-- Filtros para la tabla `tb_tipodecambio`
 --
 ALTER TABLE `tb_tipodecambio`
   ADD CONSTRAINT `fk_tb_tipodecambio_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tb_tipodecambio_tb_moneda1` FOREIGN KEY (`tb_moneda_id`) REFERENCES `tb_moneda` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_usuario`
+-- Filtros para la tabla `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
   ADD CONSTRAINT `fk_tb_usuario_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_usuariostop`
+-- Filtros para la tabla `tb_usuariostop`
 --
 ALTER TABLE `tb_usuariostop`
   ADD CONSTRAINT `fk_tb_usuariosparaprobacion_tb_obra1` FOREIGN KEY (`tb_obra_id`) REFERENCES `tb_obra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_usuariovisor`
+-- Filtros para la tabla `tb_usuariovisor`
 --
 ALTER TABLE `tb_usuariovisor`
   ADD CONSTRAINT `fk_tb_usuariovisor_tb_empresa1` FOREIGN KEY (`tb_empresa_id`) REFERENCES `tb_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_valorizacioncompra`
+-- Filtros para la tabla `tb_valorizacioncompra`
 --
 ALTER TABLE `tb_valorizacioncompra`
   ADD CONSTRAINT `fk_tb_valorizacioncompra_tb_partidacontractualoc1` FOREIGN KEY (`tb_partidacontractualoc_id`) REFERENCES `tb_partidacontractualoc` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tb_valorizaciontrabajo`
+-- Filtros para la tabla `tb_valorizaciontrabajo`
 --
 ALTER TABLE `tb_valorizaciontrabajo`
   ADD CONSTRAINT `fk_tb_valorizacioncompra_tb_partidacontractualot1` FOREIGN KEY (`tb_partidacontractualot_id`) REFERENCES `tb_partidacontractualot` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
