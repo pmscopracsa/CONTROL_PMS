@@ -70,6 +70,8 @@ class RegistraDatosObra
     }
     
     /** ESTE INSERTA ES EN REALIDAD UN UPDATE YA QUE LA OBRA YA EXISTE */ 
+    // el campo estado se pone a 1 cuando por primera vez ha sido rellenado
+    // el campo estado por defecto se pone en 0
     public function i_RegistraObra()
     {
         $sql = "UPDATE
@@ -101,7 +103,8 @@ class RegistraDatosObra
 	gastogeneral_precontra = $this->_gastogeneralpresupuestocontractual,
 	utilidad_precontra = $this->_utilidadpresupuestocontractual,
 	gastogeneral_ordcamb = $this->_gastogeneralordenescambio,
-	utilidad_ordcamb = $this->_utilidadordenescambio
+	utilidad_ordcamb = $this->_utilidadordenescambio,
+        estado = 1    
         WHERE id = $this->_id";
         
         try{

@@ -156,6 +156,7 @@ $obra_id = 0;
             $("#idtxtobra").val(obra_array[1]+"|"+obra_array[2]);
             $("#txtcodigoObra_").val(obra_array[1]);
             $("#txtnombreObra_").val(obra_array[2]);
+            $("#txtestadoobra_").val(obra_array[3]);
             $("#diveditar").css("display","block");
         });
         
@@ -187,7 +188,7 @@ $obra_id = 0;
                     ,id_obra:$("#idtxtidobra").val()
                 },
                 success:function(){
-                    linkDestino = "../../index_usuario.php?proyecto="+$("#idtxtidobra").val()+"&codigObra="+$("#txtcodigoObra_").val()+"&descObra="+$("#txtnombreObra_").val();
+                    linkDestino = "../../index_usuario.php?proyecto="+$("#idtxtidobra").val()+"&codigObra="+$("#txtcodigoObra_").val()+"&descObra="+$("#txtnombreObra_").val()+"&estadoObra="+$("#txtestadoobra_").val();
                     $("body").fadeOut(2000, redireccionaEditar(linkDestino));
                 },
                 error:function(jqXHR, exception){
@@ -241,7 +242,8 @@ $obra_id = 0;
                     <input type="hidden" id="idtxtidobra" name="txtidobra" value="" READONLY />
                     <inut type="hidden" id="txtcodigoObra_" />
                     <input type="hidden" id="txtnombreObra_" />
-<!--                    <a id="anuevo" href="../datosdeobra/registradatosdeobra.php">Nuevo</a> <a href="#"></a> 
+                    <input type="hidden" id="txtestadoobra_" />
+ <!--                    <a id="anuevo" href="../datosdeobra/registradatosdeobra.php">Nuevo</a> <a href="#"></a> 
                     <div id="diveditar"  style="display: none"><a> >> </a><a id="aeditar" href="../datosdeobra/edit/editaobra.php?id_directorio=">Editar</a></div>-->
                 </fieldset>
                

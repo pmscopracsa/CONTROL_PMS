@@ -11,11 +11,12 @@ if ($q == "1") {
     
     foreach ($obras as &$valor) 
     {
-        echo '<table><tr style="cursor:pointer;"><td class="obra"><p style="display:none">'.
-        $valor[0]." | </p>".
+        echo '<table><tr style="cursor:pointer;"><td class="obra">
+        <p style="display:none">'.$valor[0]." | </p>".
         $valor[1].
         ' | '.
-        $valor[2].
+        $valor[2].        
+        ' | <p style="display:none">'.$valor[3]." | </p>".        
         '</td></tr></table>';        
     }
 } 

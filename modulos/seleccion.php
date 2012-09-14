@@ -25,8 +25,15 @@ switch ($_REQUEST['frmName']) {
         break;
     case 'obrane':
         $title = "Datos de Obra";
-        $nuevo = "datosdeobra/registradatosdeobra.php?obra=".$_REQUEST['proyecto']."&codigo=".$_REQUEST['codigObra']."&descripcion=".$_REQUEST['descObra'];
-        $modificar = "datosdeobra/edit/editaobra.php?idobra=".$_REQUEST['proyecto'];
+        if($_REQUEST['estadoObra'] == '1') {
+            $nuevo = "#";
+            $modificar = "datosdeobra/edit/editaobra.php?idobra=".$_REQUEST['proyecto'];
+        } else {
+            $nuevo = "datosdeobra/registradatosdeobra.php?obra=".$_REQUEST['proyecto']."&codigo=".$_REQUEST['codigObra']."&descripcion=".$_REQUEST['descObra'];
+            $modificar = "datosdeobra/edit/editaobra.php?idobra=".$_REQUEST['proyecto'];
+        }
+        
+        
         break;
     default:
         break;

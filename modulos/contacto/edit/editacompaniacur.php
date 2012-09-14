@@ -899,16 +899,17 @@ session_start();
                     if ($("#direccion").val() === "") {
                         alertCampoVacion();
                     } else {
+                        alert($(this).parent().parent().parent().children().children().children("#pa"+idaddress).val());
                         $.ajax({
                             type:"POST",
                             url:"../../../bl/editaCompania_BL.php?parameter=actualizadireccion",
                             data:{
                                 idDireccion:$(this).parent().parent().children("#idDireccion"+idaddress).val(),
                                 txtdireccion:$("#direccion").val(),
-                                idpais:$(this).parent().parent().children("#pa"+idaddress).val(),
-                                iddepartamento:$(this).parent().parent().children("#de"+idaddress).val(),
-                                iddistrito:$(this).parent().parent().children("#di"+idaddress).val(),
-                                idtipodireccion:$(this).parent().parent().children("#do"+idaddress).val(),
+                                idpais:$(this).parent().parent().parent().children().children().children("#pa"+idaddress).val(),
+                                iddepartamento:$(this).parent().parent().parent().children().children().children("#de"+idaddress).val(),
+                                iddistrito:$(this).parent().parent().parent().children().children().children("#di"+idaddress).val(),
+                                idtipodireccion:$(this).parent().parent().parent().children().children().children("#do"+idaddress).val(),
                                 idCompania:$("#idCompania").val(),
                                 idEmpresa :<?=$_SESSION['id']?>
                             },
@@ -944,6 +945,7 @@ session_start();
             });
             // CREAR NUEVA DIRECCION
             $("#btnAgregarDireccion").live("click",function() {
+                alert("www");
                 $("#seleccionaDireccion").dialog("open");
             });
             // MODAL CREAR NUEVA DIRECCION
