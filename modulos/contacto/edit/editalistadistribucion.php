@@ -178,7 +178,7 @@ session_start();
             <label for="nombre">Escriba el nombre de la lista:</label>
             <div id="busqueda">
                 <input type="text" size="50" name="txtnombre" class="txtnombre" placeholder="Nombre de la lista"/>
-                <input type="button" value="Buscar" id="btnBuscar" />
+                <input type="button" value="Buscar" id="btnBuscar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
             </div>
             <hr />
             <div id="tmp">

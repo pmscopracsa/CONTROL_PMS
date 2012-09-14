@@ -21,8 +21,8 @@ function toHtml($res,$contactos)
     <table>
         <tr>
             <input type="hidden" id="idlistadistribucion" value="'.$res[0].'" />
-            <td>Nombre de la lista:<td><input type="text" id="txtnombrelista" value="'.$res[2].'" READONLY />
-            <td><input type="button" value="Editar" id="btnEditarNombreLista" />    
+            <td>Nombre de la lista:<td><input type="text" class="inputext" id="txtnombrelista" value="'.$res[2].'" READONLY />
+            <td><input type="button" value="Editar" id="btnEditarNombreLista" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
         </tr>
         <tr>
             <td>Contactos de la lista:
@@ -40,7 +40,7 @@ function toHtml($res,$contactos)
               if($i%2 != 0) {
                   echo'<tr id="tr_contacto">
                     <td>
-                    <input type="text" id="txtContacto" size="45" name="giro" value="'.
+                    <input type="text" class="inputext" id="txtContacto" size="45" name="giro" value="'.
                     $contactos[$i]
                     .'" READONLY/></td>
                     <input id="idTContacto" type="hidden" value="'.$contactos[$i-1].'" />    
@@ -56,8 +56,8 @@ function toHtml($res,$contactos)
             </table>
         </tr>
         <tr>
-            <td>Observacion:<td><input type="text" id="txtobservacion" value="'.$res[3].'" READONLY/>
-            <td><input type="button" value="Editar" id="btnEditarObservacion" />
+            <td>Observacion:<td><input type="text" class="inputext" id="txtobservacion" value="'.$res[3].'" READONLY/>
+            <td><input type="button" value="Editar" id="btnEditarObservacion" class="ui-button ui-widget ui-state-default ui-corner-all"/>
         </tr>
     </table>
     ';

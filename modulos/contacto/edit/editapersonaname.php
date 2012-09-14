@@ -91,7 +91,7 @@ session_start();
                 cargarviaenvioseleccted(id_viaenvio);
                 $("#idviaenvio tbody").append(
                     "<td><select disabled='disabled' id='viaenvio'><select></td>"+
-                    "<td><input type='button' id='btnEditarViaEnvio'  value='Editar'/></td>"
+                    "<td><input type='button' id='btnEditarViaEnvio'  value='Editar' class='ui-button ui-widget ui-state-default ui-corner-all'/></td>"
                 )
             }
             
@@ -115,7 +115,7 @@ session_start();
                             "<td><td><select disabled='disabled' id='pa"+i+"'></select></td></td>"+
                             "<td><td><select disabled='disabled' id='de"+i+"'></select></td>"+
                             "<td><td><select disabled='disabled' id='di"+i+"'></select></td>"+
-                            "<td><input type='button' id='btnEditarDireccion'  value='Editar'/></td>"+
+                            "<td><input type='button' id='btnEditarDireccion'  value='Editar' class='ui-button ui-widget ui-state-default ui-corner-all'/></td>"+
                             "<td style='display:none'><input type='hidden' id='idDireccionHidden' value='"+i+"' /></td>"+
                             "<td style='display:none'><input type='hidden' id='idDireccion"+i+"' value='"+data[index].id+"' /></td>"+
                             "</tr>"
