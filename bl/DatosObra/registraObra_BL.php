@@ -37,6 +37,7 @@ $registradatosobra->set_utilidadpresupuestocontractual($limpia->Filtro($_REQUEST
 $registradatosobra->set_gastogeneralordenescambio($limpia->Filtro($_REQUEST['txt-gastogeneral_oc']));
 $registradatosobra->set_utilidadordenescambio($limpia->Filtro($_REQUEST['tx-utilidad_oc']));
 $registradatosobra->setAleatorio($_REQUEST['random']);
+$registradatosobra->setTipopresupuesto($_REQUEST['cmb_tipopresupuesto']);
 $registradatosobra->i_RegistraObra();
 
 /** tb_contacto */

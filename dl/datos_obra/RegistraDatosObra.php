@@ -65,6 +65,8 @@ class RegistraDatosObra
     // NUMERO ALEATORIO DE SESION
     protected $aleatorio;
     
+    protected $tipopresupuesto;
+    
     //estado del proyecto 1 = Ya ha sido filled, 0 = aun no
     
     public function __construct() {
@@ -106,7 +108,8 @@ class RegistraDatosObra
 	utilidad_precontra = $this->_utilidadpresupuestocontractual,
 	gastogeneral_ordcamb = $this->_gastogeneralordenescambio,
 	utilidad_ordcamb = $this->_utilidadordenescambio,
-        estado = 1    
+        estado = 1,
+        tipopresupuesto = $this->tipopresupuesto
         WHERE id = $this->_id";
         
         try{
@@ -559,5 +562,11 @@ class RegistraDatosObra
         $this->aleatorio = $aleatorio;
     }
 
+    public function getTipopresupuesto() {
+        return $this->tipopresupuesto;
+    }
 
+    public function setTipopresupuesto($tipopresupuesto) {
+        $this->tipopresupuesto = $tipopresupuesto;
+    }
 }

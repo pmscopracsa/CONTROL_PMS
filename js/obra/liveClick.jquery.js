@@ -801,4 +801,48 @@ jQuery(function() {
     function getIdReporte() {
         return id_reporte;
     }
+    // Editar monto contratado mayor a
+    $("#btnEditaMayorA").live("click",function() {
+        myObj = $(this);
+        if (myObj.val() == "Modificar") {
+            myObj.attr('value', 'Guardar');
+            $(this).parent().parent().children().children(".txtmayora").removeAttr('readonly');
+        } else {
+            new_value = $(this).parent().parent().children().children(".txtmayora").val();
+            $.ajax({
+                type:"POST",
+                data:{
+                    newvalue:new_value,
+                    id_obra:$("#id_obra").val()
+                },
+                url:"../../../bl/DatosObra/editaObra_BL.php?parameter=actualizamayora",
+                success:function() {
+                    $(this).parent().parent().children().children(".txtmayora").attr('readonly','true');
+                    myObj.attr('value','Modificar');
+                }
+            })
+        }
+    })
+    // Editar monto contratado menor a
+    $("#btnEditaMenorA").live("click",function() {
+        myObj = $(this);
+        if(myObj.val() == "Modificar") {
+            myObj.attr('value','Guardar');
+            $(this).parent().parent().children().children(".txtmenora").removeAttr('readonly');
+        } else {
+            new_value = $(this).parent().parent().children().children(".txtmenora").val();
+            $.ajax({
+                type:"POST",
+                data:{
+                    newvalue:new_value,
+                    id_obra:$("#id_obra").val()
+                },
+                url:"../../../bl/DatosObra/editaObra_BL.php?parameter=actualizamenora",
+                success:function() {
+                    $(this).parent().parent().children().children(".txtmenora").attr('readonly', 'true');
+                    myObj.attr('value','Modificar');
+                }
+            })
+        }
+    })
 })

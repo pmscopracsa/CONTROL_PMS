@@ -7,7 +7,7 @@ class ComboBoxDireccion extends ComboBoxSql
     function cargarPais()
     {
         $consulta = parent::__construct();
-        $consulta = parent::consulta("SELECT * FROM tb_pais ORDER BY ordena_cod DESC");
+        $consulta = parent::consulta("SELECT * FROM tb_pais ORDER BY nombre DESC");
         $num_total_registros = parent::num_rows($consulta);
         
         if ($num_total_registros > 0) {
@@ -28,7 +28,7 @@ class ComboBoxDireccion extends ComboBoxSql
     {
         $consulta = parent::__construct();
         //$consulta = parent::consulta("SELECT * FROM tb_departamento WHERE tb_pais_id = $this->codigo_seleccion ORDER BY nombre ASC");
-        $consulta = parent::consulta("SELECT * FROM tb_departamento ORDER BY ordena_cod DESC");
+        $consulta = parent::consulta("SELECT * FROM tb_departamento ORDER BY nombre DESC");
         $num_total_registros = parent::num_rows($consulta);                                                                                 
         
         if ($num_total_registros > 0) {
@@ -91,7 +91,7 @@ class ComboBoxDireccion extends ComboBoxSql
     {
         $consulta = parent::__construct();
         //$consulta = parent::consulta("SELECT * FROM tb_distrito WHERE tb_departamento_id = $this->codigo_seleccion ORDER BY nombre ASC");
-        $consulta = parent::consulta("SELECT * FROM tb_distrito ORDER BY ordena_cod DESC");
+        $consulta = parent::consulta("SELECT * FROM tb_distrito ORDER BY nombre DESC");
         
         $num_total_registros = parent::num_rows($consulta);
         

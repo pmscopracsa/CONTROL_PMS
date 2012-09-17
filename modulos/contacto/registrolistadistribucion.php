@@ -283,7 +283,11 @@ function  __autoload($name) {
         });    
         </script>
         <script type="text/javascript">
-            /*$(document).ready(function(){
+            $("#frm-registralistadist").bind("keypress",function(e){
+                if(e.keyCode == 13) return false;
+            })
+            
+            $(document).ready(function(){
                 var options = {
                     success:muestraRespuesta
                 };
@@ -293,7 +297,7 @@ function  __autoload($name) {
             function muestraRespuesta(responseText, statusText, xhr, $form) {
                 alert("Los datos han sido ingresados correctamente");
                 window.setTimeout('location.reload()',1000);
-            }*/
+            }
         </script>
     </head>
     <body >

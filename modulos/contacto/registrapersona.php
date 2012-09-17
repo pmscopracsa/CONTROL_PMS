@@ -441,6 +441,11 @@ function __autoload($name) {
         </script>
         <script type="text/javascript">
             $(document).ready(function(){
+                
+                $("#frm-regpersona").bind("keypress",function(e){
+                    if(e.keyCode == 13) return false;
+                })
+                
                 var options = {
                     success:muestraRespuesta
                     //clearForm:true

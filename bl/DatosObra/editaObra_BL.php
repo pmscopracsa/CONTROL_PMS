@@ -112,6 +112,14 @@ try {
         $edita_obra->setFk($_REQUEST['id_reporte']);
         $edita_obra->setValue($_REQUEST['id_contacto']);
         $edita_obra->actualizaObra($cn);
+    } elseif ($_REQUEST['parameter'] == 'actualizamayora') {
+        $edita_obra->setAActualizar($_REQUEST['parameter']);
+        $edita_obra->setValue($_REQUEST['newvalue']);
+        $edita_obra->actualizaObra($cn);
+    } elseif ($_REQUEST['parameter'] == 'actualizamenora') {
+        $edita_obra->setAActualizar($_REQUEST['parameter']);
+        $edita_obra->setValue($_REQUEST['newvalue']);
+        $edita_obra->actualizaObra($cn);
     }
     
     

@@ -135,6 +135,16 @@ class EditaObra_DL
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
                     break;    
+                case 'actualizamayora':
+                    $query = "UPDATE tb_obra SET montocontratadomayora = $this->value WHERE id = $this->pk";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
+                    break;    
+                case 'actualizamenora':
+                    $query = "UPDATE tb_obra SET montocontratadomenora = $this->value WHERE id = $this->pk";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
+                    break;    
                 default:
                     break;
             }

@@ -184,9 +184,9 @@ function toHtml($res)
             </table>
             <table>
                 <tr>
-                    <td><input type="button" value="Modificar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                    <td><input type="button" id="btnEditaMayorA" value="Modificar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                     <td><p>Monto contratado mayor a:</p>
-                    <td><input type="text" value="'.$res[20].'" id="inputext" size="10" READONLY/>
+                    <td><input type="text" class="txtmayora" value="'.$res[20].'" id="inputext" size="10" READONLY/>
                     <td>
                     <td>
                     <td><p><input type="checkbox" checked disabled />OC/OT</p>
@@ -202,9 +202,9 @@ function toHtml($res)
                     <td><p><input type="checkbox" />CA y CG</p>
                     <td><p><input type="checkbox" />Contrato</p>
                 <tr>
-                    <td><input type="button" value="Modificar" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                    <td><input type="button" value="Modificar" id="btnEditaMenorA" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                     <td><p>Monto contratado menor a:</p>
-                    <td><input type="text" id="inputext" value="'.$res[21].'" size="10" READONLY/>
+                    <td><input type="text" id="inputext" class="txtmenora" value="'.$res[21].'" size="10" READONLY/>
                     <td>
                     <td>
                     <td><p><input type="checkbox" check disabled />OC/OT</p>

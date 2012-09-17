@@ -239,29 +239,22 @@ $contratos = $modelos->mostrarContratos();
             /**
              * FECHAS DE INICIO Y FIN DE OBRA
              */
-            $(".fecha_desde").datepicker({
+            $("#f_inicio").datepicker({
                 defaultDate:"+1w",
                 changeMonth:true,
-                numberOfMonths:1,
-                dateFormat:"yy-mm-dd",
-                changeMonth:true,
-                changeYear:true,
+                numberOfMonth:3,
                 onSelect:function(selectedDate) {
-                    $(".fecha_hasta").datepicker("option","minDate",selectedDate);
+                    $("#f_fin").datepicker("option","minDate",selectedDate);
                 }
             });
-            $(".fecha_hasta").datepicker({
+            $("#f_fin").datepicker({
                 defaultDate:"+1w",
                 changeMonth:true,
-                numberOfMonth:1,
-                dateFormat:"yy-mm-dd",
-                changeMonth:true,
-                changeYear:true,
-                onSelect:function(selectedDate) {
-                    $(".fecha_desde").datepicker("option","maxDate",selectedDate);
+                numberOfMonths:3,
+                onSelect:function(selectedDate){
+                    $("#f_inicio").datepicker("option","maxDate",selectedDate);
                 }
             });
-            //$("#datepicker_i,#datepicker_f").datepicker({dateFormat:'yy-mm-dd'},{showAnim:'fold'});
             
             /**
              * BOTONES PARA ABRIR MODALES PADRES
@@ -1659,7 +1652,6 @@ $contratos = $modelos->mostrarContratos();
                 });    
             });
             
-            
             /**
              * MOSTRAR EN TOOLTIIP LOS TELEFONOS
              * =================================
@@ -1888,6 +1880,11 @@ $contratos = $modelos->mostrarContratos();
         </script>
         <script type="text/javascript">
             $(document).ready(function() {
+                $("#frm_datosobra").bind("keypress",function(e){
+                    if(e.keyCode == 13) return false;
+                })
+                
+                
                 var options = {
                     success:muestraRespuesta
                 };
@@ -1896,7 +1893,7 @@ $contratos = $modelos->mostrarContratos();
             function muestraRespuesta(responseText,statusText,xhr,$form) {
                 alert("Los datos han sido ingresados correctamente");
                 window.setTimeout('location.reload()',1000);
-            }        
+            }  
         </script>
         <style>
             #inner-textfield-modal{padding: 5px 5px 5px 5px;}
@@ -1953,6 +1950,16 @@ $contratos = $modelos->mostrarContratos();
                 <fieldset>
                     <div id="inner-textfield-modal">
                         <table>
+                            <tr>
+                                <td><label>Tipo de Presupuesto</label></td>
+                                <td>
+                                    <select name="cmb_tipopresupuesto" id="cmbTipoPresupuesto">
+                                        <option value="0">Seleccionar tipo de presupuesto</option>
+                                        <option value="1">Presupuesto tipo A</option>
+                                        <option value="2">Presupuesto tipo B</option>
+                                    </select>
+                                </td>
+                            </tr>
                             <tr>
                                 <td><label>Tipo de valorizaci&oacute;n</label></td>
                                 <td>
@@ -2096,10 +2103,10 @@ $contratos = $modelos->mostrarContratos();
                     <td><label>Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="inputext" type="text" size="35" name="nombre" value="<?=$_REQUEST['descripcion']?>" READONLY/></td> 
                 </tr>
                 <tr>
-                    <td><label>Fecha inicio obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="inputext" class="fecha_desde" type="text" name="f_inicio" /></td>
+                    <td><label>Fecha inicio obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="f_inicio" class="fecha_desde" type="text" name="f_inicio" /></td>
                 </tr>
                 <tr>
-                    <td><label>Fecha fin de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="inputext" class="fecha_hasta" type="text" name="f_fin" /></td>                    
+                    <td><label>Fecha fin de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input id="f_fin" class="fecha_hasta" type="text" name="f_fin" /></td>                    
                 </tr>
                 <tr>
                     <td><label>Direcci&oacute;n de la obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label><input type="text" id="inputext" size="30" name="direccion_obra" /></td>
@@ -2327,6 +2334,7 @@ $contratos = $modelos->mostrarContratos();
                 </div>
             </fieldset>
             <br />
+            <!--
             <fieldset>
                 <div id="inner-textfield">
                     <table>
@@ -2343,6 +2351,7 @@ $contratos = $modelos->mostrarContratos();
                     </table>
                 </div>
             </fieldset>
+            -->
             <div id="footer"><hr/></div>
         <input type="submit" value="Guardar" class="ui-button ui-widget ui-state-default ui-corner-all" />
         </div>

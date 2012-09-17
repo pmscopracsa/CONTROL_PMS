@@ -517,6 +517,7 @@ function __autoload($name) {
        cargar_tipocompania();
        cargar_tipodireccion();
        cargar_paises();
+       $("#departamentoid").attr('disabled','true');
        cargar_departamentos();
        cargar_distritos();
 
@@ -580,6 +581,10 @@ function __autoload($name) {
     </script>
     <script type="text/javascript">
         $(document).ready(function(){
+            $("#frm-registracompania").bind("keypress",function(e){
+                if(e.keyCode == 13) return false;
+            })
+            
             var options = {
                 success:function(){
                     muestraRespuesta();
@@ -767,6 +772,7 @@ function __autoload($name) {
                                     <td class="tr-padding">
                                         <label>Departamento/Estado:</label>
                                         <select class="derecha" name="departamentoseleccionada" id="departamentoid">
+                                            <option value="0">Seleccione un departamento</option>
                                         </selected>
                                     </td>
                                    <tr> 

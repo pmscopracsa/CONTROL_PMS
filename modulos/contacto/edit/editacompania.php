@@ -908,16 +908,16 @@ session_start();
                     cargarDomicilio(data[index].idtipodireccion, i)
                     $("#direccion_full tbody").append(
                         "<tr id='tbl_direccion'>"+
-                        "<td><input type='text' class='inputext' id='direccion' value='"+data[index].direccion+"' READONLY/></td>"+
-                        "<td><td><select disabled='disabled' id='pa"+i+"'></select></td></td>"+
-                        "<td><td><select disabled='disabled' id='de"+i+"'></select></td>"+
-                        "<td><td><select disabled='disabled' id='di"+i+"'></select></td>"+
-                        "<td><td><select disabled='disabled' id='do"+i+"'></select></td>"+
+                        "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td><tr/>"+
+                        "<td><select disabled='disabled' id='pa"+i+"'></select></td><tr />"+
+                        "<td><select disabled='disabled' id='de"+i+"'></select></td><tr />"+
+                        "<td><select disabled='disabled' id='di"+i+"'></select></td><tr />"+
+                        "<td><select disabled='disabled' id='do"+i+"'></select></td><tr />"+
                         "<td><input type='button' id='btnEditarDireccion'  value='Editar' class='ui-button ui-widget ui-state-default ui-corner-all'/></td>"+
                         "<td><input type='button' class='delRow' id='btnEliminarDireccion' /></td>"+
                         "<td><input type='button' class='addRow' id='btnAgregarDireccion' /></td>"+
-                        "<td style='display:none'><input type='hidden' id='idDireccionHidden' value='"+i+"' /></td>"+
-                        "<td style='display:none'><input type='hidden' id='idDireccion"+i+"' value='"+data[index].iddcc+"' /></td>"+
+                        "<input type='hidden' id='idDireccionHidden' value='"+i+"' />"+
+                        "<input type='hidden' id='idDireccion"+i+"' value='"+data[index].iddcc+"' />"+
                         "</tr>"
                     ),
                     i++
