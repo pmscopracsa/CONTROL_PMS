@@ -501,6 +501,7 @@ jQuery(function() {
     // PARA ELIMINAR CONTACTOS
     // tb_contacto
     $("#del-contacto").live("click",function(e) {
+        myObj = $(this);
         e.preventDefault();
         idContacto = $(this).parent().parent().children().children("#idContacto").attr('value');
         // VERIFICAMOS SI EL CONTACTO SE ENCUENTRA EN LA TABLA tb_firma, si se encuentra en esta tabla
@@ -515,7 +516,7 @@ jQuery(function() {
             },
             success:function(data){
                 if (data == 0){
-                    $(this).parent().parent().remove();
+                    myObj.parent().parent().remove();
                     $.ajax({
                         type:"POST",
                         url:"../../../bl/DatosObra/editaObra_BL.php?parameter=eliminacontacto",
@@ -579,8 +580,9 @@ jQuery(function() {
     // Eliminar contactos con puestos
     // ==============================
     $("#del-contactopuesto").live("click",function(e) {
+        myObj = $(this);
         e.preventDefault();
-        idContacto = $(this).parent().parent().children().children("#idContacto").attr('value');
+        idContacto = $(this).parent().parent().children().children("#idContacto").val();
         
         $.ajax({
             type:"GET",
@@ -592,7 +594,7 @@ jQuery(function() {
             },
             success:function(data) {
                 if (data == 0){
-                    $(this).parent().parent().remove();
+                    myObj.parent().parent().remove();
                     $.ajax({
                         type:"POST",
                         url:"../../../bl/DatosObra/editaObra_BL.php?parameter=eliminacontactopuesto",
@@ -666,23 +668,24 @@ jQuery(function() {
              },
              url:"../../../bl/DatosObra/editaObra_BL.php?parameter=agregarcontactopuesto",
              success:function(){
-                 $("#addcontactos").close("dialog"); 
+                 //$("#addcontactos").close("dialog"); 
                  $("#tbl-firmas1 tbody").append(
                     "<tr>"+
                     '<td>'+
-                    data[index].posicion+
+                    $(".txt-puesto").val()+
                     '<td>'+
-                    data[index].nombre+
+                    $(".txt-contacto").val()+
                     '<td>'+
-                    data[index].descripcion+
-                    '<input type="hidden" id="idContacto" value="'+data[index].id+'" />'+
-                    '<td><a href="#" id="del-contactopuesto" class="button delete">Eliminarg</a>'  
+                    $(".txt-compania").val()+
+                    '<input type="hidden" id="idContacto" value="'+$(".txt-idcontacto").val()+'" />'+
+                    '<td><a href="#" id="del-contactopuesto" class="button delete">Eliminar</a>'  
                 );
              }
          });
     });
     
     $("input[name=id_contactoReporte]").live("click",function() {
+        alert("1");
         $.ajax({
             type:"POST",
             data:{
@@ -696,7 +699,8 @@ jQuery(function() {
                     type:"GET",
                     dataType:"json",
                     data:{
-                        idreporte:getIdReporte()
+                        idreporte:getIdReporte(),
+                        id_obra:$("#id_obra").val()
                     },
                     url:"../../../dl/datos_obra/r_listafirmasreportes_tb_firma.php",
                     success:function(data) {
@@ -731,7 +735,8 @@ jQuery(function() {
             type:"GET",
             dataType:"json",
             data:{
-                idreporte:getIdReporte()
+                idreporte:getIdReporte(),
+                id_obra:$("#id_obra").val()
             },
             url:"../../../dl/datos_obra/r_listafirmasreportes_tb_firma.php",
             success:function(data) {
@@ -745,13 +750,48 @@ jQuery(function() {
                         '<td>'+
                         data[index].nombre_compania+
                         '<td>'+
-                        '<input type="text" name="txtpos_firma_reporte" id="pos_firma_reporte" value="" />'+
+                        '<input type="text" name="txtpos_firma_reporte" id="pos_firma_reporte" value="'+data[index].ubicacion+'" />'+
                         '<input type="hidden" id="id_contacto" value="'+data[index].id_contacto+'" />'+
                         "<td><a href='#' id='del-contacto_reporte' class='button delete'>Eliminar</a></td>"
                     )
                 })
             }
         })
+    });
+    // Eliminar empate usuario - reporte
+    $("#del-contacto_reporte").live("click",function(e) {
+        e.preventDefault();
+        idcontacto = $(this).parent().parent().children().children("#id_contacto").val();
+        $(this).parent().parent().remove();
+
+        $.ajax({
+            type:"POST",
+            url:"../../../bl/DatosObra/editaObra_BL.php?parameter=eliminarempatereporte",
+            data:{
+                id_obra:$("#id_obra").val(),
+                id_reporte:getIdReporte(),
+                id_contacto:idcontacto
+            }
+        })
+    })
+    
+    /** Guardar ubicacion numeral de la firma en el reporte 
+     ** al sacar el mouse de la caja de texto */
+    $("#pos_firma_reporte").live("click",function() {
+        id_contacto = $(this).parent().parent().children().children("#id_contacto").val();
+        $(this).focusout(function(){
+            myObj = $(this).val();
+            $.ajax({
+                type:"POST",
+                data:{
+                    idContacto:id_contacto,
+                    ubicacion:myObj,
+                    id_obra:$("#id_obra").val(),
+                    id_reporte:getIdReporte()
+                },
+                url:"../../../bl/DatosObra/editaObra_BL.php?parameter=setposicionenreporte"
+            });
+        });
     });
     /** Almacenar temporalmente la seleccion del reporte */
     function setIdReporte(idreporte) {

@@ -124,6 +124,16 @@ class EditaObra_DL
                     $query = "INSERT INTO tb_contactoreporte (tb_personacontacto_id,tb_reporte_id,tb_obra_id) VALUES($this->fk,$this->value,$this->pk)";
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
+                    break;
+                case 'setposicionenreporte':
+                    $query = "UPDATE tb_contactoreporte SET posicion_reporte = '$this->value' WHERE tb_personacontacto_id = $this->fk AND tb_obra_id = $this->pk AND tb_reporte_id = $this->column";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
+                    break;    
+                case 'eliminarempatereporte':
+                    $query = "DELETE FROM tb_contactoreporte WHERE tb_personacontacto_id = $this->value AND tb_reporte_id = $this->fk AND tb_obra_id = $this->pk";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error al consultar: ".  mysql_error());
                     break;    
                 default:
                     break;

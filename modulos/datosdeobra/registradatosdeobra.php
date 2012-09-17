@@ -59,6 +59,7 @@ $contratos = $modelos->mostrarContratos();
         <script src="../../js/calendar/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
         <script src="../../js/calendar/jquery.ui.datepicker-es.js" type="text/javascript"></script>
         <script src="../../js/cargarDatos.js" type="text/javascript"></script>
+        <script src="../../js/jquery.form.js" type="text/javascript"></script>
         <script src="../../js/jquery-tooltip/js/jtip.js" type="text/javascript"></script>
         <script src="../../js/monedas_formato.js" type="text/javascript"></script>
         <link href="../../js/jquery-tooltip/css/global.css" rel="stylesheet" type="text/css" />
@@ -579,7 +580,7 @@ $contratos = $modelos->mostrarContratos();
               * CON DICHO REPORTE
               **/
               $("input[name='reportes']").live("click",function(e) {
-                  alert("evil");
+                  //alert("evil");
                   setReporte($("input[name='reportes']:checked").val());
                   var checked = $("input[name='reportes']:checked").val();
                   var aleatorio = <?=$aleatorio?>;
@@ -711,11 +712,8 @@ $contratos = $modelos->mostrarContratos();
                *  COLOCARLE EL NUMERO DE POSICION DE LA FIRMA 
                **/
               $("#pos_firma_reporte").live("focusout",function() {
-//                alert($(this).val());
                     var td_padre = $(this).parent().parent().html();
                     var matches = td_padre.match(new RegExp("\\d+","gi"));
-//                    alert(td_padre);
-//                    alert(matches[1]);
                   $.ajax({
                         data:{aleatorio:<?=$aleatorio?>,posi_reporte:$(this).val(),reporte:getReporte(),id_contacto:matches[1]},
                         type:"POST",
@@ -1887,6 +1885,18 @@ $contratos = $modelos->mostrarContratos();
             });
         })    
         
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var options = {
+                    success:muestraRespuesta
+                };
+                $("#frm_datosobra").ajaxForm(options);
+            });            
+            function muestraRespuesta(responseText,statusText,xhr,$form) {
+                alert("Los datos han sido ingresados correctamente");
+                window.setTimeout('location.reload()',1000);
+            }        
         </script>
         <style>
             #inner-textfield-modal{padding: 5px 5px 5px 5px;}

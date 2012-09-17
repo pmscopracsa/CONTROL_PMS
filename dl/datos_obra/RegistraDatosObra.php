@@ -65,6 +65,8 @@ class RegistraDatosObra
     // NUMERO ALEATORIO DE SESION
     protected $aleatorio;
     
+    //estado del proyecto 1 = Ya ha sido filled, 0 = aun no
+    
     public function __construct() {
         
     }
@@ -115,12 +117,6 @@ class RegistraDatosObra
             $rs = mysql_query($sql,$cn);
             if(!$rs)                throw new Exception("Error al consultar en obra: ".  mysql_error());
             
-            
-//            $sql_move_contactos = "INSERT INTO tb_contacto(tb_personacontacto_id, tb_obra_id)
-//            SELECT id_contacto,id_obra FROM temporal WHERE random_code = '$this->aleatorio'";
-            
-            $rs2 = mysql_query($sql_move_contactos);
-            if(!$rs2)                throw new Exception("Error al consultar: ".  mysql_error());
         } catch (Exception $ex) {
             echo 'Error: '.$ex->getMessage();
         }

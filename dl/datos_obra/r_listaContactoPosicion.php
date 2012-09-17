@@ -12,7 +12,12 @@ try {
      * ARREGLAR EL QUE AL CONSULTAR NO DEBE MOSTRAR LOS QUE YA ESTAN ASIGNADOS 
      */
     
-    $sql = "SELECT fct.id_contacto id_contacto, fct.txt_puesto txt_puesto,pc.nombre nombre_contacto, fct.aleatorio aleatorio, fct.estado_asignado AS estado_asignado
+    $sql = "SELECT 
+        fct.id_contacto id_contacto
+        , fct.txt_puesto txt_puesto
+        ,pc.nombre nombre_contacto
+        , fct.aleatorio aleatorio
+        , fct.estado_asignado AS estado_asignado
     FROM tb_firmascontactotemporal fct 
     INNER JOIN tb_personacontacto pc
     ON fct.id_contacto = pc.id

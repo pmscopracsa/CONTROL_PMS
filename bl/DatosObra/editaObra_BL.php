@@ -101,6 +101,17 @@ try {
         $edita_obra->setFk($_REQUEST['idcontacto']);
         $edita_obra->setValue($_REQUEST['idreporte']);
         $edita_obra->actualizaObra($cn);
+    } elseif ($_REQUEST['parameter'] == 'setposicionenreporte') {
+        $edita_obra->setAActualizar($_REQUEST['parameter']);
+        $edita_obra->setFk($_REQUEST['idContacto']);
+        $edita_obra->setValue($_REQUEST['ubicacion']);
+        $edita_obra->setColumn($_REQUEST['id_reporte']);
+        $edita_obra->actualizaObra($cn);
+    } elseif ($_REQUEST['parameter'] == 'eliminarempatereporte') {
+        $edita_obra->setAActualizar($_REQUEST['parameter']);
+        $edita_obra->setFk($_REQUEST['id_reporte']);
+        $edita_obra->setValue($_REQUEST['id_contacto']);
+        $edita_obra->actualizaObra($cn);
     }
     
     
