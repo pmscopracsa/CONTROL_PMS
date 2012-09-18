@@ -234,16 +234,6 @@ class RegistraCompania
         }
     }
     
-    public function u_RegistraCompania()
-    {
-        
-    }
-    
-    public function d_RegistraCompania()
-    {
-        
-    }
-    
     public function s_buscaCompaniaPorRuc()
     {
         $query = "SELECT DISTINCT
@@ -362,11 +352,6 @@ class RegistraCompania
             echo "Error al consultar compania por nombre. Error: ".$e->getMessage();
         }
     }        
-    
-    public function s_buscaCompanias()
-    {
-        
-    }
     
     /**
      * GETTERS Y SETTERS DE LAS VARIABLES DE LA CLASE

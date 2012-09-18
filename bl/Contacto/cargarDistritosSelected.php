@@ -4,7 +4,7 @@ include_once '../ComboBoxDireccion.php';
 
 $selects = new ComboBoxDireccion();
 $selects->setCodigo_seleccion($_GET['code']);
-$distritos = $selects->cargarDistrito();
+$distritos = $selects->cargarDistritoSelected();
 
 $id_distrito = $_REQUEST['id_distrito'];
 foreach ($distritos as $key => $value) {

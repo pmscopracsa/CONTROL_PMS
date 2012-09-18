@@ -19,6 +19,7 @@ try {
         ,d.nombre departamento
         ,dis.nombre distrito
         ,td.descripcion tipodireccion
+        ,dcc.inthecontract contract
         FROM tb_companiacontacto cc
         INNER JOIN tb_direccioncompaniacontacto dcc ON cc.id = dcc.tb_companiacontacto_id
         INNER JOIN tb_pais p ON dcc.tb_pais_id = p.id
@@ -38,6 +39,7 @@ try {
         ,dis.id iddistrito
         ,td.descripcion tipodireccion
         ,td.id idtipodireccion
+        ,dcc.inthecontract contract
         FROM tb_companiacontacto cc
         INNER JOIN tb_direccioncompaniacontacto dcc ON cc.id = dcc.tb_companiacontacto_id
         INNER JOIN tb_pais p ON dcc.tb_pais_id = p.id
@@ -66,6 +68,7 @@ try {
         $datos[$i]['tipodireccion'] = $res['tipodireccion'];
         $datos[$i]['idtipodireccion'] = $res['idtipodireccion'];
         $datos[$i]['iddcc'] = $res['iddcc'];
+        $datos[$i]['contract'] = $res['contract'];
         $i++;
     }
     echo json_encode($datos);

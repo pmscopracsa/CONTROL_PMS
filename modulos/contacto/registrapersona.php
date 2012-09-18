@@ -2,8 +2,7 @@
 session_name('tzLogin');
 session_set_cookie_params(2*7*24*60*60);
 session_start();
-
-
+unset($_REQUEST['nombre_empresa']);unset($_REQUEST['id_compania']);
 $CSS_PATH = '../../css/';
 
 $css = scandir($CSS_PATH);
@@ -69,7 +68,15 @@ function __autoload($name) {
         }
             
         $(document).ready(function(){
-            
+            <?php
+            if($_REQUEST['nombre_empresa'] != "") {
+            ?>
+               $("#nombre_empresa").val("<?=$_REQUEST['nombre_empresa']?>");     
+               $("#txtidempresa").val("<?=$_REQUEST['id_compania']?>");
+               $("#btnBuscarCompania").css("display","none");
+            <?php
+            } 
+            ?>
             /**
              * PRIMERA CARGA DE LA LISTA DE ESPECIALIDADES
              */
@@ -173,14 +180,15 @@ function __autoload($name) {
             cargar_tipodocumento();
             
             cargar_paises();
-            cargar_departamentos();
-            cargar_distritos();
+            //cargar_departamentos();
+            //cargar_distritos();
                     
-            /*$("#paisid").change(function(){cargar_departamentos();})
+            $("#paisid").change(function(){cargar_departamentos();})
             $("#departamentoid").change(function(){cargar_distritos();})
             $("#departamentoid").attr("disabled",true);
             $("#distritoid").attr("disabled",true);
-            */
+            
+            
             /*
              * DIRECCION
              */
@@ -436,6 +444,44 @@ function __autoload($name) {
            $(".nombre_empresa").val(cli);
            $("#txtidempresa").val(contratante_id);
       });
+      
+      //  CARGAR DIRECCIONES DE TRABAJO DE LA EMPRESA
+      $("#btnDireccionTrabajo").click(function() {
+          if ($("#nombre_empresa").val() == "") {
+              alert("Debe elegir la empresa primero.");
+          } else {
+              $.ajax({
+                  dataType:"html",
+                  type:"GET",
+                  data:{
+                      idcompania:$("#txtidempresa").val()
+                  },
+                  url:"modal_registracompania/moda-direccionescompania.php",
+                  success:function(data){
+                      $("#modal-direcciontrabajo").append(data);
+                      $("#modal-direcciontrabajo").dialog("open");
+                  }
+              })
+          }
+      })
+      
+      // MODAL PARA DIRECCIONES DE LA EMPRESA
+      $("#modal-direcciontrabajo").dialog({
+        modal:true,
+        autoOpen:false,
+        height:300,
+        width:350,
+        buttons:{
+            "Cerrar":function() {
+                $(this).dialog("close");
+            }
+        }
+      })
+      
+      // SELECCION DE LA DIRECCION DE LA COMPANIA
+      $("#direccioncompaniabox").live("click",function(){
+          alert("___");
+      })
              
         });
         </script>
@@ -454,6 +500,7 @@ function __autoload($name) {
             });
             
             function muestraRespuesta(responseText, statusText, xhr, $form) {
+                <?php unset($_REQUEST['nombre_empresa']);unset($_REQUEST['id_compania'])?>
                 alert("Los datos han sido ingresados correctamente");
                 window.setTimeout('location.reload()',1000);
             }
@@ -519,7 +566,7 @@ function __autoload($name) {
                         <td>
                             <label>Compania:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td>
-                            <input class="nombre_empresa" id="inputext" type="text" size="70"  name="companiaseleccionada" READONLY />
+                            <input class="nombre_empresa" id="nombre_empresa" type="text" size="70"  name="companiaseleccionada" READONLY />
                             <input type="button" id="btnBuscarCompania" value="Buscar Compania" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                     <input type="hidden" name="txtidempresa" id="txtidempresa"/>
                     </tr>
@@ -608,7 +655,7 @@ function __autoload($name) {
                                     <td class="tr-padding">
                                         <label>Departamento/Estado:</label>
                                         <select class="derecha-inline" name="departamentoseleccionada" id="departamentoid">
-<!--                                                <option value="0">Seleccionar departamento</option>-->
+                                                <option value="0">Seleccionar departamento</option>
                                             </selected>
                                     </td>
                                  <tr>   
@@ -616,7 +663,7 @@ function __autoload($name) {
                                     <td class="tr-padding">
                                         <label>Distrito:</label>
                                         <select class="derecha-inline" name="distritoseleccionada" id="distritoid">
-<!--                                                <option value="0">Seleccione un distrito</option>-->
+                                                <option value="0">Seleccione un distrito</option>
                                             </select>
                                     </td>
                             </table>
@@ -625,6 +672,23 @@ function __autoload($name) {
                 </tr>
                 <tr>
                     <td><label>Direcci&oacute;n del centro de trabajo:</label>
+                    <td><input type="button" value="Agregar Direccion Laboral" id="btnDireccionTrabajo" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
+                        <div id="modal-direcciontrabajo" title="Direccion del Trabajo"></div>
+                        <input type="hidden" id="txtiddirecciontrabajo" />    
+                </tr>
+                <tr>
+                    <td><label>Lista de direcciones</label></td>
+                    <td>
+                        <div class="areaScrollModal" id="lista-direcciones">
+                            <table id="tbl-listadirecciones" class="ui-widget">
+                                <thead>
+                                    <tr class="ui-widget-header">
+                                        <th>Nombre</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td><label for="especialidad">Especialidad:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>

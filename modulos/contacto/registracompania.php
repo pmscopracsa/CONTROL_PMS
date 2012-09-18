@@ -289,7 +289,6 @@ function __autoload($name) {
         /**
          * MODAL PARA CREAR UNA NUEVA ESPECIALIDAD
          */
-        $.fx.speeds._default = 1000;
         $("#divNuevaEspecialidad").dialog({
             show:"blind",
             autoOpen:false,
@@ -513,13 +512,24 @@ function __autoload($name) {
            $("direccione"+contador).remove();
         });
         
+       $("#departamentoid").attr('disabled','true'); 
+       $("#distritoid").attr('disabled','true');
+       
        cargar_viasenvio();
        cargar_tipocompania();
        cargar_tipodireccion();
        cargar_paises();
-       $("#departamentoid").attr('disabled','true');
-       cargar_departamentos();
-       cargar_distritos();
+       $("#paisid").change(function(){
+           $("#departamentoid").removeAttr('disabled');
+           cargar_departamentos();
+       })
+       $("#departamentoid").change(function(){
+           $("#distritoid").removeAttr('disabled');
+           cargar_distritos();
+       })
+       
+       //cargar_departamentos();
+       //cargar_distritos();
 
       $(".ruc_empresa").focusout(function() {
           $.ajax({
@@ -587,6 +597,7 @@ function __autoload($name) {
             
             var options = {
                 success:function(){
+                    //alert("Los datos han sido ingresados correctamente");
                     muestraRespuesta();
                 }
                 
@@ -595,9 +606,37 @@ function __autoload($name) {
         });
 
         function muestraRespuesta(responseText, statusText, xhr, $form) {
-            alert("Los datos han sido ingresados correctamente");
-            window.setTimeout('location.reload()',1000);
+            $("#modal_contacto").reveal({
+                animation:'fade',
+                animationspeed:600,
+                closeonbackgroundclick:false,
+                dismissmodalclass:'close'
+            })
+            //alert("Los datos han sido ingresados correctamente");
+            //window.setTimeout('location.reload()',1000);
         }
+        
+        // AL FORMULARIO DE EDICION DE LA COMPANIA
+        $("#btnRegistraContacto").live("click",function(e) {
+            e.preventDefault();
+            $.ajax({
+                dataType:"text",
+                type:"GET",
+                url:"../../dl/busca_persona/getCompaniaIdPorRuc.php",
+                data:{
+                    ruc:$(".ruc_empresa").val()
+                },
+                success:function(data) {
+                    window.location = "registrapersona.php?nombre_empresa="+$(".nombre_empresa").val()+"&id_compania="+data;
+                }
+            })  
+        })
+        
+        // AL FORMULARIO DE AGREGAR NUEVO CONTACTO
+        $("#btnAgregaContacto").live("click",function(e) {
+            e.preventDefault();
+            window.location = "edit/editacompaniacur.php?ruc="+$(".ruc_empresa").val();
+        })
     </script>
     <title>REGISTRO DE COMPA&Ntilde;IAS</title>
 </head>
@@ -615,6 +654,15 @@ function __autoload($name) {
 	</div>
     </div>
     <!-- FIN MODAL -->
+    <!-- modal para agregar contactos -->
+    <div id="modal_contacto">
+        <div id="heading">Agregar Representante(s)</div>
+        <div id="content">
+            <p>Esta compania no tiene contactos. Desea "Registrar Contactos" o "Agregar Contactos"</p>
+            <a href="#" id="btnRegistraContacto" class="button green close"><img src="../../css/reveal/images/tick.png">Registrar</a>
+            <a href="#" id="btnAgregaContacto" class="button green close"><img src="../../css/reveal/images/tick.png">Agregar</a>
+        </div>
+    </div>
     <div id="barra-superior">
         <?php            include_once 'modal_registracompania/modal-escogeEmpresa.php';?>
         <div id="barra-superior-dentro">
@@ -780,6 +828,7 @@ function __autoload($name) {
                                     <td class="tr-padding">
                                         <label>Distrito/Ciudad:</label>
                                         <select class="derecha" name="distritoseleccionada" id="distritoid">
+                                            <option value="0">Seleccione un Distrito/Ciudad</option>
                                         </select>
                                     </td>
                                     <tr>

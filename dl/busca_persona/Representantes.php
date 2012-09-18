@@ -12,6 +12,7 @@ class Representantes
         $query = "SELECT
             pc.nombre nombre
             ,rep.tb_personacontacto_id personaId
+            ,rep.inthecontract contract
             FROM tb_representante rep
             INNER JOIN tb_companiacontacto cc ON rep.tb_companiacontacto_id = cc.id
             INNER JOIN tb_personacontacto pc ON rep.tb_personacontacto_id = pc.id
@@ -31,6 +32,7 @@ class Representantes
             while ($res = mysql_fetch_array($rs,MYSQL_ASSOC)) {
                 array_push($representantes, $res['personaId']);
                 array_push($representantes, $res['nombre']);
+                
             }
             return $representantes;
         } catch(Exception $ex) {

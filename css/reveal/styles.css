@@ -138,6 +138,26 @@ body {
 	z-index:101;
 }
 
+#modal_contacto {
+    	visibility:hidden;
+	width:360px;
+	height:189px;
+	padding:8px;
+
+	background:rgba(0,0,0,.3);
+
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+	border-radius:8px;
+
+	position:absolute !important;
+	top:50% !important;
+	left:50% !important;
+	margin-top:-94px !important;
+	margin-left:-180px !important;
+	z-index:101;
+}
+
 
 #heading {
 	width:360px;
@@ -280,6 +300,15 @@ body {
 
 @media only screen and (max-width: 767px) {
         
+        #modal_contacto {
+            width:284px;
+		height:156px;
+		padding:8px;
+
+		margin-left:-150px !important;
+		margin-top:-78px;
+        }
+    
 	#modal {
 		width:284px;
 		height:156px;

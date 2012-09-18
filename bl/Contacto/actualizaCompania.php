@@ -419,50 +419,22 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                 </td>
             </tr>
             <tr>
-                <td>Representantes:</td>
+                <td>Contactos:</td>
                 <td>
-                    <fieldset>
-                    <table border="0" class="atable">
-                    <tr>
-                        <th>
-                        <th colspan="2">
-                    </tr>';
-      if (count($representantes_array) == 0) {
-              echo '<tr id="tr_representante"><td><input type="button" class="addRow" id="btnNewRepresentante" /></td></tr>';
-              echo '<tr>
-                      <td>
-                          <select name="representante" id="representanteid" style="display:none">
-                              <option value="0">Seleccione especialidad</option>
-                          </select>
-                      </td>
-                   </tr>';
-      } else {
-        for ($i = 0; $i < count($representantes_array);$i++) {
-            if ($i % 2 != 0) {
-              echo'<tr id="tr_representante">
-                  <td>
-                  <input type="text" size="35" name="tfijo" class="inputext" value="'.$representantes_array[$i].'" READONLY/>
-                      <input type="hidden" id="idRepresentante" value="'.$representantes_array[$i-1].'" />
-                      <td><input type="button" class="delRow" id="btnEliminarRepresentante"/></td>
-                      <td><input type="button" value="Editar" id="btnEditarRepresentante" class="ui-button ui-widget ui-state-default ui-corner-all"/>
-                      <td><input type="button" class="addRow" id="btnNewRepresentante"/></td>
-                      </td>
-                      </tr>
-                      <tr>
-                          <td>
-                              <select name="representante" id="representanteid" style="display:none">
-                                  <option value="0">Seleccione un representante</option>
-                              </select>
-                          </td>
-                      </tr>';    
-              continue;
-            }
-        }
-      }  
-      echo
-                    '</table>
-                        </fieldset>
+                    <div class="areaScrollModal" id="lista-contactos">
+                    <table border="0" id="contactos-agregados">
+                        <thead>
+                            <tr class="ui-widget-header">
+                                <th>Nombre de contacto
+                                <th>En contrato
+                        </thead>
+                        <tbody>
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                    </div>
                 </td>
+                <td><input type="button" class="addRow" id="btnNewRepresentante"/></td>
             </tr>
             <tr>
                 <td>Observacion:</td><td><textarea cols="75" rows="5" id="txtObservacion" READONLY>'.$res[7].'</textarea></td>

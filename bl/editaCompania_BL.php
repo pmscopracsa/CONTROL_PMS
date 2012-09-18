@@ -151,6 +151,15 @@ try{
         $edita_compania->setIddistrito($_REQUEST['iddistrito']);
         $edita_compania->setIdtipodireccion($_REQUEST['idtipodireccion']);
         $edita_compania->setId($_REQUEST['idDireccion']);
+        $edita_compania->setContrato($_REQUEST['contract']);
+        $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == 'inthecontract') {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setFk($_REQUEST['idPersona']);
+        $edita_compania->actualizarObjetoCompania($cn);
+    } elseif ($_REQUEST['parameter'] == 'notinthecontract') {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setFk($_REQUEST['idPersona']);
         $edita_compania->actualizarObjetoCompania($cn);
     }
 }catch(Exception $ex) {

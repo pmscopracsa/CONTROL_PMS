@@ -30,6 +30,9 @@ class EditaCompania
     protected $iddistrito;
     protected $idtipodireccion;
     
+    /** parace en el contrato */
+    protected $contrato;
+    
     
     public function actualizarObjetoCompania($cn)
     {
@@ -205,7 +208,8 @@ class EditaCompania
                         ,tb_pais_id = $this->idpais
                         ,tb_departamento_id = $this->iddepartamento
                         ,tb_tipodireccion_id = $this->idtipodireccion
-                        ,tb_distrito_id = $this->iddistrito    
+                        ,tb_distrito_id = $this->iddistrito
+                        ,inthecontract = '$this->contrato'    
                         WHERE tb_companiacontacto_id = $this->idCompania AND id = $this->id";
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
@@ -215,6 +219,16 @@ class EditaCompania
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
                     break;     
+                case 'inthecontract'    :   
+                    $query = "UPDATE tb_representante SET inthecontract = 'checked' WHERE tb_companiacontacto_id = $this->idCompania  AND tb_personacontacto_id = $this->fk";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;    
+                case 'notinthecontract'    :   
+                    $query = "UPDATE tb_representante SET inthecontract = '' WHERE tb_companiacontacto_id = $this->idCompania  AND tb_personacontacto_id = $this->fk";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta especialidad_actualiza: ".  mysql_error());
+                    break;    
                 default:
                     break;
                     
@@ -311,5 +325,13 @@ class EditaCompania
 
      public function setIdtipodireccion($idtipodireccion) {
          $this->idtipodireccion = $idtipodireccion;
+     }
+     
+     public function getContrato() {
+         return $this->contrato;
+     }
+
+     public function setContrato($contrato) {
+         $this->contrato = $contrato;
      }
 }

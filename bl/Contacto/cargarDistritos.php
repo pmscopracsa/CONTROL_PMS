@@ -11,4 +11,3 @@ foreach ($distritos as $key => $value) {
         echo "<option value=\"$key\" selected='selected'>$value</option>";
     echo "<option value=\"$key\">$value</option>";
 }
-?>

@@ -37,11 +37,23 @@ session_start();
             });
             
             // PRIMERA CARGA DE ESPECIALIDADES
-            $("#modalEspecialidad").load("../modal_registracompania/modal-especialidadCompania.php");
+            $("#modalEspecialidad").load("../modal_registracompania/modal-especialidadCompania.php?parameter=1");
             // PRIMERA CARGA DE REPRESENTANTES
             $("#modalRepresentante").load("../modal_registracompania/representantes_div_nocheckbox.php");
             // PRIMERA CARGA DE ESPECIALIDADES
             $("#modalEspecialidad").load("../modal_registracompania/especialidades_div.php?filtro=3");
+            // RECARGA DE ESPECIALIDADES
+            function recargarEspecialidades()
+            {
+                $("#modalEspecialidad").load("../modal_registracompania/modal-especialidadCompania.php");
+            }
+            function recargaEspecialidadesPorFiltro(filtro){
+                $("#modalEspecialidad").load("../modal_registracompania/modal-especialidadCompania.php?parameter="+filtro);
+            }
+            
+            $("#btnSearchEspecialidad").live("click",function() {
+                recargaEspecialidadesPorFiltro($("#txt_divEspecialidadBuscar").val());
+            })
             
             // RELOAD WITH NEW CHANGES
             function reload(){
@@ -65,11 +77,43 @@ session_start();
                         success:function(data) {
                             toHtml(data);
                             cargarDireccionCompaniaNOMBRE($(".nombre_empresa").val());
+                            cargarContactos($("#txtruc").val());
                         }
                     });
                 }
             }
             
+            // CARGAR CONTACTOS
+            function cargarContactos(ruc)
+            {
+                $.ajax({
+                    type:"GET",
+                    dataType:"json",
+                    data:{
+                        ruc_:ruc
+                    },
+                    url:"../../../dl/busca_persona/r_listacontactosporcompania.php",
+                    success:function(data) {
+                        muestraContactos(data);
+                    }
+                })
+            }
+            
+            function muestraContactos(data) {
+                $.each(data,function(index,value) {
+                    $("#contactos-agregados tbody").append(
+                        '<tr>'+
+                        '<td>'+
+                        data[index].nombre+
+                        '<td align="center">'+
+                        '<input id="chkContactoContrato" type="checkbox" '+data[index].contract+'>'+
+                        '<td>'+
+                        '<input type="hidden" id="idRepresentante" value="'+data[index].personaId+'" />'+
+                        '<td><a href="#" id="btnEliminarRepresentante" class="button delete">Eliminar</a>'
+                    )
+                })
+            }
+
             // DETECTAR EL CAMBIO EN EL RADIO BUTTON DEL CRITERIO DE BUSQUEDA
             $("input:radio[name=criteriobusqueda]").click(function() {
                 tipobusqueda = $(this).val();
@@ -105,6 +149,7 @@ session_start();
                                 success:function(data) {
                                     toHtml(data);
                                     cargarDireccionCompaniaRUC($(".ruc_empresa").val());
+                                    cargarContactos($("#txtruc").val());
                                 }
                             });
                         }
@@ -123,6 +168,7 @@ session_start();
                                 success:function(data) {
                                     toHtml(data);
                                     cargarDireccionCompaniaNOMBRE($(".nombre_empresa").val());
+                                    cargarContactos($("#txtruc").val());
                                 }
                             });
                         }
@@ -757,8 +803,8 @@ session_start();
                     },
                     url:"../../../bl/editaCompania_BL.php?parameter=representante_elimina",
                     success:function() {
-                        if (!$("#tr_representante").length)
-                            reload();
+                        //if (!$("#tr_representante").length)
+                            //reload();
                     }
                 });
             });
@@ -790,6 +836,32 @@ session_start();
                 $(this).parent().parent().remove();
                 $("#representanteid").fadeOut("slow");
             });
+            
+            // AGregar representante a contrato (documento)
+            $("#chkContactoContrato").live("click",function() {
+                if ($("#chkContactoContrato").attr('checked')) {
+                    $.ajax({
+                        type:"POST",
+                        url:"../../../bl/editaCompania_BL.php?parameter=inthecontract",
+                        data:{
+                            idPersona:$(this).parent().parent().children().children('#idRepresentante').attr("value"),
+                            idCompania:$("#idCompania").val(),
+                            idEmpresa:<?=$_SESSION['id']?>
+                        }
+                    })
+                } else {
+                    $.ajax({
+                        type:"POST",
+                        url:"../../../bl/editaCompania_BL.php?parameter=notinthecontract",
+                        data:{
+                            idPersona:$(this).parent().parent().children().children('#idRepresentante').attr("value"),
+                            idCompania:$("#idCompania").val(),
+                            idEmpresa:<?=$_SESSION['id']?>,
+                            idCompania:$("#idCompania").val()
+                        }
+                    })
+                }
+            })
             
             /** OBSERVACION */
             // EDITAR OOBSERVACION
@@ -908,11 +980,12 @@ session_start();
                     cargarDomicilio(data[index].idtipodireccion, i)
                     $("#direccion_full tbody").append(
                         "<tr id='tbl_direccion'>"+
-                        "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td><tr/>"+
-                        "<td><select disabled='disabled' id='pa"+i+"'></select></td><tr />"+
-                        "<td><select disabled='disabled' id='de"+i+"'></select></td><tr />"+
-                        "<td><select disabled='disabled' id='di"+i+"'></select></td><tr />"+
-                        "<td><select disabled='disabled' id='do"+i+"'></select></td><tr />"+
+                        "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td><br/>"+
+                        "<td><select disabled='disabled' id='pa"+i+"'></select></td><br />"+
+                        "<td><select disabled='disabled' id='de"+i+"'></select></td><br />"+
+                        "<td><select disabled='disabled' id='di"+i+"'></select></td><br />"+
+                        "<td><select disabled='disabled' id='do"+i+"'></select></td><br />"+
+                        "<td><input disabled='disabled' type='checkbox' value='contrato' id='chkContrato' "+data[index].contract+" />"+
                         "<td><input type='button' id='btnEditarDireccion'  value='Editar' class='ui-button ui-widget ui-state-default ui-corner-all'/></td>"+
                         "<td><input type='button' class='delRow' id='btnEliminarDireccion' /></td>"+
                         "<td><input type='button' class='addRow' id='btnAgregarDireccion' /></td>"+
@@ -974,40 +1047,49 @@ session_start();
             // PAIS
             // EDITAR DIRECCION
             $("#btnEditarDireccion").live("click",function() {
-                var idaddress = $(this).parent().parent().children().children("#idDireccionHidden").attr("value");
+                myObj = $(this);
+                var checked_;
+                var idaddress = $(this).parent().parent().children("#idDireccionHidden").attr("value");
                 
-                if ($("#btnEditarDireccion").val() == "Editar") {
-                    $("#btnEditarDireccion").attr('value', 'Guardar');
+                if ($(this).val() == "Editar") {
+                    $(this).attr('value', 'Guardar');
                     
                     $("#pa"+idaddress).removeAttr('disabled');
                     $("#de"+idaddress).removeAttr('disabled');
                     $("#di"+idaddress).removeAttr('disabled');
                     $("#do"+idaddress).removeAttr('disabled');
-                    $("#direccion").removeAttr('readonly');
+                    $(this).parent().parent().children().children("#chkContrato").removeAttr('disabled');
+                    
+                    myObj.parent().parent().children().children("#direccion").removeAttr('readonly');
+                    
                 } else {
                     if ($("#direccion").val() === "") {
                         alertCampoVacion();
                     } else {
+                        if($(this).parent().parent().children().children("#chkContrato").is(':checked')) checked_ = 'checked';
+                        else checked_ = '';
                         $.ajax({
                             type:"POST",
                             url:"../../../bl/editaCompania_BL.php?parameter=actualizadireccion",
                             data:{
-                                idDireccion:$(this).parent().parent().children().children("#idDireccion"+idaddress).attr("value"),
-                                txtdireccion:$("#direccion").val(),
+                                idDireccion:$(this).parent().parent().children("#idDireccion"+idaddress).attr("value"),
+                                txtdireccion:myObj.parent().parent().children().children("#direccion").val(),
                                 idpais:$(this).parent().parent().children().children("#pa"+idaddress).attr("value"),
                                 iddepartamento:$(this).parent().parent().children().children("#de"+idaddress).attr("value"),
                                 iddistrito:$(this).parent().parent().children().children("#di"+idaddress).attr("value"),
                                 idtipodireccion:$(this).parent().parent().children().children("#do"+idaddress).attr("value"),
                                 idCompania:$("#idCompania").val(),
-                                idEmpresa :<?=$_SESSION['id']?>
+                                idEmpresa :<?=$_SESSION['id']?>,
+                                contract:checked_
                             },
                             success:function() {
-                                $("#btnEditarDireccion").attr('value', 'Editar');
+                                myObj.attr('value', 'Editar');
                     
                                 $("#pa"+idaddress).attr("disabled", "disabled");
                                 $("#de"+idaddress).attr("disabled", "disabled");
                                 $("#di"+idaddress).attr("disabled", "disabled");
                                 $("#do"+idaddress).attr("disabled", "disabled");
+                                myObj.parent().parent().children().children("#chkContrato").attr('disabled','true');
                                 $("#direccion").attr('readonly', 'true');
                             }
                         });    
@@ -1086,6 +1168,32 @@ session_start();
                 width:350,
                 modal:true,
                 buttons:{
+                    "Crear nueva especialidad":function(){
+                        $("#divNuevaEspecialidad").dialog("open");
+                    },
+                    "Cerrar":function(){
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            // CREAR UNA NUEVA ESPECIALIDAD
+            $("#divNuevaEspecialidad").dialog({
+            show:"blind",
+            autoOpen:false,
+            height:150,
+            width:300,
+            modal:true,
+            buttons:{
+                "Crear":function() {
+                    $.ajax({
+                        type:"POST",
+                        url:'../../../bl/Contacto/mantenimiento/especialidadcompania_crear.php',
+                        data:"descripcion="+$('.input-descripcion').attr('value'),
+                        success:function(){
+                            recargarEspecialidades();
+                        }
+                    });
+                    },
                     "Cerrar":function(){
                         $(this).dialog("close");
                     }
@@ -1106,6 +1214,10 @@ session_start();
         </script>
     </head>
     <body class="fondo">
+        <div id="divNuevaEspecialidad" title="Crear nueva especialidad" style="display: none">
+            <label>Especialidad:</label>
+            <input id="inputext" class="input-descripcion" type="text" />
+        </div>
         <div id="modalEspecialidad" title="Seleccione una especialidad"></div>
         <div id="modalRepresentante" title="Seleccione un representante"></div>
         <?php require_once '../../modales/agregaDireccion.php';?>
