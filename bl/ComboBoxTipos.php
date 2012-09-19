@@ -54,7 +54,7 @@ class ComboBoxTipos extends ComboBoxSql
             
             while ($tipodocumento = parent::fetch_assoc($consulta)) {
                 $id = $tipodocumento['id'];
-                $descripcion = utf8_decode($tipodocumento['descripcion']);
+                $descripcion = $tipodocumento['descripcion'];
                 $tiposdocumento[$id] = $descripcion;
             }
             return $tiposdocumento;
