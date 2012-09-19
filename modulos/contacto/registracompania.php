@@ -814,6 +814,7 @@ function __autoload($name) {
                                     <td class="tr-padding">
                                         <label>Pa&iacute;s:</label>
                                         <select class="derecha" name="paisseleccionada" id="paisid">
+                                            <option value="0">Seleccione un pais</option>
                                         </selected>
                                     </td>
                                   <tr>  

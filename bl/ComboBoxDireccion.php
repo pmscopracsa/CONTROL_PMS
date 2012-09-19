@@ -7,7 +7,7 @@ class ComboBoxDireccion extends ComboBoxSql
     function cargarPais()
     {
         $consulta = parent::__construct();
-        $consulta = parent::consulta("SELECT * FROM tb_pais ORDER BY nombre DESC");
+        $consulta = parent::consulta("SELECT * FROM tb_pais ORDER BY nombre ASC");
         $num_total_registros = parent::num_rows($consulta);
         
         if ($num_total_registros > 0) {
