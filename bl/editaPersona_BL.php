@@ -122,6 +122,10 @@ try {
         $edita_persona->setAActualizar($_REQUEST['parameter']);
         $edita_persona->setValue($_REQUEST['new_viaenvio']);
         $edita_persona->actualizarPersona($cn);
+    } elseif ($_REQUEST['parameter'] == 'deldirecciontrabajo') { // DIRECCION DE TRABAJO
+        $edita_persona->setAActualizar($_REQUEST['parameter']);
+        $edita_persona->setValue($_REQUEST['id_direccion']);
+        $edita_persona->actualizarPersona($cn);
     }
 } catch (Exception $ex) {
     echo 'Error: '.$ex->getMessage();

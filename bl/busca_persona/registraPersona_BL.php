@@ -76,6 +76,17 @@ if ($_REQUEST['cont_especialidades'] > 0) {
     $registrapersona->set_tbespecialidadid($especialidad_);//array
 }
 
+/**cont_direccionestrabajo
+ * VALIDA EXISTENCIA DE DIRECCIONES DE TRABAJO
+ */
+if ($_REQUEST['cont_direccionestrabajo'] > 0) {
+    $direccion_trabajo = array();
+    for ($i = 1; $i<= $_REQUEST['cont_direccionestrabajo']; $i++) {
+        array_push($direccion_trabajo, $_REQUEST['direlaboral'.$i]);
+    }
+    $registrapersona->setTb_direcciontrabajo($direccion_trabajo);//array
+}
+
 
 $registrapersona->set_observacion($_REQUEST['observacion'] == "" ? "NULL" : $limpia->Filtro($_REQUEST['observacion']));
 $registrapersona->set_emailprincipal($_REQUEST['email'] == "" ? "NULL" : $limpia->Filtro($_REQUEST['email']));

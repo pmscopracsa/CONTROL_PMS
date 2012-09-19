@@ -177,6 +177,18 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
                     </table>
             </tr>
             <tr>
+                <td>Direccion Laboral:
+                <td>
+                    <table border="0" class="atable" id="direccionlaboral_full">
+                        <thead>
+                            <tr class="ui-widget-header">
+                                <th>Direccion
+                        </thead>
+                        <tbody>
+                            <tr></tr>
+                        </tbody>
+                    </table>
+            <tr>
                 <td>Especialidades:
                 <td>
                 <table border="0" class="atable">

@@ -34,6 +34,7 @@ class RegistraPersona
     protected $tb_pais_id;
     protected $tb_departamento_id;
     protected $tb_distrito_id;
+    protected $tb_direcciontrabajo = array();
     
     public function __construct() {
         $this->_idempresa = 1;
@@ -41,9 +42,9 @@ class RegistraPersona
     
     public function prueba() {
         echo "Dentro de funcion prueba()";
-        for ($i = 0; $i < sizeof($this->_tbespecialidadid); $i++) {
-            echo "Tamano: ".sizeof($this->_tbespecialidadid)."<br>";
-            $especialidad = $this->_tbespecialidadid[$i];
+        for ($i = 0; $i < sizeof($this->tb_direcciontrabajo); $i++) {
+            echo "Tamano: ".sizeof($this->tb_direcciontrabajo)."<br>";
+            $especialidad = $this->tb_direcciontrabajo[$i];
             echo "..".$especialidad."<br>";
         }
     }
@@ -146,6 +147,14 @@ class RegistraPersona
                     $res = mysql_query($query);
                     if (!$res)
                         throw new Exception("tb_correosecundarios. Error: ".  mysql_error());
+                }
+                
+                for ($i = 0; $i < sizeof($this->tb_direcciontrabajo); $i++) {
+                    $especialidad_ = $this->tb_direcciontrabajo[$i];
+                    $query = "INSERT INTO tb_direccionpersonalaboral (tb_personacontacto_id,tb_direccioncompaniacontacto_id) VALUES($ultimo_id,$especialidad_)";
+                    $res = mysql_query($query);
+                    if (!$res)
+                        throw new Exception("tb_direccionpersonalaboral. Error: ".  mysql_error());
                 }
                 
                 mysql_query("COMMIT",$cn);
@@ -489,5 +498,13 @@ class RegistraPersona
 
     public function setTb_distrito_id($tb_distrito_id) {
         $this->tb_distrito_id = $tb_distrito_id;
+    }
+    
+    public function getTb_direcciontrabajo() {
+        return $this->tb_direcciontrabajo;
+    }
+
+    public function setTb_direcciontrabajo($tb_direcciontrabajo) {
+        $this->tb_direcciontrabajo = $tb_direcciontrabajo;
     }
 }

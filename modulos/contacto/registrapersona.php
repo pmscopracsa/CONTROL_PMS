@@ -83,6 +83,7 @@ session_start();
             
             var contador_especialidades = 0;
             var con_especia = 0;
+            var contador_direccionlaboral = 0;
             /*
              * MODAL PÁRA SELECCIONAR ESPECIALIDAD(ES)
              */
@@ -331,6 +332,10 @@ session_start();
             $("#submit").click(function() {
                 var valor_oculto_especialidadess = $('<input type="hidden" name="cont_especialidades" value="'+con_especia+'" />');
                 valor_oculto_especialidadess.appendTo("#cant_especialidades");
+                
+                var valor_oculto_direccionestrabajo = $('<input type="hidden" name="cont_direccionestrabajo" value="'+contador_direccionlaboral+'"/>');
+                valor_oculto_direccionestrabajo.appendTo("#cant_direccioneslaboral");
+                
                 /**
                  *  VALIDACIONES PRE FORM
                  */
@@ -396,7 +401,7 @@ session_start();
               $("#btnModificar").click(function(e) {
                   e.preventDefault(e);
                   var documento = String($("#numerodocumento").val());
-                  window.location = "edit/editapersonaname.php?documentodni="+documento;
+                  window.location = "edit/editapersonaname.php?documentodni='"+documento+"'";
               });
       
       /**
@@ -445,6 +450,7 @@ session_start();
           
           if ($("#nombre_empresa").val() == "") {
               alert("Debe elegir la empresa primero.");
+              $("#divBuscarCompania").dialog("open");
           } else {
               $.ajax({
                   dataType:"html",
@@ -476,18 +482,14 @@ session_start();
       
       // SELECCION DE LA DIRECCION DE LA COMPANIA
       $("#direccioncompaniabox").live("click",function(){
-          /*if(!$(this).is(':checked')){
-              $(this).attr('checked', 'true');
-              alert('ya esta checked');
-              return;
-          }*/
+            contador_direccionlaboral++;
           direccion = $(this).parent().parent().children("#txtDireccion").text();
           iddireccion = $(this).parent().parent().children().children("#direccioncompaniabox").val();
           // VISUALMENTE LO PONEMOS EN LA TABLA
           $("#tbl-listadirecciones tbody").append(
                 '<tr>'+
                     '<td>'+direccion+
-                    '<input type="hidden" id="iddireccion" value="'+iddireccion+'" />'+
+                    '<input type="hidden" id="iddireccion" value="'+iddireccion+'" name="direlaboral'+contador_direccionlaboral+'"/>'+
                     '<td><a href="#" id="btnEliminarDireccionCompania" class="button delete">Eliminar</a>'
           )
           // LO GUARDAMOS EN SU RESPECTIVA TABLA
@@ -502,6 +504,7 @@ session_start();
       });
       // ELIMINAR la direccion de la empresa
       $("#btnEliminarDireccionCompania").live("click",function(e) {
+          contador_direccionlaboral--;
           e.preventDefault();
           $(this).parent().parent().remove();
       })
@@ -665,7 +668,7 @@ session_start();
                                  <tr>   
                                      <td class="tr-padding">
                                         <label>Direcci&oacute;n:</label>
-                                        <input class="direccion_lbl" id="inputext" type="text" size="25" name="direccion" />
+                                        <input class="direccion_lbl derecha-inline" id="inputext" type="text" size="25" name="direccion" />
                                     </td>
                                  <tr>
                                      <td class="tr-padding">
@@ -792,6 +795,7 @@ session_start();
                 </table>
                 <!-- VALORES OCULTOS -->
                 <div id="cant_especialidades"></div>
+                <div id="cant_direccioneslaboral"></div>
                 <div id="footer">
             <hr />
         </div>

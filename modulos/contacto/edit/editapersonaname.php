@@ -55,7 +55,8 @@ session_start();
                            toHtml(data);
                            cargarDireccionPersona(<?=$_REQUEST['documentodni']?>);
                            cargarViaEnvio($("#idviaenvio").val());
-                           alert($("#idviaenvio").val());
+                           cargarDireccionTrabajo($("#idpersonacontacto").val());
+                           //alert($("#idviaenvio").val());
                        }
                });
             }
@@ -71,8 +72,54 @@ session_start();
                     toHtml(data);
                     cargarDireccionPersona(<?=$_REQUEST['documentodni']?>);
                     cargarViaEnvio($("#idviaenvio").val());
+                    cargarDireccionTrabajo($("#idpersonacontacto").val());
                 }
             });
+            
+            
+            /** DIRECCION DE TRABAJO */
+            // CARGAR DIRECCION
+            function cargarDireccionTrabajo(idempleado){
+                $.ajax({
+                    type:"GET",
+                    dataType:"json",
+                    data:{
+                        id_empleado:idempleado
+                    },
+                    url:"../../../dl/busca_persona/r_listadirecciontrabajo.php",
+                    success:function(data) {
+                        muestraDireccionTrabajo(data);
+                    }
+                })
+            }
+            //MOSTRAR DIRECCION
+            function muestraDireccionTrabajo(data) {
+                $.each(data,function(index,value) {
+                    $("#direccionlaboral_full tbody").append(
+                        '<tr>'+
+                        '<td>'+
+                        '<input type="hidden" id="idDireccionTrabajo" value="'+data[index].id+'" />'+
+                        data[index].direccion+
+                        '<td><a href="#" id="del-direcciontrabajo" class="button delete">Eliminar</a>'
+                    )
+                })
+            }
+            // ELIMINAR DIRECCION
+            $("#del-direcciontrabajo").live("click",function() {
+                myObj = $(this).parent().parent();
+                iddireccion = $(this).parent().parent().children().children("#idDireccionTrabajo").val();
+                $.ajax({
+                    type:"POST",
+                    url:"../../../bl/editaPersona_BL.php?parameter=deldirecciontrabajo",
+                    data:{
+                        idpersonacontacto:$("#idpersonacontacto").val(),
+                        id_direccion:iddireccion
+                    },
+                    success:function(){
+                        reload();
+                    }
+                })
+            })
             
             function cargarDireccionPersona(id_persona){
                 $.ajax({

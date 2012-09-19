@@ -148,6 +148,11 @@ class EditaPersona_DL
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
                     break;     
+                case 'deldirecciontrabajo':
+                    $query = "DELETE FROM tb_direccionpersonalaboral WHERE tb_direccioncompaniacontacto_id = $this->value AND tb_personacontacto_id = $this->pk";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;    
                 default:
                     break;
             }
