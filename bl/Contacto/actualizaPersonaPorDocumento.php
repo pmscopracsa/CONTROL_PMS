@@ -188,6 +188,7 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
                             <tr></tr>
                         </tbody>
                     </table>
+                <td><input type="button" value="Buscar Direccion" id="btnAddDireTrabajo" class="ui-button ui-widget ui-state-default ui-corner-all" />    
             <tr>
                 <td>Especialidades:
                 <td>
