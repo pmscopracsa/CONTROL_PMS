@@ -345,7 +345,7 @@ function  __autoload($name) {
                     </tr>
                     <tr>
                         <td><label>Nombre de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                        <td><input id="inputext" class="obra" type="text" name="codigo" value="<?=@$_REQUEST['obra']?>" READONLY/></td>
+                        <td><p><?=$_REQUEST['obra']?></p>
                     <input type="hidden" name="idtxtobra" value="<?=@$_REQUEST['codigo']?>"/>
                     <input type="hidden" name="idEmpresa" value="<?=@$_SESSION['id']?>" />
                     </tr>
