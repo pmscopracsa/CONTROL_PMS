@@ -3,15 +3,14 @@ session_name('tzLogin');
 session_set_cookie_params(2*7*24*60*60);
 session_start();
 
-unset($_REQUEST['nombre_empresa']);unset($_REQUEST['id_compania']);
-$CSS_PATH = '../../css/';
+//unset($_REQUEST['nombre_empresa']);unset($_REQUEST['id_compania']);
 
-$css = scandir($CSS_PATH);
+//$css = scandir($CSS_PATH);
 
-function __autoload($name) {
+/*function __autoload($name) {
     $fullpath = '../../dl/contacto_bl/'.$name.'.php';
     if (file_exists($fullpath))        require_once ($fullpath);
-}
+}*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,12 +34,6 @@ function __autoload($name) {
         <link href="../../css/reveal/styles.css" rel="stylesheet" type="text/css" />
         <link href="../../css/google-buttons.css" rel="stylesheet" type="text/css" />
         <link href="../../css/info.css" rel="stylesheet" type="text/css" />
-        <?php
-        /*foreach ($css as $value) {
-            if ($value === '.' || $value === '..') {continue;}
-            echo '<link href="../../css/'.$value.'" rel="stylesheet" type="text/css" />';
-        }*/
-        ?>
         <link href="../../css/reveal/styles.css" rel="stylesheet" type="text/css" />
         <!--    ZONA JS -->
         <script src="../../js/jquery1.4.2.js.js" type="text/javascript"></script>
@@ -70,10 +63,10 @@ function __autoload($name) {
             
         $(document).ready(function(){
             <?php
-            if($_REQUEST['nombre_empresa'] != "") {
+            if(@$_REQUEST['nombre_empresa'] != "") {
             ?>
-               $("#nombre_empresa").val("<?=$_REQUEST['nombre_empresa']?>");     
-               $("#txtidempresa").val("<?=$_REQUEST['id_compania']?>");
+               $("#nombre_empresa").val("<?=@$_REQUEST['nombre_empresa']?>");     
+               $("#txtidempresa").val("<?=@$_REQUEST['id_compania']?>");
                $("#btnBuscarCompania").css("display","none");
             <?php
             } 
@@ -565,7 +558,7 @@ function __autoload($name) {
         <div id="main">
             <form action="../../bl/busca_persona/registraPersona_BL.php" method="POST" id="frm-regpersona">
 <!--                <form action="registratest.php" method="POST" id="frm-regpersona">-->
-                    <input type="hidden" name="idEmpresa" value="<?=$_SESSION['id']?>" />
+                    <input type="hidden" name="idEmpresa" value="<?=@$_SESSION['id']?>" />
                 <div class="info">
                 Los campos obligatorios est&aacute;n marcados con <img src="../../img/required_star.gif" alt="dato requerido" />
                 </div>
