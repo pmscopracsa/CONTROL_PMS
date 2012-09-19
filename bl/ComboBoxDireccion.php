@@ -45,6 +45,27 @@ class ComboBoxDireccion extends ComboBoxSql
         }
     }
     
+        function cargarDepartamentosPeru()
+    {
+        $consulta = parent::__construct();
+        //$consulta = parent::consulta("SELECT * FROM tb_departamento WHERE tb_pais_id = $this->codigo_seleccion ORDER BY nombre ASC");
+        $consulta = parent::consulta("SELECT * FROM tb_departamento ORDER BY nombre ASC");
+        $num_total_registros = parent::num_rows($consulta);                                                                                 
+        
+        if ($num_total_registros > 0) {
+            $departamentos = array();
+            
+            while ($departamento = parent::fetch_assoc($consulta)) {
+                $id_departamento = $departamento['id'];
+                $descripcion_departamento = $departamento['nombre'];
+                $departamentos[$id_departamento] = $descripcion_departamento;                                                                                                                           
+            }
+            return $departamentos;
+        }  else {
+            return FALSE;
+        }
+    }
+    
     function cargarDepartamentosSelected()
     {
         $consulta = parent::__construct();

@@ -2,6 +2,7 @@
 session_name('tzLogin');
 session_set_cookie_params(2*7*24*60*60);
 session_start();
+
 unset($_REQUEST['nombre_empresa']);unset($_REQUEST['id_compania']);
 $CSS_PATH = '../../css/';
 
@@ -447,6 +448,8 @@ function __autoload($name) {
       
       //  CARGAR DIRECCIONES DE TRABAJO DE LA EMPRESA
       $("#btnDireccionTrabajo").click(function() {
+          $("#modal-direcciontrabajo").empty();
+          
           if ($("#nombre_empresa").val() == "") {
               alert("Debe elegir la empresa primero.");
           } else {
@@ -480,7 +483,34 @@ function __autoload($name) {
       
       // SELECCION DE LA DIRECCION DE LA COMPANIA
       $("#direccioncompaniabox").live("click",function(){
-          alert("___");
+          /*if(!$(this).is(':checked')){
+              $(this).attr('checked', 'true');
+              alert('ya esta checked');
+              return;
+          }*/
+          direccion = $(this).parent().parent().children("#txtDireccion").text();
+          iddireccion = $(this).parent().parent().children().children("#direccioncompaniabox").val();
+          // VISUALMENTE LO PONEMOS EN LA TABLA
+          $("#tbl-listadirecciones tbody").append(
+                '<tr>'+
+                    '<td>'+direccion+
+                    '<input type="hidden" id="iddireccion" value="'+iddireccion+'" />'+
+                    '<td><a href="#" id="btnEliminarDireccionCompania" class="button delete">Eliminar</a>'
+          )
+          // LO GUARDAMOS EN SU RESPECTIVA TABLA
+          $.ajax({
+              type:"POST",
+              data:{
+                  id_direccion:iddireccion
+              },
+              url:""
+          })
+              
+      });
+      // ELIMINAR la direccion de la empresa
+      $("#btnEliminarDireccionCompania").live("click",function(e) {
+          e.preventDefault();
+          $(this).parent().parent().remove();
       })
              
         });
@@ -686,6 +716,7 @@ function __autoload($name) {
                                         <th>Nombre</th>
                                     </tr>
                                 </thead>
+                                <tbody><tr></tr></tbody>
                             </table>
                         </div>
                     </td>

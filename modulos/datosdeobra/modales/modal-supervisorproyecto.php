@@ -16,7 +16,7 @@
                         <?php
                         foreach ($clientes as &$valor) {
                             echo '<table>';
-                            echo '<tr style="cursor:pointer;"><td class="supervisorproyecto">'.'<p style="display:none">'.$valor[0].'</p>'.'<p style="display:none">-</p>'.$valor[1].'</td></tr>';
+                            echo '<tr style="cursor:pointer;"><td class="supervisorproyecto">'.'<p style="display:none">'.$valor[0].'</p>'.'<p style="display:none">-</p>'.utf8_encode($valor[1]).'</td></tr>';
                             echo '</table>';
                         }
                         ?>

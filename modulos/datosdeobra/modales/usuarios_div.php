@@ -13,7 +13,7 @@ if ($q == "1") {
         echo '<input id="listausuarios" type="checkbox" name="listarusuarios[]" value="'.
                 $valor[0].
                 '"/>'.
-                $valor[2].
+                utf8_encode($valor[2]).
                 '<br />';
     }
 }elseif ($q == "2") {
@@ -30,7 +30,7 @@ if ($q == "1") {
     $usuarios = $usuarios_sistema->mostrarUsuarios();
     foreach ($usuarios as &$valor) {
         echo '<tr><td>';
-        echo '<p style="display:none;">'.$valor[0].'"</p>'.$valor[2].'</td>';
+        echo '<p style="display:none;">'.$valor[0].'"</p>'.utf8_encode($valor[2]).'</td>';
         echo '<td align="center"><input id="chkSeleccionaUsuario" name="chkSeleccionaUsuario" type="checkbox" /></td>';
         echo '</tr>';
     }
@@ -44,7 +44,7 @@ else {
         echo '<input id="usuarios_boxes" type="checkbox" name="usuarios_sistema[]" value="'.
                 $valor[0].
                 '"/>'.
-                $valor[2].
+                utf8_encode($valor[2]).
                 '<br />';
     }
 }

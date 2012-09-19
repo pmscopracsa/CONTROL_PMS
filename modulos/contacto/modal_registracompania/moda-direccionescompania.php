@@ -5,12 +5,11 @@ $direcciones = new CompaniaContactoDL();
 $direcciones->setId($_REQUEST['idcompania']);
 $direccione = $direcciones->mostrarDireccionesCompania();
 
-echo '<div>';
+echo '<table>';
 foreach($direccione as &$valor) {
-    echo '<input id="direccioncompaniabox" type="checkbox" name="txtdireccionescompania" value="'.
+    echo '<tr><td><input id="direccioncompaniabox" type="checkbox" name="txtdireccionescompania" value="'.
         $valor[0].
-        '"/>'.
-        $valor[1].
-        '<br />';
+        '"/><td id="txtDireccion">'.
+        $valor[1];
 }
-echo '</div>';
+echo '</table>';

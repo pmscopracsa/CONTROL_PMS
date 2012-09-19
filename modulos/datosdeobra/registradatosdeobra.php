@@ -108,6 +108,7 @@ $contratos = $modelos->mostrarContratos();
         }
         
         $(document).ready(function(){
+            cargar_departamentos();
             /**
              * CARGAR DATOS DE LA OBRA QUE YA FUE CREADA POR EL ADMINISTRADOR EL SISTEMA
              */ 

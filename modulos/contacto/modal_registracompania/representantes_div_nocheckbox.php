@@ -10,6 +10,6 @@ foreach ($contactos as $valor) {
                 $valor[0].
                 '</p>'.
                 '<p style="display:none">-</p>'.
-                $valor[3].
+                utf8_encode($valor[3]).
                 '</td></tr></table>';
 }

@@ -352,7 +352,7 @@ function  __autoload($name) {
                     <tr>
                         <td><label>A&ncaron;adir Contacto:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td>
-                            <input type="button" id="anadir-contacto" value="Buscar Contacto" />
+                            <input type="button" class="ui-button ui-widget ui-state-default ui-corner-all" id="anadir-contacto" value="Buscar Contacto" />
                         </td>
                     </tr>
                     <tr>

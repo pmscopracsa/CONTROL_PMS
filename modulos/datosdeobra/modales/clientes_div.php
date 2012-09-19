@@ -14,7 +14,7 @@ if ($q == "1") {
                 $valor[0].
                 '</p>'.
                 '<p style="display:none">-</p>'.
-                $valor[1].
+                utf8_encode($valor[1]).
                 '</td></tr></table>';
     }
     echo '</div>';
@@ -28,7 +28,7 @@ if ($q == "1") {
                 $valor[0].
                 '</p>'.
                 '<p style="display:none">-</p>'.
-                $valor[1].
+                utf8_encode($valor[1]).
                 '</td></tr></table>';
     }
     echo '</div>';

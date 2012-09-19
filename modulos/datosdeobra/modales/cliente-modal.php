@@ -24,7 +24,7 @@
                     foreach ($clientes as &$valor) {
                         echo '<table>';
                         echo '<tr style="cursor:pointer;">';
-                        echo '<td class="cliente">'.'<p style="display:none">'.$valor[0].'</p>'.'<p style="display:none">-</p>'.$valor[1].'</td>';
+                        echo '<td class="cliente">'.'<p style="display:none">'.$valor[0].'</p>'.'<p style="display:none">-</p>'.utf8_encode($valor[1]).'</td>';
                         echo '</tr>';
                         echo '</table>';
                     }

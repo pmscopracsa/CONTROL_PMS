@@ -12,7 +12,7 @@ if ($q == "1" ) {
         echo '<input id="representantes_boxes" type="checkbox" name="representantes[]" value="'.
                 $valor[0].
                 '"/>'.
-                $valor[3].
+                utf8_encode($valor[3]).
                 '<br />';
     }
     echo '</div>';
@@ -24,7 +24,7 @@ if ($q == "1" ) {
         echo '<input id="representantes_boxes" type="checkbox" name="representantes[]" value="'.
                 $valor[0].
                 '"/>'.
-                $valor[3].
+                utf8_encode($valor[3]).
                 '<br />';
     }
     echo '</div>';
@@ -37,7 +37,7 @@ if ($q == "1" ) {
         echo '<input id="representantes_boxes" type="checkbox" name="representantes[]" value="'.
                 $valor[0].
                 '"/>'.
-                $valor[3].
+                utf8_encode($valor[3]).
                 '<br />';
     }
     echo '</div>';
