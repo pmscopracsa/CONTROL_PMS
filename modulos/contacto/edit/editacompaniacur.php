@@ -16,6 +16,7 @@ session_start();
         <link href="../../../css/google-buttons.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/fieldset_edit.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/areascroll.css" rel="stylesheet" type="text/css" />
         
         <!-- JS ZONE -->
         <script src="../../../js/jquery1.4.2.js.js" type="text/javascript"></script>
@@ -26,6 +27,37 @@ session_start();
         <script>
         var tipobusqueda = "";    
         $(document).ready(function() {
+            cargar_tipodireccion();
+            $("#paisid").change(function(){
+                
+                var code = $("#paisid").val();
+                $.get("../../../bl/Contacto/cargarDepartamentos.php",{code:code},function(resultado) {
+                        $("#departamentoid").attr("disabled",false);
+                        document.getElementById("departamentoid").options.length = 1;
+                        $('#departamentoid').append(resultado);
+                });
+                cargar_departamentos();
+            })
+            $("#departamentoid").change(function() {
+                var code=$("#departamentoid").val();
+                $.get("../../../bl/Contacto/cargarDistritos.php",{code:code},
+                    function(resultado)
+                    {
+                        if(resultado == false)
+                        {
+                            alert("No hay distritos");
+                        }
+                        else
+                        {
+                            $("#distritoid").attr("disabled",false);
+                            document.getElementById("distritoid").options.length = 1;
+                            $("#distritoid").append(resultado);
+                        }
+                    }
+                );
+                cargar_distritos();
+            })
+            
             $.ajax({
                 type:"GET",
                 url:"../../../bl/Contacto/actualizaCompania.php?opcion=ruc",
@@ -819,11 +851,12 @@ session_start();
                     cargarDomicilio(data[index].idtipodireccion, i)
                     $("#direccion_full tbody").append(
                         "<tr id='tbl_direccion'>"+
-                        "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td><tr />"+
-                        "<td><select disabled='disabled' id='pa"+i+"'></select></td><tr />"+
-                        "<td><select disabled='disabled' id='de"+i+"'></select></td><tr />"+
-                        "<td><select disabled='disabled' id='di"+i+"'></select></td><tr />"+
-                        "<td><select disabled='disabled' id='do"+i+"'></select></td><tr />"+
+                        "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td>x§"+
+                        "<td><select disabled='disabled' id='pa"+i+"'></select></td>"+
+                        "<td><select disabled='disabled' id='de"+i+"'></select></td>"+
+                        "<td><select disabled='disabled' id='di"+i+"'></select></td>"+
+                        "<td><select disabled='disabled' id='do"+i+"'></select></td>"+
+                        "<td><input disabled='disabled' type='checkbox' value='contrato' id='chkContrato' "+data[index].contract+" />"+
                         "<td><input type='button' id='btnEditarDireccion'  value='Editar' class='ui-button ui-widget ui-state-default ui-corner-all'/></td>"+
                         "<td><input type='button' class='delRow' id='btnEliminarDireccion' /></td>"+
                         "<td><input type='button' class='addRow' id='btnAgregarDireccion' /></td>"+
@@ -894,24 +927,29 @@ session_start();
                     $("#de"+idaddress).removeAttr('disabled');
                     $("#di"+idaddress).removeAttr('disabled');
                     $("#do"+idaddress).removeAttr('disabled');
-                    $("#direccion").removeAttr('readonly');
+                    $(this).parent().parent().children().children("#chkContrato").removeAttr('disabled');
+                    
+                    $(this).parent().parent().children().children("#direccion").removeAttr('readonly');
                 } else {
                     if ($("#direccion").val() === "") {
                         alertCampoVacion();
                     } else {
-                        alert($(this).parent().parent().parent().children().children().children("#pa"+idaddress).val());
+                        if($(this).parent().parent().children().children("#chkContrato").is(':checked')) checked_ = 'checked';
+                        else checked_ = '';
+                        //alert($(this).parent().parent().parent().children().children().children("#pa"+idaddress).val());
                         $.ajax({
                             type:"POST",
                             url:"../../../bl/editaCompania_BL.php?parameter=actualizadireccion",
                             data:{
-                                idDireccion:$(this).parent().parent().children("#idDireccion"+idaddress).val(),
-                                txtdireccion:$("#direccion").val(),
-                                idpais:$(this).parent().parent().parent().children().children().children("#pa"+idaddress).val(),
-                                iddepartamento:$(this).parent().parent().parent().children().children().children("#de"+idaddress).val(),
-                                iddistrito:$(this).parent().parent().parent().children().children().children("#di"+idaddress).val(),
-                                idtipodireccion:$(this).parent().parent().parent().children().children().children("#do"+idaddress).val(),
+                                idDireccion:thisObj.parent().parent().children("#idDireccion"+idaddress).val(),
+                                txtdireccion:thisObj.parent().parent().children().children("#direccion").val(),
+                                idpais:thisObj.parent().parent().children().children("#pa"+idaddress).val(),
+                                iddepartamento:thisObj.parent().parent().children().children("#de"+idaddress).val(),
+                                iddistrito:thisObj.parent().parent().children().children("#di"+idaddress).val(),
+                                idtipodireccion:thisObj.parent().parent().parent().children().children().children("#do"+idaddress).val(),
                                 idCompania:$("#idCompania").val(),
-                                idEmpresa :<?=$_SESSION['id']?>
+                                idEmpresa :<?=$_SESSION['id']?>,
+                                contract:checked_
                             },
                             success:function() {
                                 thisObj.attr('value', 'Editar');
@@ -945,7 +983,6 @@ session_start();
             });
             // CREAR NUEVA DIRECCION
             $("#btnAgregarDireccion").live("click",function() {
-                alert("www");
                 $("#seleccionaDireccion").dialog("open");
             });
             // MODAL CREAR NUEVA DIRECCION
@@ -1017,6 +1054,8 @@ session_start();
         </script>
     </head>
     <body class="fondo">
+        <!-- MODAL PARA DIRECCION -->
+        <?php require_once '../../modales/agregaDireccion.php';?>
         <div id="modalEspecialidad" title="Seleccione una especialidad"></div>
         <div id="modalRepresentante" title="Seleccione un representante"></div>
         <div id="barra-superior">

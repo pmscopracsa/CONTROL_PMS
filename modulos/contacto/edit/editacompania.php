@@ -16,6 +16,7 @@ session_start();
         <link href="../../../css/google-buttons.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/fieldset_edit.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/areascroll.css" rel="stylesheet" type="text/css" />
         
         <!-- JS ZONE -->
         <script src="../../../js/jquery1.4.2.js.js" type="text/javascript"></script>
@@ -25,6 +26,37 @@ session_start();
         <script>
         var tipobusqueda = "";    
         $(document).ready(function() {
+            cargar_tipodireccion();
+            $("#paisid").change(function(){
+                
+                var code = $("#paisid").val();
+                $.get("../../../bl/Contacto/cargarDepartamentos.php",{code:code},function(resultado) {
+                        $("#departamentoid").attr("disabled",false);
+                        document.getElementById("departamentoid").options.length = 1;
+                        $('#departamentoid').append(resultado);
+                });
+                cargar_departamentos();
+            })
+            $("#departamentoid").change(function() {
+                var code=$("#departamentoid").val();
+                $.get("../../../bl/Contacto/cargarDistritos.php",{code:code},
+                    function(resultado)
+                    {
+                        if(resultado == false)
+                        {
+                            alert("No hay distritos");
+                        }
+                        else
+                        {
+                            $("#distritoid").attr("disabled",false);
+                            document.getElementById("distritoid").options.length = 1;
+                            $("#distritoid").append(resultado);
+                        }
+                    }
+                );
+                cargar_distritos();
+            })
+            
             $(".ruc_empresa").autocomplete("../../../bl/Contacto/mantenimiento/autocompletadoEmpresasPorRuc.php",{
                 width:260,
                 matchContains:true,
@@ -981,14 +1013,14 @@ session_start();
                     $("#direccion_full tbody").append(
                         "<tr id='tbl_direccion'>"+
                         "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td><br/>"+
-                        "<td><select disabled='disabled' id='pa"+i+"'></select></td><br />"+
-                        "<td><select disabled='disabled' id='de"+i+"'></select></td><br />"+
-                        "<td><select disabled='disabled' id='di"+i+"'></select></td><br />"+
-                        "<td><select disabled='disabled' id='do"+i+"'></select></td><br />"+
+                        "<td><select disabled='disabled' id='pa"+i+"'></select><br />"+
+                        "<td><select disabled='disabled' id='de"+i+"'></select><br />"+
+                        "<td><select disabled='disabled' id='di"+i+"'></select><br />"+
+                        "<td><select disabled='disabled' id='do"+i+"'></select><br />"+
                         "<td><input disabled='disabled' type='checkbox' value='contrato' id='chkContrato' "+data[index].contract+" />"+
                         "<td><input type='button' id='btnEditarDireccion'  value='Editar' class='ui-button ui-widget ui-state-default ui-corner-all'/></td>"+
-                        "<td><input type='button' class='delRow' id='btnEliminarDireccion' /></td>"+
-                        "<td><input type='button' class='addRow' id='btnAgregarDireccion' /></td>"+
+                        "<td><input type='button' class='delRow' id='btnEliminarDireccion' />"+
+                        "<td><input type='button' class='addRow' id='btnAgregarDireccion' />"+
                         "<input type='hidden' id='idDireccionHidden' value='"+i+"' />"+
                         "<input type='hidden' id='idDireccion"+i+"' value='"+data[index].iddcc+"' />"+
                         "</tr>"
@@ -1220,6 +1252,7 @@ session_start();
         </div>
         <div id="modalEspecialidad" title="Seleccione una especialidad"></div>
         <div id="modalRepresentante" title="Seleccione un representante"></div>
+        <!-- MODAL PARA DIRECCION -->
         <?php require_once '../../modales/agregaDireccion.php';?>
         <div id="barra-superior">
             <div id="barra-superior-dentro">

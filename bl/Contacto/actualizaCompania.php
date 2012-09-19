@@ -355,6 +355,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
             <tr>
             <td>Direccion</td>
                 <td>
+                    <div class="areaScroll">
                     <fieldset>
                     <table border="0" class="atable" id="direccion_full">
             <!--<tr>
@@ -371,6 +372,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                      </tbody>   
                      </table>
                      </fieldset>
+                     <div>
                 </td>
             </tr>
             <tr>
