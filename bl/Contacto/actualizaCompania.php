@@ -367,7 +367,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                      </div>
                      
                 </td>
-             <td><input type="button" id="btnAgregarDireccion" class="addRow" />   
+             <td><input type="button" id="btnAgregarDireccion" value="Agregar Direccion" class="ui-button ui-widget ui-state-default ui-corner-all" />   
             </tr>
             <tr>
                 <td>Especialidad:</td>
@@ -430,7 +430,7 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                     </table>
                     </div>
                 </td>
-                <td><input type="button" class="addRow" id="btnNewRepresentante"/></td>
+                <td><input type="button" class="ui-button ui-widget ui-state-default ui-corner-all" value="Agregar Contacto" id="btnNewRepresentante"/></td>
             </tr>
             <tr>
                 <td>Observacion:</td><td><textarea cols="75" rows="5" id="txtObservacion" READONLY>'.$res[7].'</textarea></td>

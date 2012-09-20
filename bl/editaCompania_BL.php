@@ -143,6 +143,10 @@ try{
         $edita_compania->setIddistrito($_REQUEST['iddistrito']);
         $edita_compania->setIdtipodireccion($_REQUEST['idtipodireccion']);
         $edita_compania->actualizarObjetoCompania($cn);
+    }  elseif ($_REQUEST['parameter'] == 'eliminadireccion') {
+        $edita_compania->setAActualizar($_REQUEST['parameter']);
+        $edita_compania->setValue($_REQUEST['idregistro']);
+        $edita_compania->actualizarObjetoCompania($cn);
     } elseif ($_REQUEST['parameter'] == 'actualizadireccion') {
         $edita_compania->setAActualizar($_REQUEST['parameter']);
         $edita_compania->setValue($_REQUEST['txtdireccion']);

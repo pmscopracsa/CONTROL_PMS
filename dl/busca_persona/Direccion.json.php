@@ -17,8 +17,11 @@ try {
         ,p.nombre pais
         ,p.id idpais
         ,d.nombre departamento
+        ,d.id iddepartamento
         ,dis.nombre distrito
+        ,dis.id iddistrito
         ,td.descripcion tipodireccion
+        ,td.id idtipodireccion
         ,dcc.inthecontract contract
         FROM tb_companiacontacto cc
         INNER JOIN tb_direccioncompaniacontacto dcc ON cc.id = dcc.tb_companiacontacto_id

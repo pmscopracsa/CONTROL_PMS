@@ -27,6 +27,12 @@ session_start();
         var tipobusqueda = "";    
         $(document).ready(function() {
             cargar_tipodireccion();
+            function cargar_tipodireccion()
+            {
+                $.get("../../../bl/Contacto/cargarTipoDireccion.php",function(resultado){
+                    $("#tipodireccionid").append(resultado);
+                })
+            }
             $("#paisid").change(function(){
                 
                 var code = $("#paisid").val();
@@ -70,8 +76,7 @@ session_start();
             
             // PRIMERA CARGA DE ESPECIALIDADES
             $("#modalEspecialidad").load("../modal_registracompania/modal-especialidadCompania.php?parameter=1");
-            // PRIMERA CARGA DE REPRESENTANTES
-            $("#modalRepresentante").load("../modal_registracompania/representantes_div_nocheckbox.php");
+            
             // PRIMERA CARGA DE ESPECIALIDADES
             $("#modalEspecialidad").load("../modal_registracompania/especialidades_div.php?filtro=3");
             // RECARGA DE ESPECIALIDADES
@@ -118,6 +123,8 @@ session_start();
             // CARGAR CONTACTOS
             function cargarContactos(ruc)
             {
+                // PRIMERA CARGA DE REPRESENTANTES
+                $("#modalRepresentante").load("../modal_registracompania/representantes_div_nocheckbox.php?ruc="+ruc);
                 $.ajax({
                     type:"GET",
                     dataType:"json",
@@ -211,7 +218,7 @@ session_start();
             {
                 $("#tmp").html(data);
             }
-
+            
 
             //DETECTAR INTENCION DE CAMBIO DE TIPO DE COMPANIA
             $("#btnEditarTipoCompania").live("click", function() {
@@ -1012,11 +1019,11 @@ session_start();
                     cargarDomicilio(data[index].idtipodireccion, i)
                     $("#direccion_full tbody").append(
                         "<tr id='tbl_direccion'>"+
-                        "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td><br/>"+
-                        "<td><select disabled='disabled' id='pa"+i+"'></select><br />"+
-                        "<td><select disabled='disabled' id='de"+i+"'></select><br />"+
-                        "<td><select disabled='disabled' id='di"+i+"'></select><br />"+
-                        "<td><select disabled='disabled' id='do"+i+"'></select><br />"+
+                        "<td><input type='text' id='direccion' value='"+data[index].direccion+"' READONLY/></td>"+
+                        "<td><select disabled='disabled' id='pa"+i+"'></select>"+
+                        "<td><select disabled='disabled' id='de"+i+"'></select>"+
+                        "<td><select disabled='disabled' id='di"+i+"'></select>"+
+                        "<td><select disabled='disabled' id='do"+i+"'></select>"+
                         "<td><input disabled='disabled' type='checkbox' value='contrato' id='chkContrato' "+data[index].contract+" />"+
                         "<td><input type='button' id='btnEditarDireccion'  value='Editar' class='ui-button ui-widget ui-state-default ui-corner-all'/></td>"+
                         "<td><input type='button' class='delRow' id='btnEliminarDireccion' />"+
@@ -1056,7 +1063,7 @@ session_start();
             function cargarDistrito(iddistrito,i) {
                 $.ajax({
                     dataType:"html",
-                    data:{id_pais:iddistrito},
+                    data:{id_distrito:iddistrito},
                     url:"../../../bl/Contacto/cargarDistritosSelected.php",
                     success:function(data){
                         $("#di"+i).append(data);
@@ -1081,7 +1088,7 @@ session_start();
             $("#btnEditarDireccion").live("click",function() {
                 myObj = $(this);
                 var checked_;
-                var idaddress = $(this).parent().parent().children("#idDireccionHidden").attr("value");
+                var idaddress = $(this).parent().parent().children().children("#idDireccionHidden").val();
                 
                 if ($(this).val() == "Editar") {
                     $(this).attr('value', 'Guardar');
@@ -1104,7 +1111,7 @@ session_start();
                             type:"POST",
                             url:"../../../bl/editaCompania_BL.php?parameter=actualizadireccion",
                             data:{
-                                idDireccion:$(this).parent().parent().children("#idDireccion"+idaddress).attr("value"),
+                                idDireccion:$(this).parent().parent().children().children("#idDireccion"+idaddress).attr("value"),
                                 txtdireccion:myObj.parent().parent().children().children("#direccion").val(),
                                 idpais:$(this).parent().parent().children().children("#pa"+idaddress).attr("value"),
                                 iddepartamento:$(this).parent().parent().children().children("#de"+idaddress).attr("value"),
@@ -1242,6 +1249,8 @@ session_start();
                     }
                 }
             })
+            
+            
         });
         </script>
     </head>

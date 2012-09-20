@@ -8,7 +8,7 @@ if ($_REQUEST['parameter'] == 1) {
     echo '<div>';
     echo '<div style:"float:left"><input type="text" id="txt_divEspecialidadBuscar"/><input type="button" value="Buscar" id="btnSearchEspecialidad" class="ui-button ui-widget ui-state-default ui-corner-all"></div>';
     foreach ($especialidades as $valor) {
-        echo '<input id="especialidades_bixes" type="checkbox" name="especialidades[]" value="'.
+        echo '<input id="especialidades_boxes" type="checkbox" name="especialidades[]" value="'.
                     $valor[0].
                     '"/>'.
                     $valor[1].
