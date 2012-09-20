@@ -177,7 +177,7 @@ $obra_id = 0;
          * SE HA SALVADO EN LA DB
          */
         $("#setuped").click(function() {
-            if($("#idtxtobra").val() == "") {
+            if($("#idtxtobra").val() === "") {
                 alert("Seleccione una obra por favor.");
                 return;
             } else {
