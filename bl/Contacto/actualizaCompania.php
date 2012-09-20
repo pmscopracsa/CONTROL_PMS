@@ -372,10 +372,11 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                      </tbody>   
                      </table>
                      </fieldset>
-                     <input type="button" id="btnAgregarDireccion" class="addRow" />
+                     
                      <div>
                      
                 </td>
+                <input type="button" id="btnAgregarDireccion" class="addRow" />
             </tr>
             <tr>
                 <td>Especialidad:</td>
