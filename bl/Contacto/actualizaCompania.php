@@ -358,25 +358,16 @@ function toHtml($res,$giros,$telefonosf,$telefonosm,$telefnosn, $especialidades_
                     <div class="areaScroll">
                     <fieldset>
                     <table border="0" class="atable" id="direccion_full">
-            <!--<tr>
-                        <th>Direccion</th>
-                        <th>Pais</th>
-                        <th>Departamento</th>
-                        <th>Distrito</th>
-                        <th>Tipo de Direccion</th>
-                    </tr>-->';
-      echo
-                    '<tbody>
+                     <tbody>
                         <tr>
                         </tr>
                      </tbody>   
                      </table>
                      </fieldset>
-                     
                      </div>
                      
                 </td>
-                <input type="button" id="btnAgregarDireccion" class="addRow" />
+             <td><input type="button" id="btnAgregarDireccion" class="addRow" />   
             </tr>
             <tr>
                 <td>Especialidad:</td>
