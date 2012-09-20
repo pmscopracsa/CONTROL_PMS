@@ -586,17 +586,17 @@ session_start();
                             </div>
                     <tr>
                         <td><label>Nombres y Apellidos:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                        <td><input class="nombre_persona" id="inputext" type="text" size="70"  name="nombre"</td>
+                        <td><input class="nombre_persona" id="inputext" type="text" size="70"  name="nombre" required="required"/></td>
                     </tr>
                     <tr>
                         <td>
                             <label>Compania:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <td>
-                            <input class="nombre_empresa" id="nombre_empresa" type="text" size="70"  name="companiaseleccionada" READONLY />
+                            <input class="nombre_empresa" id="nombre_empresa" type="text" size="70"  name="companiaseleccionada" READONLY required="required" />
                             <input type="button" id="btnBuscarCompania" value="Buscar Compania" class="ui-button ui-widget ui-state-default ui-corner-all"/>
                     <input type="hidden" name="txtidempresa" id="txtidempresa"/>
                     </tr>
-                        <td><label>Cargo:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                        <td><label>Cargo:<em><img src="../../img/required_star.gif" alt="dato requerido" required="required"/></em></label></td>
                         <td><input id="inputext" type="text" size="25" name="cargo"</td>
                     </tr>
                     <tr>
@@ -668,7 +668,7 @@ session_start();
                                  <tr>   
                                      <td class="tr-padding">
                                         <label>Direcci&oacute;n:</label>
-                                        <input class="direccion_lbl derecha-inline" id="inputext" type="text" size="25" name="direccion" />
+                                        <input class="direccion_lbl derecha-inline" id="inputext" type="text" size="25" name="direccion" required="required"/>
                                     </td>
                                  <tr>
                                      <td class="tr-padding">
@@ -758,7 +758,7 @@ session_start();
                 </tr>
                 <tr>
                     <td><label for="email">Email principal:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                    <td><input id="inputext" type="email" size="30" placeholder="" name="email"</td>
+                    <td><input id="inputext" type="email" size="30" placeholder="" name="email" required="required"/></td>
                 </tr>
                 <tr>
                     <td><label>Email secundario(s):</label>
@@ -778,11 +778,11 @@ session_start();
                        
                 <tr>
                     <td><label for="web">Web:</label></td>
-                    <td><input id="inputext" type="text" size="30" placeholder="" name="web" /></td>
+                    <td><input id="inputext" type="text" size="30" placeholder="" name="web" required="required"/></td>
                 </tr>
                 <tr>
                     <td><label for="fax">Fax:</label></td>
-                    <td><input id="inputext" type="text" size="30" placeholder="" name="fax" /></td>
+                    <td><input id="inputext" type="text" size="30" placeholder="" name="fax" required="required"/></td>
                 </tr>
                 <tr>
                     <td><label for="via_envio">V&iacute;a de Env&iacute;o:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>

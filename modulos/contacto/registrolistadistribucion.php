@@ -304,7 +304,7 @@ function  __autoload($name) {
          <!-- INICIO MODAL -->
     <div id="modal">
 	<div id="heading">
-                La lista de distribucion que desea ingresra ya existe
+                La lista de distribucion que desea ingresar ya existe
 	</div>
 
 	<div id="content">
@@ -341,7 +341,7 @@ function  __autoload($name) {
                     <tr>
                         <td><label>Nombre de la lista:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
                         <input type="hidden" id="idLista" />
-                        <td><input class="nombre_lista" id="inputext" type="text" name="nombre" /></td>
+                        <td><input class="nombre_lista" id="inputext" type="text" name="nombre" required="required"/></td>
                     </tr>
                     <tr>
                         <td><label>Nombre de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>

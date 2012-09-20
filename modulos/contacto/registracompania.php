@@ -690,19 +690,19 @@ function __autoload($name) {
                </tr>
                <tr class="alt">
                    <td><label for="ruc">RUC:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input  class="ruc_empresa" id="inputext" type="text" maxlength="11" size="70" name="ruc" /></td>
+                   <td><input  class="ruc_empresa" id="inputext" type="text" maxlength="11" size="70" name="ruc" required="required"/></td>
                </tr>
                <tr>
                    <td><label for="nombre">Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input class="nombre_empresa" id="inputext" type="text" size="70"  name="nombre" /></td>
+                   <td><input class="nombre_empresa" id="inputext" type="text" size="70"  name="nombre" required="required"/></td>
                </tr>
                <tr>
                    <td><label for="nombre_comercial">Nombre Comercial:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="nombrecomercial" /></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="nombrecomercial" required="required"/></td>
                </tr>
                <tr>
                    <td><label for="partida_registral">Partida Registral:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="partidaregistral" /></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="partidaregistral" required="required"/></td>
                </tr>
                <tr>
                    <td><label for="giro">Giro:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
@@ -722,7 +722,7 @@ function __autoload($name) {
                    </td>
                </tr>
                <tr>
-                   <td><label for="actividad_principal">Activida Principal:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                   <td><label for="actividad_principal">Activida Principal:<em><img src="../../img/required_star.gif" alt="dato requerido" required="required"/></em></label></td>
                    <td><input id="inputext" type="text" size="30" placeholder="" name="actividadprincipal" /></td>
                </tr>
                <tr>
@@ -786,7 +786,7 @@ function __autoload($name) {
                </tr>
                <tr>
                    <td><label for="fax">Fax:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="fax" /></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="fax" required="required"/></td>
                </tr>
                <tr>
                    <td><label for="direccion">Direcci&oacute;n:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
@@ -941,11 +941,11 @@ function __autoload($name) {
                </tr>
                <tr>
                    <td><label for="email">Email:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="email" /></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="email" required="required"/></td>
                </tr>
                <tr>
                    <td><label for="web">Web:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="web" /></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="web" required="required"/></td>
                </tr>
                <tr>
                    <td><label for="via_envio">V&iacute;a de Env&iacute;o:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
