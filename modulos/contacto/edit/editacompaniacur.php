@@ -9,6 +9,7 @@ session_start();
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>EDICION DE COMPAÑIA</title>
         <!-- CSS ZONE -->
+        <link href="../../../css/email.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/barrasuperior.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/cuerpo.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/autocomplete.css" rel="stylesheet" type="text/css" />
