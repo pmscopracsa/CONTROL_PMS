@@ -339,20 +339,23 @@ function  __autoload($name) {
                 </div>
                 <table>
                     <tr>
-                        <td><label>Nombre de la lista:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                        <td>Nombre de la lista:</td>
                         <input type="hidden" id="idLista" />
-                        <td><input class="nombre_lista" id="inputext" type="text" name="nombre" required="required"/></td>
+                        <td><input class="nombre_lista" id="inputext" type="text" name="nombre" required="required"/>
+                            <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                        </td>
                     </tr>
                     <tr>
-                        <td><label>Nombre de obra:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                        <td>Nombre de obra:</td>
                         <td><p><?=$_REQUEST['obra']?></p>
                     <input type="hidden" name="idtxtobra" value="<?=@$_REQUEST['codigo']?>"/>
                     <input type="hidden" name="idEmpresa" value="<?=@$_SESSION['id']?>" />
                     </tr>
                     <tr>
-                        <td><label>A&ncaron;adir Contacto:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                        <td>A&ncaron;adir Contacto:</td>
                         <td>
                             <input type="button" class="ui-button ui-widget ui-state-default ui-corner-all" id="anadir-contacto" value="Buscar Contacto" />
+                            <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
                         </td>
                     </tr>
                     <tr>

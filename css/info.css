@@ -4,6 +4,7 @@
     padding: 15px 10px 15px 50px;
     background-repeat: no-repeat;
     background-position: 10px center;
+    position: static;
 }
 
 .info {
@@ -26,4 +27,3 @@ color: #D8000C;
 background-color: #FFBABA;
 background-image: url('../img/error.png');
 }
-

@@ -674,62 +674,76 @@ function __autoload($name) {
        <div> 
            <table id="titulo">
                <tr>
-                   <div id="tipo_compania"><td><label for="tipocompania">Tipo de Compania:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td></div>
+                   <td>Tipo de Compania:</td>
                    <td>
                        <select name="tipocompaniaseleccionada" id="tipocompaniaid">
                            <option value="0">Seleccione un tipo de Compania</option>
                        </select>
+                       <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
                    </td>
                </tr>
-               <tr class="alt">
-                   <td><label for="ruc">RUC:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input  class="ruc_empresa" id="inputext" type="text" maxlength="11" size="70" name="ruc" required="required"/></td>
+               <tr>
+                   <td>RUC:</td>
+                   <td><input  class="ruc_empresa" id="inputext" type="text" maxlength="11" size="70" name="ruc" required="required"/>
+                       <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                   </td>
                </tr>
                <tr>
-                   <td><label for="nombre">Nombre:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input class="nombre_empresa" id="inputext" type="text" size="70"  name="nombre" required="required"/></td>
+                   <td>Nombre:</td>
+                   <td><input class="nombre_empresa" id="inputext" type="text" size="70"  name="nombre" required="required"/>
+                       <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                   </td>
                </tr>
                <tr>
-                   <td><label for="nombre_comercial">Nombre Comercial:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="nombrecomercial" required="required"/></td>
+                   <td>Nombre Comercial:</td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="nombrecomercial" required="required"/>
+                       <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                   </td>
                </tr>
                <tr>
-                   <td><label for="partida_registral">Partida Registral:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="partidaregistral" required="required"/></td>
+                   <td>Partida Registral:</td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="partidaregistral" required="required"/>
+                       <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                   </td>
                </tr>
                <tr>
-                   <td><label for="giro">Giro:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                   <td>Giro:</td>
                    <td>
-                       <table border='0' class="atable">
-                           <tr>
+                       <table border='0'>
+<!--                           <tr>
                                <th>
                                <th colspan="2">
-                           </tr>
+                           </tr>-->
                            <tr>
                                 <td class="atable"><input type="text" size="30" id="inputext" name="giro" />
                                 <td><input type="button" class="addRow" />
                                 <td><input type="button" class="delRow" />
+                                    <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
                            </tr>
                                     <input type="hidden" class="rowCount" name="filas_giro" />    
                        </table>
                    </td>
                </tr>
                <tr>
-                   <td><label for="actividad_principal">Activida Principal:<em><img src="../../img/required_star.gif" alt="dato requerido" required="required"/></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="actividadprincipal" /></td>
+                   <td>Activida Principal:</td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="actividadprincipal" />
+                       <em><img src="../../img/required_star.gif" alt="dato requerido" required="required"/></em>
+                   </td>
                </tr>
-               <tr>
-                   <td><label for="telefono_fijo">Tel&eacute;fono Fijo:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+               <tr>    
+                   <td>Tel&eacute;fono Fijo:</td>
                    <td>
                        <table border="0" class="atable">
-                           <tr>
+<!--                           <tr>
                                <th></th>
                                <th colspan="2"></th>
-                           </tr>
+                           </tr>-->
                            <tr>
                                <td class="atable"><input type="text" size="15" name="telefonofijo" /></td>
                                <td><input type="button" class="addRow" /></td>
-                               <td><input type="button" class="delRow" /></td>
+                               <td><input type="button" class="delRow" />
+                                   <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                               </td>
                            </tr>
                            <input type="hidden" class="rowCount" name="filas_tfijo" />
                        </table>
@@ -744,47 +758,53 @@ function __autoload($name) {
                    </td>
                </tr>
                <tr>
-                   <td><label for="telefono_movil">Tel&eacute;fono M&oacute;vil:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                   <td>Tel&eacute;fono M&oacute;vil:</td>
                    <td>
                         <table>
-                            <tr>
+<!--                            <tr>
                                 <th></th>
                                 <th colspan="2"></th>
-                            </tr>
+                            </tr>-->
                             <tr>
                                 <td><input id="inputext" type="text" size="15" name="telefonomovil" /></td>
                                 <td><input type="button" class="addRow" /></td>
-                                <td><input type="button" class="delRow" /></td>
+                                <td><input type="button" class="delRow" />
+                                    <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                                </td>
                             </tr>
                             <input type="hidden" class="rowCount" name="filas_tmovil" />
                         </table>
                    </td>
                </tr>
                <tr>
-                   <td><label for="telefono_nextel">Tel&eacute;fono Nextel:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                   <td>Tel&eacute;fono Nextel:</td>
                    <td>
                        <table>
-                            <tr>
+<!--                            <tr>
                                 <th></th>
                                 <th colspan="2"></th>
-                            </tr>
+                            </tr>-->
                             <tr>
                                 <td><input type="text" size="15" name="telefononextel" /></td>
                                 <td><input type="button" class="addRow" /></td>
-                                <td><input type="button" class="delRow" /></td>
+                                <td><input type="button" class="delRow" />
+                                    <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                                </td>
                             </tr>
                             <input type="hidden" class="rowCount" name="filas_tnextel" />
                        </table>
                    </td>
                </tr>
                <tr>
-                   <td><label for="fax">Fax:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="fax" required="required"/></td>
+                   <td>Fax:</td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="fax" required="required"/>
+                       <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                   </td>
                </tr>
                <tr>
-                   <td><label for="direccion">Direcci&oacute;n:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                   <td>Direcci&oacute;n:</td>
                    <td>
-                       <input type="button" id="agregarDireccion" value="Agregar Direcci&oacute;n" />
+                       <input type="button" id="agregarDireccion" value="Agregar Direcci&oacute;n" /><em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
                        
                        <!-- ventana modal para seleccionar la direccion -->
                        <div id="seleccionaDireccion" title="Direcci&oacute;n" style="display: none" >
@@ -857,9 +877,9 @@ function __autoload($name) {
                    </td> 
                </tr>
                <tr>
-                   <td><label for="especialidad">Especialidad:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                   <td>Especialidad:</td>
                    <td>
-                       <input type="button" id="btnAgregarEspecialidad" value="Buscar Especialidad" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                       <input type="button" id="btnAgregarEspecialidad" value="Buscar Especialidad" class="ui-button ui-widget ui-state-default ui-corner-all"/><em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
                        
                        <!-- div que se alimenta con load()-->
                        <div id="divSeleccionaEspecialidad" title="Agregar Especialidad" style="display:none"></div>
@@ -876,7 +896,7 @@ function __autoload($name) {
                         </div>
                </tr>
                <tr>
-                    <td><label>Lista de especialidades:</label></td>
+                    <td>Lista de especialidades:</td>
                     <td>
                         <div class="areaScrollModal" id="lista-especialidades">
                             <table id="tbl-listaespecialidades" class="ui-widget">
@@ -892,60 +912,29 @@ function __autoload($name) {
                         </div>
                     </td>
                 </tr>
-<!--               <tr>
-                   <td><label for="representante">Representante:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td>
-                       <input type="button" id="btnAgregarRepresentante" value="Buscar Representante" class="ui-button ui-widget ui-state-default ui-corner-all"/>
-                       <div id="divSeleccionaRepresentante" title="Agregar Representante" style="display: none"></div>
-                       
-                   </td>
-                        <div id="modal_buscarRepresentantePorNombre" title="Buscar representante" style="display: none">
-                           <label>Nombre del representante:</label>
-                           <input type="text" id="txt_nombreRepresentante" />
-                       </div>
-               </tr>
                <tr>
-                   <td><label>Lista de representantes</label></td>
-                   <td>
-                       <div class="areaScrollModal" id="lista-representantes">
-                           <table id="tbl-listarepresentantes" class="ui-widget" border="0">
-                               <thead>
-                                   <tr class="ui-widget-header">
-                                       <th> DNI </th>
-                                       <th> Nombres </th>
-                                       <th> Cargo </th>
-                                       <th> Email </th>
-                                       <th> Fax </th>
-                                       <th> Tel&eacute;fono Fijo </th>
-                                       <th> Tel&eacute;fono M&oacute;vil </th>
-                                       <th> Tel&eacute;fono Nextel </th>
-                                   </tr>
-                               </thead>
-                               <tbody>
-                                    <tr></tr>
-                                </tbody>    
-                           </table>
-                       </div>
-                   </td>
-               </tr>-->
-               <tr>
-                   <td><label for="observacion">Observaci&oacute;n:</label></td>
+                   <td>Observaci&oacute;n:</td>
                    <td><textarea name="observacion" cols="113" rows="5"></textarea></td>
                </tr>
                <tr>
-                   <td><label for="email">Email:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="email" required="required"/></td>
+                   <td>Email:</td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="email" required="required"/>
+                       <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                   </td>
                </tr>
                <tr>
-                   <td><label for="web">Web:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                   <td><input id="inputext" type="text" size="30" placeholder="" name="web" required="required"/></td>
+                   <td>Web:<em></td>
+                   <td><input id="inputext" type="text" size="30" placeholder="" name="web" required="required"/>
+                       <img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                   </td>
                </tr>
                <tr>
-                   <td><label for="via_envio">V&iacute;a de Env&iacute;o:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                   <td>V&iacute;a de Env&iacute;o:</td>
                    <td>
                        <select name="viaenvioseleccionada" id="viaenvioid" >
                            <option value="0" REQUIRED>Seleccione una V&iacute;a de Env&iacute;o</option> 
                        </select>
+                       <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
                    </td>
                </tr>
            </table>

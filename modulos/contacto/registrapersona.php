@@ -567,49 +567,58 @@ session_start();
                 </div>
                 <table>
                     <tr>
-                        <td><label>Tipo documento:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                        <td>Tipo documento:</td>
                         <td>
                             <select id="cmb_tipodocumento" name="tipo-documento">
                                 <option value="0">Seleccionar tipo de documento</option>
                             </select>
                          
-                             <input  class="input-tipo-documento" size="8" type="text" name="numero-documento" id="inputext" required/>
+                             <input  class="input-tipo-documento" size="8" type="text" name="numero-documento" id="inputext" required/><em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
                              <input type="hidden" id="numerodocumento" />
                     </tr>
                     <tr>
-                        <td><label>¿Tiene RUC?<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label>
+                        <td>¿Tiene RUC?
                         <td>
                             <input type="radio" name="tieneruc" value="si">Si<br>
                             <input type="radio" name="tieneruc" value="no">No<br>
+                            
                             <div class="td-ruc-checkbox" style="display: none;">
                             <input placeholder="RUC" type="text" id="inputext" name="ruc" class="txtruccarne"/>
                             </div>
+                            
                     <tr>
-                        <td><label>Nombres y Apellidos:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                        <td><input class="nombre_persona" id="inputext" type="text" size="70"  name="nombre" required="required"/></td>
+                        <td>Nombres y Apellidos:</td>
+                        <td><input class="nombre_persona" id="inputext" type="text" size="70"  name="nombre" required="required"/>
+                            <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                        </td>
                     </tr>
                     <tr>
                         <td>
-                            <label>Compania:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                            Compania:</td>
                         <td>
                             <input class="nombre_empresa" id="nombre_empresa" type="text" size="70"  name="companiaseleccionada" READONLY required="required" />
                             <input type="button" id="btnBuscarCompania" value="Buscar Compania" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                            <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
                     <input type="hidden" name="txtidempresa" id="txtidempresa"/>
                     </tr>
-                        <td><label>Cargo:<em><img src="../../img/required_star.gif" alt="dato requerido" required="required"/></em></label></td>
-                        <td><input id="inputext" type="text" size="25" name="cargo"</td>
+                        <td>Cargo:</td>
+                        <td><input id="inputext" type="text" size="25" name="cargo" />
+                            <em><img src="../../img/required_star.gif" alt="dato requerido" required="required"/></em>
+                        </td>
                     </tr>
                     <tr>
-                    <td><label for="telefono_fijo">Tel&eacute;fono Fijo:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                    <td>Tel&eacute;fono Fijo:</td>
                     <td>
                         <table border="0" class="atable">
-                            <tr>
+<!--                            <tr>
                                 <th></th>
                                 <th colspan="2"></th>
-                            </tr>
+                            </tr>-->
                             <tr>
                                 <td><input type="text" size="15" name="telefonofijo" /></td>
-                                <td><input type="button" class="addRow" /></td>
+                                <td><input type="button" class="addRow" />
+                                    <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                                </td>
                                 <td><input type="button" class="delRow" /></td>
                             </tr>
                             <input type="hidden" class="rowCount" name="filas_tfijo" />
@@ -625,16 +634,18 @@ session_start();
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="telefono_movil">Tel&eacute;fono M&oacute;vil:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                    <td>Tel&eacute;fono M&oacute;vil:</td>
                     <td>
                     <table>
-                        <tr>
+<!--                        <tr>
                             <th></th>
                             <th colspan="2"></th>
-                        </tr>
+                        </tr>-->
                         <tr>
                             <td><input type="text" size="15" name="telefonomovil" /></td>
-                            <td><input type="button" class="addRow" /></td>
+                            <td><input type="button" class="addRow" />
+                                <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                            </td>
                             <td><input type="button" class="delRow" /></td>
                         </tr>
                         <input type="hidden" class="rowCount" name="filas_tmovil" />
@@ -643,16 +654,18 @@ session_start();
                 </td>
                 </tr>
                 <tr>
-                    <td><label for="telefono_nextel">Tel&eacute;fono Nextel:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                    <td>Tel&eacute;fono Nextel:</td>
                     <td>
                         <table>
-                        <tr>
+<!--                        <tr>
                             <th></th>
                             <th colspan="2"></th>
-                        </tr>
+                        </tr>-->
                         <tr>
                             <td><input type="text" size="15" name="telefononextel" /></td>
-                            <td><input type="button" class="addRow" /></td>
+                            <td><input type="button" class="addRow" />
+                                <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                            </td>
                             <td><input type="button" class="delRow" /></td>
                         </tr>
                         <input type="hidden" class="rowCount" name="filas_tnextel" />
@@ -660,9 +673,9 @@ session_start();
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="direccion">Direcci&oacute;n Personal:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                    <td>Direcci&oacute;n Personal:</td>
                     <td>
-                        <input type="button" id="agregarDireccion" value="Agregar Direccion" class="ui-button ui-widget ui-state-default ui-corner-all" />
+                        <input type="button" id="agregarDireccion" value="Agregar Direccion" class="ui-button ui-widget ui-state-default ui-corner-all" /><em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
                         <div id="seleccionaDireccion" style="display:none">
                             <table border="0" class="atable">
                                  <tr>   
@@ -697,13 +710,13 @@ session_start();
                     </td>
                 </tr>
                 <tr>
-                    <td><label>Direcci&oacute;n del centro de trabajo:</label>
+                    <td>Direcci&oacute;n del centro de trabajo:
                     <td><input type="button" value="Agregar Direccion Laboral" id="btnDireccionTrabajo" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
                         <div id="modal-direcciontrabajo" title="Direccion del Trabajo"></div>
                         <input type="hidden" id="txtiddirecciontrabajo" />    
                 </tr>
                 <tr>
-                    <td><label>Lista de direcciones</label></td>
+                    <td>Lista de direcciones</td>
                     <td>
                         <div class="areaScrollModal" id="lista-direcciones">
                             <table id="tbl-listadirecciones" class="ui-widget">
@@ -718,9 +731,9 @@ session_start();
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="especialidad">Especialidad:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                    <td>Especialidad:</td>
                     <td>
-                        <input type="button" id="agregarEspecialidad" value="Buscar Especialidad" class="ui-button ui-widget ui-state-default ui-corner-all"/>
+                        <input type="button" id="agregarEspecialidad" value="Buscar Especialidad" class="ui-button ui-widget ui-state-default ui-corner-all"/><em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
                         <div id="seleccionaEspecialidad" title="Agregar Especialidad" style="display: none" ></div>
                     </td>
                     
@@ -736,7 +749,7 @@ session_start();
                 </div> 
                 </tr>
                 <tr>
-                    <td><label>Lista de especialidades:</label></td>
+                    <td>Lista de especialidades:</td>
                     <td>
                         <div class="areaScrollModal" id="lista-especialidades">
                             <table id="tbl-listaespecialidades" class="ui-widget">
@@ -753,21 +766,23 @@ session_start();
                     </td>
                 </tr>
                 <tr>
-                    <td><label>Observaci&oacute;n</label></td>
+                    <td>Observaci&oacute;n:</td>
                     <td><textarea cols="114" rows="5" name="observacion"></textarea></td>
                 </tr>
                 <tr>
-                    <td><label for="email">Email principal:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
-                    <td><input id="inputext" type="email" size="30" placeholder="" name="email" required="required"/></td>
+                    <td>Email principal:</td>
+                    <td><input id="inputext" type="email" size="30" placeholder="" name="email" required="required"/>
+                        <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
+                    </td>
                 </tr>
                 <tr>
-                    <td><label>Email secundario(s):</label>
+                    <td>Email secundario(s):
                     <td>
                         <table border="0" class="atable">
-                            <tr>
+<!--                            <tr>
                                 <th>
                                 <th colspan="2">
-                            </tr>
+                            </tr>-->
                             <tr>
                                 <td class="atable"><input type="text" size="15" size="50" name="emailsecundario" />
                                 <td><input type="button" class="addRow" />
@@ -777,19 +792,20 @@ session_start();
                         </table>
                        
                 <tr>
-                    <td><label for="web">Web:</label></td>
+                    <td>Web:</td>
                     <td><input id="inputext" type="text" size="30" placeholder="" name="web" required="required"/></td>
                 </tr>
                 <tr>
-                    <td><label for="fax">Fax:</label></td>
+                    <td>Fax:</td>
                     <td><input id="inputext" type="text" size="30" placeholder="" name="fax" required="required"/></td>
                 </tr>
                 <tr>
-                    <td><label for="via_envio">V&iacute;a de Env&iacute;o:<em><img src="../../img/required_star.gif" alt="dato requerido" /></em></label></td>
+                    <td>V&iacute;a de Env&iacute;o:</td>
                     <td>
                         <select name="viaenvioseleccionada" id="viaenvioid">
                             <option value="0">Seleccione una V&iacute;a de Env&iacute;o</option> 
                         </select>
+                        <em><img src="../../img/required_star.gif" alt="dato requerido" /></em>
                     </td>
                 </tr>
                 </table>
