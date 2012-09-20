@@ -16,7 +16,7 @@ if ($q == "1") {
         $valor[1].
         ' | '.
         $valor[2].        
-        ' | <p style="display:none">'.$valor[3]."</p>".        
+        '<p style="display:none"> | '.$valor[3]."</p>".        
         '</tr></table>';        
     }
 } 
