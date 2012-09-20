@@ -7,9 +7,9 @@ $selects->setCodigo_seleccion($_GET['code']);
 $distritos = $selects->cargarDistrito();
 
 foreach ($distritos as $key => $value) {
-    if ($key == 1240){
-        echo "<option value=\"$key\" selected='selected'>$value</option>";
-        continue;
-    }
+//    if ($key == 1240){
+//        echo "<option value=\"$key\" selected='selected'>$value</option>";
+//        continue;
+//    }
     echo "<option value=\"$key\">$value</option>";
 }
