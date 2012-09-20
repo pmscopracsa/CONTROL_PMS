@@ -79,6 +79,7 @@ function cargar_departamentos()
             $("#departamentoid").attr("disabled",false);
             document.getElementById("departamentoid").options.length = 1;
             $('#departamentoid').append(resultado);
+            cargar_distritos();
     });
 }
 

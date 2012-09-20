@@ -504,14 +504,6 @@ function __autoload($name) {
             valor_oculto_representantes.appendTo("#cant_representantes");
         })
         
-        /**
-         * funcion que no se utiliza en ningun sitio, posible a ser borrada
-         */
-        $("#delAddress").click(function(){
-            alert("aaa");
-           $("direccione"+contador).remove();
-        });
-        
        $("#departamentoid").attr('disabled','true'); 
        $("#distritoid").attr('disabled','true');
        
@@ -522,8 +514,7 @@ function __autoload($name) {
        $("#paisid").change(function(){
            $("#departamentoid").removeAttr('disabled');
            cargar_departamentos();
-           $("#distritoid").attr('disabled', 'true');
-           cargar_distritos();
+           $("#distritoid").attr('disabled','true');
        })
        $("#departamentoid").change(function(){
            $("#distritoid").removeAttr('disabled');
