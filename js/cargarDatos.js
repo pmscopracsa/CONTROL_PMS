@@ -105,16 +105,16 @@ function cargar_distritos()
     $.get("../../bl/Contacto/cargarDistritos.php",{code:code},
         function(resultado)
         {
-            if(resultado == false)
-            {
-                alert("No hay distritos");
-            }
-            else
-            {
+//            if(resultado == false)
+//            {
+//                alert("No hay distritos");
+//            }
+//            else
+//            {
                 $("#distritoid").attr("disabled",false);
                 document.getElementById("distritoid").options.length = 1;
                 $("#distritoid").append(resultado);
-            }
+//            }
         }
     );
 }
