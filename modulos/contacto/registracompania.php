@@ -522,6 +522,7 @@ function __autoload($name) {
        $("#paisid").change(function(){
            $("#departamentoid").removeAttr('disabled');
            cargar_departamentos();
+           cargar_distritos();
        })
        $("#departamentoid").change(function(){
            $("#distritoid").removeAttr('disabled');
