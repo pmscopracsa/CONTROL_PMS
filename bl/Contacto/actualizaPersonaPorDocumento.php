@@ -41,7 +41,8 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
             <tr>
                 <input type="hidden" value="'.$res[0].'" id="idpersonacontacto" />
                 <input type="hidden" value="'.$res[9].'" id="idviaenvio" />
-                <input type="hidden" value="'.$res[11].'" id="idespecialidad" />    
+                <input type="hidden" value="'.$res[11].'" id="idespecialidad" /> 
+                <input type="hidden" value="'.$res[12].'" id="idempresa" />     
                 <td>Numero de documento:<td><input class="inputext" id="txtnumerodocumento" type="text" value="'.$res[1].'" size="45" READONLY/>
                 <td><input type="button" value="Editar" id="btnEditarNumeroDocumento" class="ui-button ui-widget ui-state-default ui-corner-all"/>    
             </tr>
@@ -179,7 +180,7 @@ function toHtml($res,$telefonosf,$telefonosm,$telefonosn,$especialidades,$correo
             <tr>
                 <td>Direccion Laboral:
                 <td>
-                    <table border="0" class="atable" id="direccionlaboral_full">
+                    <table border="0" class="atable" id="tbl-listadirecciones">
                         <thead>
                             <tr class="ui-widget-header">
                                 <th>Direccion

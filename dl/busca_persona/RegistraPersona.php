@@ -247,6 +247,7 @@ class RegistraPersona
             ,pc.tb_viaenvio_id idviaenvio
             ,cc.descripcion empresa
             ,pro.tb_especialidadpersona_id idespecialidad
+            ,cc.id idempresa
             FROM 
             tb_companiacontacto cc
             LEFT JOIN tb_personacontacto pc ON cc.id = pc.tb_companiacontacto_id 
@@ -281,6 +282,7 @@ class RegistraPersona
                 array_push($personadatos,$res['idviaenvio'] == NULL ? "" : $res['idviaenvio']);
                 array_push($personadatos,$res['empresa'] == NULL ? "" : $res['empresa']);
                 array_push($personadatos,$res['idespecialidad'] == NULL ? "" : $res['idespecialidad']);
+                array_push($personadatos,$res['idempresa'] == NULL ? "" : $res['idempresa']);
             }
             return $personadatos;
             

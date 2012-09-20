@@ -126,6 +126,15 @@ try {
         $edita_persona->setAActualizar($_REQUEST['parameter']);
         $edita_persona->setValue($_REQUEST['id_direccion']);
         $edita_persona->actualizarPersona($cn);
+    } elseif ($_REQUEST['parameter'] == 'addWorkAddress') { // ADD DIRECCION DE TRABAJO
+        $edita_persona->setAActualizar($_REQUEST['parameter']);
+        $edita_persona->setValue($_REQUEST['iddireccion_']);
+        $edita_persona->actualizarPersona($cn);
+    } elseif ($_REQUEST['parameter'] == 'delworkdirec') { // ADD DIRECCION DE TRABAJO
+        $edita_persona->setAActualizar($_REQUEST['parameter']);
+        $edita_persona->setValue($_REQUEST['personaid']);
+        $edita_persona->setPk($_REQUEST['direccionid']);
+        $edita_persona->actualizarPersona($cn);
     }
 } catch (Exception $ex) {
     echo 'Error: '.$ex->getMessage();

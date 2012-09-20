@@ -35,6 +35,9 @@ session_start();
             $("#divBuscarCompania").load("../../datosdeobra/modales/empcontratante_div.php?filtro=1");
         }  
         $(document).ready(function(){
+            
+            var contador_direccionlaboral = 0;
+            
             /** PRIMERA CARGA DE LA LISTA DE EMPRESAS */
             $("#divBuscarCompania").load("../../datosdeobra/modales/empcontratante_div.php?filtro=1");
             
@@ -72,10 +75,56 @@ session_start();
                     toHtml(data);
                     cargarDireccionPersona(<?=$_REQUEST['documentodni']?>);
                     cargarViaEnvio($("#idviaenvio").val());
-                    cargarDireccionTrabajo($("#idpersonacontacto").val());
+                    cargarDireccionTrabajo($("#idpersonacontacto").val()); // LISTA DE DIRECCIONES DE LA EMPRESA DONDE LA PERSONA LABORA
+                    cargarDireccionTrabajoAsociado(<?=$_REQUEST['documentodni']?>); // LISTA DE DIRECCIONES DE LA EMPRESA QUE FUERON ASOCIADAS A LA PERSONA
                 }
             });
             
+            
+            function cargarDireccionTrabajoAsociado(dni) {
+                $.ajax({
+                    type:"GET",
+                    dataType:"json",
+                    data:{
+                        documento:dni
+                    },
+                    url:"../../../dl/busca_persona/r_listadireccionlaboralporpersona.php",
+                    success:function(data){
+                        mostrarDireccionTrabajo(data);
+                    }
+                });
+            }
+            
+            function mostrarDireccionTrabajo(data) {
+                $.each(data,function(index,value) {
+                    $("#tbl-listadirecciones tbody").append(
+                        '<tr>'+
+                        '<td>'+
+                        data[index].direccion+
+                        '<input type="hidden" id="idcontacto" value="'+data[index].id+'" />'+
+                        '<input type="hidden" id="iddirecciontrabajo" value="'+data[index].id_direccion+'" />'+
+                        '<td><a href="#" id="del-trabajodireccion" class="button delete">Eliminar</a>'
+                    )
+                });
+            }
+            
+            // ELIMINAR DIRECCION DE TRABAJO ASOCIADO AL CONTACTO
+            $("#del-trabajodireccion").live("click",function(){
+                persona_id = $(this).parent().parent().children().children("#idcontacto").val();
+                direccion_id = $(this).parent().parent().children().children("#iddirecciontrabajo").val();
+                
+                $(this).parent().parent().remove();
+                
+                $.ajax({
+                    type:"POST",
+                    data:{
+                        idpersonacontacto:$("#idpersonacontacto").val(),
+                        personaid:persona_id,
+                        direccionid:direccion_id
+                    },
+                    url:"../../../bl/editaPersona_BL.php?parameter=delworkdirec"
+                })
+            })
             
             /** DIRECCION DE TRABAJO */
             // CARGAR DIRECCION
@@ -134,6 +183,62 @@ session_start();
                     }
                 })
             }
+            
+            /** DIRECCION DE TRABAJO */
+            $("#btnAddDireTrabajo").live("click",function(){
+                // cargar direccion de trabajo
+                $("#modal-direcciontrabajo").empty();
+                
+                $.ajax({
+                    dataType:"html",
+                    type:"GET",
+                    data:{
+                        idcompania:$("#idempresa").val()
+                    },
+                    url:"../modal_registracompania/moda-direccionescompania.php",
+                    success:function(data){
+                        $("#modal-direcciontrabajo").append(data);
+                        $("#modal-direcciontrabajo").dialog("open");
+                    }
+                })
+            })
+            // modal para la direccion del trabajo
+            $("#modal-direcciontrabajo").dialog({
+                modal:true,
+                autoOpen:false,
+                height:300,
+                width:350,
+                buttons:{
+                    "Cerrar":function() {
+                        $(this).dialog("close");
+                    }
+                }
+              })
+            // detecta la seleccion de una direccion de trabajo
+            $("#direccioncompaniabox").live("click",function(){
+            contador_direccionlaboral++;
+            direccion = $(this).parent().parent().children("#txtDireccion").text();
+            iddireccion = $(this).parent().parent().children().children("#direccioncompaniabox").val();
+            
+            var id_direccion = iddireccion;
+          // VISUALMENTE LO PONEMOS EN LA TABLA
+          $("#tbl-listadirecciones tbody").append(
+                    '<tr>'+
+                        '<td>'+direccion+
+                        '<input type="hidden" id="iddireccion" value="'+iddireccion+'" name="direlaboral'+contador_direccionlaboral+'"/>'+
+                        '<td><a href="#" id="btnEliminarDireccionCompania" class="button delete">Eliminar</a>'
+              )
+              // LO GUARDAMOS EN SU RESPECTIVA TABLA
+              $.ajax({
+                  type:"POST",
+                  data:{
+                      iddireccion_:id_direccion,
+                      idpersonacontacto:$("#idpersonacontacto").val()
+                  },
+                  url:"../../../bl/editaPersona_BL.php?parameter=addWorkAddress"
+              })
+
+          });
             
             function cargarViaEnvio(id_viaenvio) {
                 cargarviaenvioseleccted(id_viaenvio);
@@ -482,6 +587,10 @@ session_start();
             /** EDITAR DIRECCION */
             $("#btnEditarDireccion").live("click",function() {
                 var idaddress = $(this).parent().parent().children().children("#idDireccionHidden").attr("value");
+                id_pais = $(this).parent().parent().parent().children().children().children("#pa"+idaddress).val();
+                id_departamento = $(this).parent().parent().parent().children().children().children("#de"+idaddress).val();
+                id_distrito = $(this).parent().parent().parent().children().children().children("#di"+idaddress).val();
+                //alert($(this).parent().parent().parent().children().children().children("#di"+idaddress).val());
                 if($("#btnEditarDireccion").val() == 'Editar') {
                     $("#btnEditarDireccion").attr('value','Guardar');
                     $("#pa"+idaddress).removeAttr('disabled');
@@ -497,9 +606,9 @@ session_start();
                             url:"../../../bl/editaPersona_BL.php?parameter=actualizadireccion",
                             data:{
                                 txtdireccion:$("#direccion").val(),
-                                idpais:$(this).parent().parent().children().children("#pa"+idaddress).attr("value"),
-                                iddepartamento:$(this).parent().parent().children().children("#de"+idaddress).attr("value"),
-                                iddistrito:$(this).parent().parent().children().children("#di"+idaddress).attr("value"),
+                                idpais:id_pais,
+                                iddepartamento:id_departamento,
+                                iddistrito:id_distrito,
                                 idpersonacontacto:$("#idpersonacontacto").val()
                             },
                             success:function() {
@@ -522,13 +631,7 @@ session_start();
                     $(this).attr('value', 'Guardar');
                     $("#divEditarEspecialidad").dialog("open");
                 } else {
-                    //var idespecialidadacambiar = $(this).parent().parent().children("#txtES").val();
-                    //alert(data_newesp[0]);
-                    //alert(data_newesp[1]);
                     var oldyespecialidad = $(this).parent().parent().children("#idES").val();
-                    //$(this).parent().parent().children().children("#txtES").val(data_newesp[1]);
-                    //alert(oldyespecialidad);
-                    //setEspecialidadObj($(this).parent().parent().children().html());
                     $.ajax({
                         type:"POST",
                         url:"../../../bl/editaPersona_BL.php?parameter=editaEspecialidad",
@@ -546,8 +649,6 @@ session_start();
            $(".especialidad").live("click",function() {
                
                var especialidad_array = $(this).text().split("-");
-               //$("#idES").val(especialidad_array[0]);
-               //$("#txtES").val(especialidad_array[1]);
                nuevaEspecialidad(especialidad_array[0], especialidad_array[1])
            });
            function nuevaEspecialidad(id,desc){
@@ -556,7 +657,7 @@ session_start();
            }
            // ELIMINAR ESPECIALIDAD
            $("#btnEliminarES").live("click",function() {
-               var idespecialidad = $("#idES").val();
+               var idespecialidad = $(this).parent().parent().children("#idES").val();
                $(this).parent().parent().remove();
                $.ajax({
                    type:"POST",
@@ -634,8 +735,6 @@ session_start();
                    $(this).attr('value','Guardar'); 
                    $(this).parent().parent().children().children("#txtMAIL").removeAttr('readonly');
                 } else {
-                    //alert($(this).parent().parent().children().children("#txtMAIL").attr('value'));
-                    //alert($(this).parent().parent().children("#idMAIL").attr('value'));
                     $.ajax({
                         type:"POST",
                         url:"../../../bl/editaPersona_BL.php?parameter=editEmailSecundario",
@@ -775,7 +874,7 @@ session_start();
             function cargarDistrito(iddistrito,i) {
                 $.ajax({
                     dataType:"html",
-                    data:{id_pais:iddistrito},
+                    data:{id_distrito:iddistrito},
                     url:"../../../bl/Contacto/cargarDistritosSelected.php",
                     success:function(data){
                         $("#di"+i).append(data);
@@ -856,6 +955,7 @@ session_start();
         <div id="divBuscarCompania" title="Escoge una empresa"></div>
         <div id="divEditarEspecialidad" title="Escoge una especialidad"></div>
         <div id="divEditarEspecialidadNuevo" title="Escoge una especialidad nueva"></div>
+        <div id="modal-direcciontrabajo" title="Direccion del Trabajo"></div>
         
         <div id="barra-superior">
             <div id="barra-superior-dentro">

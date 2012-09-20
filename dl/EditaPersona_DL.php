@@ -152,6 +152,16 @@ class EditaPersona_DL
                     $query = "DELETE FROM tb_direccionpersonalaboral WHERE tb_direccioncompaniacontacto_id = $this->value AND tb_personacontacto_id = $this->pk";
                     $rs = mysql_query($query, $cn);
                     if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;
+                case 'addWorkAddress':
+                    $query = "INSERT INTO tb_direccionpersonalaboral (tb_personacontacto_id,tb_direccioncompaniacontacto_id) VALUES($this->pk,$this->value)";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
+                    break;   
+                case 'delworkdirec':
+                    $query = "DELETE FROM tb_direccionpersonalaboral WHERE tb_personacontacto_id = $this->value AND tb_direccioncompaniacontacto_id = $this->pk";
+                    $rs = mysql_query($query, $cn);
+                    if (!$rs)                        throw new Exception("Error en la consulta: ".  mysql_error());
                     break;    
                 default:
                     break;

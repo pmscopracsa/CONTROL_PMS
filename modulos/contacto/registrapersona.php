@@ -491,16 +491,7 @@ session_start();
                     '<td>'+direccion+
                     '<input type="hidden" id="iddireccion" value="'+iddireccion+'" name="direlaboral'+contador_direccionlaboral+'"/>'+
                     '<td><a href="#" id="btnEliminarDireccionCompania" class="button delete">Eliminar</a>'
-          )
-          // LO GUARDAMOS EN SU RESPECTIVA TABLA
-          $.ajax({
-              type:"POST",
-              data:{
-                  id_direccion:iddireccion
-              },
-              url:""
-          })
-              
+          )   
       });
       // ELIMINAR la direccion de la empresa
       $("#btnEliminarDireccionCompania").live("click",function(e) {
