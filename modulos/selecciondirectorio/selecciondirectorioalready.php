@@ -177,26 +177,31 @@ $obra_id = 0;
          * SE HA SALVADO EN LA DB
          */
         $("#setuped").click(function() {
+            if($("#idtxtobra").val() == "") {
+                alert("Seleccione una obra por favor.");
+                return;
+            } else {
+                $.ajax({
+                    type:"POST",
+                    url:"../../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=salvardirectorioobra",
+                    data:{
+                        id_usuario:<?=$_SESSION['id_usuario']?>
+                        ,id_empresa:<?=$_SESSION['id']?>
+                        ,id_directorio:$("#idtxtiddirectorio").val()
+                        ,id_obra:$("#idtxtidobra").val()
+                    },
+                    success:function(){
+                        linkDestino = "../../index_usuario.php?proyecto="+$("#idtxtidobra").val()+"&codigObra="+$("#txtcodigoObra_").val()+"&descObra="+$("#txtnombreObra_").val()+"&estadoObra="+$("#txtestadoobra_").val();
+                        $("body").fadeOut(2000, redireccionaEditar(linkDestino));
+                    },
+                    error:function(jqXHR, exception){
+                        if (jqXHR.status === 0) alert("No se ha conectado");
+                        else if (jqXHR.status == 404) alert("La pagina no existe 404");
+                        else if (jqXHR.status == 500) alert("Error interno del servidor 500");
+                    }
+                });
+            }
             
-            $.ajax({
-                type:"POST",
-                url:"../../bl/ConfiguracionGeneral/configuracionGeneral.php?parametro=salvardirectorioobra",
-                data:{
-                    id_usuario:<?=$_SESSION['id_usuario']?>
-                    ,id_empresa:<?=$_SESSION['id']?>
-                    ,id_directorio:$("#idtxtiddirectorio").val()
-                    ,id_obra:$("#idtxtidobra").val()
-                },
-                success:function(){
-                    linkDestino = "../../index_usuario.php?proyecto="+$("#idtxtidobra").val()+"&codigObra="+$("#txtcodigoObra_").val()+"&descObra="+$("#txtnombreObra_").val()+"&estadoObra="+$("#txtestadoobra_").val();
-                    $("body").fadeOut(2000, redireccionaEditar(linkDestino));
-                },
-                error:function(jqXHR, exception){
-                    if (jqXHR.status === 0) alert("No se ha conectado");
-                    else if (jqXHR.status == 404) alert("La pagina no existe 404");
-                    else if (jqXHR.status == 500) alert("Error interno del servidor 500");
-                }
-            });
         });
         
         /**
