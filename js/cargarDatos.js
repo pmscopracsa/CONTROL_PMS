@@ -75,7 +75,7 @@ function cargar_paises()
 function cargar_departamentos()
 {
     var code = $("#paisid").val();
-    $.get("../../bl/Contacto/cargarDepartamentos.php",{cache:false},{code:code},function(resultado) {
+    $.get("../../bl/Contacto/cargarDepartamentos.php",{code:code},function(resultado) {
             $("#departamentoid").attr("disabled",false);
             document.getElementById("departamentoid").options.length = 1;
             $('#departamentoid').append(resultado);
@@ -103,7 +103,7 @@ function cargar_departamentos_peru()
 function cargar_distritos()
 {
     var code=$("#departamentoid").val();
-    $.get("../../bl/Contacto/cargarDistritos.php",{cache:false},{code:code},
+    $.get("../../bl/Contacto/cargarDistritos.php",{code:code},
         function(resultado)
         {
 //            if(resultado == false)
